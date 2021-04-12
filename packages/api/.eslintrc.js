@@ -10,7 +10,7 @@ module.exports = {
     "plugin:import/warnings",
     "plugin:import/typescript",
     "google",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -20,11 +20,8 @@ module.exports = {
   ignorePatterns: [
     "/lib/**/*", // Ignore built files.
   ],
-  plugins: [
-    "@typescript-eslint",
-    "import",
-  ],
+  plugins: ["@typescript-eslint", "import"],
   rules: {
-    quotes: ["error", "double"],
+    quotes: 0,
   },
 };
