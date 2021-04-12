@@ -9,7 +9,10 @@ module.exports = {
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
+    "airbnb",
+    "airbnb-typescript",
     "google",
+    "prettier",
     "plugin:@typescript-eslint/recommended",
   ],
   parser: "@typescript-eslint/parser",
@@ -23,5 +26,7 @@ module.exports = {
   plugins: ["@typescript-eslint", "import"],
   rules: {
     quotes: 0,
+    "linebreak-style": 0,
+    "quote-props": 0,
   },
 };
