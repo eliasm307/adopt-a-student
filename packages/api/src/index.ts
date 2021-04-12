@@ -1,76 +1,41 @@
-import * as express from 'express';
 import * as functions from 'firebase-functions';
 
-const app = express();
-app.get("/", (req, res) => res.status(200).send("Hey there!"));
+// Start writing Firebase Functions
+// https://firebase.google.com/docs/functions/typescript
 
-app.get("/student", (req, res) => {
-  /** Get all student profile data */
-  res.status(501); // todo not implemented
+/*
+Example from https://firebase.google.com/docs/functions/callable#web
+// Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
+exports.addMessage = functions.https.onCall((data, context) => {
+  // ...
 });
+*/
 
-app.get("/students", (req, res) => {
-  /** Get all students */
-  // todo only basic data
-  res.status(501); // todo not implemented
-});
+/** Get all student profile data */
+export const getStudent = functions.https.onCall(_getStudent);
 
-app.post("/student", (req, res) => {
-  /** Update student profile data */
-  // todo use a partial type
-  res.status(501); // todo not implemented
-});
+/** Update student profile data */
+export const updateStudent = functions.https.onCall(_updateStudent);
 
-app.get("/tutor", (req, res) => {
-  /** Get all tutor profile data */
-  res.status(501); // todo not implemented
-});
+/** Get all tutor profile data */
+export const getTutor = functions.https.onCall(_getTutor);
 
-app.get("/tutors", (req, res) => {
-  /** Get all tutors */
-  // todo only basic data
-  res.status(501); // todo not implemented
-});
+/** Update tutor profile data */
+export const updateTutor = functions.https.onCall(_updateTutor);
 
-app.post("/tutor", (req, res) => {
-  /** Update tutor profile data */
-  // todo use a partial type
-  res.status(501); // todo not implemented
-});
+/** Get subject by id */
+export const getSubject = functions.https.onCall(_getSubject);
 
-app.get("/subject", (req, res) => {
-  /** Get subject by id */
-  res.status(501); // todo not implemented
-});
+/** Update subject by id */
+export const updateSubject = functions.https.onCall(_updateSubject);
 
-app.post("/subject", (req, res) => {
-  /** Update subject by id */
-  // todo use a partial type
-  res.status(501); // todo not implemented
-});
+/** Get all subjects */
+export const getAllSubjects = functions.https.onCall(_getAllSubjects);
 
-app.get("/subjects", (req, res) => {
-  /** Get all subjects */
-  // todo this should be only basic data about subjects
-  res.status(501); // todo not implemented
-});
+/** Get students interested in subjects */
+export const getStudentsBySubjects = functions.https.onCall(
+  _getStudentsBySubjects
+);
 
-app.get("/students-by-subjects", (req, res) => {
-  /** Get students interested in subjects */
-  res.status(501); // todo not implemented
-});
-
-app.get("/tutors-by-subjects", (req, res) => {
-  /** Get students interested in subjects */
-  res.status(501); // todo not implemented
-});
-
-exports.app = functions.https.onRequest(app);
-
-// // Start writing Firebase Functions
-// // https://firebase.google.com/docs/functions/typescript
-//
-// export const helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
+/** Get students interested in subjects */
+export const getTutorsBySubjects = functions.https.onCall(_getTutorsBySubjects);
