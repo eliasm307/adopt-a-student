@@ -4,9 +4,22 @@
     "indexes": "firestore.indexes.json"
   },
   "functions": {
+    "source": ".",
     "predeploy": [
       "npm --prefix \"$RESOURCE_DIR\" run lint",
-      "npm --prefix \"$RESOURCE_DIR\" run build"
+      "npm --prefix \"$RESOURCE_DIR\" run build",
+      "yarn"
     ]
+  },
+  "emulators": {
+    "functions": {
+      "port": 5001
+    },
+    "firestore": {
+      "port": 8080
+    },
+    "ui": {
+      "enabled": true
+    }
   }
 }

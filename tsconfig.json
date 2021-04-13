@@ -5,8 +5,7 @@
     "paths": {
       "@adopt-a-student/*": ["packages/*/src"]
     },
-    "typeRoots": ["./src/declarations", "./node_modules/@types"],
-    "types": ["@types/jest", "@types/node"],
+    "typeRoots": ["./node_modules/@types"],
     "lib": ["dom", "dom.iterable", "esnext"],
     "downlevelIteration": true,
     "allowJs": true,

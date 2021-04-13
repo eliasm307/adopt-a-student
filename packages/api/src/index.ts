@@ -12,30 +12,30 @@ exports.addMessage = functions.https.onCall((data, context) => {
 */
 
 /** Get all student profile data */
-export const getStudent = functions.https.onCall(_getStudent);
+// export const getStudent = functions.https.onCall(_getStudent);
 
 /** Update student profile data */
-export const updateStudent = functions.https.onCall(_updateStudent);
+// export const updateStudent = functions.https.onCall(_updateStudent);
 
 /** Get all tutor profile data */
-export const getTutor = functions.https.onCall(_getTutor);
+// export const getTutor = functions.https.onCall(_getTutor);
 
 /** Update tutor profile data */
-export const updateTutor = functions.https.onCall(_updateTutor);
+// export const updateTutor = functions.https.onCall(_updateTutor);
 
 /** Get subject by id */
-export const getSubject = functions.https.onCall(_getSubject);
+// export const getSubject = functions.https.onCall(_getSubject);
 
 /** Update subject by id */
-export const updateSubject = functions.https.onCall(_updateSubject);
+// export const updateSubject = functions.https.onCall(_updateSubject);
 
 /** Get all subjects */
-export const getAllSubjects = functions.https.onCall(_getAllSubjects);
+// export const getAllSubjects = functions.https.onCall(_getAllSubjects);
 
 /** Get students interested in subjects */
-export const getStudentsBySubjects = functions.https.onCall(
-  _getStudentsBySubjects
-);
+// export const getStudentsBySubjects = functions.https.onCall(
+//   _getStudentsBySubjects
+// );
 
 /** Get students interested in subjects */
-export const getTutorsBySubjects = functions.https.onCall(_getTutorsBySubjects);
+// export const getTutorsBySubjects = functions.https.onCall(_getTutorsBySubjects);

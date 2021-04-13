@@ -1,19 +1,19 @@
-import 'firebase/functions';
-
-import firebase from 'firebase';
-// The Firebase Admin SDK to access Firestore.
-import admin from 'firebase-admin';
+import * as admin from 'firebase-admin';
+import * as functions from 'firebase-functions';
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert({
+    privateKey: functions.config().private.key.replace(/\\n/g, "\n"),
+    projectId: functions.config().project.id,
+    clientEmail: functions.config().client.email,
+  }),
+  databaseURL: "https://adopt-a-student.firebaseio.com",
 });
 
-firebase.initializeApp({
-  apiKey: '### FIREBASE API KEY ###',
-  authDomain: '### FIREBASE AUTH DOMAIN ###',
-  projectId: '### CLOUD FUNCTIONS PROJECT ID ###'
-  databaseURL: 'https://### YOUR DATABASE NAME ###.firebaseio.com',
-});
+const firestoreLive = admin.firestore();
 
-// Initialize Cloud Functions through Firebase
-var functions = firebase.functions();
+// const _firestoreEmulator = admin.firestore();
+
+// _firestoreEmulator.useEmulator("localhost", 8080);
+
+export { functions, firestoreLive };
