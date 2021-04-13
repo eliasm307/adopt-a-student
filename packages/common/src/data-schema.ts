@@ -1,8 +1,12 @@
 import { ConfidenceLevelEnum } from "./enums";
 import { Country, LocaleCode } from "./types";
 
+export interface Entity {
+  dataIsComplete: boolean;
+}
+
 /** User data that is publicly available */
-export interface PublicUserData {
+export interface PublicUserData extends Entity {
   /** Unique id for a user */
   readonly id: string;
 
@@ -63,7 +67,7 @@ export interface UserSubjectData {
  * the "Maths" generic subject could be related to the "Physics" generic subject
  * where "Physics" and "Physiques" both belong to the "Physics" generic subject
  */
-export interface GenericSubjectData {
+export interface GenericSubjectData extends Entity {
   readonly id: string;
 
   categoryId: string;
@@ -87,14 +91,14 @@ export interface LocaleSubjectCategoryData {
 }
 
 /** Subject category with all locale names */
-export interface SubjectCategoryData {
+export interface SubjectCategoryData extends Entity {
   id: string;
   localeNames: SubjectLocaleName[];
 }
 
 /** Schema of the general public data (not relating to a user) that represents a specific locale dependent subject,
  * as it is stored in database. e.g. "Physics" and "Physiques" are two different LocaleSubjects */
-export interface LocaleSubjectData {
+export interface LocaleSubjectData extends Entity {
   /** Unique id */
   readonly id: string;
 
@@ -134,7 +138,8 @@ export interface StudentSubjectData extends UserSubjectData {}
 /** Subject data specific to a tutor user */
 export interface TutorSubjectData extends UserSubjectData {}
 
-export interface FirestoreSchema {
+/** Represents firestore top level collections */
+interface FirestoreSchema {
   genericSubjects: GenericSubjectData[];
   localeSubjects: LocaleSubjectData[];
   students: PrivateStudentData[];
