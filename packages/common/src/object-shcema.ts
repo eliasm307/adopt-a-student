@@ -1,14 +1,17 @@
 import {
-  StudentData,
+  PrivateStudentData,
+  PrivateTutorData,
+  PrivateUserData,
   StudentSubjectData,
-  TutorData,
   TutorSubjectData,
-  UserData,
   UserSubjectData,
 } from "./data-schema";
 
 /** A user object instance that allows reading and editing data to/from the database */
-export interface User<D extends UserData, S extends UserSubjectData> {
+export interface PrivateUser<
+  D extends PrivateUserData,
+  S extends UserSubjectData
+> {
   /** Readonly user data */
   readonly data: Readonly<D>;
   /** User id */
@@ -32,7 +35,9 @@ export interface User<D extends UserData, S extends UserSubjectData> {
 }
 
 /** A student object instance that allows reading and editing data to/from the database */
-export interface Student extends User<StudentData, StudentSubjectData> {}
+export interface PrivateStudent
+  extends PrivateUser<PrivateStudentData, StudentSubjectData> {}
 
 /** A tutor object instance that allows reading and editing data to/from the database */
-export interface Tutor extends User<TutorData, TutorSubjectData> {}
+export interface PrivateTutor
+  extends PrivateUser<PrivateTutorData, TutorSubjectData> {}

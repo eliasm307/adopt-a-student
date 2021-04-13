@@ -1,6 +1,6 @@
 import { CallableContext } from "firebase-functions/lib/providers/https";
 
-export type CallableFunctionHandler = (
-  data: any,
+export type FirebaseCallableFunctionHandler<D = any, R = any> = (
+  data: Partial<D>,
   context: CallableContext
-) => any | Promise<any>;
+) => R | Promise<R>;

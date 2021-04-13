@@ -1,38 +1,52 @@
 import { ConfidenceLevelEnum } from "./enums";
 import { Country, LocaleCode } from "./types";
 
-export interface UserData {
+/** User data that is publicly available */
+export interface PublicUserData {
   /** Unique id for a user */
   readonly id: string;
 
-  /** Email to allow users to start communicating */
-  email: string;
+  /** Link to profile image, if defined */
+  imageUrl?: string;
   /** Optional text for users to introduce themselves,
    * describe their experience, what subjects they are interested in etc */
   introduction?: string;
-  /** Links to subjects a user is interested in learning/teaching (depends on type of user)
-   * and user specific information about the user relating to a specific subject
-   */
-  relatedSubjects: UserSubjectData[];
   /** Username which will be displayed for a user */
   username: string;
 }
 
+/** Private user data only available to the owner user */
+export interface PrivateUserData extends PublicUserData {
+  /** Email to allow users to start communicating */
+  email: string;
+  /** Links to subjects a user is interested in learning/teaching (depends on type of user)
+   * and user specific information about the user relating to a specific subject
+   */
+  relatedSubjects: UserSubjectData[];
+}
+
 /** Schema of data that represents a student, as it is stored in database */
-export interface StudentData extends UserData {
+export interface PrivateStudentData extends PrivateUserData {
   /** Data about the tutors a student is involved with */
   tutors: StudentSubTutorData[];
 }
 
-/** Schema of data that represents a tutor, as it is stored in database */
-export interface TutorData extends UserData {
-  /** Represents whether a tutor is available to take on a student */
-  available: boolean;
+export interface PublicStudentData extends PublicUserData {}
+
+/** Schema of data that represents a tutor, only available to the tutor */
+export interface PrivateTutorData extends PrivateUserData {
   /** Data about the students a teacher is involved with */
   students: TutorSubStudentData[];
 }
 
-/** Data about a subject specific to a user, as it is stored in database */
+export interface PublicTutorData extends PublicUserData {
+  /** Represents whether a tutor is available to take on a student */
+  available: boolean;
+}
+
+/** Data about a subject specific to a user, as it is stored in database
+ * // ? should this be public?
+ */
 export interface UserSubjectData {
   /** Unique id to the related subject */
   readonly id: string;
@@ -52,9 +66,30 @@ export interface UserSubjectData {
 export interface GenericSubjectData {
   readonly id: string;
 
+  categoryId: string;
   /** Links to other relevant subjects a user might be interested in
-   `// todo needs to be syncronised ie if A is related to B then B must be related to A` */
+   `// todo needs to be syncronised ie if A is related to B then B must be related to A`
+  */
   relatedGenericSubjectIds: string[];
+}
+
+/** Name of a subject category in a specific locale */
+export interface SubjectLocaleName {
+  locale: LocaleCode;
+  name: string;
+}
+
+/** Subject category data in a specific locale */
+export interface LocaleSubjectCategoryData {
+  id: string;
+  locale: LocaleCode;
+  name: string;
+}
+
+/** Subject category with all locale names */
+export interface SubjectCategoryData {
+  id: string;
+  localeNames: SubjectLocaleName[];
 }
 
 /** Schema of the general public data (not relating to a user) that represents a specific locale dependent subject,
@@ -68,7 +103,7 @@ export interface LocaleSubjectData {
   /** Description of the subject */
   description: string;
   /** Id of generic subject this locale subject relates to, there should only be 1 */
-  genericSubjectIds: string;
+  genericSubjectId: string;
   /** Represents a language that a subject is in */
   locale: LocaleCode;
   /** Ids of students needing help with this subject `// todo needs to be syncronised` */
@@ -100,24 +135,9 @@ export interface StudentSubjectData extends UserSubjectData {}
 export interface TutorSubjectData extends UserSubjectData {}
 
 export interface FirestoreSchema {
-  GenericSubjects: GenericSubjectData[];
-  LocaleSubjects: LocaleSubjectData[];
-  Students: StudentData[];
-  Tutors: TutorData[];
-}
-
-export namespace API {
-  /** Get students by subjects, save this in subject */
-  // export getStudents
-  /** Get tutors by subjects, save this in subject */
-  /** Get student profile by student id */
-  /** Get tutor profile by tutor id */
-  /** Get subject by id */
-  /** Get all subjects */
-  /** Get all tutors? // ! no */
-  /** Get all students? // ! no */
-  /** Post update to student profile */
-  /** Post update to tutor profile */
-  /** Post update for subject */
-  /** Post request for new subject */
+  genericSubjects: GenericSubjectData[];
+  localeSubjects: LocaleSubjectData[];
+  students: PrivateStudentData[];
+  subjectCategories: SubjectCategoryData[];
+  tutors: PrivateTutorData[];
 }
