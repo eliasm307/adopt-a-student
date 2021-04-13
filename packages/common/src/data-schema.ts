@@ -1,5 +1,5 @@
-import { ConfidenceLevelEnum } from './enums';
-import { Country, LocaleCode } from './types';
+import { ConfidenceLevelEnum } from "./enums";
+import { Country, LocaleCode } from "./types";
 
 export interface UserData {
   /** Unique id for a user */
@@ -82,7 +82,7 @@ export interface StudentSubTutorData {
   /** Id of the tutor related to the student */
   id: string;
 
-// todo add rating, review, comments etc
+  // todo add rating, review, comments etc
 }
 
 /** Data about a student from the perspective of a tutor, as it is stored in database */
@@ -90,7 +90,7 @@ export interface TutorSubStudentData {
   /** Id of the student related to the tutor */
   id: string;
 
-// todo add rating, review, comments etc
+  // todo add rating, review, comments etc
 }
 
 /** Subject data specific to a student user, as it is stored in database */
@@ -108,7 +108,7 @@ export interface FirestoreSchema {
 
 export namespace API {
   /** Get students by subjects, save this in subject */
-  export getStudents
+  // export getStudents
   /** Get tutors by subjects, save this in subject */
   /** Get student profile by student id */
   /** Get tutor profile by tutor id */

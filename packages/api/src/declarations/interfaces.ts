@@ -1,1 +1,1 @@
-import API from "@";
+import {} from "@adopt-a-student/common";

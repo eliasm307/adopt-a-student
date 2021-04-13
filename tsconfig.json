@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@quirk-a-bot/*": ["packages/*/src"]
+      "@adopt-a-student/*": ["packages/*/src"]
     },
     "typeRoots": ["./src/declarations", "./node_modules/@types"],
     "types": ["@types/jest", "@types/node"],

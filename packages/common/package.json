@@ -4,8 +4,13 @@
   "version": "0.0.0",
   "description": "Common items for adopt-a-student",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist && yarn && npx tsc -p tsconfig.json"
   },
   "author": "",
   "license": "MIT",
