@@ -1,11 +1,20 @@
 {
+  "private": true,
   "name": "@adopt-a-student/common",
   "version": "0.0.0",
-  "description": "API for adopt-a-student",
-  "main": "index.js",
+  "description": "Common items for adopt-a-student",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf dist && yarn && npx tsc -p tsconfig.json"
   },
   "author": "",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.2.4"
+  }
 }
