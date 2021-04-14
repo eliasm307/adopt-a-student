@@ -1,17 +1,8 @@
 import {
-  GenericSubjectData,
-  LocaleCode,
-  LocaleSubjectCategoryData,
-  LocaleSubjectData,
-  PrivateStudentData,
-  PrivateTutorData,
-  PrivateUserData,
-  PublicStudentData,
-  PublicTutorData,
-  SubjectCategoryData,
-} from "@adopt-a-student/common";
-
-import { FirebaseCallableFunctionHandler } from "./types";
+  GenericSubjectData, LocaleCode, LocaleSubjectCategoryData, LocaleSubjectData, PrivateStudentData,
+  PrivateTutorData, PrivateUserData, PublicStudentData, PublicTutorData, SubjectCategoryData,
+} from '../../common';
+import { FirebaseCallableFunctionHandler } from './types';
 
 export namespace API {
   /** Get students by subjects, save this in subject */

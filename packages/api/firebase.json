@@ -4,12 +4,18 @@
     "indexes": "firestore.indexes.json"
   },
   "functions": {
-    "source": ".",
-    "predeploy": [
-      "npm --prefix \"$RESOURCE_DIR\" run lint",
-      "npm --prefix \"$RESOURCE_DIR\" run build",
-      "yarn"
-    ]
+    "ignore": [
+      ".firebase/**",
+      "**/node_modules/**",
+      "**/public/**",
+      ".firebaserc",
+      "firebase.json",
+      "postcss.config.js",
+      "README.md",
+      "tailwind.config.js"
+    ],
+    "runtime": "nodejs12",
+    "predeploy": []
   },
   "emulators": {
     "functions": {

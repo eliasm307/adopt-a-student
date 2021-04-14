@@ -7,7 +7,8 @@ admin.initializeApp({
     projectId: functions.config().project.id,
     clientEmail: functions.config().client.email,
   }),
-  databaseURL: "https://adopt-a-student.firebaseio.com",
+  // databaseURL: "https://adopt-a-student.firebaseio.com",
+  databaseURL: "https://adopt-a-student.europe-west1.firebasedatabase.app",
 });
 
 const firestoreLive = admin.firestore();
