@@ -74,9 +74,10 @@ export interface FireBaseUser extends firebase.User {}
 
 export const firestoreLive = firebase.firestore();
 
-const _firestoreEmulator = firebase.firestore();
-_firestoreEmulator.useEmulator("localhost", 8080);
-export const firestoreEmulator = _firestoreEmulator;
+const firestoreEmulator = firebase.firestore();
+firestoreEmulator.useEmulator("localhost", 8080);
+
+export { firestoreEmulator };
 
 export function isFirestoreEmulatorRunning(): boolean {
   return urlExistSync("http://localhost:4000/firestore/");
@@ -92,3 +93,15 @@ export interface FirestoreBatch extends firebase.firestore.WriteBatch {}
 export interface FirestoreDocumentSnapshot
   extends firebase.firestore
     .DocumentSnapshot<firebase.firestore.DocumentData> {}
+
+////////////////////////////////////////////////////////
+// Functions
+
+export const functionsLive = firebase.functions();
+
+// Using functions emulator
+// https://firebase.google.com/docs/emulator-suite/connect_functions
+const functionsEmulator = firebase.functions();
+functionsEmulator.useEmulator("localhost", 5001);
+
+export { functionsEmulator };

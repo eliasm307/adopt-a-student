@@ -1,5 +1,7 @@
 import * as functions from 'firebase-functions';
 
+import firestoreWriteHandler from './route-handlers/firestoreWrite';
+
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
 
@@ -12,6 +14,8 @@ export const test = functions.https.onCall((data, context) => {
   //   .region("europe-west1")
   // ...
 });
+
+export const writeTest = functions.https.onCall(firestoreWriteHandler);
 
 /** Get all student profile data */
 // export const getStudent = functions.https.onCall(_getStudent);
