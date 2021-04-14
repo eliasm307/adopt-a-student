@@ -4,6 +4,7 @@
     "typeRoots": ["node_modules/@types"],
     "module": "commonjs",
     "noImplicitReturns": true,
+    "skipLibCheck": true,
     "noUnusedLocals": true,
     "sourceMap": true,
     "strict": true,
