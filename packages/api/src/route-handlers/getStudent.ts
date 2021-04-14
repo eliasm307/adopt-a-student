@@ -1,5 +1,7 @@
-import { API } from '../declarations/interfaces';
-import { functions } from '../utils/firebase-admin';
+// import { API } from '../declarations/interfaces';
+// import { functions } from '../utils/firebase-admin';
+
+export {};
 
 /*
 const handler: API.getStudentProfile = (data, context) => {

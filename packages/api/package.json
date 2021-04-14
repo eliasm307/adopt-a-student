@@ -21,7 +21,7 @@
     "deploy": "firebase deploy --only functions",
     "predeploy": "yarn build",
     "logs": "firebase functions:log",
-    "start-emulators": "cross-env FIRESTORE_EMULATOR_HOST=\"localhost:8080\" firebase emulators:start"
+    "start-emulators": "cross-env FIRESTORE_EMULATOR_HOST=\"localhost:8080\" && firebase emulators:start"
   },
   "engines": {
     "node": "12"
