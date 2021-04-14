@@ -84,15 +84,10 @@ export function isFirestoreEmulatorRunning(): boolean {
 }
 
 // firebase types
-export interface Firestore extends firebase.firestore.Firestore {}
-export interface FirestoreDocumentChange
-  extends firebase.firestore.DocumentChange<firebase.firestore.DocumentData> {}
-
-export interface FirestoreBatch extends firebase.firestore.WriteBatch {}
-
-export interface FirestoreDocumentSnapshot
-  extends firebase.firestore
-    .DocumentSnapshot<firebase.firestore.DocumentData> {}
+export type Firestore = firebase.firestore.Firestore;
+export type FirestoreDocumentChange = firebase.firestore.DocumentChange<firebase.firestore.DocumentData>;
+export type FirestoreBatch = firebase.firestore.WriteBatch;
+export type FirestoreDocumentSnapshot = firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>;
 
 ////////////////////////////////////////////////////////
 // Functions
@@ -103,5 +98,7 @@ export const functionsLive = firebase.functions();
 // https://firebase.google.com/docs/emulator-suite/connect_functions
 const functionsEmulator = firebase.functions();
 functionsEmulator.useEmulator("localhost", 5001);
+
+export type FirebaseFunctions = firebase.functions.Functions;
 
 export { functionsEmulator };

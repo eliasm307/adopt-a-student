@@ -21,8 +21,6 @@ const app = admin.initializeApp({
   databaseURL,
 });
 
-functionsTest.
-
 const firestoreLive = admin.firestore();
 
 // you should pass projectConfig and path to serviceAccountKey like this

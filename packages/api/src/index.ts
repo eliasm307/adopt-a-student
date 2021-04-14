@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+import functions, { HttpsFunction, Runnable } from 'firebase-functions';
 
 import firestoreWriteHandler from './route-handlers/firestoreWrite';
 
@@ -9,13 +9,20 @@ import firestoreWriteHandler from './route-handlers/firestoreWrite';
 Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
-export const test = functions.https.onCall((data, context) => {
+
+const test = functions.https.onCall((data, context) => {
   return { message: "yay" };
   //   .region("europe-west1")
   // ...
 });
 
-export const writeTest = functions.https.onCall(firestoreWriteHandler);
+const writeTest = functions.https.onCall(firestoreWriteHandler);
+
+const callableFunctions: {
+  [key in CallableFunctionName]: CallableMethod | undefined;
+} = { test, writeTest };
+
+export default callableFunctions;
 
 /** Get all student profile data */
 // export const getStudent = functions.https.onCall(_getStudent);
