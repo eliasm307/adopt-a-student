@@ -4,6 +4,7 @@
     "indexes": "firestore.indexes.json"
   },
   "functions": {
+    "source": "./packages/api",
     "ignore": [
       ".firebase/**",
       "**/node_modules/**",

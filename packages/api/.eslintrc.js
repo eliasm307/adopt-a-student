@@ -10,7 +10,7 @@ module.exports = {
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       },
     },
-    typescript: { project: "tsconfig.eslint.json" },
+    typescript: {},
   },
   extends: [
     "eslint:recommended",
@@ -28,6 +28,7 @@ module.exports = {
   },
   ignorePatterns: [
     "/lib/**/*", // Ignore built files.
+    "/dist/**/*", // Ignore built files.
   ],
   plugins: ["@typescript-eslint", "import"],
   rules: {
@@ -37,5 +38,8 @@ module.exports = {
     "import/no-unresolved": 1,
     "@typescript-eslint/no-namespace": 0,
     "no-var": 1,
+    "@typescript-eslint/no-empty-interface": 0,
+    "@typescript-eslint/no-var-requires": 0,
+    "spaced-comment": 1,
   },
 };
