@@ -12,6 +12,7 @@
   ],
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
+    "test": "jest --watchAll --verbose=false",
     "build": "tsc --build tsconfig.build.json",
     "prebuild": "yarn && rm -rf lib && yarn lint",
     "serve": "npm run build && firebase emulators:start --only functions",
@@ -26,10 +27,10 @@
     "node": "12"
   },
   "dependencies": {
+    "@adopt-a-student/common": "file:./common",
     "firebase": "^8.4.1",
     "firebase-admin": "^9.6.0",
-    "firebase-functions": "^3.13.2",
-    "@adopt-a-student/common": "file:./common"
+    "firebase-functions": "^3.13.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
@@ -42,9 +43,11 @@
     "eslint-config-prettier": "^8.2.0",
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.22.0",
-    "firebase-functions-test": "^0.2.0",
+    "firebase-functions-test": "^0.2.3",
     "jest": "^26.6.3",
-    "typescript": "^3.8.0"
+    "ts-jest": "^26.5.4",
+    "typescript": "^3.8.0",
+    "url-exist-sync": "^1.0.2"
   },
   "private": true
 }

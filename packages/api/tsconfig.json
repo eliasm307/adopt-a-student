@@ -8,6 +8,7 @@
     "noUnusedLocals": true,
     "sourceMap": true,
     "strict": true,
+    "noEmit": true,
     "target": "es2017",
     "types": ["@types/jest"]
   },

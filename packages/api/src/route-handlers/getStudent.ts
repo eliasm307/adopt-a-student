@@ -1,5 +1,5 @@
 import { API } from '../declarations/interfaces';
-import { functions } from '../utils/firebase';
+import { functions } from '../utils/firebase-admin';
 
 /*
 const handler: API.getStudentProfile = (data, context) => {
