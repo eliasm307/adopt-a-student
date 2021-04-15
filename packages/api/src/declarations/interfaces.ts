@@ -76,7 +76,7 @@ export namespace API {
     BasicResponseData
   >;
   /** Post update to tutor profile */
-  export type setTutorProfile = FirebaseCallableFunctionHandler<
+  export type updateTutor = FirebaseCallableFunctionHandler<
     {
       // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
       // todo needs to verify a user has access to this data
@@ -84,8 +84,17 @@ export namespace API {
     },
     BasicResponseData
   >;
+  /** Create tutor profile */
+  export type createTutorHandler = FirebaseCallableFunctionHandler<
+    {
+      // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
+      // todo needs to verify a user has access to this data
+      data?: PrivateTutorData;
+    },
+    BasicResponseData
+  >;
   /** Post update for locale subject */
-  export type setLocaleSubject = FirebaseCallableFunctionHandler<
+  export type setLocaleSubjectHandler = FirebaseCallableFunctionHandler<
     {
       // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
       // todo needs to verify a user has access to this data

@@ -1,1 +1,5 @@
-export const CALLABLE_FUNCTION_NAMES = ["test", "writeTest"] as const;
+export const CALLABLE_FUNCTION_NAMES = [
+  "test",
+  "writeTest",
+  "createTutor",
+] as const;
