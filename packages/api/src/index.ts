@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 
 import { CallableFunctionName, CallableMethod } from './declarations/types';
-import firestoreWriteHandler from './route-handlers/firestoreWrite';
+import firestoreWriteHandler from './request-handlers/firestoreWrite';
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript

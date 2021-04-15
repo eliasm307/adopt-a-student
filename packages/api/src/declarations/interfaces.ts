@@ -1,6 +1,6 @@
 import {
   GenericSubjectData, LocaleCode, LocaleSubjectCategoryData, LocaleSubjectData, PrivateStudentData,
-  PrivateTutorData, PrivateUserData, PublicStudentData, PublicTutorData, SubjectCategoryData,
+  PrivateTutorData, PublicStudentData, PublicTutorData,
 } from '../../common';
 import { FirebaseCallableFunctionHandler } from './types';
 
