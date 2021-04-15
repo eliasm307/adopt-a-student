@@ -2,9 +2,8 @@ import callFirebaseFunction from "../client-utils/callFirebaseFunction";
 import {
   functionsEmulator,
   isFirestoreEmulatorRunning,
+  functionsLive,
 } from "../client-utils/firebase-client";
-
-const functions = functionsEmulator;
 
 /*
 if (typeof process.env.FIRESTORE_EMULATOR_HOST !== "string")
@@ -19,9 +18,23 @@ describe("firebase function emulator", () => {
     const result = await callFirebaseFunction({
       name: "writeTest",
       data: { __filename, time: new Date().toLocaleString() },
-      functions,
+      functions: functionsEmulator,
     });
 
     console.log(__filename, "firestore writeTest call result", { result });
+  });
+});
+
+describe.only("firebase functions live", () => {
+  it("can call a function that writes to live", async () => {
+    const result = await callFirebaseFunction({
+      name: "createTutor",
+      data: {},
+      functions: functionsEmulator,
+    });
+
+    console.log(__filename, "firestore invalid createTutor call result", {
+      result,
+    });
   });
 });

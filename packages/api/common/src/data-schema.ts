@@ -70,7 +70,8 @@ export interface UserSubjectData {
 export interface GenericSubjectData extends Entity {
   readonly id: string;
 
-  categoryId: string;
+  /** The categories this generic subject belongs to */
+  categoryIds: string;
   /** Links to other relevant subjects a user might be interested in
    `// todo needs to be syncronised ie if A is related to B then B must be related to A`
   */

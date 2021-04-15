@@ -16,7 +16,7 @@
     "pretest": "yarn",
     "build": "tsc --build tsconfig.build.json",
     "prebuild": "yarn build:common && rm -rf lib && yarn",
-    "build:hot-reload": "tsc --build tsconfig.build.json",
+    "build:hot-reload": "tsc --build tsconfig.build.json --watch",
     "build:common": "yarn --cwd ./common build",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
