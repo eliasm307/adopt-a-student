@@ -5,7 +5,7 @@ import {
 import { FirebaseCallableFunctionHandler } from '../types';
 
 /** Get subject by id */
-export type ApiGetSubjectProfile = FirebaseCallableFunctionHandler<
+export type ApiGetSubjectData = FirebaseCallableFunctionHandler<
   {
     localeSubjectId: string;
   },

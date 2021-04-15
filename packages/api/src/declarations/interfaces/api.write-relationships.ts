@@ -1,7 +1,7 @@
 import { FirebaseCallableFunctionHandler } from '../types';
 import { BasicResponseData } from './';
 
-export type ApiAddStudentToLocaleSubject = FirebaseCallableFunctionHandler<
+export type ApiLinkStudentToLocaleSubject = FirebaseCallableFunctionHandler<
   {
     // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
     // todo needs to verify a user has access to this data
@@ -10,7 +10,7 @@ export type ApiAddStudentToLocaleSubject = FirebaseCallableFunctionHandler<
   },
   BasicResponseData
 >;
-export type ApiAddTutorToLocaleSubject = FirebaseCallableFunctionHandler<
+export type ApiLinkTutorToLocaleSubject = FirebaseCallableFunctionHandler<
   {
     // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
     // todo needs to verify a user has access to this data
@@ -19,7 +19,7 @@ export type ApiAddTutorToLocaleSubject = FirebaseCallableFunctionHandler<
   },
   BasicResponseData
 >;
-export type ApiRemoveStudentFromLocaleSubject = FirebaseCallableFunctionHandler<
+export type ApiUnlinkStudentFromLocaleSubject = FirebaseCallableFunctionHandler<
   {
     // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
     // todo needs to verify a user has access to this data
@@ -28,7 +28,7 @@ export type ApiRemoveStudentFromLocaleSubject = FirebaseCallableFunctionHandler<
   },
   BasicResponseData
 >;
-export type ApiRemoveTutorFromLocaleSubject = FirebaseCallableFunctionHandler<
+export type ApiUnlinkTutorFromLocaleSubject = FirebaseCallableFunctionHandler<
   {
     // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
     // todo needs to verify a user has access to this data

@@ -1,4 +1,6 @@
-import { PrivateStudentData, PrivateTutorData } from '@adopt-a-student/common';
+import {
+  PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData,
+} from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionHandler } from '../types';
 
@@ -10,7 +12,17 @@ export type ApiGetPrivateStudentDataHandler = FirebaseCallableFunctionHandler<
 >;
 /** Get tutor profile by uid */
 export type ApiGetPrivateTutorDataHandler = FirebaseCallableFunctionHandler<
-  { uid: string },
+  undefined,
   // todo needs to verify a user has access to this data
   { data: PrivateTutorData }
+>;
+export type ApiGetPublicStudentDataHandler = FirebaseCallableFunctionHandler<
+  { uid: string },
+  // todo needs to verify a user has access to this data
+  { data: PublicStudentData }
+>;
+export type ApiGetPublicTutorDataHandler = FirebaseCallableFunctionHandler<
+  { uid: string },
+  // todo needs to verify a user has access to this data
+  { data: PublicTutorData }
 >;
