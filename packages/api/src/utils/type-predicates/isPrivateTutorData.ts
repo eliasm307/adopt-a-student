@@ -12,7 +12,7 @@ export default function isPrivateTutorData(
     id,
     relatedSubjects,
     students,
-    username,
+    userName: username,
   } = data as PrivateTutorData;
 
   const hasDataIsComplete = typeof dataIsComplete === "boolean";

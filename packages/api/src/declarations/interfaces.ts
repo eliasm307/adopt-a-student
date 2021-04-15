@@ -20,19 +20,15 @@ export namespace API {
     },
     { data?: PublicTutorData[] }
   >;
-  /** Get student profile by student id */
+  /** Get student profile by uid */
   export type getStudentProfile = FirebaseCallableFunctionHandler<
-    {
-      id: string;
-    },
+    undefined,
     // todo needs to verify a user has access to this data
     { data?: PrivateStudentData }
   >;
-  /** Get tutor profile by tutor id */
+  /** Get tutor profile by uid */
   export type getTutorProfile = FirebaseCallableFunctionHandler<
-    {
-      id: string;
-    },
+    undefined,
     // todo needs to verify a user has access to this data
     { data?: PrivateTutorData }
   >;
@@ -115,6 +111,42 @@ export namespace API {
       // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
       // todo needs to verify a user has access to this data
       data?: Partial<LocaleSubjectCategoryData>;
+    },
+    BasicResponseData
+  >;
+  export type addStudentToLocaleSubject = FirebaseCallableFunctionHandler<
+    {
+      // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
+      // todo needs to verify a user has access to this data
+      // todo should add subject to user and user to subject
+      data?: { localeSubjectId: string };
+    },
+    BasicResponseData
+  >;
+  export type addTutorToLocaleSubject = FirebaseCallableFunctionHandler<
+    {
+      // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
+      // todo needs to verify a user has access to this data
+      // todo should add subject to user and user to subject
+      data?: { localeSubjectId: string };
+    },
+    BasicResponseData
+  >;
+  export type removeStudentToLocaleSubject = FirebaseCallableFunctionHandler<
+    {
+      // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
+      // todo needs to verify a user has access to this data
+      // todo should remove subject to user and user to subject
+      data?: { localeSubjectId: string };
+    },
+    BasicResponseData
+  >;
+  export type removeTutorToLocaleSubject = FirebaseCallableFunctionHandler<
+    {
+      // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
+      // todo needs to verify a user has access to this data
+      // todo should remove subject to user and user to subject
+      data?: { localeSubjectId: string };
     },
     BasicResponseData
   >;

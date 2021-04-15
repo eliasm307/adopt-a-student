@@ -90,6 +90,7 @@ export type Firestore = firebase.firestore.Firestore;
 export type FirestoreDocumentChange = firebase.firestore.DocumentChange<firebase.firestore.DocumentData>;
 export type FirestoreBatch = firebase.firestore.WriteBatch;
 export type FirestoreDocumentSnapshot = firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>;
+export type FirestoreQuerySnapshot = FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData>;
 
 ////////////////////////////////////////////////////////
 // Functions
@@ -102,7 +103,5 @@ const functionsEmulator = firebase.functions();
 functionsEmulator.useEmulator("localhost", 5001);
 
 export type FirebaseFunctions = firebase.functions.Functions;
-
-const functionsHttps = firebase.functions.
 
 export { functionsEmulator };
