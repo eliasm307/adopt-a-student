@@ -26,7 +26,7 @@ export type ApiSetStudentProfile = FirebaseCallableFunctionHandler<
 /** Create tutor profile */
 export type ApiCreateTutorHandler = FirebaseCallableFunctionHandler<
   {
-    data?: PrivateTutorData;
+    data?: Omit<PrivateTutorData, "id">;
   },
   BasicResponseData & { data: PrivateTutorData }
 >;

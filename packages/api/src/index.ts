@@ -38,6 +38,12 @@ const callableFunctionHandlers = {
   updateStudent,
   getPrivateStudentData,
   getPrivateTutorData,
+  createGenericSubject,
+  createLocaleSubject,
+  createSubjectCatgory,
+  updateGenericSubject,
+  updateLocaleSubject,
+  updateLocaleSubjectCategory,
 } as {
   [key in CallableFunctionName]: FirebaseCallableFunctionHandler;
 };

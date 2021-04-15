@@ -8,6 +8,12 @@ export const CALLABLE_FUNCTION_NAMES = [
   // subjects
   "getSubject",
   "getSubjectsByCategory",
+  "createLocaleSubject",
+  "updateLocaleSubject",
+  "createGenericSubject",
+  "updateGenericSubject",
+  "createSubjectCatgory",
+  "updateLocaleSubjectCategory",
 
   // tutors
   "createTutor",

@@ -86,6 +86,7 @@ export interface SubjectLocaleName {
 
 /** Subject category data in a specific locale */
 export interface LocaleSubjectCategoryData {
+  /** id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject */
   id: string;
   locale: LocaleCode;
   name: string;
@@ -93,6 +94,10 @@ export interface LocaleSubjectCategoryData {
 
 /** Subject category with all locale names */
 export interface GenericSubjectCategoryData extends Entity {
+  /** generic subjects which belong to this generic category
+     // todo this should link category to subject and subject to category
+  */
+  genericSubjectIds: string[];
   id: string;
   /** Representations of the same generic subject catories in different locales */
   localeSubjectCategories: {
