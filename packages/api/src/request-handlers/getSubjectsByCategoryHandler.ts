@@ -1,10 +1,7 @@
-import { PublicStudentData } from '@adopt-a-student/common';
-
 import { ApiGetSubjectsByCategory } from '../declarations/interfaces';
-import extractPublicStudentData from '../utils/extractPublicStudentData';
 import { firestore, functionsHttps } from '../utils/firebase-admin';
 import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
-import getUsersBySubjects from '../utils/getUsersBySubjects';
+import getLocaleSubjectFromGenericSubject from '../utils/getLocaleSubjectFromGenericSubject';
 import verifyRequest from '../utils/verifyRequest';
 
 const handler: ApiGetSubjectsByCategory = async (data, context) => {
@@ -18,18 +15,30 @@ const handler: ApiGetSubjectsByCategory = async (data, context) => {
     );
 
   const subjectCategoryId = data.subjectCategoryId;
+  const locale = data.locale;
 
   const genericSubjectsByCategory = await getGenericSubjectsByCategory({
     firestore,
     subjectCategoryId,
   });
 
-  return getUsersBySubjects<PublicStudentData>({
-    localeSubjectIds: data.localeSubjectIds,
-    publicDataExtractor: (data) => extractPublicStudentData(data),
-    userType: "Student",
-    firestore,
-  });
+  const localeSubjectPromises = genericSubjectsByCategory.map(
+    (genericSubject) =>
+      getLocaleSubjectFromGenericSubject({
+        firestore,
+        genericSubject,
+        locale,
+      })
+  );
+
+  const localeSubjects = await Promise.all(localeSubjectPromises);
+
+  return {
+    data: genericSubjectsByCategory.map((genericSubject, i) => ({
+      genericSubject,
+      localeSubject: localeSubjects[i],
+    })),
+  };
 };
 
 export default handler;
