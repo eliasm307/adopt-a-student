@@ -3,6 +3,7 @@ export const CALLABLE_FUNCTION_NAMES = [
   "writeTest",
   "createTutor",
   "updateTutor",
+  "getSubjectsByCategory",
 ] as const;
 
 export const GENERIC_SUBJECT_COLLECTION_NAME = "generic-subjects";

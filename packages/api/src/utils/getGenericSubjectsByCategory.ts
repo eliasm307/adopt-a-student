@@ -1,6 +1,6 @@
 import { GenericSubjectData } from '@adopt-a-student/common';
 
-import { LOCALE_SUBJECT_COLLECTION_NAME } from '../constants';
+import { GENERIC_SUBJECT_COLLECTION_NAME } from '../constants';
 import { FirestoreAdmin } from '../declarations/interfaces';
 import { functionsHttps } from './firebase-admin';
 import isGenericSubjectData from './type-predicates/isGenericSubjectData';
@@ -18,7 +18,7 @@ export default async function getGenericSubjectsByCategory({
 
   try {
     const genericSubjectsFilteredByCategory = await firestore
-      .collection(LOCALE_SUBJECT_COLLECTION_NAME)
+      .collection(GENERIC_SUBJECT_COLLECTION_NAME)
       .where(categoryField, "array-contains", subjectCategoryId)
       .get();
 
