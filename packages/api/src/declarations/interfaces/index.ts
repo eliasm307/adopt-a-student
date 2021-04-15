@@ -25,3 +25,5 @@ export * from "./api.read-user-data";
 export * from "./api.write-relationships";
 export * from "./api.write-subject-data";
 export * from "./api.write-user-data";
+
+export type FirestoreAdmin = FirebaseFirestore.Firestore;

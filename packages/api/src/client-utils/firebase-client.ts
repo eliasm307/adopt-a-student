@@ -86,7 +86,7 @@ export function isFirestoreEmulatorRunning(): boolean {
 }
 
 // firebase types
-export type Firestore = firebase.firestore.Firestore;
+export type FirestoreClient = firebase.firestore.Firestore;
 export type FirestoreDocumentChange = firebase.firestore.DocumentChange<firebase.firestore.DocumentData>;
 export type FirestoreBatch = firebase.firestore.WriteBatch;
 export type FirestoreDocumentSnapshot = firebase.firestore.DocumentSnapshot<firebase.firestore.DocumentData>;

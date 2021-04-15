@@ -1,6 +1,6 @@
 import { ApiGetTutorsBySubjectsHandler } from '../declarations/interfaces';
 import extractPublicTutorData from '../utils/extractPublicTutorData';
-import { functionsHttps } from '../utils/firebase-admin';
+import { firestore, functionsHttps } from '../utils/firebase-admin';
 import getUsersBySubjects from '../utils/getUsersBySubjects';
 import verifyRequest from '../utils/verifyRequest';
 
@@ -18,6 +18,7 @@ const handler: ApiGetTutorsBySubjectsHandler = async (data, context) => {
     localeSubjectIds: data.localeSubjectIds,
     publicDataExtractor: extractPublicTutorData,
     userType: "Tutor",
+    firestore,
   });
 };
 

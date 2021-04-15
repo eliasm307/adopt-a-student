@@ -1,8 +1,8 @@
-import { PrivateTutorData } from '@adopt-a-student/common';
+import { PrivateStudentData } from '@adopt-a-student/common';
 
-export default function isPrivateTutorData(
+export default function isPrivateStudentData(
   data: any
-): data is PrivateTutorData {
+): data is PrivateStudentData {
   if (typeof data !== "object") return false;
 
   // check mandatory fields
@@ -11,9 +11,11 @@ export default function isPrivateTutorData(
     email,
     id,
     relatedSubjects,
-    students,
     userName,
-  } = data as PrivateTutorData;
+    tutors,
+    imageUrl,
+    introduction,
+  } = data as PrivateStudentData;
 
   const hasDataIsComplete = typeof dataIsComplete === "boolean";
 
@@ -21,7 +23,11 @@ export default function isPrivateTutorData(
   const hasUserName = typeof userName === "string" && userName;
   const hasId = typeof id === "string" && id;
   const hasRelatedSubjects = Array.isArray(relatedSubjects);
-  const hasStudents = Array.isArray(students);
+  const hasTutors = Array.isArray(tutors);
+  const canHaveImage =
+    typeof imageUrl === "undefined" || typeof imageUrl === "string";
+  const canHaveIntroduction =
+    typeof introduction === "undefined" || typeof introduction === "string";
 
   if (
     hasEmail &&
@@ -29,10 +35,12 @@ export default function isPrivateTutorData(
     hasUserName &&
     hasId &&
     hasRelatedSubjects &&
-    hasStudents
+    hasTutors &&
+    canHaveImage &&
+    canHaveIntroduction
   )
     return true;
 
-  console.warn("data is not complete private tutor data", { data });
+  console.warn("data is not complete private Student data", { data });
   return false;
 }
