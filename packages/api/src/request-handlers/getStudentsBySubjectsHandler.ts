@@ -1,12 +1,10 @@
-import { PrivateTutorData, PublicStudentData } from '@adopt-a-student/common';
+import { PrivateStudentData } from '@adopt-a-student/common';
 
-import { PrivateStudentData } from '../../common/src';
-import { STUDENTS_COLLECTION_NAME, TUTORS_COLLECTION_NAME } from '../constants';
+import { STUDENTS_COLLECTION_NAME } from '../constants';
 import { API } from '../declarations/interfaces';
-import createPath from '../utils/createPath';
+import extractPublicStudentData from '../utils/extractPublicStudentData';
 import { firestore, functionsHttps } from '../utils/firebase-admin';
 import groupArrayItems from '../utils/groupArrayItems';
-import isPartialPrivateTutorData from '../utils/type-predicates/isPartialPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
 const handler: API.getStudentsBySubjectsHandler = async (data, context) => {
@@ -19,13 +17,12 @@ const handler: API.getStudentsBySubjectsHandler = async (data, context) => {
       "Could not get students by subjects because provided locale subject ids are not valid format"
     );
 
+  /* array-contains-any is limited to 10 values, so split this into multiple requests if necessary
+    https://firebase.google.com/docs/firestore/query-data/queries#array-contains-any
+   */
   const groupedLocaleSubjectIds = groupArrayItems(data.localeSubjectIds, 10);
 
-  const documentPath = createPath(TUTORS_COLLECTION_NAME, auth.uid);
-
   const subjectsField: keyof PrivateStudentData = "relatedSubjects";
-
-  /** todo array-contains-any is limited to 10 values https://firebase.google.com/docs/firestore/query-data/queries#array-contains-any */
 
   const filteredStudentsPromises = groupedLocaleSubjectIds.map(
     (subjectIdGroup) => {
@@ -36,41 +33,29 @@ const handler: API.getStudentsBySubjectsHandler = async (data, context) => {
     }
   );
 
-  const filteredStudentGroupsResults = await Promise.all(
-    filteredStudentsPromises
-  );
-
-  const flatDataList = filteredStudentGroupsResults
-    .reduce((accumulatedData, currentGroup) => {
-      const groupData = currentGroup.docs.map((doc) => doc.data());
-
-      return [...accumulatedData, ...groupData];
-    }, [] as any[])
-    .map((data) => {});
-
-  // check if tutor already exists for this user
-  const docSnapshot = await firestore.doc(documentPath).get();
-
-  if (!docSnapshot.exists)
-    throw new functionsHttps.HttpsError(
-      "not-found",
-      "Could not edit tutor because a tutor profile doesnt exist for this user, create one first"
+  try {
+    // resolve promises in parallel
+    const filteredStudentGroupsResults = await Promise.all(
+      filteredStudentsPromises
     );
 
-  // edit tutor
-  try {
-    await docSnapshot.ref.update(data);
-    const newSnapshot = await docSnapshot.ref.get();
-
+    // process and return public student data
     return {
-      success: true,
-      data: newSnapshot.data() as PrivateTutorData,
+      data: filteredStudentGroupsResults
+        // reduce to flat list
+        .reduce((accumulatedData, currentGroup) => {
+          const groupData = currentGroup.docs.map((doc) => doc.data());
+          return [...accumulatedData, ...groupData];
+        }, [] as any[])
+
+        // extract public data for each user
+        .map((data) => extractPublicStudentData(data)),
     };
   } catch (error) {
     throw new functionsHttps.HttpsError(
       "internal",
-      "There was an issue creating the tutor",
-      JSON.stringify(data)
+      "There was an issue reading data from firestore",
+      JSON.stringify({ error })
     );
   }
 };

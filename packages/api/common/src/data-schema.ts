@@ -1,5 +1,5 @@
-import { ConfidenceLevelEnum } from "./enums";
-import { Country, LocaleCode } from "./types";
+import { ConfidenceLevelEnum } from './enums';
+import { Country, LocaleCode } from './types';
 
 export interface Entity {
   dataIsComplete: boolean;
@@ -16,7 +16,7 @@ export interface PublicUserData extends Entity {
    * describe their experience, what subjects they are interested in etc */
   introduction?: string;
   /** Username which will be displayed for a user */
-  username: string;
+  userName: string;
 }
 
 /** Private user data only available to the owner user */
@@ -121,7 +121,7 @@ export interface StudentSubTutorData {
   /** Id of the tutor related to the student */
   id: string;
 
-  // todo add rating, review, comments etc
+// todo add rating, review, comments etc
 }
 
 /** Data about a student from the perspective of a tutor, as it is stored in database */
@@ -129,7 +129,7 @@ export interface TutorSubStudentData {
   /** Id of the student related to the tutor */
   id: string;
 
-  // todo add rating, review, comments etc
+// todo add rating, review, comments etc
 }
 
 /** Subject data specific to a student user, as it is stored in database */

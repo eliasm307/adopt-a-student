@@ -12,13 +12,13 @@ export default function isPrivateTutorData(
     id,
     relatedSubjects,
     students,
-    userName: username,
+    userName,
   } = data as PrivateTutorData;
 
   const hasDataIsComplete = typeof dataIsComplete === "boolean";
 
   const hasEmail = typeof email === "string" && email;
-  const hasUserName = typeof username === "string" && username;
+  const hasUserName = typeof userName === "string" && userName;
   const hasId = typeof id === "string" && id;
   const hasRelatedSubjects = Array.isArray(relatedSubjects);
   const hasStudents = Array.isArray(students);

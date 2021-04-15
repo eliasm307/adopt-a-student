@@ -11,26 +11,26 @@ export namespace API {
       localeSubjectIds: string[];
     },
     // returns
-    { data?: PublicStudentData[] }
+    { data: PublicStudentData[] }
   >;
   /** Get tutors by subjects, save this in subject */
   export type getTutorsBySubjectsHandler = FirebaseCallableFunctionHandler<
     {
       localeSubjectIds: string[];
     },
-    { data?: PublicTutorData[] }
+    { data: PublicTutorData[] }
   >;
   /** Get student profile by uid */
   export type getStudentProfile = FirebaseCallableFunctionHandler<
     undefined,
     // todo needs to verify a user has access to this data
-    { data?: PrivateStudentData }
+    { data: PrivateStudentData }
   >;
   /** Get tutor profile by uid */
   export type getTutorProfile = FirebaseCallableFunctionHandler<
     undefined,
     // todo needs to verify a user has access to this data
-    { data?: PrivateTutorData }
+    { data: PrivateTutorData }
   >;
   /** Get subject by id */
   export type getSubjectProfile = FirebaseCallableFunctionHandler<
@@ -49,7 +49,7 @@ export namespace API {
       subjectCategoryId: string;
     },
     {
-      data?: {
+      data: {
         localeSubject: LocaleSubjectData;
         genericSubject: GenericSubjectData;
       }[];
@@ -60,7 +60,7 @@ export namespace API {
     {
       locale: LocaleCode;
     },
-    { data?: LocaleSubjectCategoryData[] }
+    { data: LocaleSubjectCategoryData[] }
   >;
   /** Post update to student profile */
   export type setStudentProfile = FirebaseCallableFunctionHandler<

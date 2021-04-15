@@ -36,7 +36,7 @@ export default function isPartialPrivateTutorData(
       case "students":
         if (Array.isArray(value)) propCount++;
         break;
-      case "username":
+      case "userName":
         if (typeof value === "string") propCount++;
         break;
       default:

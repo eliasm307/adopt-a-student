@@ -13,7 +13,7 @@ export default function extractPublicStudentData(data: any): PublicStudentData {
   const {
     dataIsComplete,
     id,
-    username,
+    userName: username,
     imageUrl,
     introduction,
   } = data as PublicStudentData;
