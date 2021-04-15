@@ -6,9 +6,14 @@ const firestore = firestoreApp;
 const handler: FirebaseCallableFunctionHandler = async (data, context) => {
   console.log(__filename, "received request", { data, context });
 
-  return firestore
-    .doc("tests/writeFunctionTest")
-    .set({ time: new Date(), __filename, data });
+  try {
+    await firestore
+      .doc("tests/writeFunctionTestX")
+      .set({ timeX: new Date().toLocaleString(), __filename, data });
+    console.warn("wrote to firestore successfully xxx");
+  } catch (error) {
+    console.error("Error writing to firestore from firestore-write");
+  }
 };
 
 export default handler;

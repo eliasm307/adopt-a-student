@@ -1,5 +1,6 @@
-import functions, { HttpsFunction, Runnable } from 'firebase-functions';
+import * as functions from 'firebase-functions';
 
+import { CallableFunctionName, CallableMethod } from './declarations/types';
 import firestoreWriteHandler from './route-handlers/firestoreWrite';
 
 // Start writing Firebase Functions
@@ -17,12 +18,17 @@ const test = functions.https.onCall((data, context) => {
 });
 
 const writeTest = functions.https.onCall(firestoreWriteHandler);
-
-const callableFunctions: {
+/*
+const callableFunctions = { test, writeTest } as {
   [key in CallableFunctionName]: CallableMethod | undefined;
-} = { test, writeTest };
+};
+*/
 
-export default callableFunctions;
+module.exports = { test, writeTest } as {
+  [key in CallableFunctionName]: CallableMethod | undefined;
+};
+
+// export default callableFunctions;
 
 /** Get all student profile data */
 // export const getStudent = functions.https.onCall(_getStudent);

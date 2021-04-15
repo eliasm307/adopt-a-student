@@ -4,24 +4,26 @@
   "description": "API for adopt-a-student",
   "author": "Elias Mangoro",
   "license": "MIT",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
   "nohoist": [
     "**/*jest*",
     "**/*jest*/**"
   ],
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
-    "test": "jest --watchAll --verbose=false",
+    "test": "jest --colors --logHeapUsage",
+    "pretest": "yarn",
     "build": "tsc --build tsconfig.build.json",
-    "prebuild": "yarn && rm -rf lib && yarn lint",
+    "build:hot-reload": "tsc --build tsconfig.build.json",
+    "prebuild": "yarn && rm -rf lib",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
     "predeploy": "yarn build",
     "logs": "firebase functions:log",
-    "start-emulators": "cross-env FIRESTORE_EMULATOR_HOST=\"localhost:8080\" && firebase emulators:start"
+    "start-emulators": "yarn build && set FIRESTORE_EMULATOR_HOST=localhost:8080&& set NODE_ENV=development&& firebase emulators:start"
   },
   "engines": {
     "node": "12"

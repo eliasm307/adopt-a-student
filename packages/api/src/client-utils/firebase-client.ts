@@ -1,13 +1,15 @@
+// must be listed before other Firebase SDKs
+import firebase from "firebase/app";
+
 // Firebase App (the core Firebase SDK) is always required and
 // Add the Firebase services that you want to use
-import 'firebase/functions';
-import 'firebase/firestore';
+import "firebase/functions";
+import "firebase/firestore";
+import "firebase/auth";
 
-// must be listed before other Firebase SDKs
-import firebase from 'firebase/app';
-import urlExistSync from 'url-exist-sync';
+import urlExistSync from "url-exist-sync";
 
-import config from '../../private_config/config';
+import config from "../../private_config/config";
 
 // destructure required entries
 const {
@@ -56,7 +58,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+const app = firebase.initializeApp(firebaseConfig);
 
 ////////////////////////////////////////////////////////
 // Firebase Authentication exports
@@ -72,9 +74,9 @@ export interface FireBaseUser extends firebase.User {}
 ////////////////////////////////////////////////////////
 // Firestore exports
 
-export const firestoreLive = firebase.firestore();
+export const firestoreLive = app.firestore();
 
-const firestoreEmulator = firebase.firestore();
+const firestoreEmulator = app.firestore();
 firestoreEmulator.useEmulator("localhost", 8080);
 
 export { firestoreEmulator };

@@ -1,7 +1,7 @@
 // setup from https://github.com/firebase/firebase-admin-node/issues/575#issuecomment-524744793
 
-import * as admin from 'firebase-admin';
-import * as functions from 'firebase-functions';
+import * as admin from "firebase-admin";
+import * as functions from "firebase-functions";
 
 // import functionsTest from 'firebase-functions-test';
 // import path from 'path';
@@ -10,15 +10,16 @@ const databaseURL = "https://adopt-a-student.europe-west1.firebasedatabase.app";
 
 let app;
 
+console.log(__filename, { NODE_ENV: process.env.NODE_ENV });
+
 if (process.env.NODE_ENV === "development") {
   // make admin app use this for firestore requests
   process.env.FIRESTORE_EMULATOR_HOST = "localhost:8080";
 
-  app = admin.initializeApp({
-    projectId: "test",
-    credential: admin.credential.applicationDefault(),
-  });
+  console.log(__filename, "trying to use using emulator admin");
+  app = admin.initializeApp();
 } else {
+  console.log(__filename, "using live admin");
   app = admin.initializeApp({
     credential: admin.credential.cert({
       privateKey: functions.config().private.key.replace(/\\n/g, "\n"),
