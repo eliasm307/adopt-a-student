@@ -6,6 +6,7 @@ import {
 import createTutorHandler from './request-handlers/createTutorHandler';
 import firestoreWriteHandler from './request-handlers/firestoreWrite';
 import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
+import getSubjectCategoriesHandler from './request-handlers/getSubjectCategoriesHandler';
 import getSubjectHandler from './request-handlers/getSubjectHandler';
 import getSubjectsByCategoryHandler from './request-handlers/getSubjectsByCategoryHandler';
 import getTutorsBySubjectsHandler from './request-handlers/getTutorsBySubjectsHandler';
@@ -27,6 +28,7 @@ const callableFunctionHandlers = {
   getTutorsBySubjects: getTutorsBySubjectsHandler,
   updateTutor: updateTutorHandler,
   getSubject: getSubjectHandler,
+  getSubjectCategories: getSubjectCategoriesHandler,
 } as {
   [key in CallableFunctionName]: FirebaseCallableFunctionHandler;
 };

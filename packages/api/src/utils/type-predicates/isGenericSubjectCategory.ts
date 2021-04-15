@@ -5,7 +5,10 @@ export default function isGenericSubjectCategoryData(
 ): data is GenericSubjectCategoryData {
   if (typeof data !== "object") return false;
 
-  const { id, localeSubjects } = data as GenericSubjectCategoryData;
+  const {
+    id,
+    localeSubjectCategories: localeSubjects,
+  } = data as GenericSubjectCategoryData;
 
   const hasId = typeof id === "string" && id;
 

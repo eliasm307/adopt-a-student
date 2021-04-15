@@ -92,9 +92,12 @@ export interface LocaleSubjectCategoryData {
 }
 
 /** Subject category with all locale names */
-export interface SubjectCategoryData extends Entity {
+export interface GenericSubjectCategoryData extends Entity {
   id: string;
-  localeNames: SubjectLocaleName[];
+  /** Representations of the same generic subject catories in different locales */
+  localeSubjectCategories: {
+    [key in LocaleCode]: LocaleSubjectCategoryData | undefined;
+  };
 }
 
 /** Schema of the general public data (not relating to a user) that represents a specific locale dependent subject,

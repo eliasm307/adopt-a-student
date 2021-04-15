@@ -1,7 +1,10 @@
-import { LOCALE_SUBJECT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
+import { LocaleSubjectCategoryData } from '@adopt-a-student/common';
+
+import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
 import { ApiGetSubjectCategoriesHandler } from '../declarations/interfaces';
 import { firestore, functionsHttps } from '../utils/firebase-admin';
 import getCollectionData from '../utils/getCollectionData';
+import isGenericSubjectCategoryData from '../utils/type-predicates/isGenericSubjectCategory';
 import verifyRequest from '../utils/verifyRequest';
 
 const getSubjectCategoriesHandler: ApiGetSubjectCategoriesHandler = async (
@@ -19,16 +22,41 @@ const getSubjectCategoriesHandler: ApiGetSubjectCategoriesHandler = async (
 
   const locale = data.locale;
 
-  const subjectCategories = await getCollectionData({
+  const genericSubjectCategories = await getCollectionData({
     firestore,
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
-    dataPredicate: isSubjectCategoryData,
+    dataPredicate: isGenericSubjectCategoryData,
   });
 
-  const subjectLocaleCategories = subjectCategories.map(callbackfn);
+  const localeSubjectCategories = genericSubjectCategories
+    // get locale subjects from generic subject, default to en if not defined
+    .map((genericCategory) => {
+      const localeSubjectCategory =
+        genericCategory.localeSubjectCategories[locale] ||
+        genericCategory.localeSubjectCategories.en;
+
+      if (!localeSubjectCategory)
+        console.warn(
+          __filename,
+          "Locale subject category not defined and en fallback not defined also",
+          {
+            locale,
+            genericCategory,
+          }
+        );
+
+      return localeSubjectCategory;
+    })
+    // filter out any falsy locale subjects
+    .filter((localeSubjectCategory) => localeSubjectCategory)
+    // type assertion to make ts happy
+    .map(
+      (localeSubjectCategory) =>
+        localeSubjectCategory as LocaleSubjectCategoryData
+    );
 
   return {
-    data: { subjectCategories: subjectLocaleCategories },
+    data: { localeSubjectCategories },
   };
 };
 
