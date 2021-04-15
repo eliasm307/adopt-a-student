@@ -2,7 +2,7 @@ import { ConfidenceLevelEnum } from './enums';
 import { Country, LocaleCode } from './types';
 
 export interface Entity {
-  dataIsComplete: boolean;
+  // dataIsComplete: boolean;
 }
 
 /** User data that is publicly available */

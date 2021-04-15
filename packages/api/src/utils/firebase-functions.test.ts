@@ -27,7 +27,15 @@ describe("firebase function emulator", () => {
   });
 });
 
-describe.only("firebase functions live", () => {
+describe.only("firebase functions createTutor", () => {
+  beforeEach(async () => {
+    await auth.signInAnonymously();
+  });
+
+  afterEach(async () => {
+    await auth.signOut();
+  });
+
   it("can call a function that writes to live", async () => {
     const data: PrivateTutorData = {
       email: "an-email",
@@ -37,17 +45,34 @@ describe.only("firebase functions live", () => {
       userName: "eced",
     };
 
-    await auth.signInAnonymously();
     const result = await callFirebaseFunction({
       name: "createTutor",
       data,
       functions: functionsEmulator,
     });
 
-    console.log(__filename, "firestore invalid createTutor call result", {
+    console.log(__filename, "call result", {
       result,
     });
 
-    await auth.signOut();
+    expect(result).toBeTruthy();
+  });
+
+  it("doesnt accept invalid data", async () => {
+    const data = {
+      email: "an-email",
+      // id: "232",
+      relatedSubjects: [{ confidenceLevel: 2, detail: "2ded", id: "kkd" }],
+      students: [{ id: "student1" }],
+      userName: "eced",
+    };
+
+    expect(
+      callFirebaseFunction({
+        name: "createTutor",
+        data,
+        functions: functionsEmulator,
+      })
+    ).rejects.toBeTruthy();
   });
 });
