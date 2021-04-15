@@ -3,7 +3,7 @@ import { GenericSubjectData, LocaleCode, LocaleSubjectData } from '@adopt-a-stud
 import { LOCALE_SUBJECT_COLLECTION_NAME } from '../constants';
 import { FirestoreAdmin } from '../declarations/interfaces';
 import { functionsHttps } from './firebase-admin';
-import isGenericSubjectData from './type-predicates/isGenericSubjectData';
+import isLocaleSubjectData from './type-predicates/isLocaleSubjectData';
 
 interface Props {
   firestore: FirestoreAdmin;
@@ -49,8 +49,18 @@ export default async function getLocaleSubjectFromGenericSubject({
         JSON.stringify({ resultData, resultCount })
       );
 
+    // use the first result
+    const localeSubject = resultData[0];
+
     // process and return data
-    if(!isLoc)
+    if (!isLocaleSubjectData(localeSubject))
+      throw new functionsHttps.HttpsError(
+        "internal",
+        `Locale subject data not valid`,
+        { __filename }
+      );
+
+    return localeSubject;
   } catch (error) {
     throw new functionsHttps.HttpsError(
       "internal",
