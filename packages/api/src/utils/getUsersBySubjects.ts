@@ -13,16 +13,6 @@ interface Props<PublicDataType> {
   userType: UserTypeName;
 }
 
-/*
-interface UserVariableConfig<P> {
-  publicDataExtractor: (data: any) => P;
-  userCollectionName:
-    | typeof STUDENTS_COLLECTION_NAME
-    | typeof TUTORS_COLLECTION_NAME;
-  userSubjectsField: keyof PrivateTutorData | keyof PrivateStudentData;
-}
-*/
-
 export default async function getUsersBySubjects<PublicDataType>({
   localeSubjectIds,
   publicDataExtractor,
