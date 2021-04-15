@@ -5,18 +5,20 @@ import {
 import { FirebaseCallableFunctionHandler } from '../../types';
 
 /** Get subject by id */
-export type ApiGetSubjectData = FirebaseCallableFunctionHandler<
+export type ApiGetSubjectHandler = FirebaseCallableFunctionHandler<
   {
     localeSubjectId: string;
   },
   {
-    localeSubject: LocaleSubjectData;
-    genericSubject: GenericSubjectData;
+    data: {
+      localeSubject: LocaleSubjectData;
+      genericSubject: GenericSubjectData;
+    };
   }
 >;
 
 /** Get all subject categories by locale */
-export type ApiGetSubjectsCategories = FirebaseCallableFunctionHandler<
+export type ApiGetSubjectCategoriesHandler = FirebaseCallableFunctionHandler<
   {
     locale: LocaleCode;
   },
