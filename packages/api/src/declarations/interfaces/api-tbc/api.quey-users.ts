@@ -1,6 +1,6 @@
 import { PublicStudentData, PublicTutorData } from '@adopt-a-student/common';
 
-import { FirebaseCallableFunctionHandler } from '../types';
+import { FirebaseCallableFunctionHandler } from '../../types';
 
 /** Get students by subjects, save this in subject */
 export type ApiGetStudentsBySubjectsHandler = FirebaseCallableFunctionHandler<

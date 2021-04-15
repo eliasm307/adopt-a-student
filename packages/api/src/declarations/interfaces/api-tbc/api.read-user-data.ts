@@ -2,7 +2,7 @@ import {
   PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData,
 } from '@adopt-a-student/common';
 
-import { FirebaseCallableFunctionHandler } from '../types';
+import { FirebaseCallableFunctionHandler } from '../../types';
 
 /** Get student profile by uid. users can only get their own private data */
 export type ApiGetPrivateStudentDataHandler = FirebaseCallableFunctionHandler<

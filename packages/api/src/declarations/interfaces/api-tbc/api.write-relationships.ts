@@ -1,5 +1,5 @@
-import { FirebaseCallableFunctionHandler } from '../types';
-import { BasicResponseData } from './';
+import { BasicResponseData } from '../';
+import { FirebaseCallableFunctionHandler } from '../../types';
 
 export type ApiLinkStudentToLocaleSubject = FirebaseCallableFunctionHandler<
   {

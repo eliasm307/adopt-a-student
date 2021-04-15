@@ -18,12 +18,12 @@ export interface BasicResponseData {
   success: boolean;
 }
 
-export * from "./api.query-subjects";
-export * from "./api.quey-users";
-export * from "./api.read-subject-data";
-export * from "./api.read-user-data";
-export * from "./api.write-relationships";
-export * from "./api.write-subject-data";
-export * from "./api.write-user-data";
+export * from "./api-tbc/api.query-subjects";
+export * from "./api-tbc/api.quey-users";
+export * from "./api-tbc/api.read-subject-data";
+export * from "./api-tbc/api.read-user-data";
+export * from "./api-tbc/api.write-relationships";
+export * from "./api-tbc/api.write-subject-data";
+export * from "./api-tbc/api.write-user-data";
 
 export type FirestoreAdmin = FirebaseFirestore.Firestore;
