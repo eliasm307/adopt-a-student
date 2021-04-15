@@ -3,13 +3,17 @@ import * as functions from 'firebase-functions';
 import {
   CallableFunctionName, CallableMethod, FirebaseCallableFunctionHandler,
 } from './declarations/types';
-import createTutorHandler from './request-handlers/createTutorHandler';
-import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
-import getSubjectCategoriesHandler from './request-handlers/getSubjectCategoriesHandler';
-import getSubjectHandler from './request-handlers/getSubjectHandler';
-import getSubjectsByCategoryHandler from './request-handlers/getSubjectsByCategoryHandler';
-import getTutorsBySubjectsHandler from './request-handlers/getTutorsBySubjectsHandler';
-import updateTutorHandler from './request-handlers/updateTutorHandler';
+import createTutor from './request-handlers/createTutorHandler';
+import getPrivateStudentData from './request-handlers/getPrivateStudentDataHandler';
+import getPrivateTutorData from './request-handlers/getPrivateTutorDataHandler';
+import getPublicStudentData from './request-handlers/getPublicStudentDataHandler';
+import getPublicTutorData from './request-handlers/getPublicTutorDataHandler';
+import getStudentsBySubjects from './request-handlers/getStudentsBySubjectsHandler';
+import getSubjectCategories from './request-handlers/getSubjectCategoriesHandler';
+import getSubject from './request-handlers/getSubjectHandler';
+import getSubjectsByCategory from './request-handlers/getSubjectsByCategoryHandler';
+import getTutorsBySubjects from './request-handlers/getTutorsBySubjectsHandler';
+import updateTutor from './request-handlers/updateTutorHandler';
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -21,13 +25,19 @@ Example from https://firebase.google.com/docs/functions/callable#web
 
 const callableFunctionHandlers = {
   // writeTest: firestoreWriteHandler,
-  getSubjectsByCategory: getSubjectsByCategoryHandler,
-  createTutor: createTutorHandler,
-  getStudentsBySubjects: getStudentsBySubjectsHandler,
-  getTutorsBySubjects: getTutorsBySubjectsHandler,
-  updateTutor: updateTutorHandler,
-  getSubject: getSubjectHandler,
-  getSubjectCategories: getSubjectCategoriesHandler,
+  getSubjectsByCategory,
+  createTutor,
+  updateTutor,
+  getStudentsBySubjects,
+  getTutorsBySubjects,
+  getSubject,
+  getSubjectCategories,
+  getPublicStudentData,
+  getPublicTutorData,
+  createStudent,
+  updateStudent,
+  getPrivateStudentData,
+  getPrivateTutorData,
 } as {
   [key in CallableFunctionName]: FirebaseCallableFunctionHandler;
 };

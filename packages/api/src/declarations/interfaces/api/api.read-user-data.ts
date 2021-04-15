@@ -18,11 +18,9 @@ export type ApiGetPrivateTutorDataHandler = FirebaseCallableFunctionHandler<
 >;
 export type ApiGetPublicStudentDataHandler = FirebaseCallableFunctionHandler<
   { uid: string },
-  // todo needs to verify a user has access to this data
   { data: PublicStudentData }
 >;
 export type ApiGetPublicTutorDataHandler = FirebaseCallableFunctionHandler<
   { uid: string },
-  // todo needs to verify a user has access to this data
   { data: PublicTutorData }
 >;

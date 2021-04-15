@@ -7,7 +7,7 @@ import readPublicUserData from '../utils/readPublicUserData';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
-const handler: ApiGetPublicTutorDataHandler = async (_, context) => {
+const getPublicTutorData: ApiGetPublicTutorDataHandler = async (_, context) => {
   const auth = verifyRequest(_, context);
 
   const path = createPath(TUTORS_COLLECTION_NAME, auth.uid);
@@ -22,4 +22,4 @@ const handler: ApiGetPublicTutorDataHandler = async (_, context) => {
   return { data };
 };
 
-export default handler;
+export default getPublicTutorData;
