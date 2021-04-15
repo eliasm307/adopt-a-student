@@ -1,7 +1,7 @@
 import { FirebaseCallableFunctionHandler } from '../declarations/types';
-import { firestoreApp } from '../utils/firebase-admin';
+import { firestore } from '../utils/firebase-admin';
 
-const firestore = firestoreApp;
+const firestore = firestore;
 
 const handler: FirebaseCallableFunctionHandler = async (data, context) => {
   console.log(__filename, "received request", { data, context });
