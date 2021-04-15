@@ -1,14 +1,15 @@
-import { PrivateStudentData } from '@adopt-a-student/common';
+import {
+  PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData,
+} from '@adopt-a-student/common';
 
-import { PrivateTutorData, PublicStudentData, PublicTutorData } from '../../common/src';
 import { STUDENTS_COLLECTION_NAME, TUTORS_COLLECTION_NAME } from '../constants';
 import { UserTypeName } from '../declarations/types';
 import { firestore, functionsHttps } from './firebase-admin';
 import groupArrayItems from './groupArrayItems';
 
-interface Props<P> {
+interface Props<PublicDataType extends PublicStudentData | PublicTutorData> {
   localeSubjectIds: string[];
-  publicDataExtractor: (data: any) => P;
+  publicDataExtractor: (data: any) => PublicDataType;
   userType: UserTypeName;
 }
 
@@ -23,8 +24,8 @@ interface UserVariableConfig<P> {
 */
 
 export default async function getUsersBySubjects<
-  P extends PublicStudentData | PublicTutorData
->({ localeSubjectIds, userType, publicDataExtractor }: Props<P>) {
+  PublicDataType extends PublicStudentData | PublicTutorData
+>({ localeSubjectIds, publicDataExtractor, userType }: Props<PublicDataType>) {
   const studentSubjectsField: keyof PrivateStudentData = "relatedSubjects";
   const tutorSubjectsField: keyof PrivateTutorData = "relatedSubjects";
 
@@ -32,11 +33,6 @@ export default async function getUsersBySubjects<
     userType === "Student" ? STUDENTS_COLLECTION_NAME : TUTORS_COLLECTION_NAME;
   const userSubjectsField =
     userType === "Student" ? studentSubjectsField : tutorSubjectsField;
-
-  /*
-  const publicDataExtractor: (data: any) => P =
-    userType === "Student" ? extractPublicStudentData : extractPublicTutorData;
-    */
 
   /* array-contains-any is limited to 10 values, so split this into multiple requests if necessary
     https://firebase.google.com/docs/firestore/query-data/queries#array-contains-any
