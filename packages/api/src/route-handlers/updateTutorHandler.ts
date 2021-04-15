@@ -1,8 +1,10 @@
+import { PrivateTutorData } from '@adopt-a-student/common';
+
 import { TUTORS_COLLECTION_NAME } from '../constants';
 import { API } from '../declarations/interfaces';
 import createPath from '../utils/createPath';
 import { firestore, functionsHttps } from '../utils/firebase-admin';
-import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
+import isPartialPrivateTutorData from '../utils/type-predicates/isPartialPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
 const handler: API.updateTutorHandler = async (data, context) => {
@@ -12,33 +14,29 @@ const handler: API.updateTutorHandler = async (data, context) => {
   if (!isPartialPrivateTutorData(data))
     throw new functionsHttps.HttpsError(
       "failed-precondition",
-      "Could not create tutor because provided data is not valid/complete"
+      "Could not update tutor because provided data is not valid"
     );
 
   const documentPath = createPath(TUTORS_COLLECTION_NAME, auth.uid);
 
   // check if tutor already exists for this user
-  const docRef = await firestore.doc(documentPath).get();
+  const docSnapshot = await firestore.doc(documentPath).get();
 
-  if (docRef.exists)
-    return {
-      success: false,
-      data,
-      message:
-        "Could not create tutor because a tutor already exists for the requesting user",
-    };
-  // ! dont throw error if there is an existing tutor, its not that deep
-  /*
+  if (!docSnapshot.exists)
     throw new functionsHttps.HttpsError(
-      "already-exists",
-      "Could not create tutor because a tutor already exists for the requesting user"
+      "not-found",
+      "Could not edit tutor because a tutor profile doesnt exist for this user, create one first"
     );
-    */
 
-  // create tutor
+  // edit tutor
   try {
-    await firestore.doc(documentPath).set(data);
-    return { success: true, data };
+    await docSnapshot.ref.update(data);
+    const newSnapshot = await docSnapshot.ref.get();
+
+    return {
+      success: true,
+      data: newSnapshot.data() as PrivateTutorData,
+    };
   } catch (error) {
     throw new functionsHttps.HttpsError(
       "internal",

@@ -4,7 +4,7 @@ import { functionsHttps } from '../firebase-admin';
 
 export default function isPartialPrivateTutorData(
   data: any
-): data is PrivateTutorData {
+): data is Partial<PrivateTutorData> {
   if (typeof data !== "object") return false;
 
   // check mandatory fields
