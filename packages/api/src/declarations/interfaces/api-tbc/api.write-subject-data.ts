@@ -2,8 +2,8 @@ import {
   GenericSubjectData, LocaleSubjectCategoryData, LocaleSubjectData,
 } from '@adopt-a-student/common';
 
-import { FirebaseCallableFunctionHandler } from '../types';
-import { BasicResponseData } from './';
+import { BasicResponseData } from '../';
+import { FirebaseCallableFunctionHandler } from '../../types';
 
 /** Post update for locale subject */
 export type ApiSetLocaleSubjectHandler = FirebaseCallableFunctionHandler<

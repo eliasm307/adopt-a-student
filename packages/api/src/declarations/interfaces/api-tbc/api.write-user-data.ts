@@ -1,7 +1,7 @@
 import { PrivateStudentData, PrivateTutorData } from '@adopt-a-student/common';
 
-import { FirebaseCallableFunctionHandler } from '../types';
-import { BasicResponseData } from './';
+import { BasicResponseData } from '../';
+import { FirebaseCallableFunctionHandler } from '../../types';
 
 /** Post update to tutor profile */
 export type ApiUpdateTutorDataHandler = FirebaseCallableFunctionHandler<

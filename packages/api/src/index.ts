@@ -1,7 +1,11 @@
 import * as functions from 'firebase-functions';
 
-import { CallableFunctionName, CallableMethod } from './declarations/types';
+import {
+  CallableFunctionName, CallableMethod, FirebaseCallableFunctionHandler,
+} from './declarations/types';
+import createTutorHandler from './request-handlers/createTutorHandler';
 import firestoreWriteHandler from './request-handlers/firestoreWrite';
+import getSubjectsByCategoryHandler from './request-handlers/getSubjectsByCategoryHandler';
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -11,23 +15,42 @@ Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
 
-const callableFunctions = {} as {
-  [key in CallableFunctionName]: CallableMethod | undefined;
+const callableFunctionHandlers = {} as {
+  [key in CallableFunctionName]: FirebaseCallableFunctionHandler;
 };
 
-callableFunctions.test = functions.https.onCall((data, context) => {
+callableFunctionHandlers.test = (data, context) => {
   return { message: "yay" };
   //   .region("europe-west1")
   // ...
-});
+};
 
-callableFunctions.writeTest = functions.https.onCall(firestoreWriteHandler);
+callableFunctionHandlers.writeTest = firestoreWriteHandler;
 
-callableFunctions.getSubjectsByCategory = functions.https.onCall();
+callableFunctionHandlers.getSubjectsByCategory = getSubjectsByCategoryHandler;
 
-module.exports = { ...callableFunctions } as {
+callableFunctionHandlers.createTutor = createTutorHandler;
+
+/*
+module.exports = {
+  ...callableFunctionHandlers,
+} as {
   [key in CallableFunctionName]: CallableMethod;
 };
+*/
+
+// export defined handlers with given callable function names
+module.exports = Object.entries(callableFunctionHandlers).reduce(
+  (exports, [callableName, callableHandler]) => {
+    exports[callableName as CallableFunctionName] = functions.https.onCall(
+      callableHandler
+    );
+    return exports;
+  },
+  {} as {
+    [key in CallableFunctionName]: CallableMethod;
+  }
+);
 
 // export default callableFunctions;
 
