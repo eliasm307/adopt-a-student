@@ -45,5 +45,6 @@ module.exports = {
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
     "valid-jsdoc": 0,
+    "import/export": 1,
   },
 };

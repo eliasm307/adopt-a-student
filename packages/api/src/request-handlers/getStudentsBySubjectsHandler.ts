@@ -1,10 +1,12 @@
-import { API } from '../declarations/interfaces';
+import { PublicStudentData } from '@adopt-a-student/common';
+
+import { ApiGetStudentsBySubjectsHandler } from '../declarations/interfaces';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
 import { functionsHttps } from '../utils/firebase-admin';
 import getUsersBySubjects from '../utils/getUsersBySubjects';
 import verifyRequest from '../utils/verifyRequest';
 
-const handler: API.getStudentsBySubjectsHandler = async (data, context) => {
+const handler: ApiGetStudentsBySubjectsHandler = async (data, context) => {
   const auth = verifyRequest(data, context);
 
   // verify received data
@@ -14,9 +16,9 @@ const handler: API.getStudentsBySubjectsHandler = async (data, context) => {
       "Could not get students by subjects because provided locale subject ids are not valid format"
     );
 
-  return getUsersBySubjects({
+  return getUsersBySubjects<PublicStudentData>({
     localeSubjectIds: data.localeSubjectIds,
-    publicDataExtractor: extractPublicStudentData,
+    publicDataExtractor: (data) => extractPublicStudentData(data),
     userType: "Student",
   });
 

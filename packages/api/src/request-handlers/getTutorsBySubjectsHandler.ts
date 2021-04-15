@@ -1,10 +1,10 @@
-import { API } from '../declarations/interfaces';
+import { ApiGetTutorsBySubjectsHandler } from '../declarations/interfaces';
 import extractPublicTutorData from '../utils/extractPublicTutorData';
 import { functionsHttps } from '../utils/firebase-admin';
 import getUsersBySubjects from '../utils/getUsersBySubjects';
 import verifyRequest from '../utils/verifyRequest';
 
-const handler: API.getTutorsBySubjectsHandler = async (data, context) => {
+const handler: ApiGetTutorsBySubjectsHandler = async (data, context) => {
   const auth = verifyRequest(data, context);
 
   // verify received data

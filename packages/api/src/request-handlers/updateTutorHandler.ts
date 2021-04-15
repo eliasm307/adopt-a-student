@@ -1,13 +1,13 @@
 import { PrivateTutorData } from '@adopt-a-student/common';
 
 import { TUTORS_COLLECTION_NAME } from '../constants';
-import { API } from '../declarations/interfaces';
+import { ApiUpdateTutorDataHandler } from '../declarations/interfaces';
 import createPath from '../utils/createPath';
 import { firestore, functionsHttps } from '../utils/firebase-admin';
 import isPartialPrivateTutorData from '../utils/type-predicates/isPartialPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
-const handler: API.updateTutorHandler = async (data, context) => {
+const handler: ApiUpdateTutorDataHandler = async (data, context) => {
   const auth = verifyRequest(data, context);
 
   // verify received data

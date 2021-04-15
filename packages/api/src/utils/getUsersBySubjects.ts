@@ -1,13 +1,11 @@
-import {
-  PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData,
-} from '@adopt-a-student/common';
+import { PrivateStudentData, PrivateTutorData } from '@adopt-a-student/common';
 
 import { STUDENTS_COLLECTION_NAME, TUTORS_COLLECTION_NAME } from '../constants';
 import { UserTypeName } from '../declarations/types';
 import { firestore, functionsHttps } from './firebase-admin';
 import groupArrayItems from './groupArrayItems';
 
-interface Props<PublicDataType extends PublicStudentData | PublicTutorData> {
+interface Props<PublicDataType> {
   localeSubjectIds: string[];
   publicDataExtractor: (data: any) => PublicDataType;
   userType: UserTypeName;
@@ -23,9 +21,11 @@ interface UserVariableConfig<P> {
 }
 */
 
-export default async function getUsersBySubjects<
-  PublicDataType extends PublicStudentData | PublicTutorData
->({ localeSubjectIds, publicDataExtractor, userType }: Props<PublicDataType>) {
+export default async function getUsersBySubjects<PublicDataType>({
+  localeSubjectIds,
+  publicDataExtractor,
+  userType,
+}: Props<PublicDataType>) {
   const studentSubjectsField: keyof PrivateStudentData = "relatedSubjects";
   const tutorSubjectsField: keyof PrivateTutorData = "relatedSubjects";
 

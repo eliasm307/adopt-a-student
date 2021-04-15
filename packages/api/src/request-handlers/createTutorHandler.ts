@@ -1,11 +1,11 @@
 import { TUTORS_COLLECTION_NAME } from '../constants';
-import { API } from '../declarations/interfaces';
+import { ApiCreateTutorHandler } from '../declarations/interfaces';
 import createPath from '../utils/createPath';
 import { firestore, functionsHttps } from '../utils/firebase-admin';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
-const handler: API.createTutorHandler = async (data, context) => {
+const handler: ApiCreateTutorHandler = async (data, context) => {
   const auth = verifyRequest(data, context);
 
   // verify received data

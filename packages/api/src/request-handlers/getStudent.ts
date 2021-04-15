@@ -1,33 +1,43 @@
-// import { API } from '../declarations/interfaces';
-// import { functions } from '../utils/firebase-admin';
+import { PrivateTutorData } from '@adopt-a-student/common';
 
-export {};
+import { TUTORS_COLLECTION_NAME } from '../constants';
+import { ApiGetPrivateStudentDataHandler } from '../declarations/interfaces';
+import createPath from '../utils/createPath';
+import { firestore, functionsHttps } from '../utils/firebase-admin';
+import verifyRequest from '../utils/verifyRequest';
 
-/*
-const handler: API.getStudentProfile = (data, context) => {
-  // Checking that the user is authenticated.
-  if (!context.auth) {
-    // Throwing an HttpsError so that the client gets the error details.
-    throw new functions.https.HttpsError(
-      "failed-precondition",
-      "The function must be called " + "while authenticated."
+const handler: ApiGetPrivateStudentDataHandler = async (_, context) => {
+  const auth = verifyRequest(_, context);
+
+  const documentPath = createPath(TUTORS_COLLECTION_NAME, auth.uid);
+
+  // check if tutor already exists for this user
+  const docSnapshot = await firestore.doc(documentPath).get();
+
+  if (!docSnapshot.exists)
+    throw new functionsHttps.HttpsError(
+      "not-found",
+      "Could not read data because a student profile doesnt exist for this user, create one first"
+    );
+
+  // read data
+  try {
+    // const newSnapshot = await docSnapshot.ref.get();
+
+    const data = docSnapshot.data();
+
+    if (!isPriva)
+      return {
+        success: true,
+        data: newSnapshot.data() as PrivateTutorData,
+      };
+  } catch (error) {
+    throw new functionsHttps.HttpsError(
+      "internal",
+      "There was an issue creating the tutor",
+      JSON.stringify(data)
     );
   }
-
-  /*
-  // Checking attribute.
-  if (!(typeof text === "string") || text.length === 0) {
-    // Throwing an HttpsError so that the client gets the error details.
-    throw new functions.https.HttpsError(
-      "invalid-argument",
-      "The function must be called with " +
-        'one arguments "text" containing the message text to add.'
-    );
-  }
-
 };
-*/
 
-/*
 export default handler;
-*/
