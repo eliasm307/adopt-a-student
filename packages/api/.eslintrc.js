@@ -44,5 +44,6 @@ module.exports = {
     "require-jsdoc": 0, // todo enable later
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
+    "valid-jsdoc": 0,
   },
 };

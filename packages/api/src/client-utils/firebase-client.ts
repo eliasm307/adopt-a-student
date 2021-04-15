@@ -103,4 +103,6 @@ functionsEmulator.useEmulator("localhost", 5001);
 
 export type FirebaseFunctions = firebase.functions.Functions;
 
+const functionsHttps = firebase.functions.
+
 export { functionsEmulator };

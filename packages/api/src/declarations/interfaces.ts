@@ -82,7 +82,7 @@ export namespace API {
       // todo needs to verify a user has access to this data
       data?: Partial<PrivateTutorData>;
     },
-    BasicResponseData
+    BasicResponseData & { data: PrivateTutorData }
   >;
   /** Create tutor profile */
   export type createTutorHandler = FirebaseCallableFunctionHandler<
@@ -91,7 +91,7 @@ export namespace API {
       // todo needs to verify a user has access to this data
       data?: PrivateTutorData;
     },
-    BasicResponseData
+    BasicResponseData & { data: PrivateTutorData }
   >;
   /** Post update for locale subject */
   export type setLocaleSubjectHandler = FirebaseCallableFunctionHandler<
