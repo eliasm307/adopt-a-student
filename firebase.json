@@ -27,6 +27,17 @@
     },
     "ui": {
       "enabled": true
+    },
+    "auth": {
+      "port": 9099
     }
+  },
+  "hosting": {
+    "public": "custom",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
   }
 }
