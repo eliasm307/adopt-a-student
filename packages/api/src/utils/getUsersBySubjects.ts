@@ -1,14 +1,14 @@
 import { PrivateStudentData } from '@adopt-a-student/common';
 
-import { PrivateTutorData } from '../../common/src';
+import { PrivateTutorData, PublicStudentData, PublicTutorData } from '../../common/src';
 import { STUDENTS_COLLECTION_NAME, TUTORS_COLLECTION_NAME } from '../constants';
 import { UserTypeName } from '../declarations/types';
-import extractPublicTutorData from './extractPublicStudentData';
 import { firestore, functionsHttps } from './firebase-admin';
 import groupArrayItems from './groupArrayItems';
 
-interface Props {
+interface Props<P> {
   localeSubjectIds: string[];
+  publicDataExtractor: (data: any) => P;
   userType: UserTypeName;
 }
 
@@ -22,10 +22,9 @@ interface UserVariableConfig<P> {
 }
 */
 
-export default async function getUsersBySubjects<P>({
-  localeSubjectIds,
-  userType,
-}: Props) {
+export default async function getUsersBySubjects<
+  P extends PublicStudentData | PublicTutorData
+>({ localeSubjectIds, userType, publicDataExtractor }: Props<P>) {
   const studentSubjectsField: keyof PrivateStudentData = "relatedSubjects";
   const tutorSubjectsField: keyof PrivateTutorData = "relatedSubjects";
 
@@ -34,8 +33,10 @@ export default async function getUsersBySubjects<P>({
   const userSubjectsField =
     userType === "Student" ? studentSubjectsField : tutorSubjectsField;
 
-  const publicDataExtractor =
-    userType === "Student" ? extractPublicTutorData : extractTutorStudentData;
+  /*
+  const publicDataExtractor: (data: any) => P =
+    userType === "Student" ? extractPublicStudentData : extractPublicTutorData;
+    */
 
   /* array-contains-any is limited to 10 values, so split this into multiple requests if necessary
     https://firebase.google.com/docs/firestore/query-data/queries#array-contains-any
@@ -65,7 +66,7 @@ export default async function getUsersBySubjects<P>({
         }, [] as any[])
 
         // extract public data for each user
-        .map((data) => extractPublicTutorData(data)),
+        .map((data) => publicDataExtractor(data)),
     };
   } catch (error) {
     throw new functionsHttps.HttpsError(

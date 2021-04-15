@@ -1,12 +1,12 @@
-import { PublicStudentData } from '../../common/src';
+import { PublicTutorData } from '../../common/src';
 import { functionsHttps } from './firebase-admin';
-import isPublicTutorData from './type-predicates/isPublicStudentData';
+import isPublicTutorData from './type-predicates/isPublicTutorData';
 
-export default function extractPublicStudentData(data: any): PublicStudentData {
+export default function extractPublicTutorData(data: any): PublicTutorData {
   if (typeof data !== "object")
     throw new functionsHttps.HttpsError(
       "internal",
-      `Student data could not be extracted as input data is not an object`
+      `Tutor data could not be extracted as input data is not an object`
     );
 
   // get only the public properties
@@ -16,7 +16,7 @@ export default function extractPublicStudentData(data: any): PublicStudentData {
     userName: username,
     imageUrl,
     introduction,
-  } = data as PublicStudentData;
+  } = data as PublicTutorData;
 
   const publicData = {
     dataIsComplete,
@@ -29,7 +29,7 @@ export default function extractPublicStudentData(data: any): PublicStudentData {
   if (!isPublicTutorData(publicData))
     throw new functionsHttps.HttpsError(
       "failed-precondition",
-      "Student data could not be extracted as it is not the correct format"
+      "Tutor data could not be extracted as it is not the correct format"
     );
 
   return publicData;
