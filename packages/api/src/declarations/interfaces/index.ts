@@ -19,7 +19,7 @@ export interface BasicResponseData {
 }
 
 export * from "./api/api.query-subjects";
-export * from "./api-tbc/api.quey-users";
+export * from "./api/api.quey-users";
 export * from "./api-tbc/api.read-subject-data";
 export * from "./api-tbc/api.read-user-data";
 export * from "./api-tbc/api.write-relationships";

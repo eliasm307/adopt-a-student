@@ -5,7 +5,10 @@ import {
 } from './declarations/types';
 import createTutorHandler from './request-handlers/createTutorHandler';
 import firestoreWriteHandler from './request-handlers/firestoreWrite';
+import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
 import getSubjectsByCategoryHandler from './request-handlers/getSubjectsByCategoryHandler';
+import getTutorsBySubjectsHandler from './request-handlers/getTutorsBySubjectsHandler';
+import updateTutorHandler from './request-handlers/updateTutorHandler';
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -15,27 +18,22 @@ Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
 
-const callableFunctionHandlers = {} as {
+const callableFunctionHandlers = {
+  writeTest: firestoreWriteHandler,
+  getSubjectsByCategory: getSubjectsByCategoryHandler,
+  createTutor: createTutorHandler,
+  getStudentsBySubjects: getStudentsBySubjectsHandler,
+  getTutorsBySubjects: getTutorsBySubjectsHandler,
+  updateTutor: updateTutorHandler,
+} as {
   [key in CallableFunctionName]: FirebaseCallableFunctionHandler;
 };
 
+/*
 callableFunctionHandlers.test = (data, context) => {
   return { message: "yay" };
   //   .region("europe-west1")
   // ...
-};
-
-callableFunctionHandlers.writeTest = firestoreWriteHandler;
-
-callableFunctionHandlers.getSubjectsByCategory = getSubjectsByCategoryHandler;
-
-callableFunctionHandlers.createTutor = createTutorHandler;
-
-/*
-module.exports = {
-  ...callableFunctionHandlers,
-} as {
-  [key in CallableFunctionName]: CallableMethod;
 };
 */
 
