@@ -7,7 +7,7 @@ import { firestore, functionsHttps } from '../utils/firebase-admin';
 import groupArrayItems from '../utils/groupArrayItems';
 import verifyRequest from '../utils/verifyRequest';
 
-const handler: API.getStudentsBySubjectsHandler = async (data, context) => {
+const handler: API.getTutorsBySubjectsHandler = async (data, context) => {
   const auth = verifyRequest(data, context);
 
   // verify received data

@@ -25,7 +25,7 @@ const callableFunctions = { test, writeTest } as {
 */
 
 module.exports = { test, writeTest } as {
-  [key in CallableFunctionName]: CallableMethod | undefined;
+  [key in CallableFunctionName]: CallableMethod;
 };
 
 // export default callableFunctions;
