@@ -1,5 +1,6 @@
 import { PublicStudentData } from '../../common/src';
 import { functionsHttps } from './firebase-admin';
+import isPublicStudentData from './type-predicates/isPublicStudentData';
 
 export default function extractPublicStudentData(data: any): PublicStudentData {
   if (typeof data !== "object")
@@ -24,4 +25,12 @@ export default function extractPublicStudentData(data: any): PublicStudentData {
     imageUrl,
     introduction,
   };
+
+  if (!isPublicStudentData(publicData))
+    throw new functionsHttps.HttpsError(
+      "failed-precondition",
+      "Student data could not be extracted as it is not the correct format"
+    );
+
+  return publicData;
 }
