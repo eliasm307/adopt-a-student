@@ -4,7 +4,6 @@ export default function isPublicTutorData(data: any): data is PublicTutorData {
   if (typeof data !== "object") return false;
 
   const {
-    dataIsComplete,
     id,
     userName,
     imageUrl,
@@ -12,7 +11,6 @@ export default function isPublicTutorData(data: any): data is PublicTutorData {
     available,
   } = data as PublicTutorData;
 
-  const hasDataIsComplete = typeof dataIsComplete === "boolean";
   const hasUserName = typeof userName === "string" && userName;
   const canHaveImage =
     typeof imageUrl === "undefined" ||
@@ -24,7 +22,6 @@ export default function isPublicTutorData(data: any): data is PublicTutorData {
   const hasAvailable = typeof available === "boolean";
 
   if (
-    hasDataIsComplete &&
     hasId &&
     hasUserName &&
     hasAvailable &&

@@ -11,7 +11,6 @@ export default function extractPublicTutorData(data: any): PublicTutorData {
 
   // get only the public properties
   const {
-    dataIsComplete,
     id,
     userName: username,
     imageUrl,
@@ -19,7 +18,6 @@ export default function extractPublicTutorData(data: any): PublicTutorData {
   } = data as PublicTutorData;
 
   const publicData = {
-    dataIsComplete,
     id,
     username,
     imageUrl,

@@ -1,8 +1,10 @@
+import { PrivateTutorData } from "@adopt-a-student/common";
 import callFirebaseFunction from "../client-utils/callFirebaseFunction";
 import {
   functionsEmulator,
   isFirestoreEmulatorRunning,
   functionsLive,
+  auth,
 } from "../client-utils/firebase-client";
 
 /*
@@ -27,14 +29,25 @@ describe("firebase function emulator", () => {
 
 describe.only("firebase functions live", () => {
   it("can call a function that writes to live", async () => {
+    const data: PrivateTutorData = {
+      email: "an-email",
+      id: "232",
+      relatedSubjects: [{ confidenceLevel: 2, detail: "2ded", id: "kkd" }],
+      students: [{ id: "student1" }],
+      userName: "eced",
+    };
+
+    await auth.signInAnonymously();
     const result = await callFirebaseFunction({
       name: "createTutor",
-      data: {},
+      data,
       functions: functionsEmulator,
     });
 
     console.log(__filename, "firestore invalid createTutor call result", {
       result,
     });
+
+    await auth.signOut();
   });
 });

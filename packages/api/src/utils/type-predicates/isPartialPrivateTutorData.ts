@@ -15,9 +15,6 @@ export default function isPartialPrivateTutorData(
   // check if any and only possible fields exist
   for (const [key, value] of Object.entries(o)) {
     switch (key as keyof PrivateTutorData) {
-      case "dataIsComplete":
-        if (typeof value === "boolean") propCount++;
-        break;
       case "email":
         if (typeof value === "string") propCount++;
         break;

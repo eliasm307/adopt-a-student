@@ -7,7 +7,6 @@ export default function isPrivateStudentData(
 
   // check mandatory fields
   const {
-    dataIsComplete,
     email,
     id,
     relatedSubjects,
@@ -16,8 +15,6 @@ export default function isPrivateStudentData(
     imageUrl,
     introduction,
   } = data as PrivateStudentData;
-
-  const hasDataIsComplete = typeof dataIsComplete === "boolean";
 
   const hasEmail = typeof email === "string" && email;
   const hasUserName = typeof userName === "string" && userName;
@@ -31,7 +28,6 @@ export default function isPrivateStudentData(
 
   if (
     hasEmail &&
-    hasDataIsComplete &&
     hasUserName &&
     hasId &&
     hasRelatedSubjects &&

@@ -6,24 +6,17 @@ export default function isGenericSubjectData(
   if (typeof data !== "object") return false;
 
   const {
-    dataIsComplete,
     id,
     categoryIds,
     relatedGenericSubjectIds,
   } = data as GenericSubjectData;
 
   const hasId = typeof id === "string" && id;
-  const hasDataIsComplete = typeof dataIsComplete === "boolean";
+
   const hasCategoryIds = Array.isArray(categoryIds);
   const hasRelatedGenericSubjectIds = Array.isArray(relatedGenericSubjectIds);
 
-  if (
-    hasDataIsComplete &&
-    hasId &&
-    hasCategoryIds &&
-    hasRelatedGenericSubjectIds
-  )
-    return true;
+  if (hasId && hasCategoryIds && hasRelatedGenericSubjectIds) return true;
 
   // ? check key count?
 

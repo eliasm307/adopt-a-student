@@ -11,11 +11,14 @@ export default function verifyRequest(
   data: any,
   context: CallableContext
 ): Auth {
-  if (!context.auth?.uid)
+  if (!context.auth?.uid) {
+    console.error(__filename, "User not authenticated", { auth: context.auth });
     throw new functionsHttps.HttpsError(
       "unauthenticated",
-      "Requesting user is not authenticated"
+      "Requesting user is not authenticated",
+      { auth: context.auth }
     );
+  }
 
   return context.auth;
 }

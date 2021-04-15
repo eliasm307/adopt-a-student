@@ -58,16 +58,16 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = firebase.initializeApp(firebaseConfig);
-const emulatorApp = firebase.initializeApp(firebaseConfig, "emulator");
+firebase.initializeApp(firebaseConfig);
+// const app = firebase.initializeApp(firebaseConfig);
+// const emulatorApp = firebase.initializeApp(firebaseConfig, "emulator");
 
 ////////////////////////////////////////////////////////
 // Firebase Authentication exports
 
-const auth = emulatorApp.auth();
+const auth = firebase.auth();
 auth.useEmulator("http://localhost:9099"); // todo use environment variables to conditionally use this
-const anonymousUserPromise = auth.signInAnonymously();
-export { auth, anonymousUserPromise };
+export { auth };
 
 export const { GoogleAuthProvider, EmailAuthProvider } = firebase.auth;
 
@@ -76,9 +76,9 @@ export interface FireBaseUser extends firebase.User {}
 ////////////////////////////////////////////////////////
 // Firestore exports
 
-export const firestoreLive = app.firestore();
+export const firestoreLive = firebase.firestore();
 
-const firestoreEmulator = emulatorApp.firestore();
+const firestoreEmulator = firebase.firestore();
 firestoreEmulator.useEmulator("localhost", 8080);
 
 export { firestoreEmulator };
@@ -97,11 +97,11 @@ export type FirestoreQuerySnapshot = FirebaseFirestore.QuerySnapshot<FirebaseFir
 ////////////////////////////////////////////////////////
 // Functions
 
-export const functionsLive = app.functions();
+export const functionsLive = firebase.functions();
 
 // Using functions emulator
 // https://firebase.google.com/docs/emulator-suite/connect_functions
-const functionsEmulator = emulatorApp.functions();
+const functionsEmulator = firebase.functions();
 functionsEmulator.useEmulator("localhost", 5001);
 
 export type FirebaseFunctions = firebase.functions.Functions;

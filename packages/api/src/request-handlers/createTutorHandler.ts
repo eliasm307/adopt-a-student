@@ -1,3 +1,5 @@
+import { PrivateTutorData } from '@adopt-a-student/common';
+
 import { TUTORS_COLLECTION_NAME } from '../constants';
 import { ApiCreateTutorHandler } from '../declarations/interfaces';
 import createPath from '../utils/createPath';
@@ -5,15 +7,18 @@ import { firestore, functionsHttps } from '../utils/firebase-admin';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
-const handler: ApiCreateTutorHandler = async (data, context) => {
-  const auth = verifyRequest(data, context);
+const handler: ApiCreateTutorHandler = async (_data, context) => {
+  const auth = verifyRequest(_data, context);
 
   // verify received data
-  if (!isPrivateTutorData(data))
+  if (!isPrivateTutorData(_data))
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Could not create tutor because provided data is not valid/complete"
     );
+
+  // make sure data uses user id
+  const data: PrivateTutorData = { ..._data, id: auth.uid };
 
   const documentPath = createPath(TUTORS_COLLECTION_NAME, auth.uid);
 

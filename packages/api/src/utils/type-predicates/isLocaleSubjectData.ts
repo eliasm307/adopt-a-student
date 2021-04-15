@@ -6,7 +6,6 @@ export default function isLocaleSubjectData(
   if (typeof data !== "object") return false;
 
   const {
-    dataIsComplete,
     id,
     country,
     tutorIds,
@@ -22,12 +21,10 @@ export default function isLocaleSubjectData(
   const hasLocale = typeof locale === "string" && locale;
   const hasDescription = typeof description === "string";
   const hasCountry = typeof country === "string";
-  const hasDataIsComplete = typeof dataIsComplete === "boolean";
   const hasStudentIds = Array.isArray(studentIds);
   const hasTutorIds = Array.isArray(tutorIds);
 
   if (
-    hasDataIsComplete &&
     hasId &&
     hasStudentIds &&
     hasTutorIds &&

@@ -5,15 +5,8 @@ export default function isPublicStudentData(
 ): data is PublicStudentData {
   if (typeof data !== "object") return false;
 
-  const {
-    dataIsComplete,
-    id,
-    userName,
-    imageUrl,
-    introduction,
-  } = data as PublicStudentData;
+  const { id, userName, imageUrl, introduction } = data as PublicStudentData;
 
-  const hasDataIsComplete = typeof dataIsComplete === "boolean";
   const hasUserName = typeof userName === "string" && userName;
   const canHaveImage =
     typeof imageUrl === "undefined" ||
@@ -22,14 +15,7 @@ export default function isPublicStudentData(
   const canHaveIntroduction =
     typeof introduction === "undefined" || typeof introduction === "string";
 
-  if (
-    hasDataIsComplete &&
-    hasId &&
-    hasUserName &&
-    canHaveImage &&
-    canHaveIntroduction
-  )
-    return true;
+  if (hasId && hasUserName && canHaveImage && canHaveIntroduction) return true;
 
   // ? check key count?
 

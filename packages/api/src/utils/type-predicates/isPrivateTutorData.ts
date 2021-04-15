@@ -7,7 +7,6 @@ export default function isPrivateTutorData(
 
   // check mandatory fields
   const {
-    dataIsComplete,
     email,
     id,
     relatedSubjects,
@@ -15,22 +14,13 @@ export default function isPrivateTutorData(
     userName,
   } = data as PrivateTutorData;
 
-  const hasDataIsComplete = typeof dataIsComplete === "boolean";
-
   const hasEmail = typeof email === "string" && email;
   const hasUserName = typeof userName === "string" && userName;
   const hasId = typeof id === "string" && id;
   const hasRelatedSubjects = Array.isArray(relatedSubjects);
   const hasStudents = Array.isArray(students);
 
-  if (
-    hasEmail &&
-    hasDataIsComplete &&
-    hasUserName &&
-    hasId &&
-    hasRelatedSubjects &&
-    hasStudents
-  )
+  if (hasEmail && hasUserName && hasId && hasRelatedSubjects && hasStudents)
     return true;
 
   console.warn("data is not complete private tutor data", { data });
