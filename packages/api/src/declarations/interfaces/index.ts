@@ -18,7 +18,7 @@ export interface BasicResponseData {
   success: boolean;
 }
 
-export * from "./api-tbc/api.query-subjects";
+export * from "./api/api.query-subjects";
 export * from "./api-tbc/api.quey-users";
 export * from "./api-tbc/api.read-subject-data";
 export * from "./api-tbc/api.read-user-data";

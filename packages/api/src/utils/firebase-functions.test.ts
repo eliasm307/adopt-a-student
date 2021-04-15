@@ -3,7 +3,6 @@ import callFirebaseFunction from "../client-utils/callFirebaseFunction";
 import {
   functionsEmulator,
   isFirestoreEmulatorRunning,
-  functionsLive,
   auth,
 } from "../client-utils/firebase-client";
 
