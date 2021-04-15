@@ -7,11 +7,25 @@
 /// <reference path="./api.query-subjects.ts" />
 */
 
+import {
+  GenericSubjectCategoryData as GenericSubjectCategoryData, GenericSubjectData, LocaleSubjectData,
+  PrivateStudentData, PrivateTutorData,
+} from '@adopt-a-student/common';
+
 // export namespace API {
 /** Get all tutors? // ! no */
 /** Get all students? // ! no */
 /** Contact user // ? tbc */
 // }
+
+/** Represents firestore top level collections */
+interface FirestoreSchema {
+  genericSubjects: GenericSubjectData[];
+  localeSubjects: LocaleSubjectData[];
+  students: PrivateStudentData[];
+  subjectCategories: GenericSubjectCategoryData[];
+  tutors: PrivateTutorData[];
+}
 
 export interface BasicResponseData {
   message?: string;

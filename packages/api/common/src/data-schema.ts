@@ -138,12 +138,3 @@ export interface StudentSubjectData extends UserSubjectData {}
 
 /** Subject data specific to a tutor user */
 export interface TutorSubjectData extends UserSubjectData {}
-
-/** Represents firestore top level collections */
-interface FirestoreSchema {
-  genericSubjects: GenericSubjectData[];
-  localeSubjects: LocaleSubjectData[];
-  students: PrivateStudentData[];
-  subjectCategories: SubjectCategoryData[];
-  tutors: PrivateTutorData[];
-}

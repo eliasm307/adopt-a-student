@@ -22,5 +22,5 @@ export type ApiGetSubjectCategoriesHandler = FirebaseCallableFunctionHandler<
   {
     locale: LocaleCode;
   },
-  { data: LocaleSubjectCategoryData[] }
+  { data: { subjectCategories: LocaleSubjectCategoryData[] } } // todo all returns should be named inside data object
 >;
