@@ -1,13 +1,27 @@
 export const CALLABLE_FUNCTION_NAMES = [
   // "test",
-  "writeTest",
+  // "writeTest",
+
+  // subject categories
+  "getSubjectCategories",
+
+  // subjects
+  "getSubject",
+  "getSubjectsByCategory",
+
+  // tutors
   "createTutor",
   "updateTutor",
-  "getSubjectsByCategory",
-  "getStudentsBySubjects",
+  "getPrivateTutorData",
+  "getPublicTutorData",
   "getTutorsBySubjects",
-  "getSubject",
-  "getSubjectCategories",
+
+  // students
+  "createStudent",
+  "updateStudent",
+  "getPrivateStudentData",
+  "getPublicStudentData",
+  "getStudentsBySubjects",
 ] as const;
 
 export const GENERIC_SUBJECT_COLLECTION_NAME = "generic-subjects";

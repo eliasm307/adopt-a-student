@@ -4,7 +4,6 @@ import {
   CallableFunctionName, CallableMethod, FirebaseCallableFunctionHandler,
 } from './declarations/types';
 import createTutorHandler from './request-handlers/createTutorHandler';
-import firestoreWriteHandler from './request-handlers/firestoreWrite';
 import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
 import getSubjectCategoriesHandler from './request-handlers/getSubjectCategoriesHandler';
 import getSubjectHandler from './request-handlers/getSubjectHandler';
@@ -21,7 +20,7 @@ Example from https://firebase.google.com/docs/functions/callable#web
 */
 
 const callableFunctionHandlers = {
-  writeTest: firestoreWriteHandler,
+  // writeTest: firestoreWriteHandler,
   getSubjectsByCategory: getSubjectsByCategoryHandler,
   createTutor: createTutorHandler,
   getStudentsBySubjects: getStudentsBySubjectsHandler,

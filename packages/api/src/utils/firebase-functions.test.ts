@@ -14,6 +14,7 @@ if (typeof process.env.FIRESTORE_EMULATOR_HOST !== "string")
 if (!isFirestoreEmulatorRunning())
   throw Error("Firestore emulator is not running");
 
+/*
 describe("firebase function emulator", () => {
   it("can write to firestore emulator", async () => {
     const result = await callFirebaseFunction({
@@ -25,6 +26,7 @@ describe("firebase function emulator", () => {
     console.log(__filename, "firestore writeTest call result", { result });
   });
 });
+*/
 
 describe.only("firebase functions createTutor", () => {
   beforeEach(async () => {
