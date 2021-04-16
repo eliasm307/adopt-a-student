@@ -14,7 +14,7 @@ export const CALLABLE_FUNCTION_NAMES = [
   "updateGenericSubject",
 
   // subject categories
-  "createSubjectCatgory",
+  "createSubjectCategory",
   "updateLocaleSubjectCategory",
 
   // tutors

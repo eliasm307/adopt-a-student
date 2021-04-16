@@ -6,6 +6,7 @@ import {
 import createGenericSubject from './request-handlers/createGenericSubject';
 import createLocaleSubject from './request-handlers/createLocaleSubject';
 import createStudent from './request-handlers/createStudent';
+import createSubjectCategory from './request-handlers/createSubjectCategory';
 import createTutor from './request-handlers/createTutor';
 import getPrivateStudentData from './request-handlers/getPrivateStudentDataHandler';
 import getPrivateTutorData from './request-handlers/getPrivateTutorDataHandler';
@@ -27,7 +28,6 @@ import updateTutor from './request-handlers/updateTutor';
 Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
-
 const callableFunctionHandlers = {
   // writeTest: firestoreWriteHandler,
 
@@ -55,7 +55,7 @@ const callableFunctionHandlers = {
 
   // subject categories
   getSubjectCategories,
-  createSubjectCatgory,
+  createSubjectCategory,
   updateLocaleSubjectCategory,
 
   // relationships
