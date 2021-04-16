@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // setup from https://github.com/firebase/firebase-admin-node/issues/575#issuecomment-524744793
 
 import * as admin from "firebase-admin";
@@ -22,6 +25,7 @@ if (process.env.NODE_ENV === "development") {
   console.log(__filename, "using live admin");
   app = admin.initializeApp({
     credential: admin.credential.cert({
+      // todo create custom type declarations for functions module
       privateKey: functions.config().private.key.replace(/\\n/g, "\n"),
       projectId: functions.config().project.id,
       clientEmail: functions.config().client.email,
