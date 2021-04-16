@@ -4,7 +4,7 @@ import { CallableContext } from 'firebase-functions/lib/providers/https';
 import { CALLABLE_FUNCTION_NAMES } from '../constants';
 import { BasicResponseData } from './interfaces';
 
-export type FirebaseCallableFunctionHandler<D = any, R = any> = (
+export type FirebaseCallableFunctionHandler<D = any, R = BasicResponseData> = (
   body: Partial<D> | undefined,
   context: CallableContext
 ) => (R & BasicResponseData) | Promise<R & BasicResponseData>;

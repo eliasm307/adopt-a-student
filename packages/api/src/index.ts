@@ -49,7 +49,7 @@ const callableFunctionHandlers = {
 
   // subjects
   createGenericSubject,
-  // updateGenericSubject, // this only has relationship data, so no direct user updating
+  // updateGenericSubject,
   createLocaleSubject,
   updateLocaleSubject,
   getSubject,

@@ -19,7 +19,9 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
 
   const { studentId, tutorId } = body;
 
-  if (studentId !== uid && tutorId !== uid)
+  const userIsStudentOrTutor = studentId === uid || tutorId === uid;
+
+  if (!userIsStudentOrTutor)
     throw new functionsHttps.HttpsError(
       "permission-denied",
       "Logged in user is neither the student or the tutor"
@@ -38,7 +40,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     firestore,
   };
 
-  // Read current data
+  // Read current data in parallel
   const studentReadPromise = getDocumentData({
     ...studentCrudProps,
   });
@@ -52,12 +54,27 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     tutorReadPromise,
   ]);
 
-  // add links
-  student.tutors.push({ id: tutorId });
-  tutor.students.push({ id: studentId });
+  // remove any existing links then add new links
+  const studentTutors = student.tutors.reduce(
+    (acc, user) => ({ ...acc, [user.id]: true }),
+    {} as Record<string, boolean>
+  );
+  const tutorStudents = tutor.students.reduce(
+    (acc, user) => ({ ...acc, [user.id]: true }),
+    {} as Record<string, boolean>
+  );
+
+  const studentAndTutorAlreadyLinked =
+    studentTutors[tutorId] && tutorStudents[studentId];
+
+  // avoid any uneccessary writes
+  if (studentAndTutorAlreadyLinked) return { message: "Users already linked" };
+
+  // only add links if they didnt exist already
+  if (!studentTutors[tutorId]) student.tutors.push({ id: tutorId });
+  if (!tutorStudents[studentId]) tutor.students.push({ id: studentId });
 
   // write changes back to firestore
-
   const studentUpdatePromise = updateDocumentData({
     ...studentCrudProps,
     edits: student,
@@ -72,7 +89,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     edits: tutor,
     dataUpdater: ({ edits, existingData }) => ({
       ...existingData,
-      tutors: edits.students!,
+      students: edits.students!,
     }),
   });
 
@@ -81,7 +98,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     tutorUpdatePromise,
   ]);
 
-  return { message: "Success" };
+  return { message: "Success linking users" };
 };
 
 export default linkStudentAndTutor;

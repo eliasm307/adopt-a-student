@@ -11,7 +11,7 @@ export const CALLABLE_FUNCTION_NAMES = [
   "createLocaleSubject",
   "updateLocaleSubject",
   "createGenericSubject",
-  "updateGenericSubject",
+  // "updateGenericSubject", // this only has relationship data, so no direct user updating
 
   // subject categories
   "createSubjectCategory",
