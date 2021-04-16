@@ -18,7 +18,9 @@ import getSubjectsByCategory from './request-handlers/getSubjectsByCategoryHandl
 import getTutorsBySubjects from './request-handlers/getTutorsBySubjectsHandler';
 import linkGenericSubjectAndSubjectCategory from './request-handlers/linkGenericSubjectAndSubjectCategory';
 import linkGenericSubjects from './request-handlers/linkGenericSubjects';
+import linkStudentAndLocaleSubject from './request-handlers/linkStudentAndLocaleSubject';
 import linkStudentAndTutor from './request-handlers/linkStudentAndTutor';
+import linkTutorAndLocaleSubject from './request-handlers/linkTutorAndLocaleSubject';
 import updateLocaleSubject from './request-handlers/updateLocaleSubject';
 import updateLocaleSubjectCategory from './request-handlers/updateLocaleSubjectCategory';
 import updateStudent from './request-handlers/updateStudent';
@@ -68,14 +70,14 @@ const callableFunctionHandlers = {
   linkGenericSubjectAndSubjectCategory,
   unlinkGenericSubjectAndSubjectCategory,
 
-  linkStudentAndLocaleSubject,
-  unlinkStudentAndLocaleSubject,
-
   linkStudentAndTutor,
   unlinkStudentAndTutor,
 
   linkTutorAndLocaleSubject,
   unlinkTutorAndLocaleSubject,
+
+  linkStudentAndLocaleSubject,
+  unlinkStudentAndLocaleSubject,
 } as ObjectMap<CallableFunctionName, FirebaseCallableFunctionHandler>;
 
 /*
