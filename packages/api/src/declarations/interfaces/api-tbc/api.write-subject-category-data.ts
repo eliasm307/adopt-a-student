@@ -1,4 +1,6 @@
-import { GenericSubjectCategoryData, LocaleSubjectCategoryData } from '@adopt-a-student/common';
+import {
+  GenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData,
+} from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionHandler } from '../../types';
 
@@ -23,7 +25,8 @@ export type ApiUpdateLocaleSubjectCategoryHandler = FirebaseCallableFunctionHand
     // ? should this make sure an en localeCategory is defined to make sure there is a default fallback for other languages when not defined
     /** Generic subject id */
     id: string;
-    data?: Partial<Omit<LocaleSubjectCategoryData, "id">>;
+    locale: LocaleCode;
+    data?: Partial<Omit<LocaleSubjectCategoryData, "id" | "locale">>;
   },
   {
     data: {
