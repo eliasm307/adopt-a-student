@@ -1,7 +1,5 @@
 import { PrivateTutorData } from '@adopt-a-student/common';
 
-import { functionsHttps } from '../firebase/firebase-admin';
-
 export default function isPartialPrivateTutorData(
   data: any
 ): data is Partial<PrivateTutorData> {
@@ -10,9 +8,10 @@ export default function isPartialPrivateTutorData(
   // check mandatory fields
   const o = data as PrivateTutorData;
 
-  let propCount = 0;
+  // let propCount = 0;
 
   // check if any and only possible fields exist
+  /*
   for (const [key, value] of Object.entries(o)) {
     switch (key as keyof PrivateTutorData) {
       case "email":
@@ -43,12 +42,15 @@ export default function isPartialPrivateTutorData(
         );
     }
   }
+  */
+  /*
 
   if (!propCount)
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       `Request data is not valid, there were no valid properties found`
     );
+    */
 
   return true;
 }

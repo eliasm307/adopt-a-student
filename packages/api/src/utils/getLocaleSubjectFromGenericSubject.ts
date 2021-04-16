@@ -16,7 +16,7 @@ export default async function getLocaleSubjectFromGenericSubject({
   genericSubject,
   locale,
 }: Props) {
-  const genericIdField: keyof LocaleSubjectData = "genericSubjectId";
+  const genericIdField: keyof LocaleSubjectData = "parentId";
   const localeField: keyof LocaleSubjectData = "locale";
 
   try {

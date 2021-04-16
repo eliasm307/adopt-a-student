@@ -17,7 +17,10 @@ const studentDataUpdater: DataUpdater<PrivateStudentData> = ({
 
   const mutators: DataMutatorMap<PrivateStudentData> = {
     id: null,
-    subjects: null,
+    linkedLocaleSubjects: null,
+    prefferedLocales: () => {
+      throw Error("Mutator not implemented");
+    },
     linkedTutors: null,
     email: (value) =>
       typeof value === "string" ? (newData.email = value) : null,

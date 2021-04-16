@@ -7,7 +7,7 @@ import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData'
 import verifyRequest from '../utils/verifyRequest';
 
 const updateStudent: ApiUpdateStudentDataHandler = async (body, context) => {
-  const auth = verifyRequest(body, context);
+  const { uid } = verifyRequest(body, context);
 
   // verify received data
   if (
@@ -21,10 +21,12 @@ const updateStudent: ApiUpdateStudentDataHandler = async (body, context) => {
       "Could not update tutor because provided data is not valid"
     );
 
+  const edits = { ...body.data, uid };
+
   const updatedData = await updateDocumentData({
     collectionPath: STUDENT_COLLECTION_NAME,
-    id: auth.uid,
-    edits: body?.data,
+    id: uid,
+    edits,
     dataPredicate: isPrivateStudentData,
     dataUpdater: studentDataUpdater,
     firestore: firestoreAdmin,

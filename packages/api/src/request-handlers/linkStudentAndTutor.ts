@@ -105,9 +105,9 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
     id: studentId,
-    linkCreater: (id) => ({ id }),
+    linkToAdd: { id: tutorId },
     linkReducer: (link) => link.id,
-    linksPropName: "tutors",
+    linksPropName: "linkedTutors",
   };
 
   const document2Props: DocumentLinkingProps<
@@ -117,9 +117,9 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,
     id: tutorId,
-    linkCreater: (id) => ({ id }),
+    linkToAdd: { id: studentId },
     linkReducer: (link) => link.id,
-    linksPropName: "students",
+    linksPropName: "linkedStudents",
   };
 
   const [updatedStudent, updatedTutor] = await linkDocuments({

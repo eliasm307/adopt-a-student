@@ -19,8 +19,8 @@ export default async function getUsersBySubjects<PublicDataType>({
   userType,
   firestore,
 }: Props<PublicDataType>) {
-  const studentSubjectsField: keyof PrivateStudentData = "relatedSubjects";
-  const tutorSubjectsField: keyof PrivateTutorData = "relatedSubjects";
+  const studentSubjectsField: keyof PrivateStudentData = "linkedLocaleSubjects";
+  const tutorSubjectsField: keyof PrivateTutorData = "linkedLocaleSubjects";
 
   const userCollectionName =
     userType === "Student" ? STUDENT_COLLECTION_NAME : TUTOR_COLLECTION_NAME;

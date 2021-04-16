@@ -25,10 +25,15 @@ const updateLocaleSubject: ApiUpdateLocaleSubjectHandler = async (
       "Could not update tutor because provided data is not valid"
     );
 
+  const { data, id } = body;
+
+  // id immutable
+  const edits = { ...data, id };
+
   const localeSubject = await updateDocumentData({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     id: body.id,
-    edits: body?.data,
+    edits,
     dataPredicate: isLocaleSubjectData,
     dataUpdater: localeSubjectDataUpdater,
     firestore: firestoreAdmin,

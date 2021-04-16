@@ -13,7 +13,7 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "test": "jest --colors --logHeapUsage",
-    "pretest": "yarn",
+    "pretest": "yarn && npx tsc",
     "build": "tsc --build tsconfig.build.json",
     "prebuild": "yarn build:common && rm -rf lib && yarn",
     "build:hot-reload": "tsc --build tsconfig.build.json --watch",

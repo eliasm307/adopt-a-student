@@ -11,7 +11,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
   body,
   context
 ) => {
-  const auth = verifyRequest(body, context);
+  const { uid } = verifyRequest(body, context);
 
   // verify received data
   if (

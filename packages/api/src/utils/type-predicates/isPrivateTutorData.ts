@@ -9,7 +9,7 @@ export default function isPrivateTutorData(
   const {
     email,
     id,
-    subjects: relatedSubjects,
+    linkedLocaleSubjects,
     linkedStudents: students,
     userName,
     prefferedLocales,
@@ -21,7 +21,7 @@ export default function isPrivateTutorData(
   const forTsError: PrivateTutorData = {
     email,
     id,
-    subjects: relatedSubjects,
+    linkedLocaleSubjects,
     linkedStudents: students,
     userName,
     prefferedLocales,
@@ -31,7 +31,7 @@ export default function isPrivateTutorData(
   const hasEmail = typeof email === "string" && email;
   const hasUserName = typeof userName === "string" && userName;
   const hasId = typeof id === "string" && id;
-  const hasRelatedSubjects = Array.isArray(relatedSubjects);
+  const hasRelatedSubjects = Array.isArray(linkedLocaleSubjects);
   const hasStudents = Array.isArray(students);
 
   if (

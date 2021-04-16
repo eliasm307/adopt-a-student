@@ -42,6 +42,7 @@ module.exports = {
     "@typescript-eslint/no-empty-interface": 0,
     "@typescript-eslint/no-var-requires": 0,
     "spaced-comment": 1,
+    "@typescript-eslint/no-unsafe-return": 0,
     "require-jsdoc": 0, // todo enable later
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/explicit-module-boundary-types": 0,
@@ -49,5 +50,6 @@ module.exports = {
     "import/export": 1,
     "@typescript-eslint/no-non-null-assertion": 0,
     "@typescript-eslint/no-unsafe-assignment": 0,
+    "@typescript-eslint/no-unsafe-member-access": 1,
   },
 };

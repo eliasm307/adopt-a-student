@@ -9,7 +9,7 @@ export default function isPrivateStudentData(
   const {
     email,
     id,
-    subjects: relatedSubjects,
+    linkedLocaleSubjects,
     userName,
     linkedTutors: tutors,
     imageUrl,
@@ -23,7 +23,7 @@ export default function isPrivateStudentData(
   const forTsError: PrivateStudentData = {
     email,
     id,
-    subjects: relatedSubjects,
+    linkedLocaleSubjects,
     userName,
     linkedTutors: tutors,
     imageUrl,
@@ -34,7 +34,7 @@ export default function isPrivateStudentData(
   const hasEmail = typeof email === "string" && email;
   const hasUserName = typeof userName === "string" && userName;
   const hasId = typeof id === "string" && id;
-  const hasRelatedSubjects = Array.isArray(relatedSubjects);
+  const hasRelatedSubjects = Array.isArray(linkedLocaleSubjects);
   const hasTutors = Array.isArray(tutors);
   const hasPreferredLocales = Array.isArray(prefferedLocales);
   const canHaveImage =

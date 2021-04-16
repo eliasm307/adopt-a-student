@@ -41,7 +41,10 @@ describe.only("firebase functions createTutor", () => {
     const data: PrivateTutorData = {
       email: "an-email",
       id: "232",
-      subjects: [{ confidenceLevel: 2, detail: "2ded", id: "kkd" }],
+      prefferedLocales: [],
+      linkedLocaleSubjects: [
+        { confidenceLevel: 2, detail: "2ded", id: "kkd", locale: "en" },
+      ],
       linkedStudents: [{ id: "student1" }],
       userName: "eced",
     };
@@ -68,7 +71,7 @@ describe.only("firebase functions createTutor", () => {
       userName: "eced",
     };
 
-    expect(
+    await expect(
       callFirebaseFunction({
         name: "createTutor",
         data,

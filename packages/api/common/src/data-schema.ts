@@ -16,7 +16,7 @@ export interface PublicUserData extends Entity {
    * describe their experience, what subjects they are interested in etc */
   introduction?: string;
   /** The locales a user prefers for content */
-  prefferedLocales: string;
+  prefferedLocales: string[];
   /** Username which will be displayed for a user */
   userName: string;
 
@@ -120,14 +120,14 @@ export interface LocaleSubjectData extends Entity {
   country: Country;
   /** Description of the subject */
   description: string;
+  /** Ids of students needing help with this subject `// todo needs to be syncronised` */
+  linkedStudentIds: string[];
+  /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */
+  linkedTutorIds: string[];
   /** Represents a language that a subject is in */
   locale: LocaleCode;
   /** Id of generic subject this locale subject relates to, there should only be 1 */
   parentId: string;
-  /** Ids of students needing help with this subject `// todo needs to be syncronised` */
-  studentIds: string[];
-  /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */
-  tutorIds: string[];
 }
 
 /** Data about a tutor from the perspective of a student, as it is stored in database */

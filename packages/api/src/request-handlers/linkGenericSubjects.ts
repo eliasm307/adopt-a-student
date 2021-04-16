@@ -21,22 +21,23 @@ const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
 
   const commonDocumentProps: Omit<
     DocumentLinkingProps<GenericSubjectData, string>,
-    "id"
+    "id" | "linkToAdd"
   > = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
-    linkCreater: (id) => id,
     linkReducer: (link) => link,
-    linksPropName: "relatedGenericSubjectIds",
+    linksPropName: "linkedGenericSubjectIds",
   };
 
   const document1Props: DocumentLinkingProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
+    linkToAdd: genericSubject2Id,
     id: genericSubject1Id,
   };
 
   const document2Props: DocumentLinkingProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
+    linkToAdd: genericSubject1Id,
     id: genericSubject2Id,
   };
 

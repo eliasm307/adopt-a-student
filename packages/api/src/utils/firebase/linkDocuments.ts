@@ -9,8 +9,8 @@ export interface DocumentLinkingProps<D, L> {
   collectionPath: string;
   dataPredicate: (data: any) => data is D;
   id: string;
-  linkCreater: (id: string) => L;
   linkReducer: (link: L) => string;
+  linkToAdd: L;
   linksPropName: keyof D;
 }
 
@@ -98,7 +98,7 @@ export default async function linkDocuments<D1, D2, L1, L2>(
   // only add links if they didnt exist already
   if (!document1IsLinkedToDocument2) {
     // add link
-    document1Links.push(document1Props.linkCreater(document2Props.id));
+    document1Links.push(document1Props.linkToAdd);
 
     // create document update promise
     const updatePromise = updateDocumentData({
@@ -117,7 +117,7 @@ export default async function linkDocuments<D1, D2, L1, L2>(
   // only add links if they didnt exist already
   if (!document2IsLinkedToDocument1) {
     // add link
-    document2Links.push(document2Props.linkCreater(document1Props.id));
+    document2Links.push(document2Props.linkToAdd);
 
     // create document update promise
     const updatePromise = updateDocumentData({

@@ -26,9 +26,9 @@ const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCateg
   const document1Props: DocumentLinkingProps<GenericSubjectData, string> = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
-    linkCreater: (id) => id,
+    linkToAdd: subjectCategoryId,
     linkReducer: (link) => link,
-    linksPropName: "relatedGenericSubjectIds",
+    linksPropName: "linkedGenericSubjectIds",
     id: genericSubjectId,
   };
 
@@ -38,9 +38,9 @@ const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCateg
   > = {
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     dataPredicate: isGenericSubjectCategoryData,
-    linkCreater: (id) => id,
+    linkToAdd: genericSubjectId,
     linkReducer: (link) => link,
-    linksPropName: "genericSubjectIds",
+    linksPropName: "linkedGenericSubjectIds",
     id: subjectCategoryId,
   };
 

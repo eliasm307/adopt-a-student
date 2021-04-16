@@ -1,12 +1,12 @@
-import {
-  GenericSubjectCategoryData, LinkedLocaleSubjectData, PrivateStudentData,
-} from '@adopt-a-student/common';
+import { LocaleSubjectData, PrivateStudentData } from '@adopt-a-student/common';
 
-import { STUDENT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
+import { LinkedLocaleSubjectData } from '../../common/src';
+import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../constants';
 import { ApiLinkStudentAndLocaleSubject } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import linkDocuments, { DocumentLinkingProps } from '../utils/firebase/linkDocuments';
-import isGenericSubjectCategoryData from '../utils/type-predicates/isGenericSubjectCategory';
+import isLinkedLocaleSubjectData from '../utils/type-predicates/isLinkedLocaleSubjectData';
+import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
 import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
 import verifyRequest from '../utils/verifyRequest';
 
@@ -16,14 +16,14 @@ const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
 ) => {
   const { uid } = verifyRequest(body, context);
 
+  const data = body?.data;
+
   // verify received data
-  if (!body || !body.data || !)
+  if (!body || !body.data || !isLinkedLocaleSubjectData(data))
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Could not link documents because provided data is not valid"
     );
-
-  const { localeSubjectId } = body;
 
   const document1Props: DocumentLinkingProps<
     PrivateStudentData,
@@ -31,22 +31,19 @@ const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
   > = {
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
-    linkCreater: (id) => ({}),
-    linkReducer: (link) => link,
+    linkToAdd: data,
+    linkReducer: (link) => link.id,
     linksPropName: "linkedLocaleSubjects",
     id: uid,
   };
 
-  const document2Props: DocumentLinkingProps<
-    GenericSubjectCategoryData,
-    string
-  > = {
-    collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
-    dataPredicate: isGenericSubjectCategoryData,
-    linkCreater: (id) => id,
+  const document2Props: DocumentLinkingProps<LocaleSubjectData, string> = {
+    collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
+    dataPredicate: isLocaleSubjectData,
+    linkToAdd: uid,
     linkReducer: (link) => link,
-    linksPropName: "genericSubjectIds",
-    id: subjectCategoryId,
+    linksPropName: "linkedStudentIds",
+    id: data.id,
   };
 
   const [updatedDocument1, updatedDocument2] = await linkDocuments({
