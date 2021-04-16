@@ -63,6 +63,7 @@ export interface LinkedLocaleSubjectData {
   confidenceLevel: ConfidenceLevelEnum;
   /** Detail of the users experience with the subject */
   detail: string;
+  locale: LocaleCode;
 }
 
 /**

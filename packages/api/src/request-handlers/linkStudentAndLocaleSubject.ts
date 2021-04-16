@@ -1,4 +1,6 @@
-import { GenericSubjectCategoryData, PrivateStudentData } from '@adopt-a-student/common';
+import {
+  GenericSubjectCategoryData, LinkedLocaleSubjectData, PrivateStudentData,
+} from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
 import { ApiLinkStudentAndLocaleSubject } from '../declarations/interfaces';
@@ -15,7 +17,7 @@ const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
   const { uid } = verifyRequest(body, context);
 
   // verify received data
-  if (!body || !body.localeSubjectId)
+  if (!body || !body.data || !)
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Could not link documents because provided data is not valid"
@@ -23,13 +25,16 @@ const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
 
   const { localeSubjectId } = body;
 
-  const document1Props: DocumentLinkingProps<PrivateStudentData, string> = {
+  const document1Props: DocumentLinkingProps<
+    PrivateStudentData,
+    LinkedLocaleSubjectData
+  > = {
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
-    linkCreater: (id) => id,
+    linkCreater: (id) => ({}),
     linkReducer: (link) => link,
-    linksPropName: "",
-    id: genericSubjectId,
+    linksPropName: "linkedLocaleSubjects",
+    id: uid,
   };
 
   const document2Props: DocumentLinkingProps<

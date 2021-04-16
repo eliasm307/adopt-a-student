@@ -48,5 +48,6 @@ module.exports = {
     "valid-jsdoc": 0,
     "import/export": 1,
     "@typescript-eslint/no-non-null-assertion": 0,
+    "@typescript-eslint/no-unsafe-assignment": 0,
   },
 };

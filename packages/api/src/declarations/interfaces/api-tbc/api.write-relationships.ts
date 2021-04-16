@@ -1,3 +1,4 @@
+import { LinkedLocaleSubjectData } from '../../../../common/src';
 import { FirebaseCallableFunctionHandler } from '../../types';
 
 export type ApiLinkStudentAndLocaleSubject = FirebaseCallableFunctionHandler<{
@@ -5,28 +6,28 @@ export type ApiLinkStudentAndLocaleSubject = FirebaseCallableFunctionHandler<{
   // todo needs to verify a user has access to this data
   // todo should add subject to user and user to subject
 
-  localeSubjectId: string;
+  data: LinkedLocaleSubjectData;
 }>;
 export type ApiLinkTutorAndLocaleSubject = FirebaseCallableFunctionHandler<{
   // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
   // todo needs to verify a user has access to this data
   // todo should add subject to user and user to subject
 
-  localeSubjectId: string;
+  data: LinkedLocaleSubjectData;
 }>;
 export type ApiUnlinkStudentAndLocaleSubject = FirebaseCallableFunctionHandler<{
   // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
   // todo needs to verify a user has access to this data
   // todo should remove subject to user and user to subject
 
-  localeSubjectId: string;
+  data: LinkedLocaleSubjectData;
 }>;
 export type ApiUnlinkTutorAndLocaleSubject = FirebaseCallableFunctionHandler<{
   // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
   // todo needs to verify a user has access to this data
   // todo should remove subject to user and user to subject
 
-  localeSubjectId: string;
+  data: LinkedLocaleSubjectData;
 }>;
 
 export type ApiLinkGenericSubjectAndSubjectCategory = FirebaseCallableFunctionHandler<{
