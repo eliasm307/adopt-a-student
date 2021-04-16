@@ -1,10 +1,10 @@
 import { PrivateTutorData } from "@adopt-a-student/common";
-import callFirebaseFunction from "../client-utils/callFirebaseFunction";
+import callFirebaseFunction from "../../client-utils/callFirebaseFunction";
 import {
   functionsEmulator,
   isFirestoreEmulatorRunning,
   auth,
-} from "../client-utils/firebase-client";
+} from "../../client-utils/firebase-client";
 
 /*
 if (typeof process.env.FIRESTORE_EMULATOR_HOST !== "string")

@@ -1,6 +1,6 @@
 import { PrivateTutorData } from '@adopt-a-student/common';
 
-import { DataMutatorMap as DataMutatorMap, DataUpdater } from '../declarations/types';
+import { DataMutatorMap as DataMutatorMap, DataUpdater } from '../../declarations/types';
 
 interface Props {
   edits: any;

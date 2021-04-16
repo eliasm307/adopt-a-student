@@ -1,7 +1,7 @@
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiCreateGenericSubjectHandler } from '../declarations/interfaces';
-import createDocument from '../utils/createDocument';
-import { firestore, functionsHttps } from '../utils/firebase-admin';
+import createDocument from '../utils/firebase/createDocument';
+import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
 import newGuid from '../utils/newGuid';
 import isGenericSubjectData from '../utils/type-predicates/isGenericSubjectData';
 import verifyRequest from '../utils/verifyRequest';

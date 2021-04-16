@@ -1,7 +1,7 @@
-import { TUTORS_COLLECTION_NAME } from '../constants';
+import { TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiCreateTutorHandler } from '../declarations/interfaces';
-import createDocument from '../utils/createDocument';
-import { firestore } from '../utils/firebase-admin';
+import createDocument from '../utils/firebase/createDocument';
+import { firestore } from '../utils/firebase/firebase-admin';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
@@ -12,7 +12,7 @@ const handler: ApiCreateTutorHandler = async (body, context) => {
   const data = { ...body?.data, id: auth.uid };
 
   const tutor = await createDocument({
-    collectionPath: TUTORS_COLLECTION_NAME,
+    collectionPath: TUTOR_COLLECTION_NAME,
     id: auth.uid,
     data,
     dataPredicate: isPrivateTutorData,

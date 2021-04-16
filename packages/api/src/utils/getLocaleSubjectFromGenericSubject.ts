@@ -2,7 +2,7 @@ import { GenericSubjectData, LocaleCode, LocaleSubjectData } from '@adopt-a-stud
 
 import { LOCALE_SUBJECT_COLLECTION_NAME } from '../constants';
 import { FirestoreAdmin } from '../declarations/interfaces';
-import { functionsHttps } from './firebase-admin';
+import { functionsHttps } from './firebase/firebase-admin';
 import isLocaleSubjectData from './type-predicates/isLocaleSubjectData';
 
 interface Props {

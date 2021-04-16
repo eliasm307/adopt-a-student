@@ -1,5 +1,5 @@
 import { ApiGetSubjectsByCategory } from '../declarations/interfaces';
-import { firestore, functionsHttps } from '../utils/firebase-admin';
+import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
 import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
 import getLocaleSubjectFromGenericSubject from '../utils/getLocaleSubjectFromGenericSubject';
 import verifyRequest from '../utils/verifyRequest';

@@ -1,5 +1,4 @@
 import { FirestoreAdmin } from '../declarations/interfaces';
-import { functionsHttps } from './firebase-admin';
 import readPrivateUserData from './readPrivateUserData';
 
 interface Props<D, P> {

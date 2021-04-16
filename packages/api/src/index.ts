@@ -47,12 +47,12 @@ const callableFunctionHandlers = {
   // subjects
   createGenericSubject,
   createLocaleSubject,
+  updateLocaleSubject,
   getSubject,
   getSubjectsByCategory,
 
   // subject categories
   getSubjectCategories,
-  updateLocaleSubject,
   createSubjectCatgory,
   updateGenericSubject,
   updateLocaleSubjectCategory,

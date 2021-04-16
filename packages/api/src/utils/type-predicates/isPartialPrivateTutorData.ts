@@ -1,6 +1,6 @@
 import { PrivateTutorData } from '@adopt-a-student/common';
 
-import { functionsHttps } from '../firebase-admin';
+import { functionsHttps } from '../firebase/firebase-admin';
 
 export default function isPartialPrivateTutorData(
   data: any

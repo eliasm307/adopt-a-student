@@ -1,5 +1,5 @@
 import { PublicTutorData } from '../../common/src';
-import { functionsHttps } from './firebase-admin';
+import { functionsHttps } from './firebase/firebase-admin';
 import isPublicTutorData from './type-predicates/isPublicTutorData';
 
 export default function extractPublicTutorData(data: any): PublicTutorData {

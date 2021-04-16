@@ -1,7 +1,7 @@
 import { GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiGetSubjectHandler } from '../declarations/interfaces';
-import { firestore, functionsHttps } from '../utils/firebase-admin';
-import getDocumentData from '../utils/getDocumentData';
+import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
+import getDocumentData from '../utils/firebase/getDocumentData';
 import isGenericSubjectData from '../utils/type-predicates/isGenericSubjectData';
 import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
 import verifyRequest from '../utils/verifyRequest';

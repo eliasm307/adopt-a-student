@@ -1,6 +1,6 @@
 import { ApiGetTutorsBySubjectsHandler } from '../declarations/interfaces';
 import extractPublicTutorData from '../utils/extractPublicTutorData';
-import { firestore, functionsHttps } from '../utils/firebase-admin';
+import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
 import getUsersBySubjects from '../utils/getUsersBySubjects';
 import verifyRequest from '../utils/verifyRequest';
 

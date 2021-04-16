@@ -1,5 +1,5 @@
 import { FirestoreAdmin } from '../declarations/interfaces';
-import { functionsHttps } from './firebase-admin';
+import { functionsHttps } from './firebase/firebase-admin';
 
 interface Props<D> {
   dataPredicate: (data: any) => data is D;

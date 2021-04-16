@@ -1,7 +1,7 @@
-import { FirestoreAdmin } from '../declarations/interfaces';
-import { DataUpdater } from '../declarations/types';
-import createPath from './createPath';
-import { functionsHttps } from './firebase-admin';
+import { FirestoreAdmin } from "../../declarations/interfaces";
+import { DataUpdater } from "../../declarations/types";
+import createPath from "../createPath";
+import { functionsHttps } from "./firebase-admin";
 
 interface Props<D> {
   collectionPath: string;

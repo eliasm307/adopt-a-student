@@ -106,7 +106,9 @@ export interface GenericSubjectCategoryData extends Entity {
 }
 
 /** Schema of the general public data (not relating to a user) that represents a specific locale dependent subject,
- * as it is stored in database. e.g. "Physics" and "Physiques" are two different LocaleSubjects */
+ * as it is stored in database. e.g. "Physics" and "Physiques" are two different LocaleSubjects
+ // ! this is represented as separate documents as there might be a lot of data associated with locale subjects, so this prevents every locale subject being loaded when querying generic subjects
+*/
 export interface LocaleSubjectData extends Entity {
   /** Unique id */
   readonly id: string;

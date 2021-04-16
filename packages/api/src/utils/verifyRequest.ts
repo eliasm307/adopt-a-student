@@ -1,6 +1,6 @@
 import { CallableContext } from 'firebase-functions/lib/providers/https';
 
-import { functionsHttps } from './firebase-admin';
+import { functionsHttps } from './firebase/firebase-admin';
 
 interface Auth {
   uid: string;

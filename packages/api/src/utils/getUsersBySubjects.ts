@@ -1,9 +1,9 @@
 import { PrivateStudentData, PrivateTutorData } from '@adopt-a-student/common';
 
-import { STUDENTS_COLLECTION_NAME, TUTORS_COLLECTION_NAME } from '../constants';
+import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
 import { FirestoreAdmin } from '../declarations/interfaces';
 import { UserTypeName } from '../declarations/types';
-import { functionsHttps } from './firebase-admin';
+import { functionsHttps } from './firebase/firebase-admin';
 import groupArrayItems from './groupArrayItems';
 
 interface Props<PublicDataType> {
@@ -23,7 +23,7 @@ export default async function getUsersBySubjects<PublicDataType>({
   const tutorSubjectsField: keyof PrivateTutorData = "relatedSubjects";
 
   const userCollectionName =
-    userType === "Student" ? STUDENTS_COLLECTION_NAME : TUTORS_COLLECTION_NAME;
+    userType === "Student" ? STUDENT_COLLECTION_NAME : TUTOR_COLLECTION_NAME;
   const userSubjectsField =
     userType === "Student" ? studentSubjectsField : tutorSubjectsField;
 

@@ -1,6 +1,6 @@
 import { PrivateTutorData } from '@adopt-a-student/common';
 
-import { functionsHttps } from './firebase-admin';
+import { functionsHttps } from './firebase/firebase-admin';
 
 // todo delete
 

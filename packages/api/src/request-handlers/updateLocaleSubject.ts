@@ -1,12 +1,15 @@
-import { STUDENT_COLLECTION_NAME } from '../constants';
-import { ApiUpdateStudentDataHandler } from '../declarations/interfaces';
+import { LOCALE_SUBJECT_COLLECTION_NAME } from '../constants';
+import { ApiUpdateLocaleSubjectHandler } from '../declarations/interfaces';
 import studentDataUpdater from '../utils/data-updaters/studentDataUpdater';
 import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
 import updateDocumentData from '../utils/firebase/updateDocumentData';
-import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
+import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
 import verifyRequest from '../utils/verifyRequest';
 
-const updateStudent: ApiUpdateStudentDataHandler = async (body, context) => {
+const updateLocaleSubject: ApiUpdateLocaleSubjectHandler = async (
+  body,
+  context
+) => {
   const auth = verifyRequest(body, context);
 
   // verify received data
@@ -14,7 +17,8 @@ const updateStudent: ApiUpdateStudentDataHandler = async (body, context) => {
     !body ||
     !body.data ||
     typeof body.data !== "object" ||
-    !Object.keys(body.data).length
+    !Object.keys(body.data).length ||
+    !body.id
   )
     throw new functionsHttps.HttpsError(
       "failed-precondition",
@@ -22,10 +26,10 @@ const updateStudent: ApiUpdateStudentDataHandler = async (body, context) => {
     );
 
   const updatedData = await updateDocumentData({
-    collectionPath: STUDENT_COLLECTION_NAME,
-    id: auth.uid,
+    collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
+    id: body.id,
     edits: body?.data,
-    dataPredicate: isPrivateStudentData,
+    dataPredicate: isLocaleSubjectData,
     dataUpdater: studentDataUpdater,
     firestore,
   });
@@ -33,4 +37,4 @@ const updateStudent: ApiUpdateStudentDataHandler = async (body, context) => {
   return { data: updatedData };
 };
 
-export default updateStudent;
+export default updateLocaleSubject;

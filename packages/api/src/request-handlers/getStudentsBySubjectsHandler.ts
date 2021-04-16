@@ -2,7 +2,7 @@ import { PublicStudentData } from '@adopt-a-student/common';
 
 import { ApiGetStudentsBySubjectsHandler } from '../declarations/interfaces';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
-import { firestore, functionsHttps } from '../utils/firebase-admin';
+import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
 import getUsersBySubjects from '../utils/getUsersBySubjects';
 import verifyRequest from '../utils/verifyRequest';
 

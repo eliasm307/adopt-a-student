@@ -1,9 +1,9 @@
-import { TUTORS_COLLECTION_NAME } from '../constants';
+import { TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiUpdateTutorDataHandler } from '../declarations/interfaces';
-import { firestore, functionsHttps } from '../utils/firebase-admin';
-import tutorDataUpdater from '../utils/tutorDataUpdater';
+import tutorDataUpdater from '../utils/data-updaters/tutorDataUpdater';
+import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
+import updateDocumentData from '../utils/firebase/updateDocumentData';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
-import updateDocumentData from '../utils/updateDocumentData';
 import verifyRequest from '../utils/verifyRequest';
 
 const updateTutor: ApiUpdateTutorDataHandler = async (body, context) => {
@@ -22,7 +22,7 @@ const updateTutor: ApiUpdateTutorDataHandler = async (body, context) => {
     );
 
   const updatedData = await updateDocumentData({
-    collectionPath: TUTORS_COLLECTION_NAME,
+    collectionPath: TUTOR_COLLECTION_NAME,
     id: auth.uid,
     edits: body?.data,
     dataPredicate: isPrivateTutorData,
