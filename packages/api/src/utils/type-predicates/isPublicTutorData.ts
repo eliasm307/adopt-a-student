@@ -9,8 +9,22 @@ export default function isPublicTutorData(data: any): data is PublicTutorData {
     imageUrl,
     introduction,
     available,
+    prefferedLocales,
   } = data as PublicTutorData;
 
+  // this is to ensure that if the schema changes, ie props are added/removed,
+  // ts will throw an error to update the predicate as this object will be invalid
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const forTsError: PublicTutorData = {
+    id,
+    userName,
+    imageUrl,
+    prefferedLocales,
+    introduction,
+    available,
+  };
+
+  const hasPreferredLocales = Array.isArray(prefferedLocales);
   const hasUserName = typeof userName === "string" && userName;
   const canHaveImage =
     typeof imageUrl === "undefined" ||
@@ -26,7 +40,8 @@ export default function isPublicTutorData(data: any): data is PublicTutorData {
     hasUserName &&
     hasAvailable &&
     canHaveImage &&
-    canHaveIntroduction
+    canHaveIntroduction &&
+    hasPreferredLocales
   )
     return true;
 

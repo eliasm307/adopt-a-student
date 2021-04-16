@@ -11,6 +11,15 @@ export default function isGenericSubjectData(
     relatedGenericSubjectIds,
   } = data as GenericSubjectData;
 
+  // this is to ensure that if the schema changes, ie props are added/removed,
+  // ts will throw an error to update the predicate as this object will be invalid
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const forTsError: GenericSubjectData = {
+    id,
+    categoryIds,
+    relatedGenericSubjectIds,
+  };
+
   const hasId = typeof id === "string" && id;
 
   const hasCategoryIds = Array.isArray(categoryIds);

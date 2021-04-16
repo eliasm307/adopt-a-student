@@ -15,6 +15,19 @@ export default function isLocaleSubjectData(
     studentIds,
   } = data as LocaleSubjectData;
 
+  // this is to ensure that if the schema changes, ie props are added/removed,
+  // ts will throw an error to update the predicate as this object will be invalid
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const forTsError: LocaleSubjectData = {
+    id,
+    country,
+    tutorIds,
+    description,
+    genericSubjectId,
+    locale,
+    studentIds,
+  };
+
   const hasId = typeof id === "string" && id;
   const hasGenericSubjectId =
     typeof genericSubjectId === "string" && genericSubjectId;
