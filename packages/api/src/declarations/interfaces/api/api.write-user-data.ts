@@ -7,7 +7,7 @@ export type ApiCreateTutorHandler = FirebaseCallableFunctionHandler<
   {
     data?: Omit<PrivateTutorData, "id">;
   },
-  BasicResponseData & { data: PrivateTutorData }
+  BasicResponseData & { data: { tutor: PrivateTutorData } }
 >;
 
 export type ApiUpdateTutorDataHandler = FirebaseCallableFunctionHandler<

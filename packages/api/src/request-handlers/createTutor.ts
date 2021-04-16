@@ -11,13 +11,18 @@ const handler: ApiCreateTutorHandler = async (body, context) => {
   // make sure data uses user id
   const data = { ...body?.data, id: auth.uid };
 
-  return createDocument({
+  const tutor = await createDocument({
     collectionPath: TUTORS_COLLECTION_NAME,
     id: auth.uid,
     data,
     dataPredicate: isPrivateTutorData,
     firestore,
   });
+
+  return {
+    success: true,
+    data: { tutor },
+  };
 
   // todo delete
   /*

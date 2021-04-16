@@ -4,9 +4,9 @@ import {
   CallableFunctionName, CallableMethod, FirebaseCallableFunctionHandler,
 } from './declarations/types';
 import createGenericSubject from './request-handlers/createGenericSubject';
-import createLocaleSubject from './request-handlers/createLocaleSubjectHandler';
+import createLocaleSubject from './request-handlers/createLocaleSubject';
 import createStudent from './request-handlers/createStudent';
-import createTutor from './request-handlers/createTutorHandler';
+import createTutor from './request-handlers/createTutor';
 import getPrivateStudentData from './request-handlers/getPrivateStudentDataHandler';
 import getPrivateTutorData from './request-handlers/getPrivateTutorDataHandler';
 import getPublicStudentData from './request-handlers/getPublicStudentDataHandler';

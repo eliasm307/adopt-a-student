@@ -29,7 +29,8 @@ interface FirestoreSchema {
 
 export interface BasicResponseData {
   message?: string;
-  success: boolean;
+
+// success: boolean;
 }
 
 export * from "./api/api.query-subjects";
