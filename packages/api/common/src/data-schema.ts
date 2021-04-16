@@ -1,5 +1,5 @@
 import { ConfidenceLevelEnum } from './enums';
-import { Country, LocaleCode } from './types';
+import { Country, LocaleCode, ObjectMap } from './types';
 
 export interface Entity {
   // dataIsComplete: boolean;
@@ -100,9 +100,7 @@ export interface GenericSubjectCategoryData extends Entity {
   genericSubjectIds: string[];
   id: string;
   /** Representations of the same generic subject catories in different locales */
-  localeSubjectCategories: {
-    [key in LocaleCode]: LocaleSubjectCategoryData | undefined;
-  };
+  localeSubjectCategories: ObjectMap<LocaleCode, LocaleSubjectCategoryData>;
 }
 
 /** Schema of the general public data (not relating to a user) that represents a specific locale dependent subject,

@@ -1,5 +1,5 @@
 import {
-  GenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData,
+  GenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData, ObjectMap,
 } from '@adopt-a-student/common';
 
 import { DataMutatorMap as DataMutatorMap, DataUpdater } from '../../declarations/types';
@@ -23,9 +23,10 @@ const genericSubjectCategoryDataUpdater: DataUpdater<GenericSubjectCategoryData>
     // replace the object with the edits, this should be merged by the firestore update
     localeSubjectCategories: (value) =>
       typeof value === "object"
-        ? (newData.localeSubjectCategories = value as {
-            [key in LocaleCode]: LocaleSubjectCategoryData | undefined;
-          })
+        ? (newData.localeSubjectCategories = value as ObjectMap<
+            LocaleCode,
+            LocaleSubjectCategoryData
+          >)
         : null,
     genericSubjectIds: null, // change handled by a different request
   };
