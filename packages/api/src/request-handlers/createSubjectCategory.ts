@@ -21,7 +21,7 @@ const createSubjectCategory: ApiCreateSubjectCategoryHandler = async (
   const id = newGuid();
   const data = { ...body.data, id };
 
-  const localeSubjectCategory = await createDocument({
+  const genericSubjectCategory = await createDocument({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     id,
     data,
@@ -30,8 +30,8 @@ const createSubjectCategory: ApiCreateSubjectCategoryHandler = async (
   });
 
   return {
-    data: { localeSubjectCategory },
+    data: { genericSubjectCategory },
   };
 };
 
-export default createSubjectCategoryCategory;
+export default createSubjectCategory;
