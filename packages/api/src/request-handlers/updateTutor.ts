@@ -21,7 +21,7 @@ const updateTutor: ApiUpdateTutorDataHandler = async (body, context) => {
       "Could not update tutor because provided data is not valid"
     );
 
-  return await updateDocumentData({
+  const updatedData = await updateDocumentData({
     collectionPath: TUTORS_COLLECTION_NAME,
     id: auth.uid,
     edits: body?.data,
@@ -29,6 +29,8 @@ const updateTutor: ApiUpdateTutorDataHandler = async (body, context) => {
     dataUpdater: tutorDataUpdater,
     firestore,
   });
+
+  return { data: updatedData };
 
   /*
   const documentPath = createPath(TUTORS_COLLECTION_NAME, auth.uid);

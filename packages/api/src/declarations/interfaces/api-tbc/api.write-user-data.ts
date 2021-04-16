@@ -16,7 +16,7 @@ export type ApiUpdateTutorDataHandler = FirebaseCallableFunctionHandler<
     // todo needs to verify a user has access to this data
     data?: Partial<Omit<PrivateTutorData, "id">>;
   },
-  BasicResponseData & { data: PrivateTutorData }
+  { data: PrivateTutorData }
 >;
 
 export type ApiCreateStudentHandler = FirebaseCallableFunctionHandler<
