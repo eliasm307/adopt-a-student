@@ -17,7 +17,7 @@ const studentDataUpdater: DataUpdater<PrivateStudentData> = ({
 
   const mutators: DataMutatorMap<PrivateStudentData> = {
     id: null,
-    relatedSubjects: null,
+    subjects: null,
     tutors: null,
     email: (value) =>
       typeof value === "string" ? (newData.email = value) : null,

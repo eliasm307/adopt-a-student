@@ -1,5 +1,5 @@
 import {
-  PrivateStudentData, PrivateTutorData, StudentLinkedTutorData, TutorLinkedStudentData,
+  LinkedStudentData, LinkedTutorData, PrivateStudentData, PrivateTutorData,
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
@@ -100,7 +100,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
 
   const document1Props: DocumentLinkingProps<
     PrivateStudentData,
-    StudentLinkedTutorData
+    LinkedTutorData
   > = {
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
@@ -112,7 +112,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
 
   const document2Props: DocumentLinkingProps<
     PrivateTutorData,
-    TutorLinkedStudentData
+    LinkedStudentData
   > = {
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,

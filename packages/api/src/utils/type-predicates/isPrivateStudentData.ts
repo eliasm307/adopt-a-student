@@ -9,7 +9,7 @@ export default function isPrivateStudentData(
   const {
     email,
     id,
-    relatedSubjects,
+    subjects: relatedSubjects,
     userName,
     tutors,
     imageUrl,
@@ -23,7 +23,7 @@ export default function isPrivateStudentData(
   const forTsError: PrivateStudentData = {
     email,
     id,
-    relatedSubjects,
+    subjects: relatedSubjects,
     userName,
     tutors,
     imageUrl,

@@ -28,13 +28,13 @@ export interface PrivateUserData extends PublicUserData {
   /** Links to subjects a user is interested in learning/teaching (depends on type of user)
    * and user specific information about the user relating to a specific subject
    */
-  relatedSubjects: UserSubjectData[];
+  subjects: LinkedSubjectData[];
 }
 
 /** Schema of data that represents a student, as it is stored in database */
 export interface PrivateStudentData extends PrivateUserData {
   /** Data about the tutors a student is involved with */
-  tutors: StudentLinkedTutorData[];
+  tutors: LinkedTutorData[];
 }
 
 export interface PublicStudentData extends PublicUserData {}
@@ -42,7 +42,7 @@ export interface PublicStudentData extends PublicUserData {}
 /** Schema of data that represents a tutor, only available to the tutor */
 export interface PrivateTutorData extends PrivateUserData {
   /** Data about the students a teacher is involved with */
-  students: TutorLinkedStudentData[];
+  students: LinkedStudentData[];
 }
 
 export interface PublicTutorData extends PublicUserData {
@@ -53,7 +53,7 @@ export interface PublicTutorData extends PublicUserData {
 /** Data about a subject specific to a user, as it is stored in database
  * // ? should this be public?
  */
-export interface UserSubjectData {
+export interface LinkedSubjectData {
   /** Unique id to the related subject */
   readonly id: string;
 
@@ -77,7 +77,7 @@ export interface GenericSubjectData extends Entity {
   /** Links to other relevant subjects a user might be interested in
    `// todo needs to be syncronised ie if A is related to B then B must be related to A`
   */
-  relatedGenericSubjectIds: string[];
+  linkedGenericSubjectIds: string[];
 }
 
 /** Name of a subject category in a specific locale */
@@ -128,7 +128,7 @@ export interface LocaleSubjectData extends Entity {
 }
 
 /** Data about a tutor from the perspective of a student, as it is stored in database */
-export interface StudentLinkedTutorData {
+export interface LinkedTutorData {
   /** Id of the tutor related to the student */
   id: string;
 
@@ -136,7 +136,7 @@ export interface StudentLinkedTutorData {
 }
 
 /** Data about a student from the perspective of a tutor, as it is stored in database */
-export interface TutorLinkedStudentData {
+export interface LinkedStudentData {
   /** Id of the student related to the tutor */
   id: string;
 
@@ -144,7 +144,7 @@ export interface TutorLinkedStudentData {
 }
 
 /** Subject data specific to a student user, as it is stored in database */
-export interface StudentSubjectData extends UserSubjectData {}
+export interface StudentSubjectData extends LinkedSubjectData {}
 
 /** Subject data specific to a tutor user */
-export interface TutorSubjectData extends UserSubjectData {}
+export interface TutorSubjectData extends LinkedSubjectData {}

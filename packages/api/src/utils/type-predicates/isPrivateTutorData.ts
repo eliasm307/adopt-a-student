@@ -9,7 +9,7 @@ export default function isPrivateTutorData(
   const {
     email,
     id,
-    relatedSubjects,
+    subjects: relatedSubjects,
     students,
     userName,
     prefferedLocales,
@@ -21,7 +21,7 @@ export default function isPrivateTutorData(
   const forTsError: PrivateTutorData = {
     email,
     id,
-    relatedSubjects,
+    subjects: relatedSubjects,
     students,
     userName,
     prefferedLocales,

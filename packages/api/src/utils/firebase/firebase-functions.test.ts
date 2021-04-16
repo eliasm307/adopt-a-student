@@ -41,7 +41,7 @@ describe.only("firebase functions createTutor", () => {
     const data: PrivateTutorData = {
       email: "an-email",
       id: "232",
-      relatedSubjects: [{ confidenceLevel: 2, detail: "2ded", id: "kkd" }],
+      subjects: [{ confidenceLevel: 2, detail: "2ded", id: "kkd" }],
       students: [{ id: "student1" }],
       userName: "eced",
     };

@@ -1,16 +1,12 @@
 import {
-  PrivateStudentData,
-  PrivateTutorData,
-  PrivateUserData,
-  StudentSubjectData,
+  LinkedSubjectData, PrivateStudentData, PrivateTutorData, PrivateUserData, StudentSubjectData,
   TutorSubjectData,
-  UserSubjectData,
-} from "./data-schema";
+} from './data-schema';
 
 /** A user object instance that allows reading and editing data to/from the database */
 export interface PrivateUser<
   D extends PrivateUserData,
-  S extends UserSubjectData
+  S extends LinkedSubjectData
 > {
   /** Readonly user data */
   readonly data: Readonly<D>;
