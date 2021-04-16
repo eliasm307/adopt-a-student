@@ -2,7 +2,7 @@ import { GenericSubjectCategoryData, LocaleSubjectCategoryData } from '@adopt-a-
 
 import { FirebaseCallableFunctionHandler } from '../../types';
 
-export type ApiCreateSubjectCatgoryHandler = FirebaseCallableFunctionHandler<
+export type ApiCreateSubjectCategoryHandler = FirebaseCallableFunctionHandler<
   {
     // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
     // todo needs to verify a user has access to this data
