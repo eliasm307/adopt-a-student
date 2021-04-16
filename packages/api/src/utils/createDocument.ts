@@ -16,7 +16,7 @@ export default async function createDocument<D>({
   collectionPath,
   firestore,
   data,
-}: Props<D>) {
+}: Props<D>): Promise<D> {
   // verify received data
   if (!dataPredicate(data))
     throw new functionsHttps.HttpsError(
@@ -29,18 +29,27 @@ export default async function createDocument<D>({
   // check if tutor already exists for this user
   const docRef = await firestore.doc(path).get();
 
-  if (docRef.exists)
+  if (docRef.exists) {
+    console.warn(
+      __filename,
+      "Could not create document because one already exists at path",
+      { path }
+    );
     // dont throw error if there is an existing tutor, its not that deep
+    /*
     return {
       success: false,
       data,
       message: "Could not create document because one already exists",
     };
+    */
+  }
 
   // create document
   try {
     await firestore.doc(path).set(data);
-    return { success: true, data };
+    // return { success: true, data };
+    return data;
   } catch (error) {
     throw new functionsHttps.HttpsError(
       "internal",

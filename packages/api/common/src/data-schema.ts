@@ -62,8 +62,8 @@ export interface UserSubjectData {
 }
 
 /**
- * Represents a subject not dependent on locale.
- * This is used to map relationships between subjects e.g.
+ * Represents a subject in every language, ie not dependent on locale.
+ * This is used to map high level relationships between subjects e.g.
  * the "Maths" generic subject could be related to the "Physics" generic subject
  * where "Physics" and "Physiques" both belong to the "Physics" generic subject
  */
@@ -71,7 +71,7 @@ export interface GenericSubjectData extends Entity {
   readonly id: string;
 
   /** The categories this generic subject belongs to */
-  categoryIds: string;
+  categoryIds: string[];
   /** Links to other relevant subjects a user might be interested in
    `// todo needs to be syncronised ie if A is related to B then B must be related to A`
   */
