@@ -15,6 +15,8 @@ export interface PublicUserData extends Entity {
   /** Optional text for users to introduce themselves,
    * describe their experience, what subjects they are interested in etc */
   introduction?: string;
+  /** The locales a user prefers for content */
+  prefferedLocales: string;
   /** Username which will be displayed for a user */
   userName: string;
 }

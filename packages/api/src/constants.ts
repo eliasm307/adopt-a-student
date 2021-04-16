@@ -43,6 +43,9 @@ export const CALLABLE_FUNCTION_NAMES = [
 
   "linkStudentAndTutor",
   "unlinkStudentAndTutor",
+
+  "linkGenericSubjects",
+  "unlinkGenericSubjects",
 ] as const;
 
 export const GENERIC_SUBJECT_COLLECTION_NAME = "generic-subjects";

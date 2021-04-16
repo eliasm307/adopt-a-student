@@ -8,8 +8,8 @@
 */
 
 import {
-  GenericSubjectCategoryData as GenericSubjectCategoryData, GenericSubjectData, LocaleSubjectData,
-  PrivateStudentData, PrivateTutorData,
+  GenericSubjectCategoryData as GenericSubjectCategoryData, GenericSubjectData, LocaleCode,
+  LocaleSubjectData, PrivateStudentData, PrivateTutorData,
 } from '@adopt-a-student/common';
 
 // export namespace API {
@@ -20,7 +20,11 @@ import {
 
 /** Represents firestore top level collections */
 interface FirestoreSchema {
-  genericSubjects: GenericSubjectData[];
+  /** Generic subjects, each with a locale subject sub collection */
+  genericSubjects: (GenericSubjectData & {
+    localeSubjects: { [key in LocaleCode]: LocaleSubjectData };
+  })[];
+  /** // todo move to sub collecitons inside generic subjects */
   localeSubjects: LocaleSubjectData[];
   students: PrivateStudentData[];
   subjectCategories: GenericSubjectCategoryData[];
@@ -34,6 +38,7 @@ export interface BasicResponseData {
 }
 
 export * from "./api/api.query-subjects";
+
 export * from "./api/api.quey-users";
 export * from "./api/api.read-subject-data";
 export * from "./api/api.read-user-data";

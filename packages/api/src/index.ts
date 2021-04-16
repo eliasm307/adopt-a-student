@@ -60,6 +60,8 @@ const callableFunctionHandlers = {
   updateLocaleSubjectCategory,
 
   // relationships
+  linkGenericSubjects,
+  unlinkGenericSubjects,
   linkGenericSubjectAndSubjectCategory,
   linkStudentAndLocaleSubject,
   linkStudentAndTutor,
