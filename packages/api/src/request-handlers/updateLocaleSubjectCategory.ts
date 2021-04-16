@@ -1,6 +1,7 @@
 import { GenericSubjectCategoryData } from '../../common/src';
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
 import { ApiUpdateLocaleSubjectCategoryHandler } from '../declarations/interfaces';
+import genericSubjectCategoryDataUpdater from '../utils/data-updaters/genericSubjectCategoryDataUpdater';
 import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
 import updateDocumentData from '../utils/firebase/updateDocumentData';
 import isGenericSubjectCategoryData from '../utils/type-predicates/isGenericSubjectCategory';
@@ -42,7 +43,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
   */
 
   // update just the locale subject category of the generic
-  const localeSubject = await updateDocumentData({
+  const genericSubjectCategory = await updateDocumentData({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     id,
     edits: genericCategoryEdits,
@@ -51,7 +52,16 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
     firestore,
   });
 
-  return { data: { localeSubject } };
+  const localeSubjectCategory =
+    genericSubjectCategory.localeSubjectCategories[locale];
+
+  if (!localeSubjectCategory)
+    throw new functionsHttps.HttpsError(
+      "internal",
+      "There was an issue updating the locale subject category"
+    );
+
+  return { data: { localeSubjectCategory } };
 };
 
 export default updateLocaleSubjectCategory;
