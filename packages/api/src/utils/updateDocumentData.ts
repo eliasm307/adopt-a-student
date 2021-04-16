@@ -5,21 +5,21 @@ import { functionsHttps } from './firebase-admin';
 
 interface Props<D> {
   collectionPath: string;
-  data: any;
   dataPredicate: (data: any) => data is D;
   dataUpdater: DataUpdater<D>;
+  edits: any;
   firestore: FirestoreAdmin;
   id: string;
 }
 
 export default async function updateDocumentData<D>({
   collectionPath,
-  data,
+  edits,
   dataPredicate,
   firestore,
   id,
   dataUpdater,
-}: Props<D>) {
+}: Props<D>): Promise<D> {
   const documentPath = createPath(collectionPath, id);
 
   // check if tutor already exists for this user
@@ -41,19 +41,23 @@ export default async function updateDocumentData<D>({
     );
 
   const updatedData = dataUpdater({
-    edits: data,
+    edits,
     existingData,
   });
+
+  // verify updated data
+  if (!dataPredicate(updatedData))
+    throw new functionsHttps.HttpsError(
+      "internal",
+      "Could not update document because the changes would result in invalid data"
+    );
 
   // aplly updated data to firestore
   try {
     await docSnapshot.ref.update(updatedData);
     const newSnapshot = await docSnapshot.ref.get();
 
-    return {
-      success: true,
-      data: newSnapshot.data(),
-    };
+    return newSnapshot.data() as D;
   } catch (error) {
     throw new functionsHttps.HttpsError(
       "internal",

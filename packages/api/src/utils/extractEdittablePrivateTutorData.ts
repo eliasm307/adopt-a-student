@@ -2,6 +2,8 @@ import { PrivateTutorData } from '@adopt-a-student/common';
 
 import { functionsHttps } from './firebase-admin';
 
+// todo delete
+
 export default function extractEdittablePrivateTutorData(
   data: any
 ): Partial<Omit<PrivateTutorData, "id">> {
@@ -50,5 +52,7 @@ export default function extractEdittablePrivateTutorData(
       `Request data is not valid, there were no valid properties found`
     );
 
-  return true;
+  throw Error("Not implemented");
+
+  // return true;
 }

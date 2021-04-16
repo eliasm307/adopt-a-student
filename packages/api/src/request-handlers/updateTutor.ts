@@ -1,28 +1,36 @@
-import { PrivateTutorData } from '@adopt-a-student/common';
-
 import { TUTORS_COLLECTION_NAME } from '../constants';
 import { ApiUpdateTutorDataHandler } from '../declarations/interfaces';
-import createPath from '../utils/createPath';
 import { firestore, functionsHttps } from '../utils/firebase-admin';
 import tutorDataUpdater from '../utils/tutorDataUpdater';
-import isPartialPrivateTutorData from '../utils/type-predicates/isPartialPrivateTutorData';
+import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
+import updateDocumentData from '../utils/updateDocumentData';
 import verifyRequest from '../utils/verifyRequest';
 
-const updateTutor: ApiUpdateTutorDataHandler = async (data, context) => {
-  const auth = verifyRequest(data, context);
+const updateTutor: ApiUpdateTutorDataHandler = async (body, context) => {
+  const auth = verifyRequest(body, context);
 
-  const dataUpdater = tutorDataUpdater;
-
-  // ! this doesnt do anything, you dont need to know the shape of partial data
   // verify received data
-  /*
-  if (!isPartialPrivateTutorData(data))
+  if (
+    !body ||
+    !body.data ||
+    typeof body.data !== "object" ||
+    !Object.keys(body.data).length
+  )
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Could not update tutor because provided data is not valid"
     );
-    */
 
+  return await updateDocumentData({
+    collectionPath: TUTORS_COLLECTION_NAME,
+    id: auth.uid,
+    edits: body?.data,
+    dataPredicate: isPrivateTutorData,
+    dataUpdater: tutorDataUpdater,
+    firestore,
+  });
+
+  /*
   const documentPath = createPath(TUTORS_COLLECTION_NAME, auth.uid);
 
   // check if tutor already exists for this user
@@ -55,6 +63,7 @@ const updateTutor: ApiUpdateTutorDataHandler = async (data, context) => {
       JSON.stringify({ error })
     );
   }
+  */
 };
 
 export default updateTutor;
