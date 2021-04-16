@@ -17,6 +17,7 @@ import getSubjectCategories from './request-handlers/getSubjectCategoriesHandler
 import getSubject from './request-handlers/getSubjectHandler';
 import getSubjectsByCategory from './request-handlers/getSubjectsByCategoryHandler';
 import getTutorsBySubjects from './request-handlers/getTutorsBySubjectsHandler';
+import linkStudentAndTutor from './request-handlers/linkStudentAndTutor';
 import updateLocaleSubject from './request-handlers/updateLocaleSubject';
 import updateLocaleSubjectCategory from './request-handlers/updateLocaleSubjectCategory';
 import updateStudent from './request-handlers/updateStudent';
