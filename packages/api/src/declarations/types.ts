@@ -15,3 +15,11 @@ export type CallableFunctionName = typeof CALLABLE_FUNCTION_NAMES[number];
 export type CallableMethod = HttpsFunction & Runnable<any>;
 
 export type UserTypeName = "Student" | "Tutor";
+
+/**
+ * An object with the same keys as a given object where the values can be functions to cause mutations
+ * or null for no mutation
+ */
+export type DataMutatorMap<T> = {
+  [key in keyof T]: null | ((value: any) => void);
+};

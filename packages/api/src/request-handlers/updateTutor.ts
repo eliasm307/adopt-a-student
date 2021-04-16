@@ -7,15 +7,18 @@ import { firestore, functionsHttps } from '../utils/firebase-admin';
 import isPartialPrivateTutorData from '../utils/type-predicates/isPartialPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
-const handler: ApiUpdateTutorDataHandler = async (data, context) => {
+const updateTutor: ApiUpdateTutorDataHandler = async (data, context) => {
   const auth = verifyRequest(data, context);
 
+  // ! this doesnt do anything, you dont need to know the shape of partial data
   // verify received data
+  /*
   if (!isPartialPrivateTutorData(data))
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Could not update tutor because provided data is not valid"
     );
+    */
 
   const documentPath = createPath(TUTORS_COLLECTION_NAME, auth.uid);
 
@@ -27,6 +30,8 @@ const handler: ApiUpdateTutorDataHandler = async (data, context) => {
       "not-found",
       "Could not edit tutor because a tutor profile doesnt exist for this user, create one first"
     );
+
+  const updatedData = updateTutorData();
 
   // edit tutor
   try {
@@ -46,4 +51,4 @@ const handler: ApiUpdateTutorDataHandler = async (data, context) => {
   }
 };
 
-export default handler;
+export default updateTutor;

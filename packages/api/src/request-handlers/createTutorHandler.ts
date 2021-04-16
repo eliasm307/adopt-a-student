@@ -1,7 +1,7 @@
 import { TUTORS_COLLECTION_NAME } from '../constants';
 import { ApiCreateTutorHandler } from '../declarations/interfaces';
-import createPath from '../utils/createPath';
-import { firestore, functionsHttps } from '../utils/firebase-admin';
+import createDocument from '../utils/createDocument';
+import { firestore } from '../utils/firebase-admin';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
@@ -11,6 +11,16 @@ const handler: ApiCreateTutorHandler = async (body, context) => {
   // make sure data uses user id
   const data = { ...body?.data, id: auth.uid };
 
+  return createDocument({
+    collectionPath: TUTORS_COLLECTION_NAME,
+    id: auth.uid,
+    data,
+    dataPredicate: isPrivateTutorData,
+    firestore,
+  });
+
+  // todo delete
+  /*
   // verify received data
   if (!isPrivateTutorData(data))
     throw new functionsHttps.HttpsError(
@@ -43,6 +53,7 @@ const handler: ApiCreateTutorHandler = async (body, context) => {
       JSON.stringify(data)
     );
   }
+  */
 };
 
 export default handler;
