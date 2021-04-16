@@ -16,6 +16,7 @@ import getSubjectCategories from './request-handlers/getSubjectCategoriesHandler
 import getSubject from './request-handlers/getSubjectHandler';
 import getSubjectsByCategory from './request-handlers/getSubjectsByCategoryHandler';
 import getTutorsBySubjects from './request-handlers/getTutorsBySubjectsHandler';
+import linkGenericSubjectAndSubjectCategory from './request-handlers/linkGenericSubjectAndSubjectCategory';
 import linkGenericSubjects from './request-handlers/linkGenericSubjects';
 import linkStudentAndTutor from './request-handlers/linkStudentAndTutor';
 import updateLocaleSubject from './request-handlers/updateLocaleSubject';
@@ -30,7 +31,6 @@ import updateTutor from './request-handlers/updateTutor';
 Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
-
 const callableFunctionHandlers = {
   // writeTest: firestoreWriteHandler,
 
@@ -64,13 +64,17 @@ const callableFunctionHandlers = {
   // relationships
   linkGenericSubjects,
   unlinkGenericSubjects,
+
   linkGenericSubjectAndSubjectCategory,
-  linkStudentAndLocaleSubject,
-  linkStudentAndTutor,
-  linkTutorAndLocaleSubject,
   unlinkGenericSubjectAndSubjectCategory,
+
+  linkStudentAndLocaleSubject,
   unlinkStudentAndLocaleSubject,
+
+  linkStudentAndTutor,
   unlinkStudentAndTutor,
+
+  linkTutorAndLocaleSubject,
   unlinkTutorAndLocaleSubject,
 } as ObjectMap<CallableFunctionName, FirebaseCallableFunctionHandler>;
 
