@@ -26,13 +26,13 @@ export interface PrivateUserData extends PublicUserData {
   /** Links to subjects a user is interested in learning/teaching (depends on type of user)
    * and user specific information about the user relating to a specific subject
    */
-  relatedSubjects: ObjectMap<string, UserSubjectData>;
+  relatedSubjects: UserSubjectData[];
 }
 
 /** Schema of data that represents a student, as it is stored in database */
 export interface PrivateStudentData extends PrivateUserData {
   /** Data about the tutors a student is involved with */
-  tutors: ObjectMap<string, StudentSubTutorData>;
+  tutors: StudentSubTutorData[];
 }
 
 export interface PublicStudentData extends PublicUserData {}
@@ -40,7 +40,7 @@ export interface PublicStudentData extends PublicUserData {}
 /** Schema of data that represents a tutor, only available to the tutor */
 export interface PrivateTutorData extends PrivateUserData {
   /** Data about the students a teacher is involved with */
-  students: ObjectMap<string, TutorSubStudentData>;
+  students: TutorSubStudentData[];
 }
 
 export interface PublicTutorData extends PublicUserData {
@@ -71,11 +71,11 @@ export interface GenericSubjectData extends Entity {
   readonly id: string;
 
   /** The categories this generic subject belongs to */
-  categoryIds: ObjectMap<string, boolean>;
+  categoryIds: string[];
   /** Links to other relevant subjects a user might be interested in
    `// todo needs to be syncronised ie if A is related to B then B must be related to A`
   */
-  relatedGenericSubjectIds: ObjectMap<string, boolean>;
+  relatedGenericSubjectIds: string[];
 }
 
 /** Name of a subject category in a specific locale */
@@ -97,7 +97,7 @@ export interface GenericSubjectCategoryData extends Entity {
   /** generic subjects which belong to this generic category
      // todo this should link category to subject and subject to category
   */
-  genericSubjectIds: ObjectMap<string, boolean>;
+  genericSubjectIds: string[];
   id: string;
   /** Representations of the same generic subject catories in different locales */
   localeSubjectCategories: ObjectMap<LocaleCode, LocaleSubjectCategoryData>;
@@ -120,9 +120,9 @@ export interface LocaleSubjectData extends Entity {
   /** Represents a language that a subject is in */
   locale: LocaleCode;
   /** Ids of students needing help with this subject `// todo needs to be syncronised` */
-  studentIds: ObjectMap<string, boolean>;
+  studentIds: string[];
   /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */
-  tutorIds: ObjectMap<string, boolean>;
+  tutorIds: string[];
 }
 
 /** Data about a tutor from the perspective of a student, as it is stored in database */
