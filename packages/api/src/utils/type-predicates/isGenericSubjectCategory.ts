@@ -10,7 +10,7 @@ export default function isGenericSubjectCategoryData(
   const {
     id,
     localeSubjectCategories,
-    genericSubjectIds,
+    linkedGenericSubjectIds: genericSubjectIds,
   } = data as GenericSubjectCategoryData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -19,7 +19,7 @@ export default function isGenericSubjectCategoryData(
   const forTsError: GenericSubjectCategoryData = {
     id,
     localeSubjectCategories,
-    genericSubjectIds,
+    linkedGenericSubjectIds: genericSubjectIds,
   };
 
   const hasId = typeof id === "string" && id;

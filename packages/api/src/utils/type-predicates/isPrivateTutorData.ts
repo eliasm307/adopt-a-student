@@ -10,7 +10,7 @@ export default function isPrivateTutorData(
     email,
     id,
     subjects: relatedSubjects,
-    students,
+    linkedStudents: students,
     userName,
     prefferedLocales,
   } = data as PrivateTutorData;
@@ -22,7 +22,7 @@ export default function isPrivateTutorData(
     email,
     id,
     subjects: relatedSubjects,
-    students,
+    linkedStudents: students,
     userName,
     prefferedLocales,
   };

@@ -28,7 +28,7 @@ const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
     dataPredicate: isPrivateStudentData,
     linkCreater: (id) => id,
     linkReducer: (link) => link,
-    linksPropName: "relatedGenericSubjectIds",
+    linksPropName: "",
     id: genericSubjectId,
   };
 

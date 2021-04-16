@@ -19,6 +19,8 @@ export interface PublicUserData extends Entity {
   prefferedLocales: string;
   /** Username which will be displayed for a user */
   userName: string;
+
+// todo add reviews
 }
 
 /** Private user data only available to the owner user */
@@ -28,13 +30,13 @@ export interface PrivateUserData extends PublicUserData {
   /** Links to subjects a user is interested in learning/teaching (depends on type of user)
    * and user specific information about the user relating to a specific subject
    */
-  subjects: LinkedSubjectData[];
+  linkedLocaleSubjects: LinkedLocaleSubjectData[];
 }
 
 /** Schema of data that represents a student, as it is stored in database */
 export interface PrivateStudentData extends PrivateUserData {
   /** Data about the tutors a student is involved with */
-  tutors: LinkedTutorData[];
+  linkedTutors: LinkedTutorData[];
 }
 
 export interface PublicStudentData extends PublicUserData {}
@@ -42,7 +44,7 @@ export interface PublicStudentData extends PublicUserData {}
 /** Schema of data that represents a tutor, only available to the tutor */
 export interface PrivateTutorData extends PrivateUserData {
   /** Data about the students a teacher is involved with */
-  students: LinkedStudentData[];
+  linkedStudents: LinkedStudentData[];
 }
 
 export interface PublicTutorData extends PublicUserData {
@@ -53,7 +55,7 @@ export interface PublicTutorData extends PublicUserData {
 /** Data about a subject specific to a user, as it is stored in database
  * // ? should this be public?
  */
-export interface LinkedSubjectData {
+export interface LinkedLocaleSubjectData {
   /** Unique id to the related subject */
   readonly id: string;
 
@@ -96,11 +98,11 @@ export interface LocaleSubjectCategoryData {
 
 /** Subject category with all locale names */
 export interface GenericSubjectCategoryData extends Entity {
+  id: string;
   /** generic subjects which belong to this generic category
      // todo this should link category to subject and subject to category
   */
-  genericSubjectIds: string[];
-  id: string;
+  linkedGenericSubjectIds: string[];
   /** Representations of the same generic subject catories in different locales */
   localeSubjectCategories: ObjectMap<LocaleCode, LocaleSubjectCategoryData>;
 }
@@ -144,7 +146,7 @@ export interface LinkedStudentData {
 }
 
 /** Subject data specific to a student user, as it is stored in database */
-export interface StudentSubjectData extends LinkedSubjectData {}
+export interface StudentSubjectData extends LinkedLocaleSubjectData {}
 
 /** Subject data specific to a tutor user */
-export interface TutorSubjectData extends LinkedSubjectData {}
+export interface TutorSubjectData extends LinkedLocaleSubjectData {}

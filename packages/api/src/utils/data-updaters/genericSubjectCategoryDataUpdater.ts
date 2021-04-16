@@ -28,7 +28,7 @@ const genericSubjectCategoryDataUpdater: DataUpdater<GenericSubjectCategoryData>
             LocaleSubjectCategoryData
           >)
         : null,
-    genericSubjectIds: null, // change handled by a different request
+    linkedGenericSubjectIds: null, // change handled by a different request
   };
 
   // apply edit mutations where possible

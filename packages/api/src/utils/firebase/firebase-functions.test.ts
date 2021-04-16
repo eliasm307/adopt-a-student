@@ -42,7 +42,7 @@ describe.only("firebase functions createTutor", () => {
       email: "an-email",
       id: "232",
       subjects: [{ confidenceLevel: 2, detail: "2ded", id: "kkd" }],
-      students: [{ id: "student1" }],
+      linkedStudents: [{ id: "student1" }],
       userName: "eced",
     };
 
