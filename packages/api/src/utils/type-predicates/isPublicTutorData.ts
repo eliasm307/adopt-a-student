@@ -24,6 +24,14 @@ export default function isPublicTutorData(data: any): data is PublicTutorData {
     available,
   };
 
+  /* // todo split type predictes into 2 types "Only" and "Atleast"
+  (how about is for exact matching and extends for atleast?),
+  where Only types only return true if the data only has the properties required to meet the target,
+  ie and exact match and Atleast just says there are atlest the target properties but there could be more.
+  This can be used to make cascading type predictes which mirror the interface/inheritance hierarchy,
+  so if a high level item changes, the children type predicates dont all need to change,
+  just the type predicate for the parent
+  */
   const hasPreferredLocales = Array.isArray(prefferedLocales);
   const hasUserName = typeof userName === "string" && userName;
   const canHaveImage =
