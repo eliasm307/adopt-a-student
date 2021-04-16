@@ -1,8 +1,11 @@
+import {
+  PrivateStudentData, PrivateTutorData, StudentLinkedTutorData, TutorLinkedStudentData,
+} from '@adopt-a-student/common';
+
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiLinkStudentAndTutor } from '../declarations/interfaces';
 import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
-import getDocumentData from '../utils/firebase/getDocumentData';
-import updateDocumentData from '../utils/firebase/updateDocumentData';
+import linkDocuments, { DocumentLinkingProps } from '../utils/firebase/linkDocuments';
 import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
@@ -27,6 +30,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
       "Logged in user is neither the student or the tutor"
     );
 
+  /*
   const studentCrudProps = {
     id: studentId,
     collectionPath: STUDENT_COLLECTION_NAME,
@@ -92,11 +96,37 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
       students: edits.students!,
     }),
   });
+  */
 
-  const [updatedStudent, updatedTutor] = await Promise.all([
-    studentUpdatePromise,
-    tutorUpdatePromise,
-  ]);
+  const document1Props: DocumentLinkingProps<
+    PrivateStudentData,
+    StudentLinkedTutorData
+  > = {
+    collectionPath: STUDENT_COLLECTION_NAME,
+    dataPredicate: isPrivateStudentData,
+    id: studentId,
+    linkCreater: (id) => ({ id }),
+    linkReducer: (link) => link.id,
+    linksPropName: "tutors",
+  };
+
+  const document2Props: DocumentLinkingProps<
+    PrivateTutorData,
+    TutorLinkedStudentData
+  > = {
+    collectionPath: TUTOR_COLLECTION_NAME,
+    dataPredicate: isPrivateTutorData,
+    id: tutorId,
+    linkCreater: (id) => ({ id }),
+    linkReducer: (link) => link.id,
+    linksPropName: "students",
+  };
+
+  const [updatedStudent, updatedTutor] = await linkDocuments({
+    document1Props,
+    document2Props,
+    firestore,
+  });
 
   return { message: "Success linking users" };
 };

@@ -34,7 +34,7 @@ export interface PrivateUserData extends PublicUserData {
 /** Schema of data that represents a student, as it is stored in database */
 export interface PrivateStudentData extends PrivateUserData {
   /** Data about the tutors a student is involved with */
-  tutors: StudentSubTutorData[];
+  tutors: StudentLinkedTutorData[];
 }
 
 export interface PublicStudentData extends PublicUserData {}
@@ -42,7 +42,7 @@ export interface PublicStudentData extends PublicUserData {}
 /** Schema of data that represents a tutor, only available to the tutor */
 export interface PrivateTutorData extends PrivateUserData {
   /** Data about the students a teacher is involved with */
-  students: TutorSubStudentData[];
+  students: TutorLinkedStudentData[];
 }
 
 export interface PublicTutorData extends PublicUserData {
@@ -128,7 +128,7 @@ export interface LocaleSubjectData extends Entity {
 }
 
 /** Data about a tutor from the perspective of a student, as it is stored in database */
-export interface StudentSubTutorData {
+export interface StudentLinkedTutorData {
   /** Id of the tutor related to the student */
   id: string;
 
@@ -136,7 +136,7 @@ export interface StudentSubTutorData {
 }
 
 /** Data about a student from the perspective of a tutor, as it is stored in database */
-export interface TutorSubStudentData {
+export interface TutorLinkedStudentData {
   /** Id of the student related to the tutor */
   id: string;
 

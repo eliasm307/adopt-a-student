@@ -11,7 +11,7 @@ export interface DocumentLinkingProps<D, L> {
   id: string;
   linkCreater: (id: string) => L;
   linkReducer: (link: L) => string;
-  linksProp: keyof D;
+  linksPropName: keyof D;
 }
 
 interface Props<D1, D2, L1, L2> {
@@ -44,18 +44,18 @@ const createLinksReducer = <L>(linkReducer: (link: L) => string) => {
 
 export default async function linkDocuments<D1, D2, L1, L2>(
   props: Props<D1, D2, L1, L2>
-) {
+): Promise<[D1, D2]> {
   const { document1Props, document2Props, firestore } = props;
 
   // Read current data in parallel
-  const [document1, document2] = await Promise.all([
+  const [document1Data, document2Data] = await Promise.all([
     getDocumentData({ ...document1Props, firestore }),
     getDocumentData({ ...document2Props, firestore }),
   ]);
 
   // get pointers to link arrays in documents
-  const document1Links = document1[document1Props.linksProp];
-  const document2Links = document2[document2Props.linksProp];
+  const document1Links = document1Data[document1Props.linksPropName];
+  const document2Links = document2Data[document2Props.linksPropName];
 
   // assert document links are arrays
   if (!Array.isArray(document1Links) || !Array.isArray(document2Links))
@@ -78,12 +78,15 @@ export default async function linkDocuments<D1, D2, L1, L2>(
     document2LinkIdMap[document1Props.id];
 
   // avoid any uneccessary writes if documents already linked
-  if (documentsLinksAlreadyExist) return { message: "Users already linked" };
+  if (documentsLinksAlreadyExist) {
+    console.warn(__filename, "Users already linked, doing nothing");
+    return [document1Data, document2Data];
+  }
 
   // queue promises to return existing documents by default
   const updatePromises: [Promise<D1>, Promise<D2>] = [
-    Promise.resolve(document1),
-    Promise.resolve(document2),
+    Promise.resolve(document1Data),
+    Promise.resolve(document2Data),
   ];
 
   // todo make this less repetitive
@@ -101,8 +104,8 @@ export default async function linkDocuments<D1, D2, L1, L2>(
     const updatePromise = updateDocumentData({
       ...document1Props,
       firestore,
-      edits: document1,
-      dataUpdater: createDocumentPropDataUpdater(document1Props.linksProp),
+      edits: document1Data,
+      dataUpdater: createDocumentPropDataUpdater(document1Props.linksPropName),
     });
 
     // replace queued promise with promise to mutate document with new link
@@ -120,8 +123,8 @@ export default async function linkDocuments<D1, D2, L1, L2>(
     const updatePromise = updateDocumentData({
       ...document2Props,
       firestore,
-      edits: document2,
-      dataUpdater: createDocumentPropDataUpdater(document2Props.linksProp),
+      edits: document2Data,
+      dataUpdater: createDocumentPropDataUpdater(document2Props.linksPropName),
     });
 
     // replace queued promise with promise to mutate document with new link

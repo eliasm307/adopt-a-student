@@ -1,6 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": { "@adopt-a-student/common": ["./common/src/"] }
   },
   "include": ["**/*"],
