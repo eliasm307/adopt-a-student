@@ -1,6 +1,6 @@
 import { LOCALE_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiUpdateLocaleSubjectHandler } from '../declarations/interfaces';
-import studentDataUpdater from '../utils/data-updaters/studentDataUpdater';
+import localeSubjectDataUpdater from '../utils/data-updaters/localeSubjectDataUpdater';
 import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
 import updateDocumentData from '../utils/firebase/updateDocumentData';
 import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
@@ -25,16 +25,16 @@ const updateLocaleSubject: ApiUpdateLocaleSubjectHandler = async (
       "Could not update tutor because provided data is not valid"
     );
 
-  const updatedData = await updateDocumentData({
+  const localeSubject = await updateDocumentData({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     id: body.id,
     edits: body?.data,
     dataPredicate: isLocaleSubjectData,
-    dataUpdater: studentDataUpdater,
+    dataUpdater: localeSubjectDataUpdater,
     firestore,
   });
 
-  return { data: updatedData };
+  return { data: { localeSubject } };
 };
 
 export default updateLocaleSubject;

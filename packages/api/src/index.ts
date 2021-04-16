@@ -16,6 +16,7 @@ import getSubjectCategories from './request-handlers/getSubjectCategoriesHandler
 import getSubject from './request-handlers/getSubjectHandler';
 import getSubjectsByCategory from './request-handlers/getSubjectsByCategoryHandler';
 import getTutorsBySubjects from './request-handlers/getTutorsBySubjectsHandler';
+import updateLocaleSubject from './request-handlers/updateLocaleSubject';
 import updateStudent from './request-handlers/updateStudent';
 import updateTutor from './request-handlers/updateTutor';
 
@@ -46,6 +47,7 @@ const callableFunctionHandlers = {
 
   // subjects
   createGenericSubject,
+  updateGenericSubject,
   createLocaleSubject,
   updateLocaleSubject,
   getSubject,
@@ -54,7 +56,6 @@ const callableFunctionHandlers = {
   // subject categories
   getSubjectCategories,
   createSubjectCatgory,
-  updateGenericSubject,
   updateLocaleSubjectCategory,
 
   // relationships
