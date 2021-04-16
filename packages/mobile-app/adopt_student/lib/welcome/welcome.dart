@@ -116,6 +116,7 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     OutlineButton(
+                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                         onPressed: (){
                           Navigator.push(
                             context,
@@ -123,7 +124,11 @@ class _WelcomeScreen extends State<WelcomeScreen> {
                           );
                         },
                         child: new Text(
-                            'Skip'
+                            'Skip',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
                         ),
                     )
                   ],

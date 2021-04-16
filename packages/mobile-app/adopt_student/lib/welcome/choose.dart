@@ -1,5 +1,6 @@
 import 'package:adopt_student/welcome/tableau_de_bord.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 
 class chose extends StatelessWidget{
@@ -45,7 +46,7 @@ class _choose extends State<choose>{
               new Container(
                 margin: EdgeInsets.only(top: 60),
                 child: new Text(
-                  "Are you Student Or ",
+                  "Are you Student Or Teacher ? ",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontFamily: 'open sans',
@@ -55,32 +56,46 @@ class _choose extends State<choose>{
                 ),
               ),
               new Container(
-                  margin: EdgeInsets.only(right: 250),
-                  child: new OutlineButton(
-                    onPressed: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => dashtabs()),
-                      );
-                    },
-                    child: new Text('STUDENT'),
-                  )
+                margin: EdgeInsets.only(top: 50),
+                child: new OutlineButton(
+                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => dashtabs()),
+                    );
+                  },
+                  child: new Text(
+                      'STUDENT',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                  ),
+                ),
               ),
               new Container(
-                  margin: EdgeInsets.only(left: 250),
-                  child: new OutlineButton(
-                    onPressed: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => dashtabs()),
-                      );
-                    },
-                    child: new Text('TEACHER'),
-                  )
+                margin: EdgeInsets.only(top: 20),
+                child: new OutlineButton(
+                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                  onPressed: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => dashtabs()),
+                    );
+                  },
+                  child: new Text(
+                      'TEACHER',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
               )
             ],
           ),
-        )
+        ),
     );
   }
 }

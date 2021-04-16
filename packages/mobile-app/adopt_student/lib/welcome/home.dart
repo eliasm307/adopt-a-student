@@ -47,13 +47,21 @@ class _Home extends State<Home>{
                   new Container(
                     margin: EdgeInsets.only(top: 60),
                     child: new OutlineButton(
+                       color: Color(0xFFA0D450),
+                      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                         onPressed: (){
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => welcome()),
                           );
                         },
-                      child: new Text('GET STARTED'),
+                      child: new Text(
+                          'GET STARTED',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                      ),
                     )
                   )
                 ],
