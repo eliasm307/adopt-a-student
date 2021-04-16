@@ -4,11 +4,14 @@ import { TUTORS_COLLECTION_NAME } from '../constants';
 import { ApiUpdateTutorDataHandler } from '../declarations/interfaces';
 import createPath from '../utils/createPath';
 import { firestore, functionsHttps } from '../utils/firebase-admin';
+import tutorDataUpdater from '../utils/tutorDataUpdater';
 import isPartialPrivateTutorData from '../utils/type-predicates/isPartialPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
 const updateTutor: ApiUpdateTutorDataHandler = async (data, context) => {
   const auth = verifyRequest(data, context);
+
+  const dataUpdater = tutorDataUpdater;
 
   // ! this doesnt do anything, you dont need to know the shape of partial data
   // verify received data
@@ -28,14 +31,17 @@ const updateTutor: ApiUpdateTutorDataHandler = async (data, context) => {
   if (!docSnapshot.exists)
     throw new functionsHttps.HttpsError(
       "not-found",
-      "Could not edit tutor because a tutor profile doesnt exist for this user, create one first"
+      "Could not edit document because it doesnt exist, create one first"
     );
 
-  const updatedData = updateTutorData();
+  const updatedData = dataUpdater({
+    edits: data,
+    existingData: docSnapshot.data() as PrivateTutorData, // todo does this need type predicate?
+  });
 
   // edit tutor
   try {
-    await docSnapshot.ref.update(data);
+    await docSnapshot.ref.update(updatedData);
     const newSnapshot = await docSnapshot.ref.get();
 
     return {
@@ -45,8 +51,8 @@ const updateTutor: ApiUpdateTutorDataHandler = async (data, context) => {
   } catch (error) {
     throw new functionsHttps.HttpsError(
       "internal",
-      "There was an issue creating the tutor",
-      JSON.stringify(data)
+      "There was an issue editting the document",
+      JSON.stringify({ error })
     );
   }
 };
