@@ -12,6 +12,8 @@ export const CALLABLE_FUNCTION_NAMES = [
   "updateLocaleSubject",
   "createGenericSubject",
   "updateGenericSubject",
+
+  // subject categories
   "createSubjectCatgory",
   "updateLocaleSubjectCategory",
 
@@ -28,6 +30,19 @@ export const CALLABLE_FUNCTION_NAMES = [
   "getPrivateStudentData",
   "getPublicStudentData",
   "getStudentsBySubjects",
+
+  // relationships
+  "linkStudentAndLocaleSubject",
+  "unlinkStudentAndLocaleSubject",
+
+  "linkTutorAndLocaleSubject",
+  "unlinkTutorAndLocaleSubject",
+
+  "linkGenericSubjectAndSubjectCategory",
+  "unlinkGenericSubjectAndSubjectCategory",
+
+  "linkStudentAndTutor",
+  "unlinkStudentAndTutor",
 ] as const;
 
 export const GENERIC_SUBJECT_COLLECTION_NAME = "generic-subjects";

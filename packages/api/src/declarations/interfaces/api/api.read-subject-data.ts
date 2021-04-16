@@ -1,6 +1,4 @@
-import {
-  GenericSubjectData, LocaleCode, LocaleSubjectCategoryData, LocaleSubjectData,
-} from '@adopt-a-student/common';
+import { GenericSubjectData, LocaleSubjectData } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionHandler } from '../../types';
 
@@ -15,12 +13,4 @@ export type ApiGetSubjectHandler = FirebaseCallableFunctionHandler<
       genericSubject: GenericSubjectData;
     };
   }
->;
-
-/** Get all subject categories by locale */
-export type ApiGetSubjectCategoriesHandler = FirebaseCallableFunctionHandler<
-  {
-    locale: LocaleCode;
-  },
-  { data: { localeSubjectCategories: LocaleSubjectCategoryData[] } } // todo all returns should be named inside data object
 >;

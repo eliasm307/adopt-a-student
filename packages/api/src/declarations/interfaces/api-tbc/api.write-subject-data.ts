@@ -1,15 +1,10 @@
-import {
-  GenericSubjectCategoryData, GenericSubjectData, LocaleSubjectCategoryData, LocaleSubjectData,
-} from '@adopt-a-student/common';
+import { GenericSubjectData, LocaleSubjectData } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionHandler } from '../../types';
 
-/** Post update for locale subject */
-export type ApiUpdateLocaleSubjectHandler = FirebaseCallableFunctionHandler<
+export type ApiCreateLocaleSubjectHandler = FirebaseCallableFunctionHandler<
   {
-    /** Locale subject id to modify */
-    id: string;
-    data?: Partial<Omit<LocaleSubjectData, "id">>;
+    data?: Omit<LocaleSubjectData, "id">;
   },
   {
     data: {
@@ -18,9 +13,11 @@ export type ApiUpdateLocaleSubjectHandler = FirebaseCallableFunctionHandler<
   }
 >;
 
-export type ApiCreateLocaleSubjectHandler = FirebaseCallableFunctionHandler<
+export type ApiUpdateLocaleSubjectHandler = FirebaseCallableFunctionHandler<
   {
-    data?: Omit<LocaleSubjectData, "id">;
+    /** Locale subject id to modify */
+    id: string;
+    data?: Partial<Omit<LocaleSubjectData, "id">>;
   },
   {
     data: {
@@ -52,36 +49,6 @@ export type ApiCreateGenericSubjectHandler = FirebaseCallableFunctionHandler<
   {
     data: {
       genericSubject: GenericSubjectData;
-    };
-  }
->;
-
-export type ApiCreateSubjectCatgoryHandler = FirebaseCallableFunctionHandler<
-  {
-    // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
-    // todo needs to verify a user has access to this data
-    // ? should this make sure an en localeCategory is defined to make sure there is a default fallback for other languages when not defined
-    data?: Partial<Omit<GenericSubjectCategoryData, "id">>;
-  },
-  {
-    data: {
-      genericSubjectCategory: GenericSubjectCategoryData;
-    };
-  }
->;
-
-export type ApiUpdateLocaleSubjectCategoryHandler = FirebaseCallableFunctionHandler<
-  {
-    // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
-    // todo needs to verify a user has access to this data
-    // ? should this make sure an en localeCategory is defined to make sure there is a default fallback for other languages when not defined
-    /** Generic subject id */
-    id: string;
-    data?: Partial<Omit<LocaleSubjectCategoryData, "id">>;
-  },
-  {
-    data: {
-      localeSubjectCategory: LocaleSubjectCategoryData;
     };
   }
 >;

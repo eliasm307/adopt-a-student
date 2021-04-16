@@ -27,25 +27,43 @@ Example from https://firebase.google.com/docs/functions/callable#web
 
 const callableFunctionHandlers = {
   // writeTest: firestoreWriteHandler,
-  getSubjectsByCategory,
+
+  // tutors
   createTutor,
   updateTutor,
-  getStudentsBySubjects,
-  getTutorsBySubjects,
-  getSubject,
-  getSubjectCategories,
-  getPublicStudentData,
+  getPrivateTutorData,
   getPublicTutorData,
+  getTutorsBySubjects,
+
+  // students
   createStudent,
   updateStudent,
   getPrivateStudentData,
-  getPrivateTutorData,
+  getPublicStudentData,
+  getStudentsBySubjects,
+
+  // subjects
   createGenericSubject,
   createLocaleSubject,
+  getSubject,
+  getSubjectsByCategory,
+
+  // subject categories
+  getSubjectCategories,
+  updateLocaleSubject,
   createSubjectCatgory,
   updateGenericSubject,
-  updateLocaleSubject,
   updateLocaleSubjectCategory,
+
+  // relationships
+  linkGenericSubjectAndSubjectCategory,
+  linkStudentAndLocaleSubject,
+  linkStudentAndTutor,
+  linkTutorAndLocaleSubject,
+  unlinkGenericSubjectAndSubjectCategory,
+  unlinkStudentAndLocaleSubject,
+  unlinkStudentAndTutor,
+  unlinkTutorAndLocaleSubject,
 } as {
   [key in CallableFunctionName]: FirebaseCallableFunctionHandler;
 };
