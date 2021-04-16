@@ -1,4 +1,4 @@
-import 'package:adopt_student/Widgets/tableau_de_bord.dart';
+import 'package:adopt_student/welcome/tableau_de_bord.dart';
 import 'package:flutter/material.dart';
 
 

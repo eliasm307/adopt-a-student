@@ -1,4 +1,4 @@
-import 'package:adopt_student/Widgets/welcome.dart';
+import 'package:adopt_student/welcome/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 

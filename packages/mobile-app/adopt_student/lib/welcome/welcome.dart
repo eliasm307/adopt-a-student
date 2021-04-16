@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:adopt_student/Widgets/items.dart';
+import 'package:adopt_student/welcome/items.dart';
 import 'package:flutter/rendering.dart';
-import 'package:adopt_student/Widgets/choose.dart';
+import 'package:adopt_student/welcome/choose.dart';
 
 class welcome extends StatelessWidget{
   @override
