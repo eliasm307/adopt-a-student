@@ -1,3 +1,6 @@
 {
-  "recommendations": ["mike-co.import-sorter"]
+  "recommendations": [
+    "mike-co.import-sorter",
+    "coenraads.bracket-pair-colorizer-2"
+  ]
 }

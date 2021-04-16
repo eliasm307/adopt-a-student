@@ -1,8 +1,7 @@
-import * as functions from 'firebase-functions';
+import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-functions';
 
-import {
-  CallableFunctionName, CallableMethod, FirebaseCallableFunctionHandler,
-} from './declarations/types';
+import { ObjectMap } from '../common/src';
+import { CallableFunctionName, FirebaseCallableFunctionHandler } from './declarations/types';
 import createGenericSubject from './request-handlers/createGenericSubject';
 import createLocaleSubject from './request-handlers/createLocaleSubject';
 import createStudent from './request-handlers/createStudent';
@@ -69,9 +68,7 @@ const callableFunctionHandlers = {
   unlinkStudentAndLocaleSubject,
   unlinkStudentAndTutor,
   unlinkTutorAndLocaleSubject,
-} as {
-  [key in CallableFunctionName]: FirebaseCallableFunctionHandler;
-};
+} as ObjectMap<CallableFunctionName, FirebaseCallableFunctionHandler>;
 
 /*
 callableFunctionHandlers.test = (data, context) => {
@@ -84,14 +81,11 @@ callableFunctionHandlers.test = (data, context) => {
 // export defined handlers with given callable function names
 module.exports = Object.entries(callableFunctionHandlers).reduce(
   (exports, [callableName, callableHandler]) => {
-    exports[callableName as CallableFunctionName] = functions.https.onCall(
-      callableHandler
-    );
+    if (callableHandler)
+      exports[callableName] = functionsHttps.onCall(callableHandler);
     return exports;
   },
-  {} as {
-    [key in CallableFunctionName]: CallableMethod;
-  }
+  {} as ObjectMap<string, HttpsFunction & Runnable<any>>
 );
 
 // export default callableFunctions;
