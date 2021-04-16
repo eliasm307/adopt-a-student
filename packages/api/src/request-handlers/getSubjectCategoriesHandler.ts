@@ -2,7 +2,7 @@ import { LocaleSubjectCategoryData } from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
 import { ApiGetSubjectCategoriesHandler } from '../declarations/interfaces';
-import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import getCollectionData from '../utils/firebase/getCollectionData';
 import isGenericSubjectCategoryData from '../utils/type-predicates/isGenericSubjectCategory';
 import verifyRequest from '../utils/verifyRequest';
@@ -23,7 +23,7 @@ const getSubjectCategoriesHandler: ApiGetSubjectCategoriesHandler = async (
   const locale = data.locale;
 
   const genericSubjectCategories = await getCollectionData({
-    firestore,
+    firestore: firestoreAdmin,
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     dataPredicate: isGenericSubjectCategoryData,
   });

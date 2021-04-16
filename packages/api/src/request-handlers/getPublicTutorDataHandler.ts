@@ -2,7 +2,7 @@ import { TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiGetPublicTutorDataHandler } from '../declarations/interfaces';
 import createPath from '../utils/createPath';
 import extractPublicTutorData from '../utils/extractPublicTutorData';
-import { firestore } from '../utils/firebase/firebase-admin';
+import { firestoreAdmin } from '../utils/firebase/firebase-admin';
 import readPublicUserData from '../utils/readPublicUserData';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
@@ -14,7 +14,7 @@ const getPublicTutorData: ApiGetPublicTutorDataHandler = async (_, context) => {
 
   const data = await readPublicUserData({
     dataPredicate: isPrivateTutorData,
-    firestore,
+    firestore: firestoreAdmin,
     path,
     publicDataExtractor: extractPublicTutorData,
   });

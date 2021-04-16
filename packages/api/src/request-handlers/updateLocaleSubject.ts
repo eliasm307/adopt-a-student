@@ -1,7 +1,7 @@
 import { LOCALE_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiUpdateLocaleSubjectHandler } from '../declarations/interfaces';
 import localeSubjectDataUpdater from '../utils/data-updaters/localeSubjectDataUpdater';
-import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import updateDocumentData from '../utils/firebase/updateDocumentData';
 import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
 import verifyRequest from '../utils/verifyRequest';
@@ -31,7 +31,7 @@ const updateLocaleSubject: ApiUpdateLocaleSubjectHandler = async (
     edits: body?.data,
     dataPredicate: isLocaleSubjectData,
     dataUpdater: localeSubjectDataUpdater,
-    firestore,
+    firestore: firestoreAdmin,
   });
 
   return { data: { localeSubject } };

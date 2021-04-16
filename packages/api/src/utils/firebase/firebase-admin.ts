@@ -43,7 +43,7 @@ const projectConfig = {
 // const firestoreAdmin = admin.firestore();
 const firestoreApp = app.firestore();
 
-const firestore = firestoreApp;
+const firestoreAdmin = firestoreApp;
 
 // you should pass projectConfig and path to serviceAccountKey like this
 // path.resolve defaults to directory where you're executing test command
@@ -61,4 +61,4 @@ const testEnv = functionsTest(
 
 const functionsHttps = functions.https;
 
-export { firestore, functionsHttps };
+export { firestoreAdmin, functionsHttps };

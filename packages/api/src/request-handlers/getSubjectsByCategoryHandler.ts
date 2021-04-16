@@ -1,5 +1,5 @@
 import { ApiGetSubjectsByCategory } from '../declarations/interfaces';
-import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
 import getLocaleSubjectFromGenericSubject from '../utils/getLocaleSubjectFromGenericSubject';
 import verifyRequest from '../utils/verifyRequest';
@@ -18,14 +18,14 @@ const handler: ApiGetSubjectsByCategory = async (data, context) => {
   const locale = data.locale;
 
   const genericSubjectsByCategory = await getGenericSubjectsByCategory({
-    firestore,
+    firestore: firestoreAdmin,
     subjectCategoryId,
   });
 
   const localeSubjectPromises = genericSubjectsByCategory.map(
     (genericSubject) =>
       getLocaleSubjectFromGenericSubject({
-        firestore,
+        firestore: firestoreAdmin,
         genericSubject,
         locale,
       })

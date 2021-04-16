@@ -1,7 +1,7 @@
 import { STUDENT_COLLECTION_NAME } from '../constants';
 import { ApiUpdateStudentDataHandler } from '../declarations/interfaces';
 import studentDataUpdater from '../utils/data-updaters/studentDataUpdater';
-import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import updateDocumentData from '../utils/firebase/updateDocumentData';
 import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
 import verifyRequest from '../utils/verifyRequest';
@@ -27,7 +27,7 @@ const updateStudent: ApiUpdateStudentDataHandler = async (body, context) => {
     edits: body?.data,
     dataPredicate: isPrivateStudentData,
     dataUpdater: studentDataUpdater,
-    firestore,
+    firestore: firestoreAdmin,
   });
 
   return { data: updatedData };

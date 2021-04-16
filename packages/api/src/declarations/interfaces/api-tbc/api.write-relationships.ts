@@ -58,3 +58,19 @@ export type ApiUnlinkStudentAndTutor = FirebaseCallableFunctionHandler<{
   studentId: string;
   tutorId: string;
 }>;
+
+export type ApiLinkGenericSubjects = FirebaseCallableFunctionHandler<{
+  // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
+  // todo needs to verify a user has access to this data
+  // todo should add subject to user and user to subject
+  genericSubject1Id: string;
+  genericSubject2Id: string;
+}>;
+
+export type ApiUnlinkGenericSubjects = FirebaseCallableFunctionHandler<{
+  // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
+  // todo needs to verify a user has access to this data
+  // todo should remove subject to user and user to subject
+  genericSubject1Id: string;
+  genericSubject2Id: string;
+}>;

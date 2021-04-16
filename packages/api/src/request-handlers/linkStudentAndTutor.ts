@@ -4,7 +4,7 @@ import {
 
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiLinkStudentAndTutor } from '../declarations/interfaces';
-import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import linkDocuments, { DocumentLinkingProps } from '../utils/firebase/linkDocuments';
 import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
@@ -125,7 +125,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
   const [updatedStudent, updatedTutor] = await linkDocuments({
     document1Props,
     document2Props,
-    firestore,
+    firestore: firestoreAdmin,
   });
 
   return { message: "Success linking users" };

@@ -2,7 +2,7 @@ import { PublicStudentData } from '@adopt-a-student/common';
 
 import { ApiGetStudentsBySubjectsHandler } from '../declarations/interfaces';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
-import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import getUsersBySubjects from '../utils/getUsersBySubjects';
 import verifyRequest from '../utils/verifyRequest';
 
@@ -20,7 +20,7 @@ const handler: ApiGetStudentsBySubjectsHandler = async (data, context) => {
     localeSubjectIds: data.localeSubjectIds,
     publicDataExtractor: (data) => extractPublicStudentData(data),
     userType: "Student",
-    firestore,
+    firestore: firestoreAdmin,
   });
 };
 

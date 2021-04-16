@@ -1,7 +1,7 @@
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
 import { ApiCreateSubjectCategoryHandler } from '../declarations/interfaces';
 import createDocument from '../utils/firebase/createDocument';
-import { firestore, functionsHttps } from '../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import newGuid from '../utils/newGuid';
 import isGenericSubjectCategoryData from '../utils/type-predicates/isGenericSubjectCategory';
 import verifyRequest from '../utils/verifyRequest';
@@ -26,7 +26,7 @@ const createSubjectCategory: ApiCreateSubjectCategoryHandler = async (
     id,
     data,
     dataPredicate: isGenericSubjectCategoryData,
-    firestore,
+    firestore: firestoreAdmin,
   });
 
   return {

@@ -49,8 +49,8 @@ export default async function linkDocuments<D1, D2, L1, L2>(
 
   // Read current data in parallel
   const [document1Data, document2Data] = await Promise.all([
-    getDocumentData({ ...document1Props, firestore }),
-    getDocumentData({ ...document2Props, firestore }),
+    getDocumentData({ ...document1Props, firestoreAdmin: firestore }),
+    getDocumentData({ ...document2Props, firestoreAdmin: firestore }),
   ]);
 
   // get pointers to link arrays in documents

@@ -1,7 +1,7 @@
 import { TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiGetPrivateStudentDataHandler } from '../declarations/interfaces';
 import createPath from '../utils/createPath';
-import { firestore } from '../utils/firebase/firebase-admin';
+import { firestoreAdmin } from '../utils/firebase/firebase-admin';
 import readPrivateUserData from '../utils/readPrivateUserData';
 import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
 import verifyRequest from '../utils/verifyRequest';
@@ -16,7 +16,7 @@ const getPublicStudentData: ApiGetPrivateStudentDataHandler = async (
 
   const data = await readPrivateUserData({
     dataPredicate: isPrivateStudentData,
-    firestore,
+    firestore: firestoreAdmin,
     path,
   });
 
