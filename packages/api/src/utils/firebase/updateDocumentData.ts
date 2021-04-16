@@ -7,7 +7,7 @@ interface Props<D> {
   collectionPath: string;
   dataPredicate: (data: any) => data is D;
   dataUpdater: DataUpdater<D>;
-  edits: any;
+  edits: Partial<D>;
   firestore: FirestoreAdmin;
   id: string;
 }

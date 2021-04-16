@@ -2,11 +2,12 @@ import { HttpsFunction, Runnable } from 'firebase-functions';
 import { CallableContext } from 'firebase-functions/lib/providers/https';
 
 import { CALLABLE_FUNCTION_NAMES } from '../constants';
+import { BasicResponseData } from './interfaces';
 
 export type FirebaseCallableFunctionHandler<D = any, R = any> = (
   body: Partial<D> | undefined,
   context: CallableContext
-) => R | Promise<R>;
+) => (R & BasicResponseData) | Promise<R & BasicResponseData>;
 
 /** Defines the callable function names available */
 export type CallableFunctionName = typeof CALLABLE_FUNCTION_NAMES[number];
@@ -24,4 +25,7 @@ export type DataMutatorMap<T> = {
   [key in keyof T]: null | ((newValue: any) => void);
 };
 
-export type DataUpdater<T> = (props: { edits: any; existingData: T }) => T;
+export type DataUpdater<T> = (props: {
+  edits: Partial<T>;
+  existingData: T;
+}) => T;
