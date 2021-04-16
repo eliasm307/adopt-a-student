@@ -31,9 +31,11 @@
   },
   "dependencies": {
     "@adopt-a-student/common": "file:./common",
+    "@types/uuid": "^8.3.0",
     "firebase": "^8.4.1",
     "firebase-admin": "^9.6.0",
-    "firebase-functions": "^3.13.2"
+    "firebase-functions": "^3.13.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
