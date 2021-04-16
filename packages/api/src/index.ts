@@ -14,6 +14,7 @@ import getSubjectCategories from './request-handlers/getSubjectCategoriesHandler
 import getSubject from './request-handlers/getSubjectHandler';
 import getSubjectsByCategory from './request-handlers/getSubjectsByCategoryHandler';
 import getTutorsBySubjects from './request-handlers/getTutorsBySubjectsHandler';
+import updateStudent from './request-handlers/updateStudent';
 import updateTutor from './request-handlers/updateTutor';
 
 // Start writing Firebase Functions
@@ -23,9 +24,6 @@ import updateTutor from './request-handlers/updateTutor';
 Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
-
-createStudent;
-createG;
 
 const callableFunctionHandlers = {
   // writeTest: firestoreWriteHandler,

@@ -21,7 +21,7 @@ export type UserTypeName = "Student" | "Tutor";
  * or null for no mutation
  */
 export type DataMutatorMap<T> = {
-  [key in keyof T]: null | ((value: any) => void);
+  [key in keyof T]: null | ((newValue: any) => void);
 };
 
 export type DataUpdater<T> = (props: { edits: any; existingData: T }) => T;
