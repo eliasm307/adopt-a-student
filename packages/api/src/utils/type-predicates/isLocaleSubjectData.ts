@@ -10,7 +10,7 @@ export default function isLocaleSubjectData(
     country,
     tutorIds,
     description,
-    genericSubjectId,
+    parentId: genericSubjectId,
     locale,
     studentIds,
   } = data as LocaleSubjectData;
@@ -23,7 +23,7 @@ export default function isLocaleSubjectData(
     country,
     tutorIds,
     description,
-    genericSubjectId,
+    parentId: genericSubjectId,
     locale,
     studentIds,
   };

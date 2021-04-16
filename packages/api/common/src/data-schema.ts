@@ -88,10 +88,10 @@ export interface SubjectLocaleName {
 
 /** Subject category data in a specific locale */
 export interface LocaleSubjectCategoryData {
-  /** id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject */
-  id: string;
   locale: LocaleCode;
   name: string;
+  /** id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject */
+  parentId: string;
 }
 
 /** Subject category with all locale names */
@@ -117,10 +117,10 @@ export interface LocaleSubjectData extends Entity {
   country: Country;
   /** Description of the subject */
   description: string;
-  /** Id of generic subject this locale subject relates to, there should only be 1 */
-  genericSubjectId: string;
   /** Represents a language that a subject is in */
   locale: LocaleCode;
+  /** Id of generic subject this locale subject relates to, there should only be 1 */
+  parentId: string;
   /** Ids of students needing help with this subject `// todo needs to be syncronised` */
   studentIds: string[];
   /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */

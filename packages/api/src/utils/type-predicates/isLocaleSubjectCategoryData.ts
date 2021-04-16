@@ -5,13 +5,13 @@ export default function isLocaleSubjectCategoryData(
 ): data is LocaleSubjectCategoryData {
   if (typeof data !== "object") return false;
 
-  const { id, locale, name } = data as LocaleSubjectCategoryData;
+  const { parentId: id, locale, name } = data as LocaleSubjectCategoryData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
   // ts will throw an error to update the predicate as this object will be invalid
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const forTsError: LocaleSubjectCategoryData = {
-    id,
+    parentId: id,
     locale,
     name,
   };

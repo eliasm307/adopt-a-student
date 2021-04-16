@@ -32,13 +32,11 @@ export default async function getUsersBySubjects<PublicDataType>({
    */
   const groupedLocaleSubjectIds = groupArrayItems(localeSubjectIds, 10);
 
-  const filteredUsersPromises = groupedLocaleSubjectIds.map(
-    (subjectIdGroup) => {
-      return firestore
-        .collection(userCollectionName)
-        .where(userSubjectsField, "array-contains-any", subjectIdGroup)
-        .get();
-    }
+  const filteredUsersPromises = groupedLocaleSubjectIds.map((subjectIdGroup) =>
+    firestore
+      .collection(userCollectionName)
+      .where(userSubjectsField, "array-contains-any", subjectIdGroup)
+      .get()
   );
 
   try {

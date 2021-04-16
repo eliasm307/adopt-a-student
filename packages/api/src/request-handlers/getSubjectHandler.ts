@@ -28,7 +28,7 @@ const getSubjectHandler: ApiGetSubjectHandler = async (data, context) => {
   const genericSubject = await getDocumentData({
     firestore,
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
-    id: localeSubject.genericSubjectId,
+    id: localeSubject.parentId,
     dataPredicate: isGenericSubjectData,
   });
 
