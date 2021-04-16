@@ -4,29 +4,35 @@ import { DataUpdater } from "../../declarations/types";
 import getDocumentData from "./getDocumentData";
 import updateDocumentData from "./updateDocumentData";
 
+/** Required props from each document for linking */
+export interface DocumentLinkingProps<D, L> {
+  collectionPath: string;
+  dataPredicate: (data: any) => data is D;
+  id: string;
+  linkCreater: (id: string) => L;
+  linkReducer: (link: L) => string;
+  linksProp: keyof D;
+}
+
 interface Props<D1, D2, L1, L2> {
-  document1CollectionPath: string;
-  document1DataPredicate: (data: any) => data is D1;
-  document1Id: string;
-  document1LinkCreater: (id: string) => L1;
-  document1LinkReducer: (link: L1) => string;
-  document1LinksProp: keyof D1;
-  document2CollectionPath: string;
-  document2DataPredicate: (data: any) => data is D2;
-  document2Id: string;
-  document2LinkCreater: (id: string) => L2;
-  document2LinkReducer: (link: L2) => string;
-  document2LinksProp: keyof D2;
+  document1Props: DocumentLinkingProps<D1, L1>;
+  document2Props: DocumentLinkingProps<D2, L2>;
   firestore: FirestoreAdmin;
 }
 
-const newDocumentLinkDataUpdater = <D>(linksProp: keyof D): DataUpdater<D> => {
+/** Util to create a document updater for the links property
+ * when mutating a document */
+const createDocumentPropDataUpdater = <D>(
+  linksProp: keyof D
+): DataUpdater<D> => {
   return ({ edits, existingData }) => ({
     ...existingData,
     [linksProp]: edits[linksProp]!, // overwrite existing links
   });
 };
-const newDocumentLinksReducer = <L>(linkReducer: (link: L) => string) => {
+
+/** Util to reduce an array of links to an object map */
+const createLinksReducer = <L>(linkReducer: (link: L) => string) => {
   return (
     acc: ObjectMap<string, boolean>,
     link: L
@@ -39,53 +45,19 @@ const newDocumentLinksReducer = <L>(linkReducer: (link: L) => string) => {
 export default async function linkDocuments<D1, D2, L1, L2>(
   props: Props<D1, D2, L1, L2>
 ) {
-  const {
-    document1CollectionPath,
-    document1DataPredicate,
-    document1Id,
-    document1LinksProp,
-    document2CollectionPath,
-    document2DataPredicate,
-    document2Id,
-    document1LinkReducer,
-    document2LinkReducer,
-    document2LinksProp,
-    document1LinkCreater,
-    document2LinkCreater,
-    firestore,
-  } = props;
-
-  const document1CrudProps = {
-    id: document1Id,
-    collectionPath: document1CollectionPath,
-    dataPredicate: document1DataPredicate,
-    firestore,
-  };
-  const document2CrudProps = {
-    id: document2Id,
-    collectionPath: document2CollectionPath,
-    dataPredicate: document2DataPredicate,
-    firestore,
-  };
+  const { document1Props, document2Props, firestore } = props;
 
   // Read current data in parallel
-  const document1ReadPromise = getDocumentData({
-    ...document1CrudProps,
-  });
-
-  const document2ReadPromise = getDocumentData({
-    ...document2CrudProps,
-  });
-
   const [document1, document2] = await Promise.all([
-    document1ReadPromise,
-    document2ReadPromise,
+    getDocumentData({ ...document1Props, firestore }),
+    getDocumentData({ ...document2Props, firestore }),
   ]);
 
   // get pointers to link arrays in documents
-  const document1Links = document1[document1LinksProp];
-  const document2Links = document2[document2LinksProp];
+  const document1Links = document1[document1Props.linksProp];
+  const document2Links = document2[document2Props.linksProp];
 
+  // assert document links are arrays
   if (!Array.isArray(document1Links) || !Array.isArray(document2Links))
     throw Error(
       "Could not link documents, one of the links prop values is not an array"
@@ -93,19 +65,20 @@ export default async function linkDocuments<D1, D2, L1, L2>(
 
   // reduce link array to object map
   const document1LinkIdMap = (document1Links as L1[]).reduce(
-    newDocumentLinksReducer(document1LinkReducer),
-    {} as ObjectMap<string, boolean>
+    createLinksReducer(document1Props.linkReducer),
+    {}
   );
   const document2LinkIdMap = (document2Links as L2[]).reduce(
-    newDocumentLinksReducer(document2LinkReducer),
-    {} as ObjectMap<string, boolean>
+    createLinksReducer(document2Props.linkReducer),
+    {}
   );
 
-  const documentsAlreadyLinked =
-    document1LinkIdMap[document2Id] && document2LinkIdMap[document1Id];
+  const documentsLinksAlreadyExist =
+    document1LinkIdMap[document2Props.id] &&
+    document2LinkIdMap[document1Props.id];
 
   // avoid any uneccessary writes if documents already linked
-  if (documentsAlreadyLinked) return { message: "Users already linked" };
+  if (documentsLinksAlreadyExist) return { message: "Users already linked" };
 
   // queue promises to return existing documents by default
   const updatePromises: [Promise<D1>, Promise<D2>] = [
@@ -113,60 +86,47 @@ export default async function linkDocuments<D1, D2, L1, L2>(
     Promise.resolve(document2),
   ];
 
-  // todo make this less
+  // todo make this less repetitive
+
+  // mutate arrays directly, // todo test this works
+
+  const document1IsLinkedToDocument2 = document1LinkIdMap[document2Props.id];
+
   // only add links if they didnt exist already
-  // mutate arrays directly, test this works
-  if (!document1LinkIdMap[document2Id]) {
+  if (!document1IsLinkedToDocument2) {
     // add link
-    document1Links.push(document1LinkCreater(document2Id));
+    document1Links.push(document1Props.linkCreater(document2Props.id));
 
     // create document update promise
     const updatePromise = updateDocumentData({
-      ...document1CrudProps,
+      ...document1Props,
+      firestore,
       edits: document1,
-      dataUpdater: newDocumentLinkDataUpdater(document1LinksProp),
+      dataUpdater: createDocumentPropDataUpdater(document1Props.linksProp),
     });
 
-    // queue promise to mutate document
+    // replace queued promise with promise to mutate document with new link
     updatePromises[0] = updatePromise;
   }
 
-  if (!document2LinkIdMap[document1Id]) {
+  const document2IsLinkedToDocument1 = document2LinkIdMap[document1Props.id];
+
+  // only add links if they didnt exist already
+  if (!document2IsLinkedToDocument1) {
     // add link
-    document2Links.push(document2LinkCreater(document1Id));
+    document2Links.push(document2Props.linkCreater(document1Props.id));
 
     // create document update promise
     const updatePromise = updateDocumentData({
-      ...document2CrudProps,
+      ...document2Props,
+      firestore,
       edits: document2,
-      dataUpdater: newDocumentLinkDataUpdater(document2LinksProp),
+      dataUpdater: createDocumentPropDataUpdater(document2Props.linksProp),
     });
 
-    // queue promise to mutate document
+    // replace queued promise with promise to mutate document with new link
     updatePromises[1] = updatePromise;
   }
-
-  // write changes back to firestore
-  /*
-  const document1UpdatePromise = updateDocumentData({
-    ...document1CrudProps,
-    edits: document1,
-    dataUpdater: ({ edits, existingData }) => ({
-      ...existingData,
-      document2s: edits.document2s!,
-    }),
-  });
-
-  const document2UpdatePromise = updateDocumentData({
-    ...document2CrudProps,
-    edits: document2,
-    dataUpdater: ({ edits, existingData }) => ({
-      ...existingData,
-      document1s: edits.document1s!,
-    }),
-  });
-
-  */
 
   return Promise.all(updatePromises);
 }
