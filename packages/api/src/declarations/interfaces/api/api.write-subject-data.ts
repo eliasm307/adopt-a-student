@@ -26,6 +26,8 @@ export type ApiUpdateLocaleSubjectHandler = FirebaseCallableFunctionHandler<
   }
 >;
 
+/*
+ // No data to edit directly on Generic Subject
 export type ApiUpdateGenericSubjectHandler = FirebaseCallableFunctionHandler<
   {
     id: string;
@@ -39,6 +41,7 @@ export type ApiUpdateGenericSubjectHandler = FirebaseCallableFunctionHandler<
     };
   }
 >;
+*/
 
 export type ApiCreateGenericSubjectHandler = FirebaseCallableFunctionHandler<
   {

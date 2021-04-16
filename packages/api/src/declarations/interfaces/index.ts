@@ -38,7 +38,7 @@ export * from "./api/api.quey-users";
 export * from "./api/api.read-subject-data";
 export * from "./api/api.read-user-data";
 export * from "./api-tbc/api.write-relationships";
-export * from "./api-tbc/api.write-subject-data";
+export * from "./api/api.write-subject-data";
 export * from "./api/api.write-user-data";
 export * from "./api/api.write-subject-category-data";
 export * from "./api/api.read-subject-category-data";
