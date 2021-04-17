@@ -3,11 +3,11 @@ import { GenericSubjectData } from '@adopt-a-student/common';
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiLinkGenericSubjects } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
+import unlinkDocuments, { RemoveDocumentLinkProps } from '../utils/links/unlinkDocuments';
 import isGenericSubjectData from '../utils/type-predicates/isGenericSubjectData';
 import verifyRequest from '../utils/verifyRequest';
 
-const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
+const unlinkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
   const { uid } = verifyRequest(body, context);
 
   // verify received data
@@ -20,8 +20,8 @@ const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
   const { genericSubject1Id, genericSubject2Id } = body;
 
   const commonDocumentProps: Omit<
-    AddDocumentLinkProps<GenericSubjectData, string>,
-    "id" | "linkToAdd"
+    RemoveDocumentLinkProps<GenericSubjectData, string>,
+    "id" | "filterPredicate"
   > = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
@@ -29,25 +29,26 @@ const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
     linksPropName: "linkedGenericSubjectIds",
   };
 
-  const document1Props: AddDocumentLinkProps<GenericSubjectData, string> = {
+  const document1Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
-    linkToAdd: genericSubject2Id,
+    filterPredicate: (link) => link !== genericSubject2Id,
+
     id: genericSubject1Id,
   };
 
-  const document2Props: AddDocumentLinkProps<GenericSubjectData, string> = {
+  const document2Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
-    linkToAdd: genericSubject1Id,
+    filterPredicate: (link) => link !== genericSubject1Id,
     id: genericSubject2Id,
   };
 
-  const [updatedDocument1, updatedDocument2] = await linkDocuments({
+  const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
     document1Props,
     document2Props,
     firestore: firestoreAdmin,
   });
 
-  return { message: "Success linking documents" };
+  return { message: "Success" };
 };
 
-export default linkGenericSubjects;
+export default unlinkGenericSubjects;

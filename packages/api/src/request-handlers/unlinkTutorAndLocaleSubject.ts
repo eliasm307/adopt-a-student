@@ -50,7 +50,7 @@ const linkStudentAndLocaleSubject: ApiUnlinkTutorAndLocaleSubject = async (
     firestore: firestoreAdmin,
   });
 
-  return { message: "Success linking documents" };
+  return { message: "Success" };
 };
 
 export default linkStudentAndLocaleSubject;
