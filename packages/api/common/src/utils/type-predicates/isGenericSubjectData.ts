@@ -1,8 +1,6 @@
 import { GenericSubjectData } from '@adopt-a-student/common';
 
-export default function isGenericSubjectData(
-  data: any
-): data is GenericSubjectData {
+export function isGenericSubjectData(data: any): data is GenericSubjectData {
   if (typeof data !== "object") return false;
 
   const {

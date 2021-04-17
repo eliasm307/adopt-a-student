@@ -2,8 +2,6 @@ import { GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME } from 
 import { ApiGetSubjectHandler } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import getDocumentData from '../utils/firebase/getDocumentData';
-import isGenericSubjectData from '../utils/type-predicates/isGenericSubjectData';
-import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
 import verifyRequest from '../utils/verifyRequest';
 
 const getSubjectHandler: ApiGetSubjectHandler = async (data, context) => {

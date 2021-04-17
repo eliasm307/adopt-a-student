@@ -1,4 +1,5 @@
-import { LinkedLocaleSubjectData } from '../../../../common/src';
+import { LinkedLocaleSubjectData } from '@adopt-a-student/common';
+
 import { FirebaseCallableFunctionHandler } from '../../types';
 
 export type ApiLinkStudentAndLocaleSubject = FirebaseCallableFunctionHandler<{

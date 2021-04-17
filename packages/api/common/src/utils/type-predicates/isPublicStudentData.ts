@@ -1,8 +1,6 @@
 import { PublicStudentData } from '@adopt-a-student/common';
 
-export default function isPublicStudentData(
-  data: any
-): data is PublicStudentData {
+export function isPublicStudentData(data: any): data is PublicStudentData {
   if (typeof data !== "object") return false;
 
   const {

@@ -4,8 +4,6 @@ import { GENERIC_SUBJECT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME } fro
 import { ApiLinkGenericSubjectAndSubjectCategory } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
-import isGenericSubjectCategoryData from '../utils/type-predicates/isGenericSubjectCategory';
-import isGenericSubjectData from '../utils/type-predicates/isGenericSubjectData';
 import verifyRequest from '../utils/verifyRequest';
 
 const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCategory = async (

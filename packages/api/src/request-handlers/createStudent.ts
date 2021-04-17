@@ -2,7 +2,6 @@ import { STUDENT_COLLECTION_NAME } from '../constants';
 import { ApiCreateStudentHandler } from '../declarations/interfaces';
 import createDocument from '../utils/firebase/createDocument';
 import { firestoreAdmin } from '../utils/firebase/firebase-admin';
-import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
 import verifyRequest from '../utils/verifyRequest';
 
 const createStudent: ApiCreateStudentHandler = async (body, context) => {

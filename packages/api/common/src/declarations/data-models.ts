@@ -1,6 +1,8 @@
 import { ConfidenceLevelEnum } from './enums';
 import { Country, LocaleCode, ObjectMap } from './types';
 
+// ? wrap these in a Model namespace?
+
 export interface Entity {
   // dataIsComplete: boolean;
 }

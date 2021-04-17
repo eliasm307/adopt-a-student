@@ -3,7 +3,6 @@ import { ApiGetPrivateStudentDataHandler } from '../declarations/interfaces';
 import createPath from '../utils/createPath';
 import { firestoreAdmin } from '../utils/firebase/firebase-admin';
 import readPrivateUserData from '../utils/readPrivateUserData';
-import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
 import verifyRequest from '../utils/verifyRequest';
 
 const getPublicStudentData: ApiGetPrivateStudentDataHandler = async (

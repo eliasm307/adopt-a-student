@@ -1,13 +1,11 @@
-import { LocaleSubjectData, PrivateTutorData } from '@adopt-a-student/common';
+import {
+  LinkedLocaleSubjectData, LocaleSubjectData, PrivateTutorData,
+} from '@adopt-a-student/common';
 
-import { LinkedLocaleSubjectData } from '../../common/src';
 import { LOCALE_SUBJECT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiLinkTutorAndLocaleSubject } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
-import isLinkedLocaleSubjectData from '../utils/type-predicates/isLinkedLocaleSubjectData';
-import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
-import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
 const linkStudentAndLocaleSubject: ApiLinkTutorAndLocaleSubject = async (

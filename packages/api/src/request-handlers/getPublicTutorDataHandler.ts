@@ -4,7 +4,6 @@ import createPath from '../utils/createPath';
 import extractPublicTutorData from '../utils/extractPublicTutorData';
 import { firestoreAdmin } from '../utils/firebase/firebase-admin';
 import readPublicUserData from '../utils/readPublicUserData';
-import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
 const getPublicTutorData: ApiGetPublicTutorDataHandler = async (_, context) => {

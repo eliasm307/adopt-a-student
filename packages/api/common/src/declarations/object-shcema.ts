@@ -1,7 +1,11 @@
 import {
-  LinkedLocaleSubjectData, PrivateStudentData, PrivateTutorData, PrivateUserData,
-  StudentSubjectData, TutorSubjectData,
-} from './data-schema';
+  LinkedLocaleSubjectData,
+  PrivateStudentData,
+  PrivateTutorData,
+  PrivateUserData,
+  StudentSubjectData,
+  TutorSubjectData,
+} from "./data-models";
 
 /** A user object instance that allows reading and editing data to/from the database */
 export interface PrivateUser<

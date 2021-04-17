@@ -1,6 +1,6 @@
 import { PublicTutorData } from '@adopt-a-student/common';
 
-export default function isPublicTutorData(data: any): data is PublicTutorData {
+export function isPublicTutorData(data: any): data is PublicTutorData {
   if (typeof data !== "object") return false;
 
   const {

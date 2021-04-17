@@ -1,9 +1,8 @@
-import { GenericSubjectData } from '@adopt-a-student/common';
+import { GenericSubjectData, isGenericSubjectData } from '@adopt-a-student/common';
 
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../constants';
 import { FirestoreAdmin } from '../declarations/interfaces';
 import { functionsHttps } from './firebase/firebase-admin';
-import isGenericSubjectData from './type-predicates/isGenericSubjectData';
 
 interface Props {
   firestore: FirestoreAdmin;

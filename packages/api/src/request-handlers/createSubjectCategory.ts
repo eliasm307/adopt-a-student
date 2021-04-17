@@ -3,7 +3,6 @@ import { ApiCreateSubjectCategoryHandler } from '../declarations/interfaces';
 import createDocument from '../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import newGuid from '../utils/newGuid';
-import isGenericSubjectCategoryData from '../utils/type-predicates/isGenericSubjectCategory';
 import verifyRequest from '../utils/verifyRequest';
 
 const createSubjectCategory: ApiCreateSubjectCategoryHandler = async (

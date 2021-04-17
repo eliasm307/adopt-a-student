@@ -1,9 +1,10 @@
-import { GenericSubjectData, LocaleCode, LocaleSubjectData } from '@adopt-a-student/common';
+import {
+  GenericSubjectData, isLocaleSubjectData, LocaleCode, LocaleSubjectData,
+} from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME } from '../constants';
 import { FirestoreAdmin } from '../declarations/interfaces';
 import { functionsHttps } from './firebase/firebase-admin';
-import isLocaleSubjectData from './type-predicates/isLocaleSubjectData';
 
 interface Props {
   firestore: FirestoreAdmin;

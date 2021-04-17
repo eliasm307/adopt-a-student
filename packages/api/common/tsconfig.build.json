@@ -1,8 +1,7 @@
 {
+  "extends": "../../../tsconfig.build.json",
   "compilerOptions": {
     "typeRoots": ["./node_modules/@types"],
-    "module": "commonjs",
-    "target": "es2015",
     "sourceMap": true,
     "outDir": "lib",
     "noEmitOnError": true,

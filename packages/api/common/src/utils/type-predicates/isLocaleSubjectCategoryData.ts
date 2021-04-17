@@ -1,6 +1,6 @@
 import { LocaleSubjectCategoryData } from '@adopt-a-student/common';
 
-export default function isLocaleSubjectCategoryData(
+export function isLocaleSubjectCategoryData(
   data: any
 ): data is LocaleSubjectCategoryData {
   if (typeof data !== "object") return false;

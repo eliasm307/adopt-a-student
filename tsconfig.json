@@ -7,6 +7,7 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "noUnusedLocals": false,
     "allowSyntheticDefaultImports": true,
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
@@ -20,8 +21,7 @@
     "noImplicitReturns": true,
     "sourceMap": true,
     "noEmit": true,
-    "target": "es2017",
-    "types": ["@types/jest"],
+    "types": ["@types/jest", "@types/node"],
     "esModuleInterop": true
   }
 }

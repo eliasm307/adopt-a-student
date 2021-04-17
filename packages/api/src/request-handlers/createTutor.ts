@@ -2,7 +2,6 @@ import { TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiCreateTutorHandler } from '../declarations/interfaces';
 import createDocument from '../utils/firebase/createDocument';
 import { firestoreAdmin } from '../utils/firebase/firebase-admin';
-import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
 const handler: ApiCreateTutorHandler = async (body, context) => {

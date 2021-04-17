@@ -1,6 +1,7 @@
 import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-functions';
 
-import { ObjectMap } from '../common/src';
+import { ObjectMap } from '@adopt-a-student/common';
+
 import { CallableFunctionName, FirebaseCallableFunctionHandler } from './declarations/types';
 import createGenericSubject from './request-handlers/createGenericSubject';
 import createLocaleSubject from './request-handlers/createLocaleSubject';

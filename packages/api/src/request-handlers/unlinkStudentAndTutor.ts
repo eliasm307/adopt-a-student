@@ -1,13 +1,11 @@
 import {
-  LinkedStudentData, LinkedTutorData, PrivateStudentData, PrivateTutorData,
+  isPrivateStudentData, LinkedStudentData, LinkedTutorData, PrivateStudentData, PrivateTutorData,
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiUnlinkStudentAndTutor } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import unlinkDocuments, { RemoveDocumentLinkProps } from '../utils/links/unlinkDocuments';
-import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
-import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
 const unlinkStudentAndTutor: ApiUnlinkStudentAndTutor = async (

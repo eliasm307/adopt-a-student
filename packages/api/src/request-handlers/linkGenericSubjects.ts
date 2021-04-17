@@ -4,7 +4,6 @@ import { GENERIC_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiLinkGenericSubjects } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
-import isGenericSubjectData from '../utils/type-predicates/isGenericSubjectData';
 import verifyRequest from '../utils/verifyRequest';
 
 const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {

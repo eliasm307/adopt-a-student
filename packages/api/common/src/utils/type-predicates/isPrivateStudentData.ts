@@ -1,8 +1,6 @@
 import { PrivateStudentData } from '@adopt-a-student/common';
 
-export default function isPrivateStudentData(
-  data: any
-): data is PrivateStudentData {
+export function isPrivateStudentData(data: any): data is PrivateStudentData {
   if (typeof data !== "object") return false;
 
   // check mandatory fields

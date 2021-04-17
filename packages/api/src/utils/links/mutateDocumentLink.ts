@@ -1,4 +1,5 @@
-import { ObjectMap } from '../../../common/src';
+import { ObjectMap } from '@adopt-a-student/common';
+
 import { FirestoreAdmin } from '../../declarations/interfaces';
 import getDocumentData from '../firebase/getDocumentData';
 import { hasLinkMutator } from './interfaces';

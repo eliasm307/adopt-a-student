@@ -1,8 +1,8 @@
 import { GenericSubjectCategoryData } from '@adopt-a-student/common';
 
-import isLocaleSubjectCategoryData from './isLocaleSubjectCategoryData';
+import { isLocaleSubjectCategoryData } from './isLocaleSubjectCategoryData';
 
-export default function isGenericSubjectCategoryData(
+export function isGenericSubjectCategoryData(
   data: any
 ): data is GenericSubjectCategoryData {
   if (typeof data !== "object") return false;

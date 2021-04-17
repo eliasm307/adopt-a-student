@@ -1,6 +1,6 @@
 import { LinkedLocaleSubjectData } from '@adopt-a-student/common';
 
-export default function isLinkedLocaleSubjectData(
+export function isLinkedLocaleSubjectData(
   data: any
 ): data is LinkedLocaleSubjectData {
   if (typeof data !== "object") return false;

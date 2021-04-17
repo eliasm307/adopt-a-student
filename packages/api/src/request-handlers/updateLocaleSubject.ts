@@ -3,7 +3,6 @@ import { ApiUpdateLocaleSubjectHandler } from '../declarations/interfaces';
 import localeSubjectDataUpdater from '../utils/data-updaters/localeSubjectDataUpdater';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import updateDocumentData from '../utils/firebase/updateDocumentData';
-import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
 import verifyRequest from '../utils/verifyRequest';
 
 const updateLocaleSubject: ApiUpdateLocaleSubjectHandler = async (

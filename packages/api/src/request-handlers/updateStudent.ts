@@ -1,9 +1,10 @@
+import { isPrivateStudentData } from '@adopt-a-student/common';
+
 import { STUDENT_COLLECTION_NAME } from '../constants';
 import { ApiUpdateStudentDataHandler } from '../declarations/interfaces';
 import studentDataUpdater from '../utils/data-updaters/studentDataUpdater';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import updateDocumentData from '../utils/firebase/updateDocumentData';
-import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
 import verifyRequest from '../utils/verifyRequest';
 
 const updateStudent: ApiUpdateStudentDataHandler = async (body, context) => {

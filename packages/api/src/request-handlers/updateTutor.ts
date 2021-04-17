@@ -1,9 +1,10 @@
+import { isPrivateTutorData } from '@adopt-a-student/common';
+
 import { TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiUpdateTutorDataHandler } from '../declarations/interfaces';
 import tutorDataUpdater from '../utils/data-updaters/tutorDataUpdater';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import updateDocumentData from '../utils/firebase/updateDocumentData';
-import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
 const updateTutor: ApiUpdateTutorDataHandler = async (body, context) => {

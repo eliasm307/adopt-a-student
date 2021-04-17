@@ -1,6 +1,6 @@
-import { PublicStudentData } from '../../common/src';
+import { isPublicTutorData, PublicStudentData } from '@adopt-a-student/common';
+
 import { functionsHttps } from './firebase/firebase-admin';
-import isPublicTutorData from './type-predicates/isPublicStudentData';
 
 export default function extractPublicStudentData(data: any): PublicStudentData {
   if (typeof data !== "object")
