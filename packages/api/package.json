@@ -17,10 +17,15 @@
     "test": "jest --colors --logHeapUsage",
     "check-types": "npx tsc",
     "pretest": "yarn",
-    "build": "tsc --build tsconfig.build.json",
-    "build:common": "yarn --cwd ./common build",
+
     "prebuild": "yarn build:common && rm -rf lib && yarn && yarn check-types",
+    "build": "tsc --build tsconfig.build.json",
+    "postbuild": "yarn tsoa:build",
+
+    "build:common": "yarn --cwd ./common build",
+
     "build:hot-reload": "tsc --build tsconfig.build.json --watch",
+
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
@@ -30,13 +35,17 @@
     "predeploy": "yarn build",
     "logs": "firebase functions:log",
     "start-emulators": "set FIRESTORE_EMULATOR_HOST=localhost:8080&& set NODE_ENV=development&& firebase emulators:start",
+
     "docs": "yarn docs:generate && yarn docs:zip && yarn docs:start",
     "predocs": "yarn docs:delete",
     "docs:delete": "rm -rf ./docs && rm -rf ./docs.zip",
     "docs:generate": "npx typedoc --disableSources --name \"Adopt a student\" --out docs src",
     "docs:zip": "cd docs/ && bestzip ../adopt-a-student-docs.zip * && cd ../",
     "docs:start": "start \"\" \"docs/index.html\"",
-    "tsoa:routes": "yarn tsoa routes"
+
+    "tsoa:build": "yarn tsoa spec-and-routes",
+    "tsoa:start": "node lib/src/tsoa-docs/server.js",
+    "tsoa:buildstart": "yarn build && yarn tsoa:start"
   },
   "engines": {
     "node": "12"

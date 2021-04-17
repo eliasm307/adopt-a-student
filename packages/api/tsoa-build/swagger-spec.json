@@ -1,0 +1,137 @@
+{
+	"components": {
+		"examples": {},
+		"headers": {},
+		"parameters": {},
+		"requestBodies": {},
+		"responses": {},
+		"schemas": {
+			"PublicStudentData": {
+				"properties": {
+					"id": {
+						"type": "string",
+						"description": "Unique id for a user"
+					},
+					"imageUrl": {
+						"type": "string",
+						"description": "Link to profile image, if defined"
+					},
+					"introduction": {
+						"type": "string",
+						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedLocales": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array",
+						"description": "The locales a user prefers for content"
+					},
+					"userName": {
+						"type": "string",
+						"description": "Username which will be displayed for a user"
+					}
+				},
+				"required": [
+					"id",
+					"prefferedLocales",
+					"userName"
+				],
+				"type": "object",
+				"additionalProperties": false
+			}
+		},
+		"securitySchemes": {}
+	},
+	"info": {
+		"title": "@adopt-a-student/api",
+		"version": "0.0.0",
+		"description": "API for adopt-a-student",
+		"license": {
+			"name": "MIT"
+		},
+		"contact": {
+			"name": "Elias Mangoro"
+		}
+	},
+	"openapi": "3.0.0",
+	"paths": {
+		"/users/{userId}": {
+			"get": {
+				"operationId": "GetUser",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/PublicStudentData"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "userId",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					},
+					{
+						"in": "query",
+						"name": "name",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					}
+				]
+			}
+		},
+		"/users": {
+			"post": {
+				"operationId": "CreateUser",
+				"responses": {
+					"201": {
+						"description": "Created"
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"properties": {
+									"prop2": {
+										"type": "number",
+										"format": "double"
+									},
+									"prop1": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"prop2",
+									"prop1"
+								],
+								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"servers": [
+		{
+			"url": "/"
+		}
+	]
+}

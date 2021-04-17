@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "typeRoots": [ "./node_modules/@types" ],
+    "typeRoots": ["./node_modules/@types"],
     "module": "CommonJS",
     "moduleResolution": "Node",
     "target": "es2017",
@@ -8,7 +8,8 @@
     "noEmitOnError": true,
     "esModuleInterop": true,
     "declaration": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "incremental": true
   },
   "exclude": [
     "**/node_modules/**",

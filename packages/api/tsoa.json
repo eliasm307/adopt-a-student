@@ -15,8 +15,9 @@
   "compilerOptions": {
     "_1": "/* Basic Options */",
     "incremental": true,
-    "_target": "es6",
-    "_module": "commonjs",
+    "_target": "es2017",
+    "target": "es6",
+    "module": "commonjs",
     "outDir": "tsoa-build",
 
     "_2": "/* Strict Type-Checking Options */",
