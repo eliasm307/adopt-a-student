@@ -1,7 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Body, Controller, Get, Path, Post, Query, Route, SuccessResponse } from 'tsoa';
 
-import { PublicStudentData } from '../../common/src';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { PublicStudentData } from '@adopt-a-student/common';
 
 const data: PublicStudentData = {
   id: "student",

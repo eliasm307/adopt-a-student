@@ -1,5 +1,6 @@
 import bodyParser from 'body-parser';
-import express from 'express';
+import express, { Request as ExRequest, Response as ExResponse } from 'express';
+import swaggerUi from 'swagger-ui-express';
 
 import { RegisterRoutes } from '../../tsoa-build/routes';
 
@@ -14,3 +15,10 @@ app.use(
 app.use(bodyParser.json());
 
 RegisterRoutes(app);
+
+app.use("/", swaggerUi.serve, async (_req: ExRequest, res: ExResponse) => {
+  // console.log(__filename, { _req, res });
+  return res.send(
+    swaggerUi.generateHTML(await import("../../tsoa-build/swagger-spec.json"))
+  );
+});
