@@ -39,7 +39,7 @@
     "docs:start": "start \"\" \"docs/index.html\"",
     "tsoa:build": "yarn tsoa spec-and-routes",
     "tsoa:start": "start http://localhost:3000/ && node lib/src/tsoa-docs/server.js",
-    "tsoa:buildstart": "yarn build && yarn tsoa:start"
+    "tsoa:buildstart": "yarn build && start http://localhost:3000/ && node lib/src/tsoa-docs/server.js"
   },
   "engines": {
     "node": "12"

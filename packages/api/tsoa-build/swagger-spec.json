@@ -38,7 +38,7 @@
 					"userName"
 				],
 				"type": "object",
-				"additionalProperties": false
+				"additionalProperties": true
 			}
 		},
 		"securitySchemes": {}
@@ -56,12 +56,12 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/users/{userId}": {
-			"get": {
-				"operationId": "GetUser",
+		"/users": {
+			"post": {
+				"operationId": "CreateUser",
 				"responses": {
-					"200": {
-						"description": "Ok",
+					"201": {
+						"description": "Created",
 						"content": {
 							"application/json": {
 								"schema": {
@@ -74,35 +74,14 @@
 				"security": [],
 				"parameters": [
 					{
-						"in": "path",
-						"name": "userId",
+						"in": "header",
+						"name": "context",
 						"required": true,
-						"schema": {
-							"format": "double",
-							"type": "number"
-						}
-					},
-					{
-						"in": "query",
-						"name": "name",
-						"required": false,
 						"schema": {
 							"type": "string"
 						}
 					}
-				]
-			}
-		},
-		"/users": {
-			"post": {
-				"operationId": "CreateUser",
-				"responses": {
-					"201": {
-						"description": "Created"
-					}
-				},
-				"security": [],
-				"parameters": [],
+				],
 				"requestBody": {
 					"required": true,
 					"content": {

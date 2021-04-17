@@ -1,7 +1,7 @@
 {
   "_entryFile": "src/app.ts",
-  "noImplicitAdditionalProperties": "throw-on-extras",
-  "controllerPathGlobs": ["src/controllers/*.ts"],
+  "noImplicitAdditionalProperties": "ignore",
+  "controllerPathGlobs": [ "src/controllers/*.ts" ],
   "spec": {
     "specFileBaseName": "swagger-spec",
     "outputDirectory": "tsoa-build",
@@ -40,7 +40,7 @@
     "_moduleResolution": "node",
     "_baseUrl": ".",
     "paths": {
-      "@adopt-a-student/common": ["./common/src/"]
+      "@adopt-a-student/common": [ "./common/src/" ]
     },
     "_esModuleInterop": true,
 
