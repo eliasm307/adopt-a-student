@@ -1,5 +1,6 @@
 import {
-  LinkedLocaleSubjectData, LocaleSubjectData, PrivateStudentData,
+  isLocaleSubjectData, isPrivateStudentData, LinkedLocaleSubjectData, LocaleSubjectData,
+  PrivateStudentData,
 } from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../constants';

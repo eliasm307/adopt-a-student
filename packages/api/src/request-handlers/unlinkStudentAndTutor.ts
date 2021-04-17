@@ -1,5 +1,6 @@
 import {
-  isPrivateStudentData, LinkedStudentData, LinkedTutorData, PrivateStudentData, PrivateTutorData,
+  isPrivateStudentData, isPrivateTutorData, LinkedStudentData, LinkedTutorData, PrivateStudentData,
+  PrivateTutorData,
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';

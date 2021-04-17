@@ -18,12 +18,15 @@
     "check-types": "npx tsc",
     "pretest": "yarn",
     "build": "tsc --build tsconfig.build.json",
+    "build:common": "yarn --cwd ./common build",
     "prebuild": "yarn build:common && rm -rf lib && yarn && yarn check-types",
     "build:hot-reload": "tsc --build tsconfig.build.json --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "firebase deploy --only functions",
+    "preinstall": "yarn install:common",
+    "install:common": "yarn --cwd ./common",
     "predeploy": "yarn build",
     "logs": "firebase functions:log",
     "start-emulators": "set FIRESTORE_EMULATOR_HOST=localhost:8080&& set NODE_ENV=development&& firebase emulators:start",
@@ -38,7 +41,7 @@
     "node": "12"
   },
   "dependencies": {
-    "@adopt-a-student/common": "file:./common",
+    "@adopt-a-student/common": "file:common",
     "@types/uuid": "^8.3.0",
     "firebase": "^8.4.1",
     "firebase-admin": "^9.6.0",
@@ -61,7 +64,7 @@
     "jest": "^26.6.3",
     "ts-jest": "^26.5.4",
     "typedoc": "^0.20.35",
-    "typescript": "^3.8.0",
+    "typescript": "^4.2.4",
     "url-exist-sync": "^1.0.2"
   },
   "private": true

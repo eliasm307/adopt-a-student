@@ -1,3 +1,5 @@
+import { isPrivateTutorData } from '@adopt-a-student/common';
+
 import { TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiCreateTutorHandler } from '../declarations/interfaces';
 import createDocument from '../utils/firebase/createDocument';

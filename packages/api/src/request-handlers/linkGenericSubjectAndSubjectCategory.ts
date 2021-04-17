@@ -1,4 +1,7 @@
-import { GenericSubjectCategoryData, GenericSubjectData } from '@adopt-a-student/common';
+import {
+  GenericSubjectCategoryData, GenericSubjectData, isGenericSubjectCategoryData,
+  isGenericSubjectData,
+} from '@adopt-a-student/common';
 
 import { GENERIC_SUBJECT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
 import { ApiLinkGenericSubjectAndSubjectCategory } from '../declarations/interfaces';

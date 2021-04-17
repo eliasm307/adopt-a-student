@@ -1,3 +1,5 @@
+import { isPrivateStudentData } from '@adopt-a-student/common';
+
 import { TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiGetPublicStudentDataHandler } from '../declarations/interfaces';
 import createPath from '../utils/createPath';

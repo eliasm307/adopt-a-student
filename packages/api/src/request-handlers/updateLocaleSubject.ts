@@ -1,3 +1,5 @@
+import { isLocaleSubjectData } from '@adopt-a-student/common';
+
 import { LOCALE_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiUpdateLocaleSubjectHandler } from '../declarations/interfaces';
 import localeSubjectDataUpdater from '../utils/data-updaters/localeSubjectDataUpdater';

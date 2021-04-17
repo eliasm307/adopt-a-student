@@ -1,3 +1,5 @@
+import { isGenericSubjectData, isLocaleSubjectData } from '@adopt-a-student/common';
+
 import { GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiGetSubjectHandler } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';

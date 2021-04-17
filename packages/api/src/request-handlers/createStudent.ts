@@ -1,3 +1,5 @@
+import { isPrivateStudentData } from '@adopt-a-student/common';
+
 import { STUDENT_COLLECTION_NAME } from '../constants';
 import { ApiCreateStudentHandler } from '../declarations/interfaces';
 import createDocument from '../utils/firebase/createDocument';

@@ -1,4 +1,4 @@
-import { LocaleSubjectCategoryData } from '@adopt-a-student/common';
+import { isGenericSubjectCategoryData, LocaleSubjectCategoryData } from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
 import { ApiGetSubjectCategoriesHandler } from '../declarations/interfaces';

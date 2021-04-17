@@ -1,3 +1,5 @@
+import { isGenericSubjectData } from '@adopt-a-student/common';
+
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiCreateGenericSubjectHandler } from '../declarations/interfaces';
 import createDocument from '../utils/firebase/createDocument';
