@@ -1,0 +1,53 @@
+{
+  "_entryFile": "src/app.ts",
+  "noImplicitAdditionalProperties": "throw-on-extras",
+  "controllerPathGlobs": ["src/controllers/*.ts"],
+  "spec": {
+    "specFileBaseName": "swagger-spec",
+    "outputDirectory": "tsoa-build",
+    "specVersion": 3
+  },
+  "routes": {
+    "routesDir": "tsoa-build",
+    "noWriteIfUnchanged": true,
+    "useSuccessResponseCode": false
+  },
+  "compilerOptions": {
+    "_1": "/* Basic Options */",
+    "incremental": true,
+    "_target": "es6",
+    "_module": "commonjs",
+    "outDir": "tsoa-build",
+
+    "_2": "/* Strict Type-Checking Options */",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    "_3": "/* Additional Checks */",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "_4": "/* Module Resolution Options */",
+    "_moduleResolution": "node",
+    "_baseUrl": ".",
+    "paths": {
+      "@adopt-a-student/common": ["./common/src/"]
+    },
+    "_esModuleInterop": true,
+
+    "_5": "/* Experimental Options */",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "_6": "/* Advanced Options */",
+    "forceConsistentCasingInFileNames": true
+  }
+}
