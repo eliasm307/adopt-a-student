@@ -1,10 +1,7 @@
-import * as firebase from 'firebase-admin';
 import { Body, Controller, Header, Post, Route, SuccessResponse } from 'tsoa';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { PublicStudentData } from '@adopt-a-student/common';
-
-const fb = firebase;
 
 const data: PublicStudentData = {
   id: "student",

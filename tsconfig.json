@@ -1,8 +1,8 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "typeRoots": [ "./node_modules/@types" ],
-    "lib": [ "dom", "dom.iterable", "esnext" ],
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
@@ -20,7 +20,7 @@
     "noImplicitReturns": true,
     "sourceMap": true,
     "noEmit": true,
-    "types": [ "@types/jest", "@types/node" ],
+    "types": ["@types/jest", "@types/node"],
     "esModuleInterop": true
   }
 }

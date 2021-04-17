@@ -10,7 +10,8 @@
     "**/*jest*",
     "**/*jest*/**",
     "**/@adopt-a-student/**",
-    "**/@adopt-a-student*"
+    "**/@adopt-a-student*",
+    "**/firebase/*", "**/*arnfirebase/*"
   ],
   "scripts": {
     "lint": "eslint --ext .js,.ts .",

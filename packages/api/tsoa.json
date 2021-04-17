@@ -19,6 +19,8 @@
     "target": "es6",
     "module": "commonjs",
     "outDir": "tsoa-build",
+    "typeRoots": [ "./node_modules/@types" ],
+    "types": [ "@types/jest", "@types/node" ],
 
     "_2": "/* Strict Type-Checking Options */",
     "strict": true,

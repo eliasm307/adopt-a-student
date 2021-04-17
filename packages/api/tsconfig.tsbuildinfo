@@ -1867,13 +1867,13 @@
         "affectsGlobalScope": false
       },
       "./src/controllers/studentcontroller.ts": {
-        "version": "95cd16f6fb8d179a98515d464b4d4990b88d2f32b37bfe34a7bbbfc13c6dd4ce",
-        "signature": "b0fbef18f8204dbd22c5c5515dcff4f03d7acd96c6762567a0f84d98a2e4e8f0",
+        "version": "c7d61a0a47c6e872fb02de8444a810bb50ddeb77919ff2e36155a9bbec8449f4",
+        "signature": "2b3138bc4bf9d763346d1d7a39fb2fbd1a74d89e9cd174c86de632af30980352",
         "affectsGlobalScope": false
       },
       "./src/declarations/declarations.d.ts": {
-        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "version": "a0b7dc43bd5978b7dabc8796938c62eb9bd275701e72f89213fa89bc176284ea",
+        "signature": "a0b7dc43bd5978b7dabc8796938c62eb9bd275701e72f89213fa89bc176284ea",
         "affectsGlobalScope": false
       },
       "./src/request-handlers/firestorewrite.ts": {
@@ -1892,13 +1892,13 @@
         "affectsGlobalScope": false
       },
       "./tsoa-build/routes.ts": {
-        "version": "91efc8080ea0a642bb7d835829bcd872ff53cb9a12f92cbfd2bfc0f4fb2b969f",
+        "version": "976d6ea39f2685da4b9615c056bfcf30cf8c355d906bc397271c66aab3b9dcda",
         "signature": "f827e36cd211d156a506672269d4e396d374939b1fac93a8b3bef4a25cc18dc1",
         "affectsGlobalScope": false
       },
       "./tsoa-build/swagger-spec.json": {
-        "version": "673215c9c5b371aaa8b57196ede47cf828c129c76a888784ad4fd64ad6ee6920",
-        "signature": "fbcbee0acbe50c6f4f1924e44574951f2090f33c60bf1eda1ca316252af8e8df",
+        "version": "bd77d77412803a8a8b143d3a784c4b1fa37b2208205545572fa81d7554cf0e5f",
+        "signature": "6aa64e6ab27243448e572bcc456421e211b6e551992833d052a98f8e8ab10c0b",
         "affectsGlobalScope": true
       },
       "./src/tsoa-docs/app.ts": {
@@ -33214,6 +33214,7 @@
         "../../node_modules/@types/node/worker_threads.d.ts",
         "../../node_modules/@types/node/zlib.d.ts",
         "../../node_modules/firebase-admin/lib/index.d.ts",
+        "../../node_modules/firebase-functions/lib/providers/https.d.ts",
         "../../node_modules/tsoa/dist/index.d.ts",
         "./common/src/index.ts",
         "./node_modules/@types/node/assert.d.ts",
@@ -68837,6 +68838,7 @@
         "../../node_modules/firebase/index.d.ts"
       ],
       "./src/controllers/studentcontroller.ts": [
+        "../../node_modules/firebase-functions/lib/providers/https.d.ts",
         "../../node_modules/tsoa/dist/index.d.ts",
         "./common/src/index.ts"
       ],
