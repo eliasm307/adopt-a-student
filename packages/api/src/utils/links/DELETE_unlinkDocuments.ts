@@ -1,8 +1,8 @@
-import { ObjectMap } from "../../../common/src";
-import { FirestoreAdmin } from "../../declarations/interfaces";
-import { DataUpdater } from "../../declarations/types";
-import getDocumentData from "./getDocumentData";
-import updateDocumentData from "./updateDocumentData";
+import { ObjectMap } from '../../../common/src';
+import { FirestoreAdmin } from '../../declarations/interfaces';
+import { DataUpdater } from '../../declarations/types';
+import getDocumentData from '../firebase/getDocumentData';
+import updateDocumentData from '../firebase/updateDocumentData';
 
 /** Required props from each document for linking */
 export interface DocumentUnlinkingProps<D, L> {
@@ -42,7 +42,7 @@ const createLinksReducer = <L>(linkReducer: (link: L) => string) => {
   };
 };
 
-export default async function unlinkDocuments<D1, D2, L1, L2>(
+export default async function DELETE_unlinkDocuments<D1, D2, L1, L2>(
   props: Props<D1, D2, L1, L2>
 ): Promise<[D1, D2]> {
   const { document1Props, document2Props, firestore } = props;

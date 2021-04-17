@@ -1,11 +1,7 @@
-import { ObjectMap } from "../../../common/src";
-import { FirestoreAdmin } from "../../declarations/interfaces";
-import createAddDocumentLinkMutator from "../createAddDocumentLinkMutatorFactory";
-import getDocumentData from "./getDocumentData";
-
-interface hasLinkMutator<D, L> {
-  createLinkMutator: (props: CreateLinkMutatorProps<D, L>) => Promise<D>;
-}
+import { ObjectMap } from '../../../common/src';
+import { FirestoreAdmin } from '../../declarations/interfaces';
+import getDocumentData from '../firebase/getDocumentData';
+import { hasLinkMutator } from './interfaces';
 
 /** Required props from each document for linking */
 export interface DocumentLinkMutationProps<D, L> {
@@ -17,14 +13,14 @@ export interface DocumentLinkMutationProps<D, L> {
   linksPropName: keyof D;
 }
 
-export interface CreateLinkMutatorProps<D, L> {
+export interface LinkMutatorProps<D, L> {
   currentData: D;
   currentLinks: L[];
   documentProps: DocumentLinkMutationProps<D, L>;
   firestore: FirestoreAdmin;
 }
 
-interface MutateDocumentLinkProps<D1, L1, L2, D2> {
+interface MutateDocumentLinkProps<D1, L1, D2, L2> {
   document1Props: DocumentLinkMutationProps<D1, L1> & hasLinkMutator<D1, L1>;
   document2Props: DocumentLinkMutationProps<D2, L2> & hasLinkMutator<D2, L2>;
   documentLinksShouldBeMutated: (
@@ -45,8 +41,8 @@ const createLinksReducer = <L>(linkReducer: (link: L) => string) => {
   };
 };
 
-export default async function documentLinkMutator<D1, L1, L2, D2>(
-  props: MutateDocumentLinkProps<D1, L1, L2, D2>
+export default async function mutateDocumentLink<D1, L1, D2, L2>(
+  props: MutateDocumentLinkProps<D1, L1, D2, L2>
 ): Promise<[D1, D2]> {
   const {
     document1Props,
@@ -98,7 +94,7 @@ export default async function documentLinkMutator<D1, L1, L2, D2>(
 
   // only add links if they didnt exist already
   if (!document1IsLinkedToDocument2)
-    updatePromises[0] = createAddDocumentLinkMutator<D1, L1>({
+    updatePromises[0] = document1Props.linkMutator({
       currentData: document1Data,
       currentLinks: document1Links,
       documentProps: document1Props,
@@ -109,7 +105,7 @@ export default async function documentLinkMutator<D1, L1, L2, D2>(
 
   // only add links if they didnt exist already
   if (!document2IsLinkedToDocument1)
-    updatePromises[1] = createAddDocumentLinkMutator<D2, L2>({
+    updatePromises[1] = document2Props.linkMutator({
       currentData: document2Data,
       currentLinks: document2Links,
       documentProps: document2Props,

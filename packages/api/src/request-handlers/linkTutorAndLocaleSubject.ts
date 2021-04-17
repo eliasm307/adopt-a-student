@@ -4,7 +4,7 @@ import { LinkedLocaleSubjectData } from '../../common/src';
 import { LOCALE_SUBJECT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiLinkTutorAndLocaleSubject } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import linkDocuments, { DocumentLinkingProps } from '../utils/firebase/linkDocuments';
+import unlinkDocuments, { DocumentLinkingProps } from '../utils/links/linkDocuments';
 import isLinkedLocaleSubjectData from '../utils/type-predicates/isLinkedLocaleSubjectData';
 import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
@@ -48,7 +48,7 @@ const linkStudentAndLocaleSubject: ApiLinkTutorAndLocaleSubject = async (
     id,
   };
 
-  const [updatedDocument1, updatedDocument2] = await linkDocuments({
+  const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
     document1Props,
     document2Props,
     firestore: firestoreAdmin,

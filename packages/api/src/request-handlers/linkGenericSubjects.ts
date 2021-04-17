@@ -3,7 +3,7 @@ import { GenericSubjectData } from '@adopt-a-student/common';
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiLinkGenericSubjects } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import linkDocuments, { DocumentLinkingProps } from '../utils/firebase/linkDocuments';
+import unlinkDocuments, { DocumentLinkingProps } from '../utils/links/linkDocuments';
 import isGenericSubjectData from '../utils/type-predicates/isGenericSubjectData';
 import verifyRequest from '../utils/verifyRequest';
 
@@ -41,7 +41,7 @@ const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
     id: genericSubject2Id,
   };
 
-  const [updatedDocument1, updatedDocument2] = await linkDocuments({
+  const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
     document1Props,
     document2Props,
     firestore: firestoreAdmin,
