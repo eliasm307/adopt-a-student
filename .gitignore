@@ -16,6 +16,7 @@ yarn-error.log*
 dist/
 lib/
 build/
+docs/
 
 # Runtime data
 pids
