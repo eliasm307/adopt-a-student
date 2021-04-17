@@ -1,0 +1,27 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "typeRoots": ["./node_modules/@types"],
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "downlevelIteration": true,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "jsx": "react",
+    "isolatedModules": true,
+    "checkJs": false,
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "target": "es2017",
+    "types": ["@types/jest"],
+    "esModuleInterop": true
+  }
+}

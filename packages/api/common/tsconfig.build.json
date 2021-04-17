@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "typeRoots": ["./node_modules/@types"],
+    "module": "commonjs",
+    "target": "es2015",
+    "sourceMap": true,
+    "outDir": "lib",
+    "noEmitOnError": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src"],
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/lib/**",
+    "**/public/**",
+    "**/*.spec.*",
+    "**/*.test.*"
+  ]
+}

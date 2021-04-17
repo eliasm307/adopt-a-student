@@ -2,10 +2,57 @@
   "name": "@adopt-a-student/api",
   "version": "0.0.0",
   "description": "API for adopt-a-student",
-  "main": "index.js",
+  "author": "Elias Mangoro",
+  "license": "MIT",
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
+  "nohoist": [
+    "**/*jest*",
+    "**/*jest*/**", "**/@adopt-a-student/**", "**/@adopt-a-student*"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint --ext .js,.ts .",
+    "test": "jest --colors --logHeapUsage",
+    "pretest": "yarn",
+    "build": "tsc --build tsconfig.build.json",
+    "prebuild": "yarn build:common && rm -rf lib && yarn",
+    "build:hot-reload": "tsc --build tsconfig.build.json --watch",
+    "build:common": "yarn --cwd ./common build",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "predeploy": "yarn build",
+    "logs": "firebase functions:log",
+    "start-emulators": "set FIRESTORE_EMULATOR_HOST=localhost:8080&& set NODE_ENV=development&& firebase emulators:start"
   },
-  "author": "",
-  "license": "MIT"
+  "engines": {
+    "node": "12"
+  },
+  "dependencies": {
+    "@adopt-a-student/common": "file:./common",
+    "@types/uuid": "^8.3.0",
+    "firebase": "^8.4.1",
+    "firebase-admin": "^9.6.0",
+    "firebase-functions": "^3.13.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.22",
+    "@types/node": "^14.14.37",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.20.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.22.0",
+    "firebase-functions-test": "^0.2.3",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.4",
+    "typescript": "^3.8.0",
+    "url-exist-sync": "^1.0.2"
+  },
+  "private": true
 }
