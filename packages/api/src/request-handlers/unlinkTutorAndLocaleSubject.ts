@@ -2,15 +2,15 @@ import { LocaleSubjectData, PrivateTutorData } from '@adopt-a-student/common';
 
 import { LinkedLocaleSubjectData } from '../../common/src';
 import { LOCALE_SUBJECT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
-import { ApiLinkTutorAndLocaleSubject } from '../declarations/interfaces';
+import { ApiUnlinkTutorAndLocaleSubject } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
+import unlinkDocuments, { RemoveDocumentLinkProps } from '../utils/links/unlinkDocuments';
 import isLinkedLocaleSubjectData from '../utils/type-predicates/isLinkedLocaleSubjectData';
 import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
 
-const linkStudentAndLocaleSubject: ApiLinkTutorAndLocaleSubject = async (
+const linkStudentAndLocaleSubject: ApiUnlinkTutorAndLocaleSubject = async (
   body,
   context
 ) => {
@@ -24,31 +24,29 @@ const linkStudentAndLocaleSubject: ApiLinkTutorAndLocaleSubject = async (
       "failed-precondition",
       "Could not link documents because provided data is not valid"
     );
-
-  const document1Props: AddDocumentLinkProps<
+  const { id: localeSubject } = data;
+  const document1Props: RemoveDocumentLinkProps<
     PrivateTutorData,
     LinkedLocaleSubjectData
   > = {
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,
-    linkToAdd: data,
+    filterPredicate: ({ id: linkId }) => linkId !== localeSubject,
     linkReducer: ({ id }) => id,
     linksPropName: "linkedLocaleSubjects",
     id: uid,
   };
 
-  const { id } = data;
-
-  const document2Props: AddDocumentLinkProps<LocaleSubjectData, string> = {
+  const document2Props: RemoveDocumentLinkProps<LocaleSubjectData, string> = {
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
-    linkToAdd: uid,
+    filterPredicate: (linkId) => linkId !== uid,
     linkReducer: (link) => link,
     linksPropName: "linkedStudentIds",
-    id,
+    id: localeSubject,
   };
 
-  const [updatedDocument1, updatedDocument2] = await linkDocuments({
+  const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
     document1Props,
     document2Props,
     firestore: firestoreAdmin,
