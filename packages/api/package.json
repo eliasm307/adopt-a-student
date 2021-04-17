@@ -8,12 +8,12 @@
   "types": "lib/src/index.d.ts",
   "nohoist": [
     "**/*jest*",
-    "**/*jest*/**"
+    "**/*jest*/**", "**/@adopt-a-student/**", "**/@adopt-a-student*"
   ],
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "test": "jest --colors --logHeapUsage",
-    "pretest": "yarn && npx tsc",
+    "pretest": "yarn",
     "build": "tsc --build tsconfig.build.json",
     "prebuild": "yarn build:common && rm -rf lib && yarn",
     "build:hot-reload": "tsc --build tsconfig.build.json --watch",

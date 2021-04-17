@@ -21,6 +21,7 @@
     "sourceMap": true,
     "noEmit": true,
     "target": "es2017",
-    "types": ["@types/jest"]
+    "types": ["@types/jest"],
+    "esModuleInterop": true
   }
 }

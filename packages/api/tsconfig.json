@@ -1,10 +1,10 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    // "baseUrl": ".",
+    "baseUrl": ".",
     "paths": { "@adopt-a-student/common": ["./common/src/"] }
   },
-  "include": ["**/*", "src/request-handlers/linkGenericSubjects.ts"],
+  "include": ["**/*"],
   "exclude": [
     "**/node_modules/**",
     "**/dist/**",
