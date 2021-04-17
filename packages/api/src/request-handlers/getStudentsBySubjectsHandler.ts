@@ -6,7 +6,10 @@ import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin
 import getUsersBySubjects from '../utils/getUsersBySubjects';
 import verifyRequest from '../utils/verifyRequest';
 
-const handler: ApiGetStudentsBySubjectsHandler = async (data, context) => {
+const getStudentsBySubjectsHandler: ApiGetStudentsBySubjectsHandler = async (
+  data,
+  context
+) => {
   const auth = verifyRequest(data, context);
 
   // verify received data
@@ -24,4 +27,4 @@ const handler: ApiGetStudentsBySubjectsHandler = async (data, context) => {
   });
 };
 
-export default handler;
+export default getStudentsBySubjectsHandler;

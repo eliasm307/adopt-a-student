@@ -20,7 +20,6 @@
     "pretest": "yarn",
     "prebuild": "yarn build:common && rm -rf lib && yarn && yarn check-types",
     "build": "tsc --build tsconfig.build.json",
-    "postbuild": "yarn tsoa:build",
     "build:common": "yarn --cwd ./common build",
     "build:hot-reload": "tsc --build tsconfig.build.json --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
@@ -40,7 +39,7 @@
     "docs:start": "start \"\" \"docs/index.html\"",
     "tsoa:build": "yarn tsoa spec-and-routes",
     "tsoa:start": "start http://localhost:3000/ && node lib/src/tsoa-docs/server.js",
-    "tsoa:buildstart": "yarn build && start http://localhost:3000/ && node lib/src/tsoa-docs/server.js"
+    "tsoa:buildstart": "yarn build && yarn tsoa:build && start http://localhost:3000/ && node lib/src/tsoa-docs/server.js"
   },
   "engines": {
     "node": "12"

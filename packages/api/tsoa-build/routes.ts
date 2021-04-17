@@ -21,6 +21,22 @@ const models: TsoaRoute.Models = {
         "additionalProperties": true,
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "GetStudentsBySubjectsResult": {
+        "dataType": "refObject",
+        "properties": {
+            "data": {"dataType":"array","array":{"ref":"PublicStudentData"},"required":true},
+        },
+        "additionalProperties": true,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "GetStudentsBySubjectsBody": {
+        "dataType": "refObject",
+        "properties": {
+            "localeSubjectIds": {"dataType":"array","array":{"dataType":"string"},"required":true},
+        },
+        "additionalProperties": true,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
 const validationService = new ValidationService(models);
 
@@ -31,10 +47,10 @@ export function RegisterRoutes(app: express.Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.post('/users',
-            function StudentsController_createUser(request: any, response: any, next: any) {
+        app.post('/',
+            function StudentsController_getStudentsBySubjects(request: any, response: any, next: any) {
             const args = {
-                    requestBody: {"in":"body","name":"requestBody","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"prop2":{"dataType":"double","required":true},"prop1":{"dataType":"string","required":true}}},
+                    body: {"in":"body","name":"body","required":true,"ref":"GetStudentsBySubjectsBody"},
                     context: {"in":"header","name":"context","required":true,"dataType":"any"},
             };
 
@@ -50,7 +66,7 @@ export function RegisterRoutes(app: express.Router) {
             const controller = new StudentsController();
 
 
-            const promise = controller.createUser.apply(controller, validatedArgs as any);
+            const promise = controller.getStudentsBySubjects.apply(controller, validatedArgs as any);
             promiseHandler(controller, promise, response, undefined, next);
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

@@ -1,24 +1,28 @@
-import { Body, Controller, Header, Post, Route, SuccessResponse } from 'tsoa';
+import { Body, Controller, Header, Post, Route } from 'tsoa';
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { PublicStudentData } from '@adopt-a-student/common';
+import { GetStudentsBySubjectsBody, GetStudentsBySubjectsResult } from '../declarations/interfaces';
+import getStudentsBySubjectsHandler from '../request-handlers/getStudentsBySubjectsHandler';
 
-const data: PublicStudentData = {
-  id: "student",
-  prefferedLocales: [],
-  userName: "",
+/*
+const data: GetStudentsBySubjectsResult = {
+  data: [
+    {
+      id: "student",
+      prefferedLocales: [],
+      userName: "",
+    },
+  ],
 };
+*/
 
-@Route("users")
+@Route("/")
 export class StudentsController extends Controller {
-  @SuccessResponse("201", "Created") // Custom success response
+  // @SuccessResponse("201", "Created") // Custom success response
   @Post()
-  public async createUser(
-    @Body() requestBody: { prop1: string; prop2: number },
+  public async getStudentsBySubjects(
+    @Body() body: GetStudentsBySubjectsBody,
     @Header() context: any
-  ): Promise<PublicStudentData> {
-    // this.setStatus(201); // set return status 201
-    // new UsersService().create(requestBody);
-    return Promise.resolve(data);
+  ): Promise<GetStudentsBySubjectsResult> {
+    return getStudentsBySubjectsHandler(body, context);
   }
 }

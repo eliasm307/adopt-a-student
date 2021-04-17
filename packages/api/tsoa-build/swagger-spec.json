@@ -39,6 +39,36 @@
 				],
 				"type": "object",
 				"additionalProperties": true
+			},
+			"GetStudentsBySubjectsResult": {
+				"properties": {
+					"data": {
+						"items": {
+							"$ref": "#/components/schemas/PublicStudentData"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"data"
+				],
+				"type": "object",
+				"additionalProperties": true
+			},
+			"GetStudentsBySubjectsBody": {
+				"properties": {
+					"localeSubjectIds": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"localeSubjectIds"
+				],
+				"type": "object",
+				"additionalProperties": true
 			}
 		},
 		"securitySchemes": {}
@@ -56,16 +86,16 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/users": {
+		"/": {
 			"post": {
-				"operationId": "CreateUser",
+				"operationId": "GetStudentsBySubjects",
 				"responses": {
-					"201": {
-						"description": "Created",
+					"200": {
+						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/PublicStudentData"
+									"$ref": "#/components/schemas/GetStudentsBySubjectsResult"
 								}
 							}
 						}
@@ -87,20 +117,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"properties": {
-									"prop2": {
-										"type": "number",
-										"format": "double"
-									},
-									"prop1": {
-										"type": "string"
-									}
-								},
-								"required": [
-									"prop2",
-									"prop1"
-								],
-								"type": "object"
+								"$ref": "#/components/schemas/GetStudentsBySubjectsBody"
 							}
 						}
 					}
