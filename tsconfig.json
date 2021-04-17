@@ -1,17 +1,13 @@
 {
   "extends": "./tsconfig.build.json",
   "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@adopt-a-student/*": ["packages/*/src"]
-    },
-    "typeRoots": ["./src/declarations", "./node_modules/@types"],
-    "types": ["@types/jest", "@types/node"],
+    "typeRoots": ["./node_modules/@types"],
     "lib": ["dom", "dom.iterable", "esnext"],
     "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "allowSyntheticDefaultImports": true,
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
@@ -19,6 +15,13 @@
     "resolveJsonModule": true,
     "jsx": "react",
     "isolatedModules": true,
-    "checkJs": false
+    "checkJs": false,
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "target": "es2017",
+    "types": ["@types/jest"],
+    "esModuleInterop": true
   }
 }

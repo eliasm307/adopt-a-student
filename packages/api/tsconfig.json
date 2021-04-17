@@ -1,14 +1,15 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "outDir": "lib",
-    "sourceMap": true,
-    "strict": true,
-    "target": "es2017"
+    "baseUrl": ".",
+    "paths": { "@adopt-a-student/common": ["./common/src/"] }
   },
-  "compileOnSave": true,
-  "include": ["src"]
+  "include": ["**/*"],
+  "exclude": [
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/lib/**",
+    "**/public/**"
+  ]
 }
