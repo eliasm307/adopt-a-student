@@ -4,7 +4,7 @@ import { LinkedLocaleSubjectData } from '../../common/src';
 import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../constants';
 import { ApiLinkStudentAndLocaleSubject } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
+import unlinkDocuments, { RemoveDocumentLinkProps } from '../utils/links/unlinkDocuments';
 import isLinkedLocaleSubjectData from '../utils/type-predicates/isLinkedLocaleSubjectData';
 import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
 import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
@@ -24,29 +24,30 @@ const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
       "failed-precondition",
       "Could not link documents because provided data is not valid"
     );
+  const { id: localesubjectId } = data;
 
-  const document1Props: AddDocumentLinkProps<
+  const document1Props: RemoveDocumentLinkProps<
     PrivateStudentData,
     LinkedLocaleSubjectData
   > = {
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
-    linkToAdd: data,
-    linkReducer: (link) => link.id,
+    linkReducer: ({ id }) => id,
+    filterPredicate: ({ id: link }) => link !== localesubjectId,
     linksPropName: "linkedLocaleSubjects",
     id: uid,
   };
 
-  const document2Props: AddDocumentLinkProps<LocaleSubjectData, string> = {
+  const document2Props: RemoveDocumentLinkProps<LocaleSubjectData, string> = {
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
-    linkToAdd: uid,
+    filterPredicate: (link) => link !== uid,
     linkReducer: (link) => link,
     linksPropName: "linkedStudentIds",
-    id: data.id,
+    id: localesubjectId,
   };
 
-  const [updatedDocument1, updatedDocument2] = await linkDocuments({
+  const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
     document1Props,
     document2Props,
     firestore: firestoreAdmin,
