@@ -4,7 +4,7 @@ import { LinkedLocaleSubjectData } from '../../common/src';
 import { LOCALE_SUBJECT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiLinkTutorAndLocaleSubject } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import unlinkDocuments, { DocumentLinkingProps } from '../utils/links/linkDocuments';
+import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
 import isLinkedLocaleSubjectData from '../utils/type-predicates/isLinkedLocaleSubjectData';
 import isLocaleSubjectData from '../utils/type-predicates/isLocaleSubjectData';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
@@ -25,7 +25,7 @@ const linkStudentAndLocaleSubject: ApiLinkTutorAndLocaleSubject = async (
       "Could not link documents because provided data is not valid"
     );
 
-  const document1Props: DocumentLinkingProps<
+  const document1Props: AddDocumentLinkProps<
     PrivateTutorData,
     LinkedLocaleSubjectData
   > = {
@@ -39,7 +39,7 @@ const linkStudentAndLocaleSubject: ApiLinkTutorAndLocaleSubject = async (
 
   const { id } = data;
 
-  const document2Props: DocumentLinkingProps<LocaleSubjectData, string> = {
+  const document2Props: AddDocumentLinkProps<LocaleSubjectData, string> = {
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
     linkToAdd: uid,
@@ -48,7 +48,7 @@ const linkStudentAndLocaleSubject: ApiLinkTutorAndLocaleSubject = async (
     id,
   };
 
-  const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
+  const [updatedDocument1, updatedDocument2] = await linkDocuments({
     document1Props,
     document2Props,
     firestore: firestoreAdmin,

@@ -3,7 +3,7 @@ import { GenericSubjectCategoryData, GenericSubjectData } from '@adopt-a-student
 import { GENERIC_SUBJECT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
 import { ApiLinkGenericSubjectAndSubjectCategory } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import unlinkDocuments, { DocumentLinkingProps } from '../utils/links/linkDocuments';
+import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
 import isGenericSubjectCategoryData from '../utils/type-predicates/isGenericSubjectCategory';
 import isGenericSubjectData from '../utils/type-predicates/isGenericSubjectData';
 import verifyRequest from '../utils/verifyRequest';
@@ -23,7 +23,7 @@ const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCateg
 
   const { genericSubjectId, subjectCategoryId } = body;
 
-  const document1Props: DocumentLinkingProps<GenericSubjectData, string> = {
+  const document1Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
     linkToAdd: subjectCategoryId,
@@ -32,7 +32,7 @@ const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCateg
     id: genericSubjectId,
   };
 
-  const document2Props: DocumentLinkingProps<
+  const document2Props: AddDocumentLinkProps<
     GenericSubjectCategoryData,
     string
   > = {
@@ -44,7 +44,7 @@ const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCateg
     id: subjectCategoryId,
   };
 
-  const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
+  const [updatedDocument1, updatedDocument2] = await linkDocuments({
     document1Props,
     document2Props,
     firestore: firestoreAdmin,

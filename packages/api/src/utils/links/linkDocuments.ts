@@ -4,9 +4,13 @@ import { hasLinkToAdd } from './interfaces';
 import { documentLinksShouldBeAdded as linksShouldBeAdded } from './linksShouldBeMutated';
 import mutateDocumentLink, { DocumentLinkMutationProps } from './mutateDocumentLink';
 
+export interface AddDocumentLinkProps<D, L>
+  extends DocumentLinkMutationProps<D, L>,
+    hasLinkToAdd<L> {}
+
 interface Props<D1, L1, D2, L2> {
-  document1Props: DocumentLinkMutationProps<D1, L1> & hasLinkToAdd<L1>;
-  document2Props: DocumentLinkMutationProps<D2, L2> & hasLinkToAdd<L2>;
+  document1Props: AddDocumentLinkProps<D1, L1>;
+  document2Props: AddDocumentLinkProps<D2, L2>;
   firestore: FirestoreAdmin;
 }
 export default async function linkDocuments<D1, L1, D2, L2>(

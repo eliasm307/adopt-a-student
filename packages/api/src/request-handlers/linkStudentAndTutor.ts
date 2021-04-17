@@ -5,7 +5,7 @@ import {
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiLinkStudentAndTutor } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import unlinkDocuments, { DocumentLinkingProps } from '../utils/links/linkDocuments';
+import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
 import isPrivateStudentData from '../utils/type-predicates/isPrivateStudentData';
 import isPrivateTutorData from '../utils/type-predicates/isPrivateTutorData';
 import verifyRequest from '../utils/verifyRequest';
@@ -98,7 +98,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
   });
   */
 
-  const document1Props: DocumentLinkingProps<
+  const document1Props: AddDocumentLinkProps<
     PrivateStudentData,
     LinkedTutorData
   > = {
@@ -110,7 +110,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     linksPropName: "linkedTutors",
   };
 
-  const document2Props: DocumentLinkingProps<
+  const document2Props: AddDocumentLinkProps<
     PrivateTutorData,
     LinkedStudentData
   > = {
@@ -122,7 +122,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     linksPropName: "linkedStudents",
   };
 
-  const [updatedStudent, updatedTutor] = await unlinkDocuments({
+  const [updatedStudent, updatedTutor] = await linkDocuments({
     document1Props,
     document2Props,
     firestore: firestoreAdmin,

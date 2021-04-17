@@ -3,7 +3,7 @@ import { GenericSubjectData } from '@adopt-a-student/common';
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../constants';
 import { ApiLinkGenericSubjects } from '../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import unlinkDocuments, { DocumentLinkingProps } from '../utils/links/linkDocuments';
+import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
 import isGenericSubjectData from '../utils/type-predicates/isGenericSubjectData';
 import verifyRequest from '../utils/verifyRequest';
 
@@ -20,7 +20,7 @@ const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
   const { genericSubject1Id, genericSubject2Id } = body;
 
   const commonDocumentProps: Omit<
-    DocumentLinkingProps<GenericSubjectData, string>,
+    AddDocumentLinkProps<GenericSubjectData, string>,
     "id" | "linkToAdd"
   > = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
@@ -29,19 +29,19 @@ const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
     linksPropName: "linkedGenericSubjectIds",
   };
 
-  const document1Props: DocumentLinkingProps<GenericSubjectData, string> = {
+  const document1Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
     linkToAdd: genericSubject2Id,
     id: genericSubject1Id,
   };
 
-  const document2Props: DocumentLinkingProps<GenericSubjectData, string> = {
+  const document2Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
     linkToAdd: genericSubject1Id,
     id: genericSubject2Id,
   };
 
-  const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
+  const [updatedDocument1, updatedDocument2] = await linkDocuments({
     document1Props,
     document2Props,
     firestore: firestoreAdmin,
