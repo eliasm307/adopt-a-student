@@ -1,6 +1,6 @@
 import {
   GenericSubjectCategoryData, GenericSubjectData, LocaleSubjectData, PrivateStudentData,
-  PrivateTutorData, PublicStudentData, PublicTutorData,
+  PrivateTutorData, PublicStudentData, PublicTutorData, UserSubjectData,
 } from './data-models';
 import {
   CategoryId, GenericSubjectId, LocaleCode, LocaleSubjectId, StudentId, SubjectCategoryId,
@@ -117,4 +117,73 @@ export interface CreateSubjectCategoryRequestBody {
 }
 export interface CreateSubjectCategoryResponseBody {
   result: GenericSubjectCategoryData;
+}
+export interface UnlinkSubjectsRequestBody {
+  subject1Id: string;
+  subject2Id: string;
+}
+
+export interface UnlinkSubjectsResponseBody extends BasicResponseData {}
+
+export interface LinkSubjectsRequestBody {
+  subject1Id: string;
+  subject2Id: string;
+}
+
+export interface LinkSubjectsResponseBody extends BasicResponseData {}
+export interface UnlinkStudentAndTutorRequestBody {
+  studentId: StudentId;
+  tutorId: TutorId;
+}
+
+export interface UnlinkStudentAndTutorResponseBody extends BasicResponseData {}
+export interface LinkStudentAndTutorRequestBody {
+  studentId: StudentId;
+  tutorId: TutorId;
+}
+
+export interface LinkStudentAndTutorResponseBody extends BasicResponseData {}
+
+export interface UnlinkSubjectAndSubjectCategoryRequestBody {
+  categoryId: CategoryId;
+  subjectId: SubjectId;
+}
+
+export interface UnlinkSubjectAndSubjectCategoryResponseBody
+  extends BasicResponseData {}
+export interface LinkSubjectAndSubjectCategoryRequestBody {
+  categoryId: CategoryId;
+  subjectId: SubjectId;
+}
+
+export interface LinkSubjectAndSubjectCategoryResponseBody
+  extends BasicResponseData {}
+export interface UnlinkTutorAndSubjectRequestBody {
+  id: LocaleSubjectId;
+}
+
+export interface UnlinkTutorAndSubjectResponseBody extends BasicResponseData {}
+
+export interface UnlinkStudentAndSubjectRequestBody {
+  id: LocaleSubjectId;
+}
+
+export interface UnlinkStudentAndSubjectResponseBody
+  extends BasicResponseData {}
+
+export interface LinkTutorAndSubjectRequestBody {
+  data: UserSubjectData;
+}
+
+export interface LinkTutorAndSubjectResponseBody extends BasicResponseData {}
+export interface LinkStudentAndSubjectRequestBody {
+  data: UserSubjectData;
+}
+
+export interface LinkStudentAndSubjectResponseBody extends BasicResponseData {}
+
+export interface BasicResponseData {
+  message?: string;
+
+// success: boolean;
 }

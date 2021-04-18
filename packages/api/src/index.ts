@@ -5,7 +5,7 @@ import { ObjectMap } from '@adopt-a-student/common';
 import { CallableName as CallableNameEnum } from './constants';
 import linkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/linkGenericSubjectAndSubjectCategory';
 import linkGenericSubjects from './controllers/RelationshipController/request-handlers/linkGenericSubjects';
-import linkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkStudentAndLocaleSubject';
+import linkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkStudentAndSubject';
 import linkStudentAndTutor from './controllers/RelationshipController/request-handlers/linkStudentAndTutor';
 import linkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkTutorAndLocaleSubject';
 import unlinkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/unlinkGenericSubjectAndSubjectCategory';

@@ -32,12 +32,6 @@ interface FirestoreSchema {
   tutors: PrivateTutorData[];
 }
 
-export interface BasicResponseData {
-  message?: string;
-
-// success: boolean;
-}
-
 export * from "./api-tbc/api.write-relationships";
 
 export type FirestoreAdmin = FirebaseFirestore.Firestore;
