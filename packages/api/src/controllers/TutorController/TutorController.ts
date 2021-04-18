@@ -10,7 +10,7 @@ import { GetStudentsBySubjectsRequestBody } from '@adopt-a-student/common';
 // ! so the routes are named after the variables, and the actual name is exported
 
 const createTutor = "createTutor";
-const getTutorsBySubjects = "GetTutorsBySubjects";
+const getTutorsBySubjects = "getTutorsBySubjects";
 const a3 = "a3";
 
 const exportedNames = [createTutor, getTutorsBySubjects, a3] as const;

@@ -1,5 +1,6 @@
 import {
-  LocaleSubjectData, PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData,
+  GenericSubjectData, LocaleSubjectData, PrivateStudentData, PrivateTutorData, PublicStudentData,
+  PublicTutorData,
 } from './data-models';
 import {
   CategoryId, GenericSubjectId, LocaleCode, LocaleSubjectId, StudentId, SubjectCategoryId,
@@ -88,4 +89,11 @@ export interface UpdateLocaleSubjectRequestBody {
 }
 export interface UpdateLocaleSubjectResponseBody {
   result: LocaleSubjectData;
+}
+
+export interface CreateGenericSubjectRequestBody {
+  data?: Omit<GenericSubjectData, "id">;
+}
+export interface CreateGenericSubjectResponseBody {
+  subject: GenericSubjectData;
 }

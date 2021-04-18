@@ -42,7 +42,7 @@ const enumv = CallableName.getStudentsBySubjects.toString() + "/";
 */
 // hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
-@Route("")
+@Route("/")
 export class StudentsController extends Controller {
   /*
   static callableNames = Object.keys(namedKeys).reduce(
