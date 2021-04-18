@@ -39,7 +39,7 @@ module.exports = {
     "@typescript-eslint/no-namespace": 0,
     "@typescript-eslint/no-non-null-assertion": 0,
     "@typescript-eslint/no-unsafe-assignment": 0,
-    "@typescript-eslint/no-unsafe-member-access": 1,
+    "@typescript-eslint/no-unsafe-member-access": 0,
     "@typescript-eslint/no-unsafe-return": 0,
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/require-await": 1,
