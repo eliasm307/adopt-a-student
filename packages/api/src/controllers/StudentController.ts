@@ -1,52 +1,37 @@
 import { Body, Controller, Header, Post, Route } from 'tsoa';
 
-import { PublicStudentData, PublicTutorData } from '@adopt-a-student/common';
+import {
+  GetStudentsBySubjectsRequestBody, GetStudentsBySubjectsResponseBody,
+  GetTutorsBySubjectsRequestBody, GetTutorsBySubjectsResponseBody,
+} from '@adopt-a-student/common';
 
 import getStudentsBySubjectsHandler from '../request-handlers/getStudentsBySubjectsHandler';
 import getTutorsBySubjectsHandler from '../request-handlers/getTutorsBySubjectsHandler';
 
-/*
-const data: GetStudentsBySubjectsResult = {
-  data: [
-    {
-      id: "student",
-      prefferedLocales: [],
-      userName: "",
-    },
-  ],
-};
-*/
-
-export interface GetStudentsBySubjectsBody {
-  localeSubjectIds: string[];
-}
-export interface GetStudentsBySubjectsResult {
-  data: PublicStudentData[];
-}
-
-export interface GetTutorsBySubjectsBody {
-  localeSubjectIds: string[];
-}
-export interface GetTutorsBySubjectsResult {
-  data: PublicTutorData[];
-}
-
 @Route("/")
 export class StudentsController extends Controller {
+  @Post()
+  public static async createStudent(
+    @Body() body: GetStudentsBySubjectsRequestBody,
+    @Header() context: any
+  ): Promise<GetStudentsBySubjectsResponseBody> {
+    return getStudentsBySubjectsHandler(body, context);
+  }
+
   // @SuccessResponse("201", "Created") // Custom success response
   @Post()
   public static async getStudentsBySubjects(
-    @Body() body: GetStudentsBySubjectsBody,
+    @Body() body: GetStudentsBySubjectsRequestBody,
     @Header() context: any
-  ): Promise<GetStudentsBySubjectsResult> {
+  ): Promise<GetStudentsBySubjectsResponseBody> {
     return getStudentsBySubjectsHandler(body, context);
   }
 
   @Post()
   public static async getTutorsBySubjects(
-    @Body() body: GetTutorsBySubjectsBody,
+    @Body() body: GetTutorsBySubjectsRequestBody,
     @Header() context: any
-  ): Promise<GetTutorsBySubjectsResult> {
+  ): Promise<GetTutorsBySubjectsResponseBody> {
     return getTutorsBySubjectsHandler(body, context);
   }
 }

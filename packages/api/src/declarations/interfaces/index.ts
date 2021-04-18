@@ -39,7 +39,7 @@ export interface BasicResponseData {
 
 export * from "./api/api.query-subjects";
 
-export * from "./api/DELETE_api.quey-users";
+export * from "./api/api.quey-users";
 export * from "./api/api.read-subject-data";
 export * from "./api/api.read-user-data";
 export * from "./api-tbc/api.write-relationships";

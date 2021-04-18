@@ -366,9 +366,14 @@
         "signature": "c7d6fd440f2f018d74521a6d024a8286589bcb5b62bdd70a320e837669eb7669",
         "affectsGlobalScope": false
       },
+      "./src/declarations/api.ts": {
+        "version": "f005771442c3738179a83823b0460fd72dde141380821cb8d652e95ea8020a8e",
+        "signature": "700dee29fff49839837947834134b26c10637e8ed3d8afe8010ebadb39e87785",
+        "affectsGlobalScope": false
+      },
       "./src/index.ts": {
-        "version": "6b8283f954fbb22f1f79bc025a960daa246f8ab814184a1f91c432b779ed4588",
-        "signature": "98b6bb042eb1f3d236a7e8707c99ef4dd3752dc4ab1b2cf4552025e166d4745a",
+        "version": "6ead5aea271de1b436c767c91a3d32061cd87aff634940ab66cf36c3961b60f6",
+        "signature": "6f83b5a5a1ded389b4d5bb989b8d024045c97f723e31d629515eeecc8be94589",
         "affectsGlobalScope": false
       },
       "./node_modules/jest-diff/build/cleanupsemantic.d.ts": {
@@ -651,6 +656,7 @@
       "target": 4,
       "sourceMap": true,
       "noEmitOnError": true,
+      "resolveJsonModule": true,
       "esModuleInterop": true,
       "declaration": true,
       "allowSyntheticDefaultImports": true,
@@ -668,7 +674,6 @@
       "alwaysStrict": true,
       "forceConsistentCasingInFileNames": true,
       "noFallthroughCasesInSwitch": true,
-      "resolveJsonModule": true,
       "jsx": 2,
       "isolatedModules": true,
       "checkJs": false,
@@ -930,6 +935,9 @@
       "./node_modules/pretty-format/build/index.d.ts": [
         "./node_modules/pretty-format/build/types.d.ts"
       ],
+      "./src/declarations/api.ts": [
+        "./src/declarations/data-models.ts"
+      ],
       "./src/declarations/data-models.ts": [
         "./src/declarations/enums.ts",
         "./src/declarations/types.ts"
@@ -938,6 +946,7 @@
         "./src/declarations/data-models.ts"
       ],
       "./src/index.ts": [
+        "./src/declarations/api.ts",
         "./src/declarations/data-models.ts",
         "./src/declarations/enums.ts",
         "./src/declarations/object-shcema.ts",
@@ -1286,6 +1295,9 @@
       "./node_modules/pretty-format/build/index.d.ts": [
         "./node_modules/pretty-format/build/types.d.ts"
       ],
+      "./src/declarations/api.ts": [
+        "./src/declarations/data-models.ts"
+      ],
       "./src/declarations/data-models.ts": [
         "./src/declarations/enums.ts",
         "./src/declarations/types.ts"
@@ -1294,6 +1306,7 @@
         "./src/declarations/data-models.ts"
       ],
       "./src/index.ts": [
+        "./src/declarations/api.ts",
         "./src/declarations/data-models.ts",
         "./src/declarations/enums.ts",
         "./src/declarations/object-shcema.ts",
@@ -1490,6 +1503,7 @@
       "./node_modules/typescript/lib/lib.esnext.promise.d.ts",
       "./node_modules/typescript/lib/lib.esnext.string.d.ts",
       "./node_modules/typescript/lib/lib.esnext.weakref.d.ts",
+      "./src/declarations/api.ts",
       "./src/declarations/data-models.ts",
       "./src/declarations/enums.ts",
       "./src/declarations/object-shcema.ts",
@@ -1764,6 +1778,10 @@
       ],
       [
         "./node_modules/typescript/lib/lib.esnext.d.ts",
+        1
+      ],
+      [
+        "./src/declarations/api.ts",
         1
       ],
       [
