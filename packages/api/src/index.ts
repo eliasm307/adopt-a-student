@@ -19,7 +19,6 @@ import getPublicStudentData from './controllers/StudentController/request-handle
 import updateLocaleSubject from './controllers/StudentController/request-handlers/updateLocaleSubject';
 import updateStudent from './controllers/StudentController/request-handlers/updateStudent';
 import createSubjectCategory from './controllers/SubjectCategoryController/request-handlers/createSubjectCategory';
-import getSubjectCategories from './controllers/SubjectCategoryController/request-handlers/getSubjectCategories';
 import updateSubjectCategory from './controllers/SubjectCategoryController/request-handlers/updateLocaleSubjectCategory';
 import createGenericSubject from './controllers/SubjectController/request-handlers/createGenericSubject';
 import createLocaleSubject from './controllers/SubjectController/request-handlers/createLocaleSubject';
