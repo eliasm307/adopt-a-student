@@ -1,0 +1,5 @@
+{
+  "exec": "ts-node src/tsoa-docs/server.ts",
+  "watch": [ "src", "common/src" ],
+  "ext": "ts"
+}

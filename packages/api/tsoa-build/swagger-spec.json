@@ -201,7 +201,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/CallableName.createStudent.toString()": {
+		"/a/name1": {
 			"post": {
 				"operationId": "CreateStudent",
 				"responses": {
@@ -217,16 +217,7 @@
 					}
 				},
 				"security": [],
-				"parameters": [
-					{
-						"in": "header",
-						"name": "context",
-						"required": true,
-						"schema": {
-							"$ref": "#/components/schemas/FirebaseCallableFunctionContext"
-						}
-					}
-				],
+				"parameters": [],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -239,7 +230,7 @@
 				}
 			}
 		},
-		"/CallableName.getStudentsBySubjects.toString()": {
+		"/a/undefined": {
 			"post": {
 				"operationId": "GetStudentsBySubjects",
 				"responses": {
@@ -255,16 +246,7 @@
 					}
 				},
 				"security": [],
-				"parameters": [
-					{
-						"in": "header",
-						"name": "context",
-						"required": true,
-						"schema": {
-							"$ref": "#/components/schemas/FirebaseCallableFunctionContext"
-						}
-					}
-				],
+				"parameters": [],
 				"requestBody": {
 					"required": true,
 					"content": {
@@ -277,7 +259,7 @@
 				}
 			}
 		},
-		"/CallableName.getTutorsBySubjects.toString()": {
+		"/a/name23": {
 			"post": {
 				"operationId": "GetTutorsBySubjects",
 				"responses": {
@@ -293,16 +275,7 @@
 					}
 				},
 				"security": [],
-				"parameters": [
-					{
-						"in": "header",
-						"name": "context",
-						"required": true,
-						"schema": {
-							"$ref": "#/components/schemas/FirebaseCallableFunctionContext"
-						}
-					}
-				],
+				"parameters": [],
 				"requestBody": {
 					"required": true,
 					"content": {
