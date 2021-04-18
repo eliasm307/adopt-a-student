@@ -15,10 +15,7 @@ export type ApiLinkSubjectAndSubjectCategory = ;
 // todo should add subject to user and user to subject
 export type ApiLinkStudentAndTutor = ;
 
-export type ApiUnlinkStudentAndTutor = FirebaseCallableFunctionHandler<
-  UnlinkStudentAndTutorRequestBody,
-  UnlinkStudentAndTutorResponseBody
->;
+export type ApiUnlinkStudentAndTutor =
 
 export type ApiLinkSubjects = FirebaseCallableFunctionHandler<
   LinkSubjectsRequestBody,

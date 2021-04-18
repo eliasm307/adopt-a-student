@@ -1,18 +1,18 @@
 import {
   isPrivateStudentData, isPrivateTutorData, LinkedStudentData, LinkedTutorData, PrivateStudentData,
-  PrivateTutorData,
+  PrivateTutorData, UnlinkStudentAndTutorRequestBody, UnlinkStudentAndTutorResponseBody,
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
-import { ApiUnlinkStudentAndTutor } from '../../../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const unlinkStudentAndTutor: ApiUnlinkStudentAndTutor = async (
-  body,
-  context
-) => {
+const unlinkStudentAndTutor: FirebaseCallableFunctionHandler<
+  UnlinkStudentAndTutorRequestBody,
+  UnlinkStudentAndTutorResponseBody
+> = async (body, context) => {
   const { uid } = verifyRequest(body, context);
 
   // verify received data
