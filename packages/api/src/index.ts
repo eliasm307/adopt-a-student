@@ -5,7 +5,7 @@ import { ObjectMap } from '@adopt-a-student/common';
 import { CallableName as CallableNameEnum } from './constants';
 import linkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkStudentAndSubject';
 import linkStudentAndTutor from './controllers/RelationshipController/request-handlers/linkStudentAndTutor';
-import linkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/linkSubjectAndSubjectCategory';
+import linkSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/linkSubjectAndSubjectCategory';
 import linkGenericSubjects from './controllers/RelationshipController/request-handlers/linkSubjects';
 import linkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkTutorAndSubject';
 import unlinkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkStudentAndSubject';
@@ -74,7 +74,7 @@ const callableFunctionHandlers = {
   linkGenericSubjects,
   unlinkGenericSubjects,
 
-  linkGenericSubjectAndSubjectCategory,
+  linkGenericSubjectAndSubjectCategory: linkSubjectAndSubjectCategory,
   unlinkGenericSubjectAndSubjectCategory: unlinkSubjectAndSubjectCategory,
 
   linkStudentAndTutor,

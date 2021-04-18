@@ -8,10 +8,7 @@ export type ApiUnlinkTutorAndLocaleSubject = ;
 // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
 // todo needs to verify a user has access to this data
 // todo should add subject to user and user to subject
-export type ApiLinkSubjectAndSubjectCategory = FirebaseCallableFunctionHandler<
-  LinkSubjectAndSubjectCategoryRequestBody,
-  LinkSubjectAndSubjectCategoryResponseBody
->;
+export type ApiLinkSubjectAndSubjectCategory = ;
 
 // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
 // todo needs to verify a user has access to this data

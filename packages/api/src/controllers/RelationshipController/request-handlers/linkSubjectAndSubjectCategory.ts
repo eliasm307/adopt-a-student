@@ -1,20 +1,21 @@
 import {
   GenericSubjectCategoryData, GenericSubjectData, isGenericSubjectCategoryData,
-  isGenericSubjectData,
+  isGenericSubjectData, LinkSubjectAndSubjectCategoryRequestBody,
+  LinkSubjectAndSubjectCategoryResponseBody,
 } from '@adopt-a-student/common';
 
 import {
   GENERIC_SUBJECT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME,
 } from '../../../constants';
-import { ApiLinkSubjectAndSubjectCategory } from '../../../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const linkGenericSubjectAndSubjectCategory: ApiLinkSubjectAndSubjectCategory = async (
-  body,
-  context
-) => {
+const linkSubjectAndSubjectCategory: FirebaseCallableFunctionHandler<
+  LinkSubjectAndSubjectCategoryRequestBody,
+  LinkSubjectAndSubjectCategoryResponseBody
+> = async (body, context) => {
   const { uid } = verifyRequest(body, context);
 
   // verify received data
@@ -55,4 +56,4 @@ const linkGenericSubjectAndSubjectCategory: ApiLinkSubjectAndSubjectCategory = a
   return { message: "Success linking documents" };
 };
 
-export default linkGenericSubjectAndSubjectCategory;
+export default linkSubjectAndSubjectCategory;
