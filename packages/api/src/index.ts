@@ -10,7 +10,7 @@ import linkGenericSubjects from './controllers/RelationshipController/request-ha
 import linkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkTutorAndSubject';
 import unlinkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkStudentAndSubject';
 import unlinkStudentAndTutor from './controllers/RelationshipController/request-handlers/unlinkStudentAndTutor';
-import unlinkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/unlinkSubjectAndSubjectCategory';
+import unlinkSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/unlinkSubjectAndSubjectCategory';
 import unlinkGenericSubjects from './controllers/RelationshipController/request-handlers/unlinkSubjects';
 import unlinkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkTutorAndSubject';
 import createStudent from './controllers/StudentController/request-handlers/createStudent';
@@ -75,7 +75,7 @@ const callableFunctionHandlers = {
   unlinkGenericSubjects,
 
   linkGenericSubjectAndSubjectCategory,
-  unlinkGenericSubjectAndSubjectCategory,
+  unlinkGenericSubjectAndSubjectCategory: unlinkSubjectAndSubjectCategory,
 
   linkStudentAndTutor,
   unlinkStudentAndTutor,
