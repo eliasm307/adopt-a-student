@@ -1,24 +1,33 @@
+import { CallableContext } from 'firebase-functions/lib/providers/https';
 /* eslint-disable @typescript-eslint/require-await */
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
-  CreateStudentRequestBody, CreateStudentResponseBody, GetStudentsBySubjectsRequestBody,
-  GetStudentsBySubjectsResponseBody,
+  CreateStudentRequestBody, CreateStudentResponseBody, GetStudentRequestBody,
+  GetStudentResponseBody, GetStudentsBySubjectsRequestBody, GetStudentsBySubjectsResponseBody,
+  UpdateStudentRequestBody, UpdateStudentResponseBody,
 } from '@adopt-a-student/common';
 
+import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
+import verifyRequest from '../../utils/verifyRequest';
 import createStudentHandler from './request-handlers/createStudent';
+import getPrivateStudentData from './request-handlers/getPrivateStudentData';
+import getPublicStudentData from './request-handlers/getPublicStudentDataHandler';
 import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
+import updateStudentHandler from './request-handlers/updateStudentHandler';
 
-/** Provided automatically by Firebase */
-type FirebaseCallableFunctionContext = any;
-
+const x: CallableContext;
 const createStudent = "createStudent";
 const getStudentsBySubjects = "getStudentsBySubjects";
+const updateStudent = "updateStudent";
+const getStudent = "getStudent";
 
 const exportedNames = [
   createStudent,
+  getStudent,
   getStudentsBySubjects,
   getStudentsBySubjects,
+  updateStudent,
 ] as const;
 /*
 const namedKeys = { a: "", v: "", c: "", d: "" };
@@ -55,17 +64,44 @@ export class StudentsController extends Controller {
   @Post(createStudent)
   static createStudent(
     @Body() body: CreateStudentRequestBody,
-    @Query() @Hidden() context: FirebaseCallableFunctionContext = {}
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateStudentResponseBody> {
     return createStudentHandler(body, context);
+  }
+
+  /**
+   * Retreives data about a student user. If the student user owns the data then they get all the data, otherwise it is restricted to 'public' data.
+   * @param body
+   * @param context
+   * @returns
+   */
+  @Post(getStudent)
+  static getStudent(
+    @Body() body: GetStudentRequestBody,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<GetStudentResponseBody> {
+    const { id } = body;
+    const { uid } = verifyRequest(body, context);
+
+    return uid === id
+      ? getPrivateStudentData(body, context)
+      : getPublicStudentData(body, context);
   }
 
   @Post(getStudentsBySubjects)
   static getStudentsBySubjects(
     @Body() body: GetStudentsBySubjectsRequestBody,
-    @Query() @Hidden() context: FirebaseCallableFunctionContext = {}
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetStudentsBySubjectsResponseBody> {
     return getStudentsBySubjectsHandler(body, context);
+  }
+
+  @Post(updateStudent)
+  static updateStudent(
+    @Body() body: UpdateStudentRequestBody,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<UpdateStudentResponseBody> {
+    return updateStudentHandler(body, context);
   }
 }
 

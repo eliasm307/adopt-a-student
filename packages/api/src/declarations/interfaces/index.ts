@@ -32,6 +32,27 @@ interface FirestoreSchema {
   tutors: PrivateTutorData[];
 }
 
-export * from "./api-tbc/api.write-relationships";
-
 export type FirestoreAdmin = FirebaseFirestore.Firestore;
+
+/**
+ * The interface for metadata for the API as passed to the handler.
+ * Provided automatically by Firebase.
+ * Duplicated from firebase for TSOA compatibility.
+ */
+export type FirebaseCallableFunctionContext = {
+  /**
+   * The result of decoding and verifying a Firebase Auth ID token.
+   */
+  auth?: {
+    uid: string;
+    token: any;
+  };
+  /**
+   * An unverified token for a Firebase Instance ID.
+   */
+  instanceIdToken?: string;
+  /**
+   * The raw request handled by the callable.
+   */
+  rawRequest: any;
+};

@@ -3,32 +3,7 @@ import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-funct
 import { ObjectMap } from '@adopt-a-student/common';
 
 import { CallableName as CallableNameEnum } from './constants';
-import linkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkStudentAndSubject';
-import linkStudentAndTutor from './controllers/RelationshipController/request-handlers/linkStudentAndTutor';
-import linkSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/linkSubjectAndSubjectCategory';
-import linkGenericSubjects from './controllers/RelationshipController/request-handlers/linkSubjects';
-import linkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkTutorAndSubject';
-import unlinkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkStudentAndSubject';
-import unlinkStudentAndTutor from './controllers/RelationshipController/request-handlers/unlinkStudentAndTutor';
-import unlinkSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/unlinkSubjectAndSubjectCategory';
-import unlinkGenericSubjects from './controllers/RelationshipController/request-handlers/unlinkSubjects';
-import unlinkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkTutorAndSubject';
-import createStudent from './controllers/StudentController/request-handlers/createStudent';
-import getPrivateStudentData from './controllers/StudentController/request-handlers/getPrivateStudentData';
-import getPublicStudentData from './controllers/StudentController/request-handlers/getPublicStudentDataHandler';
-import updateLocaleSubject from './controllers/StudentController/request-handlers/updateLocaleSubject';
-import updateStudent from './controllers/StudentController/request-handlers/updateStudent';
-import createSubjectCategory from './controllers/SubjectCategoryController/request-handlers/createSubjectCategory';
-import updateSubjectCategory from './controllers/SubjectCategoryController/request-handlers/updateLocaleSubjectCategory';
-import createGenericSubject from './controllers/SubjectController/request-handlers/createGenericSubject';
-import createLocaleSubject from './controllers/SubjectController/request-handlers/createLocaleSubject';
-import getSubject from './controllers/SubjectController/request-handlers/getSubject';
-import getSubjectsByCategory from './controllers/SubjectController/request-handlers/getSubjectsByCategory';
-import createTutor from './controllers/TutorController/request-handlers/createTutor';
-import getPrivateTutorData from './controllers/TutorController/request-handlers/getPrivateTutorDataHandler';
-import getPublicTutorData from './controllers/TutorController/request-handlers/getPublicTutorDataHandler';
-import getTutorsBySubjects from './controllers/TutorController/request-handlers/getTutorsBySubjectsHandler';
-import updateTutor from './controllers/TutorController/request-handlers/updateTutor';
+import { StudentsController } from './controllers/StudentController/StudentController';
 import { FirebaseCallableFunctionHandler } from './declarations/types';
 
 // Start writing Firebase Functions
@@ -39,7 +14,6 @@ Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
 // getStudentsBySubjects;
-
 const callableFunctionHandlers = {
   // writeTest: firestoreWriteHandler,
 
@@ -51,11 +25,11 @@ const callableFunctionHandlers = {
   getTutorsBySubjects,
 
   // students
-  createStudent,
+  createStudent: StudentsController.createStudent,
   updateStudent,
   getPrivateStudentData,
   getPublicStudentData,
-  // getStudentsBySubjects: StudentsController.getStudentsBySubjects,
+  getStudentsBySubjects: StudentsController.getStudentsBySubjects,
 
   // subjects
   createGenericSubject,
