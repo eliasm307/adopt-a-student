@@ -5,7 +5,56 @@ import swaggerSpec from '../../tsoa-build/swagger-spec.json';
 
 export const app = express();
 
-app.use("/", swaggerUi.serve, (_req: ExRequest, res: ExResponse) => {
+// const r = redoc.;
+
+// serve your swagger.json file
+app.get("/docs/swagger.json", (req, res) => {
+  res.json(swaggerSpec);
+});
+
+// define title and specUrl location
+// serve redoc
+/*
+app.get(
+  "/docs",
+  redoc({
+    title: "API Docs",
+    specUrl: "/docs/swagger.json",
+    nativeScrollbars: true,
+    theme: { colors: { primary: { main: "#dd5522" } } },
+  })
+);
+*/
+app.get("/", (_req, res) =>
+  res.send(`
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ReDoc</title>
+    <!-- needed for adaptive design -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+
+    <!--
+    ReDoc doesn't change outer page styles
+    -->
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <redoc spec-url='/docs/swagger.json' expand-responses='all' max-displayed-enum-values='5' hide-hostname></redoc>
+    <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+  </body>
+</html>
+`)
+);
+
+app.use("/docs", swaggerUi.serve, (_req: ExRequest, res: ExResponse) => {
   // console.log(__filename, { _req, res });
   return res.send(
     swaggerUi.generateHTML(swaggerSpec, {

@@ -50,6 +50,8 @@
     "firebase": "^8.4.1",
     "firebase-admin": "^9.6.0",
     "firebase-functions": "^3.13.2",
+    "redoc": "^2.0.0-rc.53",
+    "redoc-express": "^1.0.0",
     "swagger-ui-express": "^4.1.6",
     "tsoa": "^3.6.1",
     "uuid": "^8.3.2"
