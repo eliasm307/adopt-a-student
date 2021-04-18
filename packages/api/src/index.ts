@@ -3,6 +3,7 @@ import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-funct
 import { ObjectMap } from '@adopt-a-student/common';
 
 import { StudentsController } from './controllers/StudentController/StudentController';
+import { TutorsController } from './controllers/TutorController/TutorController';
 import { FirebaseCallableFunctionHandler } from './declarations/types';
 
 // Start writing Firebase Functions
@@ -20,11 +21,10 @@ const callableFunctionHandlers = {
   // writeTest: firestoreWriteHandler,
 
   // tutors
-  createTutor,
-  updateTutor,
-  getPrivateTutorData,
-  getPublicTutorData,
-  getTutorsBySubjects,
+  createTutor: TutorsController.createTutor,
+  updateTutor: TutorsController.updateTutor,
+  getTutor: TutorsController.getTutor,
+  getTutorsBySubjects: TutorsController.getTutorsBySubjects,
 
   // students
   createStudent: StudentsController.createStudent,

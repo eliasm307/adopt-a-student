@@ -1,23 +1,38 @@
-/* eslint-disable @typescript-eslint/require-await */
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
-import { GetStudentsBySubjectsRequestBody } from '@adopt-a-student/common';
+/* eslint-disable @typescript-eslint/require-await */
+import {
+  CreateTutorRequestBody, CreateTutorResponseBody, GetTutorRequestBody, GetTutorResponseBody,
+  GetTutorsBySubjectsRequestBody, GetTutorsBySubjectsResponseBody, UpdateTutorRequestBody,
+  UpdateTutorResponseBody,
+} from '@adopt-a-student/common';
 
-/** Provided automatically by Firebase */
-// type FirebaseCallableFunctionContext = any;
-
-// ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
-// ! so the routes are named after the variables, and the actual name is exported
+import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
+import verifyRequest from '../../utils/verifyRequest';
+import createTutorHandler from './request-handlers/createTutorHandler';
+import getPrivateTutorData from './request-handlers/getPrivateTutorDataHandler';
+import getPublicTutorData from './request-handlers/getPublicTutorDataHandler';
+import getTutorsBySubjectsHandler from './request-handlers/getTutorsBySubjectsHandler';
+import updateTutorHandler from './request-handlers/updateTutorHandler';
 
 const createTutor = "createTutor";
 const getTutorsBySubjects = "getTutorsBySubjects";
-const a3 = "a3";
+const updateTutor = "updateTutor";
+const getTutor = "getTutor";
 
-const exportedNames = [createTutor, getTutorsBySubjects, a3] as const;
-
+const exportedNames = [
+  createTutor,
+  getTutor,
+  getTutorsBySubjects,
+  getTutorsBySubjects,
+  updateTutor,
+] as const;
 /*
-const namedKeys = { a1, a2, a3 };
-// const { x: a, z: c, p: d } = namedKeys;
+const namedKeys = { a: "", v: "", c: "", d: "" };
+
+// ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
+// ! so the routes are named
+const { a, c, d, v } = namedKeys;
 const custom = {
   val1: "aVal",
 };
@@ -27,17 +42,17 @@ const { createGenericSubjectX: createGenericSubjecta } = CallableName;
 const name1 = "name1x/";
 const name23 = CallableName.createGenericSubjectX + "dedec";
 console.log(
-  `enum: ${CallableName.getStudentsBySubjects.toString()} enumCustom: ${custom.val1.toString()}`
+  `enum: ${CallableName.getTutorsBySubjects.toString()} enumCustom: ${custom.val1.toString()}`
 );
 
-const enumv = CallableName.getStudentsBySubjects.toString() + "/";
+const enumv = CallableName.getTutorsBySubjects.toString() + "/";
 */
-
 // hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
 @Route("/")
-export class TutorController extends Controller {
-  /* static callableNames = Object.keys(namedKeys).reduce(
+export class TutorsController extends Controller {
+  /*
+  static callableNames = Object.keys(namedKeys).reduce(
     (acc, name) => ({ ...acc, [name]: name }),
     {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
   );
@@ -45,19 +60,46 @@ export class TutorController extends Controller {
   static callableNames = exportedNames;
 
   @Post(createTutor)
-  public static createTutor(
-    @Body() body: GetStudentsBySubjectsRequestBody,
-    @Query() @Hidden() context: any = {}
-  ): Promise<string> {
-    return Promise.resolve("ss");
+  static createTutor(
+    @Body() body: CreateTutorRequestBody,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<CreateTutorResponseBody> {
+    return createTutorHandler(body, context);
+  }
+
+  /**
+   * Retreives data about a tutor user. If the tutor user owns the data then they get all the data, otherwise it is restricted to 'public' data.
+   * @param body
+   * @param context
+   * @returns
+   */
+  @Post(getTutor)
+  static getTutor(
+    @Body() body: GetTutorRequestBody,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<GetTutorResponseBody> {
+    const { id } = body;
+    const { uid } = verifyRequest(body, context);
+
+    return uid === id
+      ? getPrivateTutorData(body, context)
+      : getPublicTutorData(body, context);
   }
 
   @Post(getTutorsBySubjects)
-  public static getTutorsBySubjects(
-    @Body() body: GetStudentsBySubjectsRequestBody,
-    @Query() @Hidden() context: any = {}
-  ): Promise<string> {
-    return Promise.resolve("edec");
+  static getTutorsBySubjects(
+    @Body() body: GetTutorsBySubjectsRequestBody,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<GetTutorsBySubjectsResponseBody> {
+    return getTutorsBySubjectsHandler(body, context);
+  }
+
+  @Post(updateTutor)
+  static updateTutor(
+    @Body() body: UpdateTutorRequestBody,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<UpdateTutorResponseBody> {
+    return updateTutorHandler(body, context);
   }
 }
 

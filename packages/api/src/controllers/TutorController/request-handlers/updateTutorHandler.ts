@@ -9,7 +9,7 @@ import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase
 import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const updateTutor: FirebaseCallableFunctionHandler<
+const updateTutorHandler: FirebaseCallableFunctionHandler<
   UpdateTutorRequestBody,
   UpdateTutorResponseBody
 > = async (body, context) => {
@@ -40,4 +40,4 @@ const updateTutor: FirebaseCallableFunctionHandler<
 
   return { result: updatedData };
 };
-export default updateTutor;
+export default updateTutorHandler;

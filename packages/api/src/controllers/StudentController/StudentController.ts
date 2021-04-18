@@ -1,4 +1,3 @@
-import { CallableContext } from 'firebase-functions/lib/providers/https';
 /* eslint-disable @typescript-eslint/require-await */
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
@@ -16,7 +15,6 @@ import getPublicStudentData from './request-handlers/getPublicStudentDataHandler
 import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
 import updateStudentHandler from './request-handlers/updateStudentHandler';
 
-const x: CallableContext;
 const createStudent = "createStudent";
 const getStudentsBySubjects = "getStudentsBySubjects";
 const updateStudent = "updateStudent";
