@@ -6,7 +6,7 @@ import {
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import createSubjectCategoryHandler from './request-handlers/createSubjectCategoryHandler';
 import getSubjectCategoriesHandler, {
-  GetSubjectCategoryRequestBody,
+  GetSubjectCategoryRequestBody, GetSubjectCategoryResponseBody,
 } from './request-handlers/getSubjectCategoriesHandler';
 import updateSubjectCategoryHandler, {
   UpdateSubjectCategoryRequestBody, UpdateSubjectCategoryResponseBody,
@@ -53,20 +53,20 @@ export class SubjectCategorysController extends Controller {
   */
   static callableNames = exportedNames;
 
-  @Post(getSubjectCategories)
-  static getSubjectCategories(
-    @Body() body: GetSubjectCategoryRequestBody,
-    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
-  ): Promise<CreateSubjectCategoryResponseBody> {
-    return getSubjectCategoriesHandler(body, context);
-  }
-
   @Post(createSubjectCategory)
   static createSubjectCategory(
     @Body() body: CreateSubjectCategoryRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateSubjectCategoryResponseBody> {
     return createSubjectCategoryHandler(body, context);
+  }
+
+  @Post(getSubjectCategories)
+  static getSubjectCategories(
+    @Body() body: GetSubjectCategoryRequestBody,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<GetSubjectCategoryResponseBody> {
+    return getSubjectCategoriesHandler(body, context);
   }
 
   @Post(updateSubjectCategory)

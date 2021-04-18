@@ -34,6 +34,7 @@ const callableFunctionHandlers = {
   getStudent: StudentsController.getStudent,
   getStudentsBySubjects: StudentsController.getStudentsBySubjects,
 
+  /*
   // subjects
   createGenericSubject,
   // updateGenericSubject,
@@ -41,6 +42,7 @@ const callableFunctionHandlers = {
   updateLocaleSubject,
   getSubject,
   getSubjectsByCategory,
+  */
 
   // subject categories
   getSubjectCategories: SubjectCategorysController.getSubjectCategories,
@@ -48,6 +50,7 @@ const callableFunctionHandlers = {
   updateSubjectCategory: SubjectCategorysController.updateSubjectCategory,
 
   // relationships
+  /*
   linkGenericSubjects,
   unlinkGenericSubjects,
 
@@ -62,6 +65,7 @@ const callableFunctionHandlers = {
 
   linkStudentAndLocaleSubject,
   unlinkStudentAndLocaleSubject,
+  */
 } as ObjectMap<CallableName, (body: any, context: any) => Promise<any>>;
 
 /*

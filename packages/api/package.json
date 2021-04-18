@@ -38,7 +38,7 @@
     "docs:start": "start \"\" \"docs/index.html\"",
     "tsoa:build": "yarn tsoa spec",
     "tsoa:start": "start http://localhost:3000/ && node lib/src/tsoa-docs/server.js",
-    "tsoa:start:hot": "start http://localhost:3000/ && concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
+    "tsoa:start:hot": "tsoa:build && start http://localhost:3000/ && concurrently \"nodemon\" \"nodemon -x tsoa spec\"",
     "tsoa:buildstart": "yarn build && yarn tsoa:build && start http://localhost:3000/ && node lib/src/tsoa-docs/server.js"
   },
   "engines": {

@@ -3,7 +3,7 @@ import swaggerUi from 'swagger-ui-express';
 
 import swaggerSpec from '../../tsoa-build/swagger-spec.json';
 import { StudentsController } from '../controllers/StudentController/StudentController';
-import { TutorController } from '../controllers/TutorController/TutorController';
+import { TutorsController } from '../controllers/TutorController/TutorController';
 
 export const app = express();
 
@@ -29,7 +29,7 @@ const updates = {
     },
     {
       name: "Tutors",
-      tags: [...TutorController.callableNames],
+      tags: [...TutorsController.callableNames],
     },
   ],
 };
@@ -116,7 +116,7 @@ const redocHtml = `
 `;
 app.get("/", (_req, res) => res.send(redocHtml));
 
-app.use("/docs", swaggerUi.serve, (_req: ExRequest, res: ExResponse) => {
+app.use("/docs-alt", swaggerUi.serve, (_req: ExRequest, res: ExResponse) => {
   // console.log(__filename, { _req, res });
   return res.send(
     swaggerUi.generateHTML(swaggerSpec, {

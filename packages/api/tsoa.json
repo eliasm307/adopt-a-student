@@ -16,10 +16,10 @@
     "_1": "/* Basic Options */",
     "incremental": true,
     "_target": "es2017",
-    "target": "es6",
-    "module": "commonjs",
+    "_.target": "es6",
+    "_module": "commonjs",
     "outDir": "tsoa-build",
-    "baseUrl": ".",
+    "__baseUrl": ".",
     "typeRoots": [ "./node_modules/@types" ],
     "types": [ "@types/jest", "@types/node" ],
 
@@ -41,7 +41,6 @@
 
     "_4": "/* Module Resolution Options */",
     "_moduleResolution": "node",
-    "_baseUrl": ".",
     "paths": {
       "@adopt-a-student/common": [ "./common/src/" ]
     },
