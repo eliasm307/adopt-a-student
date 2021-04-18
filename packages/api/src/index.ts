@@ -9,6 +9,7 @@ import {
 } from './controllers/SubjectCategoryController/SubjectCategoryController';
 import { SubjectsController } from './controllers/SubjectController/SubjectController';
 import { TutorsController } from './controllers/TutorController/TutorController';
+import app from './tsoa-docs/app';
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -79,3 +80,5 @@ module.exports = Object.entries(callableFunctionHandlers).reduce(
   },
   {} as Record<string, HttpsFunction & Runnable<any>>
 );
+
+module.exports.docs = functionsHttps.onRequest(app);

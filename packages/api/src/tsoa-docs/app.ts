@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { Request as ExRequest, Response as ExResponse } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
@@ -5,7 +6,11 @@ import swaggerSpec from '../../tsoa-build/swagger-spec.json';
 import { StudentsController } from '../controllers/StudentController/StudentController';
 import { TutorsController } from '../controllers/TutorController/TutorController';
 
-export const app = express();
+const app = express();
+
+// Automatically allow cross-origin requests
+// eslint-disable-next-line @typescript-eslint/no-unsafe-call
+app.use(cors({ origin: true }));
 
 // const r = redoc.;
 
@@ -86,7 +91,7 @@ console.log("Redoc Config", {
 });
 */
 // serve your swagger.json file
-app.get("/docs/swagger.json", (req, res) => {
+app.get("docs/swagger.json", (req, res) => {
   res.json(modifiedSpec);
 });
 
@@ -112,7 +117,7 @@ const redocHtml = `
   </head>
   <body>
       <div id="redoc-container"></div>
-      <redocx spec-url='/docs/swagger.json'
+      <redocx spec-url='./docs/swagger.json'
         expand-responses='all'
         max-displayed-enum-values='5'
         hide-hostname
@@ -134,7 +139,7 @@ const redocHtml = `
     <script> document.querySelectorAll('[aria-label="expand properties"]').forEach(button => button.click()); console.log('clicked'); </script>
     <script>
       Redoc.init(
-          '/docs/swagger.json',
+          ${JSON.stringify(modifiedSpec)},
           {
             expandDefaultServerVariables: true,
             expandResponses: 'all',
@@ -165,7 +170,7 @@ const redocHtml = `
 `;
 app.get("/", (_req, res) => res.send(redocHtml));
 
-app.use("/docs-alt", swaggerUi.serve, (_req: ExRequest, res: ExResponse) => {
+app.use("/alt", swaggerUi.serve, (_req: ExRequest, res: ExResponse) => {
   // console.log(__filename, { _req, res });
   return res.send(
     swaggerUi.generateHTML(swaggerSpec, {
@@ -177,3 +182,5 @@ app.use("/docs-alt", swaggerUi.serve, (_req: ExRequest, res: ExResponse) => {
     })
   );
 });
+
+export default app;

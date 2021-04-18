@@ -227,13 +227,13 @@
         "affectsGlobalScope": false
       },
       "./src/declarations/types.ts": {
-        "version": "ae579da6bfc8587b80fd1019df830d525b3ce25df7560e4baa097b054f2a5eab",
-        "signature": "0775e62a37e680d6ad23a4cf976a72e20606e4d14a0dca0b43dbb003ac32a94f",
+        "version": "ff537bb2d0e257fd9b12de198e6ecb2a3ab086290406dea0e06e90c302792ec0",
+        "signature": "1c0cf7a4e6acfdfcf38819c9493aa380097973e63f55f693eccaa834036fde20",
         "affectsGlobalScope": false
       },
       "./src/declarations/data-models.ts": {
-        "version": "b7d740924b62cc87406b1fcf109dded884457b2f86633338e312e49fbb06bb00",
-        "signature": "ca042dd7539b7cce8538051bee26ca6d99920ae1dbfc81d8d9ce7d048efee2a2",
+        "version": "4c4e0753d92d2e7b88cc2463b77bf26feaf613c3c2a7b673cdd1574990964e43",
+        "signature": "16399d5fca5c205784130ee8c5ca6bfdab84de47795c180bf75543b9c1e85907",
         "affectsGlobalScope": false
       },
       "./src/declarations/object-shcema.ts": {

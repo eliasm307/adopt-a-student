@@ -38,6 +38,10 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ]
+    ],
+    "rewrites": [ {
+      "source": "**",
+      "function": "docs"
+    } ]
   }
 }
