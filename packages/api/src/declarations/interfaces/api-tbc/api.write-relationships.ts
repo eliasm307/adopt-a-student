@@ -2,21 +2,8 @@ import { FirebaseCallableFunctionHandler } from '../../types';
 
 // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
 // todo needs to verify a user has access to this data
-// todo should add subject to user and user to subject
-export type ApiLinkTutorAndLocaleSubject = ;
-
-// todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
-// todo needs to verify a user has access to this data
 // todo should remove subject to user and user to subject
-export type ApiUnlinkStudentAndLocaleSubject = ;
-
-// todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
-// todo needs to verify a user has access to this data
-// todo should remove subject to user and user to subject
-export type ApiUnlinkTutorAndLocaleSubject = FirebaseCallableFunctionHandler<
-  UnlinkTutorAndSubjectRequestBody,
-  UnlinkTutorAndSubjectResponseBody
->;
+export type ApiUnlinkTutorAndLocaleSubject = ;
 
 // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
 // todo needs to verify a user has access to this data
@@ -42,9 +29,6 @@ export type ApiLinkStudentAndTutor = FirebaseCallableFunctionHandler<
   LinkStudentAndTutorResponseBody
 >;
 
-// todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
-// todo needs to verify a user has access to this data
-// todo should remove subject to user and user to subject
 export type ApiUnlinkStudentAndTutor = FirebaseCallableFunctionHandler<
   UnlinkStudentAndTutorRequestBody,
   UnlinkStudentAndTutorResponseBody

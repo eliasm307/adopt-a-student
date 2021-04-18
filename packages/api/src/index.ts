@@ -12,7 +12,7 @@ import unlinkGenericSubjectAndSubjectCategory from './controllers/RelationshipCo
 import unlinkGenericSubjects from './controllers/RelationshipController/request-handlers/unlinkGenericSubjects';
 import unlinkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkStudentAndLocaleSubject';
 import unlinkStudentAndTutor from './controllers/RelationshipController/request-handlers/unlinkStudentAndTutor';
-import unlinkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkTutorAndLocaleSubject';
+import unlinkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkTutorAndSubject';
 import createStudent from './controllers/StudentController/request-handlers/createStudent';
 import getPrivateStudentData from './controllers/StudentController/request-handlers/getPrivateStudentData';
 import getPublicStudentData from './controllers/StudentController/request-handlers/getPublicStudentDataHandler';
