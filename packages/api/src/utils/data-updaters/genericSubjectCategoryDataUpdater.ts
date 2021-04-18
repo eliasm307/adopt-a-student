@@ -21,14 +21,14 @@ const genericSubjectCategoryDataUpdater: DataUpdater<GenericSubjectCategoryData>
     id: null,
     // todo test this works as expected
     // replace the object with the edits, this should be merged by the firestore update
-    localeSubjectCategories: (value) =>
+    locales: (value) =>
       typeof value === "object"
-        ? (newData.localeSubjectCategories = value as ObjectMap<
+        ? (newData.locales = value as ObjectMap<
             LocaleCode,
             LocaleSubjectCategoryData
           >)
         : null,
-    linkedGenericSubjectIds: null, // change handled by a different request
+    relatedSubjects: null, // change handled by a different request
   };
 
   // apply edit mutations where possible

@@ -20,8 +20,8 @@ const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
     prefferedLocales: () => {
       throw Error("Mutator not implemented");
     },
-    linkedLocaleSubjects: null,
-    linkedStudents: null,
+    relatedSubjects: null,
+    relatedStudents: null,
     email: (value) =>
       typeof value === "string" ? (newData.email = value) : null,
     userName: (value) =>

@@ -1,5 +1,5 @@
 import { ConfidenceLevelEnum } from './enums';
-import { Country, LocaleCode, ObjectMap } from './types';
+import { CategoryId, Country, GenericSubjectId, LocaleCode, ObjectMap, SubjectId } from './types';
 
 // ? wrap these in a Model namespace?
 
@@ -32,13 +32,13 @@ export interface PrivateUserData extends PublicUserData {
   /** Links to subjects a user is interested in learning/teaching (depends on type of user)
    * and user specific information about the user relating to a specific subject
    */
-  linkedLocaleSubjects: LinkedLocaleSubjectData[];
+  relatedSubjects: LinkedLocaleSubjectData[];
 }
 
 /** Schema of data that represents a student, as it is stored in database */
 export interface PrivateStudentData extends PrivateUserData {
   /** Data about the tutors a student is involved with */
-  linkedTutors: LinkedTutorData[];
+  relatedTutors: LinkedTutorData[];
 }
 
 export interface PublicStudentData extends PublicUserData {}
@@ -46,7 +46,7 @@ export interface PublicStudentData extends PublicUserData {}
 /** Schema of data that represents a tutor, only available to the tutor */
 export interface PrivateTutorData extends PrivateUserData {
   /** Data about the students a teacher is involved with */
-  linkedStudents: LinkedStudentData[];
+  relatedStudents: LinkedStudentData[];
 }
 
 export interface PublicTutorData extends PublicUserData {
@@ -78,11 +78,11 @@ export interface GenericSubjectData extends Entity {
   readonly id: string;
 
   /** The categories this generic subject belongs to */
-  categoryIds: string[];
+  relatedCategories: CategoryId[];
   /** Links to other relevant subjects a user might be interested in
    `// todo needs to be syncronised ie if A is related to B then B must be related to A`
   */
-  linkedGenericSubjectIds: string[];
+  relatedSubjects: SubjectId[];
 }
 
 /** Name of a subject category in a specific locale */
@@ -102,12 +102,12 @@ export interface LocaleSubjectCategoryData {
 /** Subject category with all locale names */
 export interface GenericSubjectCategoryData extends Entity {
   id: string;
+  /** Representations of the same generic subject catories in different locales */
+  locales: ObjectMap<LocaleCode, LocaleSubjectCategoryData>;
   /** generic subjects which belong to this generic category
      // todo this should link category to subject and subject to category
   */
-  linkedGenericSubjectIds: string[];
-  /** Representations of the same generic subject catories in different locales */
-  localeSubjectCategories: ObjectMap<LocaleCode, LocaleSubjectCategoryData>;
+  relatedSubjects: GenericSubjectId[];
 }
 
 /** Schema of the general public data (not relating to a user) that represents a specific locale dependent subject,
@@ -122,14 +122,14 @@ export interface LocaleSubjectData extends Entity {
   country: Country;
   /** Description of the subject */
   description: string;
-  /** Ids of students needing help with this subject `// todo needs to be syncronised` */
-  linkedStudentIds: string[];
-  /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */
-  linkedTutorIds: string[];
   /** Represents a language that a subject is in */
   locale: LocaleCode;
   /** Id of generic subject this locale subject relates to, there should only be 1 */
   parentId: string;
+  /** Ids of students needing help with this subject `// todo needs to be syncronised` */
+  relatedStudentIds: string[];
+  /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */
+  relatedTutorIds: string[];
 }
 
 /** Data about a tutor from the perspective of a student, as it is stored in database */

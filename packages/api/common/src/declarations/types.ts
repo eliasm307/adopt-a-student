@@ -18,3 +18,7 @@ export type TutorId = string;
 export type StudentId = string;
 
 export type UserId = TutorId | StudentId;
+
+export type SubjectCategoryId = string;
+
+export type CategoryId = string;

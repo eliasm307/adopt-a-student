@@ -17,8 +17,8 @@ const localeSubjectDataUpdater: DataUpdater<LocaleSubjectData> = ({
 
   const mutators: DataMutatorMap<LocaleSubjectData> = {
     id: null,
-    linkedStudentIds: null, // change handled by a different request
-    linkedTutorIds: null, // change handled by a different request
+    relatedStudentIds: null, // change handled by a different request
+    relatedTutorIds: null, // change handled by a different request
     country: (value) =>
       typeof value === "string" ? (newData.country = value as Country) : null,
     description: (value) =>

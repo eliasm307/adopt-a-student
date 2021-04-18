@@ -6,11 +6,11 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
   const {
     id,
     country,
-    linkedTutorIds: tutorIds,
+    relatedTutorIds: tutorIds,
     description,
     parentId: genericSubjectId,
     locale,
-    linkedStudentIds: studentIds,
+    relatedStudentIds: studentIds,
   } = data as LocaleSubjectData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -19,11 +19,11 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
   const forTsError: LocaleSubjectData = {
     id,
     country,
-    linkedTutorIds: tutorIds,
+    relatedTutorIds: tutorIds,
     description,
     parentId: genericSubjectId,
     locale,
-    linkedStudentIds: studentIds,
+    relatedStudentIds: studentIds,
   };
 
   const hasId = typeof id === "string" && id;

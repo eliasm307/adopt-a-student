@@ -1,7 +1,9 @@
 import {
-  PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData,
+  LocaleSubjectData, PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData,
 } from './data-models';
-import { StudentId, SubjectId, TutorId } from './types';
+import {
+  CategoryId, GenericSubjectId, LocaleCode, StudentId, SubjectCategoryId, SubjectId, TutorId,
+} from './types';
 
 export interface GetStudentsBySubjectsRequestBody {
   subjectIds: SubjectId[];
@@ -62,4 +64,17 @@ export interface GetStudentRequestBody {
 
 export interface GetStudentResponseBody {
   student: PrivateStudentData | PublicStudentData;
+}
+
+export interface GetSubjectsByCategoryRequestBody {
+  categoryId: SubjectCategoryId;
+  locale: LocaleCode;
+}
+
+export interface GetSubjectsByCategoryResponseBody {
+  data: {
+    subject: LocaleSubjectData;
+    relatedSubjects: GenericSubjectId[];
+    relatedCategories: CategoryId[];
+  }[];
 }

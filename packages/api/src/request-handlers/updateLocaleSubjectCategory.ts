@@ -30,7 +30,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
   const { id, locale, data: localeCategoryEdits } = body;
 
   const genericCategoryEdits: Partial<GenericSubjectCategoryData> = {
-    localeSubjectCategories: { [locale]: localeCategoryEdits },
+    locales: { [locale]: localeCategoryEdits },
   } as Partial<GenericSubjectCategoryData>;
 
   /*
@@ -52,8 +52,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
     firestore: firestoreAdmin,
   });
 
-  const localeSubjectCategory =
-    genericSubjectCategory.localeSubjectCategories[locale];
+  const localeSubjectCategory = genericSubjectCategory.locales[locale];
 
   if (!localeSubjectCategory)
     throw new functionsHttps.HttpsError(

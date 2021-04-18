@@ -7,9 +7,9 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
   const {
     email,
     id,
-    linkedLocaleSubjects,
+    relatedSubjects: linkedLocaleSubjects,
     userName,
-    linkedTutors: tutors,
+    relatedTutors: tutors,
     imageUrl,
     introduction,
     prefferedLocales,
@@ -21,9 +21,9 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
   const forTsError: PrivateStudentData = {
     email,
     id,
-    linkedLocaleSubjects,
+    relatedSubjects: linkedLocaleSubjects,
     userName,
-    linkedTutors: tutors,
+    relatedTutors: tutors,
     imageUrl,
     introduction,
     prefferedLocales,

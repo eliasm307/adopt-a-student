@@ -31,8 +31,7 @@ const getSubjectCategoriesHandler: ApiGetSubjectCategoriesHandler = async (
     // get locale subjects from generic subject, default to en if not defined
     .map((genericCategory) => {
       const localeSubjectCategory =
-        genericCategory.localeSubjectCategories[locale] ||
-        genericCategory.localeSubjectCategories.en;
+        genericCategory.locales[locale] || genericCategory.locales.en;
 
       if (!localeSubjectCategory)
         console.warn(

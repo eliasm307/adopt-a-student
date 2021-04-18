@@ -42,10 +42,10 @@ describe.only("firebase functions createTutor", () => {
       email: "an-email",
       id: "232",
       prefferedLocales: [],
-      linkedLocaleSubjects: [
+      relatedSubjects: [
         { confidenceLevel: 2, detail: "2ded", id: "kkd", locale: "en" },
       ],
-      linkedStudents: [{ id: "student1" }],
+      relatedStudents: [{ id: "student1" }],
       userName: "eced",
     };
 

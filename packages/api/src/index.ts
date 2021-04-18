@@ -16,7 +16,7 @@ import getPublicTutorData from './request-handlers/getPublicTutorDataHandler';
 import getStudentsBySubjects from './request-handlers/getStudentsBySubjectsHandler';
 import getSubjectCategories from './request-handlers/getSubjectCategoriesHandler';
 import getSubject from './request-handlers/getSubjectHandler';
-import getSubjectsByCategory from './request-handlers/getSubjectsByCategoryHandler';
+import getSubjectsByCategory from './request-handlers/getSubjectsByCategory';
 import getTutorsBySubjects from './request-handlers/getTutorsBySubjectsHandler';
 import linkGenericSubjectAndSubjectCategory from './request-handlers/linkGenericSubjectAndSubjectCategory';
 import linkGenericSubjects from './request-handlers/linkGenericSubjects';
