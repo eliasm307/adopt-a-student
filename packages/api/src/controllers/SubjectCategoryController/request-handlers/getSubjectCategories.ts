@@ -1,11 +1,23 @@
-import { isGenericSubjectCategoryData, LocaleSubjectCategoryData } from '@adopt-a-student/common';
+import {
+  isGenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData,
+} from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
+import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getCollectionData from '../../../utils/firebase/getCollectionData';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const getSubjectCategories:  = async (data, context) => {
+export interface GetSubjectCategoryRequestBody {
+  locale: LocaleCode;
+}
+export interface GetSubjectCategoryResponseBody {
+  subjectCategories: LocaleSubjectCategoryData[];
+}
+const getSubjectCategories: FirebaseCallableFunctionHandler<
+  GetSubjectCategoryRequestBody,
+  GetSubjectCategoryResponseBody
+> = async (data, context) => {
   const auth = verifyRequest(data, context);
 
   // verify received data
@@ -23,7 +35,7 @@ const getSubjectCategories:  = async (data, context) => {
     dataPredicate: isGenericSubjectCategoryData,
   });
 
-  const localeSubjectCategories = genericSubjectCategories
+  const subjectCategories = genericSubjectCategories
     // get locale subjects from generic subject, default to en if not defined
     .map((genericCategory) => {
       const localeSubjectCategory =
@@ -50,8 +62,8 @@ const getSubjectCategories:  = async (data, context) => {
     );
 
   return {
-    data: { localeSubjectCategories },
-  };
+    subjectCategories,
+  } as GetSubjectCategoryResponseBody;
 };
 
 export default getSubjectCategories;
