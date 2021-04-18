@@ -1,28 +1,37 @@
-import { isGenericSubjectCategoryData } from '@adopt-a-student/common';
+import { GenericSubjectCategoryData, isGenericSubjectCategoryData } from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
-import { ApiCreateSubjectCategoryHandler } from '../../../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import newGuid from '../../../utils/newGuid';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const createSubjectCategory: ApiCreateSubjectCategoryHandler = async (
-  body,
-  context
-) => {
+export interface CreateSubjectCategoryRequestBody {
+  updates: Partial<Omit<GenericSubjectCategoryData, "id">>;
+}
+export interface CreateSubjectCategoryResponseBody {
+  result: GenericSubjectCategoryData;
+}
+
+const createSubjectCategory: FirebaseCallableFunctionHandler<
+  CreateSubjectCategoryRequestBody,
+  CreateSubjectCategoryResponseBody
+> = async (body, context) => {
   const auth = verifyRequest(body, context);
 
-  if (!body?.data)
+  if (!body?.updates)
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Data not provided"
     );
 
-  const id = newGuid();
-  const data = { ...body.data, id };
+  const { updates } = body;
 
-  const genericSubjectCategory = await createDocument({
+  const id = newGuid();
+  const data = { ...updates, id };
+
+  const result = await createDocument({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     id,
     data,
@@ -30,9 +39,7 @@ const createSubjectCategory: ApiCreateSubjectCategoryHandler = async (
     firestoreAdmin,
   });
 
-  return {
-    data: { genericSubjectCategory },
-  };
+  return { result } as CreateSubjectCategoryResponseBody;
 };
 
 export default createSubjectCategory;
