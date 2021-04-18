@@ -1,15 +1,29 @@
 import { HttpsFunction, Runnable } from 'firebase-functions';
 import { CallableContext } from 'firebase-functions/lib/providers/https';
 
-import { CALLABLE_FUNCTION_NAMES } from '../constants';
+import {
+  RelationshipController,
+} from '../controllers/RelationshipController/RelationshipController';
+import { StudentsController } from '../controllers/StudentController/StudentController';
+import {
+  SubjectCategoryController,
+} from '../controllers/SubjectCategoryController/SubjectCategoryController';
+import { SubjectsController } from '../controllers/SubjectController/SubjectController';
+import { TutorsController } from '../controllers/TutorController/TutorController';
 
 export type FirebaseCallableFunctionHandler<D = any, R = any> = (
   body: Partial<D> | undefined,
   context: CallableContext
 ) => Promise<R>;
 
-/** Defines the callable function names available */
-export type CallableFunctionName = typeof CALLABLE_FUNCTION_NAMES[number];
+/** Defines the callable function names available, as defined by various controllers */
+export type CallableFunctionName =
+  | typeof StudentsController.callableNames[number]
+  | typeof TutorsController.callableNames[number]
+  | typeof SubjectsController.callableNames[number]
+  | typeof SubjectCategoryController.callableNames[number]
+  | typeof RelationshipController.callableNames[number];
+// typeof CALLABLE_FUNCTION_NAMES[number];
 
 /** Type of a callable function */
 export type CallableMethod = HttpsFunction & Runnable<any>;
