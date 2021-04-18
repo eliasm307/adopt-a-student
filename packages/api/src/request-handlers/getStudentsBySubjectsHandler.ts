@@ -1,10 +1,19 @@
-import { PublicStudentData } from '@adopt-a-student/common';
+import {
+  GetStudentsBySubjectsRequestBody, GetStudentsBySubjectsResponseBody, PublicStudentData,
+} from '@adopt-a-student/common';
 
-import { ApiGetStudentsBySubjectsHandler } from '../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../declarations/types';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import getUsersBySubjects from '../utils/getUsersBySubjects';
 import verifyRequest from '../utils/verifyRequest';
+
+/** Get students by subjects, save this in subject */
+type ApiGetStudentsBySubjectsHandler = FirebaseCallableFunctionHandler<
+  GetStudentsBySubjectsRequestBody,
+  // returns
+  GetStudentsBySubjectsResponseBody
+>;
 
 const getStudentsBySubjectsHandler: ApiGetStudentsBySubjectsHandler = async (
   data,
