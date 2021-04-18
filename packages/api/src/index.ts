@@ -2,7 +2,6 @@ import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-funct
 
 import { ObjectMap } from '@adopt-a-student/common';
 
-import { CallableName as CallableNameEnum } from './constants';
 import { StudentsController } from './controllers/StudentController/StudentController';
 import { FirebaseCallableFunctionHandler } from './declarations/types';
 
@@ -13,6 +12,9 @@ import { FirebaseCallableFunctionHandler } from './declarations/types';
 Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
+
+type CallableName = typeof StudentsController.callableNames[number] | string;
+
 // getStudentsBySubjects;
 const callableFunctionHandlers = {
   // writeTest: firestoreWriteHandler,
@@ -26,9 +28,8 @@ const callableFunctionHandlers = {
 
   // students
   createStudent: StudentsController.createStudent,
-  updateStudent,
-  getPrivateStudentData,
-  getPublicStudentData,
+  updateStudent: StudentsController.updateStudent,
+  getStudent: StudentsController.getStudent,
   getStudentsBySubjects: StudentsController.getStudentsBySubjects,
 
   // subjects
@@ -59,7 +60,7 @@ const callableFunctionHandlers = {
 
   linkStudentAndLocaleSubject,
   unlinkStudentAndLocaleSubject,
-} as ObjectMap<CallableNameEnum, FirebaseCallableFunctionHandler>;
+} as ObjectMap<CallableName, FirebaseCallableFunctionHandler>;
 
 /*
 callableFunctionHandlers.test = (data, context) => {
