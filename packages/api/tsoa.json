@@ -1,7 +1,7 @@
 {
   "_entryFile": "src/app.ts",
   "noImplicitAdditionalProperties": "silently-remove-extras",
-  "controllerPathGlobs": [ "src/controllers/StudentController/Controller.ts" ],
+  "controllerPathGlobs": [ "src/controllers/**/*Controller.ts" ],
   "spec": {
     "specFileBaseName": "swagger-spec",
     "outputDirectory": "tsoa-build",

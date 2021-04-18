@@ -3,18 +3,24 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
   CreateStudentRequestBody, CreateStudentResponseBody, GetStudentsBySubjectsRequestBody,
-  GetStudentsBySubjectsResponseBody, GetTutorsBySubjectsRequestBody,
-  GetTutorsBySubjectsResponseBody,
+  GetStudentsBySubjectsResponseBody,
 } from '@adopt-a-student/common';
 
-import { CallableName } from '../../constants';
-import getTutorsBySubjects from '../TutorController/request-handlers/getTutorsBySubjectsHandler';
-import createStudent from './request-handlers/createStudent';
+import createStudentHandler from './request-handlers/createStudent';
 import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
 
 /** Provided automatically by Firebase */
 type FirebaseCallableFunctionContext = any;
 
+const createStudent = "b19";
+const getStudentsBySubjects = "b3";
+
+const exportedNames = [
+  createStudent,
+  getStudentsBySubjects,
+  getStudentsBySubjects,
+] as const;
+/*
 const namedKeys = { a: "", v: "", c: "", d: "" };
 
 // ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
@@ -33,50 +39,47 @@ console.log(
 );
 
 const enumv = CallableName.getStudentsBySubjects.toString() + "/";
-
+*/
 // hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
-@Route()
-export default class StudentsController extends Controller {
+@Route("")
+export class StudentsController extends Controller {
+  /*
   static callableNames = Object.keys(namedKeys).reduce(
     (acc, name) => ({ ...acc, [name]: name }),
     {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
   );
+  */
+  static callableNames = exportedNames;
 
-  @Post(a)
+  @Post(createStudent)
   static createStudent(
     @Body() body: CreateStudentRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {}
   ): Promise<CreateStudentResponseBody> {
-    return createStudent(body, context);
+    return createStudentHandler(body, context);
   }
 
-  @Post(c)
+  @Post(getStudentsBySubjects)
   static getStudentsBySubjects(
     @Body() body: GetStudentsBySubjectsRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {}
   ): Promise<GetStudentsBySubjectsResponseBody> {
     return getStudentsBySubjectsHandler(body, context);
   }
-
-  @Post(d)
-  static getTutorsBySubjects(
-    @Body() body: GetTutorsBySubjectsRequestBody,
-    @Query() @Hidden() context: FirebaseCallableFunctionContext = {}
-  ): Promise<GetTutorsBySubjectsResponseBody> {
-    return getTutorsBySubjects(body, context);
-  }
 }
 
+/*
 enum wer {
   a,
   b,
   c,
 }
+*/
 
 // const a = { ...wer };
 
 // const b = Object.values(a).map((k) => k as const);
 
-type q = keyof typeof a;
+// type q = keyof typeof a;
 // const c:  q,  = "";
