@@ -1,4 +1,6 @@
-import { GenericSubjectCategoryData, isGenericSubjectCategoryData } from '@adopt-a-student/common';
+import {
+  CreateSubjectCategoryRequestBody, CreateSubjectCategoryResponseBody, isGenericSubjectCategoryData,
+} from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
@@ -6,13 +8,6 @@ import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import newGuid from '../../../utils/newGuid';
 import verifyRequest from '../../../utils/verifyRequest';
-
-export interface CreateSubjectCategoryRequestBody {
-  updates: Partial<Omit<GenericSubjectCategoryData, "id">>;
-}
-export interface CreateSubjectCategoryResponseBody {
-  result: GenericSubjectCategoryData;
-}
 
 const createSubjectCategory: FirebaseCallableFunctionHandler<
   CreateSubjectCategoryRequestBody,

@@ -20,7 +20,7 @@ import updateLocaleSubject from './controllers/StudentController/request-handler
 import updateStudent from './controllers/StudentController/request-handlers/updateStudent';
 import createSubjectCategory from './controllers/SubjectCategoryController/request-handlers/createSubjectCategory';
 import getSubjectCategories from './controllers/SubjectCategoryController/request-handlers/getSubjectCategories';
-import updateLocaleSubjectCategory from './controllers/SubjectCategoryController/request-handlers/updateLocaleSubjectCategory';
+import updateSubjectCategory from './controllers/SubjectCategoryController/request-handlers/updateLocaleSubjectCategory';
 import createGenericSubject from './controllers/SubjectController/request-handlers/createGenericSubject';
 import createLocaleSubject from './controllers/SubjectController/request-handlers/createLocaleSubject';
 import getSubject from './controllers/SubjectController/request-handlers/getSubject';
@@ -69,7 +69,7 @@ const callableFunctionHandlers = {
   // subject categories
   getSubjectCategories,
   createSubjectCategory,
-  updateLocaleSubjectCategory,
+  updateLocaleSubjectCategory: updateSubjectCategory,
 
   // relationships
   linkGenericSubjects,

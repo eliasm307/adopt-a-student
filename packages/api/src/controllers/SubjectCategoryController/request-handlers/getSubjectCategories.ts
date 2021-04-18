@@ -1,15 +1,11 @@
 import { isGenericSubjectCategoryData, LocaleSubjectCategoryData } from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
-import { ApiGetSubjectCategoriesHandler } from '../../../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getCollectionData from '../../../utils/firebase/getCollectionData';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const getSubjectCategories: ApiGetSubjectCategoriesHandler = async (
-  data,
-  context
-) => {
+const getSubjectCategories:  = async (data, context) => {
   const auth = verifyRequest(data, context);
 
   // verify received data

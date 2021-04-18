@@ -1,24 +1,36 @@
-import { GenericSubjectCategoryData, isGenericSubjectCategoryData } from '@adopt-a-student/common';
+import {
+  GenericSubjectCategoryData, isGenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData,
+  SubjectCategoryId,
+} from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
-import { ApiUpdateLocaleSubjectCategoryHandler } from '../../../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import genericSubjectCategoryDataUpdater from '../../../utils/data-updaters/genericSubjectCategoryDataUpdater';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async (
-  body,
-  context
-) => {
+export interface UpdateSubjectCategoryRequestBody {
+  id: SubjectCategoryId;
+  locale: LocaleCode;
+  updates: Partial<Omit<LocaleSubjectCategoryData, "id" | "locale">>;
+}
+export interface UpdateSubjectCategoryResponseBody {
+  result: LocaleSubjectCategoryData;
+}
+
+const updateSubjectCategory: FirebaseCallableFunctionHandler<
+  UpdateSubjectCategoryRequestBody,
+  UpdateSubjectCategoryResponseBody
+> = async (body, context) => {
   const { uid } = verifyRequest(body, context);
 
   // verify received data
   if (
     !body ||
-    !body.data ||
-    typeof body.data !== "object" ||
-    !Object.keys(body.data).length ||
+    !body.updates ||
+    typeof body.updates !== "object" ||
+    !Object.keys(body.updates).length ||
     !body.id ||
     !body.locale
   )
@@ -27,7 +39,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
       "Could not update document because provided data is not valid"
     );
 
-  const { id, locale, data: localeCategoryupdates } = body;
+  const { id, locale, updates: localeCategoryupdates } = body;
 
   const genericCategoryupdates: Partial<GenericSubjectCategoryData> = {
     locales: { [locale]: localeCategoryupdates },
@@ -52,15 +64,15 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
     firestoreAdmin,
   });
 
-  const localeSubjectCategory = genericSubjectCategory.locales[locale];
+  const subjectCategory = genericSubjectCategory.locales[locale];
 
-  if (!localeSubjectCategory)
+  if (!subjectCategory)
     throw new functionsHttps.HttpsError(
       "internal",
       "There was an issue updating the locale subject category"
     );
 
-  return { data: { localeSubjectCategory } };
+  return { result: subjectCategory } as UpdateSubjectCategoryResponseBody;
 };
 
-export default updateLocaleSubjectCategory;
+export default updateSubjectCategory;
