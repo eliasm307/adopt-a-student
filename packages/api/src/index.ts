@@ -2,6 +2,7 @@ import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-funct
 
 import { ObjectMap } from '@adopt-a-student/common';
 
+import { StudentsController } from './controllers/StudentController';
 import { CallableFunctionName, FirebaseCallableFunctionHandler } from './declarations/types';
 import createGenericSubject from './request-handlers/createGenericSubject';
 import createLocaleSubject from './request-handlers/createLocaleSubject';
@@ -54,7 +55,7 @@ const callableFunctionHandlers = {
   updateStudent,
   getPrivateStudentData,
   getPublicStudentData,
-  getStudentsBySubjects,
+  getStudentsBySubjects: StudentsController.getStudentsBySubjects,
 
   // subjects
   createGenericSubject,

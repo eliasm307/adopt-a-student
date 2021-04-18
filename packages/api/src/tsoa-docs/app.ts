@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import express, { Request as ExRequest, Response as ExResponse } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
