@@ -8,6 +8,7 @@ import {
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
+import arrayToRecord from '../../utils/arrayToRecord';
 import verifyRequest from '../../utils/verifyRequest';
 import createTutorHandler from './request-handlers/createTutorHandler';
 import getPrivateTutorData from './request-handlers/getPrivateTutorDataHandler';
@@ -58,6 +59,8 @@ export class TutorsController extends Controller {
   );
   */
   static callableNames = exportedNames;
+  static callableNamesMap = arrayToRecord([...exportedNames]);
+  static typeName = "Tutors";
 
   @Post(createTutor)
   static createTutor(

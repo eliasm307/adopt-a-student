@@ -8,6 +8,7 @@ import {
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
+import arrayToRecord from '../../utils/arrayToRecord';
 import verifyRequest from '../../utils/verifyRequest';
 import createStudentHandler from './request-handlers/createStudent';
 import getPrivateStudentData from './request-handlers/getPrivateStudentData';
@@ -51,13 +52,15 @@ const enumv = CallableName.getStudentsBySubjects.toString() + "/";
 
 @Route("/")
 export class StudentsController extends Controller {
+  static callableNames = exportedNames;
+  static callableNamesMap = arrayToRecord([...exportedNames]);
   /*
   static callableNames = Object.keys(namedKeys).reduce(
     (acc, name) => ({ ...acc, [name]: name }),
     {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
   );
   */
-  static callableNames = exportedNames;
+  static id = "Students";
 
   @Post(createStudent)
   static createStudent(

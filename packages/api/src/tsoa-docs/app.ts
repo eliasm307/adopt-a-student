@@ -21,21 +21,70 @@ app.get(
 );
 */
 
+// for groups to work the valuse in the tags field need to match tags in
+// the paths array inside each object under the method name e.g. POST ie the tags go inside POST
+// the tags are shown under a subheading by the tag name, not as one group under the main taggroup name
 const updates = {
-  "xx-tagGroups": [
+  "-x-tagGroups": [
     {
-      name: "Students",
-      tags: [...StudentsController.callableNames],
+      name: "",
+      tags: [StudentsController.id],
     },
     {
-      name: "Tutors",
-      tags: [...TutorsController.callableNames],
+      name: "x",
+      tags: [TutorsController.typeName],
+    },
+    {
+      name: "Unknown",
+      tags: ["na"],
     },
   ],
 };
 
 const modifiedSpec = { ...swaggerSpec, ...updates };
 
+/*
+modifiedSpec.paths = Object.entries(modifiedSpec.paths).reduce(
+  (out, [_path, data]) => {
+    const path = _path as keyof typeof modifiedSpec.paths;
+    const pathText = _path.replace("/", "");
+
+    const newData = { ...data };
+    let tag = "x";
+    // Add tags for grouping https://idratherbewriting.com/learnapidoc/pubapis_openapi_step7_tags_object.html
+
+    // const mutators: DataMutatorMap<Record<typeof path, string>> = ({"/createStudent": () => tag=})
+    /*
+    if (/\/(get | create | update)/i.test(path)) {
+      const group = /([A-Z][a-z]+)/.exec(path);
+
+      if (group) {
+        {newData.tag = group;
+        return {};
+      }
+    }
+  */
+// try to see if this matches like this or based on group name
+// tag = pathText;
+/*
+    if (StudentsController.callableNamesMap[pathText]) {
+      newData = { ...newData, tags: [] };
+    }
+*/
+/*
+    (newData.post as any).tags = [tag];
+    return { ...out, [path]: { ...newData } };
+  },
+  {} as any
+);
+
+console.log("Redoc Config", {
+  paths: modifiedSpec.paths,
+  tags: (modifiedSpec as any)["x-tagGroups"],
+  "/createStudent post": modifiedSpec.paths["/createStudent"].post,
+  tagsUnknown: modifiedSpec["x-tagGroups"][2],
+});
+*/
 // serve your swagger.json file
 app.get("/docs/swagger.json", (req, res) => {
   res.json(modifiedSpec);

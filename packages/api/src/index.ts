@@ -1,10 +1,8 @@
 import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-functions';
 
-import { ObjectMap } from '@adopt-a-student/common';
-
 import { StudentsController } from './controllers/StudentController/StudentController';
 import {
-  SubjectCategorysController,
+  SubjectCategoryController,
 } from './controllers/SubjectCategoryController/SubjectCategoryController';
 import { TutorsController } from './controllers/TutorController/TutorController';
 
@@ -45,9 +43,9 @@ const callableFunctionHandlers = {
   */
 
   // subject categories
-  getSubjectCategories: SubjectCategorysController.getSubjectCategories,
-  createSubjectCategory: SubjectCategorysController.createSubjectCategory,
-  updateSubjectCategory: SubjectCategorysController.updateSubjectCategory,
+  getSubjectCategories: SubjectCategoryController.getSubjectCategories,
+  createSubjectCategory: SubjectCategoryController.createSubjectCategory,
+  updateSubjectCategory: SubjectCategoryController.updateSubjectCategory,
 
   // relationships
   /*
@@ -66,7 +64,7 @@ const callableFunctionHandlers = {
   linkStudentAndLocaleSubject,
   unlinkStudentAndLocaleSubject,
   */
-} as ObjectMap<CallableName, (body: any, context: any) => Promise<any>>;
+} as Record<CallableName, (body: any, context: any) => Promise<any>>;
 
 /*
 callableFunctionHandlers.test = (data, context) => {
@@ -83,7 +81,7 @@ module.exports = Object.entries(callableFunctionHandlers).reduce(
       exports[callableName] = functionsHttps.onCall(callableHandler);
     return exports;
   },
-  {} as ObjectMap<string, HttpsFunction & Runnable<any>>
+  {} as Record<string, HttpsFunction & Runnable<any>>
 );
 
 // export default callableFunctions;

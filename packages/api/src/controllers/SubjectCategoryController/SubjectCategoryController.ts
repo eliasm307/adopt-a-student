@@ -4,6 +4,7 @@ import {
   CreateSubjectCategoryRequestBody, CreateSubjectCategoryResponseBody,
 } from '../../../common/src';
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
+import arrayToRecord from '../../utils/arrayToRecord';
 import createSubjectCategoryHandler from './request-handlers/createSubjectCategoryHandler';
 import getSubjectCategoriesHandler, {
   GetSubjectCategoryRequestBody, GetSubjectCategoryResponseBody,
@@ -44,14 +45,17 @@ const enumv = CallableName.createSubjectCategory.toString() + "/";
 // hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
 @Route("/")
-export class SubjectCategorysController extends Controller {
+export class SubjectCategoryController extends Controller {
+  static callableNames = exportedNames;
+  static callableNamesMap = arrayToRecord([...exportedNames]);
+
   /*
   static callableNames = Object.keys(namedKeys).reduce(
     (acc, name) => ({ ...acc, [name]: name }),
     {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
   );
   */
-  static callableNames = exportedNames;
+  typeName = "Subject Categories";
 
   @Post(createSubjectCategory)
   static createSubjectCategory(
