@@ -15,8 +15,9 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
     "test": "jest --colors --logHeapUsage",
-    "check-types": "npx tsc",
     "pretest": "yarn",
+    "test:production": "set NODE_ENV=production-test&& yarn test",
+    "check-types": "npx tsc",
     "prebuild": "yarn build:common && rm -rf lib && yarn",
     "build": "tsc --build tsconfig.build.json",
     "build:common": "yarn --cwd ./common build",

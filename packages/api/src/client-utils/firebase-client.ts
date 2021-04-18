@@ -10,6 +10,13 @@ import "firebase/auth";
 import urlExistSync from "url-exist-sync";
 
 import config from "../../private_config/config";
+import isProductionEnvironment from "../utils/isProductionEnvironment";
+
+if (!isProductionEnvironment()) {
+  console.warn(__filename, "Using emulators");
+} else {
+  console.warn(__filename, "Using Production");
+}
 
 // destructure required entries
 const {
@@ -65,9 +72,13 @@ firebase.initializeApp(firebaseConfig);
 ////////////////////////////////////////////////////////
 // Firebase Authentication exports
 
-const auth = firebase.auth();
-auth.useEmulator("http://localhost:9099"); // todo use environment variables to conditionally use this
-export { auth };
+export const auth = firebase.auth();
+if (!isProductionEnvironment()) {
+  console.warn(__filename, "Using emulator auth");
+  auth.useEmulator("http://localhost:9099");
+} else {
+  console.warn(__filename, "Using Production auth");
+}
 
 export const { GoogleAuthProvider, EmailAuthProvider } = firebase.auth;
 
@@ -78,10 +89,14 @@ export interface FireBaseUser extends firebase.User {}
 
 export const firestoreLive = firebase.firestore();
 
-const firestoreEmulator = firebase.firestore();
-firestoreEmulator.useEmulator("localhost", 8080);
+const firestoreClient = firebase.firestore();
+if (!isProductionEnvironment()) {
+  firestoreClient.useEmulator("localhost", 8080);
+} else {
+  console.warn(__filename, "Using Production firestore");
+}
 
-export { firestoreEmulator };
+export { firestoreClient };
 
 export function isFirestoreEmulatorRunning(): boolean {
   return urlExistSync("http://localhost:4000/firestore/");
@@ -101,9 +116,11 @@ export const functionsLive = firebase.functions();
 
 // Using functions emulator
 // https://firebase.google.com/docs/emulator-suite/connect_functions
-const functionsEmulator = firebase.functions();
-functionsEmulator.useEmulator("localhost", 5001);
+export const functionsClient = firebase.functions();
+if (!isProductionEnvironment()) {
+  functionsClient.useEmulator("localhost", 5001);
+} else {
+  console.warn(__filename, "Using Production functions");
+}
 
 export type FirebaseFunctions = firebase.functions.Functions;
-
-export { functionsEmulator };

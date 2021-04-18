@@ -7,10 +7,10 @@ interface Props<D> {
   name: CallableFunctionName;
 }
 
-export default async function callFirebaseFunction<D = any>({
+export default async function callFirebaseFunction<D = any, R = any>({
   data,
   functions,
   name,
 }: Props<D>) {
-  return functions.httpsCallable(name)(data);
+  return (await functions.httpsCallable(name)(data)).data as R;
 }
