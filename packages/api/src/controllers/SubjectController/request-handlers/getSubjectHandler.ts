@@ -10,7 +10,7 @@ import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase
 import getDocumentData from '../../../utils/firebase/getDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const getSubject: FirebaseCallableFunctionHandler<
+const getSubjectHandler: FirebaseCallableFunctionHandler<
   GetSubjectRequestBody,
   GetSubjectResponseBody
 > = async (data, context) => {
@@ -46,4 +46,4 @@ const getSubject: FirebaseCallableFunctionHandler<
   } as GetSubjectResponseBody;
 };
 
-export default getSubject;
+export default getSubjectHandler;

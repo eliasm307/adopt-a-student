@@ -4,6 +4,7 @@ import { StudentsController } from './controllers/StudentController/StudentContr
 import {
   SubjectCategoryController,
 } from './controllers/SubjectCategoryController/SubjectCategoryController';
+import { SubjectsController } from './controllers/SubjectController/SubjectController';
 import { TutorsController } from './controllers/TutorController/TutorController';
 
 // Start writing Firebase Functions
@@ -32,15 +33,14 @@ const callableFunctionHandlers = {
   getStudent: StudentsController.getStudent,
   getStudentsBySubjects: StudentsController.getStudentsBySubjects,
 
-  /*
+  /**/
   // subjects
-  createGenericSubject,
+  createGenericSubject: SubjectsController.createGenericSubject,
   // updateGenericSubject,
-  createLocaleSubject,
-  updateLocaleSubject,
-  getSubject,
-  getSubjectsByCategory,
-  */
+  createLocaleSubject: SubjectsController.createLocaleSubject,
+  updateLocaleSubject: SubjectsController.updateLocaleSubject,
+  getSubject: SubjectsController.getSubject,
+  getSubjectsByCategory: SubjectsController.getSubjectsByCategory,
 
   // subject categories
   getSubjectCategories: SubjectCategoryController.getSubjectCategories,
