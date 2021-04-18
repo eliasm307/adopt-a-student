@@ -4,7 +4,6 @@ import { ObjectMap } from '@adopt-a-student/common';
 
 import { StudentsController } from './controllers/StudentController/StudentController';
 import { TutorsController } from './controllers/TutorController/TutorController';
-import { FirebaseCallableFunctionHandler } from './declarations/types';
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -14,7 +13,7 @@ Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
 
-type CallableName = typeof StudentsController.callableNames[number] | string;
+type CallableName = typeof StudentsController.callableNames[number] | any;
 
 // getStudentsBySubjects;
 const callableFunctionHandlers = {
@@ -43,14 +42,14 @@ const callableFunctionHandlers = {
   // subject categories
   getSubjectCategories,
   createSubjectCategory,
-  updateLocaleSubjectCategory: updateSubjectCategory,
+  updateSubjectCategory,
 
   // relationships
   linkGenericSubjects,
   unlinkGenericSubjects,
 
-  linkGenericSubjectAndSubjectCategory: linkSubjectAndSubjectCategory,
-  unlinkGenericSubjectAndSubjectCategory: unlinkSubjectAndSubjectCategory,
+  linkSubjectAndSubjectCategory,
+  unlinkSubjectAndSubjectCategory,
 
   linkStudentAndTutor,
   unlinkStudentAndTutor,
@@ -60,7 +59,7 @@ const callableFunctionHandlers = {
 
   linkStudentAndLocaleSubject,
   unlinkStudentAndLocaleSubject,
-} as ObjectMap<CallableName, FirebaseCallableFunctionHandler>;
+} as ObjectMap<CallableName, (body: any, context?: any) => Promise<any>>;
 
 /*
 callableFunctionHandlers.test = (data, context) => {

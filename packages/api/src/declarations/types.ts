@@ -7,7 +7,7 @@ import { BasicResponseData } from './interfaces';
 export type FirebaseCallableFunctionHandler<D = any, R = any> = (
   body: Partial<D> | undefined,
   context: CallableContext
-) => Promise<R & BasicResponseData>;
+) => Promise<R | BasicResponseData>;
 
 /** Defines the callable function names available */
 export type CallableFunctionName = typeof CALLABLE_FUNCTION_NAMES[number];
