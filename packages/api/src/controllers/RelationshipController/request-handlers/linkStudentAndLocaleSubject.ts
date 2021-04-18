@@ -42,7 +42,7 @@ const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
   const [updatedDocument1, updatedDocument2] = await linkDocuments({
     document1Props,
     document2Props,
-    firestore: firestoreAdmin,
+    FirestoreAdmin,
   });
 
   return { message: "Success linking documents" };

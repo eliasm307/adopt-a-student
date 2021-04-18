@@ -3,14 +3,14 @@ import { functionsHttps } from './firebase/firebase-admin';
 
 interface Props<D> {
   dataPredicate: (data: any) => data is D;
-  firestore: FirestoreAdmin;
+  FirestoreAdmin;
   path: string;
 }
 
 export default async function readPrivateUserData<D>({
   dataPredicate,
   path,
-  firestore,
+  FirestoreAdmin,
 }: Props<D>) {
   // todo use generic getDocumentData here
 

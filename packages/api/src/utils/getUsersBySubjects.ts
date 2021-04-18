@@ -5,7 +5,7 @@ import { functionsHttps } from './firebase/firebase-admin';
 import groupArrayItems from './groupArrayItems';
 
 interface Props<PublicDataType> {
-  firestore: FirestoreAdmin;
+  FirestoreAdmin;
   localeSubjectIds: string[];
   publicDataExtractor: (data: any) => PublicDataType;
   userCollectionName: string;
@@ -14,7 +14,7 @@ interface Props<PublicDataType> {
 export default async function getUsersBySubjects<PublicDataType>({
   localeSubjectIds,
   publicDataExtractor,
-  firestore,
+  FirestoreAdmin,
   userCollectionName,
 }: Props<PublicDataType>): Promise<PublicDataType[]> {
   /*

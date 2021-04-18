@@ -5,7 +5,7 @@ import {
 import { LOCALE_SUBJECT_COLLECTION_NAME } from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import localeSubjectDataUpdater from '../../../utils/data-updaters/localeSubjectDataUpdater';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
 
@@ -36,7 +36,7 @@ const updateLocaleSubject: FirebaseCallableFunctionHandler<
     updates: { ...updates, id },
     dataPredicate: isLocaleSubjectData,
     dataUpdater: localeSubjectDataUpdater,
-    firestore: firestoreAdmin,
+    FirestoreAdmin,
   });
 
   return { result };

@@ -7,13 +7,13 @@ import { FirestoreAdmin } from '../../../declarations/interfaces';
 import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 
 interface Props {
-  firestore: FirestoreAdmin;
+  FirestoreAdmin;
   genericSubject: GenericSubjectData;
   locale: LocaleCode;
 }
 
 export default async function getLocaleSubjectFromGenericSubject({
-  firestore,
+  FirestoreAdmin,
   genericSubject,
   locale,
 }: Props) {

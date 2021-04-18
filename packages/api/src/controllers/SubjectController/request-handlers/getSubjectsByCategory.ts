@@ -3,7 +3,7 @@ import {
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
 import getLocaleSubjectFromGenericSubject from '../utils/getLocaleSubjectFromGenericSubject';
@@ -24,14 +24,14 @@ const getSubjectsByCategory: FirebaseCallableFunctionHandler<
   const { categoryId: subjectCategoryId, locale } = data;
 
   const genericSubjectsByCategory = await getGenericSubjectsByCategory({
-    firestore: firestoreAdmin,
+    FirestoreAdmin,
     subjectCategoryId,
   });
 
   const localeSubjectPromises = genericSubjectsByCategory.map(
     (genericSubject) =>
       getLocaleSubjectFromGenericSubject({
-        firestore: firestoreAdmin,
+        FirestoreAdmin,
         genericSubject,
         locale,
       })

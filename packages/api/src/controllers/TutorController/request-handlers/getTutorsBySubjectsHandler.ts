@@ -4,7 +4,7 @@ import {
 
 import { TUTOR_COLLECTION_NAME } from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getUsersBySubjects from '../../../utils/getUsersBySubjects';
 import verifyRequest from '../../../utils/verifyRequest';
 import extractPublicTutorData from './utils/extractPublicTutorData';
@@ -28,7 +28,7 @@ const getTutorsBySubjects: FirebaseCallableFunctionHandler<
     publicDataExtractor: extractPublicTutorData,
     userCollectionName: TUTOR_COLLECTION_NAME,
     userSubjectsField: "relatedSubjects",
-    firestore: firestoreAdmin,
+    FirestoreAdmin,
   });
 
   return { tutors };

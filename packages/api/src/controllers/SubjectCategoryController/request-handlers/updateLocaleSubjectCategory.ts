@@ -3,7 +3,7 @@ import { GenericSubjectCategoryData, isGenericSubjectCategoryData } from '@adopt
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
 import { ApiUpdateLocaleSubjectCategoryHandler } from '../../../declarations/interfaces';
 import genericSubjectCategoryDataUpdater from '../../../utils/data-updaters/genericSubjectCategoryDataUpdater';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
 
@@ -37,7 +37,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
   const genericSubjectCategory = await getDocumentData({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     dataPredicate: isGenericSubjectCategoryData,
-    firestore,
+    FirestoreAdmin,
     id,
   });
   */
@@ -49,7 +49,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
     updates: genericCategoryupdates,
     dataPredicate: isGenericSubjectCategoryData,
     dataUpdater: genericSubjectCategoryDataUpdater,
-    firestore: firestoreAdmin,
+    FirestoreAdmin,
   });
 
   const localeSubjectCategory = genericSubjectCategory.locales[locale];

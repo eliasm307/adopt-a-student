@@ -6,7 +6,7 @@ interface Props<D> {
   collectionPath: string;
   data: any;
   dataPredicate: (data: any) => data is D;
-  firestore: FirestoreAdmin;
+  FirestoreAdmin;
   id: string;
 }
 
@@ -14,7 +14,7 @@ export default async function createDocument<D>({
   dataPredicate,
   id,
   collectionPath,
-  firestore,
+  FirestoreAdmin,
   data,
 }: Props<D>): Promise<D> {
   // verify received data

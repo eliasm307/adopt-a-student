@@ -5,12 +5,12 @@ import { FirestoreAdmin } from '../../../declarations/interfaces';
 import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 
 interface Props {
-  firestore: FirestoreAdmin;
+  FirestoreAdmin;
   subjectCategoryId: string;
 }
 
 export default async function getGenericSubjectsByCategory({
-  firestore,
+  FirestoreAdmin,
   subjectCategoryId,
 }: Props) {
   const categoryField: keyof GenericSubjectData = "categoryIds";

@@ -11,12 +11,12 @@ export interface AddDocumentLinkProps<D, L>
 interface Props<D1, L1, D2, L2> {
   document1Props: AddDocumentLinkProps<D1, L1>;
   document2Props: AddDocumentLinkProps<D2, L2>;
-  firestore: FirestoreAdmin;
+  FirestoreAdmin;
 }
 export default async function linkDocuments<D1, L1, D2, L2>(
   props: Props<D1, L1, D2, L2>
 ) {
-  const { firestore, document1Props, document2Props } = props;
+  const { FirestoreAdmin, document1Props, document2Props } = props;
 
   return mutateDocumentLink<D1, L1, D2, L2>({
     document1Props: {
@@ -32,6 +32,6 @@ export default async function linkDocuments<D1, L1, D2, L2>(
       }),
     },
     documentLinksShouldBeMutated: linksShouldBeAdded,
-    firestore,
+    FirestoreAdmin,
   });
 }

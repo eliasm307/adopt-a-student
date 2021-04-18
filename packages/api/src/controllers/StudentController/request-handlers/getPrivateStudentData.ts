@@ -5,7 +5,6 @@ import {
 import { TUTOR_COLLECTION_NAME } from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import createPath from '../../../utils/createPath';
-import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import readPublicUserData from '../../../utils/readPublicUserData';
 import verifyRequest from '../../../utils/verifyRequest';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
@@ -20,7 +19,7 @@ const handler: FirebaseCallableFunctionHandler<
 
   const student = await readPublicUserData({
     dataPredicate: isPrivateStudentData,
-    firestore: firestoreAdmin,
+    FirestoreAdmin,
     path,
     publicDataExtractor: extractPublicStudentData,
   });

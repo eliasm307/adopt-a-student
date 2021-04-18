@@ -8,7 +8,7 @@ interface Props {
 }
 
 const localeSubjectDataUpdater: DataUpdater<LocaleSubjectData> = ({
-  updates: updates,
+  updates,
   existingData,
 }: Props) => {
   if (!updates) return { ...existingData };

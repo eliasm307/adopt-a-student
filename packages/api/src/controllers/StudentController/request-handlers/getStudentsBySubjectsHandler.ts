@@ -4,7 +4,7 @@ import {
 
 import { STUDENT_COLLECTION_NAME } from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getUsersBySubjects from '../../../utils/getUsersBySubjects';
 import verifyRequest from '../../../utils/verifyRequest';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
@@ -32,7 +32,7 @@ const getStudentsBySubjectsHandler: ApiGetStudentsBySubjectsHandler = async (
   const students = await getUsersBySubjects<PublicStudentData>({
     localeSubjectIds: data.subjectIds,
     publicDataExtractor: (data) => extractPublicStudentData(data),
-    firestore: firestoreAdmin,
+    FirestoreAdmin,
     userCollectionName: STUDENT_COLLECTION_NAME,
   });
 

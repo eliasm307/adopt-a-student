@@ -7,7 +7,7 @@ import {
   GENERIC_SUBJECT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME,
 } from '../../../constants';
 import { ApiLinkGenericSubjectAndSubjectCategory } from '../../../declarations/interfaces';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
@@ -50,7 +50,7 @@ const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCateg
   const [updatedDocument1, updatedDocument2] = await linkDocuments({
     document1Props,
     document2Props,
-    firestore: firestoreAdmin,
+    FirestoreAdmin,
   });
 
   return { message: "Success linking documents" };

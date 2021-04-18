@@ -7,7 +7,7 @@ interface Props<D> {
   collectionPath: string;
   dataPredicate: (data: any) => data is D;
   dataUpdater: DataUpdater<D>;
-  firestore: FirestoreAdmin;
+  FirestoreAdmin;
   id: string;
   updates: Partial<D>;
 }
@@ -16,7 +16,7 @@ export default async function updateDocumentData<D>({
   collectionPath,
   updates: updates,
   dataPredicate,
-  firestore,
+  FirestoreAdmin,
   id,
   dataUpdater,
 }: Props<D>): Promise<D> {

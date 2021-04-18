@@ -9,14 +9,14 @@ export interface RemoveDocumentLinkProps<D, L>
     hasFilterPredicate<L> {}
 
 interface Props<D1, L1, D2, L2> {
+  FirestoreAdmin;
   document1Props: RemoveDocumentLinkProps<D1, L1>;
   document2Props: RemoveDocumentLinkProps<D2, L2>;
-  firestore: FirestoreAdmin;
 }
 export default async function unlinkDocuments<D1, L1, D2, L2>(
   props: Props<D1, L1, D2, L2>
 ) {
-  const { firestore, document1Props, document2Props } = props;
+  const { FirestoreAdmin, document1Props, document2Props } = props;
 
   return mutateDocumentLink<D1, L1, D2, L2>({
     document1Props: {
@@ -32,6 +32,6 @@ export default async function unlinkDocuments<D1, L1, D2, L2>(
       }),
     },
     documentLinksShouldBeMutated: linksShouldBeRemoved,
-    firestore,
+    FirestoreAdmin,
   });
 }

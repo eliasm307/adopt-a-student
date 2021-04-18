@@ -3,7 +3,7 @@ import readPrivateUserData from './readPrivateUserData';
 
 interface Props<D, P> {
   dataPredicate: (data: any) => data is D;
-  firestore: FirestoreAdmin;
+  FirestoreAdmin;
   path: string;
   publicDataExtractor: (data: any) => P;
 }

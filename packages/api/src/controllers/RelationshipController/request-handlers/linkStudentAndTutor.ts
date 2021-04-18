@@ -5,7 +5,7 @@ import {
 
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
 import { ApiLinkStudentAndTutor } from '../declarations/interfaces';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
+import { functionsHttps } from '../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
 import verifyRequest from '../utils/verifyRequest';
 
@@ -34,13 +34,13 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     id: studentId,
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
-    firestore,
+    FirestoreAdmin,
   };
   const tutorCrudProps = {
     id: tutorId,
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,
-    firestore,
+    FirestoreAdmin,
   };
 
   // Read current data in parallel
@@ -124,7 +124,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
   const [updatedStudent, updatedTutor] = await linkDocuments({
     document1Props,
     document2Props,
-    firestore: firestoreAdmin,
+    FirestoreAdmin,
   });
 
   return { message: "Success linking users" };
