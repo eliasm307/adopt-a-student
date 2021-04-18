@@ -1,16 +1,18 @@
-import { isLocaleSubjectData } from '@adopt-a-student/common';
+import {
+  CreateLocaleSubjectRequestBody, CreateLocaleSubjectResponseBody, isLocaleSubjectData,
+} from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME } from '../../../constants';
-import { ApiCreateLocaleSubjectHandler } from '../../../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import newGuid from '../../../utils/newGuid';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const createLocaleSubject: ApiCreateLocaleSubjectHandler = async (
-  body,
-  context
-) => {
+const createLocaleSubject: FirebaseCallableFunctionHandler<
+  CreateLocaleSubjectRequestBody,
+  CreateLocaleSubjectResponseBody
+> = async (body, context) => {
   const auth = verifyRequest(body, context);
 
   const id = newGuid();
@@ -23,7 +25,7 @@ const createLocaleSubject: ApiCreateLocaleSubjectHandler = async (
 
   const data = { ...body.data, id };
 
-  const localeSubject = await createDocument({
+  const subject = await createDocument({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     id,
     data,
@@ -32,8 +34,8 @@ const createLocaleSubject: ApiCreateLocaleSubjectHandler = async (
   });
 
   return {
-    data: { localeSubject },
-  };
+    subject,
+  } as CreateLocaleSubjectResponseBody;
 };
 
 export default createLocaleSubject;
