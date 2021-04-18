@@ -1887,12 +1887,12 @@
         "affectsGlobalScope": false
       },
       "./tsoa-build/swagger-spec.json": {
-        "version": "d51a4fe42ae26a5f4df9f3ca64fbead80d1e6431a9447073713c2ecb795f16fa",
+        "version": "ca2966a1b2e79b5b845c1ecc41a3f555ccbe68606bca82a6a8f818914de9e4e9",
         "signature": "e911abcdec9df2e963cc01e97874cfd48d6cbd9cd62539f9916f309e4d1c09ce",
         "affectsGlobalScope": true
       },
       "./src/tsoa-docs/app.ts": {
-        "version": "54466d629be91808636c74c52685f90d26f97d660847d0a7d20281e4f891c23b",
+        "version": "1e38a7176feb42391ba4bc2072a433d00c4159f9eb1551a00ba71ab4d1732e29",
         "signature": "70b6ab08ecdd5cfbc788a1785e4abd20d5c5ce6f3b9ec6d6e6e1c2e44d1a22d3",
         "affectsGlobalScope": false
       },
@@ -1904,11 +1904,6 @@
       "./src/utils/firebase/firebase-functions.test.ts": {
         "version": "5d4dcf32498138b13aa18db2ea0b48ea99c43a3bb4ddd61cd4d8644870995775",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
-        "affectsGlobalScope": false
-      },
-      "./tsoa-build/routes.ts": {
-        "version": "9a69298a8ad8728bc57e4acbd6db678a7b058c5efed3b9b111e4885372969515",
-        "signature": "f827e36cd211d156a506672269d4e396d374939b1fac93a8b3bef4a25cc18dc1",
         "affectsGlobalScope": false
       },
       "../../node_modules/jest-diff/build/cleanupsemantic.d.ts": {
@@ -39623,93 +39618,6 @@
         "./node_modules/@types/node/zlib.d.ts",
         "./src/utils/firebase/firebase-admin.ts"
       ],
-      "./tsoa-build/routes.ts": [
-        "../../node_modules/@tsoa/runtime/dist/index.d.ts",
-        "../../node_modules/@types/express/index.d.ts",
-        "../../node_modules/@types/node/assert.d.ts",
-        "../../node_modules/@types/node/async_hooks.d.ts",
-        "../../node_modules/@types/node/buffer.d.ts",
-        "../../node_modules/@types/node/child_process.d.ts",
-        "../../node_modules/@types/node/cluster.d.ts",
-        "../../node_modules/@types/node/console.d.ts",
-        "../../node_modules/@types/node/constants.d.ts",
-        "../../node_modules/@types/node/crypto.d.ts",
-        "../../node_modules/@types/node/dgram.d.ts",
-        "../../node_modules/@types/node/dns.d.ts",
-        "../../node_modules/@types/node/domain.d.ts",
-        "../../node_modules/@types/node/events.d.ts",
-        "../../node_modules/@types/node/fs.d.ts",
-        "../../node_modules/@types/node/fs/promises.d.ts",
-        "../../node_modules/@types/node/http.d.ts",
-        "../../node_modules/@types/node/http2.d.ts",
-        "../../node_modules/@types/node/https.d.ts",
-        "../../node_modules/@types/node/inspector.d.ts",
-        "../../node_modules/@types/node/module.d.ts",
-        "../../node_modules/@types/node/net.d.ts",
-        "../../node_modules/@types/node/os.d.ts",
-        "../../node_modules/@types/node/path.d.ts",
-        "../../node_modules/@types/node/perf_hooks.d.ts",
-        "../../node_modules/@types/node/process.d.ts",
-        "../../node_modules/@types/node/punycode.d.ts",
-        "../../node_modules/@types/node/querystring.d.ts",
-        "../../node_modules/@types/node/readline.d.ts",
-        "../../node_modules/@types/node/repl.d.ts",
-        "../../node_modules/@types/node/stream.d.ts",
-        "../../node_modules/@types/node/string_decoder.d.ts",
-        "../../node_modules/@types/node/timers.d.ts",
-        "../../node_modules/@types/node/tls.d.ts",
-        "../../node_modules/@types/node/trace_events.d.ts",
-        "../../node_modules/@types/node/tty.d.ts",
-        "../../node_modules/@types/node/url.d.ts",
-        "../../node_modules/@types/node/util.d.ts",
-        "../../node_modules/@types/node/v8.d.ts",
-        "../../node_modules/@types/node/vm.d.ts",
-        "../../node_modules/@types/node/wasi.d.ts",
-        "../../node_modules/@types/node/worker_threads.d.ts",
-        "../../node_modules/@types/node/zlib.d.ts",
-        "./node_modules/@types/node/assert.d.ts",
-        "./node_modules/@types/node/async_hooks.d.ts",
-        "./node_modules/@types/node/buffer.d.ts",
-        "./node_modules/@types/node/child_process.d.ts",
-        "./node_modules/@types/node/cluster.d.ts",
-        "./node_modules/@types/node/console.d.ts",
-        "./node_modules/@types/node/constants.d.ts",
-        "./node_modules/@types/node/crypto.d.ts",
-        "./node_modules/@types/node/dgram.d.ts",
-        "./node_modules/@types/node/dns.d.ts",
-        "./node_modules/@types/node/domain.d.ts",
-        "./node_modules/@types/node/events.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/fs/promises.d.ts",
-        "./node_modules/@types/node/http.d.ts",
-        "./node_modules/@types/node/http2.d.ts",
-        "./node_modules/@types/node/https.d.ts",
-        "./node_modules/@types/node/inspector.d.ts",
-        "./node_modules/@types/node/module.d.ts",
-        "./node_modules/@types/node/net.d.ts",
-        "./node_modules/@types/node/os.d.ts",
-        "./node_modules/@types/node/path.d.ts",
-        "./node_modules/@types/node/perf_hooks.d.ts",
-        "./node_modules/@types/node/process.d.ts",
-        "./node_modules/@types/node/punycode.d.ts",
-        "./node_modules/@types/node/querystring.d.ts",
-        "./node_modules/@types/node/readline.d.ts",
-        "./node_modules/@types/node/repl.d.ts",
-        "./node_modules/@types/node/stream.d.ts",
-        "./node_modules/@types/node/string_decoder.d.ts",
-        "./node_modules/@types/node/timers.d.ts",
-        "./node_modules/@types/node/tls.d.ts",
-        "./node_modules/@types/node/trace_events.d.ts",
-        "./node_modules/@types/node/tty.d.ts",
-        "./node_modules/@types/node/url.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/v8.d.ts",
-        "./node_modules/@types/node/vm.d.ts",
-        "./node_modules/@types/node/wasi.d.ts",
-        "./node_modules/@types/node/worker_threads.d.ts",
-        "./node_modules/@types/node/zlib.d.ts",
-        "./src/controllers/studentcontroller.ts"
-      ],
       "./tsoa-build/swagger-spec.json": [
         "../../node_modules/@types/node/assert.d.ts",
         "../../node_modules/@types/node/async_hooks.d.ts",
@@ -68979,9 +68887,6 @@
       ],
       "./src/utils/verifyrequest.ts": [
         "../../node_modules/firebase-functions/lib/providers/https.d.ts"
-      ],
-      "./tsoa-build/routes.ts": [
-        "../../node_modules/@types/express/index.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -69419,7 +69324,6 @@
       "./src/utils/readprivateuserdata.ts",
       "./src/utils/readpublicuserdata.ts",
       "./src/utils/verifyrequest.ts",
-      "./tsoa-build/routes.ts",
       "./tsoa-build/swagger-spec.json"
     ],
     "affectedFilesPendingEmit": [

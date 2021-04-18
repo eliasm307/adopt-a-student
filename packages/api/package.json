@@ -36,7 +36,7 @@
     "docs:generate": "npx typedoc --disableSources --name \"Adopt a student\" --out docs src",
     "docs:zip": "cd docs/ && bestzip ../adopt-a-student-docs.zip * && cd ../",
     "docs:start": "start \"\" \"docs/index.html\"",
-    "tsoa:build": "yarn tsoa spec-and-routes",
+    "tsoa:build": "yarn tsoa spec",
     "tsoa:start": "start http://localhost:3000/ && node lib/src/tsoa-docs/server.js",
     "tsoa:buildstart": "yarn build && yarn tsoa:build && start http://localhost:3000/ && node lib/src/tsoa-docs/server.js"
   },
