@@ -1,24 +1,29 @@
-import { GenericSubjectData, isGenericSubjectData } from '@adopt-a-student/common';
+import {
+  GenericSubjectData, isGenericSubjectData, LinkSubjectsRequestBody, LinkSubjectsResponseBody,
+} from '@adopt-a-student/common';
 
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../../constants';
-import { ApiLinkGenericSubjects } from '../../../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
 // todo firestoreAdmin should be a dependency through  props
 
-const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
+const linkGenericSubjects: FirebaseCallableFunctionHandler<
+  LinkSubjectsRequestBody,
+  LinkSubjectsResponseBody
+> = async (body, context) => {
   const { uid } = verifyRequest(body, context);
 
   // verify received data
-  if (!body || !body.genericSubject1Id || !body.genericSubject2Id)
+  if (!body || !body.subject1Id || !body.subject2Id)
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Could not link documents because provided data is not valid"
     );
 
-  const { genericSubject1Id, genericSubject2Id } = body;
+  const { subject1Id, subject2Id } = body;
 
   const commonDocumentProps: Omit<
     AddDocumentLinkProps<GenericSubjectData, string>,
@@ -32,14 +37,14 @@ const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
 
   const document1Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
-    linkToAdd: genericSubject2Id,
-    id: genericSubject1Id,
+    linkToAdd: subject2Id,
+    id: subject1Id,
   };
 
   const document2Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
-    linkToAdd: genericSubject1Id,
-    id: genericSubject2Id,
+    linkToAdd: subject1Id,
+    id: subject2Id,
   };
 
   const [updatedDocument1, updatedDocument2] = await linkDocuments({
