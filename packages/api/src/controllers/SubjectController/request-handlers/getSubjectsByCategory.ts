@@ -2,12 +2,6 @@ import {
   GetSubjectsByCategoryRequestBody, GetSubjectsByCategoryResponseBody, SubjectOverview,
 } from '@adopt-a-student/common';
 
-import { FirebaseCallableFunctionHandler } from '../declarations/types';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
-import getLocaleSubjectFromGenericSubject from '../utils/getLocaleSubjectFromGenericSubject';
-import verifyRequest from '../utils/verifyRequest';
-
 const getSubjectsByCategory: FirebaseCallableFunctionHandler<
   GetSubjectsByCategoryRequestBody,
   GetSubjectsByCategoryResponseBody

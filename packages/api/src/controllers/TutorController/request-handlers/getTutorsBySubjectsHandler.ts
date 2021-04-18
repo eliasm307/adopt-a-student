@@ -10,7 +10,6 @@ import verifyRequest from '../../../utils/verifyRequest';
 import extractPublicTutorData from './utils/extractPublicTutorData';
 
 /** Get tutors by subjects, save this in subject */
-
 const getTutorsBySubjects: FirebaseCallableFunctionHandler<
   GetTutorsBySubjectsRequestBody,
   GetTutorsBySubjectsResponseBody

@@ -1,4 +1,4 @@
-import { PrivateStudentData, PrivateTutorData } from '@adopt-a-student/common';
+import { PrivateUserData } from '@adopt-a-student/common';
 
 import { FirestoreAdmin } from '../declarations/interfaces';
 import { functionsHttps } from './firebase/firebase-admin';
@@ -9,7 +9,7 @@ interface Props<PublicDataType> {
   localeSubjectIds: string[];
   publicDataExtractor: (data: any) => PublicDataType;
   userCollectionName: string;
-  userSubjectsField: keyof PrivateStudentData | keyof PrivateTutorData;
+  userSubjectsField: keyof PrivateUserData;
 }
 
 export default async function getUsersBySubjects<PublicDataType>({
