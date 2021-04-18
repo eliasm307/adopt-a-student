@@ -39,14 +39,13 @@ const getSubjectsByCategory: FirebaseCallableFunctionHandler<
   const localeSubjects = await Promise.all(localeSubjectPromises);
 
   const result: GetSubjectsByCategoryResponseBody = {
-    data: genericSubjectsByCategory.map((genericSubject, i) => {
-      const { relatedSubjects, relatedCategories } = genericSubject;
-      return {
+    data: genericSubjectsByCategory.map(
+      ({ relatedSubjects, relatedCategories }, i) => ({
         relatedCategories,
         relatedSubjects,
         subject: localeSubjects[i],
-      };
-    }),
+      })
+    ),
   };
 
   return result;
