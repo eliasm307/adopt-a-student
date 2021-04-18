@@ -11,7 +11,7 @@ import {
   auth,
 } from "./firebase-client";
 import testUser from "../../private_config/testUserAuth";
-
+import faker from "faker";
 /*
 if (typeof process.env.FIRESTORE_EMULATOR_HOST !== "string")
   throw Error("Firestore emulator host environment variable not set");
@@ -58,15 +58,20 @@ describe.only("firebase functions createTutor", () => {
     const data: CreateTutorRequestBody = {
       // id: "232",
       tutor: {
-        email: "an-email",
+        email: faker.internet.email(),
         prefferedLocales: ["en"],
         relatedStudents: [],
         relatedSubjects: [
-          { confidenceLevel: 2, detail: "2ded", id: "kkd", locale: "en" },
+          {
+            confidenceLevel: 2,
+            detail: faker.lorem.paragraph(Math.random() * 3),
+            id: "fake-id",
+            locale: "en",
+          },
         ],
-        userName: "a user name",
-        imageUrl: "an-image",
-        introduction: "hi",
+        userName: faker.internet.userName(),
+        imageUrl: faker.image.imageUrl(),
+        introduction: faker.lorem.lines(Math.random() * 3),
       },
     };
 
