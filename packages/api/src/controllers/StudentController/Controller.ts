@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/require-await */
-import { Body, Controller, Header, Post, Route } from 'tsoa';
+import { Body, Controller, Header, Hidden, Post, Route } from 'tsoa';
 
 import {
   GetStudentsBySubjectsRequestBody, GetStudentsBySubjectsResponseBody,
@@ -14,27 +14,27 @@ type FirebaseCallableFunctionContext = any;
 
 @Route("/")
 export class StudentsController extends Controller {
-  @Post()
-  public static async createStudent(
+  @Post("CallableName.createStudent.toString()")
+  public async createStudent(
     @Body() body: GetStudentsBySubjectsRequestBody,
 
-    @Header() context: FirebaseCallableFunctionContext
+    @Header() @Hidden() context: FirebaseCallableFunctionContext
   ): Promise<GetStudentsBySubjectsResponseBody> {
     return getStudentsBySubjectsHandler(body, context);
   }
 
-  @Post()
-  public static async getStudentsBySubjects(
+  @Post("CallableName.getStudentsBySubjects.toString()")
+  public async getStudentsBySubjects(
     @Body() body: GetStudentsBySubjectsRequestBody,
-    @Header() context: FirebaseCallableFunctionContext
+    @Header() @Hidden() context: FirebaseCallableFunctionContext
   ): Promise<GetStudentsBySubjectsResponseBody> {
     return getStudentsBySubjectsHandler(body, context);
   }
 
-  @Post()
-  public static async getTutorsBySubjects(
+  @Post("CallableName.getTutorsBySubjects.toString()")
+  public async getTutorsBySubjects(
     @Body() body: GetTutorsBySubjectsRequestBody,
-    @Header() context: FirebaseCallableFunctionContext
+    @Header() @Hidden() context: FirebaseCallableFunctionContext
   ): Promise<GetTutorsBySubjectsResponseBody> {
     return getTutorsBySubjects(body, context);
   }

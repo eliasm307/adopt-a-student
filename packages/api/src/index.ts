@@ -2,15 +2,24 @@ import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-funct
 
 import { ObjectMap } from '@adopt-a-student/common';
 
+import { CallableName as CallableNameEnum } from './constants';
 import linkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/linkGenericSubjectAndSubjectCategory';
+import linkGenericSubjects from './controllers/RelationshipController/request-handlers/linkGenericSubjects';
+import linkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkStudentAndLocaleSubject';
+import linkStudentAndTutor from './controllers/RelationshipController/request-handlers/linkStudentAndTutor';
+import linkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkTutorAndLocaleSubject';
 import unlinkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/unlinkGenericSubjectAndSubjectCategory';
-import { StudentsController } from './controllers/StudentController';
+import unlinkGenericSubjects from './controllers/RelationshipController/request-handlers/unlinkGenericSubjects';
+import unlinkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkStudentAndLocaleSubject';
+import unlinkStudentAndTutor from './controllers/RelationshipController/request-handlers/unlinkStudentAndTutor';
+import unlinkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkTutorAndLocaleSubject';
 import createStudent from './controllers/StudentController/request-handlers/createStudent';
 import getPrivateStudentData from './controllers/StudentController/request-handlers/getPrivateStudentData';
 import getPublicStudentData from './controllers/StudentController/request-handlers/getPublicStudentDataHandler';
 import updateLocaleSubject from './controllers/StudentController/request-handlers/updateLocaleSubject';
 import updateStudent from './controllers/StudentController/request-handlers/updateStudent';
 import createSubjectCategory from './controllers/SubjectCategoryController/request-handlers/createSubjectCategory';
+import getSubjectCategories from './controllers/SubjectCategoryController/request-handlers/getSubjectCategories';
 import updateLocaleSubjectCategory from './controllers/SubjectCategoryController/request-handlers/updateLocaleSubjectCategory';
 import createGenericSubject from './controllers/SubjectController/request-handlers/createGenericSubject';
 import createLocaleSubject from './controllers/SubjectController/request-handlers/createLocaleSubject';
@@ -21,7 +30,7 @@ import getPrivateTutorData from './controllers/TutorController/request-handlers/
 import getPublicTutorData from './controllers/TutorController/request-handlers/getPublicTutorDataHandler';
 import getTutorsBySubjects from './controllers/TutorController/request-handlers/getTutorsBySubjectsHandler';
 import updateTutor from './controllers/TutorController/request-handlers/updateTutor';
-import { CallableFunctionName, FirebaseCallableFunctionHandler } from './declarations/types';
+import { FirebaseCallableFunctionHandler } from './declarations/types';
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -30,6 +39,8 @@ import { CallableFunctionName, FirebaseCallableFunctionHandler } from './declara
 Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
+// getStudentsBySubjects;
+
 const callableFunctionHandlers = {
   // writeTest: firestoreWriteHandler,
 
@@ -45,7 +56,7 @@ const callableFunctionHandlers = {
   updateStudent,
   getPrivateStudentData,
   getPublicStudentData,
-  getStudentsBySubjects: StudentsController.getStudentsBySubjects,
+  // getStudentsBySubjects: StudentsController.getStudentsBySubjects,
 
   // subjects
   createGenericSubject,
@@ -75,7 +86,7 @@ const callableFunctionHandlers = {
 
   linkStudentAndLocaleSubject,
   unlinkStudentAndLocaleSubject,
-} as ObjectMap<CallableFunctionName, FirebaseCallableFunctionHandler>;
+} as ObjectMap<CallableNameEnum, FirebaseCallableFunctionHandler>;
 
 /*
 callableFunctionHandlers.test = (data, context) => {

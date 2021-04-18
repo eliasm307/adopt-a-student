@@ -227,138 +227,63 @@
         "affectsGlobalScope": false
       },
       "./src/declarations/types.ts": {
-        "version": "fcea46a2dcc204fd23425c2cabe99059b9b0bdbbc39020fd14a67e45668f469d",
-        "signature": "782b989d92f560df1cff9128ae5fb306ee8198c2cf88e792d704da5801cfb08b",
+        "version": "ae579da6bfc8587b80fd1019df830d525b3ce25df7560e4baa097b054f2a5eab",
+        "signature": "0775e62a37e680d6ad23a4cf976a72e20606e4d14a0dca0b43dbb003ac32a94f",
         "affectsGlobalScope": false
       },
       "./src/declarations/data-models.ts": {
-        "version": "88fd2a29a2b3b257a915a71f0e4ecf8329cc6c8df87cad946609a827786321bc",
-        "signature": "5250ad349194e65a224df6fcb26ab4d12918c2c5291a30105c23d3a3cd8ad67c",
+        "version": "b7d740924b62cc87406b1fcf109dded884457b2f86633338e312e49fbb06bb00",
+        "signature": "ca042dd7539b7cce8538051bee26ca6d99920ae1dbfc81d8d9ce7d048efee2a2",
         "affectsGlobalScope": false
       },
       "./src/declarations/object-shcema.ts": {
-        "version": "c9d9d597a3ce37a7f2e1476634062daf9edda1ecb064de857fa5781f6ebcafd7",
-        "signature": "7f405687f236a08a2bea25617077c3c480b58ee4bfe945dbacc83a74612ddef2",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/declarations/enums.d.ts": {
-        "version": "801067ca47204145766efd1cca3fc0278324dbe44a71e353ad62f785e3951670",
-        "signature": "801067ca47204145766efd1cca3fc0278324dbe44a71e353ad62f785e3951670",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/declarations/types.d.ts": {
-        "version": "782b989d92f560df1cff9128ae5fb306ee8198c2cf88e792d704da5801cfb08b",
-        "signature": "782b989d92f560df1cff9128ae5fb306ee8198c2cf88e792d704da5801cfb08b",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/declarations/data-models.d.ts": {
-        "version": "5250ad349194e65a224df6fcb26ab4d12918c2c5291a30105c23d3a3cd8ad67c",
-        "signature": "5250ad349194e65a224df6fcb26ab4d12918c2c5291a30105c23d3a3cd8ad67c",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/declarations/object-shcema.d.ts": {
-        "version": "7f405687f236a08a2bea25617077c3c480b58ee4bfe945dbacc83a74612ddef2",
-        "signature": "7f405687f236a08a2bea25617077c3c480b58ee4bfe945dbacc83a74612ddef2",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectcategorydata.d.ts": {
-        "version": "6d67c6a28037f766284509f7e77a7151caf7343a383af0febe7c084989e69d5a",
-        "signature": "6d67c6a28037f766284509f7e77a7151caf7343a383af0febe7c084989e69d5a",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectdata.d.ts": {
-        "version": "5679dd9d7b47bdb5020fd52a360b50d3aa5d3fd041da70305da12f81df136816",
-        "signature": "5679dd9d7b47bdb5020fd52a360b50d3aa5d3fd041da70305da12f81df136816",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islinkedlocalesubjectdata.d.ts": {
-        "version": "b2607d99d8583431c17fa7485c30001be999788947df90312c76adaeb76198c3",
-        "signature": "b2607d99d8583431c17fa7485c30001be999788947df90312c76adaeb76198c3",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectcategorydata.d.ts": {
-        "version": "74053cfe917db015007593d3853b858fbcf2e38012ab08d541411884467c941d",
-        "signature": "74053cfe917db015007593d3853b858fbcf2e38012ab08d541411884467c941d",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectdata.d.ts": {
-        "version": "6418326bd93b335c9b6aa6be0b515a4de48e1873d06c17ff8ed257214cd13af3",
-        "signature": "6418326bd93b335c9b6aa6be0b515a4de48e1873d06c17ff8ed257214cd13af3",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatestudentdata.d.ts": {
-        "version": "77aee65308bc3d2d5bc3571ca959a3204befbf71187fb20e12c442a1cf51eac6",
-        "signature": "77aee65308bc3d2d5bc3571ca959a3204befbf71187fb20e12c442a1cf51eac6",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatetutordata.d.ts": {
-        "version": "94796ebe3167e07226297ee5eaadbb922eb2b83a891d9b111b3e9dab5eb5ecf6",
-        "signature": "94796ebe3167e07226297ee5eaadbb922eb2b83a891d9b111b3e9dab5eb5ecf6",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublicstudentdata.d.ts": {
-        "version": "cac8a279cb82bbe13dba6dff41a3da770abf6e5a10c49335088b3a12295ab885",
-        "signature": "cac8a279cb82bbe13dba6dff41a3da770abf6e5a10c49335088b3a12295ab885",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublictutordata.d.ts": {
-        "version": "1c222e5f344683b2f1450f232511489a90e3ef2859418bf60eb9f9ff2710c490",
-        "signature": "1c222e5f344683b2f1450f232511489a90e3ef2859418bf60eb9f9ff2710c490",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/index.d.ts": {
-        "version": "c7d6fd440f2f018d74521a6d024a8286589bcb5b62bdd70a320e837669eb7669",
-        "signature": "c7d6fd440f2f018d74521a6d024a8286589bcb5b62bdd70a320e837669eb7669",
-        "affectsGlobalScope": false
-      },
-      "../node_modules/@adopt-a-student/common/lib/index.d.ts": {
-        "version": "98b6bb042eb1f3d236a7e8707c99ef4dd3752dc4ab1b2cf4552025e166d4745a",
-        "signature": "98b6bb042eb1f3d236a7e8707c99ef4dd3752dc4ab1b2cf4552025e166d4745a",
+        "version": "9fad17e6a42528cf0e022af1527f3d7a114f69939c24f939afe2525fbbe0592d",
+        "signature": "2b94faf995ca53e2bc5a1bbcc47ed56a429989dce7e184593dfa7301bc96b973",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/islocalesubjectcategorydata.ts": {
-        "version": "af42ce945453da2b0735712e3892764bda034772e3934679ecef4e1f84df46f7",
-        "signature": "74053cfe917db015007593d3853b858fbcf2e38012ab08d541411884467c941d",
+        "version": "00d5a10770aedd54d0e846a4fa5eca6a7341e5d6978a70c8a4e84a3b1890b150",
+        "signature": "2a8e1ac17967f227f9a9028c98700b717a7a735e243e5ab4f4655e3f8366063b",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isgenericsubjectcategorydata.ts": {
-        "version": "3ed443f9a8c8fef4edb1ad11182467f7669d8bd2a26906af3c0949d0faf85d69",
-        "signature": "6d67c6a28037f766284509f7e77a7151caf7343a383af0febe7c084989e69d5a",
+        "version": "4c65ddba2b4b668308c9c747ec6bb6924bb9aefe355e21f891daa10a5d4d862e",
+        "signature": "550a268ff1a600583e9af045e7712104d9ef25bbe0678168e79231e587e38ac3",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isgenericsubjectdata.ts": {
-        "version": "748a2895b8b594da57a0d1c45096ab7814f53b8c7c37f5f37fdcb4de409dc693",
-        "signature": "5679dd9d7b47bdb5020fd52a360b50d3aa5d3fd041da70305da12f81df136816",
+        "version": "ecb5bd0d2281b6c0eb908ecefacc1c9ddd12e1d31ccf719a447f25404d8b0769",
+        "signature": "8c52e0aa05f551447fce69c04a30e60c9136fcc6628c71fc1937163d47d8eff4",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/islinkedlocalesubjectdata.ts": {
-        "version": "35510cb7120d05947e4d66024adf8496f7c79d176e451ea4ea295ff3c40f68e4",
-        "signature": "b2607d99d8583431c17fa7485c30001be999788947df90312c76adaeb76198c3",
+        "version": "0bdb68285e9a5dde9eb490e3804fe517de2318b14c9eef4fe2b895d39ded2739",
+        "signature": "1e4acd85400e692735d84805fbd8d157d8b2926634a65cd6ca5344f25ee7e205",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/islocalesubjectdata.ts": {
-        "version": "b6a3641ada935eb2dd7bc584fe42aae65edd391f141cb57ac15baa5ffacb03b3",
-        "signature": "6418326bd93b335c9b6aa6be0b515a4de48e1873d06c17ff8ed257214cd13af3",
+        "version": "190569420541592aebef2e4ba4cb8fe809e2328cdeb818b729abbc29b2204af2",
+        "signature": "163b7f2e92e84f90677aeb2c558d612d6017fbc1c02ad7acc101bf90241c5611",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isprivatestudentdata.ts": {
-        "version": "08171ec4d031560dc80e5beec5e89e2ab3c1a57464856adbef34394140ebca32",
-        "signature": "77aee65308bc3d2d5bc3571ca959a3204befbf71187fb20e12c442a1cf51eac6",
+        "version": "c51988b052bd07b0ed8889a132447e389a7184b64efb1abbbb62dcb641ed062f",
+        "signature": "2139056c54401170e17fe51a221fe8e0b0f05608b8095c22888aa0be667013f3",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isprivatetutordata.ts": {
-        "version": "2b3ed3aa5878fec78ab9d39e51354553d81341a749a591721516320780581136",
-        "signature": "94796ebe3167e07226297ee5eaadbb922eb2b83a891d9b111b3e9dab5eb5ecf6",
+        "version": "63803c7b54550bd4e829be590202ef881e1699b71fd591d9ebfd7653d2404305",
+        "signature": "9d8870a6b6883ce746cdcb3c82875373591e3bbef1204008fd42144e75891e80",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/ispublicstudentdata.ts": {
-        "version": "e00a31210356e62ddbcb933e7910fce4ad592ad156adce39b33e1e6cf6dd5ccc",
-        "signature": "cac8a279cb82bbe13dba6dff41a3da770abf6e5a10c49335088b3a12295ab885",
+        "version": "baf683a5d9ddaf88004702cccfd7bdd9228a36e40b60f1c1dcfddb233661e75b",
+        "signature": "6f0769782f418baaacbb5c822cecdf8459cf32eeae4040341b131604c289e9e3",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/ispublictutordata.ts": {
-        "version": "daf1ea52843ac487dbcf803e1c022ecec2b09b92f0c39c26a2d0210ea3bad66f",
-        "signature": "1c222e5f344683b2f1450f232511489a90e3ef2859418bf60eb9f9ff2710c490",
+        "version": "86fb1a7dab0dc876de6c1347f63bca21a4c77becfc2651787dc89cc6c9d86c4e",
+        "signature": "c8a1af46a03792756a4d9c4d6663d1b27da071aaf71d224024a90b2cd135a8cd",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/index.ts": {
@@ -367,8 +292,8 @@
         "affectsGlobalScope": false
       },
       "./src/declarations/api.ts": {
-        "version": "f005771442c3738179a83823b0460fd72dde141380821cb8d652e95ea8020a8e",
-        "signature": "700dee29fff49839837947834134b26c10637e8ed3d8afe8010ebadb39e87785",
+        "version": "681ca04f4fa25c21eb1b7a6122eb15cef85cd09e06d938fc915f48b351c67f1a",
+        "signature": "6ac44ce161c920be925fbe442bc240589b19d16309e94b650b5f7b678075fe84",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -936,7 +861,8 @@
         "./node_modules/pretty-format/build/types.d.ts"
       ],
       "./src/declarations/api.ts": [
-        "./src/declarations/data-models.ts"
+        "./src/declarations/data-models.ts",
+        "./src/declarations/types.ts"
       ],
       "./src/declarations/data-models.ts": [
         "./src/declarations/enums.ts",
@@ -965,84 +891,32 @@
         "./src/utils/type-predicates/ispublictutordata.ts"
       ],
       "./src/utils/type-predicates/isgenericsubjectcategorydata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts",
+        "./src/index.ts",
         "./src/utils/type-predicates/islocalesubjectcategorydata.ts"
       ],
       "./src/utils/type-predicates/isgenericsubjectdata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/islinkedlocalesubjectdata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/islocalesubjectcategorydata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/islocalesubjectdata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/isprivatestudentdata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/isprivatetutordata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/ispublicstudentdata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/ispublictutordata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/declarations/data-models.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/declarations/enums.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/declarations/types.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/declarations/object-shcema.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/declarations/data-models.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/index.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/declarations/data-models.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/declarations/enums.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/declarations/object-shcema.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/declarations/types.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/index.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectcategorydata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectdata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islinkedlocalesubjectdata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectcategorydata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectdata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatestudentdata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatetutordata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublicstudentdata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublictutordata.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectcategorydata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectdata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islinkedlocalesubjectdata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectcategorydata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectdata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatestudentdata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatetutordata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublicstudentdata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublictutordata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ]
     },
     "exportedModulesMap": {
@@ -1296,7 +1170,8 @@
         "./node_modules/pretty-format/build/types.d.ts"
       ],
       "./src/declarations/api.ts": [
-        "./src/declarations/data-models.ts"
+        "./src/declarations/data-models.ts",
+        "./src/declarations/types.ts"
       ],
       "./src/declarations/data-models.ts": [
         "./src/declarations/enums.ts",
@@ -1325,83 +1200,31 @@
         "./src/utils/type-predicates/ispublictutordata.ts"
       ],
       "./src/utils/type-predicates/isgenericsubjectcategorydata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/isgenericsubjectdata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/islinkedlocalesubjectdata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/islocalesubjectcategorydata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/islocalesubjectdata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/isprivatestudentdata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/isprivatetutordata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/ispublicstudentdata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ],
       "./src/utils/type-predicates/ispublictutordata.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/declarations/data-models.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/declarations/enums.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/declarations/types.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/declarations/object-shcema.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/declarations/data-models.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/index.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/declarations/data-models.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/declarations/enums.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/declarations/object-shcema.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/declarations/types.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/index.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectcategorydata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectdata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islinkedlocalesubjectdata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectcategorydata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectdata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatestudentdata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatetutordata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublicstudentdata.d.ts",
-        "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublictutordata.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectcategorydata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectdata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islinkedlocalesubjectdata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectcategorydata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectdata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatestudentdata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatetutordata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublicstudentdata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
-      ],
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublictutordata.d.ts": [
-        "../node_modules/@adopt-a-student/common/lib/index.d.ts"
+        "./src/index.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -1518,24 +1341,73 @@
       "./src/utils/type-predicates/isprivatestudentdata.ts",
       "./src/utils/type-predicates/isprivatetutordata.ts",
       "./src/utils/type-predicates/ispublicstudentdata.ts",
-      "./src/utils/type-predicates/ispublictutordata.ts",
-      "../node_modules/@adopt-a-student/common/lib/declarations/data-models.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/declarations/enums.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/declarations/object-shcema.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/declarations/types.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/index.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/index.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectcategorydata.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isgenericsubjectdata.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islinkedlocalesubjectdata.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectcategorydata.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/islocalesubjectdata.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatestudentdata.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/isprivatetutordata.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublicstudentdata.d.ts",
-      "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublictutordata.d.ts"
+      "./src/utils/type-predicates/ispublictutordata.ts"
     ],
     "affectedFilesPendingEmit": [
+      [
+        "./lib/declarations/api.d.ts",
+        1
+      ],
+      [
+        "./lib/declarations/data-models.d.ts",
+        1
+      ],
+      [
+        "./lib/declarations/enums.d.ts",
+        1
+      ],
+      [
+        "./lib/declarations/object-shcema.d.ts",
+        1
+      ],
+      [
+        "./lib/declarations/types.d.ts",
+        1
+      ],
+      [
+        "./lib/index.d.ts",
+        1
+      ],
+      [
+        "./lib/utils/type-predicates/index.d.ts",
+        1
+      ],
+      [
+        "./lib/utils/type-predicates/isgenericsubjectcategorydata.d.ts",
+        1
+      ],
+      [
+        "./lib/utils/type-predicates/isgenericsubjectdata.d.ts",
+        1
+      ],
+      [
+        "./lib/utils/type-predicates/islinkedlocalesubjectdata.d.ts",
+        1
+      ],
+      [
+        "./lib/utils/type-predicates/islocalesubjectcategorydata.d.ts",
+        1
+      ],
+      [
+        "./lib/utils/type-predicates/islocalesubjectdata.d.ts",
+        1
+      ],
+      [
+        "./lib/utils/type-predicates/isprivatestudentdata.d.ts",
+        1
+      ],
+      [
+        "./lib/utils/type-predicates/isprivatetutordata.d.ts",
+        1
+      ],
+      [
+        "./lib/utils/type-predicates/ispublicstudentdata.d.ts",
+        1
+      ],
+      [
+        "./lib/utils/type-predicates/ispublictutordata.d.ts",
+        1
+      ],
       [
         "./node_modules/@types/jest/index.d.ts",
         1

@@ -6,7 +6,7 @@ import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase
 import getCollectionData from '../../../utils/firebase/getCollectionData';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const getSubjectCategoriesHandler: ApiGetSubjectCategoriesHandler = async (
+const getSubjectCategories: ApiGetSubjectCategoriesHandler = async (
   data,
   context
 ) => {
@@ -58,4 +58,4 @@ const getSubjectCategoriesHandler: ApiGetSubjectCategoriesHandler = async (
   };
 };
 
-export default getSubjectCategoriesHandler;
+export default getSubjectCategories;

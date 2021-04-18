@@ -1,4 +1,4 @@
-import { GenericSubjectData } from '@adopt-a-student/common';
+import { GenericSubjectData } from '../..';
 
 export function isGenericSubjectData(data: any): data is GenericSubjectData {
   if (typeof data !== "object") return false;

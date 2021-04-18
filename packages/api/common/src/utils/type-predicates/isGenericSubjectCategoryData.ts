@@ -1,5 +1,4 @@
-import { GenericSubjectCategoryData } from '@adopt-a-student/common';
-
+import { GenericSubjectCategoryData } from '../..';
 import { isLocaleSubjectCategoryData } from './isLocaleSubjectCategoryData';
 
 export function isGenericSubjectCategoryData(

@@ -1,4 +1,4 @@
-import { PrivateTutorData } from "@adopt-a-student/common";
+import { PrivateTutorData } from "../../../common/src";
 import callFirebaseFunction from "../../client-utils/callFirebaseFunction";
 import {
   functionsEmulator,

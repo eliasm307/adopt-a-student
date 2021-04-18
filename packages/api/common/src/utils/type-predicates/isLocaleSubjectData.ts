@@ -1,4 +1,4 @@
-import { LocaleSubjectData } from '@adopt-a-student/common';
+import { LocaleSubjectData } from '../..';
 
 export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
   if (typeof data !== "object") return false;

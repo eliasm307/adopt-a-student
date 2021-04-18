@@ -1,4 +1,4 @@
-import { LocaleSubjectCategoryData } from '@adopt-a-student/common';
+import { LocaleSubjectCategoryData } from '../..';
 
 export function isLocaleSubjectCategoryData(
   data: any

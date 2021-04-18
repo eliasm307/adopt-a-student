@@ -6,14 +6,41 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
+			"TutorId": {
+				"type": "string"
+			},
+			"StudentId": {
+				"type": "string"
+			},
+			"UserId": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/TutorId"
+					},
+					{
+						"$ref": "#/components/schemas/StudentId"
+					}
+				]
+			},
+			"UrlString": {
+				"type": "string",
+				"description": "An internet link"
+			},
+			"LocaleCode": {
+				"type": "string",
+				"enum": [
+					"en",
+					"fr"
+				]
+			},
 			"PublicStudentData": {
 				"properties": {
 					"id": {
-						"type": "string",
+						"$ref": "#/components/schemas/UserId",
 						"description": "Unique id for a user"
 					},
 					"imageUrl": {
-						"type": "string",
+						"$ref": "#/components/schemas/UrlString",
 						"description": "Link to profile image, if defined"
 					},
 					"introduction": {
@@ -22,7 +49,7 @@
 					},
 					"prefferedLocales": {
 						"items": {
-							"type": "string"
+							"$ref": "#/components/schemas/LocaleCode"
 						},
 						"type": "array",
 						"description": "The locales a user prefers for content"
@@ -40,9 +67,9 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GetStudentsBySubjectsResult": {
+			"GetStudentsBySubjectsResponseBody": {
 				"properties": {
-					"data": {
+					"students": {
 						"items": {
 							"$ref": "#/components/schemas/PublicStudentData"
 						},
@@ -50,22 +77,110 @@
 					}
 				},
 				"required": [
-					"data"
+					"students"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GetStudentsBySubjectsBody": {
+			"GenericSubjectId": {
+				"type": "string"
+			},
+			"LocaleSubjectId": {
+				"type": "string"
+			},
+			"SubjectId": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/GenericSubjectId"
+					},
+					{
+						"$ref": "#/components/schemas/LocaleSubjectId"
+					}
+				]
+			},
+			"GetStudentsBySubjectsRequestBody": {
 				"properties": {
-					"localeSubjectIds": {
+					"subjectIds": {
 						"items": {
-							"type": "string"
+							"$ref": "#/components/schemas/SubjectId"
 						},
 						"type": "array"
 					}
 				},
 				"required": [
-					"localeSubjectIds"
+					"subjectIds"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"FirebaseCallableFunctionContext": {
+				"description": "Provided automatically by Firebase"
+			},
+			"PublicTutorData": {
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/UserId",
+						"description": "Unique id for a user"
+					},
+					"imageUrl": {
+						"$ref": "#/components/schemas/UrlString",
+						"description": "Link to profile image, if defined"
+					},
+					"introduction": {
+						"type": "string",
+						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedLocales": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleCode"
+						},
+						"type": "array",
+						"description": "The locales a user prefers for content"
+					},
+					"userName": {
+						"type": "string",
+						"description": "Username which will be displayed for a user"
+					},
+					"available": {
+						"type": "boolean",
+						"description": "Represents whether a tutor is available to take on a student"
+					}
+				},
+				"required": [
+					"id",
+					"prefferedLocales",
+					"userName",
+					"available"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetTutorsBySubjectsResponseBody": {
+				"properties": {
+					"tutors": {
+						"items": {
+							"$ref": "#/components/schemas/PublicTutorData"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"tutors"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetTutorsBySubjectsRequestBody": {
+				"properties": {
+					"subjectIds": {
+						"items": {
+							"$ref": "#/components/schemas/SubjectId"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"subjectIds"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -86,16 +201,16 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/": {
+		"/CallableName.createStudent.toString()": {
 			"post": {
-				"operationId": "GetStudentsBySubjects",
+				"operationId": "CreateStudent",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GetStudentsBySubjectsResult"
+									"$ref": "#/components/schemas/GetStudentsBySubjectsResponseBody"
 								}
 							}
 						}
@@ -108,7 +223,7 @@
 						"name": "context",
 						"required": true,
 						"schema": {
-							"type": "string"
+							"$ref": "#/components/schemas/FirebaseCallableFunctionContext"
 						}
 					}
 				],
@@ -117,7 +232,83 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GetStudentsBySubjectsBody"
+								"$ref": "#/components/schemas/GetStudentsBySubjectsRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/CallableName.getStudentsBySubjects.toString()": {
+			"post": {
+				"operationId": "GetStudentsBySubjects",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetStudentsBySubjectsResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "context",
+						"required": true,
+						"schema": {
+							"$ref": "#/components/schemas/FirebaseCallableFunctionContext"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetStudentsBySubjectsRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/CallableName.getTutorsBySubjects.toString()": {
+			"post": {
+				"operationId": "GetTutorsBySubjects",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetTutorsBySubjectsResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "context",
+						"required": true,
+						"schema": {
+							"$ref": "#/components/schemas/FirebaseCallableFunctionContext"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetTutorsBySubjectsRequestBody"
 							}
 						}
 					}

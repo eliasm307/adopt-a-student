@@ -1,4 +1,4 @@
-import { PrivateStudentData } from '@adopt-a-student/common';
+import { PrivateStudentData } from '../..';
 
 export function isPrivateStudentData(data: any): data is PrivateStudentData {
   if (typeof data !== "object") return false;

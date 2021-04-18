@@ -1,4 +1,4 @@
-import { UserSubjectData } from '@adopt-a-student/common';
+import { UserSubjectData } from '../..';
 
 export function isLinkedLocaleSubjectData(data: any): data is UserSubjectData {
   if (typeof data !== "object") return false;

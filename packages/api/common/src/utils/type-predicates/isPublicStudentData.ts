@@ -1,4 +1,4 @@
-import { PublicStudentData } from '@adopt-a-student/common';
+import { PublicStudentData } from '../..';
 
 export function isPublicStudentData(data: any): data is PublicStudentData {
   if (typeof data !== "object") return false;

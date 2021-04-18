@@ -1,4 +1,4 @@
-import { PrivateTutorData } from '@adopt-a-student/common';
+import { PrivateTutorData } from '../..';
 
 export function isPrivateTutorData(data: any): data is PrivateTutorData {
   if (typeof data !== "object") return false;
@@ -7,10 +7,10 @@ export function isPrivateTutorData(data: any): data is PrivateTutorData {
   const {
     email,
     id,
-    relatedSubjects: linkedLocaleSubjects,
-    relatedStudents: students,
+    relatedStudents,
     userName,
     prefferedLocales,
+    relatedSubjects,
   } = data as PrivateTutorData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -19,18 +19,18 @@ export function isPrivateTutorData(data: any): data is PrivateTutorData {
   const forTsError: PrivateTutorData = {
     email,
     id,
-    relatedSubjects: linkedLocaleSubjects,
-    relatedStudents: students,
+    relatedStudents,
     userName,
     prefferedLocales,
+    relatedSubjects,
   };
 
   const hasPreferredLocales = Array.isArray(prefferedLocales);
   const hasEmail = typeof email === "string" && email;
   const hasUserName = typeof userName === "string" && userName;
   const hasId = typeof id === "string" && id;
-  const hasRelatedSubjects = Array.isArray(linkedLocaleSubjects);
-  const hasStudents = Array.isArray(students);
+  const hasRelatedSubjects = Array.isArray(relatedStudents);
+  const hasStudents = Array.isArray(relatedStudents);
 
   if (
     hasEmail &&
