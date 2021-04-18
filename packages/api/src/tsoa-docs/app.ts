@@ -47,8 +47,26 @@ app.get("/", (_req, res) =>
     </style>
   </head>
   <body>
-    <redoc spec-url='/docs/swagger.json' expand-responses='all' max-displayed-enum-values='5' hide-hostname></redoc>
+    <redoc spec-url='/docs/swagger.json'
+        expand-responses='all'
+        max-displayed-enum-values='5'
+        hide-hostname
+        hide-schema-patternX
+        hide-single-request-sample-tab
+        expand-single-schema-field
+        json-sample-expand-level='all'
+        no-auto-auth
+        menu-toggle
+        expand-default-server-variables
+        hide-schema-titles
+        simple-one-of-type-label
+        path-in-middle-panel
+        required-props-first
+        sort-props-alphabetically
+        hide-download-button
+    ></redoc>
     <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
+    <script> document.querySelectorAll('[aria-label="expand properties"]').forEach(button => button.click()); console.log('clicked'); </script>
   </body>
 </html>
 `)
