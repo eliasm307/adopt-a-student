@@ -3,6 +3,9 @@ import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-funct
 import { ObjectMap } from '@adopt-a-student/common';
 
 import { StudentsController } from './controllers/StudentController/StudentController';
+import {
+  SubjectCategorysController,
+} from './controllers/SubjectCategoryController/SubjectCategoryController';
 import { TutorsController } from './controllers/TutorController/TutorController';
 
 // Start writing Firebase Functions
@@ -40,9 +43,9 @@ const callableFunctionHandlers = {
   getSubjectsByCategory,
 
   // subject categories
-  getSubjectCategories,
-  createSubjectCategory,
-  updateSubjectCategory,
+  getSubjectCategories: SubjectCategorysController.getSubjectCategories,
+  createSubjectCategory: SubjectCategorysController.createSubjectCategory,
+  updateSubjectCategory: SubjectCategorysController.updateSubjectCategory,
 
   // relationships
   linkGenericSubjects,
@@ -59,7 +62,7 @@ const callableFunctionHandlers = {
 
   linkStudentAndLocaleSubject,
   unlinkStudentAndLocaleSubject,
-} as ObjectMap<CallableName, (body: any, context?: any) => Promise<any>>;
+} as ObjectMap<CallableName, (body: any, context: any) => Promise<any>>;
 
 /*
 callableFunctionHandlers.test = (data, context) => {
