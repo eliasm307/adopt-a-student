@@ -18,14 +18,14 @@ const handler: ApiGetTutorsBySubjectsHandler = async (data, context) => {
   const auth = verifyRequest(data, context);
 
   // verify received data
-  if (!data?.localeSubjectIds || !Array.isArray(data.localeSubjectIds))
+  if (!data?.subjectIds || !Array.isArray(data.subjectIds))
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Could not get students by subjects because provided locale subject ids are not valid format"
     );
 
   return getUsersBySubjects({
-    localeSubjectIds: data.localeSubjectIds,
+    localeSubjectIds: data.subjectIds,
     publicDataExtractor: extractPublicTutorData,
     userType: "Tutor",
     firestore: firestoreAdmin,

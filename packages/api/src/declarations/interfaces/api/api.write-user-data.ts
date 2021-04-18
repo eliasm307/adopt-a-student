@@ -1,13 +1,4 @@
-import { PrivateStudentData, PrivateTutorData } from '@adopt-a-student/common';
-
 import { FirebaseCallableFunctionHandler } from '../../types';
-
-export type ApiCreateTutorHandler = FirebaseCallableFunctionHandler<
-  {
-    data?: Omit<PrivateTutorData, "id">;
-  },
-  { data: { tutor: PrivateTutorData } }
->;
 
 export type ApiUpdateTutorDataHandler = FirebaseCallableFunctionHandler<
   {

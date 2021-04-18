@@ -19,6 +19,7 @@ import {
 // }
 
 /** Represents firestore top level collections */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface FirestoreSchema {
   /** Generic subjects, each with a locale subject sub collection */
   genericSubjects: (GenericSubjectData & {
@@ -34,12 +35,11 @@ interface FirestoreSchema {
 export interface BasicResponseData {
   message?: string;
 
-  // success: boolean;
+// success: boolean;
 }
 
 export * from "./api/api.query-subjects";
 
-export * from "./api/api.quey-users";
 export * from "./api/api.read-subject-data";
 export * from "./api/api.read-user-data";
 export * from "./api-tbc/api.write-relationships";

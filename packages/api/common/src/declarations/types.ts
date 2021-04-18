@@ -6,3 +6,9 @@ export type Country = "United Kingdom" | "Brazil" | "Cote d'Ivoire"; // todo add
 export type ObjectMap<K extends string | number, V> = {
   [key in K]: V | undefined;
 };
+
+export type LocaleSubjectId = string;
+
+export type GenericSubjectId = string;
+
+export type SubjectId = GenericSubjectId | LocaleSubjectId;

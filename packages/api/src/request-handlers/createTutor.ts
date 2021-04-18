@@ -1,16 +1,29 @@
-import { isPrivateTutorData } from '@adopt-a-student/common';
+import {
+  CreateTutorRequestBody, CreateTutorResponseBody, isPrivateTutorData,
+} from '@adopt-a-student/common';
 
 import { TUTOR_COLLECTION_NAME } from '../constants';
-import { ApiCreateTutorHandler } from '../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../declarations/types';
 import createDocument from '../utils/firebase/createDocument';
-import { firestoreAdmin } from '../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import verifyRequest from '../utils/verifyRequest';
 
-const handler: ApiCreateTutorHandler = async (body, context) => {
+const createTutor: FirebaseCallableFunctionHandler<
+  CreateTutorRequestBody,
+  CreateTutorResponseBody
+> = async (body, context) => {
+  if (!body)
+    throw new functionsHttps.HttpsError(
+      "invalid-argument",
+      "Body not provided"
+    );
+
   const auth = verifyRequest(body, context);
 
+  const { tutor: tutorParams } = body;
+
   // make sure data uses user id
-  const data = { ...body?.data, id: auth.uid };
+  const data = { ...tutorParams, id: auth.uid };
 
   const tutor = await createDocument({
     collectionPath: TUTOR_COLLECTION_NAME,
@@ -21,8 +34,7 @@ const handler: ApiCreateTutorHandler = async (body, context) => {
   });
 
   return {
-    success: true,
-    data: { tutor },
+    tutor,
   };
 
   // todo delete
@@ -62,4 +74,4 @@ const handler: ApiCreateTutorHandler = async (body, context) => {
   */
 };
 
-export default handler;
+export default createTutor;

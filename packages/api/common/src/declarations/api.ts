@@ -1,19 +1,34 @@
-import { PublicStudentData, PublicTutorData } from './data-models';
+import {
+  PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData,
+} from './data-models';
+import { SubjectId } from './types';
 
 export interface GetStudentsBySubjectsRequestBody {
-  localeSubjectIds: string[];
+  subjectIds: SubjectId[];
 }
 export interface GetStudentsBySubjectsResponseBody {
-  data: PublicStudentData[];
+  students: PublicStudentData[];
 }
 
 export interface GetTutorsBySubjectsRequestBody {
-  localeSubjectIds: string[];
+  subjectIds: SubjectId[];
 }
 export interface GetTutorsBySubjectsResponseBody {
-  data: PublicTutorData[];
+  tutors: PublicTutorData[];
 }
 
-export interface CreateStudentBody {}
+export interface CreateTutorRequestBody {
+  tutor: Omit<PrivateTutorData, "id">;
+}
 
-export interface CreateStudentResult {}
+export interface CreateTutorResponseBody {
+  tutor: PrivateTutorData;
+}
+
+export interface CreateStudentRequestBody {
+  student: Omit<PrivateStudentData, "id">;
+}
+
+export interface CreateStudentResponseBody {
+  student: PrivateStudentData;
+}
