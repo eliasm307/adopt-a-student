@@ -1,21 +1,14 @@
-import { LinkedLocaleSubjectData } from '@adopt-a-student/common';
+import { UserSubjectData } from '@adopt-a-student/common';
 
-export function isLinkedLocaleSubjectData(
-  data: any
-): data is LinkedLocaleSubjectData {
+export function isLinkedLocaleSubjectData(data: any): data is UserSubjectData {
   if (typeof data !== "object") return false;
 
-  const {
-    id,
-    locale,
-    confidenceLevel,
-    detail,
-  } = data as LinkedLocaleSubjectData;
+  const { id, locale, confidenceLevel, detail } = data as UserSubjectData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
   // ts will throw an error to update the predicate as this object will be invalid
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const forTsError: LinkedLocaleSubjectData = {
+  const forTsError: UserSubjectData = {
     id,
     locale,
     confidenceLevel,

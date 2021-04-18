@@ -1,6 +1,6 @@
 import {
-  isLinkedLocaleSubjectData, isLocaleSubjectData, isPrivateStudentData, LinkedLocaleSubjectData,
-  LocaleSubjectData, PrivateStudentData,
+  isLinkedLocaleSubjectData, isLocaleSubjectData, isPrivateStudentData, LocaleSubjectData,
+  PrivateStudentData, UserSubjectData,
 } from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../constants';
@@ -26,7 +26,7 @@ const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
 
   const document1Props: AddDocumentLinkProps<
     PrivateStudentData,
-    LinkedLocaleSubjectData
+    UserSubjectData
   > = {
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,

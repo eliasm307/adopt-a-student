@@ -10,7 +10,7 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
     description,
     parentId: genericSubjectId,
     locale,
-    relatedStudentIds: studentIds,
+    relatedStudents: studentIds,
   } = data as LocaleSubjectData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -23,7 +23,7 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
     description,
     parentId: genericSubjectId,
     locale,
-    relatedStudentIds: studentIds,
+    relatedStudents: studentIds,
   };
 
   const hasId = typeof id === "string" && id;

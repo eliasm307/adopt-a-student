@@ -1,13 +1,12 @@
 import {
-  isLocaleSubjectData, isPrivateTutorData, LinkedLocaleSubjectData, LocaleSubjectData,
-  PrivateTutorData,
+  isLocaleSubjectData, isPrivateTutorData, LocaleSubjectData, PrivateTutorData, UserSubjectData,
 } from '@adopt-a-student/common';
 
-import { LOCALE_SUBJECT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
-import { ApiUnlinkTutorAndLocaleSubject } from '../declarations/interfaces';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import unlinkDocuments, { RemoveDocumentLinkProps } from '../utils/links/unlinkDocuments';
-import verifyRequest from '../utils/verifyRequest';
+import { LOCALE_SUBJECT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
+import { ApiUnlinkTutorAndLocaleSubject } from '../../../declarations/interfaces';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
+import verifyRequest from '../../../utils/verifyRequest';
 
 const linkStudentAndLocaleSubject: ApiUnlinkTutorAndLocaleSubject = async (
   body,
@@ -25,13 +24,13 @@ const linkStudentAndLocaleSubject: ApiUnlinkTutorAndLocaleSubject = async (
 
   const document1Props: RemoveDocumentLinkProps<
     PrivateTutorData,
-    LinkedLocaleSubjectData
+    UserSubjectData
   > = {
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,
     filterPredicate: ({ id: linkId }) => linkId !== localeSubjectId,
     linkReducer: ({ id }) => id,
-    linksPropName: "linkedLocaleSubjects",
+    linksPropName: "relatedSubjects",
     id: uid,
   };
 
@@ -40,7 +39,7 @@ const linkStudentAndLocaleSubject: ApiUnlinkTutorAndLocaleSubject = async (
     dataPredicate: isLocaleSubjectData,
     filterPredicate: (linkId) => linkId !== uid,
     linkReducer: (link) => link,
-    linksPropName: "linkedStudentIds",
+    linksPropName: "relatedStudentIds",
     id: localeSubjectId,
   };
 
