@@ -1,12 +1,5 @@
 import { FirebaseCallableFunctionHandler } from '../../types';
 
-export type ApiCreateStudentHandler = FirebaseCallableFunctionHandler<
-  {
-    data?: Omit<PrivateStudentData, "id">;
-  },
-  { data: PrivateStudentData }
->;
-
 export type ApiUpdateStudentDataHandler = FirebaseCallableFunctionHandler<
   {
     // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
