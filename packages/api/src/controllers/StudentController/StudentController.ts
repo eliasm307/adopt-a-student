@@ -12,8 +12,8 @@ import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjec
 /** Provided automatically by Firebase */
 type FirebaseCallableFunctionContext = any;
 
-const createStudent = "b19";
-const getStudentsBySubjects = "b3";
+const createStudent = "createStudent";
+const getStudentsBySubjects = "getStudentsBySubjects";
 
 const exportedNames = [
   createStudent,

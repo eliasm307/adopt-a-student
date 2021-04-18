@@ -9,8 +9,8 @@ import { GetStudentsBySubjectsRequestBody } from '@adopt-a-student/common';
 // ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
 // ! so the routes are named after the variables, and the actual name is exported
 
-const createTutor = "a1";
-const getTutorsBySubjects = "a2";
+const createTutor = "createTutor";
+const getTutorsBySubjects = "GetTutorsBySubjects";
 const a3 = "a3";
 
 const exportedNames = [createTutor, getTutorsBySubjects, a3] as const;
@@ -42,7 +42,7 @@ export class TutorController extends Controller {
     {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
   );
   */
-  callableNames = exportedNames;
+  static callableNames = exportedNames;
 
   @Post(createTutor)
   public static createTutor(

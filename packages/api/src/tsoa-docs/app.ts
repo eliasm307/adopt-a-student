@@ -2,15 +2,12 @@ import express, { Request as ExRequest, Response as ExResponse } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
 import swaggerSpec from '../../tsoa-build/swagger-spec.json';
+import { StudentsController } from '../controllers/StudentController/StudentController';
+import { TutorController } from '../controllers/TutorController/TutorController';
 
 export const app = express();
 
 // const r = redoc.;
-
-// serve your swagger.json file
-app.get("/docs/swagger.json", (req, res) => {
-  res.json(swaggerSpec);
-});
 
 // define title and specUrl location
 // serve redoc
@@ -23,6 +20,26 @@ app.get(
   })
 );
 */
+
+const updates = {
+  "xx-tagGroups": [
+    {
+      name: "Students",
+      tags: [...StudentsController.callableNames],
+    },
+    {
+      name: "Tutors",
+      tags: [...TutorController.callableNames],
+    },
+  ],
+};
+
+const modifiedSpec = { ...swaggerSpec, ...updates };
+
+// serve your swagger.json file
+app.get("/docs/swagger.json", (req, res) => {
+  res.json(modifiedSpec);
+});
 
 const redocHtml = `
 <!DOCTYPE html>
@@ -78,7 +95,7 @@ const redocHtml = `
             hideSchemaPattern: true,
             hideSingleRequestSampleTab: true,
             expandSingleSchemaField: true,
-            jsonSampleExpandLevel: true,
+            jsonSampleExpandLevel: 'all',
             hideSchemaTitles: true,
             simpleOneOfTypeLabel: true,
             menuToggle: true,
