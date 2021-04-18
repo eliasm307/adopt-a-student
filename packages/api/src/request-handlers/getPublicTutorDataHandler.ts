@@ -1,26 +1,33 @@
-import { isPrivateTutorData } from '@adopt-a-student/common';
+import {
+  GetTutorRequestBody, GetTutorResponseBody, isPrivateTutorData,
+} from '@adopt-a-student/common';
 
 import { TUTOR_COLLECTION_NAME } from '../constants';
-import { ApiGetPublicTutorDataHandler } from '../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../declarations/types';
 import createPath from '../utils/createPath';
 import extractPublicTutorData from '../utils/extractPublicTutorData';
 import { firestoreAdmin } from '../utils/firebase/firebase-admin';
 import readPublicUserData from '../utils/readPublicUserData';
 import verifyRequest from '../utils/verifyRequest';
 
-const getPublicTutorData: ApiGetPublicTutorDataHandler = async (_, context) => {
+// todo make controller automatically choose whether to use the private or public data if user id matches, just need to call a data extractor functionto get public data
+
+const getPublicTutorData: FirebaseCallableFunctionHandler<
+  GetTutorRequestBody,
+  GetTutorResponseBody
+> = async (_, context) => {
   const auth = verifyRequest(_, context);
 
   const path = createPath(TUTOR_COLLECTION_NAME, auth.uid);
 
-  const data = await readPublicUserData({
+  const tutor = await readPublicUserData({
     dataPredicate: isPrivateTutorData,
     firestore: firestoreAdmin,
     path,
     publicDataExtractor: extractPublicTutorData,
   });
 
-  return { data };
+  return { tutor };
 };
 
 export default getPublicTutorData;

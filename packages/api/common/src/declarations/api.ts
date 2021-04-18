@@ -1,7 +1,7 @@
 import {
   PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData,
 } from './data-models';
-import { SubjectId } from './types';
+import { SubjectId, TutorId } from './types';
 
 export interface GetStudentsBySubjectsRequestBody {
   subjectIds: SubjectId[];
@@ -47,4 +47,11 @@ export interface UpdateStudentRequestBody {
 
 export interface UpdateStudentResponseBody {
   result: PrivateStudentData;
+}
+export interface GetTutorRequestBody {
+  id: TutorId;
+}
+
+export interface GetTutorResponseBody {
+  tutor: PrivateTutorData | PublicTutorData;
 }

@@ -12,3 +12,9 @@ export type LocaleSubjectId = string;
 export type GenericSubjectId = string;
 
 export type SubjectId = GenericSubjectId | LocaleSubjectId;
+
+export type TutorId = string;
+
+export type StudentId = string;
+
+export type UserId = TutorId | StudentId;

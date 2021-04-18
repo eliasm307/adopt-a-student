@@ -9,7 +9,7 @@ import createLocaleSubject from './request-handlers/createLocaleSubject';
 import createStudent from './request-handlers/createStudent';
 import createSubjectCategory from './request-handlers/createSubjectCategory';
 import createTutor from './request-handlers/createTutor';
-import getPrivateStudentData from './request-handlers/getPrivateStudentDataHandler';
+import getPrivateStudentData from './request-handlers/getPrivateStudentData';
 import getPrivateTutorData from './request-handlers/getPrivateTutorDataHandler';
 import getPublicStudentData from './request-handlers/getPublicStudentDataHandler';
 import getPublicTutorData from './request-handlers/getPublicTutorDataHandler';
