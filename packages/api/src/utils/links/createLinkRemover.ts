@@ -20,7 +20,7 @@ const documentLinkRemover = async <D, L>({
   return updateDocumentData({
     ...documentProps,
     firestore,
-    edits: {
+    updates: {
       ...currentData,
       [linksPropName]: currentLinks.filter(filterPredicate), // remove link
     },

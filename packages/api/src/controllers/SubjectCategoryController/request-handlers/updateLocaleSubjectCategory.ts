@@ -46,7 +46,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
   const genericSubjectCategory = await updateDocumentData({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     id,
-    edits: genericCategoryEdits,
+    updates: genericCategoryEdits,
     dataPredicate: isGenericSubjectCategoryData,
     dataUpdater: genericSubjectCategoryDataUpdater,
     firestore: firestoreAdmin,

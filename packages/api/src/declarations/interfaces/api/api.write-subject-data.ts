@@ -13,19 +13,6 @@ export type ApiCreateLocaleSubjectHandler = FirebaseCallableFunctionHandler<
   }
 >;
 
-export type ApiUpdateLocaleSubjectHandler = FirebaseCallableFunctionHandler<
-  {
-    /** Locale subject id to modify */
-    id: string;
-    data?: Partial<Omit<LocaleSubjectData, "id">>;
-  },
-  {
-    data: {
-      localeSubject: LocaleSubjectData;
-    };
-  }
->;
-
 /*
  // No data to edit directly on Generic Subject
 export type ApiUpdateGenericSubjectHandler = FirebaseCallableFunctionHandler<

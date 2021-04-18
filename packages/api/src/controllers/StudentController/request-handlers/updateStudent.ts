@@ -32,7 +32,7 @@ const updateStudent: FirebaseCallableFunctionHandler<
   const updatedData = await updateDocumentData({
     collectionPath: STUDENT_COLLECTION_NAME,
     id: uid,
-    edits,
+    updates: edits,
     dataPredicate: isPrivateStudentData,
     dataUpdater: studentDataUpdater,
     firestore: firestoreAdmin,

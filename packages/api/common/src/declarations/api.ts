@@ -2,7 +2,8 @@ import {
   LocaleSubjectData, PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData,
 } from './data-models';
 import {
-  CategoryId, GenericSubjectId, LocaleCode, StudentId, SubjectCategoryId, SubjectId, TutorId,
+  CategoryId, GenericSubjectId, LocaleCode, LocaleSubjectId, StudentId, SubjectCategoryId,
+  SubjectId, TutorId,
 } from './types';
 
 export interface GetStudentsBySubjectsRequestBody {
@@ -79,4 +80,12 @@ export interface SubjectOverview {
 
 export interface GetSubjectsByCategoryResponseBody {
   results: SubjectOverview[];
+}
+export interface UpdateLocaleSubjectRequestBody {
+  /** Locale subject id to modify */
+  id: LocaleSubjectId;
+  updates: Partial<Omit<LocaleSubjectData, "id">>;
+}
+export interface UpdateLocaleSubjectResponseBody {
+  result: LocaleSubjectData;
 }

@@ -20,7 +20,7 @@ const addDocumentLinkMutator = async <D, L>({
   return updateDocumentData({
     ...documentProps,
     firestore,
-    edits: {
+    updates: {
       ...currentData,
       [linksPropName]: [...currentLinks, linkToAdd], // add link
     },
