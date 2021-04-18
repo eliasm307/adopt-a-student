@@ -2,24 +2,23 @@
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
-  CreateStudentRequestBody, CreateStudentResponseBody, GetStudentsBySubjectsRequestBody,
-  GetStudentsBySubjectsResponseBody, GetTutorsBySubjectsRequestBody,
-  GetTutorsBySubjectsResponseBody,
+  GetStudentsBySubjectsRequestBody, GetTutorsBySubjectsRequestBody,
 } from '@adopt-a-student/common';
 
 import { CallableName } from '../../constants';
-import getTutorsBySubjects from '../TutorController/request-handlers/getTutorsBySubjectsHandler';
-import createStudent from './request-handlers/createStudent';
-import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
 
 /** Provided automatically by Firebase */
 type FirebaseCallableFunctionContext = any;
 
-const namedKeys = { a: "", v: "", c: "", d: "" };
-
 // ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
 // ! so the routes are named
-const { a, c, d, v } = namedKeys;
+
+const a1 = "";
+const a2 = "";
+const a3 = "";
+
+const namedKeys = { a1, a2, a3 };
+// const { x: a, z: c, p: d } = namedKeys;
 const custom = {
   val1: "aVal",
 };
@@ -43,28 +42,28 @@ export default class StudentsController extends Controller {
     {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
   );
 
-  @Post(a)
+  @Post(a1)
   static createStudent(
-    @Body() body: CreateStudentRequestBody,
+    @Body() body: GetStudentsBySubjectsRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {}
-  ): Promise<CreateStudentResponseBody> {
-    return createStudent(body, context);
+  ): Promise<any> {
+    return Promise.resolve();
   }
 
-  @Post(c)
+  @Post(a2)
   static getStudentsBySubjects(
     @Body() body: GetStudentsBySubjectsRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {}
-  ): Promise<GetStudentsBySubjectsResponseBody> {
-    return getStudentsBySubjectsHandler(body, context);
+  ): Promise<any> {
+    return Promise.resolve();
   }
 
-  @Post(d)
+  @Post(a3)
   static getTutorsBySubjects(
     @Body() body: GetTutorsBySubjectsRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {}
-  ): Promise<GetTutorsBySubjectsResponseBody> {
-    return getTutorsBySubjects(body, context);
+  ): Promise<any> {
+    return Promise.resolve();
   }
 }
 

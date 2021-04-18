@@ -201,7 +201,7 @@
 	},
 	"openapi": "3.0.0",
 	"paths": {
-		"/a/name1": {
+		"/a": {
 			"post": {
 				"operationId": "CreateStudent",
 				"responses": {
@@ -230,7 +230,7 @@
 				}
 			}
 		},
-		"/a/undefined": {
+		"/undefined": {
 			"post": {
 				"operationId": "GetStudentsBySubjects",
 				"responses": {
@@ -259,7 +259,7 @@
 				}
 			}
 		},
-		"/a/name23": {
+		"/createGenericSubjecta": {
 			"post": {
 				"operationId": "GetTutorsBySubjects",
 				"responses": {

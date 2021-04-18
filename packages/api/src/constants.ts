@@ -59,7 +59,7 @@ export enum CallableName {
   getSubjectsByCategory = "getSubjectsByCategory",
   createLocaleSubject = "createLocaleSubject",
   updateLocaleSubject = "updateLocaleSubject",
-  createGenericSubject = "createGenericSubject",
+  createGenericSubjectX = "createGenericSubject",
   // "updateGenericSubject", // this only has relationship data, so no direct user updating
 
   // subject categories
