@@ -6,25 +6,25 @@ import {
 import {
   GENERIC_SUBJECT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME,
 } from '../../../constants';
-import { ApiLinkGenericSubjectAndSubjectCategory } from '../../../declarations/interfaces';
+import { ApiLinkSubjectAndSubjectCategory } from '../../../declarations/interfaces';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCategory = async (
+const linkGenericSubjectAndSubjectCategory: ApiLinkSubjectAndSubjectCategory = async (
   body,
   context
 ) => {
   const { uid } = verifyRequest(body, context);
 
   // verify received data
-  if (!body || !body.subjectCategoryId || !body.genericSubjectId)
+  if (!body || !body.categoryId || !body.subjectId)
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Could not link documents because provided data is not valid"
     );
 
-  const { genericSubjectId, subjectCategoryId } = body;
+  const { subjectId: genericSubjectId, categoryId: subjectCategoryId } = body;
 
   const document1Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
