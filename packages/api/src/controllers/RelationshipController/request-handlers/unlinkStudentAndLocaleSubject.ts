@@ -1,26 +1,27 @@
 import {
-  isLocaleSubjectData, isPrivateStudentData, LocaleSubjectData, PrivateStudentData, UserSubjectData,
+  isLocaleSubjectData, isPrivateStudentData, LocaleSubjectData, PrivateStudentData,
+  UnlinkStudentAndSubjectRequestBody, UnlinkStudentAndSubjectResponseBody, UserSubjectData,
 } from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../../../constants';
-import { ApiUnlinkStudentAndLocaleSubject } from '../../../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const unlinkStudentAndLocaleSubject: ApiUnlinkStudentAndLocaleSubject = async (
-  body,
-  context
-) => {
+const unlinkStudentAndLocaleSubject: FirebaseCallableFunctionHandler<
+  UnlinkStudentAndSubjectRequestBody,
+  UnlinkStudentAndSubjectResponseBody
+> = async (body, context) => {
   const { uid } = verifyRequest(body, context);
 
   // verify received data
-  if (!body || !body.localeSubjectId)
+  if (!body || !body.id)
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Could not link documents because provided data is not valid"
     );
-  const { localeSubjectId } = body;
+  const { id } = body;
 
   const document1Props: RemoveDocumentLinkProps<
     PrivateStudentData,
@@ -29,7 +30,7 @@ const unlinkStudentAndLocaleSubject: ApiUnlinkStudentAndLocaleSubject = async (
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
     linkReducer: ({ id }) => id,
-    filterPredicate: ({ id: link }) => link !== localeSubjectId,
+    filterPredicate: ({ id: link }) => link !== id,
     linksPropName: "relatedSubjects",
     id: uid,
   };
@@ -40,7 +41,7 @@ const unlinkStudentAndLocaleSubject: ApiUnlinkStudentAndLocaleSubject = async (
     filterPredicate: (link) => link !== uid,
     linkReducer: (link) => link,
     linksPropName: "relatedStudents",
-    id: localeSubjectId,
+    id,
   };
 
   const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
