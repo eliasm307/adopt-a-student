@@ -5,9 +5,9 @@ import { DataUpdater } from '../declarations/types';
 const createDocumentPropDataUpdater = <D>(
   linksProp: keyof D
 ): DataUpdater<D> => {
-  return ({ edits, existingData }) => ({
+  return ({ updates: updates, existingData }) => ({
     ...existingData,
-    [linksProp]: edits[linksProp]!, // overwrite existing links only
+    [linksProp]: updates[linksProp]!, // overwrite existing links only
   });
 };
 

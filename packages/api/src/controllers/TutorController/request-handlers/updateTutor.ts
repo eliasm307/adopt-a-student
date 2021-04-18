@@ -27,12 +27,12 @@ const updateTutor: FirebaseCallableFunctionHandler<
       "Could not update tutor because provided data is not valid"
     );
 
-  const edits = { ...body.updates, uid };
+  const updates = { ...body.updates, uid };
 
   const updatedData = await updateDocumentData({
     collectionPath: TUTOR_COLLECTION_NAME,
     id: uid,
-    updates: edits,
+    updates: updates,
     dataPredicate: isPrivateTutorData,
     dataUpdater: tutorDataUpdater,
     firestore: firestoreAdmin,

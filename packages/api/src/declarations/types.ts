@@ -26,6 +26,6 @@ export type DataMutatorMap<T> = {
 };
 
 export type DataUpdater<T> = (props: {
-  edits: Partial<T>;
+  updates: Partial<T>;
   existingData: T;
 }) => T;

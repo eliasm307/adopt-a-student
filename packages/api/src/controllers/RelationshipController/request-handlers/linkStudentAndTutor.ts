@@ -80,19 +80,19 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
   // write changes back to firestore
   const studentUpdatePromise = updateDocumentData({
     ...studentCrudProps,
-    edits: student,
-    dataUpdater: ({ edits, existingData }) => ({
+    updates: student,
+    dataUpdater: ({ updates, existingData }) => ({
       ...existingData,
-      tutors: edits.tutors!,
+      tutors: updates.tutors!,
     }),
   });
 
   const tutorUpdatePromise = updateDocumentData({
     ...tutorCrudProps,
-    edits: tutor,
-    dataUpdater: ({ edits, existingData }) => ({
+    updates: tutor,
+    dataUpdater: ({ updates, existingData }) => ({
       ...existingData,
-      students: edits.students!,
+      students: updates.students!,
     }),
   });
   */

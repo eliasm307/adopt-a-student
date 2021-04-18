@@ -3,7 +3,7 @@ import {
   UserSubjectData,
 } from './data-models';
 
-/** A user object instance that allows reading and editing data to/from the database */
+/** A user object instance that allows reading and updateing data to/from the database */
 export interface PrivateUser<
   D extends PrivateUserData,
   S extends UserSubjectData
@@ -30,10 +30,10 @@ export interface PrivateUser<
   updateData(newData: D): Promise<void>;
 }
 
-/** A student object instance that allows reading and editing data to/from the database */
+/** A student object instance that allows reading and updateing data to/from the database */
 export interface PrivateStudent
   extends PrivateUser<PrivateStudentData, StudentSubjectData> {}
 
-/** A tutor object instance that allows reading and editing data to/from the database */
+/** A tutor object instance that allows reading and updateing data to/from the database */
 export interface PrivateTutor
   extends PrivateUser<PrivateTutorData, TutorSubjectData> {}

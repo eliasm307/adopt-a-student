@@ -3,15 +3,15 @@ import { PrivateStudentData } from '@adopt-a-student/common';
 import { DataMutatorMap, DataUpdater } from '../../declarations/types';
 
 interface Props {
-  edits: any;
+  updates: any;
   existingData: PrivateStudentData;
 }
 
 const studentDataUpdater: DataUpdater<PrivateStudentData> = ({
-  edits,
+  updates,
   existingData,
 }: Props) => {
-  if (!edits) return { ...existingData };
+  if (!updates) return { ...existingData };
 
   const newData: PrivateStudentData = { ...existingData };
 
@@ -32,8 +32,8 @@ const studentDataUpdater: DataUpdater<PrivateStudentData> = ({
       typeof value === "string" ? (newData.introduction = value) : null,
   };
 
-  // apply edit mutations where possible
-  Object.entries(edits).forEach(([key, value]) => {
+  // apply update mutations where possible
+  Object.entries(updates).forEach(([key, value]) => {
     const mutator = mutators[key as keyof PrivateStudentData];
     if (mutator) mutator(value);
   });

@@ -27,10 +27,10 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
       "Could not update document because provided data is not valid"
     );
 
-  const { id, locale, data: localeCategoryEdits } = body;
+  const { id, locale, data: localeCategoryupdates } = body;
 
-  const genericCategoryEdits: Partial<GenericSubjectCategoryData> = {
-    locales: { [locale]: localeCategoryEdits },
+  const genericCategoryupdates: Partial<GenericSubjectCategoryData> = {
+    locales: { [locale]: localeCategoryupdates },
   } as Partial<GenericSubjectCategoryData>;
 
   /*
@@ -46,7 +46,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
   const genericSubjectCategory = await updateDocumentData({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     id,
-    updates: genericCategoryEdits,
+    updates: genericCategoryupdates,
     dataPredicate: isGenericSubjectCategoryData,
     dataUpdater: genericSubjectCategoryDataUpdater,
     firestore: firestoreAdmin,

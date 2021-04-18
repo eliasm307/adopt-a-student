@@ -14,7 +14,7 @@ export type ApiCreateLocaleSubjectHandler = FirebaseCallableFunctionHandler<
 >;
 
 /*
- // No data to edit directly on Generic Subject
+ // No data to update directly on Generic Subject
 export type ApiUpdateGenericSubjectHandler = FirebaseCallableFunctionHandler<
   {
     id: string;

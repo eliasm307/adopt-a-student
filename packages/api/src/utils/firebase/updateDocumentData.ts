@@ -14,7 +14,7 @@ interface Props<D> {
 
 export default async function updateDocumentData<D>({
   collectionPath,
-  updates: edits,
+  updates: updates,
   dataPredicate,
   firestore,
   id,
@@ -28,7 +28,7 @@ export default async function updateDocumentData<D>({
   if (!docSnapshot.exists)
     throw new functionsHttps.HttpsError(
       "not-found",
-      "Could not edit document because it doesnt exist, create one first"
+      "Could not update document because it doesnt exist, create one first"
     );
 
   const existingData = docSnapshot.data();
@@ -41,7 +41,7 @@ export default async function updateDocumentData<D>({
     );
 
   const updatedData = dataUpdater({
-    edits,
+    updates: updates,
     existingData,
   });
 
@@ -61,7 +61,7 @@ export default async function updateDocumentData<D>({
   } catch (error) {
     throw new functionsHttps.HttpsError(
       "internal",
-      "There was an issue editting the document",
+      "There was an issue updateting the document",
       JSON.stringify({ error })
     );
   }

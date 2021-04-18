@@ -27,18 +27,18 @@ export interface PrivateUserData extends PublicUserData {
   /** Links to subjects a user is interested in learning/teaching (depends on type of user)
    * and user specific information about the user relating to a specific subject
    */
-  linkedLocaleSubjects: LinkedLocaleSubjectData[];
+  relatedSubjects: UserSubjectData[];
 }
 /** Schema of data that represents a student, as it is stored in database */
 export interface PrivateStudentData extends PrivateUserData {
   /** Data about the tutors a student is involved with */
-  linkedTutors: LinkedTutorData[];
+  relatedTutors: LinkedTutorData[];
 }
 export interface PublicStudentData extends PublicUserData {}
 /** Schema of data that represents a tutor, only available to the tutor */
 export interface PrivateTutorData extends PrivateUserData {
   /** Data about the students a teacher is involved with */
-  linkedStudents: LinkedStudentData[];
+  relatedStudents: LinkedStudentData[];
 }
 export interface PublicTutorData extends PublicUserData {
   /** Represents whether a tutor is available to take on a student */
@@ -47,7 +47,7 @@ export interface PublicTutorData extends PublicUserData {
 /** Data about a subject specific to a user, as it is stored in database
  * // ? should this be public?
  */
-export interface LinkedLocaleSubjectData {
+export interface UserSubjectData {
   /** Unique id to the related subject */
   readonly id: LocaleSubjectId;
 
@@ -107,14 +107,14 @@ export interface LocaleSubjectData extends Entity {
   country: Country;
   /** Description of the subject */
   description: string;
-  /** Ids of students needing help with this subject `// todo needs to be syncronised` */
-  linkedStudentIds: StudentId[];
-  /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */
-  linkedTutorIds: TutorId[];
   /** Represents a language that a subject is in */
   locale: LocaleCode;
   /** Id of generic subject this locale subject relates to, there should only be 1 */
   parentId: GenericSubjectId;
+  /** Ids of students needing help with this subject `// todo needs to be syncronised` */
+  relatedStudents: StudentId[];
+  /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */
+  relatedTutors: TutorId[];
 }
 /** Data about a tutor from the perspective of a student, as it is stored in database */
 export interface LinkedTutorData {
@@ -127,6 +127,6 @@ export interface LinkedStudentData {
   id: StudentId;
 }
 /** Subject data specific to a student user, as it is stored in database */
-export interface StudentSubjectData extends LinkedLocaleSubjectData {}
+export interface StudentSubjectData extends UserSubjectData {}
 /** Subject data specific to a tutor user */
-export interface TutorSubjectData extends LinkedLocaleSubjectData {}
+export interface TutorSubjectData extends UserSubjectData {}
