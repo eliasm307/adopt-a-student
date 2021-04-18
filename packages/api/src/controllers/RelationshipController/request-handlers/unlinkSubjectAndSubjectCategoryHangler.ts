@@ -12,7 +12,7 @@ import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase
 import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const unlinkSubjectAndSubjectCategory: FirebaseCallableFunctionHandler<
+const unlinkSubjectAndSubjectCategoryHandler: FirebaseCallableFunctionHandler<
   UnlinkSubjectAndSubjectCategoryRequestBody,
   UnlinkSubjectAndSubjectCategoryResponseBody
 > = async (body, context) => {
@@ -57,4 +57,4 @@ const unlinkSubjectAndSubjectCategory: FirebaseCallableFunctionHandler<
   return { message: "Success linking documents" };
 };
 
-export default unlinkSubjectAndSubjectCategory;
+export default unlinkSubjectAndSubjectCategoryHandler;

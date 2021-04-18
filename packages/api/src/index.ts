@@ -1,5 +1,8 @@
 import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-functions';
 
+import {
+  RelationshipController,
+} from './controllers/RelationshipController/RelationshipController';
 import { StudentsController } from './controllers/StudentController/StudentController';
 import {
   SubjectCategoryController,
@@ -48,31 +51,24 @@ const callableFunctionHandlers = {
   updateSubjectCategory: SubjectCategoryController.updateSubjectCategory,
 
   // relationships
-  /*
-  linkGenericSubjects,
-  unlinkGenericSubjects,
+  /* */
+  linkSubjects: RelationshipController.linkSubjects,
+  unlinkSubjects: RelationshipController.unlinkSubjects,
 
-  linkSubjectAndSubjectCategory,
-  unlinkSubjectAndSubjectCategory,
+  linkSubjectAndSubjectCategory:
+    RelationshipController.linkSubjectAndSubjectCategory,
+  unlinkSubjectAndSubjectCategory:
+    RelationshipController.unlinkSubjectAndSubjectCategory,
 
-  linkStudentAndTutor,
-  unlinkStudentAndTutor,
+  linkStudentAndTutor: RelationshipController.linkStudentAndTutor,
+  unlinkStudentAndTutor: RelationshipController.unlinkStudentAndTutor,
 
-  linkTutorAndLocaleSubject,
-  unlinkTutorAndLocaleSubject,
+  linkTutorAndLocaleSubject: RelationshipController.linkTutorAndSubject,
+  unlinkTutorAndLocaleSubject: RelationshipController.unlinkTutorAndSubject,
 
-  linkStudentAndLocaleSubject,
-  unlinkStudentAndLocaleSubject,
-  */
+  linkStudentAndSubject: RelationshipController.linkStudentAndSubject,
+  unlinkStudentAndSubject: RelationshipController.unlinkStudentAndSubject,
 } as Record<CallableName, (body: any, context: any) => Promise<any>>;
-
-/*
-callableFunctionHandlers.test = (data, context) => {
-  return { message: "yay" };
-  //   .region("europe-west1")
-  // ...
-};
-*/
 
 // export defined handlers with given callable function names
 module.exports = Object.entries(callableFunctionHandlers).reduce(
@@ -83,34 +79,3 @@ module.exports = Object.entries(callableFunctionHandlers).reduce(
   },
   {} as Record<string, HttpsFunction & Runnable<any>>
 );
-
-// export default callableFunctions;
-
-/** Get all student profile data */
-// export const getStudent = functions.https.onCall(_getStudent);
-
-/** Update student profile data */
-// export const updateStudent = functions.https.onCall(_updateStudent);
-
-/** Get all tutor profile data */
-// export const getTutor = functions.https.onCall(_getTutor);
-
-/** Update tutor profile data */
-// export const updateTutor = functions.https.onCall(_updateTutor);
-
-/** Get subject by id */
-// export const getSubject = functions.https.onCall(_getSubject);
-
-/** Update subject by id */
-// export const updateSubject = functions.https.onCall(_updateSubject);
-
-/** Get all subjects */
-// export const getAllSubjects = functions.https.onCall(_getAllSubjects);
-
-/** Get students interested in subjects */
-// export const getStudentsBySubjects = functions.https.onCall(
-//   _getStudentsBySubjects
-// );
-
-/** Get students interested in subjects */
-// export const getTutorsBySubjects = functions.https.onCall(_getTutorsBySubjects);
