@@ -19,14 +19,12 @@ app.get(
   "/docs",
   redoc({
     title: "API Docs",
-    specUrl: "/docs/swagger.json",
-    nativeScrollbars: true,
-    theme: { colors: { primary: { main: "#dd5522" } } },
+    specUrl: "http://petstore.swagger.io/v2/swagger.json",
   })
 );
 */
-app.get("/", (_req, res) =>
-  res.send(`
+
+const redocHtml = `
 <!DOCTYPE html>
 <html>
   <head>
@@ -47,7 +45,8 @@ app.get("/", (_req, res) =>
     </style>
   </head>
   <body>
-    <redoc spec-url='/docs/swagger.json'
+      <div id="redoc-container"></div>
+      <redocx spec-url='/docs/swagger.json'
         expand-responses='all'
         max-displayed-enum-values='5'
         hide-hostname
@@ -67,10 +66,38 @@ app.get("/", (_req, res) =>
     ></redoc>
     <script src="https://cdn.jsdelivr.net/npm/redoc@next/bundles/redoc.standalone.js"> </script>
     <script> document.querySelectorAll('[aria-label="expand properties"]').forEach(button => button.click()); console.log('clicked'); </script>
+    <script>
+      Redoc.init(
+          '/docs/swagger.json',
+          {
+            expandDefaultServerVariables: true,
+            expandResponses: 'all',
+            maxDisplayedEnumValues: 10,
+            hideDownloadButton: true,
+            hideHostname: true,
+            hideSchemaPattern: true,
+            hideSingleRequestSampleTab: true,
+            expandSingleSchemaField: true,
+            jsonSampleExpandLevel: true,
+            hideSchemaTitles: true,
+            simpleOneOfTypeLabel: true,
+            menuToggle: true,
+            noAutoAuth: true,
+            pathInMiddlePanel: true,
+            requiredPropsFirst: true,
+            sortPropsAlphabetically: true,
+            payloadSampleIdx: 3
+
+          },
+          document.getElementById('redoc-container'),
+          () => document.querySelectorAll('[aria-label="expand properties"]').forEach(button => button.click())
+      );
+
+    </script>
   </body>
 </html>
-`)
-);
+`;
+app.get("/", (_req, res) => res.send(redocHtml));
 
 app.use("/docs", swaggerUi.serve, (_req: ExRequest, res: ExResponse) => {
   // console.log(__filename, { _req, res });
