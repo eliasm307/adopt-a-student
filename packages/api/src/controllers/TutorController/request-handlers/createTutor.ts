@@ -2,11 +2,11 @@ import {
   CreateTutorRequestBody, CreateTutorResponseBody, isPrivateTutorData,
 } from '@adopt-a-student/common';
 
-import { TUTOR_COLLECTION_NAME } from '../constants';
-import { FirebaseCallableFunctionHandler } from '../declarations/types';
-import createDocument from '../utils/firebase/createDocument';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import verifyRequest from '../utils/verifyRequest';
+import { TUTOR_COLLECTION_NAME } from '../../../constants';
+import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
+import createDocument from '../../../utils/firebase/createDocument';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import verifyRequest from '../../../utils/verifyRequest';
 
 const createTutor: FirebaseCallableFunctionHandler<
   CreateTutorRequestBody,

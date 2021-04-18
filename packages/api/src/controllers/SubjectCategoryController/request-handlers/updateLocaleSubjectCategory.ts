@@ -1,11 +1,11 @@
 import { GenericSubjectCategoryData, isGenericSubjectCategoryData } from '@adopt-a-student/common';
 
-import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
-import { ApiUpdateLocaleSubjectCategoryHandler } from '../declarations/interfaces';
-import genericSubjectCategoryDataUpdater from '../utils/data-updaters/genericSubjectCategoryDataUpdater';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import updateDocumentData from '../utils/firebase/updateDocumentData';
-import verifyRequest from '../utils/verifyRequest';
+import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
+import { ApiUpdateLocaleSubjectCategoryHandler } from '../../../declarations/interfaces';
+import genericSubjectCategoryDataUpdater from '../../../utils/data-updaters/genericSubjectCategoryDataUpdater';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import updateDocumentData from '../../../utils/firebase/updateDocumentData';
+import verifyRequest from '../../../utils/verifyRequest';
 
 const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async (
   body,

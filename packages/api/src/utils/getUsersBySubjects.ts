@@ -1,8 +1,6 @@
 import { PrivateStudentData, PrivateTutorData } from '@adopt-a-student/common';
 
-import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
 import { FirestoreAdmin } from '../declarations/interfaces';
-import { UserTypeName } from '../declarations/types';
 import { functionsHttps } from './firebase/firebase-admin';
 import groupArrayItems from './groupArrayItems';
 
@@ -10,15 +8,19 @@ interface Props<PublicDataType> {
   firestore: FirestoreAdmin;
   localeSubjectIds: string[];
   publicDataExtractor: (data: any) => PublicDataType;
-  userType: UserTypeName;
+  userCollectionName: string;
+  userSubjectsField: keyof PrivateStudentData | keyof PrivateTutorData;
 }
 
 export default async function getUsersBySubjects<PublicDataType>({
   localeSubjectIds,
   publicDataExtractor,
-  userType,
   firestore,
-}: Props<PublicDataType>) {
+  userCollectionName,
+  userSubjectsField,
+}: Props<PublicDataType>): Promise<PublicDataType[]> {
+  /*
+  // todo delete
   const studentSubjectsField: keyof PrivateStudentData = "linkedLocaleSubjects";
   const tutorSubjectsField: keyof PrivateTutorData = "linkedLocaleSubjects";
 
@@ -26,6 +28,7 @@ export default async function getUsersBySubjects<PublicDataType>({
     userType === "Student" ? STUDENT_COLLECTION_NAME : TUTOR_COLLECTION_NAME;
   const userSubjectsField =
     userType === "Student" ? studentSubjectsField : tutorSubjectsField;
+    */
 
   /* array-contains-any is limited to 10 values, so split this into multiple requests if necessary
     https://firebase.google.com/docs/firestore/query-data/queries#array-contains-any
@@ -43,9 +46,10 @@ export default async function getUsersBySubjects<PublicDataType>({
     // resolve promises in parallel
     const filteredUserGroupsResults = await Promise.all(filteredUsersPromises);
 
+    // todo use flatmap
     // process and return public user data
-    return {
-      data: filteredUserGroupsResults
+    return (
+      filteredUserGroupsResults
         // reduce to flat list
         .reduce((accumulatedData, currentGroup) => {
           const groupData = currentGroup.docs.map((doc) => doc.data());
@@ -53,8 +57,8 @@ export default async function getUsersBySubjects<PublicDataType>({
         }, [] as any[])
 
         // extract public data for each user
-        .map((data) => publicDataExtractor(data)),
-    };
+        .map((data) => publicDataExtractor(data))
+    );
   } catch (error) {
     throw new functionsHttps.HttpsError(
       "internal",

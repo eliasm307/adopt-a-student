@@ -1,11 +1,11 @@
 import { isGenericSubjectCategoryData } from '@adopt-a-student/common';
 
-import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
-import { ApiCreateSubjectCategoryHandler } from '../declarations/interfaces';
-import createDocument from '../utils/firebase/createDocument';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import newGuid from '../utils/newGuid';
-import verifyRequest from '../utils/verifyRequest';
+import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
+import { ApiCreateSubjectCategoryHandler } from '../../../declarations/interfaces';
+import createDocument from '../../../utils/firebase/createDocument';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import newGuid from '../../../utils/newGuid';
+import verifyRequest from '../../../utils/verifyRequest';
 
 const createSubjectCategory: ApiCreateSubjectCategoryHandler = async (
   body,

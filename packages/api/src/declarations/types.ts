@@ -15,7 +15,7 @@ export type CallableFunctionName = typeof CALLABLE_FUNCTION_NAMES[number];
 /** Type of a callable function */
 export type CallableMethod = HttpsFunction & Runnable<any>;
 
-export type UserTypeName = "Student" | "Tutor";
+// export type UserTypeName = "Student" | "Tutor";
 
 /**
  * An object with the same keys as a given object where the values can be functions to cause mutations

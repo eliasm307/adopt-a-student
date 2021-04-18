@@ -5,8 +5,8 @@ import {
   GetTutorsBySubjectsRequestBody, GetTutorsBySubjectsResponseBody,
 } from '@adopt-a-student/common';
 
-import getStudentsBySubjectsHandler from '../request-handlers/getStudentsBySubjectsHandler';
-import getTutorsBySubjectsHandler from '../request-handlers/getTutorsBySubjectsHandler';
+import getStudentsBySubjectsHandler from '../../request-handlers/getStudentsBySubjectsHandler';
+import getTutorsBySubjects from '../TutorController/request-handlers/getTutorsBySubjectsHandler';
 
 /** Provided automatically by Firebase */
 type FirebaseCallableFunctionContext = any;
@@ -35,6 +35,6 @@ export class StudentsController extends Controller {
     @Body() body: GetTutorsBySubjectsRequestBody,
     @Header() context: FirebaseCallableFunctionContext
   ): Promise<GetTutorsBySubjectsResponseBody> {
-    return getTutorsBySubjectsHandler(body, context);
+    return getTutorsBySubjects(body, context);
   }
 }

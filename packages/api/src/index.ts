@@ -2,23 +2,27 @@ import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-funct
 
 import { ObjectMap } from '@adopt-a-student/common';
 
+import linkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/linkGenericSubjectAndSubjectCategory';
 import { StudentsController } from './controllers/StudentController';
+import createStudent from './controllers/StudentController/request-handlers/createStudent';
+import getPrivateStudentData from './controllers/StudentController/request-handlers/getPrivateStudentData';
+import getPublicStudentData from './controllers/StudentController/request-handlers/getPublicStudentDataHandler';
+import updateLocaleSubject from './controllers/StudentController/request-handlers/updateLocaleSubject';
+import updateStudent from './controllers/StudentController/request-handlers/updateStudent';
+import createSubjectCategory from './controllers/SubjectCategoryController/request-handlers/createSubjectCategory';
+import updateLocaleSubjectCategory from './controllers/SubjectCategoryController/request-handlers/updateLocaleSubjectCategory';
+import createGenericSubject from './controllers/SubjectController/request-handlers/createGenericSubject';
+import getSubject from './controllers/SubjectController/request-handlers/getSubject';
+import createTutor from './controllers/TutorController/request-handlers/createTutor';
+import getPrivateTutorData from './controllers/TutorController/request-handlers/getPrivateTutorDataHandler';
+import getTutorsBySubjects from './controllers/TutorController/request-handlers/getTutorsBySubjectsHandler';
+import updateTutor from './controllers/TutorController/request-handlers/updateTutor';
 import { CallableFunctionName, FirebaseCallableFunctionHandler } from './declarations/types';
-import createGenericSubject from './request-handlers/createGenericSubject';
 import createLocaleSubject from './request-handlers/createLocaleSubject';
-import createStudent from './request-handlers/createStudent';
-import createSubjectCategory from './request-handlers/createSubjectCategory';
-import createTutor from './request-handlers/createTutor';
-import getPrivateStudentData from './request-handlers/getPrivateStudentData';
-import getPrivateTutorData from './request-handlers/getPrivateTutorDataHandler';
-import getPublicStudentData from './request-handlers/getPublicStudentDataHandler';
 import getPublicTutorData from './request-handlers/getPublicTutorDataHandler';
 import getStudentsBySubjects from './request-handlers/getStudentsBySubjectsHandler';
-import getSubject from './request-handlers/getSubject';
 import getSubjectCategories from './request-handlers/getSubjectCategoriesHandler';
 import getSubjectsByCategory from './request-handlers/getSubjectsByCategory';
-import getTutorsBySubjects from './request-handlers/getTutorsBySubjectsHandler';
-import linkGenericSubjectAndSubjectCategory from './request-handlers/linkGenericSubjectAndSubjectCategory';
 import linkGenericSubjects from './request-handlers/linkGenericSubjects';
 import linkStudentAndLocaleSubject from './request-handlers/linkStudentAndLocaleSubject';
 import linkStudentAndTutor from './request-handlers/linkStudentAndTutor';
@@ -28,10 +32,6 @@ import unlinkGenericSubjects from './request-handlers/unlinkGenericSubjects';
 import unlinkStudentAndLocaleSubject from './request-handlers/unlinkStudentAndLocaleSubject';
 import unlinkStudentAndTutor from './request-handlers/unlinkStudentAndTutor';
 import unlinkTutorAndLocaleSubject from './request-handlers/unlinkTutorAndLocaleSubject';
-import updateLocaleSubject from './request-handlers/updateLocaleSubject';
-import updateLocaleSubjectCategory from './request-handlers/updateLocaleSubjectCategory';
-import updateStudent from './request-handlers/updateStudent';
-import updateTutor from './request-handlers/updateTutor';
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
