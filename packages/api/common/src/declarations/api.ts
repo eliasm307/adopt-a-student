@@ -104,3 +104,11 @@ export interface CreateLocaleSubjectRequestBody {
 export interface CreateLocaleSubjectResponseBody {
   subject: LocaleSubjectData;
 }
+export interface GetSubjectRequestBody {
+  id: LocaleSubjectId;
+}
+export interface GetSubjectResponseBody {
+  localeSubject: LocaleSubjectData;
+  relatedCategories: CategoryId[];
+  relatedSubjects: SubjectId[];
+}
