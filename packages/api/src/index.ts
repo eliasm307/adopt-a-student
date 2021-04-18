@@ -3,15 +3,15 @@ import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-funct
 import { ObjectMap } from '@adopt-a-student/common';
 
 import { CallableName as CallableNameEnum } from './constants';
-import linkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/linkGenericSubjectAndSubjectCategory';
-import linkGenericSubjects from './controllers/RelationshipController/request-handlers/linkGenericSubjects';
 import linkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkStudentAndSubject';
 import linkStudentAndTutor from './controllers/RelationshipController/request-handlers/linkStudentAndTutor';
-import linkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkTutorAndLocaleSubject';
-import unlinkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/unlinkGenericSubjectAndSubjectCategory';
-import unlinkGenericSubjects from './controllers/RelationshipController/request-handlers/unlinkGenericSubjects';
-import unlinkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkStudentAndLocaleSubject';
+import linkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/linkSubjectAndSubjectCategory';
+import linkGenericSubjects from './controllers/RelationshipController/request-handlers/linkSubjects';
+import linkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/linkTutorAndSubject';
+import unlinkStudentAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkStudentAndSubject';
 import unlinkStudentAndTutor from './controllers/RelationshipController/request-handlers/unlinkStudentAndTutor';
+import unlinkGenericSubjectAndSubjectCategory from './controllers/RelationshipController/request-handlers/unlinkSubjectAndSubjectCategory';
+import unlinkGenericSubjects from './controllers/RelationshipController/request-handlers/unlinkSubjects';
 import unlinkTutorAndLocaleSubject from './controllers/RelationshipController/request-handlers/unlinkTutorAndSubject';
 import createStudent from './controllers/StudentController/request-handlers/createStudent';
 import getPrivateStudentData from './controllers/StudentController/request-handlers/getPrivateStudentData';
