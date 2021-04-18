@@ -1,11 +1,5 @@
 import { GenericSubjectData, isGenericSubjectData } from '@adopt-a-student/common';
 
-import { GENERIC_SUBJECT_COLLECTION_NAME } from '../constants';
-import { ApiLinkGenericSubjects } from '../declarations/interfaces';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import unlinkDocuments, { RemoveDocumentLinkProps } from '../utils/links/unlinkDocuments';
-import verifyRequest from '../utils/verifyRequest';
-
 const unlinkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
   const { uid } = verifyRequest(body, context);
 

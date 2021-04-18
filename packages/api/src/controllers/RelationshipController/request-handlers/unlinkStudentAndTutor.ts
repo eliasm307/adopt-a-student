@@ -3,11 +3,11 @@ import {
   PrivateTutorData,
 } from '@adopt-a-student/common';
 
-import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
-import { ApiUnlinkStudentAndTutor } from '../declarations/interfaces';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import unlinkDocuments, { RemoveDocumentLinkProps } from '../utils/links/unlinkDocuments';
-import verifyRequest from '../utils/verifyRequest';
+import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
+import { ApiUnlinkStudentAndTutor } from '../../../declarations/interfaces';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
+import verifyRequest from '../../../utils/verifyRequest';
 
 const unlinkStudentAndTutor: ApiUnlinkStudentAndTutor = async (
   body,
@@ -41,7 +41,7 @@ const unlinkStudentAndTutor: ApiUnlinkStudentAndTutor = async (
     id: studentId,
     filterPredicate: ({ id: linkId }) => linkId !== tutorId,
     linkReducer: ({ id }) => id,
-    linksPropName: "linkedTutors",
+    linksPropName: "relatedTutors",
   };
 
   const document2Props: RemoveDocumentLinkProps<
@@ -53,7 +53,7 @@ const unlinkStudentAndTutor: ApiUnlinkStudentAndTutor = async (
     id: tutorId,
     filterPredicate: ({ id: linkId }) => linkId !== studentId,
     linkReducer: (link) => link.id,
-    linksPropName: "linkedStudents",
+    linksPropName: "relatedStudents",
   };
 
   const [updatedStudent, updatedTutor] = await unlinkDocuments({

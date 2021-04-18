@@ -2,12 +2,6 @@ import {
   isLocaleSubjectData, isPrivateStudentData, LocaleSubjectData, PrivateStudentData, UserSubjectData,
 } from '@adopt-a-student/common';
 
-import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../constants';
-import { ApiUnlinkStudentAndLocaleSubject } from '../declarations/interfaces';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import unlinkDocuments, { RemoveDocumentLinkProps } from '../utils/links/unlinkDocuments';
-import verifyRequest from '../utils/verifyRequest';
-
 const unlinkStudentAndLocaleSubject: ApiUnlinkStudentAndLocaleSubject = async (
   body,
   context

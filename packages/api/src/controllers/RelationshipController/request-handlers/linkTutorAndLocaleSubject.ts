@@ -3,12 +3,6 @@ import {
   PrivateTutorData, UserSubjectData,
 } from '@adopt-a-student/common';
 
-import { LOCALE_SUBJECT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
-import { ApiLinkTutorAndLocaleSubject } from '../declarations/interfaces';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
-import verifyRequest from '../utils/verifyRequest';
-
 const linkStudentAndLocaleSubject: ApiLinkTutorAndLocaleSubject = async (
   body,
   context

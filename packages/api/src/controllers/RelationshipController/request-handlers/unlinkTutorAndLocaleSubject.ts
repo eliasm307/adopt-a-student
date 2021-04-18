@@ -39,7 +39,7 @@ const linkStudentAndLocaleSubject: ApiUnlinkTutorAndLocaleSubject = async (
     dataPredicate: isLocaleSubjectData,
     filterPredicate: (linkId) => linkId !== uid,
     linkReducer: (link) => link,
-    linksPropName: "relatedStudentIds",
+    linksPropName: "relatedStudents",
     id: localeSubjectId,
   };
 

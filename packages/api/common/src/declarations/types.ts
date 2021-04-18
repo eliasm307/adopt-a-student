@@ -7,6 +7,12 @@ export type ObjectMap<K extends string | number, V> = {
   [key in K]: V | undefined;
 };
 
+/** A valid email address */
+export type EmailString = string;
+
+/** An internet link */
+export type UrlString = string;
+
 export type LocaleSubjectId = string;
 
 export type GenericSubjectId = string;

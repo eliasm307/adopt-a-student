@@ -5,8 +5,8 @@ export function isGenericSubjectData(data: any): data is GenericSubjectData {
 
   const {
     id,
-    categoryIds,
-    linkedGenericSubjectIds: relatedGenericSubjectIds,
+    relatedCategories: categoryIds,
+    relatedSubjects: relatedGenericSubjectIds,
   } = data as GenericSubjectData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -14,8 +14,8 @@ export function isGenericSubjectData(data: any): data is GenericSubjectData {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const forTsError: GenericSubjectData = {
     id,
-    categoryIds,
-    linkedGenericSubjectIds: relatedGenericSubjectIds,
+    relatedCategories: categoryIds,
+    relatedSubjects: relatedGenericSubjectIds,
   };
 
   const hasId = typeof id === "string" && id;

@@ -3,12 +3,6 @@ import {
   isGenericSubjectData,
 } from '@adopt-a-student/common';
 
-import { GENERIC_SUBJECT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME } from '../constants';
-import { ApiUnlinkGenericSubjectAndSubjectCategory } from '../declarations/interfaces';
-import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
-import unlinkDocuments, { RemoveDocumentLinkProps } from '../utils/links/unlinkDocuments';
-import verifyRequest from '../utils/verifyRequest';
-
 const unlinkGenericSubjectAndSubjectCategory: ApiUnlinkGenericSubjectAndSubjectCategory = async (
   body,
   context
