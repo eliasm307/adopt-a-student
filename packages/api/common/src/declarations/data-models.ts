@@ -1,7 +1,7 @@
 import { ConfidenceLevelEnum } from './enums';
 import {
-  CategoryId, Country, EmailString, GenericSubjectId, LocaleCode, LocaleSubjectId, ObjectMap,
-  StudentId, SubjectCategoryId, SubjectId, TutorId, UrlString, UserId,
+  CategoryId, Country, EmailString, GenericSubjectId, LocaleCode, LocaleSubjectId, StudentId,
+  SubjectCategoryId, SubjectId, TutorId, UrlString, UserId,
 } from './types';
 
 export interface Entity {}
@@ -89,7 +89,7 @@ export interface LocaleSubjectCategoryData {
 export interface GenericSubjectCategoryData extends Entity {
   id: CategoryId;
   /** Representations of the same generic subject catories in different locales */
-  locales: ObjectMap<LocaleCode, LocaleSubjectCategoryData>;
+  locales: Record<LocaleCode, LocaleSubjectCategoryData>;
   /** generic subjects which belong to this generic category
        // todo this should link category to subject and subject to category
     */

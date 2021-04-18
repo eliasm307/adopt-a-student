@@ -19,30 +19,30 @@
     "_.target": "es6",
     "_module": "commonjs",
     "outDir": "tsoa-build",
-    "__baseUrl": ".",
+    "baseUrl": "../../",
     "typeRoots": [ "./node_modules/@types" ],
     "types": [ "@types/jest", "@types/node" ],
 
     "_2": "/* Strict Type-Checking Options */",
     "strict": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "strictPropertyInitialization": true,
-    "noImplicitThis": true,
+    "_noImplicitAny": true,
+    "_strictNullChecks": true,
+    "_strictFunctionTypes": true,
+    "_strictBindCallApply": true,
+    "_strictPropertyInitialization": true,
+    "_noImplicitThis": true,
     "alwaysStrict": true,
 
     "_3": "/* Additional Checks */",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+    "_noUnusedLocals": true,
+    "_noUnusedParameters": true,
+    "_noImplicitReturns": true,
+    "_noFallthroughCasesInSwitch": true,
 
     "_4": "/* Module Resolution Options */",
     "_moduleResolution": "node",
     "paths": {
-      "@adopt-a-student/common": [ "./common/src/" ]
+      "@adopt-a-student/common": [ "packages/api/common/src/" ]
     },
     "_esModuleInterop": true,
 

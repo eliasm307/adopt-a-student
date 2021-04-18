@@ -227,7 +227,34 @@
 				"additionalProperties": false
 			},
 			"FirebaseCallableFunctionContext": {
-				"description": "Provided automatically by Firebase"
+				"properties": {
+					"rawRequest": {
+						"description": "The raw request handled by the callable."
+					},
+					"instanceIdToken": {
+						"type": "string",
+						"description": "An unverified token for a Firebase Instance ID."
+					},
+					"auth": {
+						"properties": {
+							"token": {},
+							"uid": {
+								"type": "string"
+							}
+						},
+						"required": [
+							"token",
+							"uid"
+						],
+						"type": "object",
+						"description": "The result of decoding and verifying a Firebase Auth ID token."
+					}
+				},
+				"required": [
+					"rawRequest"
+				],
+				"type": "object",
+				"description": "The interface for metadata for the API as passed to the handler.\r\nProvided automatically by Firebase.\r\nDuplicated from firebase for TSOA compatibility."
 			},
 			"PublicStudentData": {
 				"properties": {
@@ -259,6 +286,37 @@
 					"id",
 					"prefferedLocales",
 					"userName"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetStudentResponseBody": {
+				"properties": {
+					"student": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/PrivateStudentData"
+							},
+							{
+								"$ref": "#/components/schemas/PublicStudentData"
+							}
+						]
+					}
+				},
+				"required": [
+					"student"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetStudentRequestBody": {
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/StudentId"
+					}
+				},
+				"required": [
+					"id"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -302,6 +360,567 @@
 				},
 				"required": [
 					"subjectIds"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateStudentResponseBody": {
+				"properties": {
+					"result": {
+						"$ref": "#/components/schemas/PrivateStudentData"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_Omit_PrivateStudentData.id__": {
+				"properties": {
+					"relatedTutors": {
+						"items": {
+							"$ref": "#/components/schemas/LinkedTutorData"
+						},
+						"type": "array",
+						"description": "Data about the tutors a student is involved with"
+					},
+					"email": {
+						"$ref": "#/components/schemas/EmailString",
+						"description": "Email to allow users to start communicating"
+					},
+					"relatedSubjects": {
+						"items": {
+							"$ref": "#/components/schemas/UserSubjectData"
+						},
+						"type": "array",
+						"description": "Links to subjects a user is interested in learning/teaching (depends on type of user)\r\nand user specific information about the user relating to a specific subject"
+					},
+					"imageUrl": {
+						"$ref": "#/components/schemas/UrlString",
+						"description": "Link to profile image, if defined"
+					},
+					"introduction": {
+						"type": "string",
+						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedLocales": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleCode"
+						},
+						"type": "array",
+						"description": "The locales a user prefers for content"
+					},
+					"userName": {
+						"type": "string",
+						"description": "Username which will be displayed for a user"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"UpdateStudentRequestBody": {
+				"properties": {
+					"updates": {
+						"$ref": "#/components/schemas/Partial_Omit_PrivateStudentData.id__"
+					}
+				},
+				"required": [
+					"updates"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CategoryId": {
+				"type": "string"
+			},
+			"LocaleSubjectCategoryData": {
+				"description": "Subject category data in a specific locale",
+				"properties": {
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode"
+					},
+					"name": {
+						"type": "string"
+					},
+					"parentId": {
+						"$ref": "#/components/schemas/SubjectId",
+						"description": "id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject"
+					}
+				},
+				"required": [
+					"locale",
+					"name",
+					"parentId"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Record_LocaleCode.LocaleSubjectCategoryData_": {
+				"properties": {
+					"en": {
+						"$ref": "#/components/schemas/LocaleSubjectCategoryData"
+					},
+					"fr": {
+						"$ref": "#/components/schemas/LocaleSubjectCategoryData"
+					}
+				},
+				"type": "object",
+				"description": "Construct a type with a set of properties K of type T"
+			},
+			"GenericSubjectCategoryData": {
+				"description": "Subject category with all locale names",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/CategoryId"
+					},
+					"locales": {
+						"$ref": "#/components/schemas/Record_LocaleCode.LocaleSubjectCategoryData_",
+						"description": "Representations of the same generic subject catories in different locales"
+					},
+					"relatedSubjects": {
+						"items": {
+							"$ref": "#/components/schemas/SubjectId"
+						},
+						"type": "array",
+						"description": "generic subjects which belong to this generic category\r\n // todo this should link category to subject and subject to category"
+					}
+				},
+				"required": [
+					"id",
+					"locales",
+					"relatedSubjects"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateSubjectCategoryResponseBody": {
+				"properties": {
+					"result": {
+						"$ref": "#/components/schemas/GenericSubjectCategoryData"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_Omit_GenericSubjectCategoryData.id__": {
+				"properties": {
+					"relatedSubjects": {
+						"items": {
+							"$ref": "#/components/schemas/SubjectId"
+						},
+						"type": "array",
+						"description": "generic subjects which belong to this generic category\r\n // todo this should link category to subject and subject to category"
+					},
+					"locales": {
+						"$ref": "#/components/schemas/Record_LocaleCode.LocaleSubjectCategoryData_",
+						"description": "Representations of the same generic subject catories in different locales"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"CreateSubjectCategoryRequestBody": {
+				"properties": {
+					"updates": {
+						"$ref": "#/components/schemas/Partial_Omit_GenericSubjectCategoryData.id__"
+					}
+				},
+				"required": [
+					"updates"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetSubjectCategoryResponseBody": {
+				"properties": {
+					"subjectCategories": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleSubjectCategoryData"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"subjectCategories"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetSubjectCategoryRequestBody": {
+				"properties": {
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode"
+					}
+				},
+				"required": [
+					"locale"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateSubjectCategoryResponseBody": {
+				"properties": {
+					"result": {
+						"$ref": "#/components/schemas/LocaleSubjectCategoryData"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"SubjectCategoryId": {
+				"type": "string"
+			},
+			"Partial_Omit_LocaleSubjectCategoryData.id-or-locale__": {
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"parentId": {
+						"$ref": "#/components/schemas/SubjectId",
+						"description": "id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"UpdateSubjectCategoryRequestBody": {
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/SubjectCategoryId"
+					},
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode"
+					},
+					"updates": {
+						"$ref": "#/components/schemas/Partial_Omit_LocaleSubjectCategoryData.id-or-locale__"
+					}
+				},
+				"required": [
+					"id",
+					"locale",
+					"updates"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"LinkedStudentData": {
+				"description": "Data about a student from the perspective of a tutor, as it is stored in database",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/StudentId",
+						"description": "Id of the student related to the tutor"
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PrivateTutorData": {
+				"description": "Schema of data that represents a tutor, only available to the tutor",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/UserId",
+						"description": "Unique id for a user"
+					},
+					"imageUrl": {
+						"$ref": "#/components/schemas/UrlString",
+						"description": "Link to profile image, if defined"
+					},
+					"introduction": {
+						"type": "string",
+						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedLocales": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleCode"
+						},
+						"type": "array",
+						"description": "The locales a user prefers for content"
+					},
+					"userName": {
+						"type": "string",
+						"description": "Username which will be displayed for a user"
+					},
+					"email": {
+						"$ref": "#/components/schemas/EmailString",
+						"description": "Email to allow users to start communicating"
+					},
+					"relatedSubjects": {
+						"items": {
+							"$ref": "#/components/schemas/UserSubjectData"
+						},
+						"type": "array",
+						"description": "Links to subjects a user is interested in learning/teaching (depends on type of user)\r\nand user specific information about the user relating to a specific subject"
+					},
+					"relatedStudents": {
+						"items": {
+							"$ref": "#/components/schemas/LinkedStudentData"
+						},
+						"type": "array",
+						"description": "Data about the students a teacher is involved with"
+					}
+				},
+				"required": [
+					"id",
+					"prefferedLocales",
+					"userName",
+					"email",
+					"relatedSubjects",
+					"relatedStudents"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"CreateTutorResponseBody": {
+				"properties": {
+					"tutor": {
+						"$ref": "#/components/schemas/PrivateTutorData"
+					}
+				},
+				"required": [
+					"tutor"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Pick_PrivateTutorData.Exclude_keyofPrivateTutorData.id__": {
+				"properties": {
+					"email": {
+						"$ref": "#/components/schemas/EmailString",
+						"description": "Email to allow users to start communicating"
+					},
+					"relatedSubjects": {
+						"items": {
+							"$ref": "#/components/schemas/UserSubjectData"
+						},
+						"type": "array",
+						"description": "Links to subjects a user is interested in learning/teaching (depends on type of user)\r\nand user specific information about the user relating to a specific subject"
+					},
+					"imageUrl": {
+						"$ref": "#/components/schemas/UrlString",
+						"description": "Link to profile image, if defined"
+					},
+					"introduction": {
+						"type": "string",
+						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedLocales": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleCode"
+						},
+						"type": "array",
+						"description": "The locales a user prefers for content"
+					},
+					"userName": {
+						"type": "string",
+						"description": "Username which will be displayed for a user"
+					},
+					"relatedStudents": {
+						"items": {
+							"$ref": "#/components/schemas/LinkedStudentData"
+						},
+						"type": "array",
+						"description": "Data about the students a teacher is involved with"
+					}
+				},
+				"required": [
+					"email",
+					"relatedSubjects",
+					"prefferedLocales",
+					"userName",
+					"relatedStudents"
+				],
+				"type": "object",
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Omit_PrivateTutorData.id_": {
+				"$ref": "#/components/schemas/Pick_PrivateTutorData.Exclude_keyofPrivateTutorData.id__",
+				"description": "Construct a type with the properties of T except for those in type K."
+			},
+			"CreateTutorRequestBody": {
+				"properties": {
+					"tutor": {
+						"$ref": "#/components/schemas/Omit_PrivateTutorData.id_"
+					}
+				},
+				"required": [
+					"tutor"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"PublicTutorData": {
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/UserId",
+						"description": "Unique id for a user"
+					},
+					"imageUrl": {
+						"$ref": "#/components/schemas/UrlString",
+						"description": "Link to profile image, if defined"
+					},
+					"introduction": {
+						"type": "string",
+						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedLocales": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleCode"
+						},
+						"type": "array",
+						"description": "The locales a user prefers for content"
+					},
+					"userName": {
+						"type": "string",
+						"description": "Username which will be displayed for a user"
+					},
+					"available": {
+						"type": "boolean",
+						"description": "Represents whether a tutor is available to take on a student"
+					}
+				},
+				"required": [
+					"id",
+					"prefferedLocales",
+					"userName",
+					"available"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetTutorResponseBody": {
+				"properties": {
+					"tutor": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/PrivateTutorData"
+							},
+							{
+								"$ref": "#/components/schemas/PublicTutorData"
+							}
+						]
+					}
+				},
+				"required": [
+					"tutor"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetTutorRequestBody": {
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/TutorId"
+					}
+				},
+				"required": [
+					"id"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetTutorsBySubjectsResponseBody": {
+				"properties": {
+					"tutors": {
+						"items": {
+							"$ref": "#/components/schemas/PublicTutorData"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"tutors"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"GetTutorsBySubjectsRequestBody": {
+				"properties": {
+					"subjectIds": {
+						"items": {
+							"$ref": "#/components/schemas/SubjectId"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"subjectIds"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"UpdateTutorResponseBody": {
+				"properties": {
+					"result": {
+						"$ref": "#/components/schemas/PrivateTutorData"
+					}
+				},
+				"required": [
+					"result"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_Omit_PrivateTutorData.id__": {
+				"properties": {
+					"email": {
+						"$ref": "#/components/schemas/EmailString",
+						"description": "Email to allow users to start communicating"
+					},
+					"relatedSubjects": {
+						"items": {
+							"$ref": "#/components/schemas/UserSubjectData"
+						},
+						"type": "array",
+						"description": "Links to subjects a user is interested in learning/teaching (depends on type of user)\r\nand user specific information about the user relating to a specific subject"
+					},
+					"imageUrl": {
+						"$ref": "#/components/schemas/UrlString",
+						"description": "Link to profile image, if defined"
+					},
+					"introduction": {
+						"type": "string",
+						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedLocales": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleCode"
+						},
+						"type": "array",
+						"description": "The locales a user prefers for content"
+					},
+					"userName": {
+						"type": "string",
+						"description": "Username which will be displayed for a user"
+					},
+					"relatedStudents": {
+						"items": {
+							"$ref": "#/components/schemas/LinkedStudentData"
+						},
+						"type": "array",
+						"description": "Data about the students a teacher is involved with"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"UpdateTutorRequestBody": {
+				"properties": {
+					"updates": {
+						"$ref": "#/components/schemas/Partial_Omit_PrivateTutorData.id__"
+					}
+				},
+				"required": [
+					"updates"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -351,6 +970,36 @@
 				}
 			}
 		},
+		"/getStudent": {
+			"post": {
+				"operationId": "GetStudent",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetStudentResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retreives data about a student user. If the student user owns the data then they get all the data, otherwise it is restricted to 'public' data.",
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetStudentRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
 		"/getStudentsBySubjects": {
 			"post": {
 				"operationId": "GetStudentsBySubjects",
@@ -380,16 +1029,16 @@
 				}
 			}
 		},
-		"/createTutor": {
+		"/updateStudent": {
 			"post": {
-				"operationId": "CreateTutor",
+				"operationId": "UpdateStudent",
 				"responses": {
 					"200": {
 						"description": "Ok",
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "string"
+									"$ref": "#/components/schemas/UpdateStudentResponseBody"
 								}
 							}
 						}
@@ -402,7 +1051,153 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GetStudentsBySubjectsRequestBody"
+								"$ref": "#/components/schemas/UpdateStudentRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/createSubjectCategory": {
+			"post": {
+				"operationId": "CreateSubjectCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateSubjectCategoryResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateSubjectCategoryRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/getSubjectCategories": {
+			"post": {
+				"operationId": "GetSubjectCategories",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetSubjectCategoryResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetSubjectCategoryRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/updateSubjectCategory": {
+			"post": {
+				"operationId": "UpdateSubjectCategory",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateSubjectCategoryResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateSubjectCategoryRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/createTutor": {
+			"post": {
+				"operationId": "CreateTutor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/CreateTutorResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/CreateTutorRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/getTutor": {
+			"post": {
+				"operationId": "GetTutor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetTutorResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"description": "Retreives data about a tutor user. If the tutor user owns the data then they get all the data, otherwise it is restricted to 'public' data.",
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/GetTutorRequestBody"
 							}
 						}
 					}
@@ -418,7 +1213,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"type": "string"
+									"$ref": "#/components/schemas/GetTutorsBySubjectsResponseBody"
 								}
 							}
 						}
@@ -431,7 +1226,36 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GetStudentsBySubjectsRequestBody"
+								"$ref": "#/components/schemas/GetTutorsBySubjectsRequestBody"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/updateTutor": {
+			"post": {
+				"operationId": "UpdateTutor",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/UpdateTutorResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/UpdateTutorRequestBody"
 							}
 						}
 					}
