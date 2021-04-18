@@ -9,7 +9,6 @@ interface Props<PublicDataType> {
   localeSubjectIds: string[];
   publicDataExtractor: (data: any) => PublicDataType;
   userCollectionName: string;
-  userSubjectsField: keyof PrivateUserData;
 }
 
 export default async function getUsersBySubjects<PublicDataType>({
@@ -17,7 +16,6 @@ export default async function getUsersBySubjects<PublicDataType>({
   publicDataExtractor,
   firestore,
   userCollectionName,
-  userSubjectsField,
 }: Props<PublicDataType>): Promise<PublicDataType[]> {
   /*
   // todo delete
@@ -33,6 +31,8 @@ export default async function getUsersBySubjects<PublicDataType>({
   /* array-contains-any is limited to 10 values, so split this into multiple requests if necessary
     https://firebase.google.com/docs/firestore/query-data/queries#array-contains-any
    */
+
+  const userSubjectsField: keyof PrivateUserData = "relatedSubjects";
   const groupedLocaleSubjectIds = groupArrayItems(localeSubjectIds, 10);
 
   const filteredUsersPromises = groupedLocaleSubjectIds.map((subjectIdGroup) =>
