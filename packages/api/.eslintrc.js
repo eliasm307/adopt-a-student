@@ -43,6 +43,7 @@ module.exports = {
     "@typescript-eslint/no-unsafe-return": 0,
     "@typescript-eslint/no-var-requires": 0,
     "@typescript-eslint/require-await": 1,
+    "@typescript-eslint/no-unused-vars": 0,
     "import/export": 1,
     "import/no-unresolved": 1,
     "linebreak-style": 0,

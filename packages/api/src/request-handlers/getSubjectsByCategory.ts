@@ -1,6 +1,7 @@
 import {
-  GetSubjectsByCategoryRequestBody, GetSubjectsByCategoryResponseBody,
-} from '../../common/src';
+  GetSubjectsByCategoryRequestBody, GetSubjectsByCategoryResponseBody, SubjectOverview,
+} from '@adopt-a-student/common';
+
 import { FirebaseCallableFunctionHandler } from '../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin';
 import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
@@ -11,7 +12,7 @@ const getSubjectsByCategory: FirebaseCallableFunctionHandler<
   GetSubjectsByCategoryRequestBody,
   GetSubjectsByCategoryResponseBody
 > = async (data, context) => {
-  const auth = verifyRequest(data, context);
+  const { uid } = verifyRequest(data, context);
 
   // verify received data
   if (!data?.locale || !data.categoryId)
@@ -38,17 +39,16 @@ const getSubjectsByCategory: FirebaseCallableFunctionHandler<
 
   const localeSubjects = await Promise.all(localeSubjectPromises);
 
-  const result: GetSubjectsByCategoryResponseBody = {
-    data: genericSubjectsByCategory.map(
-      ({ relatedSubjects, relatedCategories }, i) => ({
+  const results = genericSubjectsByCategory.map(
+    ({ relatedSubjects, relatedCategories }, i) =>
+      ({
         relatedCategories,
         relatedSubjects,
         subject: localeSubjects[i],
-      })
-    ),
-  };
+      } as SubjectOverview)
+  );
 
-  return result;
+  return { results };
 };
 
 export default getSubjectsByCategory;

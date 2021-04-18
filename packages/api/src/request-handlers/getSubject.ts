@@ -6,7 +6,9 @@ import { firestoreAdmin, functionsHttps } from '../utils/firebase/firebase-admin
 import getDocumentData from '../utils/firebase/getDocumentData';
 import verifyRequest from '../utils/verifyRequest';
 
-const getSubjectHandler: ApiGetSubjectHandler = async (data, context) => {
+export interface GetSubjectRequestBody {}
+export interface GetSubjectResponseBody {}
+const getSubject: ApiGetSubjectHandler = async (data, context) => {
   const auth = verifyRequest(data, context);
 
   // verify received data
@@ -40,4 +42,4 @@ const getSubjectHandler: ApiGetSubjectHandler = async (data, context) => {
   };
 };
 
-export default getSubjectHandler;
+export default getSubject;

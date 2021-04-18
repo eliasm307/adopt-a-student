@@ -71,10 +71,12 @@ export interface GetSubjectsByCategoryRequestBody {
   locale: LocaleCode;
 }
 
+export interface SubjectOverview {
+  relatedCategories: CategoryId[];
+  relatedSubjects: GenericSubjectId[];
+  subject: LocaleSubjectData;
+}
+
 export interface GetSubjectsByCategoryResponseBody {
-  data: {
-    subject: LocaleSubjectData;
-    relatedSubjects: GenericSubjectId[];
-    relatedCategories: CategoryId[];
-  }[];
+  results: SubjectOverview[];
 }
