@@ -40,3 +40,11 @@ export interface UpdateTutorRequestBody {
 export interface UpdateTutorResponseBody {
   result: PrivateTutorData;
 }
+
+export interface UpdateStudentRequestBody {
+  updates: Partial<Omit<PrivateStudentData, "id">>;
+}
+
+export interface UpdateStudentResponseBody {
+  result: PrivateStudentData;
+}
