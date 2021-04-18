@@ -1,18 +1,19 @@
 import {
-  isLinkedLocaleSubjectData, isLocaleSubjectData, isPrivateTutorData, LocaleSubjectData,
+  isLinkedLocaleSubjectData, isLocaleSubjectData, isPrivateTutorData,
+  LinkTutorAndSubjectRequestBody, LinkTutorAndSubjectResponseBody, LocaleSubjectData,
   PrivateTutorData, UserSubjectData,
 } from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
-import { ApiLinkTutorAndLocaleSubject } from '../../../declarations/interfaces';
+import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const linkStudentAndLocaleSubject: ApiLinkTutorAndLocaleSubject = async (
-  body,
-  context
-) => {
+const linkStudentAndSubject: FirebaseCallableFunctionHandler<
+  LinkTutorAndSubjectRequestBody,
+  LinkTutorAndSubjectResponseBody
+> = async (body, context) => {
   const { uid } = verifyRequest(body, context);
 
   const data = body?.data;
@@ -56,4 +57,4 @@ const linkStudentAndLocaleSubject: ApiLinkTutorAndLocaleSubject = async (
   return { message: "Success linking documents" };
 };
 
-export default linkStudentAndLocaleSubject;
+export default linkStudentAndSubject;
