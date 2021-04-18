@@ -1,0 +1,9 @@
+{
+  "npm.validate.enable": false,
+  "files.associations": {
+    "tsconfig*.json": "jsonc"
+  },
+  "json.schemas": [
+
+  ]
+}

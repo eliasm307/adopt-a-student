@@ -13,6 +13,7 @@
     "lerna": "^4.0.0"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "packages/api/common"
   ]
 }

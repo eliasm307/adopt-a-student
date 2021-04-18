@@ -1,21 +1,21 @@
 import { FirestoreAdmin } from '../declarations/interfaces';
-import { functionsHttps } from './firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from './firebase/firebase-admin';
 
 interface Props<D> {
   dataPredicate: (data: any) => data is D;
-  firestore: FirestoreAdmin;
+  firestoreAdmin: FirestoreAdmin;
   path: string;
 }
 
 export default async function readPrivateUserData<D>({
   dataPredicate,
   path,
-  firestore,
+  firestoreAdmin,
 }: Props<D>) {
   // todo use generic getDocumentData here
 
   // check if tutor already exists for this user
-  const docSnapshot = await firestore.doc(path).get();
+  const docSnapshot = await firestoreAdmin.doc(path).get();
 
   if (!docSnapshot.exists)
     throw new functionsHttps.HttpsError(

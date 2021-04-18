@@ -9,7 +9,7 @@ interface Props<D, L> extends LinkMutatorProps<D, L>, FactoryProps<D, L> {}
 
 const addDocumentLinkMutator = async <D, L>({
   documentProps,
-  firestore,
+  firestoreAdmin,
   currentData,
   currentLinks,
   linkToAdd,
@@ -19,8 +19,8 @@ const addDocumentLinkMutator = async <D, L>({
   // create and return document update promise
   return updateDocumentData({
     ...documentProps,
-    firestore,
-    edits: {
+    firestoreAdmin,
+    updates: {
       ...currentData,
       [linksPropName]: [...currentLinks, linkToAdd], // add link
     },

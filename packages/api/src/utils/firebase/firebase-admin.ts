@@ -15,14 +15,8 @@ let app;
 
 console.log(__filename, { NODE_ENV: process.env.NODE_ENV });
 
-if (process.env.NODE_ENV === "development") {
-  // make admin app use this for firestore requests
-  process.env.FIRESTORE_EMULATOR_HOST = "localhost:8080";
-
-  console.log(__filename, "trying to use using emulator admin");
-  app = admin.initializeApp();
-} else {
-  console.log(__filename, "using live admin");
+if (process.env.NODE_ENV === "production") {
+  console.warn(__filename, "using live admin");
   app = admin.initializeApp({
     credential: admin.credential.cert({
       // todo create custom type declarations for functions module
@@ -33,6 +27,13 @@ if (process.env.NODE_ENV === "development") {
     // databaseURL: "https://adopt-a-student.firebaseio.com",
     databaseURL,
   });
+} else {
+  console.warn(__filename, "using local admin");
+  // make admin app use this for firestore requests
+  process.env.FIRESTORE_EMULATOR_HOST = "localhost:8080";
+
+  console.log(__filename, "trying to use using emulator admin");
+  app = admin.initializeApp();
 }
 
 // you can check all these information in firebase console/settings

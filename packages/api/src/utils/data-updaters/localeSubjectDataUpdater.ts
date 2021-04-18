@@ -3,22 +3,22 @@ import { Country, LocaleCode, LocaleSubjectData } from '@adopt-a-student/common'
 import { DataMutatorMap as DataMutatorMap, DataUpdater } from '../../declarations/types';
 
 interface Props {
-  edits: any;
   existingData: LocaleSubjectData;
+  updates: any;
 }
 
 const localeSubjectDataUpdater: DataUpdater<LocaleSubjectData> = ({
-  edits,
+  updates,
   existingData,
 }: Props) => {
-  if (!edits) return { ...existingData };
+  if (!updates) return { ...existingData };
 
   const newData: LocaleSubjectData = { ...existingData };
 
   const mutators: DataMutatorMap<LocaleSubjectData> = {
     id: null,
-    linkedStudentIds: null, // change handled by a different request
-    linkedTutorIds: null, // change handled by a different request
+    relatedStudents: null, // change handled by a different request
+    relatedTutors: null, // change handled by a different request
     country: (value) =>
       typeof value === "string" ? (newData.country = value as Country) : null,
     description: (value) =>
@@ -29,8 +29,8 @@ const localeSubjectDataUpdater: DataUpdater<LocaleSubjectData> = ({
       typeof value === "string" ? (newData.locale = value as LocaleCode) : null,
   };
 
-  // apply edit mutations where possible
-  Object.entries(edits).forEach(([key, value]) => {
+  // apply mutations where allowed
+  Object.entries(updates).forEach(([key, value]) => {
     const mutator = mutators[key as keyof LocaleSubjectData];
     if (mutator) mutator(value);
   });

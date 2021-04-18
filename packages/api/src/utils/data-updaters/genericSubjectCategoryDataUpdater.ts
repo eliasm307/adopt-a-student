@@ -5,34 +5,34 @@ import {
 import { DataMutatorMap as DataMutatorMap, DataUpdater } from '../../declarations/types';
 
 interface Props {
-  edits: any;
+  updates: any;
   existingData: GenericSubjectCategoryData;
 }
 
 const genericSubjectCategoryDataUpdater: DataUpdater<GenericSubjectCategoryData> = ({
-  edits,
+  updates,
   existingData,
 }: Props) => {
-  if (!edits) return { ...existingData };
+  if (!updates) return { ...existingData };
 
   const newData: GenericSubjectCategoryData = { ...existingData };
 
   const mutators: DataMutatorMap<GenericSubjectCategoryData> = {
     id: null,
     // todo test this works as expected
-    // replace the object with the edits, this should be merged by the firestore update
-    localeSubjectCategories: (value) =>
+    // replace the object with the updates, this should be merged by the firestore update
+    locales: (value) =>
       typeof value === "object"
-        ? (newData.localeSubjectCategories = value as ObjectMap<
+        ? (newData.locales = value as ObjectMap<
             LocaleCode,
             LocaleSubjectCategoryData
           >)
         : null,
-    linkedGenericSubjectIds: null, // change handled by a different request
+    relatedSubjects: null, // change handled by a different request
   };
 
-  // apply edit mutations where possible
-  Object.entries(edits).forEach(([key, value]) => {
+  // apply update mutations where possible
+  Object.entries(updates).forEach(([key, value]) => {
     const mutator = mutators[key as keyof GenericSubjectCategoryData];
     if (mutator) mutator(value);
   });

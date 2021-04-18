@@ -2,12 +2,11 @@ import { HttpsFunction, Runnable } from 'firebase-functions';
 import { CallableContext } from 'firebase-functions/lib/providers/https';
 
 import { CALLABLE_FUNCTION_NAMES } from '../constants';
-import { BasicResponseData } from './interfaces';
 
-export type FirebaseCallableFunctionHandler<D = any, R = BasicResponseData> = (
+export type FirebaseCallableFunctionHandler<D = any, R = any> = (
   body: Partial<D> | undefined,
   context: CallableContext
-) => (R & BasicResponseData) | Promise<R & BasicResponseData>;
+) => Promise<R>;
 
 /** Defines the callable function names available */
 export type CallableFunctionName = typeof CALLABLE_FUNCTION_NAMES[number];
@@ -15,7 +14,7 @@ export type CallableFunctionName = typeof CALLABLE_FUNCTION_NAMES[number];
 /** Type of a callable function */
 export type CallableMethod = HttpsFunction & Runnable<any>;
 
-export type UserTypeName = "Student" | "Tutor";
+// export type UserTypeName = "Student" | "Tutor";
 
 /**
  * An object with the same keys as a given object where the values can be functions to cause mutations
@@ -26,6 +25,6 @@ export type DataMutatorMap<T> = {
 };
 
 export type DataUpdater<T> = (props: {
-  edits: Partial<T>;
+  updates: Partial<T>;
   existingData: T;
 }) => T;

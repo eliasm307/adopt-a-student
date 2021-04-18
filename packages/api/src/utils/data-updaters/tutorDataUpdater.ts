@@ -3,15 +3,15 @@ import { PrivateTutorData } from '@adopt-a-student/common';
 import { DataMutatorMap as DataMutatorMap, DataUpdater } from '../../declarations/types';
 
 interface Props {
-  edits: any;
+  updates: any;
   existingData: PrivateTutorData;
 }
 
 const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
-  edits,
+  updates,
   existingData,
 }: Props) => {
-  if (!edits) return { ...existingData };
+  if (!updates) return { ...existingData };
 
   const newData: PrivateTutorData = { ...existingData };
 
@@ -20,8 +20,8 @@ const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
     prefferedLocales: () => {
       throw Error("Mutator not implemented");
     },
-    linkedLocaleSubjects: null,
-    linkedStudents: null,
+    relatedSubjects: null,
+    relatedStudents: null,
     email: (value) =>
       typeof value === "string" ? (newData.email = value) : null,
     userName: (value) =>
@@ -32,8 +32,8 @@ const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
       typeof value === "string" ? (newData.introduction = value) : null,
   };
 
-  // apply edit mutations where possible
-  Object.entries(edits).forEach(([key, value]) => {
+  // apply update mutations where possible
+  Object.entries(updates).forEach(([key, value]) => {
     const mutator = mutators[key as keyof PrivateTutorData];
     if (mutator) mutator(value);
 
@@ -53,7 +53,7 @@ const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
         break;
 
       default:
-        console.warn(__filename, `Field "${key}" is not edittable`);
+        console.warn(__filename, `Field "${key}" is not updatetable`);
     }
     */
   });

@@ -1,35 +1,15 @@
 import { https as functionsHttps, HttpsFunction, Runnable } from 'firebase-functions';
 
-import { ObjectMap } from '../common/src';
-import { CallableFunctionName, FirebaseCallableFunctionHandler } from './declarations/types';
-import createGenericSubject from './request-handlers/createGenericSubject';
-import createLocaleSubject from './request-handlers/createLocaleSubject';
-import createStudent from './request-handlers/createStudent';
-import createSubjectCategory from './request-handlers/createSubjectCategory';
-import createTutor from './request-handlers/createTutor';
-import getPrivateStudentData from './request-handlers/getPrivateStudentDataHandler';
-import getPrivateTutorData from './request-handlers/getPrivateTutorDataHandler';
-import getPublicStudentData from './request-handlers/getPublicStudentDataHandler';
-import getPublicTutorData from './request-handlers/getPublicTutorDataHandler';
-import getStudentsBySubjects from './request-handlers/getStudentsBySubjectsHandler';
-import getSubjectCategories from './request-handlers/getSubjectCategoriesHandler';
-import getSubject from './request-handlers/getSubjectHandler';
-import getSubjectsByCategory from './request-handlers/getSubjectsByCategoryHandler';
-import getTutorsBySubjects from './request-handlers/getTutorsBySubjectsHandler';
-import linkGenericSubjectAndSubjectCategory from './request-handlers/linkGenericSubjectAndSubjectCategory';
-import linkGenericSubjects from './request-handlers/linkGenericSubjects';
-import linkStudentAndLocaleSubject from './request-handlers/linkStudentAndLocaleSubject';
-import linkStudentAndTutor from './request-handlers/linkStudentAndTutor';
-import linkTutorAndLocaleSubject from './request-handlers/linkTutorAndLocaleSubject';
-import unlinkGenericSubjectAndSubjectCategory from './request-handlers/unlinkGenericSubjectAndSubjectCategory';
-import unlinkGenericSubjects from './request-handlers/unlinkGenericSubjects';
-import unlinkStudentAndLocaleSubject from './request-handlers/unlinkStudentAndLocaleSubject';
-import unlinkStudentAndTutor from './request-handlers/unlinkStudentAndTutor';
-import unlinkTutorAndLocaleSubject from './request-handlers/unlinkTutorAndLocaleSubject';
-import updateLocaleSubject from './request-handlers/updateLocaleSubject';
-import updateLocaleSubjectCategory from './request-handlers/updateLocaleSubjectCategory';
-import updateStudent from './request-handlers/updateStudent';
-import updateTutor from './request-handlers/updateTutor';
+import {
+  RelationshipController,
+} from './controllers/RelationshipController/RelationshipController';
+import { StudentsController } from './controllers/StudentController/StudentController';
+import {
+  SubjectCategoryController,
+} from './controllers/SubjectCategoryController/SubjectCategoryController';
+import { SubjectsController } from './controllers/SubjectController/SubjectController';
+import { TutorsController } from './controllers/TutorController/TutorController';
+import app from './tsoa-docs/app';
 
 // Start writing Firebase Functions
 // https://firebase.google.com/docs/functions/typescript
@@ -38,60 +18,58 @@ import updateTutor from './request-handlers/updateTutor';
 Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
+
+type CallableName = typeof StudentsController.callableNames[number] | any;
+
+// getStudentsBySubjects;
 const callableFunctionHandlers = {
   // writeTest: firestoreWriteHandler,
 
   // tutors
-  createTutor,
-  updateTutor,
-  getPrivateTutorData,
-  getPublicTutorData,
-  getTutorsBySubjects,
+  createTutor: TutorsController.createTutor,
+  updateTutor: TutorsController.updateTutor,
+  getTutor: TutorsController.getTutor,
+  getTutorsBySubjects: TutorsController.getTutorsBySubjects,
 
   // students
-  createStudent,
-  updateStudent,
-  getPrivateStudentData,
-  getPublicStudentData,
-  getStudentsBySubjects,
+  createStudent: StudentsController.createStudent,
+  updateStudent: StudentsController.updateStudent,
+  getStudent: StudentsController.getStudent,
+  getStudentsBySubjects: StudentsController.getStudentsBySubjects,
 
+  /**/
   // subjects
-  createGenericSubject,
+  createGenericSubject: SubjectsController.createGenericSubject,
   // updateGenericSubject,
-  createLocaleSubject,
-  updateLocaleSubject,
-  getSubject,
-  getSubjectsByCategory,
+  createLocaleSubject: SubjectsController.createLocaleSubject,
+  updateLocaleSubject: SubjectsController.updateLocaleSubject,
+  getSubject: SubjectsController.getSubject,
+  getSubjectsByCategory: SubjectsController.getSubjectsByCategory,
 
   // subject categories
-  getSubjectCategories,
-  createSubjectCategory,
-  updateLocaleSubjectCategory,
+  getSubjectCategories: SubjectCategoryController.getSubjectCategories,
+  createSubjectCategory: SubjectCategoryController.createSubjectCategory,
+  updateSubjectCategory: SubjectCategoryController.updateSubjectCategory,
 
   // relationships
-  linkGenericSubjects,
-  unlinkGenericSubjects,
+  /* */
+  linkSubjects: RelationshipController.linkSubjects,
+  unlinkSubjects: RelationshipController.unlinkSubjects,
 
-  linkGenericSubjectAndSubjectCategory,
-  unlinkGenericSubjectAndSubjectCategory,
+  linkSubjectAndSubjectCategory:
+    RelationshipController.linkSubjectAndSubjectCategory,
+  unlinkSubjectAndSubjectCategory:
+    RelationshipController.unlinkSubjectAndSubjectCategory,
 
-  linkStudentAndTutor,
-  unlinkStudentAndTutor,
+  linkStudentAndTutor: RelationshipController.linkStudentAndTutor,
+  unlinkStudentAndTutor: RelationshipController.unlinkStudentAndTutor,
 
-  linkTutorAndLocaleSubject,
-  unlinkTutorAndLocaleSubject,
+  linkTutorAndLocaleSubject: RelationshipController.linkTutorAndSubject,
+  unlinkTutorAndLocaleSubject: RelationshipController.unlinkTutorAndSubject,
 
-  linkStudentAndLocaleSubject,
-  unlinkStudentAndLocaleSubject,
-} as ObjectMap<CallableFunctionName, FirebaseCallableFunctionHandler>;
-
-/*
-callableFunctionHandlers.test = (data, context) => {
-  return { message: "yay" };
-  //   .region("europe-west1")
-  // ...
-};
-*/
+  linkStudentAndSubject: RelationshipController.linkStudentAndSubject,
+  unlinkStudentAndSubject: RelationshipController.unlinkStudentAndSubject,
+} as Record<CallableName, (body: any, context: any) => Promise<any>>;
 
 // export defined handlers with given callable function names
 module.exports = Object.entries(callableFunctionHandlers).reduce(
@@ -100,36 +78,7 @@ module.exports = Object.entries(callableFunctionHandlers).reduce(
       exports[callableName] = functionsHttps.onCall(callableHandler);
     return exports;
   },
-  {} as ObjectMap<string, HttpsFunction & Runnable<any>>
+  {} as Record<string, HttpsFunction & Runnable<any>>
 );
 
-// export default callableFunctions;
-
-/** Get all student profile data */
-// export const getStudent = functions.https.onCall(_getStudent);
-
-/** Update student profile data */
-// export const updateStudent = functions.https.onCall(_updateStudent);
-
-/** Get all tutor profile data */
-// export const getTutor = functions.https.onCall(_getTutor);
-
-/** Update tutor profile data */
-// export const updateTutor = functions.https.onCall(_updateTutor);
-
-/** Get subject by id */
-// export const getSubject = functions.https.onCall(_getSubject);
-
-/** Update subject by id */
-// export const updateSubject = functions.https.onCall(_updateSubject);
-
-/** Get all subjects */
-// export const getAllSubjects = functions.https.onCall(_getAllSubjects);
-
-/** Get students interested in subjects */
-// export const getStudentsBySubjects = functions.https.onCall(
-//   _getStudentsBySubjects
-// );
-
-/** Get students interested in subjects */
-// export const getTutorsBySubjects = functions.https.onCall(_getTutorsBySubjects);
+module.exports.docs = functionsHttps.onRequest(app);

@@ -1,17 +1,10 @@
 {
+  "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "typeRoots": ["./node_modules/@types"],
-    "baseUrl": "./",
-    "module": "commonjs",
-    "sourceMap": true,
     "outDir": "lib",
-    "noEmitOnError": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "declaration": true,
-    "target": "es2017",
-    "types": ["@types/jest"],
-    "allowSyntheticDefaultImports": true
+    /* for tsoa */
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
   "include": ["src"],
   "exclude": [

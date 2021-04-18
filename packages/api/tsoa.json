@@ -1,0 +1,56 @@
+{
+  "_entryFile": "src/app.ts",
+  "noImplicitAdditionalProperties": "silently-remove-extras",
+  "controllerPathGlobs": [ "src/controllers/**/*Controller.ts" ],
+  "spec": {
+    "specFileBaseName": "swagger-spec",
+    "outputDirectory": "tsoa-build",
+    "specVersion": 3
+  },
+  "routes": {
+    "routesDir": "tsoa-build",
+    "noWriteIfUnchanged": true,
+    "useSuccessResponseCode": false
+  },
+  "compilerOptions": {
+    "_1": "/* Basic Options */",
+    "incremental": true,
+    "_target": "es2017",
+    "_.target": "es6",
+    "_module": "commonjs",
+    "outDir": "tsoa-build",
+    "baseUrl": "../../",
+    "typeRoots": [ "./node_modules/@types" ],
+    "types": [ "@types/jest", "@types/node" ],
+
+    "_2": "/* Strict Type-Checking Options */",
+    "strict": true,
+    "_noImplicitAny": true,
+    "_strictNullChecks": true,
+    "_strictFunctionTypes": true,
+    "_strictBindCallApply": true,
+    "_strictPropertyInitialization": true,
+    "_noImplicitThis": true,
+    "alwaysStrict": true,
+
+    "_3": "/* Additional Checks */",
+    "_noUnusedLocals": true,
+    "_noUnusedParameters": true,
+    "_noImplicitReturns": true,
+    "_noFallthroughCasesInSwitch": true,
+
+    "_4": "/* Module Resolution Options */",
+    "_moduleResolution": "node",
+    "paths": {
+      "@adopt-a-student/common": [ "packages/api/common/src/" ]
+    },
+    "_esModuleInterop": true,
+
+    "_5": "/* Experimental Options */",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "_6": "/* Advanced Options */",
+    "forceConsistentCasingInFileNames": true
+  }
+}

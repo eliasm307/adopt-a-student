@@ -4,16 +4,16 @@ import { functionsHttps } from "./firebase-admin";
 interface Props<D> {
   collectionPath: string;
   dataPredicate: (data: any) => data is D;
-  firestore: FirestoreAdmin;
+  firestoreAdmin: FirestoreAdmin;
 }
 
 export default async function getCollectionData<D>({
   dataPredicate,
   collectionPath,
-  firestore,
+  firestoreAdmin,
 }: Props<D>) {
   // check if tutor already exists for this user
-  const snapshot = await firestore.collection(collectionPath).get();
+  const snapshot = await firestoreAdmin.collection(collectionPath).get();
 
   if (!snapshot.docs.length)
     throw new functionsHttps.HttpsError(

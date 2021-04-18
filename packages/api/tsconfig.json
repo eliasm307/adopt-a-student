@@ -1,8 +1,12 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": { "@adopt-a-student/common": ["./common/src/"] }
+    /* "baseUrl": ".", */
+    "paths": {
+      "@adopt-a-student/common": ["./common/src/"]
+    },
+    /* Experimental Options for tsoa*/
+    "experimentalDecorators": true
   },
   "include": ["**/*"],
   "exclude": [

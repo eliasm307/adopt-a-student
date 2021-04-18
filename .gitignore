@@ -16,6 +16,9 @@ yarn-error.log*
 dist/
 lib/
 build/
+docs/
+
+*tsconfig.tsbuildinfo
 
 # Runtime data
 pids

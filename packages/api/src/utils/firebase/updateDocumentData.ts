@@ -7,28 +7,28 @@ interface Props<D> {
   collectionPath: string;
   dataPredicate: (data: any) => data is D;
   dataUpdater: DataUpdater<D>;
-  edits: Partial<D>;
-  firestore: FirestoreAdmin;
+  firestoreAdmin: FirestoreAdmin;
   id: string;
+  updates: Partial<D>;
 }
 
 export default async function updateDocumentData<D>({
   collectionPath,
-  edits,
+  updates: updates,
   dataPredicate,
-  firestore,
+  firestoreAdmin,
   id,
   dataUpdater,
 }: Props<D>): Promise<D> {
   const documentPath = createPath(collectionPath, id);
 
   // check if tutor already exists for this user
-  const docSnapshot = await firestore.doc(documentPath).get();
+  const docSnapshot = await firestoreAdmin.doc(documentPath).get();
 
   if (!docSnapshot.exists)
     throw new functionsHttps.HttpsError(
       "not-found",
-      "Could not edit document because it doesnt exist, create one first"
+      "Could not update document because it doesnt exist, create one first"
     );
 
   const existingData = docSnapshot.data();
@@ -41,7 +41,7 @@ export default async function updateDocumentData<D>({
     );
 
   const updatedData = dataUpdater({
-    edits,
+    updates: updates,
     existingData,
   });
 
@@ -61,7 +61,7 @@ export default async function updateDocumentData<D>({
   } catch (error) {
     throw new functionsHttps.HttpsError(
       "internal",
-      "There was an issue editting the document",
+      "There was an issue updateting the document",
       JSON.stringify({ error })
     );
   }

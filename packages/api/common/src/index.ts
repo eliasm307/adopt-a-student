@@ -1,7 +1,11 @@
-export * from "./data-schema";
+export * from "./declarations/data-models";
 
-export * from "./enums";
+export * from "./declarations/enums";
 
-export * from "./object-shcema";
+export * from "./declarations/object-shcema";
 
-export * from "./types";
+export * from "./declarations/types";
+
+export * from "./utils/type-predicates";
+
+export * from "./declarations/api";
