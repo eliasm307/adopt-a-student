@@ -23,14 +23,14 @@ const getSubject: ApiGetSubjectHandler = async (data, context) => {
   const localeSubjectId = data.localeSubjectId;
 
   const localeSubject = await getDocumentData({
-    firestoreAdmin: firestoreAdmin,
+    firestoreAdmin: FirestoreAdmin,
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     id: localeSubjectId,
     dataPredicate: isLocaleSubjectData,
   });
 
   const genericSubject = await getDocumentData({
-    firestoreAdmin: firestoreAdmin,
+    firestoreAdmin: FirestoreAdmin,
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     id: localeSubject.parentId,
     dataPredicate: isGenericSubjectData,

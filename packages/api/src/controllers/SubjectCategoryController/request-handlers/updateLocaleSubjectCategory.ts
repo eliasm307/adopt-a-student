@@ -37,7 +37,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
   const genericSubjectCategory = await getDocumentData({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     dataPredicate: isGenericSubjectCategoryData,
-    FirestoreAdmin,
+    firestoreAdmin,
     id,
   });
   */
@@ -49,7 +49,7 @@ const updateLocaleSubjectCategory: ApiUpdateLocaleSubjectCategoryHandler = async
     updates: genericCategoryupdates,
     dataPredicate: isGenericSubjectCategoryData,
     dataUpdater: genericSubjectCategoryDataUpdater,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   const localeSubjectCategory = genericSubjectCategory.locales[locale];

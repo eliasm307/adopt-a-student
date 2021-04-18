@@ -7,13 +7,13 @@ import { FirestoreAdmin } from '../../../declarations/interfaces';
 import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 
 interface Props {
-  FirestoreAdmin;
+  firestoreAdmin: FirestoreAdmin;
   genericSubject: GenericSubjectData;
   locale: LocaleCode;
 }
 
 export default async function getLocaleSubjectFromGenericSubject({
-  FirestoreAdmin,
+  firestoreAdmin,
   genericSubject,
   locale,
 }: Props) {
@@ -21,7 +21,7 @@ export default async function getLocaleSubjectFromGenericSubject({
   const localeField: keyof LocaleSubjectData = "locale";
 
   try {
-    const localeSubjectsFilteredByGenericId = await firestore
+    const localeSubjectsFilteredByGenericId = await firestoreAdmin
       .collection(LOCALE_SUBJECT_COLLECTION_NAME)
       .where(genericIdField, "==", genericSubject.id)
       .where(localeField, "==", locale)

@@ -59,7 +59,7 @@ const unlinkStudentAndTutor: ApiUnlinkStudentAndTutor = async (
   const [updatedStudent, updatedTutor] = await unlinkDocuments({
     document1Props,
     document2Props,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return { message: "Success" };

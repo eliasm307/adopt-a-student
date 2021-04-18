@@ -20,7 +20,7 @@ const getPublicStudentData: FirebaseCallableFunctionHandler<
 
   const student = await readPrivateUserData({
     dataPredicate: isPrivateStudentData,
-    FirestoreAdmin,
+    firestoreAdmin,
     path,
   });
 

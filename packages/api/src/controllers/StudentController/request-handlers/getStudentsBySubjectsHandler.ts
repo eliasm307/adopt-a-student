@@ -32,7 +32,7 @@ const getStudentsBySubjectsHandler: ApiGetStudentsBySubjectsHandler = async (
   const students = await getUsersBySubjects<PublicStudentData>({
     localeSubjectIds: data.subjectIds,
     publicDataExtractor: (data) => extractPublicStudentData(data),
-    FirestoreAdmin,
+    firestoreAdmin,
     userCollectionName: STUDENT_COLLECTION_NAME,
   });
 

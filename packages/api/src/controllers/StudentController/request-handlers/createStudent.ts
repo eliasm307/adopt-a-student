@@ -21,7 +21,7 @@ const createStudent: FirebaseCallableFunctionHandler<
     id: auth.uid,
     data,
     dataPredicate: isPrivateStudentData,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return {

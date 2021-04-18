@@ -18,7 +18,7 @@ export interface LinkMutatorProps<D, L> {
   currentData: D;
   currentLinks: L[];
   documentProps: DocumentLinkMutationProps<D, L>;
-  FirestoreAdmin;
+  firestoreAdmin: FirestoreAdmin;
 }
 
 interface MutateDocumentLinkProps<D1, L1, D2, L2> {
@@ -28,7 +28,7 @@ interface MutateDocumentLinkProps<D1, L1, D2, L2> {
     existingDocument1Link: any,
     existingDocument2Link: any
   ) => boolean;
-  FirestoreAdmin;
+  firestoreAdmin: FirestoreAdmin;
 }
 
 /** Util to reduce an array of links to an object map */
@@ -48,14 +48,14 @@ export default async function mutateDocumentLink<D1, L1, D2, L2>(
   const {
     document1Props,
     document2Props,
-    FirestoreAdmin,
+    firestoreAdmin,
     documentLinksShouldBeMutated,
   } = props;
 
   // Read current data in parallel
   const [document1Data, document2Data] = await Promise.all([
-    getDocumentData({ ...document1Props, firestoreAdmin: FirestoreAdmin }),
-    getDocumentData({ ...document2Props, firestoreAdmin: FirestoreAdmin }),
+    getDocumentData({ ...document1Props, firestoreAdmin }),
+    getDocumentData({ ...document2Props, firestoreAdmin }),
   ]);
 
   // get pointers to link arrays in documents
@@ -99,7 +99,7 @@ export default async function mutateDocumentLink<D1, L1, D2, L2>(
       currentData: document1Data,
       currentLinks: document1Links,
       documentProps: document1Props,
-      FirestoreAdmin,
+      firestoreAdmin,
     });
 
   const document2IsLinkedToDocument1 = document2LinkIdMap[document1Props.id];
@@ -110,7 +110,7 @@ export default async function mutateDocumentLink<D1, L1, D2, L2>(
       currentData: document2Data,
       currentLinks: document2Links,
       documentProps: document2Props,
-      FirestoreAdmin,
+      firestoreAdmin,
     });
 
   return Promise.all(updatePromises);

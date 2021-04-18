@@ -35,7 +35,7 @@ const updateStudent: FirebaseCallableFunctionHandler<
     updates: updates,
     dataPredicate: isPrivateStudentData,
     dataUpdater: studentDataUpdater,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return { result: updatedData };

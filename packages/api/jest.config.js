@@ -5,11 +5,11 @@ module.exports = {
 
   testEnvironment: "node",
   verbose: false,
-  /*
+  /**/
   transform: {
     "^.+\\.tsx?$": "ts-jest",
   },
-  */
+
   // testRegex: "src(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
   // testPathIgnorePatterns: ["lib/", "node_modules/"],
   /**/

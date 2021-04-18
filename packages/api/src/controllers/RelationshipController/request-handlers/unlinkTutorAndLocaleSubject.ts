@@ -4,7 +4,7 @@ import {
 
 import { LOCALE_SUBJECT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
 import { ApiUnlinkTutorAndLocaleSubject } from '../../../declarations/interfaces';
-import { functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
@@ -46,7 +46,7 @@ const linkStudentAndLocaleSubject: ApiUnlinkTutorAndLocaleSubject = async (
   const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
     document1Props,
     document2Props,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return { message: "Success" };

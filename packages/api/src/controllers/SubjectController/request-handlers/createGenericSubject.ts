@@ -28,7 +28,7 @@ const createGenericSubject: ApiCreateGenericSubjectHandler = async (
     id,
     data,
     dataPredicate: isGenericSubjectData,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return {

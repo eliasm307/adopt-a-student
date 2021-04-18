@@ -42,7 +42,7 @@ const unlinkGenericSubjectAndSubjectCategory: ApiUnlinkGenericSubjectAndSubjectC
   const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
     document1Props,
     document2Props,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return { message: "Success linking documents" };

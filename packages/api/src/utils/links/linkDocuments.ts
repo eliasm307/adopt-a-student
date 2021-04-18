@@ -1,4 +1,3 @@
-import { FirestoreAdmin } from '../../declarations/interfaces';
 import createLinkAdder from './createLinkAdder';
 import { hasLinkToAdd } from './interfaces';
 import { documentLinksShouldBeAdded as linksShouldBeAdded } from './linksShouldBeMutated';
@@ -11,12 +10,12 @@ export interface AddDocumentLinkProps<D, L>
 interface Props<D1, L1, D2, L2> {
   document1Props: AddDocumentLinkProps<D1, L1>;
   document2Props: AddDocumentLinkProps<D2, L2>;
-  FirestoreAdmin;
+  firestoreAdmin;
 }
 export default async function linkDocuments<D1, L1, D2, L2>(
   props: Props<D1, L1, D2, L2>
 ) {
-  const { FirestoreAdmin, document1Props, document2Props } = props;
+  const { firestoreAdmin, document1Props, document2Props } = props;
 
   return mutateDocumentLink<D1, L1, D2, L2>({
     document1Props: {
@@ -32,6 +31,6 @@ export default async function linkDocuments<D1, L1, D2, L2>(
       }),
     },
     documentLinksShouldBeMutated: linksShouldBeAdded,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 }

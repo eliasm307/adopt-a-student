@@ -28,7 +28,7 @@ const createLocaleSubject: ApiCreateLocaleSubjectHandler = async (
     id,
     data,
     dataPredicate: isLocaleSubjectData,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return {

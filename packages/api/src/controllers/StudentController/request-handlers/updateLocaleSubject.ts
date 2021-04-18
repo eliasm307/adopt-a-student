@@ -36,7 +36,7 @@ const updateLocaleSubject: FirebaseCallableFunctionHandler<
     updates: { ...updates, id },
     dataPredicate: isLocaleSubjectData,
     dataUpdater: localeSubjectDataUpdater,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return { result };

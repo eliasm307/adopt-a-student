@@ -34,13 +34,13 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     id: studentId,
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
-    FirestoreAdmin,
+    firestoreAdmin,
   };
   const tutorCrudProps = {
     id: tutorId,
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,
-    FirestoreAdmin,
+    firestoreAdmin,
   };
 
   // Read current data in parallel
@@ -124,7 +124,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
   const [updatedStudent, updatedTutor] = await linkDocuments({
     document1Props,
     document2Props,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return { message: "Success linking users" };

@@ -22,7 +22,7 @@ const getSubjectCategoriesHandler: ApiGetSubjectCategoriesHandler = async (
   const locale = data.locale;
 
   const genericSubjectCategories = await getCollectionData({
-    FirestoreAdmin,
+    firestoreAdmin,
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     dataPredicate: isGenericSubjectCategoryData,
   });

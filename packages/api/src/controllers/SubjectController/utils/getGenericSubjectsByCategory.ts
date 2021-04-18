@@ -5,18 +5,18 @@ import { FirestoreAdmin } from '../../../declarations/interfaces';
 import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 
 interface Props {
-  FirestoreAdmin;
+  firestoreAdmin: FirestoreAdmin;
   subjectCategoryId: string;
 }
 
 export default async function getGenericSubjectsByCategory({
-  FirestoreAdmin,
+  firestoreAdmin,
   subjectCategoryId,
 }: Props) {
-  const categoryField: keyof GenericSubjectData = "categoryIds";
+  const categoryField: keyof GenericSubjectData = "relatedCategories";
 
   try {
-    const genericSubjectsFilteredByCategory = await firestore
+    const genericSubjectsFilteredByCategory = await firestoreAdmin
       .collection(GENERIC_SUBJECT_COLLECTION_NAME)
       .where(categoryField, "array-contains", subjectCategoryId)
       .get();

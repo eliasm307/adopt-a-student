@@ -9,7 +9,7 @@ interface Props<D, L> extends LinkMutatorProps<D, L>, FactoryProps<D, L> {}
 
 const documentLinkRemover = async <D, L>({
   documentProps,
-  FirestoreAdmin,
+  firestoreAdmin,
   currentData,
   currentLinks,
   filterPredicate,
@@ -19,7 +19,7 @@ const documentLinkRemover = async <D, L>({
   // create and return document update promise
   return updateDocumentData({
     ...documentProps,
-    FirestoreAdmin,
+    firestoreAdmin,
     updates: {
       ...currentData,
       [linksPropName]: currentLinks.filter(filterPredicate), // remove link

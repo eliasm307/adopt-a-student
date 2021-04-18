@@ -4,7 +4,7 @@ import {
 
 import { TUTOR_COLLECTION_NAME } from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
-import { functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getUsersBySubjects from '../../../utils/getUsersBySubjects';
 import verifyRequest from '../../../utils/verifyRequest';
 import extractPublicTutorData from './utils/extractPublicTutorData';
@@ -22,13 +22,11 @@ const getTutorsBySubjects: FirebaseCallableFunctionHandler<
       "failed-precondition",
       "Could not get students by subjects because provided locale subject ids are not valid format"
     );
-
   const tutors = await getUsersBySubjects({
     localeSubjectIds: data.subjectIds,
     publicDataExtractor: extractPublicTutorData,
     userCollectionName: TUTOR_COLLECTION_NAME,
-    userSubjectsField: "relatedSubjects",
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return { tutors };

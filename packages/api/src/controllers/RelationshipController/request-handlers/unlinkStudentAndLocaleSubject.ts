@@ -30,7 +30,7 @@ const unlinkStudentAndLocaleSubject: ApiUnlinkStudentAndLocaleSubject = async (
     dataPredicate: isPrivateStudentData,
     linkReducer: ({ id }) => id,
     filterPredicate: ({ id: link }) => link !== localeSubjectId,
-    linksPropName: "linkedLocaleSubjects",
+    linksPropName: "relatedSubjects",
     id: uid,
   };
 
@@ -39,7 +39,7 @@ const unlinkStudentAndLocaleSubject: ApiUnlinkStudentAndLocaleSubject = async (
     dataPredicate: isLocaleSubjectData,
     filterPredicate: (link) => link !== uid,
     linkReducer: (link) => link,
-    linksPropName: "linkedStudentIds",
+    linksPropName: "relatedStudents",
     id: localeSubjectId,
   };
 

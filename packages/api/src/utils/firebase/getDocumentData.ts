@@ -23,7 +23,7 @@ export default async function getDocumentData<D>({
   if (!docSnapshot.exists)
     throw new functionsHttps.HttpsError(
       "not-found",
-      "Could not read data because the document doesnt exist on FirestoreAdmin, create one first"
+      "Could not read data because the document doesnt exist on firestoreAdmin, create one first"
     );
 
   // read data

@@ -5,7 +5,7 @@ import { functionsHttps } from './firebase/firebase-admin';
 import groupArrayItems from './groupArrayItems';
 
 interface Props<PublicDataType> {
-  FirestoreAdmin;
+  firestoreAdmin: FirestoreAdmin;
   localeSubjectIds: string[];
   publicDataExtractor: (data: any) => PublicDataType;
   userCollectionName: string;
@@ -14,7 +14,7 @@ interface Props<PublicDataType> {
 export default async function getUsersBySubjects<PublicDataType>({
   localeSubjectIds,
   publicDataExtractor,
-  FirestoreAdmin,
+  firestoreAdmin,
   userCollectionName,
 }: Props<PublicDataType>): Promise<PublicDataType[]> {
   /*
@@ -36,7 +36,7 @@ export default async function getUsersBySubjects<PublicDataType>({
   const groupedLocaleSubjectIds = groupArrayItems(localeSubjectIds, 10);
 
   const filteredUsersPromises = groupedLocaleSubjectIds.map((subjectIdGroup) =>
-    firestore
+    firestoreAdmin
       .collection(userCollectionName)
       .where(userSubjectsField, "array-contains-any", subjectIdGroup)
       .get()

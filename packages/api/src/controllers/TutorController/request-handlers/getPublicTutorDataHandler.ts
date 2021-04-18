@@ -21,7 +21,7 @@ const getPublicTutorData: FirebaseCallableFunctionHandler<
 
   const tutor = await readPublicUserData({
     dataPredicate: isPrivateTutorData,
-    FirestoreAdmin,
+    firestoreAdmin,
     path,
     publicDataExtractor: extractPublicTutorData,
   });

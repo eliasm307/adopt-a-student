@@ -24,14 +24,14 @@ const getSubjectsByCategory: FirebaseCallableFunctionHandler<
   const { categoryId: subjectCategoryId, locale } = data;
 
   const genericSubjectsByCategory = await getGenericSubjectsByCategory({
-    FirestoreAdmin,
+    firestoreAdmin,
     subjectCategoryId,
   });
 
   const localeSubjectPromises = genericSubjectsByCategory.map(
     (genericSubject) =>
       getLocaleSubjectFromGenericSubject({
-        FirestoreAdmin,
+        firestoreAdmin,
         genericSubject,
         locale,
       })

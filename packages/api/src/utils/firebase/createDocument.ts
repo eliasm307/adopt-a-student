@@ -6,7 +6,7 @@ interface Props<D> {
   collectionPath: string;
   data: any;
   dataPredicate: (data: any) => data is D;
-  FirestoreAdmin;
+  firestoreAdmin;
   id: string;
 }
 
@@ -14,7 +14,7 @@ export default async function createDocument<D>({
   dataPredicate,
   id,
   collectionPath,
-  FirestoreAdmin,
+  firestoreAdmin,
   data,
 }: Props<D>): Promise<D> {
   // verify received data
@@ -27,7 +27,7 @@ export default async function createDocument<D>({
   const path = createPath(collectionPath, id);
 
   // check if tutor already exists for this user
-  const docRef = await firestore.doc(path).get();
+  const docRef = await firestoreAdmin.doc(path).get();
 
   if (docRef.exists) {
     console.warn(
@@ -47,7 +47,7 @@ export default async function createDocument<D>({
 
   // create document
   try {
-    await firestore.doc(path).set(data);
+    await firestoreAdmin.doc(path).set(data);
     // return { success: true, data };
     return data;
   } catch (error) {

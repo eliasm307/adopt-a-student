@@ -30,7 +30,7 @@ const createTutor: FirebaseCallableFunctionHandler<
     id: auth.uid,
     data,
     dataPredicate: isPrivateTutorData,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return {
@@ -49,7 +49,7 @@ const createTutor: FirebaseCallableFunctionHandler<
   const documentPath = createPath(TUTORS_COLLECTION_NAME, auth.uid);
 
   // check if tutor already exists for this user
-  const docRef = await firestore.doc(documentPath).get();
+  const docRef = await firestoreAdmin.doc(documentPath).get();
 
   if (docRef.exists)
     // ! dont throw error if there is an existing tutor, its not that deep
@@ -62,7 +62,7 @@ const createTutor: FirebaseCallableFunctionHandler<
 
   // create tutor
   try {
-    await firestore.doc(documentPath).set(data);
+    await firestoreAdmin.doc(documentPath).set(data);
     return { success: true, data };
   } catch (error) {
     throw new functionsHttps.HttpsError(

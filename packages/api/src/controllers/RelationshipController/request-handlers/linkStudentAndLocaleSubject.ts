@@ -3,6 +3,12 @@ import {
   PrivateStudentData, UserSubjectData,
 } from '@adopt-a-student/common';
 
+import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../../../constants';
+import { ApiLinkStudentAndLocaleSubject } from '../../../declarations/interfaces';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
+import verifyRequest from '../../../utils/verifyRequest';
+
 const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
   body,
   context
@@ -26,7 +32,7 @@ const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
     dataPredicate: isPrivateStudentData,
     linkToAdd: data,
     linkReducer: (link) => link.id,
-    linksPropName: "linkedLocaleSubjects",
+    linksPropName: "relatedSubjects",
     id: uid,
   };
 
@@ -35,14 +41,14 @@ const linkStudentAndLocaleSubject: ApiLinkStudentAndLocaleSubject = async (
     dataPredicate: isLocaleSubjectData,
     linkToAdd: uid,
     linkReducer: (link) => link,
-    linksPropName: "linkedStudentIds",
+    linksPropName: "relatedStudents",
     id: data.id,
   };
 
   const [updatedDocument1, updatedDocument2] = await linkDocuments({
     document1Props,
     document2Props,
-    FirestoreAdmin,
+    firestoreAdmin,
   });
 
   return { message: "Success linking documents" };
