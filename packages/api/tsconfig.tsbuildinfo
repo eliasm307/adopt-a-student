@@ -1412,7 +1412,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/firebase/firebase-admin.ts": {
-        "version": "eca9345b0e5f31bcfbe308c6cdf4701ca589cf9a9af3a312d3a6acb065ab267f",
+        "version": "489564c84dd4f2fa92acff31ef366196d3c51b687ad6468c1d2dfcede4d4995f",
         "signature": "6092ff1478c0e0e3e434284b07572412f9050252397bbaaebfb5a86e44959c47",
         "affectsGlobalScope": false
       },
@@ -1886,18 +1886,13 @@
         "signature": "0b9112295d348f3a4e712a97dfc36867ff7816c68280bea697333b3879fc17c2",
         "affectsGlobalScope": false
       },
-      "./tsoa-build/routes.ts": {
-        "version": "9a69298a8ad8728bc57e4acbd6db678a7b058c5efed3b9b111e4885372969515",
-        "signature": "f827e36cd211d156a506672269d4e396d374939b1fac93a8b3bef4a25cc18dc1",
-        "affectsGlobalScope": false
-      },
       "./tsoa-build/swagger-spec.json": {
         "version": "d51a4fe42ae26a5f4df9f3ca64fbead80d1e6431a9447073713c2ecb795f16fa",
         "signature": "e911abcdec9df2e963cc01e97874cfd48d6cbd9cd62539f9916f309e4d1c09ce",
         "affectsGlobalScope": true
       },
       "./src/tsoa-docs/app.ts": {
-        "version": "bcd2b63c7248dce394f8f5246de3bb772ffbb94ea10dae5aca3f7a8281e14b5b",
+        "version": "54466d629be91808636c74c52685f90d26f97d660847d0a7d20281e4f891c23b",
         "signature": "70b6ab08ecdd5cfbc788a1785e4abd20d5c5ce6f3b9ec6d6e6e1c2e44d1a22d3",
         "affectsGlobalScope": false
       },
@@ -1909,6 +1904,11 @@
       "./src/utils/firebase/firebase-functions.test.ts": {
         "version": "5d4dcf32498138b13aa18db2ea0b48ea99c43a3bb4ddd61cd4d8644870995775",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
+        "affectsGlobalScope": false
+      },
+      "./tsoa-build/routes.ts": {
+        "version": "9a69298a8ad8728bc57e4acbd6db678a7b058c5efed3b9b111e4885372969515",
+        "signature": "f827e36cd211d156a506672269d4e396d374939b1fac93a8b3bef4a25cc18dc1",
         "affectsGlobalScope": false
       },
       "../../node_modules/jest-diff/build/cleanupsemantic.d.ts": {
@@ -37026,7 +37026,6 @@
         "./node_modules/@types/node/wasi.d.ts",
         "./node_modules/@types/node/worker_threads.d.ts",
         "./node_modules/@types/node/zlib.d.ts",
-        "./tsoa-build/routes.ts",
         "./tsoa-build/swagger-spec.json"
       ],
       "./src/tsoa-docs/server.ts": [
@@ -69997,6 +69996,14 @@
         1
       ],
       [
+        "../../node_modules/base64-js/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/buffer/index.d.ts",
+        1
+      ],
+      [
         "../../node_modules/event-target-shim/index.d.ts",
         1
       ],
@@ -70350,6 +70357,10 @@
       ],
       [
         "../../node_modules/gtoken/build/src/index.d.ts",
+        1
+      ],
+      [
+        "../../node_modules/ieee754/index.d.ts",
         1
       ],
       [
@@ -71018,6 +71029,34 @@
       ],
       [
         "./src/utils/verifyrequest.ts",
+        1
+      ],
+      [
+        "./swagger-ui/absolute-path.js",
+        1
+      ],
+      [
+        "./swagger-ui/index.js",
+        1
+      ],
+      [
+        "./swagger-ui/swagger-ui-bundle.js",
+        1
+      ],
+      [
+        "./swagger-ui/swagger-ui-es-bundle-core.js",
+        1
+      ],
+      [
+        "./swagger-ui/swagger-ui-es-bundle.js",
+        1
+      ],
+      [
+        "./swagger-ui/swagger-ui-standalone-preset.js",
+        1
+      ],
+      [
+        "./swagger-ui/swagger-ui.js",
         1
       ],
       [

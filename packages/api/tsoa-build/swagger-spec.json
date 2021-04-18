@@ -38,7 +38,7 @@
 					"userName"
 				],
 				"type": "object",
-				"additionalProperties": true
+				"additionalProperties": false
 			},
 			"GetStudentsBySubjectsResult": {
 				"properties": {
@@ -53,7 +53,7 @@
 					"data"
 				],
 				"type": "object",
-				"additionalProperties": true
+				"additionalProperties": false
 			},
 			"GetStudentsBySubjectsBody": {
 				"properties": {
@@ -68,7 +68,7 @@
 					"localeSubjectIds"
 				],
 				"type": "object",
-				"additionalProperties": true
+				"additionalProperties": false
 			}
 		},
 		"securitySchemes": {}

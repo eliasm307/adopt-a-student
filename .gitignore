@@ -18,6 +18,8 @@ lib/
 build/
 docs/
 
+*tsconfig.tsbuildinfo
+
 # Runtime data
 pids
 *.pid

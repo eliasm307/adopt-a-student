@@ -1,6 +1,6 @@
 {
   "_entryFile": "src/app.ts",
-  "noImplicitAdditionalProperties": "ignore",
+  "noImplicitAdditionalProperties": "throw-on-extras",
   "controllerPathGlobs": [ "src/controllers/*.ts" ],
   "spec": {
     "specFileBaseName": "swagger-spec",
