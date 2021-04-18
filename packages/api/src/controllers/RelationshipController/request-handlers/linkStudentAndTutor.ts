@@ -3,11 +3,11 @@ import {
   PrivateTutorData,
 } from '@adopt-a-student/common';
 
-import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../constants';
-import { ApiLinkStudentAndTutor } from '../declarations/interfaces';
-import { functionsHttps } from '../utils/firebase/firebase-admin';
-import linkDocuments, { AddDocumentLinkProps } from '../utils/links/linkDocuments';
-import verifyRequest from '../utils/verifyRequest';
+import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
+import { ApiLinkStudentAndTutor } from '../../../declarations/interfaces';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
+import verifyRequest from '../../../utils/verifyRequest';
 
 const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
   const { uid } = verifyRequest(body, context);
@@ -106,7 +106,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     id: studentId,
     linkToAdd: { id: tutorId },
     linkReducer: (link) => link.id,
-    linksPropName: "linkedTutors",
+    linksPropName: "relatedTutors",
   };
 
   const document2Props: AddDocumentLinkProps<
@@ -118,7 +118,7 @@ const linkStudentAndTutor: ApiLinkStudentAndTutor = async (body, context) => {
     id: tutorId,
     linkToAdd: { id: studentId },
     linkReducer: (link) => link.id,
-    linksPropName: "linkedStudents",
+    linksPropName: "relatedStudents",
   };
 
   const [updatedStudent, updatedTutor] = await linkDocuments({

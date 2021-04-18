@@ -7,7 +7,7 @@ import {
   GENERIC_SUBJECT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME,
 } from '../../../constants';
 import { ApiLinkGenericSubjectAndSubjectCategory } from '../../../declarations/interfaces';
-import { functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
@@ -31,7 +31,7 @@ const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCateg
     dataPredicate: isGenericSubjectData,
     linkToAdd: subjectCategoryId,
     linkReducer: (link) => link,
-    linksPropName: "linkedGenericSubjectIds",
+    linksPropName: "relatedSubjects",
     id: genericSubjectId,
   };
 
@@ -43,7 +43,7 @@ const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCateg
     dataPredicate: isGenericSubjectCategoryData,
     linkToAdd: genericSubjectId,
     linkReducer: (link) => link,
-    linksPropName: "linkedGenericSubjectIds",
+    linksPropName: "relatedSubjects",
     id: subjectCategoryId,
   };
 
@@ -52,7 +52,6 @@ const linkGenericSubjectAndSubjectCategory: ApiLinkGenericSubjectAndSubjectCateg
     document2Props,
     firestoreAdmin,
   });
-
   return { message: "Success linking documents" };
 };
 

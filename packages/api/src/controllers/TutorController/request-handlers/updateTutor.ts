@@ -5,7 +5,7 @@ import {
 import { TUTOR_COLLECTION_NAME } from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import tutorDataUpdater from '../../../utils/data-updaters/tutorDataUpdater';
-import { functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
 
@@ -40,5 +40,4 @@ const updateTutor: FirebaseCallableFunctionHandler<
 
   return { result: updatedData };
 };
-
 export default updateTutor;

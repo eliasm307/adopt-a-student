@@ -5,6 +5,7 @@ import {
 import { TUTOR_COLLECTION_NAME } from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import createPath from '../../../utils/createPath';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import readPrivateUserData from '../../../utils/readPrivateUserData';
 import verifyRequest from '../../../utils/verifyRequest';
 
@@ -13,7 +14,6 @@ const getPrivateTutorData: FirebaseCallableFunctionHandler<
   GetTutorResponseBody
 > = async (_, context) => {
   const auth = verifyRequest(_, context);
-
   const path = createPath(TUTOR_COLLECTION_NAME, auth.uid);
 
   const tutor = await readPrivateUserData({

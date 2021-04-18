@@ -1,5 +1,13 @@
 import { GenericSubjectData, isGenericSubjectData } from '@adopt-a-student/common';
 
+import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../../constants';
+import { ApiLinkGenericSubjects } from '../../../declarations/interfaces';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
+import verifyRequest from '../../../utils/verifyRequest';
+
+// todo firestoreAdmin should be a dependency through  props
+
 const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
   const { uid } = verifyRequest(body, context);
 
@@ -19,7 +27,7 @@ const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
     linkReducer: (link) => link,
-    linksPropName: "linkedGenericSubjectIds",
+    linksPropName: "relatedSubjects",
   };
 
   const document1Props: AddDocumentLinkProps<GenericSubjectData, string> = {
@@ -42,5 +50,4 @@ const linkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
 
   return { message: "Success linking documents" };
 };
-
 export default linkGenericSubjects;

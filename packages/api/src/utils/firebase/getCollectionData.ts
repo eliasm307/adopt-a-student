@@ -4,7 +4,7 @@ import { functionsHttps } from "./firebase-admin";
 interface Props<D> {
   collectionPath: string;
   dataPredicate: (data: any) => data is D;
-  firestoreAdmin;
+  firestoreAdmin: FirestoreAdmin;
 }
 
 export default async function getCollectionData<D>({

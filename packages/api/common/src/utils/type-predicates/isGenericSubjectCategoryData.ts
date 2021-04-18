@@ -7,12 +7,7 @@ export function isGenericSubjectCategoryData(
 ): data is GenericSubjectCategoryData {
   if (typeof data !== "object") return false;
 
-  const {
-    id,
-    relatedSubjects: linkedGenericSubjectIds,
-    locales,
-    relatedSubjects,
-  } = data as GenericSubjectCategoryData;
+  const { id, locales, relatedSubjects } = data as GenericSubjectCategoryData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
   // ts will throw an error to update the predicate as this object will be invalid
@@ -25,8 +20,8 @@ export function isGenericSubjectCategoryData(
 
   const hasId = typeof id === "string" && id;
 
-  const hasGenericSubjectIds = Array.isArray(genericSubjectIds);
-  const hasLocaleSubjects = typeof localeSubjectCategories === "object";
+  const hasGenericSubjectIds = Array.isArray(relatedSubjects);
+  const hasLocaleSubjects = typeof locales === "object";
 
   if (!(hasId && hasLocaleSubjects && hasGenericSubjectIds)) {
     console.warn(
@@ -39,20 +34,18 @@ export function isGenericSubjectCategoryData(
 
   // ? check individual sub locale subjects?
 
-  for (const id of genericSubjectIds) {
+  for (const id of relatedSubjects) {
     if (typeof id !== "string") {
       console.warn(
         __filename,
         "Some of the provided generic subject ids are not strings",
-        { data, genericSubjectIds }
+        { data, relatedSubjects }
       );
       return false;
     }
   }
 
-  for (const [localeCode, localeSubjectCategory] of Object.entries(
-    localeSubjectCategories
-  )) {
+  for (const [localeCode, localeSubjectCategory] of Object.entries(locales)) {
     if (
       typeof localeSubjectCategory === "object" &&
       !isLocaleSubjectCategoryData(localeSubjectCategory)

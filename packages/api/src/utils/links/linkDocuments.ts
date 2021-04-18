@@ -1,3 +1,4 @@
+import { FirestoreAdmin } from '../../declarations/interfaces';
 import createLinkAdder from './createLinkAdder';
 import { hasLinkToAdd } from './interfaces';
 import { documentLinksShouldBeAdded as linksShouldBeAdded } from './linksShouldBeMutated';
@@ -10,7 +11,7 @@ export interface AddDocumentLinkProps<D, L>
 interface Props<D1, L1, D2, L2> {
   document1Props: AddDocumentLinkProps<D1, L1>;
   document2Props: AddDocumentLinkProps<D2, L2>;
-  firestoreAdmin;
+  firestoreAdmin: FirestoreAdmin;
 }
 export default async function linkDocuments<D1, L1, D2, L2>(
   props: Props<D1, L1, D2, L2>

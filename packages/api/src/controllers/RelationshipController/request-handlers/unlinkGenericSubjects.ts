@@ -1,5 +1,11 @@
 import { GenericSubjectData, isGenericSubjectData } from '@adopt-a-student/common';
 
+import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../../constants';
+import { ApiLinkGenericSubjects } from '../../../declarations/interfaces';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
+import verifyRequest from '../../../utils/verifyRequest';
+
 const unlinkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
   const { uid } = verifyRequest(body, context);
 
@@ -19,7 +25,7 @@ const unlinkGenericSubjects: ApiLinkGenericSubjects = async (body, context) => {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
     linkReducer: (link) => link,
-    linksPropName: "linkedGenericSubjectIds",
+    linksPropName: "relatedSubjects",
   };
 
   const document1Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {

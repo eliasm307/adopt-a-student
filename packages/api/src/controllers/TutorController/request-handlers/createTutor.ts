@@ -5,7 +5,7 @@ import {
 import { TUTOR_COLLECTION_NAME } from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
-import { functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 
 const createTutor: FirebaseCallableFunctionHandler<
@@ -36,7 +36,6 @@ const createTutor: FirebaseCallableFunctionHandler<
   return {
     tutor,
   };
-
   // todo delete
   /*
   // verify received data

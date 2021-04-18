@@ -5,7 +5,7 @@ import {
 
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
 import { ApiUnlinkStudentAndTutor } from '../../../declarations/interfaces';
-import { functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
@@ -61,7 +61,6 @@ const unlinkStudentAndTutor: ApiUnlinkStudentAndTutor = async (
     document2Props,
     firestoreAdmin,
   });
-
   return { message: "Success" };
 };
 

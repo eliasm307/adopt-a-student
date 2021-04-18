@@ -3,7 +3,7 @@ import {
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
-import { functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
 import getLocaleSubjectFromGenericSubject from '../utils/getLocaleSubjectFromGenericSubject';

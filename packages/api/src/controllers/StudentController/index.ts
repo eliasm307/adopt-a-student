@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/require-await */
 import { Body, Controller, Header, Post, Route } from 'tsoa';
 
 import {
@@ -5,8 +6,8 @@ import {
   GetTutorsBySubjectsRequestBody, GetTutorsBySubjectsResponseBody,
 } from '@adopt-a-student/common';
 
-import getStudentsBySubjectsHandler from '../../request-handlers/getStudentsBySubjectsHandler';
 import getTutorsBySubjects from '../TutorController/request-handlers/getTutorsBySubjectsHandler';
+import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
 
 /** Provided automatically by Firebase */
 type FirebaseCallableFunctionContext = any;

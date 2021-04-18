@@ -2,7 +2,7 @@ import { isGenericSubjectCategoryData, LocaleSubjectCategoryData } from '@adopt-
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
 import { ApiGetSubjectCategoriesHandler } from '../../../declarations/interfaces';
-import { functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getCollectionData from '../../../utils/firebase/getCollectionData';
 import verifyRequest from '../../../utils/verifyRequest';
 
