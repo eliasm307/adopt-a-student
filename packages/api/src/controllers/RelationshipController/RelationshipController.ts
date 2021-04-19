@@ -59,6 +59,12 @@ export class RelationshipController extends Controller {
   static callableNamesMap = arrayToRecord([...exportedNames]);
   static typeName = "Relationships";
 
+  // todo add this to other controllers?
+  // should not be instantiable as the methods are stateless
+  private constructor() {
+    super();
+  }
+
   /**
    * Retreives data about a tutor user. If the tutor user owns the data then they get all the data, otherwise it is restricted to 'public' data.
    * @param body
