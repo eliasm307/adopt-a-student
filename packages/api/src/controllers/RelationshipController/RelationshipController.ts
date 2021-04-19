@@ -59,7 +59,7 @@ export class RelationshipController extends Controller {
   static callableNamesMap = arrayToRecord([...exportedNames]);
   static typeName = "Relationships";
 
-  // todo add this to other controllers?
+  // todo add this to other controllers? or should controllers be instantiable with firebaseAdmin dependency injected?
   // should not be instantiable as the methods are stateless
   private constructor() {
     super();
