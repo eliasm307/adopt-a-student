@@ -1,6 +1,5 @@
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
-/* eslint-disable @typescript-eslint/require-await */
 import {
   LinkStudentAndSubjectRequestBody, LinkStudentAndSubjectResponseBody,
   LinkStudentAndTutorRequestBody, LinkStudentAndTutorResponseBody,
@@ -52,7 +51,7 @@ const exportedNames = [
   unlinkStudentAndTutor,
 ] as const;
 
-// hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
+// tsoa hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
 @Route("/")
 export class RelationshipController extends Controller {

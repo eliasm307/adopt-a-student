@@ -1,5 +1,3 @@
-import { ObjectMap } from '@adopt-a-student/common';
-
 import { FirestoreAdmin } from '../../declarations/interfaces';
 import getDocumentData from '../firebase/getDocumentData';
 import { hasLinkMutator } from './interfaces';
@@ -33,10 +31,7 @@ interface MutateDocumentLinkProps<D1, L1, D2, L2> {
 
 /** Util to reduce an array of links to an object map */
 const createLinksReducer = <L>(linkReducer: (link: L) => string) => {
-  return (
-    acc: ObjectMap<string, boolean>,
-    link: L
-  ): ObjectMap<string, boolean> => {
+  return (acc: Record<string, boolean>, link: L): Record<string, boolean> => {
     const id = linkReducer(link);
     return { ...acc, [id]: true };
   };
@@ -57,6 +52,12 @@ export default async function mutateDocumentLink<D1, L1, D2, L2>(
     getDocumentData({ ...document1Props, firestoreAdmin }),
     getDocumentData({ ...document2Props, firestoreAdmin }),
   ]);
+
+  // assert documents exist
+  if (!document1Data || !document2Data)
+    throw Error(
+      "Could not inspect document links, one or more of the documents doesnt exist"
+    );
 
   // get pointers to link arrays in documents
   const document1Links = document1Data[document1Props.linksPropName];
