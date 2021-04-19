@@ -1,9 +1,15 @@
 import { navigate } from 'gatsby';
 
+import { RouteComponentProps } from '@reach/router';
+
 const isLoggedIn = () => true;
 
-const PrivateRoute = ({ component: Component, location, ...rest }) => {
-  if (!isLoggedIn() && location.pathname !== `/app/login`) {
+const PrivateRoute = ({
+  component: Component,
+  location,
+  ...rest
+}: RouteComponentProps<any>) => {
+  if (!isLoggedIn() && location?.pathname !== `/app/login`) {
     navigate("/app/login");
     return null;
   }
