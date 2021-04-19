@@ -14,3 +14,28 @@ exports.onCreatePage = async ({ page, actions }) => {
     createPage(page);
   }
 };
+
+const path = require("path");
+
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    // this was supposed to load react
+    /*
+    plugins: [
+      new webpack.ProvidePlugin({
+        React: "react",
+      }),
+    ],
+    */
+    resolve: {
+      /*
+      alias: {
+        path: require.resolve("path-browserify"),
+      },
+      */
+      fallback: {
+        fs: false,
+      },
+    },
+  });
+};

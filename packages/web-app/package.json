@@ -6,11 +6,13 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "prebuild": "rm -rf public && gatsby clean",
-    "develop": "gatsby develop",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "clean": "gatsby clean",
+    "prebuild": "gatsby clean",
+    "develop": "gatsby develop --open",
+    "dev": "yarn start",
+    "start": "yarn develop",
+    "prestart": "yarn clean",
+    "serve": "yarn build && gatsby serve",
+    "clean": "rm -rf public && gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },

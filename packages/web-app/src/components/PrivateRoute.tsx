@@ -1,4 +1,5 @@
 import { navigate } from 'gatsby';
+import React from 'react';
 
 import { RouteComponentProps } from '@reach/router';
 

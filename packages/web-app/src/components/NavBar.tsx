@@ -1,4 +1,5 @@
 import { Link, navigate } from 'gatsby';
+import React from 'react';
 
 import { getUser, isLoggedIn, logout } from '../services/auth';
 
