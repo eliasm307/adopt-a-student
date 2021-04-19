@@ -1,4 +1,4 @@
 [build]
   command = "yarn && yarn build"
   publish = "public"
-  ignore = "git diff --quiet HEAD^ HEAD ./" # do not build if no changes
+  ignore = "git diff --quiet HEAD^ HEAD ./" # do not build if no changes to this package
