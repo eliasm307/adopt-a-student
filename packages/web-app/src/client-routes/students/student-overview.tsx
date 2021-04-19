@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { getUser } from '../services/auth';
+import { getUser } from '../../services/auth';
+
+// ! shows private data
 
 const Profile = () => (
   <>
