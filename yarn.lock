@@ -6368,7 +6368,7 @@ engine.io@~4.1.0:
     engine.io-parser "~4.0.0"
     ws "~7.4.2"
 
-enhanced-resolve@^5.8.0:
+enhanced-resolve@^5.7.0, enhanced-resolve@^5.8.0:
   version "5.8.0"
   resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-5.8.0.tgz#d9deae58f9d3773b6a111a5a46831da5be5c9ac0"
   integrity sha512-Sl3KRpJA8OpprrtaIswVki3cWPiPKxXuFxJXBp+zNb6s6VwNWwFRUdtmzd2ReUut8n+sCPx7QCtQ7w5wfJhSgQ==
@@ -7617,6 +7617,13 @@ gatsby-plugin-page-creator@^3.3.0:
     gatsby-telemetry "^2.3.0"
     globby "^11.0.2"
     lodash "^4.17.21"
+
+gatsby-plugin-tsconfig-paths@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-tsconfig-paths/-/gatsby-plugin-tsconfig-paths-1.0.3.tgz#f652b250c08bf5654c9ceec12e55eedf56528a07"
+  integrity sha512-uALyXpLHT9tujMd84q5Pbw0iOnKcw7NTdlk/9CG6wtnkkDdl++B5ioppv+xMMzi5LHTDVmY8z3CNumlsTpvL6A==
+  dependencies:
+    tsconfig-paths-webpack-plugin "^3.2.0"
 
 gatsby-plugin-typescript@^3.3.0:
   version "3.3.0"
@@ -15609,6 +15616,15 @@ ts-pnp@^1.1.6:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
+
+tsconfig-paths-webpack-plugin@^3.2.0:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/tsconfig-paths-webpack-plugin/-/tsconfig-paths-webpack-plugin-3.5.1.tgz#e4dbf492a20dca9caab60086ddacb703afc2b726"
+  integrity sha512-n5CMlUUj+N5pjBhBACLq4jdr9cPTitySCjIosoQm0zwK99gmrcTGAfY9CwxRFT9+9OleNWXPRUcxsKP4AYExxQ==
+  dependencies:
+    chalk "^4.1.0"
+    enhanced-resolve "^5.7.0"
+    tsconfig-paths "^3.9.0"
 
 tsconfig-paths@^3.9.0:
   version "3.9.0"

@@ -1,9 +1,10 @@
-import { ComponentChildren, createContext } from 'preact';
-import { useEffect, useState } from 'preact/hooks';
+import { auth, FireBaseUser } from 'firebase-utils';
 
-import { auth, FireBaseUser } from '@quirk-a-bot/firebase-utils';
+import { BasicResponseData } from '@adopt-a-student/common';
 
 export const UserContext = createContext(null as FireBaseUser | null);
+
+const data: BasicResponseData;
 
 interface Props {
   children: ComponentChildren;

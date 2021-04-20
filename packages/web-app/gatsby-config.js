@@ -7,5 +7,5 @@
 module.exports = {
   flags: { FAST_DEV: true },
   /* Your site config here */
-  plugins: [],
+  plugins: [`gatsby-plugin-tsconfig-paths`],
 };
