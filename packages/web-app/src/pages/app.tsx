@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Router } from '@reach/router';
 
-import Login from '../client-routes/general/login';
+import Login from '../client-routes/general/sign-in';
 import Profile from '../client-routes/students/profile';
 import PrivateRoute from '../components/PrivateRoute';
 import Layout from '../layouts/DefaultLayout';

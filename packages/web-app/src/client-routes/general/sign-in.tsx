@@ -8,13 +8,41 @@ const isLoggedIn = () => true;
 const Login = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState(null);
+
+  const signInWithEmailAndPasswordHandler = (
+    event: JSX.TargetedMouseEvent<HTMLButtonElement>,
+    _email: string,
+    _password: string
+  ): void => {
+    event.preventDefault();
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     handleLogin({ userName, password });
   };
 
-  const handleUpdate = (event) => {};
+  const onChangeHandler = (
+    event: TargetedEvent<HTMLInputElement, Event>
+  ): void => {
+    const { currentTarget } = event;
+
+    if (currentTarget instanceof EventTarget) {
+      const { name, value } = currentTarget;
+      switch (name) {
+        case "userEmail":
+          return setEmail(value as string);
+        case "userPassword":
+          return setPassword(value as string);
+        default:
+          return console.error(`Unknown html event target "${name}"`);
+      }
+    } else {
+      console.warn("Unknown event", { event });
+    }
+  };
 
   if (isLoggedIn()) {
     navigate(`/app/profile`);
