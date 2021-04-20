@@ -1,23 +1,23 @@
-import { auth, FireBaseUser } from 'firebase-utils';
+import React, { createContext, useEffect, useState } from 'react';
+import { UserAuth } from 'src/declarations/interfaces';
 
-import { BasicResponseData } from '@adopt-a-student/common';
+import { auth } from '../utils/firebase-client';
 
-export const UserContext = createContext(null as FireBaseUser | null);
-
-const data: BasicResponseData;
+export const UserContext = createContext(null as UserAuth | null);
 
 interface Props {
-  children: ComponentChildren;
+  children: React.ReactChildren;
 }
 
 export default function UserProvider({ children }: Props) {
-  const [user, setUser] = useState(null as FireBaseUser | null);
+  const [user, setUser] = useState(null as UserAuth | null);
 
   // on mount, add auth state listener
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
       console.log(`User state changed to:`, { userAuth });
-      setUser(userAuth);
+
+      setUser({ uid: userAuth.uid });
     });
   }, []);
 

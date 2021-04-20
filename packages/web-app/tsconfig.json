@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "paths": { "@adopt-a-student/common": ["../api/common/src"] }
+    "paths": { "@adopt-a-student/common": ["../api/common/src"] },
+    "jsx": "react",
+    "esModuleInterop": true
   }
 }

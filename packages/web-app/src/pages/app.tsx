@@ -3,9 +3,11 @@ import React from 'react';
 import { Router } from '@reach/router';
 
 import Login from '../client-routes/general/sign-in';
-import Profile from '../client-routes/students/profile';
+import StudentProfile from '../client-routes/student/profile';
 import PrivateRoute from '../components/PrivateRoute';
+import PublicRoute from '../components/PublicRoute';
 import Layout from '../layouts/DefaultLayout';
+import NotFound from '../pages/404';
 
 // todo add router switch to match exact paths
 // todo add 404 page or 404 redirect to home?
@@ -14,8 +16,9 @@ import Layout from '../layouts/DefaultLayout';
 const App = () => (
   <Layout>
     <Router>
-      <PrivateRoute path='/app/profile' component={Profile} />
-      <PrivateRoute path='/app/login' component={Login} />
+      <PublicRoute default component={NotFound} />
+      <PublicRoute path='/app/login' component={Login} />
+      <PrivateRoute path='/app/profile' component={StudentProfile} />
     </Router>
   </Layout>
 );
