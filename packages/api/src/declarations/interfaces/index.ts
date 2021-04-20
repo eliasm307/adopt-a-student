@@ -27,6 +27,7 @@ interface FirestoreSchema {
   })[];
   /** // todo move to sub collecitons inside generic subjects */
   localeSubjects: LocaleSubjectData[];
+  // ? would it be better if students and teachers were in one collection, then they have props to describe their roles and data associated with their role, ie a user can be both tutor and student. For the current setup, if a user wanted to be both then those profiles are unrelated, is this a good thing? what, if any data needs to be shared?
   students: PrivateStudentData[];
   subjectCategories: GenericSubjectCategoryData[];
   tutors: PrivateTutorData[];

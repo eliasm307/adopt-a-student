@@ -2,6 +2,8 @@ import React from 'react';
 
 import { getUser } from '../../services/auth';
 
+// todo shows public data
+
 // ! shows private data
 
 const Profile = () => (

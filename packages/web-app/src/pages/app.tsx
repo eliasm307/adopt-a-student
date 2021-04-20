@@ -2,10 +2,14 @@ import React from 'react';
 
 import { Router } from '@reach/router';
 
-import Login from '../client-routes/login';
-import Profile from '../client-routes/profile';
+import Login from '../client-routes/general/login';
+import Profile from '../client-routes/students/profile';
 import PrivateRoute from '../components/PrivateRoute';
 import Layout from '../layouts/DefaultLayout';
+
+// todo add router switch to match exact paths
+// todo add 404 page or 404 redirect to home?
+// todo add a tutor app and user app which defines what routes are available to each
 
 const App = () => (
   <Layout>
