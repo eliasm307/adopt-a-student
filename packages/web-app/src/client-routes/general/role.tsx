@@ -1,3 +1,5 @@
+// users choose what role they want to use the app in for this session
+
 import React from 'react';
 
 import { getUser } from '../../services/auth';

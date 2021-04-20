@@ -1,4 +1,5 @@
 import React from 'react';
+import StudentApp from 'src/client-routes/student';
 
 import { Router } from '@reach/router';
 
@@ -18,7 +19,8 @@ const App = () => (
     <Router>
       <PublicRoute default component={NotFound} />
       <PublicRoute path='/app/login' component={Login} />
-      <PrivateRoute path='/app/profile' component={StudentProfile} />
+      <PublicRoute path='/app/login' component={Login} />
+      <PrivateRoute path='/app' component={StudentApp} />
     </Router>
   </Layout>
 );

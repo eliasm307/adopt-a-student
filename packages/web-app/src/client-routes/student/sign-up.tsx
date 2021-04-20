@@ -2,3 +2,9 @@
 // ie they can leave the site and it wont break their experience when they come back
 //
 // todo use xstate to manage states
+
+import React from 'react';
+
+const SignUp = () => <div>student signup</div>;
+
+export default SignUp;
