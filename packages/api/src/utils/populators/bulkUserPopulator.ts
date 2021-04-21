@@ -1,5 +1,6 @@
 import faker from 'faker';
 
+import promiseAllSettledAndLog from '../../../common/src/utils/promiseAllSettledAndLog';
 import createDocument, { CreateDocumentProps } from '../firebase/createDocument';
 import newGuid from '../newGuid';
 
@@ -37,21 +38,7 @@ const bulkUserPopulator = async <D>(props: Props<D>) => {
     });
   }
 
-  const [...results] = await Promise.allSettled(promises);
-
-  let resolvedCount = 0;
-
-  results.forEach((result) => {
-    if (result) resolvedCount++;
-  });
-
-  const rejectedCount = results.length - resolvedCount;
-
-  console.log(
-    __filename,
-    `${resolvedCount}/${results.length} resolved, ${rejectedCount} rejected`
-  );
-  return results;
+  return promiseAllSettledAndLog(promises);
 };
 
 export default bulkUserPopulator;

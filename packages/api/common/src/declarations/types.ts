@@ -2,7 +2,7 @@ import { localeCodes } from '../utils/locales';
 
 export type LocaleCode = typeof localeCodes[number]; // todo add more
 
-export type Country = "United Kingdom" | "Brazil" | "Cote d'Ivoire"; // todo add more
+export type Country = "United Kingdom" | "Brazil" | "Cote d'Ivoire" | string; // todo add more
 
 // ? use Record type instead?
 /*
