@@ -5,6 +5,7 @@ import {
 } from '@adopt-a-student/common';
 
 import { localeCodes } from '../../../common/src/utils/locales';
+import promiseAllSettledAndLog from '../../../common/src/utils/promiseAllSettledAndLog';
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../constants';
 import createGenericSubject from '../../controllers/SubjectController/request-handlers/createGenericSubjectHandler';
 import { createLocaleSubjectId } from '../../controllers/SubjectController/utils/localeSubjectId';
@@ -54,5 +55,5 @@ export default async function bulkCreateSubjectsForAllLocales(props: Props) {
     promises.push(localeSubjectPromise);
   });
 
-  const result = await Promise.allSettled(promises);
+  return promiseAllSettledAndLog(promises);
 }

@@ -22,14 +22,21 @@ const localesUsed = locales.all.filter((locale) =>
 
 // populate countries set for each locale
 localesUsed.forEach((locale) => {
-  if (locale.location)
+  console.warn({ locale, localeCountries });
+
+  if (locale.location) {
+    if (!localeCountries[locale["iso639-1"] as LocaleCode])
+      localeCountries[locale["iso639-1"] as LocaleCode] = new Set<string>();
+
     localeCountries[locale["iso639-1"] as LocaleCode].add(locale.location);
+  }
 });
 
+/*
 console.log(__filename, "Resulting locale data", {
   localeCountries,
-  localesUsed,
 });
+*/
 // todo implement this such that any required locale information is exported
 /*
 

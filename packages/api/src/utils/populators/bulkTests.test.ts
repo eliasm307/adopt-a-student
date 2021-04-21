@@ -1,6 +1,7 @@
 import { isPrivateStudentData, isPrivateTutorData } from '../../../common/src';
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../constants';
 import { firestoreAdmin } from '../firebase/firebase-admin';
+import bulkCreateSubjectsForAllLocales from './bulkCreateSubjectsForAllLocales';
 import bulkUserPopulator from './bulkUserPopulator';
 import createFakeTutorData from './createFakeStudentData';
 import createFakeStudentData from './createFakeTutorData';
@@ -31,4 +32,14 @@ describe("bulkUserPopulator", () => {
   }, 9999);
 });
 
-export {};
+describe("bulkCreateSubjectsForAllLocales", () => {
+  it("can generate multiple subjects and locale subjects", () => {
+    const result = bulkCreateSubjectsForAllLocales({
+      genericSubjectData: {
+        internalName: "Maths",
+        relatedCategories: [],
+        relatedSubjects: [],
+      },
+    });
+  });
+});
