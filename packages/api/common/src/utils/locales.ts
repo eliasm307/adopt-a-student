@@ -9,6 +9,27 @@ export const localeCodes = ["ms", "en", "fr", "pt"] as const;
 
 export const getLocaleData = (locale: LocaleCode) => locales.getByTag(locale);
 
+export const localeCountries: Record<LocaleCode, Set<string>> = {} as Record<
+  LocaleCode,
+  Set<string>
+>;
+
+const localeCodesSet = new Set(localeCodes);
+
+const localesUsed = locales.all.filter((locale) =>
+  localeCodesSet.has(locale["iso639-1"] as LocaleCode)
+);
+
+// populate countries set for each locale
+localesUsed.forEach((locale) => {
+  if (locale.location)
+    localeCountries[locale["iso639-1"] as LocaleCode].add(locale.location);
+});
+
+console.log(__filename, "Resulting locale data", {
+  localeCountries,
+  localesUsed,
+});
 // todo implement this such that any required locale information is exported
 /*
 

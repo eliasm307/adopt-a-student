@@ -66,6 +66,7 @@ export interface UserSubjectData {
 export interface GenericSubjectData extends Entity {
   readonly id: GenericSubjectId;
 
+  internalName: string;
   /** The categories this generic subject belongs to */
   relatedCategories: SubjectCategoryId[];
   /** Links to other relevant subjects a user might be interested in
