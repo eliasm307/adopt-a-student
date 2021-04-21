@@ -17,25 +17,37 @@ exports.onCreatePage = async ({ page, actions }) => {
 
 const path = require("path");
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ actions, stage, loaders }) => {
+  if (stage === "build-html" || stage === "develop-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /firebase/,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
+  }
+  /*
   actions.setWebpackConfig({
     // this was supposed to load react
-    /*
+
     plugins: [
       new webpack.ProvidePlugin({
         React: "react",
       }),
     ],
-    */
+
     resolve: {
-      /*
       alias: {
         path: require.resolve("path-browserify"),
       },
-      */
+
       fallback: {
         fs: false,
       },
     },
-  });
+  });*/
 };

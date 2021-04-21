@@ -12,7 +12,7 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const signInWithEmailAndPasswordHandler = (
-    event: JSX.TargetedMouseEvent<HTMLButtonElement>,
+    event: React.ChangeEvent<HTMLButtonElement>,
     _email: string,
     _password: string
   ): void => {
@@ -25,7 +25,7 @@ const Login = () => {
   };
 
   const onChangeHandler = (
-    event: TargetedEvent<HTMLInputElement, Event>
+    event: React.ChangeEvent<HTMLInputElement>
   ): void => {
     const { currentTarget } = event;
 
@@ -60,11 +60,11 @@ const Login = () => {
       >
         <label>
           Username
-          <input type='text' name='username' onChange={handleUpdate} />
+          <input type='text' name='username' onChange={onChangeHandler} />
         </label>
         <label>
           Password
-          <input type='password' name='password' onChange={handleUpdate} />
+          <input type='password' name='password' onChange={onChangeHandler} />
         </label>
         <input type='submit' value='Log In' />
       </form>

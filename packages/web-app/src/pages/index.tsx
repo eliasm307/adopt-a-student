@@ -1,15 +1,18 @@
-import { Link } from 'gatsby';
+import { Link, navigate } from 'gatsby';
 import React from 'react';
+import useAuthData from 'src/hooks/useAuthData';
 
 import Layout from '../layouts/DefaultLayout';
-import { getUser, isLoggedIn } from '../services/auth';
 
 export default function Home() {
+  const user = useAuthData();
+
+  if (user && typeof window !== "undefined") navigate("/app");
   return (
     <Layout>
-      <h1>Hello {isLoggedIn() ? getUser().name : "world"}!</h1>
+      <h1>Hello {user ? user.displayName : "world"}!</h1>
       <p>
-        {isLoggedIn() ? (
+        {user ? (
           <>
             You are logged in, so check your{" "}
             <Link to='/app/profile'>profile</Link>

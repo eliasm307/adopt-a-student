@@ -15,6 +15,7 @@ import SignUp from './sign-up';
 
 const StudentApp = () => (
   <Layout>
+    <div>Student App</div>
     <Router>
       <PrivateRoute path='/' component={Home} />
       <PrivateRoute path='/profile' component={Profile} />

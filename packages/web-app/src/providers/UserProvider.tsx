@@ -24,7 +24,7 @@ export default function UserProvider({ children }: Props) {
     auth.onAuthStateChanged((userAuth) => {
       console.log(`User state changed to:`, { userAuth });
 
-      setUser({ uid: userAuth.uid });
+      setUser(userAuth);
     });
   }, []);
 
