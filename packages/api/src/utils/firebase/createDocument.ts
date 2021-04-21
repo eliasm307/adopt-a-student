@@ -2,7 +2,7 @@ import { FirestoreAdmin } from "../../declarations/interfaces";
 import createPath from "../createPath";
 import { functionsHttps } from "./firebase-admin";
 
-interface Props<D> {
+export interface CreateDocumentProps<D> {
   collectionPath: string;
   data: any;
   dataPredicate: (data: any) => data is D;
@@ -16,7 +16,7 @@ export default async function createDocument<D>({
   collectionPath,
   firestoreAdmin,
   data,
-}: Props<D>): Promise<D> {
+}: CreateDocumentProps<D>): Promise<D> {
   // verify received data
   if (!dataPredicate(data))
     throw new functionsHttps.HttpsError(

@@ -7,7 +7,7 @@ export default function Home() {
     <Layout>
       <p>Are you lost?</p>
       <p>
-        Lets get back to <a href='/app'>reality</a>
+        Lets go back <a href='/app/home'>home</a>
       </p>
     </Layout>
   );

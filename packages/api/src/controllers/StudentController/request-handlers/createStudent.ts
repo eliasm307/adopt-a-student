@@ -1,11 +1,11 @@
 import {
-  CreateStudentRequestBody, CreateStudentResponseBody, isPrivateStudentData,
+  CreateStudentRequestBody, CreateStudentResponseBody, isPrivateStudentData, PrivateStudentData,
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME } from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
-import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 
 const createStudent: FirebaseCallableFunctionHandler<
@@ -14,10 +14,18 @@ const createStudent: FirebaseCallableFunctionHandler<
 > = async (body, context) => {
   const auth = verifyRequest(body, context);
 
-  // make sure data uses user id
-  const data = { ...body?.student, id: auth.uid };
+  if (!body)
+    throw new functionsHttps.HttpsError(
+      "invalid-argument",
+      "body data not provided"
+    );
 
-  const student = await createDocument({
+  const { student: studentInput } = body;
+
+  // make sure data uses user id
+  const data = { ...studentInput, id: auth.uid };
+
+  const student: PrivateStudentData = await createDocument({
     collectionPath: STUDENT_COLLECTION_NAME,
     id: auth.uid,
     data,
