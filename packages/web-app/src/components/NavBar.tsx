@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import useAuthData from 'src/hooks/useAuthData';
-import { signOut } from 'src/services/auth';
+import { signOut } from 'src/utils/auth';
 
 export default function NavBar() {
   const user = useAuthData();

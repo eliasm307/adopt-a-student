@@ -2,7 +2,7 @@ import { navigate } from 'gatsby';
 import React, { useContext, useState } from 'react';
 import useAuthData from 'src/hooks/useAuthData';
 import UserProvider, { UserContext } from 'src/providers/UserProvider';
-import { signInWithEmailPassword, signOut } from 'src/services/auth';
+import { signInWithEmailPassword, signOut } from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
 import isProductionEnvironment from 'src/utils/isProductionEnvironment';
 

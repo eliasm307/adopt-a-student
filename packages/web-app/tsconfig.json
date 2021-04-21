@@ -5,7 +5,7 @@
     "jsx": "react",
     "esModuleInterop": true,
     "noEmit": true,
-    "checkJs": true
+    "checkJs": false
   },
   "include": ["**/*"],
   "exclude": ["**/node_modules/**", "**/public/**"]
