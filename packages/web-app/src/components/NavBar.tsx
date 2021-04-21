@@ -1,12 +1,13 @@
 import { Link, navigate } from 'gatsby';
 import React from 'react';
-
-import { getUser, isLoggedIn, logout } from '../services/auth';
+import useAuthData from 'src/hooks/useAuthData';
+import { signOut } from 'src/services/auth';
 
 export default function NavBar() {
+  const user = useAuthData();
   let greetingMessage = "";
-  if (isLoggedIn()) {
-    greetingMessage = `Hello ${getUser().name}`;
+  if (user) {
+    greetingMessage = `Hello ${user.displayName}`;
   } else {
     greetingMessage = "You are not logged in";
   }
@@ -25,12 +26,12 @@ export default function NavBar() {
         {` `}
         <Link to='/app/profile'>Profile</Link>
         {` `}
-        {isLoggedIn() ? (
+        {user ? (
           <a
             href='/'
             onClick={(event) => {
               event.preventDefault();
-              logout(() => navigate(`/app/login`));
+              signOut(() => navigate(`/app/login`));
             }}
           >
             Logout

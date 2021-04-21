@@ -1,19 +1,22 @@
 import React from 'react';
-
-import { getUser } from '../../services/auth';
+import useAuthData from 'src/hooks/useAuthData';
 
 // todo shows public data
 
 // ! shows private data
 
-const Overview = () => (
-  <>
-    <h1>Your profile</h1>
-    <ul>
-      <li>Name: {getUser().name}</li>
-      <li>E-mail: {getUser().email}</li>
-    </ul>
-  </>
-);
+const Overview = () => {
+  const user = useAuthData();
+
+  return (
+    <>
+      <h1>Your profile</h1>
+      <ul>
+        <li>Name: {user.displayName}</li>
+        <li>E-mail: {user.email}</li>
+      </ul>
+    </>
+  );
+};
 
 export default Overview;
