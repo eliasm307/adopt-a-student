@@ -8,7 +8,7 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
     country,
     relatedTutors,
     description,
-    parentId: genericSubjectId,
+    genericId: genericSubjectId,
     locale,
     relatedStudents,
   } = data as LocaleSubjectData;
@@ -21,7 +21,7 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
     country,
     relatedTutors,
     description,
-    parentId: genericSubjectId,
+    genericId: genericSubjectId,
     locale,
     relatedStudents,
   };

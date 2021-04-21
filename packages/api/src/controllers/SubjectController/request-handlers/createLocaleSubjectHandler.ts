@@ -3,12 +3,16 @@ import {
   CreateLocaleSubjectResponseBody as CreateLocaleSubjectResponseBody, isLocaleSubjectData,
 } from '@adopt-a-student/common';
 
-import { LOCALE_SUBJECT_COLLECTION_NAME } from '../../../constants';
+import {
+  GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME,
+} from '../../../constants';
 import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
+import createPath from '../../../utils/createPath';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import newGuid from '../../../utils/newGuid';
 import verifyRequest from '../../../utils/verifyRequest';
+import { createLocaleSubjectId } from '../utils/localeSubjectId';
 
 const createLocaleSubject: FirebaseCallableFunctionHandler<
   CreateLocaleSubjectRequestBody,
@@ -22,11 +26,22 @@ const createLocaleSubject: FirebaseCallableFunctionHandler<
       "Data not provided"
     );
 
-  const id = newGuid();
+  const { genericId, locale } = body.data;
+
+  const genericSubjectRef = await firestoreAdmin
+    .doc(createPath(GENERIC_SUBJECT_COLLECTION_NAME, genericId))
+    .get();
+
+  if (!genericSubjectRef.exists)
+    throw new functionsHttps.HttpsError(
+      "not-found",
+      "Could not create a locale subject for a generic subject that doesnt exist"
+    );
+
+  // id is generated from generic id
+  const id = createLocaleSubjectId({ genericId: genericId, locale });
 
   const data = { ...body.data, id };
-
-  // todo this should only allow creating/editting locale subjects if a generic subject exists
 
   const subject = await createDocument({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,

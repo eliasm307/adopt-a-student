@@ -107,10 +107,10 @@ export interface LocaleSubjectData extends Entity {
   country: Country;
   /** Description of the subject */
   description: string;
+  /** Id of generic subject this locale subject relates to, there should only be 1 */
+  genericId: GenericSubjectId;
   /** Represents a language that a subject is in */
   locale: LocaleCode;
-  /** Id of generic subject this locale subject relates to, there should only be 1 */
-  parentId: GenericSubjectId;
   /** Ids of students needing help with this subject `// todo needs to be syncronised` */
   relatedStudents: StudentId[];
   /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */

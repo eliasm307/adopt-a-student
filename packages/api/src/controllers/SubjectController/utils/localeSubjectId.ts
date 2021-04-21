@@ -1,10 +1,12 @@
+import { LocaleCode } from '../../../../common/src';
+
 interface Props {
   genericId: string;
-  id: string;
+  locale: LocaleCode;
 }
 
-export function createLocaleSubjectId({ genericId, id }: Props): string {
-  return `${genericId}-${id}`;
+export function createLocaleSubjectId({ genericId, locale }: Props): string {
+  return `${genericId}-${locale}`;
 }
 
 export function getGenericIdFromLocaleSubjectId(
