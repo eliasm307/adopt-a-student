@@ -1,9 +1,9 @@
 import { navigate } from 'gatsby';
 import { auth, GoogleAuthProvider } from 'src/utils/firebase-client';
 
-export const signOut = async (args: any) => {
+export const signOut = async () => {
   await auth.signOut();
-  navigate(`/app/login`);
+  navigate(`/`);
 };
 
 export const signInWithGoogle = async () => {
@@ -24,6 +24,8 @@ export const signInWithEmailPassword = async (
 ) => {
   // const provider = new EmailAuthProvider();
   // auth.signInWithPopup(provider);
+  if (!email || !password)
+    return console.error("Invalid arguments for sign in with email");
   try {
     await auth.signInWithEmailAndPassword(email, password);
     console.log("signed in successfully using email and password");

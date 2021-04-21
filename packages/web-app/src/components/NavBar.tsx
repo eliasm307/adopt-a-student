@@ -1,4 +1,4 @@
-import { Link, navigate } from 'gatsby';
+import { Link } from 'gatsby';
 import React from 'react';
 import useAuthData from 'src/hooks/useAuthData';
 import { signOut } from 'src/services/auth';
@@ -31,7 +31,7 @@ export default function NavBar() {
             href='/'
             onClick={(event) => {
               event.preventDefault();
-              signOut(() => navigate(`/app/login`));
+              signOut();
             }}
           >
             Logout

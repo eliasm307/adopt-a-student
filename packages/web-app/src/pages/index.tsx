@@ -14,11 +14,11 @@ export default function Home() {
       <p>
         {user ? (
           <>
-            You are logged in, so check your <Link to='/app/home'>profile</Link>
+            You are logged in, so check your <Link to='/app'>profile</Link>
           </>
         ) : (
           <>
-            You should <Link to='/app/login'>log in</Link> to see restricted
+            You should <Link to='/app/sign-in'>log in</Link> to see restricted
             content
           </>
         )}

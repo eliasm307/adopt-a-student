@@ -5,7 +5,7 @@ import useAuthData from 'src/hooks/useAuthData';
 
 // ! shows private data
 
-const Overview = () => {
+const StudentOverview = () => {
   const user = useAuthData();
 
   return (
@@ -19,4 +19,4 @@ const Overview = () => {
   );
 };
 
-export default Overview;
+export default StudentOverview;

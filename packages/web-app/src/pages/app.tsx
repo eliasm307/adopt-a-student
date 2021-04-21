@@ -1,13 +1,20 @@
 import React from 'react';
 import RoleSelect from 'src/client-routes/general/role';
-import StudentApp from 'src/client-routes/student';
-import TutorApp from 'src/client-routes/tutor';
-import PrivateRoleRoute from 'src/components/PrivateRoleRoute';
+import SignIn from 'src/client-routes/general/sign-in';
+import StudentHome from 'src/client-routes/student/home';
+import StudentOverview from 'src/client-routes/student/overview';
+import StudentSignUp from 'src/client-routes/student/sign-up';
+import TutorHome from 'src/client-routes/tutor/home';
+import TutorOverview from 'src/client-routes/tutor/overview';
+import TutorSignUp from 'src/client-routes/tutor/sign-up';
+import TutorProfile from 'src/client-routes/tutor/tutor-profile';
+import PrivateRoleRoute from 'src/components/PrivateRoleBasedRoute';
 import useAuthData from 'src/hooks/useAuthData';
 import UserProvider from 'src/providers/UserProvider';
 
-import { Router } from '@reach/router';
+import { Redirect, Router } from '@reach/router';
 
+import StudentProfile from '../client-routes/student/profile';
 import PrivateRoute from '../components/PrivateRoute';
 import PublicRoute from '../components/PublicRoute';
 import Layout from '../layouts/DefaultLayout';
@@ -21,16 +28,16 @@ const App = () => {
   const user = useAuthData();
 
   // select the app to use based on the user
+  /*
   const UserApp =
     (user?.role === "Student" && (
-      <PrivateRoleRoute path='/app' role='Student'>
-        <StudentApp />
-      </PrivateRoleRoute>
+      <PrivateRoleRoute path='/app' role='Student' component={StudentApp} />
     )) ||
     (user?.role === "Tutor" && (
       <PrivateRoleRoute path='/app' role='Tutor' component={TutorApp} />
     )) ||
     null;
+    */
 
   return (
     <UserProvider>
@@ -38,8 +45,32 @@ const App = () => {
         <div>Role {user?.role}</div>
         <Router>
           <PublicRoute default component={NotFound} />
+          <PublicRoute path='/app/sign-in' component={SignIn} />
           <PrivateRoute path='/app/role' component={RoleSelect} />
-          {UserApp}
+          <Redirect from='/app' to='/app/sign-in' />
+          <PrivateRoleRoute
+            path='/app/home'
+            StudentComponent={StudentHome}
+            TutorComponent={TutorHome}
+          />
+          <PrivateRoleRoute
+            path='/app/profile'
+            StudentComponent={StudentProfile}
+            TutorComponent={TutorProfile}
+          />
+          <PrivateRoute
+            path='/app/student/:studentId'
+            component={StudentOverview}
+          />
+          <PrivateRoute
+            path='/app/tutor/:studentId'
+            component={TutorOverview}
+          />
+          <PrivateRoleRoute
+            path='/app/sign-up'
+            StudentComponent={StudentSignUp}
+            TutorComponent={TutorSignUp}
+          />
         </Router>
       </Layout>
     </UserProvider>

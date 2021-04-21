@@ -5,6 +5,6 @@
 
 import React from 'react';
 
-const Profile = () => <div>student profile</div>;
+const StudentProfile = () => <div>student profile</div>;
 
-export default Profile;
+export default StudentProfile;

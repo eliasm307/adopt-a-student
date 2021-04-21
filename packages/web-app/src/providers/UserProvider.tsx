@@ -16,16 +16,17 @@ interface Props {
 
 export const UserContext = createContext({
   user: null,
-  setUserRole: () => null,
+  setUserRole: null,
 } as UserContextShape);
 
 export default function UserProvider({ children }: Props) {
   const [user, setUser] = useState(null as UserAuth | null);
+  const [roleState, setRole] = useState(null as string);
 
   // on mount, add auth state listener
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
-      console.log(`User state changed to:`, { userAuth });
+      console.log(__filename, `User state changed to:`, { userAuth });
 
       setUser(userAuth);
     });

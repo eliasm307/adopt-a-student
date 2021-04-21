@@ -8,10 +8,15 @@ import { UserContext } from 'src/providers/UserProvider';
 
 // ! shows private data
 
-const RoleSelect = () => {
+const RoleSelect = (props: any) => {
   const { setUserRole, user } = useContext(UserContext);
 
-  if (user?.role) navigate("/app/home");
+  if (user?.role) {
+    navigate("/app/home");
+    console.log("role", "user role defined, navigating to home");
+    return null;
+  }
+  console.warn("role", "user role not defined, staying on role select screen");
 
   const pathStyle: React.CSSProperties = {
     padding: "50px",
@@ -26,7 +31,6 @@ const RoleSelect = () => {
           type='button'
           style={pathStyle}
           onClick={(e) => {
-            alert("student");
             setUserRole("Student");
           }}
         >

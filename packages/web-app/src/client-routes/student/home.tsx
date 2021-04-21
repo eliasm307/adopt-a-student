@@ -5,6 +5,6 @@
 
 import React from 'react';
 
-const Home = () => <div>student home</div>;
+const StudentHome = () => <div>student home</div>;
 
-export default Home;
+export default StudentHome;

@@ -1,24 +1,37 @@
 import { navigate } from 'gatsby';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import useAuthData from 'src/hooks/useAuthData';
-import { signInWithEmailPassword } from 'src/services/auth';
+import UserProvider, { UserContext } from 'src/providers/UserProvider';
+import { signInWithEmailPassword, signOut } from 'src/services/auth';
 import { auth } from 'src/utils/firebase-client';
 import isProductionEnvironment from 'src/utils/isProductionEnvironment';
 
 // import testUser from '../../private_config/testUserAuth';
 
-const Login = () => {
+const SignIn = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
 
   const user = useAuthData();
+  const { setUserRole } = useContext(UserContext);
+
+  console.log(`typeof user ${typeof user}`);
 
   if (user) {
+    console.log(__filename, "user signed in, navigating to app role select...");
     navigate(`/app/role`);
     return null;
   }
+  console.log(__filename, "NOT navigating to app role select...", { user });
+
+  /*
+  if (user && !user?.role) {
+    setUserRole("Student");
+  }
+  */
+
   if (!isProductionEnvironment()) {
     console.log("Dev environment, signing in anonymously");
     // signInWithEmailPassword(testUser.email, testUser.password);
@@ -61,8 +74,9 @@ const Login = () => {
   };
 
   return (
-    <>
+    <UserProvider>
       <h1>Log in</h1>
+      <div>Role: {user?.role}</div>
       <form
         method='post'
         onSubmit={(event) => {
@@ -79,9 +93,12 @@ const Login = () => {
           <input type='password' name='password' onChange={onChangeHandler} />
         </label>
         <input type='submit' value='Log In' />
+        <button type='button' onClick={() => signOut()}>
+          Sign out
+        </button>
       </form>
-    </>
+    </UserProvider>
   );
 };
 
-export default Login;
+export default SignIn;
