@@ -1,9 +1,6 @@
 import { navigate } from 'gatsby';
 import React, { useState } from 'react';
-
-const handleLogin = (input: any) => true;
-
-const isLoggedIn = () => true;
+import { signInWithEmailPassword } from 'src/services/auth';
 
 const Login = () => {
   const [userName, setUserName] = useState("");
@@ -11,6 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
 
+  /*
   const signInWithEmailAndPasswordHandler = (
     event: React.ChangeEvent<HTMLButtonElement>,
     _email: string,
@@ -18,10 +16,11 @@ const Login = () => {
   ): void => {
     event.preventDefault();
   };
+  */
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleLogin({ userName, password });
+    signInWithEmailPassword({ userName, password });
   };
 
   const onChangeHandler = (
