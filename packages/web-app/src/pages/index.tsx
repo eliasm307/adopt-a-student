@@ -14,8 +14,7 @@ export default function Home() {
       <p>
         {user ? (
           <>
-            You are logged in, so check your{" "}
-            <Link to='/app/profile'>profile</Link>
+            You are logged in, so check your <Link to='/app/home'>profile</Link>
           </>
         ) : (
           <>

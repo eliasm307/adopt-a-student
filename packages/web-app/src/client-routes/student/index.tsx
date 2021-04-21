@@ -1,11 +1,9 @@
 import React from 'react';
 import PrivateRoute from 'src/components/PrivateRoute';
-import PublicRoute from 'src/components/PublicRoute';
 import Layout from 'src/layouts/DefaultLayout';
 
 import { Router } from '@reach/router';
 
-import Login from '../general/sign-in';
 import Home from './home';
 import Overview from './overview';
 import Profile from './profile';
@@ -17,7 +15,7 @@ const StudentApp = () => (
   <Layout>
     <div>Student App</div>
     <Router>
-      <PrivateRoute path='/' component={Home} />
+      <PrivateRoute path='/home' component={Home} />
       <PrivateRoute path='/profile' component={Profile} />
       <PrivateRoute path='/overview/:studentId' component={Overview} />
       <PrivateRoute path='/sign-up' component={SignUp} />

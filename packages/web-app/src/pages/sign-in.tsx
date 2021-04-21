@@ -1,11 +1,11 @@
 import { navigate } from 'gatsby';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useAuthData from 'src/hooks/useAuthData';
 import { signInWithEmailPassword } from 'src/services/auth';
 import { auth } from 'src/utils/firebase-client';
 import isProductionEnvironment from 'src/utils/isProductionEnvironment';
 
-import testUser from '../../../private_config/testUserAuth';
+// import testUser from '../../private_config/testUserAuth';
 
 const Login = () => {
   const [userName, setUserName] = useState("");
@@ -14,14 +14,17 @@ const Login = () => {
   const [error, setError] = useState(null);
 
   const user = useAuthData();
-  useEffect(() => {
-    ``;
-    // todo remove completely for production
-    if (!isProductionEnvironment()) {
-      // signInWithEmailPassword(testUser.email, testUser.password);
-      auth.signInAnonymously();
-    }
-  });
+
+  if (user) {
+    navigate(`/app/role`);
+    return null;
+  }
+  if (!isProductionEnvironment()) {
+    console.log("Dev environment, signing in anonymously");
+    // signInWithEmailPassword(testUser.email, testUser.password);
+    auth.signInAnonymously();
+  }
+
   /*
   const signInWithEmailAndPasswordHandler = (
     event: React.ChangeEvent<HTMLButtonElement>,
@@ -56,10 +59,6 @@ const Login = () => {
       console.warn("Unknown event", { event });
     }
   };
-
-  if (user) {
-    navigate(`/app/role`);
-  }
 
   return (
     <>

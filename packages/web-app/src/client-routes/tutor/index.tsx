@@ -5,8 +5,6 @@ import Layout from 'src/layouts/DefaultLayout';
 
 import { Router } from '@reach/router';
 
-import Login from '../general/sign-in';
-
 // ? should layout be inside each route to display relevant links
 
 const TutorApp = () => (

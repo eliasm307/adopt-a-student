@@ -4,11 +4,10 @@ import StudentApp from 'src/client-routes/student';
 import TutorApp from 'src/client-routes/tutor';
 import PrivateRoleRoute from 'src/components/PrivateRoleRoute';
 import useAuthData from 'src/hooks/useAuthData';
+import UserProvider from 'src/providers/UserProvider';
 
 import { Router } from '@reach/router';
 
-import Login from '../client-routes/general/sign-in';
-import StudentProfile from '../client-routes/student/profile';
 import PrivateRoute from '../components/PrivateRoute';
 import PublicRoute from '../components/PublicRoute';
 import Layout from '../layouts/DefaultLayout';
@@ -24,23 +23,26 @@ const App = () => {
   // select the app to use based on the user
   const UserApp =
     (user?.role === "Student" && (
-      <PrivateRoleRoute path='/app' role='Student' component={StudentApp} />
+      <PrivateRoleRoute path='/app' role='Student'>
+        <StudentApp />
+      </PrivateRoleRoute>
     )) ||
     (user?.role === "Tutor" && (
-      <PrivateRoleRoute path='/app' role='Student' component={TutorApp} />
+      <PrivateRoleRoute path='/app' role='Tutor' component={TutorApp} />
     )) ||
     null;
 
   return (
-    <Layout>
-      <div>Role {user?.role}</div>
-      <Router>
-        <PublicRoute default component={NotFound} />
-        <PublicRoute path='/app/login' component={Login} />
-        <PrivateRoute path='/app/role' component={RoleSelect} />
-        {UserApp}
-      </Router>
-    </Layout>
+    <UserProvider>
+      <Layout>
+        <div>Role {user?.role}</div>
+        <Router>
+          <PublicRoute default component={NotFound} />
+          <PrivateRoute path='/app/role' component={RoleSelect} />
+          {UserApp}
+        </Router>
+      </Layout>
+    </UserProvider>
   );
 };
 

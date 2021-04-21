@@ -4,20 +4,20 @@ import { UserRole } from 'src/declarations/types';
 
 import { auth } from '../utils/firebase-client';
 
-interface UserContext {
+interface UserContextShape {
   user: UserAuth;
 
   setUserRole(role: UserRole): void;
 }
 
 interface Props {
-  children: React.ReactChildren;
+  children: React.ReactNode;
 }
 
 export const UserContext = createContext({
   user: null,
   setUserRole: () => null,
-} as UserContext);
+} as UserContextShape);
 
 export default function UserProvider({ children }: Props) {
   const [user, setUser] = useState(null as UserAuth | null);
@@ -31,7 +31,14 @@ export default function UserProvider({ children }: Props) {
     });
   }, []);
 
-  const setUserRole = (role: UserRole) => setUser({ ...user, role });
+  const setUserRole = (role: UserRole) => {
+    const newUser = { ...user, role };
+    console.log(__filename, `Setting user role to ${role}`, {
+      newUser,
+      newRole: newUser.role,
+    });
+    setUser(newUser);
+  };
 
   return (
     <UserContext.Provider value={{ user, setUserRole }}>
