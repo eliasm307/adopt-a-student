@@ -2,6 +2,7 @@ import faker from 'faker';
 
 import { PrivateStudentData } from '../../../common/src';
 import newGuid from '../newGuid';
+import getRandomLocales from './getRandomLocales';
 
 export default function createFakeStudentData(): PrivateStudentData {
   return {
@@ -10,7 +11,7 @@ export default function createFakeStudentData(): PrivateStudentData {
     userName: faker.internet.userName(),
     imageUrl: faker.image.avatar(),
     introduction: faker.lorem.lines(Math.random() * 3),
-    prefferedLocales: [],
+    prefferedLocales: getRandomLocales(),
     relatedSubjects: [],
     relatedTutors: [],
   };

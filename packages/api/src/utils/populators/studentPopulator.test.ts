@@ -10,7 +10,7 @@ describe("studentPopulator", () => {
       collectionPath: STUDENT_COLLECTION_NAME,
       dataPredicate: isPrivateStudentData,
       firestoreAdmin,
-      numberToGenerate: 2,
+      numberToGenerate: 10,
       userDataFactory: createFakeStudentData,
     });
 
