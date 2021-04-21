@@ -15,6 +15,7 @@ const createGenericSubject: FirebaseCallableFunctionHandler<
 > = async (body, context) => {
   const auth = verifyRequest(body, context);
 
+  // ? can this check if a document already exists somehow? maybe matching by name?
   const id = newGuid();
 
   if (!body?.data)

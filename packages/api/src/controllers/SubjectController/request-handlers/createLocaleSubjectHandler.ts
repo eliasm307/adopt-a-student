@@ -1,5 +1,6 @@
 import {
-  CreateLocaleSubjectRequestBody, CreateLocaleSubjectResponseBody, isLocaleSubjectData,
+  CreateLocaleSubjectRequestBody as CreateLocaleSubjectRequestBody,
+  CreateLocaleSubjectResponseBody as CreateLocaleSubjectResponseBody, isLocaleSubjectData,
 } from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME } from '../../../constants';
@@ -15,15 +16,17 @@ const createLocaleSubject: FirebaseCallableFunctionHandler<
 > = async (body, context) => {
   const auth = verifyRequest(body, context);
 
-  const id = newGuid();
-
-  if (!body?.data)
+  if (!body?.data || !body.genericSubjectId)
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Data not provided"
     );
 
+  const id = newGuid();
+
   const data = { ...body.data, id };
+
+  // todo this should only allow creating/editting locale subjects if a generic subject exists
 
   const subject = await createDocument({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,

@@ -99,6 +99,7 @@ export interface CreateGenericSubjectResponseBody {
 }
 export interface CreateLocaleSubjectRequestBody {
   data: Omit<LocaleSubjectData, "id">;
+  genericSubjectId: string;
 }
 
 export interface CreateLocaleSubjectResponseBody {
