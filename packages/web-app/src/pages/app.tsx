@@ -47,7 +47,7 @@ const App = () => {
           <PublicRoute default component={NotFound} />
           <PublicRoute path='/app/sign-in' component={SignIn} />
           <PrivateRoute path='/app/role' component={RoleSelect} />
-          <Redirect from='/app' to='/app/sign-in' />
+          <Redirect from='/app' to='/app/sign-in' noThrow />
           <PrivateRoleRoute
             path='/app/home'
             StudentComponent={StudentHome}

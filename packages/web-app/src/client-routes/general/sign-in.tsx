@@ -20,11 +20,14 @@ const SignIn = () => {
   console.log(`typeof user ${typeof user}`);
 
   if (user) {
-    console.log(__filename, "user signed in, navigating to app role select...");
+    console.log("sign-in", "user signed in, navigating to app role select...");
     navigate(`/app/role`);
     return null;
   }
-  console.log(__filename, "NOT navigating to app role select...", { user });
+  console.log("sign-in", "NOT navigating to app role select...", {
+    user,
+    authUser: auth.currentUser,
+  });
 
   /*
   if (user && !user?.role) {

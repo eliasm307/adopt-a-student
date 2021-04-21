@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
+import { ROLE_LOCAL_STORAGE_KEY } from 'src/constants';
 import { UserAuth } from 'src/declarations/interfaces';
 import { UserRole } from 'src/declarations/types';
 
@@ -28,12 +29,16 @@ export default function UserProvider({ children }: Props) {
     auth.onAuthStateChanged((userAuth) => {
       console.log(__filename, `User state changed to:`, { userAuth });
 
-      setUser(userAuth);
+      setUser({
+        ...userAuth,
+        role: localStorage.getItem(ROLE_LOCAL_STORAGE_KEY) as UserRole,
+      });
     });
   }, []);
 
   const setUserRole = (role: UserRole) => {
     const newUser = { ...user, role };
+    localStorage.setItem(ROLE_LOCAL_STORAGE_KEY, role);
     console.log(__filename, `Setting user role to ${role}`, {
       newUser,
       newRole: newUser.role,
