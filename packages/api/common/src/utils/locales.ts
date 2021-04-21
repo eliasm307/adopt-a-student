@@ -1,5 +1,14 @@
 export {};
 
+import locales from 'locale-codes';
+
+import { LocaleCode } from '../declarations/types';
+
+// define the available locale codes, keep this limited for the hackathon app
+export const localeCodes = ["ms", "en", "fr", "pt"] as const;
+
+export const getLocaleData = (locale: LocaleCode) => locales.getByTag(locale);
+
 // todo implement this such that any required locale information is exported
 /*
 

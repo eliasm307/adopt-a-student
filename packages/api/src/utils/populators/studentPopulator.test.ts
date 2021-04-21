@@ -5,14 +5,16 @@ import bulkUserPopulator from './bulkUserPopulator';
 import createFakeStudentData from './createFakeTutorData';
 
 describe("studentPopulator", () => {
-  it("Can bulk generate students", () => {
-    const results = bulkUserPopulator({
+  it("Can bulk generate students", async () => {
+    const results = await bulkUserPopulator({
       collectionPath: STUDENT_COLLECTION_NAME,
       dataPredicate: isPrivateStudentData,
       firestoreAdmin,
       numberToGenerate: 2,
       userDataFactory: createFakeStudentData,
     });
+
+    console.log(__filename, "test result", { results });
   });
 });
 

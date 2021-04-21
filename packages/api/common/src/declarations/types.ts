@@ -1,4 +1,6 @@
-export type LocaleCode = "en" | "fr" | string; // todo add more
+import { localeCodes } from '../utils/locales';
+
+export type LocaleCode = typeof localeCodes[number]; // todo add more
 
 export type Country = "United Kingdom" | "Brazil" | "Cote d'Ivoire"; // todo add more
 

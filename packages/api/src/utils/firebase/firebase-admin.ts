@@ -5,6 +5,7 @@
 
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
+import config from "../../../private_config/config";
 
 // import functionsTest from 'firebase-functions-test';
 // import path from 'path';
@@ -33,7 +34,7 @@ if (process.env.NODE_ENV === "production") {
   process.env.FIRESTORE_EMULATOR_HOST = "localhost:8080";
 
   console.log(__filename, "trying to use using emulator admin");
-  app = admin.initializeApp();
+  app = admin.initializeApp({ projectId: config.FIREBASE_PROJECT_ID });
 }
 
 // you can check all these information in firebase console/settings
