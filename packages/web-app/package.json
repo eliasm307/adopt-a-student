@@ -14,7 +14,8 @@
     "serve": "yarn build && gatsby serve",
     "clean": "rm -rf public && gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start-emulators": "yarn --cwd ../../ start-emulators"
   },
   "dependencies": {
     "gatsby": "^3.2.1",

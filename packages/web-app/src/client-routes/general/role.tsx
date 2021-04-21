@@ -12,8 +12,8 @@ const RoleSelect = () => {
   const { setUserRole, user } = useContext(UserContext);
 
   useEffect(() => {
-    navigate("/app");
-  }, [user.role]);
+    if (user?.role) navigate("/app");
+  }, [user?.role]);
 
   const pathStyle: React.CSSProperties = {
     padding: "50px",

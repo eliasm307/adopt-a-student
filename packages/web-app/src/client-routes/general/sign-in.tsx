@@ -1,6 +1,11 @@
 import { navigate } from 'gatsby';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import useAuthData from 'src/hooks/useAuthData';
 import { signInWithEmailPassword } from 'src/services/auth';
+import { auth } from 'src/utils/firebase-client';
+import isProductionEnvironment from 'src/utils/isProductionEnvironment';
+
+import testUser from '../../../private_config/testUserAuth';
 
 const Login = () => {
   const [userName, setUserName] = useState("");
@@ -8,6 +13,15 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
 
+  const user = useAuthData();
+  useEffect(() => {
+    ``;
+    // todo remove completely for production
+    if (!isProductionEnvironment()) {
+      // signInWithEmailPassword(testUser.email, testUser.password);
+      auth.signInAnonymously();
+    }
+  });
   /*
   const signInWithEmailAndPasswordHandler = (
     event: React.ChangeEvent<HTMLButtonElement>,
@@ -20,7 +34,7 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    signInWithEmailPassword({ userName, password });
+    signInWithEmailPassword(userName, password);
   };
 
   const onChangeHandler = (
@@ -43,8 +57,8 @@ const Login = () => {
     }
   };
 
-  if (isLoggedIn()) {
-    navigate(`/app/profile`);
+  if (user) {
+    navigate(`/app/role`);
   }
 
   return (
@@ -54,7 +68,7 @@ const Login = () => {
         method='post'
         onSubmit={(event) => {
           handleSubmit(event);
-          navigate(`/app/profile`);
+          navigate(`/app/role`);
         }}
       >
         <label>

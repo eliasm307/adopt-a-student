@@ -5,7 +5,8 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "start-emulators": "set FIRESTORE_EMULATOR_HOST=localhost:8080&& set NODE_ENV=development&& firebase emulators:start"
   },
   "license": "MIT",
   "author": "",

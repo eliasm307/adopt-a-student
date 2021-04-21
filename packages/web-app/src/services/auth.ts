@@ -13,6 +13,7 @@ export const signInWithGoogle = async () => {
     console.log("Signed in successfully using google");
   } catch (error) {
     console.error({ error });
+    alert("Could not sign in");
   }
 };
 
@@ -28,5 +29,6 @@ export const signInWithEmailPassword = async (
     console.log("signed in successfully using email and password");
   } catch (error) {
     console.error(__filename, "Could not sign in", { error });
+    alert("Could not sign in");
   }
 };

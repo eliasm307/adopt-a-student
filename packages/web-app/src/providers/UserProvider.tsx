@@ -14,7 +14,10 @@ interface Props {
   children: React.ReactChildren;
 }
 
-export const UserContext = createContext(null as UserContext | null);
+export const UserContext = createContext({
+  user: null,
+  setUserRole: () => null,
+} as UserContext);
 
 export default function UserProvider({ children }: Props) {
   const [user, setUser] = useState(null as UserAuth | null);
