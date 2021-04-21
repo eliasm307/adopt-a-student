@@ -2,6 +2,7 @@ import React, { createContext, useEffect, useState } from 'react';
 import { ROLE_LOCAL_STORAGE_KEY } from 'src/constants';
 import { UserAuth } from 'src/declarations/interfaces';
 import { UserRole } from 'src/declarations/types';
+import { getUserLocalStorageItem, setUserLocalStorageItem } from 'src/utils/userLocalStorage';
 
 import { auth } from '../utils/firebase-client';
 
@@ -29,16 +30,25 @@ export default function UserProvider({ children }: Props) {
     auth.onAuthStateChanged((userAuth) => {
       console.log(__filename, `User state changed to:`, { userAuth });
 
+      const lastRole = getUserLocalStorageItem({
+        uid: userAuth.uid,
+        key: ROLE_LOCAL_STORAGE_KEY,
+      }) as UserRole;
+
       setUser({
         ...userAuth,
-        role: localStorage.getItem(ROLE_LOCAL_STORAGE_KEY) as UserRole,
+        role: lastRole,
       });
     });
   }, []);
 
   const setUserRole = (role: UserRole) => {
     const newUser = { ...user, role };
-    localStorage.setItem(ROLE_LOCAL_STORAGE_KEY, role);
+    setUserLocalStorageItem({
+      uid: user.uid,
+      key: ROLE_LOCAL_STORAGE_KEY,
+      value: role,
+    });
     console.log(__filename, `Setting user role to ${role}`, {
       newUser,
       newRole: newUser.role,
