@@ -1,7 +1,9 @@
 import fs from 'fs-extra';
 import path from 'path';
 
-import { countries, countryLocales, localeCountries, localesUsed } from './locales-internal';
+import {
+  countryLocales, localeCountries, localeEnglishNames, localeNativeNames, localesUsed,
+} from './locales-internal';
 import saveJsonToFile from './saveJsonToFile';
 
 const basePath = "../data/locales";
@@ -55,13 +57,28 @@ describe("locales", () => {
 
     expect(output).toEqual(data);
   });
-  it("can save used unique countries", async () => {
-    const data = countries;
+  it("can save locale english names", async () => {
+    const data = localeEnglishNames;
 
     const usedLocalesFilePath = path.resolve(
       __dirname,
       basePath,
-      "countries.json"
+      "locale-english-names.json"
+    );
+
+    await saveJsonToFile({ data: data, path: usedLocalesFilePath });
+
+    const output = await fs.readJSON(usedLocalesFilePath);
+
+    expect(output).toEqual(data);
+  });
+  it("can save locale native names", async () => {
+    const data = localeNativeNames;
+
+    const usedLocalesFilePath = path.resolve(
+      __dirname,
+      basePath,
+      "locale-native-names.json"
     );
 
     await saveJsonToFile({ data: data, path: usedLocalesFilePath });

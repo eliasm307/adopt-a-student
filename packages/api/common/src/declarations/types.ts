@@ -1,10 +1,14 @@
-import { localeCodes } from '../utils/locales-internal';
+import { localeCodes } from '../constants';
+import countryLocales from '../data/locales/country-locales.json';
 
 /** A locale code to specify language e.g. en for English */
 export type LocaleCode = typeof localeCodes[number]; // todo add more
 
 /** A country name e.g. "Malaysia" */
-export type Country = "United Kingdom" | "Brazil" | "Cote d'Ivoire" | string; // todo add more
+export type Country = keyof typeof countryLocales;
+/*
+export type Country = "United Kingdom" | "Brazil" | "Cote d'Ivoire" | string;
+*/
 
 // ? use Record type instead?
 /*
