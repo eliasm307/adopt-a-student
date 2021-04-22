@@ -63,6 +63,7 @@ describe.only("firebase functions createTutor", () => {
             detail: faker.lorem.paragraph(Math.random() * 3),
             id: "fake-id",
             locale: "en",
+            country: "World",
           },
         ],
         userName: faker.internet.userName(),

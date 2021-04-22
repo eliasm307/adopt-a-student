@@ -1,21 +1,40 @@
 import locales from 'locale-codes';
 
-import { LocaleCode } from '../declarations/types';
+import { Country, LocaleCode } from '../declarations/types';
 
 // define the available locale codes, keep this limited for the hackathon app
 const localeCodes = ["ms", "en", "fr", "pt"] as const;
 
 // export const getLocaleData = (locale: LocaleCode) => locales.getByTag(locale);
 
-const localeCountries: Record<LocaleCode, Set<string>> = {} as Record<
+const localeCountriesSet: Record<LocaleCode, Set<string>> = {} as Record<
   LocaleCode,
   Set<string>
 >;
 
+const countryLocalesSet: Record<Country, Set<LocaleCode>> = {} as Record<
+  Country,
+  Set<LocaleCode>
+>;
+
+const setToRecord = (set: Set<string>) => {
+  return [...set].reduce((out, val) => {
+    return { ...out, [val]: val };
+  }, {} as Record<string, string>);
+};
+
+const setRecordToObjectRecord = (record: Record<string, Set<string>>) => {
+  return Object.entries(record).reduce((a, [key, value]) => {
+    return { ...a, [key]: setToRecord(value) };
+  }, {} as Record<string, Record<string, string>>);
+};
+
+export const countries = new Set<string>();
+
 const localeCodesSet = new Set(localeCodes);
 
 // todo extract these into a local file, so the whole locale-codes package doesnt need to be imported/exported
-const localesUsed = locales.all.filter((locale) =>
+export const localesUsed = locales.all.filter((locale) =>
   localeCodesSet.has(locale["iso639-1"] as LocaleCode)
 );
 
@@ -24,14 +43,27 @@ localesUsed.forEach((locale) => {
   // console.warn({ locale, localeCountries });
 
   if (locale.location) {
-    if (!localeCountries[locale["iso639-1"] as LocaleCode])
-      localeCountries[locale["iso639-1"] as LocaleCode] = new Set<string>();
+    // populate locale countries
+    if (!localeCountriesSet[locale["iso639-1"] as LocaleCode])
+      localeCountriesSet[locale["iso639-1"] as LocaleCode] = new Set<string>();
 
-    localeCountries[locale["iso639-1"] as LocaleCode].add(locale.location);
+    localeCountriesSet[locale["iso639-1"] as LocaleCode].add(locale.location);
+
+    // populate country locales
+    if (!countryLocalesSet[locale.location])
+      countryLocalesSet[locale.location] = new Set<LocaleCode>();
+
+    countryLocalesSet[locale.location].add(locale["iso639-1"] as LocaleCode);
+
+    // record country
+    countries.add(locale.location);
   }
 });
 
-export { localeCountries, localeCodes };
+const localeCountries = setRecordToObjectRecord(localeCountriesSet);
+const countryLocales = setRecordToObjectRecord(countryLocalesSet);
+
+export { localeCountries, countryLocales, localeCodes };
 /*
 console.log(__filename, "Resulting locale data", {
   localeCountries,

@@ -232,18 +232,18 @@
         "affectsGlobalScope": false
       },
       "./src/utils/locales.ts": {
-        "version": "a6cfb1be341a0fcace502d603eb0225e9a3bba7e4e8bd402b54e1e31944073ed",
+        "version": "f6e4b53e86b73cc371eeb0c3987539410e8521d5549d5479ce77de6f5e852d9c",
         "signature": "dd373854b6aadd8ab2994ee1a31669aec6ae1f37bc90cf10efed7a0d6679b4c4",
         "affectsGlobalScope": false
       },
       "./src/declarations/types.ts": {
-        "version": "fbb5ca7f45c6e5c04ef7b363fce6f4605b0ee34b4214f6e8154a63a271892364",
-        "signature": "b7e9360a10a6eff2d2cd0ae800ff90f4d03932c8e6892d3f7518e7676acc1b48",
+        "version": "3316abfd2d833bd078f7465a13dda06f5bfda4934c79e263d2bd83a3d829d0cb",
+        "signature": "a5391019d999d98def7fdde2e9a2f5559068cdeb61eb1e8d9720567f19b6f662",
         "affectsGlobalScope": false
       },
       "./src/declarations/data-models.ts": {
-        "version": "5c9420f0a7ec83542526e2509cd1a09dbd00aaad23370e64e6222b49847e9b0a",
-        "signature": "ed8241d074db2c037c26808c03e4037367fb9ef9ffdccd691d5b49400c7380f7",
+        "version": "f8e620698dc68a5f6703f6be5c32979f44b9d732688adb269fff6da4c11f56a1",
+        "signature": "5bf36753f220b8d2d6bc7b2cac32dc80fe7a31e5851e094301e4680377ca097e",
         "affectsGlobalScope": false
       },
       "./src/declarations/object-shcema.ts": {
@@ -252,27 +252,27 @@
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/islocalesubjectcategorydata.ts": {
-        "version": "00d5a10770aedd54d0e846a4fa5eca6a7341e5d6978a70c8a4e84a3b1890b150",
+        "version": "4495afa04bf04150a521b391adf9a128c15d88e0f8621145895f39ed8e7768f7",
         "signature": "2a8e1ac17967f227f9a9028c98700b717a7a735e243e5ab4f4655e3f8366063b",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isgenericsubjectcategorydata.ts": {
-        "version": "4c65ddba2b4b668308c9c747ec6bb6924bb9aefe355e21f891daa10a5d4d862e",
+        "version": "813a247ec3b6ab31a3dabbaa1540231822aed5c7dff1afacff7de58889230eba",
         "signature": "550a268ff1a600583e9af045e7712104d9ef25bbe0678168e79231e587e38ac3",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isgenericsubjectdata.ts": {
-        "version": "2a5c4a494f1538745050e2b73c37a1ca1beea164e314c4ad0867eeac016c55ce",
+        "version": "7173282f88c3aae4d57ca0c168ec0d8c9dc8a81d8043d0ab4627d8ef0150254e",
         "signature": "8c52e0aa05f551447fce69c04a30e60c9136fcc6628c71fc1937163d47d8eff4",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/islinkedlocalesubjectdata.ts": {
-        "version": "0bdb68285e9a5dde9eb490e3804fe517de2318b14c9eef4fe2b895d39ded2739",
+        "version": "8b01200c5380e2950da8976d9b57a175988a40843b6ab4791fb42c71e8b19488",
         "signature": "1e4acd85400e692735d84805fbd8d157d8b2926634a65cd6ca5344f25ee7e205",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/islocalesubjectdata.ts": {
-        "version": "70db936678658e86728cb50f963b839e22eb2f682e754a6c2cd4f9ee491b05d7",
+        "version": "2d839e7b4bd8e87127989d29b53c181d8e54ebd3379d4bc900505b50c256adae",
         "signature": "163b7f2e92e84f90677aeb2c558d612d6017fbc1c02ad7acc101bf90241c5611",
         "affectsGlobalScope": false
       },
@@ -282,7 +282,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isprivatetutordata.ts": {
-        "version": "63803c7b54550bd4e829be590202ef881e1699b71fd591d9ebfd7653d2404305",
+        "version": "1cbd73cdd9b778f0add8eea35a6e420efc5be69bfc0c8184e4f29baf404fad86",
         "signature": "9d8870a6b6883ce746cdcb3c82875373591e3bbef1204008fd42144e75891e80",
         "affectsGlobalScope": false
       },
@@ -296,18 +296,23 @@
         "signature": "c8a1af46a03792756a4d9c4d6663d1b27da071aaf71d224024a90b2cd135a8cd",
         "affectsGlobalScope": false
       },
+      "./src/utils/type-predicates/basic.ts": {
+        "version": "9101c637756fdea1f425eac3118b5c863ab54a6e323c502df5b5fb9d01f353d7",
+        "signature": "9409eb5b59eab7d3fd9702ecb53294809b90f15d4dfa12a010f333d643de8fa4",
+        "affectsGlobalScope": false
+      },
       "./src/utils/type-predicates/index.ts": {
-        "version": "c7d6fd440f2f018d74521a6d024a8286589bcb5b62bdd70a320e837669eb7669",
-        "signature": "c7d6fd440f2f018d74521a6d024a8286589bcb5b62bdd70a320e837669eb7669",
+        "version": "63d68a8fd6da18eb6ff69ad9ae9e964ef12a16de837d7e846d72c73d7e5264a3",
+        "signature": "63d68a8fd6da18eb6ff69ad9ae9e964ef12a16de837d7e846d72c73d7e5264a3",
         "affectsGlobalScope": false
       },
       "./src/declarations/api.ts": {
-        "version": "b3364e9be8ee87b18fb039c523b80c8c3466647286657772171d02f0ea7dff31",
-        "signature": "a8d71033956007dff36dd13e51ecc91aabed5b84675e0793abef43625c4782d7",
+        "version": "1c863b8331fc961f542a08d11108ffcdadcdda55aea761e79aa14cbd3ccaebef",
+        "signature": "d87f38884ae109f1c391c705d3577b97bd6bed1cb0d375163e9419d7f9fc2e37",
         "affectsGlobalScope": false
       },
       "./src/utils/promiseallsettledandlog.ts": {
-        "version": "c98d752b31c6c86cd06614c49d3559b81dada4edd3b3e41e26f2901e92533d92",
+        "version": "2ad012d1fd90350afe37f86e4ce19346b003c3a3ddecf304a7b01fb5939d2423",
         "signature": "d579cdba7884bef8395051ffb057f370b7f00134a685f76c57ba1d596f64814d",
         "affectsGlobalScope": false
       },
@@ -324,6 +329,11 @@
       "./src/index.ts": {
         "version": "cf66e2fe716adb8429d3058cc874cf3699c1d5ed1c1a5e99e85f8ff51a64adb1",
         "signature": "30297b4ea96ffd0e5964e5ff76906ebd6b488bbe4ae2a071dd7ba405548fc644",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/type-predicates/islocale.ts": {
+        "version": "4ee217a596565804ddeb7dd6f231256783b8e09ac26965ff855d5b1d3e78c917",
+        "signature": "e5aa6feb1b51cc9073874959e7e95aff4b66c197c825f28c13854eb3a5705cc8",
         "affectsGlobalScope": false
       },
       "./node_modules/jest-diff/build/cleanupsemantic.d.ts": {
@@ -918,6 +928,7 @@
         "./src/declarations/types.ts"
       ],
       "./src/utils/type-predicates/index.ts": [
+        "./src/utils/type-predicates/basic.ts",
         "./src/utils/type-predicates/isgenericsubjectcategorydata.ts",
         "./src/utils/type-predicates/isgenericsubjectdata.ts",
         "./src/utils/type-predicates/islinkedlocalesubjectdata.ts",
@@ -937,6 +948,10 @@
       ],
       "./src/utils/type-predicates/islinkedlocalesubjectdata.ts": [
         "./src/index.ts"
+      ],
+      "./src/utils/type-predicates/islocale.ts": [
+        "./src/declarations/types.ts",
+        "./src/utils/locales.ts"
       ],
       "./src/utils/type-predicates/islocalesubjectcategorydata.ts": [
         "./src/index.ts"
@@ -1239,6 +1254,7 @@
         "./src/declarations/types.ts"
       ],
       "./src/utils/type-predicates/index.ts": [
+        "./src/utils/type-predicates/basic.ts",
         "./src/utils/type-predicates/isgenericsubjectcategorydata.ts",
         "./src/utils/type-predicates/isgenericsubjectdata.ts",
         "./src/utils/type-predicates/islinkedlocalesubjectdata.ts",
@@ -1257,6 +1273,9 @@
       ],
       "./src/utils/type-predicates/islinkedlocalesubjectdata.ts": [
         "./src/index.ts"
+      ],
+      "./src/utils/type-predicates/islocale.ts": [
+        "./src/declarations/types.ts"
       ],
       "./src/utils/type-predicates/islocalesubjectcategorydata.ts": [
         "./src/index.ts"
@@ -1387,10 +1406,12 @@
       "./src/utils/locales.ts",
       "./src/utils/promiseallsettledandlog.ts",
       "./src/utils/selectanyarrayitem.ts",
+      "./src/utils/type-predicates/basic.ts",
       "./src/utils/type-predicates/index.ts",
       "./src/utils/type-predicates/isgenericsubjectcategorydata.ts",
       "./src/utils/type-predicates/isgenericsubjectdata.ts",
       "./src/utils/type-predicates/islinkedlocalesubjectdata.ts",
+      "./src/utils/type-predicates/islocale.ts",
       "./src/utils/type-predicates/islocalesubjectcategorydata.ts",
       "./src/utils/type-predicates/islocalesubjectdata.ts",
       "./src/utils/type-predicates/isprivatestudentdata.ts",
@@ -1900,6 +1921,10 @@
         1
       ],
       [
+        "./src/utils/type-predicates/basic.ts",
+        1
+      ],
+      [
         "./src/utils/type-predicates/index.ts",
         1
       ],
@@ -1913,6 +1938,10 @@
       ],
       [
         "./src/utils/type-predicates/islinkedlocalesubjectdata.ts",
+        1
+      ],
+      [
+        "./src/utils/type-predicates/islocale.ts",
         1
       ],
       [

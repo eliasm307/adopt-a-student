@@ -1,4 +1,4 @@
-import { localeCodes } from '../utils/locales';
+import { localeCodes } from '../utils/locales-internal';
 
 /** A locale code to specify language e.g. en for English */
 export type LocaleCode = typeof localeCodes[number]; // todo add more
