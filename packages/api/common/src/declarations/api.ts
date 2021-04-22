@@ -125,7 +125,7 @@ export interface GetSubjectResponseBody {
   relatedSubjects: SubjectId[];
 }
 export interface CreateSubjectCategoryRequestBody {
-  data: Omit<LocaleSubjectCategoryData, "id" | "parentId">;
+  // data: Omit<LocaleSubjectCategoryData, "id" | "locale">;
   locale: LocaleCode;
   name: SubjectCategoryName;
 }

@@ -1,29 +1,28 @@
-import {
-  GenericSubjectCategoryData, localeCodes, localeCountries, LocaleSubjectData,
-  promiseAllSettledAndLog,
-} from '@adopt-a-student/common';
+import { localeCodes, localeCountries, promiseAllSettledAndLog } from '@adopt-a-student/common';
 
 import createSubjectCategory from '../../controllers/SubjectCategoryController/request-handlers/createSubjectCategoryHandler';
+import updateSubjectCategory from '../../controllers/SubjectCategoryController/request-handlers/updateSubjectCategoryHandler';
 import createLocaleSubject from '../../controllers/SubjectController/request-handlers/createLocaleSubjectHandler';
+import updateLocaleSubject from '../../controllers/SubjectController/request-handlers/updateLocaleSubjectHandler';
 import callableContextSpoof from '../firebase/callableContextSpoof';
 
 interface Props {
-  genericSubjectData: Omit<GenericSubjectCategoryData, "id">;
+  name: string;
 }
 
 export default async function bulkCreateSubjectCategoryForAllLocales(
   props: Props
 ) {
-  const { genericSubjectData } = props;
+  const { name } = props;
 
   // create generic subject
 
-  const { genericSubject } = await createSubjectCategory(
-    { data: genericSubjectData, locale, name },
-    callableContextSpoof()
-  );
-
-  const { id: genericId } = genericSubject;
+  const {
+    result: { id },
+  } = await createSubjectCategory({
+    locale: "en",
+    name,
+  });
 
   const promises: Promise<any>[] = [];
 
@@ -33,23 +32,12 @@ export default async function bulkCreateSubjectCategoryForAllLocales(
 
     if (countries)
       countries.forEach((country) => {
-        const localeSubjectData: Omit<LocaleSubjectData, "id"> = {
-          country,
-          description: `test subject in ${String(
-            locale
-          )} locale for country ${country}`,
-          genericId,
+        const localeSubjectPromise = updateSubjectCategory({
+          id,
           locale,
-          relatedStudents: [],
-          relatedTutors: [],
-        };
-        const localeSubjectPromise = createLocaleSubject(
-          {
-            data: localeSubjectData,
-            genericSubjectId: genericId,
-          },
-          callableContextSpoof()
-        );
+          updates: { name: `${name} (${country} in language ${locale})` },
+        });
+
         promises.push(localeSubjectPromise);
       });
   });

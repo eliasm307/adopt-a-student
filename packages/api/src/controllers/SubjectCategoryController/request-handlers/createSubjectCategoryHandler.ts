@@ -16,11 +16,12 @@ const createSubjectCategory: InternalHandler<
   CreateSubjectCategoryRequestBody,
   CreateSubjectCategoryResponseBody
 > = async (props) => {
-  const { locale, name, data: inputData } = props;
+  const { locale, name } = props;
   const genericId = newGuid();
 
   const localeCategoryData: LocaleSubjectCategoryData = {
-    ...inputData,
+    locale,
+    name,
     id: genericId,
   };
 
