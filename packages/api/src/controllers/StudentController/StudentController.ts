@@ -53,7 +53,7 @@ export class StudentsController extends Controller {
         "Provided data is not valid"
       );
 
-    return createStudentHandler({ id: uid, student });
+    return createStudentHandler({ uid, student });
   }
 
   /**
@@ -120,6 +120,6 @@ export class StudentsController extends Controller {
         "Could not update tutor because no updates were provided"
       );
 
-    return updateStudentHandler({ id: uid, updates });
+    return updateStudentHandler({ uid, updates });
   }
 }

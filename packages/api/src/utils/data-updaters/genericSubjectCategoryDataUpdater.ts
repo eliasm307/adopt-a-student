@@ -44,6 +44,7 @@ const genericSubjectCategoryDataUpdater: DataUpdater<GenericSubjectCategoryData>
 
       // make sure names are Unique
       newData.names = [...new Set([...(value as string[]), ...newData.names])];
+      return;
     },
     relatedSubjects: null, // change handled by a different request
   };

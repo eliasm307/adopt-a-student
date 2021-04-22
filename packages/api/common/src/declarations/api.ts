@@ -70,6 +70,7 @@ export interface GetStudentResponseBody {
 
 export interface GetSubjectsByCategoryRequestBody {
   categoryId: SubjectCategoryId;
+  country: Country;
   locale: LocaleCode;
 }
 

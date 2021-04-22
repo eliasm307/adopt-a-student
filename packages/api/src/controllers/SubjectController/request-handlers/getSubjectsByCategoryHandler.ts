@@ -12,7 +12,7 @@ const getSubjectsByCategory: InternalHandler<
   GetSubjectsByCategoryRequestBody,
   GetSubjectsByCategoryResponseBody
 > = async (props) => {
-  const { categoryId: subjectCategoryId, locale } = props;
+  const { categoryId: subjectCategoryId, locale, country } = props;
 
   const genericSubjectsByCategory = await getGenericSubjectsByCategory({
     firestoreAdmin,
@@ -25,6 +25,7 @@ const getSubjectsByCategory: InternalHandler<
         firestoreAdmin,
         genericSubject,
         locale,
+        country,
       })
   );
 

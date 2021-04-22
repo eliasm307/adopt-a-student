@@ -16,6 +16,8 @@ const linkTutorAndSubject: InternalHandler<
 > = async (body) => {
   const { data, uid } = body;
 
+  const { country, id: subjectId, locale } = data;
+
   const document1Props: AddDocumentLinkProps<
     PrivateTutorData,
     UserSubjectData
@@ -23,20 +25,23 @@ const linkTutorAndSubject: InternalHandler<
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,
     linkToAdd: data,
-    linkToMutatePredicate: ({ id }) => id,
-    linksPropName: "relatedStudents",
+    linkToMutatePredicate: ({
+      id: linkId,
+      country: linkCountry,
+      locale: linkLocale,
+    }) =>
+      linkId === subjectId && linkCountry === country && linkLocale === locale,
+    linksPropName: "relatedSubjects",
     documentId: uid,
   };
-
-  const { id } = data;
 
   const document2Props: AddDocumentLinkProps<LocaleSubjectData, string> = {
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
     linkToAdd: uid,
-    linkToMutatePredicate: (link) => link,
+    linkToMutatePredicate: (link) => link === uid,
     linksPropName: "relatedTutors",
-    documentId: id,
+    documentId: subjectId,
   };
 
   const [updatedTutor, updatedSubject] = await linkDocuments({

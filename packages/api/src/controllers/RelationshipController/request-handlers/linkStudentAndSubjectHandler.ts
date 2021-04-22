@@ -32,24 +32,27 @@ const linkStudentAndLocaleSubject: InternalHandler<
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
     linkToAdd: data,
-    linkToMutatePredicate: (link) => link.id,
+    linkToMutatePredicate: ({
+      country: linkCountry,
+      locale: linkLocale,
+      id: linkId,
+    }) =>
+      linkId === subjectId && linkLocale === locale && linkCountry === country,
     linksPropName: "relatedSubjects",
     documentId: uid,
-    entityId: uid,
   };
 
   const document2Props: AddDocumentLinkProps<LocaleSubjectData, string> = {
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
     linkToAdd: uid,
-    linkToMutatePredicate: (link) => link,
+    linkToMutatePredicate: (link) => link === uid,
     linksPropName: "relatedStudents",
     documentId: createLocaleSubjectDocumentId({
       country,
       genericId: subjectId,
       locale,
     }),
-    entityId: subjectId,
   };
 
   const [updatedStudent, updatedSubject] = await linkDocuments({

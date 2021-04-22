@@ -26,7 +26,7 @@ const linkStudentAndTutor: InternalHandler<
     dataPredicate: isPrivateStudentData,
     documentId: studentId,
     linkToAdd: { id: tutorId },
-    linkToMutatePredicate: (link) => link.id,
+    linkToMutatePredicate: ({ id }) => id === tutorId,
     linksPropName: "relatedTutors",
   };
 
@@ -38,7 +38,7 @@ const linkStudentAndTutor: InternalHandler<
     dataPredicate: isPrivateTutorData,
     documentId: tutorId,
     linkToAdd: { id: studentId },
-    linkToMutatePredicate: (link) => link.id,
+    linkToMutatePredicate: ({ id }) => id === studentId,
     linksPropName: "relatedStudents",
   };
 

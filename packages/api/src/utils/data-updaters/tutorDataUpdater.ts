@@ -3,8 +3,8 @@ import { PrivateTutorData } from '@adopt-a-student/common';
 import { DataMutatorMap as DataMutatorMap, DataUpdater } from '../../declarations/types';
 
 interface Props {
-  updates: any;
   existingData: PrivateTutorData;
+  updates: any;
 }
 
 const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
@@ -18,7 +18,7 @@ const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
   const mutators: DataMutatorMap<PrivateTutorData> = {
     id: null,
     prefferedLocales: () => {
-      throw Error("Mutator not implemented");
+      throw Error("Mutator not implemented for tutorDataUpdater");
     },
     relatedSubjects: null,
     relatedStudents: null,
@@ -30,6 +30,8 @@ const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
       typeof value === "string" ? (newData.imageUrl = value) : null,
     introduction: (value) =>
       typeof value === "string" ? (newData.introduction = value) : null,
+    available: (value) =>
+      typeof value === "boolean" ? (newData.available = value) : null,
   };
 
   // apply update mutations where possible
