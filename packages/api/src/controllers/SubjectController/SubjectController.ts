@@ -1,6 +1,5 @@
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
-/* eslint-disable @typescript-eslint/require-await */
 import {
   CreateGenericSubjectRequestBody, CreateGenericSubjectResponseBody, CreateLocaleSubjectRequestBody,
   CreateLocaleSubjectResponseBody, GetSubjectRequestBody, GetSubjectResponseBody,
@@ -8,11 +7,14 @@ import {
   UpdateLocaleSubjectResponseBody,
 } from '@adopt-a-student/common';
 
+import verifyRequest from '../../../utils/verifyRequest';
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
-import verifyRequest from '../../utils/verifyRequest';
+import { functionsHttps } from '../../utils/firebase/firebase-admin';
 import getPrivateTutorData from '../TutorController/request-handlers/getPrivateTutorDataHandler';
 import getPublicTutorData from '../TutorController/request-handlers/getPublicTutorDataHandler';
+import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
+import getLocaleSubjectFromGenericSubject from '../utils/getLocaleSubjectFromGenericSubject';
 import createGenericSubjectHandler from './request-handlers/createGenericSubjectHandler';
 import createLocaleSubjectHandler from './request-handlers/createLocaleSubjectHandler';
 import getSubjectHandler from './request-handlers/getSubjectHandler';
@@ -67,17 +69,22 @@ export class SubjectsController extends Controller {
 
   /**
    * Retreives data about a tutor user. If the tutor user owns the data then they get all the data, otherwise it is restricted to 'public' data.
-   * @param body
-   * @param context
-   * @returns
    */
   @Post(getSubjectsByCategory)
   static getSubjectsByCategory(
     @Body() body: GetTutorRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetTutorResponseBody> {
-    const { id } = body;
     const { uid } = verifyRequest(body, context);
+
+    const { id } = body;
+
+    // verify received data
+    if (!data?.locale || !data.categoryId)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not get subjects by category because provided data is missing locale or required subject category id"
+      );
 
     return uid === id
       ? getPrivateTutorData(body, context)
