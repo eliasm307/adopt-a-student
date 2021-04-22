@@ -1,5 +1,5 @@
 import {
-  GenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData,
+  GenericSubjectCategoryData, isArray, LocaleCode, LocaleSubjectCategoryData,
 } from '@adopt-a-student/common';
 
 import { DataMutatorMap as DataMutatorMap, DataUpdater } from '../../declarations/types';
@@ -28,6 +28,23 @@ const genericSubjectCategoryDataUpdater: DataUpdater<GenericSubjectCategoryData>
             LocaleSubjectCategoryData
           >)
         : null,
+    names: (value) => {
+      if (!isArray(value)) return null;
+
+      for (const val of value) {
+        if (typeof val !== "string") {
+          console.warn(
+            __filename,
+            "Tried to update generic subject category name with an array that wasnt all strings, did nothing",
+            { value }
+          );
+          return null;
+        }
+      }
+
+      // make sure names are Unique
+      newData.names = [...new Set([...(value as string[]), ...newData.names])];
+    },
     relatedSubjects: null, // change handled by a different request
   };
 

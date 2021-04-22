@@ -1,6 +1,7 @@
+import { FirebaseCallableFunctionHandler } from '../declarations/types';
 import { firestoreAdmin } from '../utils/firebase/firebase-admin';
 
-const handler: InternalHandler = async (data, context) => {
+const handler: FirebaseCallableFunctionHandler = async (data, context) => {
   console.log(__filename, "received request", { data, context });
 
   try {

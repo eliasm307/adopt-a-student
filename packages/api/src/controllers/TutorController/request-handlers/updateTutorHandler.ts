@@ -3,6 +3,7 @@ import {
 } from '@adopt-a-student/common';
 
 import { TUTOR_COLLECTION_NAME } from '../../../constants';
+import { AuthData } from '../../../declarations/interfaces';
 import { InternalHandler } from '../../../declarations/types';
 import tutorDataUpdater from '../../../utils/data-updaters/tutorDataUpdater';
 import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
