@@ -177,7 +177,7 @@ export interface UnlinkSubjectAndSubjectCategoryRequestBody {
 }
 
 export interface UnlinkSubjectAndSubjectCategoryResponseBody {
-  subject: SubjectOverview;
+  subject: LocaleSubjectData;
   subjectCategory: SubjectCategoryOverview;
 }
 
@@ -187,7 +187,7 @@ export interface LinkSubjectAndSubjectCategoryRequestBody {
 }
 
 export interface LinkSubjectAndSubjectCategoryResponseBody {
-  subject: SubjectOverview;
+  subject: LocaleSubjectData;
   subjectCategory: SubjectCategoryOverview;
 }
 
@@ -198,7 +198,7 @@ export interface UnlinkTutorAndSubjectRequestBody {
 }
 
 export interface UnlinkTutorAndSubjectResponseBody {
-  subject: SubjectOverview;
+  subject: LocaleSubjectData;
   tutor: PublicTutorData;
 }
 
@@ -210,7 +210,7 @@ export interface UnlinkStudentAndSubjectRequestBody {
 
 export interface UnlinkStudentAndSubjectResponseBody {
   student: PublicStudentData;
-  subject: SubjectOverview;
+  subject: LocaleSubjectData;
 }
 
 export interface LinkTutorAndSubjectRequestBody {
@@ -218,7 +218,7 @@ export interface LinkTutorAndSubjectRequestBody {
 }
 
 export interface LinkTutorAndSubjectResponseBody {
-  subject: SubjectOverview;
+  subject: LocaleSubjectData;
   tutor: PublicTutorData;
 }
 
@@ -228,7 +228,7 @@ export interface LinkStudentAndSubjectRequestBody {
 
 export interface LinkStudentAndSubjectResponseBody {
   student: PublicStudentData;
-  subject: SubjectOverview;
+  subject: LocaleSubjectData;
 }
 
 /*

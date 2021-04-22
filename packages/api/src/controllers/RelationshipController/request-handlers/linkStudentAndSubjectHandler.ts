@@ -42,15 +42,16 @@ const linkStudentAndLocaleSubject: InternalHandler<
     id: data.id,
   };
 
-  const [updatedDocument1, updatedDocument2] = await linkDocuments({
+  const [updatedStudent, updatedSubject] = await linkDocuments({
     document1Props,
     document2Props,
     firestoreAdmin,
   });
 
   return {
-    message: "Success linking documents",
-  };
+    student: updatedStudent,
+    subject: updatedSubject,
+  } as LinkStudentAndSubjectResponseBody;
 };
 
 export default linkStudentAndLocaleSubject;
