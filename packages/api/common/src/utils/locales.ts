@@ -14,6 +14,7 @@ const localeCountries: Record<LocaleCode, Set<string>> = {} as Record<
 
 const localeCodesSet = new Set(localeCodes);
 
+// todo extract these into a local file, so the whole locale-codes package doesnt need to be imported/exported
 const localesUsed = locales.all.filter((locale) =>
   localeCodesSet.has(locale["iso639-1"] as LocaleCode)
 );

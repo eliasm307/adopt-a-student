@@ -10,6 +10,7 @@ import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase
 import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
 
+/** This allows internal subject category locale details to be updated */
 const updateSubjectCategory: FirebaseCallableFunctionHandler<
   UpdateSubjectCategoryRequestBody,
   UpdateSubjectCategoryResponseBody
@@ -30,40 +31,31 @@ const updateSubjectCategory: FirebaseCallableFunctionHandler<
       "Could not update document because provided data is not valid"
     );
 
-  const { id, locale, updates: localeCategoryupdates } = body;
+  const { id, locale, updates: localeCategoryUpdates } = body;
 
-  const genericCategoryupdates: Partial<GenericSubjectCategoryData> = {
-    locales: { [locale]: localeCategoryupdates },
+  const genericCategoryUpdates: Partial<GenericSubjectCategoryData> = {
+    locales: { [locale]: localeCategoryUpdates },
   } as Partial<GenericSubjectCategoryData>;
-
-  /*
-  const genericSubjectCategory = await getDocumentData({
-    collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
-    dataPredicate: isGenericSubjectCategoryData,
-    firestoreAdmin,
-    id,
-  });
-  */
 
   // update just the locale subject category of the generic
   const genericSubjectCategory = await updateDocumentData({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     id,
-    updates: genericCategoryupdates,
+    updates: genericCategoryUpdates,
     dataPredicate: isGenericSubjectCategoryData,
     dataUpdater: genericSubjectCategoryDataUpdater,
     firestoreAdmin,
   });
 
-  const subjectCategory = genericSubjectCategory.locales[locale];
+  const result = genericSubjectCategory.locales[locale];
 
-  if (!subjectCategory)
+  if (!result)
     throw new functionsHttps.HttpsError(
       "internal",
       "There was an issue updating the locale subject category"
     );
 
-  return { result: subjectCategory } as UpdateSubjectCategoryResponseBody;
+  return { result } as UpdateSubjectCategoryResponseBody;
 };
 
 export default updateSubjectCategory;

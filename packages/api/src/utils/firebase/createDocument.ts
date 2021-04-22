@@ -35,14 +35,12 @@ export default async function createDocument<D>({
       "Could not create document because one already exists at path",
       { path }
     );
-    // dont throw error if there is an existing tutor, its not that deep
-    /*
-    return {
-      success: false,
-      data,
-      message: "Could not create document because one already exists",
-    };
-    */
+
+    throw new functionsHttps.HttpsError(
+      "already-exists",
+      "Could not create document because one already exists at path",
+      JSON.stringify({ __filename })
+    );
   }
 
   // create document
