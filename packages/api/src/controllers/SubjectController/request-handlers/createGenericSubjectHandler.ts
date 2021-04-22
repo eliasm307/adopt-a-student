@@ -74,7 +74,7 @@ const createGenericSubject: FirebaseCallableFunctionHandler<
   };
 
   // create generic subject
-  const { relatedCategories, relatedSubjects } = await createDocument({
+  const genericSubject = await createDocument({
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     id: genericId,
     data: genericSubjectData,
@@ -92,9 +92,7 @@ const createGenericSubject: FirebaseCallableFunctionHandler<
   });
 
   return {
-    localeSubject,
-    relatedCategories,
-    relatedSubjects,
+    genericSubject,
   } as CreateGenericSubjectResponseBody;
 };
 

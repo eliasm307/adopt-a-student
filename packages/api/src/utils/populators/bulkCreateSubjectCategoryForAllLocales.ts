@@ -19,8 +19,8 @@ export default async function bulkCreateSubjectCategoryForAllLocales(
 
   // create generic subject
 
-  const {} = await createSubjectCategory(
-    { updates: genericSubjectData },
+  const { genericSubject } = await createSubjectCategory(
+    { data: genericSubjectData, locale, name },
     callableContextSpoof()
   );
 

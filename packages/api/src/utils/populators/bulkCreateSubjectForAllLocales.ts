@@ -15,7 +15,7 @@ export default async function bulkCreateSubjectsForAllLocales(props: Props) {
 
   // create generic subject
 
-  const { subject: genericSubject } = await createGenericSubject(
+  const { localeSubject: genericSubject } = await createGenericSubject(
     { data: genericSubjectData },
     callableContextSpoof()
   );
