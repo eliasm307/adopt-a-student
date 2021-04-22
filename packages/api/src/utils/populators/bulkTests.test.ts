@@ -2,7 +2,7 @@ import { isPrivateStudentData, isPrivateTutorData } from '@adopt-a-student/commo
 
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../constants';
 import { firestoreAdmin } from '../firebase/firebase-admin';
-import bulkCreateSubjectsForAllLocales from './bulkCreateSubjectsForAllLocales';
+import bulkCreateSubjectsForAllLocales from './bulkCreateSubjectForAllLocales';
 import bulkUserPopulator from './bulkUserPopulator';
 import createFakeTutorData from './createFakeStudentData';
 import createFakeStudentData from './createFakeTutorData';

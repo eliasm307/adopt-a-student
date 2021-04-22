@@ -3,8 +3,8 @@ import {
   PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData, UserSubjectData,
 } from './data-models';
 import {
-  CategoryId, Country, GenericSubjectId, LocaleCode, StudentId, SubjectCategoryId, SubjectId,
-  TutorId,
+  CategoryId, Country, GenericSubjectId, LocaleCode, StudentId, SubjectCategoryId,
+  SubjectCategoryName, SubjectId, TutorId,
 } from './types';
 
 export interface GetStudentsBySubjectsRequestBody {
@@ -100,7 +100,7 @@ export interface CreateGenericSubjectResponseBody {
 }
 export interface CreateLocaleSubjectRequestBody {
   data: Omit<LocaleSubjectData, "id">;
-  genericSubjectId: string;
+  genericSubjectId: SubjectId;
 }
 
 export interface CreateLocaleSubjectResponseBody {
@@ -117,21 +117,23 @@ export interface GetSubjectResponseBody {
   relatedSubjects: SubjectId[];
 }
 export interface CreateSubjectCategoryRequestBody {
-  updates: Partial<Omit<GenericSubjectCategoryData, "id">>;
+  data: LocaleSubjectCategoryData;
+  locale: LocaleCode;
+  name: SubjectCategoryName;
 }
 export interface CreateSubjectCategoryResponseBody {
   result: GenericSubjectCategoryData;
 }
 export interface UnlinkSubjectsRequestBody {
-  subject1Id: string;
-  subject2Id: string;
+  subject1Id: SubjectId;
+  subject2Id: SubjectId;
 }
 
 export interface UnlinkSubjectsResponseBody extends BasicResponseData {}
 
 export interface LinkSubjectsRequestBody {
-  subject1Id: string;
-  subject2Id: string;
+  subject1Id: SubjectId;
+  subject2Id: SubjectId;
 }
 
 export interface LinkSubjectsResponseBody extends BasicResponseData {}

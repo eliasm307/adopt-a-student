@@ -1,7 +1,7 @@
 import { ConfidenceLevelEnum } from './enums';
 import {
   CategoryId, Country, EmailString, GenericSubjectId, LocaleCode, LocaleSubjectId, StudentId,
-  SubjectCategoryId, SubjectId, TutorId, UrlString, UserId,
+  SubjectCategoryId, SubjectCategoryName, SubjectId, SubjectName, TutorId, UrlString, UserId,
 } from './types';
 
 export interface Entity {}
@@ -66,7 +66,11 @@ export interface UserSubjectData {
 export interface GenericSubjectData extends Entity {
   readonly id: GenericSubjectId;
 
-  internalName: string;
+  /** Existing names for this subject from defined locales
+   *
+  // todo this should update when locale subjects are changed
+   */
+  names: SubjectName[];
   /** The categories this generic subject belongs to */
   relatedCategories: SubjectCategoryId[];
   /** Links to other relevant subjects a user might be interested in
@@ -75,14 +79,14 @@ export interface GenericSubjectData extends Entity {
   relatedSubjects: GenericSubjectId[];
 }
 /** Name of a subject category in a specific locale */
-export interface SubjectLocaleName {
+export interface LocaleSubjectName {
   locale: LocaleCode;
-  name: string;
+  name: SubjectName;
 }
 /** Subject category data in a specific locale */
 export interface LocaleSubjectCategoryData {
   locale: LocaleCode;
-  name: string;
+  name: SubjectCategoryName;
   /** id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject */
   parentId: SubjectId;
 }
@@ -91,6 +95,10 @@ export interface GenericSubjectCategoryData extends Entity {
   id: CategoryId;
   /** Representations of the same generic subject catories in different locales */
   locales: Record<LocaleCode, LocaleSubjectCategoryData>;
+  /** Existing names for this subject category from defined locales *
+  // todo this should update when locale subjects are changed
+  */
+  names: SubjectName[];
   /** generic subjects which belong to this generic category
        // todo this should link category to subject and subject to category
     */
@@ -112,6 +120,7 @@ export interface LocaleSubjectData extends Entity {
   genericId: GenericSubjectId;
   /** Represents a language that a subject is in */
   locale: LocaleCode;
+  name: SubjectName;
   /** Ids of students needing help with this subject `// todo needs to be syncronised` */
   relatedStudents: StudentId[];
   /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */

@@ -45,3 +45,9 @@ export type LocaleSubjectCategoryId = string;
 
 /** A general category name which doesnt specify locale */
 export type CategoryId = string;
+
+/** Name of a subject in a specific locale */
+export type SubjectName = string;
+
+/** Name of a subject cateogry in a specific locale */
+export type SubjectCategoryName = string;

@@ -1,5 +1,3 @@
-// todo implement
-
 import {
   GenericSubjectData, localeCodes, localeCountries, LocaleSubjectData, promiseAllSettledAndLog,
 } from '@adopt-a-student/common';
@@ -7,9 +5,6 @@ import {
 import createGenericSubject from '../../controllers/SubjectController/request-handlers/createGenericSubjectHandler';
 import createLocaleSubject from '../../controllers/SubjectController/request-handlers/createLocaleSubjectHandler';
 import callableContextSpoof from '../firebase/callableContextSpoof';
-import createDocument from '../firebase/createDocument';
-import newGuid from '../newGuid';
-import getRandomLocaleCountry from './getRandomLocaleCountry';
 
 interface Props {
   genericSubjectData: Omit<GenericSubjectData, "id">;
