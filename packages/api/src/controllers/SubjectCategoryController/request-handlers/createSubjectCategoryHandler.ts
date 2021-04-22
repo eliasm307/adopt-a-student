@@ -66,7 +66,7 @@ const createSubjectCategory: InternalHandler<
   // create
   const result = await createDocument({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
-    id: genericId,
+    documentId: genericId,
     data,
     dataPredicate: isGenericSubjectCategoryData,
     firestoreAdmin,

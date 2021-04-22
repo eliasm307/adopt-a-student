@@ -5,7 +5,7 @@ import { promiseAllSettledAndLog } from '@adopt-a-student/common';
 import createDocument, { CreateDocumentProps } from '../firebase/createDocument';
 import newGuid from '../newGuid';
 
-interface Props<D> extends Omit<CreateDocumentProps<D>, "data" | "id"> {
+interface Props<D> extends Omit<CreateDocumentProps<D>, "data" | "documentId"> {
   numberToGenerate: number;
   userDataFactory: () => D;
 }
@@ -26,7 +26,7 @@ const bulkUserPopulator = async <D>(props: Props<D>) => {
 
     const fakeUserPromise = createDocument({
       collectionPath,
-      id: newGuid(),
+      documentId: newGuid(),
       data: fakeUserData,
       dataPredicate,
       firestoreAdmin,
@@ -35,7 +35,7 @@ const bulkUserPopulator = async <D>(props: Props<D>) => {
     promises.push(fakeUserPromise);
 
     console.log(__filename, "Fake user promise created", {
-      fakeUserData,
+      // fakeUserData,
     });
   }
 

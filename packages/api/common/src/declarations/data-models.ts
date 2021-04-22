@@ -5,6 +5,12 @@ import {
 } from './types';
 
 export interface Entity {}
+
+export interface UserLocale {
+  country: Country;
+  locale: LocaleCode;
+}
+
 /** User data that is publicly available */
 export interface PublicUserData extends Entity {
   /** Unique id for a user */
@@ -16,7 +22,7 @@ export interface PublicUserData extends Entity {
    * describe their experience, what subjects they are interested in etc */
   introduction?: string;
   /** The locales a user prefers for content */
-  prefferedLocales: LocaleCode[];
+  prefferedLocales: UserLocale[];
   /** Username which will be displayed for a user */
   userName: string;
 }

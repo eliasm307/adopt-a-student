@@ -20,7 +20,7 @@ const createStudentHandler: InternalHandler<
 
   const student: PrivateStudentData = await createDocument({
     collectionPath: STUDENT_COLLECTION_NAME,
-    id: uid,
+    documentId: uid,
     data,
     dataPredicate: isPrivateStudentData,
     firestoreAdmin,

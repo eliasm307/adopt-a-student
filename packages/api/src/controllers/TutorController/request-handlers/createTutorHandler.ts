@@ -20,7 +20,7 @@ const createTutorHandler: InternalHandler<
 
   const tutor = await createDocument({
     collectionPath: TUTOR_COLLECTION_NAME,
-    id: uid,
+    documentId: uid,
     data,
     dataPredicate: isPrivateTutorData,
     firestoreAdmin,

@@ -6,13 +6,13 @@ export interface CreateDocumentProps<D> {
   collectionPath: string;
   data: D;
   dataPredicate: (data: any) => data is D;
+  documentId: string;
   firestoreAdmin: FirestoreAdmin;
-  id: string;
 }
 
 export default async function createDocument<D>({
   dataPredicate,
-  id,
+  documentId,
   collectionPath,
   firestoreAdmin,
   data,
@@ -24,7 +24,7 @@ export default async function createDocument<D>({
       "Could not create document because provided data is not valid/complete"
     );
 
-  const path = createPath(collectionPath, id);
+  const path = createPath(collectionPath, documentId);
 
   // check if tutor already exists for this user
   const docRef = await firestoreAdmin.doc(path).get();

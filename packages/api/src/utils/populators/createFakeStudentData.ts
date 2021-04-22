@@ -4,6 +4,7 @@ import { PrivateTutorData } from '@adopt-a-student/common';
 
 import newGuid from '../newGuid';
 import getRandomLocales from './getRandomLocales';
+import getRandomUserLocales from './getRandomUserLocales';
 
 export default function createFakeTutorData(): PrivateTutorData {
   return {
@@ -12,7 +13,7 @@ export default function createFakeTutorData(): PrivateTutorData {
     userName: faker.internet.userName(),
     imageUrl: faker.image.avatar(),
     introduction: faker.lorem.lines(Math.random() * 3),
-    prefferedLocales: getRandomLocales(),
+    prefferedLocales: getRandomUserLocales(),
     relatedSubjects: [],
     relatedStudents: [],
     available: true,

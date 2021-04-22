@@ -66,7 +66,7 @@ const createGenericSubject: InternalHandler<
   // create generic subject
   const genericSubject = await createDocument({
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
-    id: genericId,
+    documentId: genericId,
     data: genericSubjectData,
     dataPredicate: isGenericSubjectData,
     firestoreAdmin,
@@ -75,7 +75,7 @@ const createGenericSubject: InternalHandler<
   // create initial locale subject
   const localeSubject = await createDocument({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
-    id: createLocaleSubjectDocumentId({ country, genericId, locale }),
+    documentId: createLocaleSubjectDocumentId({ country, genericId, locale }),
     data: localeSubjectData,
     dataPredicate: isLocaleSubjectData,
     firestoreAdmin,

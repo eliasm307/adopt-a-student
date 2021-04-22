@@ -43,7 +43,7 @@ const createLocaleSubject: InternalHandler<
 
   const subject = await createDocument({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
-    id,
+    documentId: id,
     data: localeSubjectData,
     dataPredicate: isLocaleSubjectData,
     firestoreAdmin,

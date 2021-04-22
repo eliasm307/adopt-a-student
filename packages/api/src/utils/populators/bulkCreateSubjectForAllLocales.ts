@@ -25,8 +25,8 @@ export default async function bulkCreateSubjectsForAllLocales(props: Props) {
   // create generic subject
   const genericSubject = await createDocument({
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
-    id: genericId,
-    data: genericSubjectData,
+    documentId: genericId,
+    data: { ...genericSubjectData, id: genericId },
     dataPredicate: isGenericSubjectData,
     firestoreAdmin,
   });

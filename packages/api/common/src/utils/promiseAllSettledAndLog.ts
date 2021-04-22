@@ -13,8 +13,8 @@ export default async function promiseAllSettledAndLog<T>(
 
   console.warn(
     __filename,
-    `${resolvedCount}/${results.length} resolved, ${rejectedCount} rejected, results:`,
-    results
+    `${resolvedCount}/${results.length} resolved, ${rejectedCount} rejected, results:`
+    // results
   );
   return results;
 }
