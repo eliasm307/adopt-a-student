@@ -114,6 +114,13 @@ export class RelationshipController extends Controller {
     @Body() body: Partial<LinkSubjectAndSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkSubjectAndSubjectCategoryResponseBody> {
+    // verify received data
+    if (!body || !body.categoryId || !body.subjectId)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+
     return linkSubjectAndSubjectCategoryHandler(body, context);
   }
 
@@ -122,6 +129,13 @@ export class RelationshipController extends Controller {
     @Body() body: Partial<LinkSubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkSubjectsResponseBody> {
+    // verify received data
+    if (!body || !body.subject1Id || !body.subject2Id)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+
     return linkSubjectsHandler(body, context);
   }
 

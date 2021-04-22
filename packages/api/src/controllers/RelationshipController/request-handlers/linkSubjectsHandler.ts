@@ -3,7 +3,8 @@ import {
 } from '@adopt-a-student/common';
 
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../../constants';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { InternalHandler } from '../../../declarations/types';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
@@ -12,17 +13,8 @@ import verifyRequest from '../../../utils/verifyRequest';
 const linkGenericSubjects: InternalHandler<
   LinkSubjectsRequestBody,
   LinkSubjectsResponseBody
-> = async (body, context) => {
-  const { uid } = verifyRequest(body, context);
-
-  // verify received data
-  if (!body || !body.subject1Id || !body.subject2Id)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not link documents because provided data is not valid"
-    );
-
-  const { subject1Id, subject2Id } = body;
+> = async (props) => {
+  const { subject1Id, subject2Id } = props;
 
   const commonDocumentProps: Omit<
     AddDocumentLinkProps<GenericSubjectData, string>,
@@ -52,6 +44,6 @@ const linkGenericSubjects: InternalHandler<
     firestoreAdmin,
   });
 
-  return { message: "Success linking documents" };
+  return {};
 };
 export default linkGenericSubjects;

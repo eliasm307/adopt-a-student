@@ -137,8 +137,7 @@ export interface UnlinkSubjectsRequestBody {
 }
 
 export interface UnlinkSubjectsResponseBody {
-  subject1: SubjectOverview;
-  subject2: SubjectOverview;
+  // return nothing
 }
 
 export interface LinkSubjectsRequestBody {
@@ -147,8 +146,7 @@ export interface LinkSubjectsRequestBody {
 }
 
 export interface LinkSubjectsResponseBody {
-  subject1: SubjectOverview;
-  subject2: SubjectOverview;
+  // return nothing
 }
 
 export interface UnlinkStudentAndTutorRequestBody {
@@ -183,12 +181,13 @@ export interface UnlinkSubjectAndSubjectCategoryResponseBody {
 
 export interface LinkSubjectAndSubjectCategoryRequestBody {
   categoryId: CategoryId;
+  /** Locale to be returned after linking */
+  locale: LocaleCode;
   subjectId: SubjectId;
 }
 
 export interface LinkSubjectAndSubjectCategoryResponseBody {
-  subject: LocaleSubjectData;
-  subjectCategory: SubjectCategoryOverview;
+  // return nothing
 }
 
 export interface UnlinkTutorAndSubjectRequestBody {
