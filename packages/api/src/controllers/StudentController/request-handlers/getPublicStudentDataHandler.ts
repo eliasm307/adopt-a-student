@@ -12,7 +12,7 @@ import verifyRequest from '../../../utils/verifyRequest';
 // todo make controller automatically choose whether to use the private or public data if user id matches, just need to call a data extractor functionto get public data
 
 const getPublicStudentData: InternalHandler<
-  GetStudentRequestBody & { uid: string },
+  GetStudentRequestBody & AuthData,
   GetStudentResponseBody
 > = async ({ id, uid }) => {
   const path = createPath(TUTOR_COLLECTION_NAME, uid);

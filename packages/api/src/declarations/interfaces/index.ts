@@ -57,3 +57,8 @@ export type FirebaseCallableFunctionContext = {
    */
   rawRequest: any;
 };
+
+/** Simplified version of the auth object from a firebase callable context */
+export interface AuthData {
+  uid: string;
+}

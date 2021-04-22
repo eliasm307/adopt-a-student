@@ -1,16 +1,13 @@
 import { CallableContext } from 'firebase-functions/lib/providers/https';
 
+import { AuthData as RequestAuthData } from '../declarations/interfaces';
 import { functionsHttps } from './firebase/firebase-admin';
-
-interface Auth {
-  uid: string;
-}
 
 /** Does basic verification on request data */
 export default function verifyRequest(
   body: any,
   context: CallableContext
-): Auth {
+): RequestAuthData {
   // check user is authenticated
   if (!context.auth?.uid) {
     const error = "Requesting user is not authenticated";

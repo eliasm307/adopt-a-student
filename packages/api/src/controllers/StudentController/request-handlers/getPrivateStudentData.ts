@@ -10,7 +10,7 @@ import readPublicUserData from '../../../utils/readPublicUserData';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
 
 const getPrivateStudentData: InternalHandler<
-  GetStudentRequestBody & { uid: string },
+  GetStudentRequestBody & AuthData,
   GetStudentResponseBody
 > = async ({ id, uid }) => {
   const path = createPath(TUTOR_COLLECTION_NAME, uid);
