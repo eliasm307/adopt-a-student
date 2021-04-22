@@ -2,9 +2,10 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
   CreateTutorRequestBody, CreateTutorResponseBody, GetTutorRequestBody, GetTutorResponseBody,
-  isPrivateTutorData,
+  GetTutorsBySubjectsRequestBody, GetTutorsBySubjectsResponseBody, isPrivateTutorData,
 } from '@adopt-a-student/common';
 
+import isId from '../../../common/src/utils/type-predicates/isId';
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
 import { functionsHttps } from '../../utils/firebase/firebase-admin';
@@ -12,6 +13,7 @@ import verifyRequest from '../../utils/verifyRequest';
 import getPrivateTutorData from '../TutorController/request-handlers/getPrivateTutorDataHandler';
 import getPublicTutorData from '../TutorController/request-handlers/getPublicTutorDataHandler';
 import createTutorHandler from './request-handlers/createTutorHandler';
+import getTutorsBySubjectsHandler from './request-handlers/getTutorsBySubjectsHandler';
 
 const createTutor = "createTutor";
 const getTutorsBySubjects = "getTutorsBySubjects";
@@ -67,7 +69,7 @@ export class TutorsController extends Controller {
 
     const { id } = body;
 
-    if (!tutor || !isPrivateTutorData({ tutor, id: uid }))
+    if (!isId(id))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Provided data is invalid"
@@ -85,7 +87,15 @@ export class TutorsController extends Controller {
   ): Promise<GetTutorsBySubjectsResponseBody> {
     const { uid } = verifyRequest(body, context);
 
-    return getTutorsBySubjectsHandler(body, context);
+    const { subjectIds } = body;
+
+    if (!)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Provided data is invalid"
+      );
+
+    return getTutorsBySubjectsHandler({ subjectIds });
   }
 
   @Post(updateTutor)
