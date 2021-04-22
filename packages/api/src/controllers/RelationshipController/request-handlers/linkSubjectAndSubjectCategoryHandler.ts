@@ -26,7 +26,7 @@ const linkSubjectAndSubjectCategory: InternalHandler<
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
     linkToAdd: subjectCategoryId,
-    linkToMutatePredicate: (link) => link,
+    linkToMutatePredicate: (link) => link === subjectCategoryId,
     linksPropName: "relatedSubjects",
     documentId: genericSubjectId,
   };
@@ -38,7 +38,7 @@ const linkSubjectAndSubjectCategory: InternalHandler<
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     dataPredicate: isGenericSubjectCategoryData,
     linkToAdd: genericSubjectId,
-    linkToMutatePredicate: (link) => link,
+    linkToMutatePredicate: (link) => link === genericSubjectId,
     linksPropName: "relatedSubjects",
     documentId: subjectCategoryId,
   };
