@@ -89,6 +89,18 @@ export class SubjectsController extends Controller {
     @Body() body: UpdateLocaleSubjectRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateLocaleSubjectResponseBody> {
+    // verify received data
+    if (
+      !body ||
+      !body.updates ||
+      typeof body.updates !== "object" ||
+      !Object.keys(body.updates).length ||
+      !body.id
+    )
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update tutor because provided data is not valid"
+      );
     return updateLocaleSubjectHandler(body, context);
   }
 }

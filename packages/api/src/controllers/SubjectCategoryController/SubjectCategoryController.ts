@@ -84,6 +84,7 @@ export class SubjectCategoryController extends Controller {
 
     const { id, locale } = body;
 
+    // verify received data
     if (!locale || !id)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
