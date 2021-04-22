@@ -48,6 +48,14 @@ export class SubjectsController extends Controller {
     @Body() body: CreateGenericSubjectRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateGenericSubjectResponseBody> {
+    const auth = verifyRequest(body, context);
+
+    if (!body?.data)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Data not provided"
+      );
+
     return createGenericSubjectHandler(body, context);
   }
 

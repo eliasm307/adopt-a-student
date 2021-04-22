@@ -6,30 +6,21 @@ import {
 import {
   GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME,
 } from '../../../constants';
+import { InternalHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import newGuid from '../../../utils/newGuid';
 import verifyRequest from '../../../utils/verifyRequest';
 import { createLocaleSubjectId } from '../utils/localeSubjectDocumentId';
 
-// ? should the handlers require a CallableContext? should any security logic be done in the controller instead?
 const createGenericSubject: InternalHandler<
   CreateGenericSubjectRequestBody,
   CreateGenericSubjectResponseBody
-> = async (body, context) => {
-  const auth = verifyRequest(body, context);
-
-  if (!body?.data)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Data not provided"
-    );
-
-  const { data: inputData } = body;
+> = async (props) => {
+  const { data: inputData } = props;
 
   const { country, locale, name } = inputData;
 
-  // ? can this check if a document already exists somehow? maybe matching by name?
   const genericId = newGuid();
 
   const localeSubjectData: LocaleSubjectData = {
@@ -60,7 +51,7 @@ const createGenericSubject: InternalHandler<
       existingSubjectsSnapshot.docs.length
     } existing subjects with this name, try to edit existing subjects instead`;
 
-    console.warn(__filename, error, { body });
+    console.warn(__filename, error, { body: props });
 
     throw new functionsHttps.HttpsError("already-exists", error);
   }

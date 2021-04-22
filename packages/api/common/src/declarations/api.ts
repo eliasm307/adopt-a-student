@@ -94,7 +94,7 @@ export interface UpdateLocaleSubjectResponseBody {
 
 export interface CreateGenericSubjectRequestBody {
   /** initial localeSubjectData */
-  data?: Omit<LocaleSubjectData, "id">;
+  data: Omit<LocaleSubjectData, "id">;
 }
 export interface CreateGenericSubjectResponseBody {
   genericSubject: GenericSubjectData;
