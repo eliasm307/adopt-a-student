@@ -15,5 +15,6 @@ export default function createFakeTutorData(): PrivateTutorData {
     prefferedLocales: getRandomLocales(),
     relatedSubjects: [],
     relatedStudents: [],
+    available: true,
   };
 }

@@ -38,7 +38,7 @@ describe("bulkCreateSubjectsForAllLocales", () => {
     await expect(
       bulkCreateSubjectsForAllLocales({
         genericSubjectData: {
-          internalName: "Maths",
+          names: ["Maths"],
           relatedCategories: [],
           relatedSubjects: [],
         },

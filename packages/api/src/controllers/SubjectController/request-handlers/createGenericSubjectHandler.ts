@@ -83,6 +83,7 @@ const createGenericSubject: InternalHandler<
 
   return {
     genericSubject,
+    localeSubject,
   } as CreateGenericSubjectResponseBody;
 };
 

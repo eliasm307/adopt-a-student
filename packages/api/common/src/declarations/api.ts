@@ -103,6 +103,7 @@ export interface CreateGenericSubjectRequestBody {
 }
 export interface CreateGenericSubjectResponseBody {
   genericSubject: GenericSubjectData;
+  localeSubject: LocaleSubjectData;
 }
 
 export interface CreateLocaleSubjectRequestBody {

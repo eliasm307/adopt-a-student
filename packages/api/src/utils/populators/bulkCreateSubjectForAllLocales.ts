@@ -1,10 +1,15 @@
 import {
-  GenericSubjectData, localeCodes, localeCountries, LocaleSubjectData, promiseAllSettledAndLog,
+  GenericSubjectData, isGenericSubjectData, localeCodes, localeCountries, LocaleSubjectData,
+  promiseAllSettledAndLog,
 } from '@adopt-a-student/common';
 
+import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../constants';
 import createGenericSubject from '../../controllers/SubjectController/request-handlers/createGenericSubjectHandler';
 import createLocaleSubject from '../../controllers/SubjectController/request-handlers/createLocaleSubjectHandler';
 import callableContextSpoof from '../firebase/callableContextSpoof';
+import createDocument from '../firebase/createDocument';
+import { firestoreAdmin } from '../firebase/firebase-admin';
+import newGuid from '../newGuid';
 
 interface Props {
   genericSubjectData: Omit<GenericSubjectData, "id">;
@@ -13,14 +18,18 @@ interface Props {
 export default async function bulkCreateSubjectsForAllLocales(props: Props) {
   const { genericSubjectData } = props;
 
+  const { names } = genericSubjectData;
+
+  const genericId = newGuid();
+
   // create generic subject
-
-  const { localeSubject: genericSubject } = await createGenericSubject(
-    { data: genericSubjectData },
-    callableContextSpoof()
-  );
-
-  const { id: genericId } = genericSubject;
+  const genericSubject = await createDocument({
+    collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
+    id: genericId,
+    data: genericSubjectData,
+    dataPredicate: isGenericSubjectData,
+    firestoreAdmin,
+  });
 
   const promises: Promise<any>[] = [];
 
@@ -35,18 +44,17 @@ export default async function bulkCreateSubjectsForAllLocales(props: Props) {
           description: `test subject in ${String(
             locale
           )} locale for country ${country}`,
-          genericId,
+          name: names[0],
           locale,
           relatedStudents: [],
           relatedTutors: [],
         };
-        const localeSubjectPromise = createLocaleSubject(
-          {
-            data: localeSubjectData,
-            genericSubjectId: genericId,
-          },
-          callableContextSpoof()
-        );
+
+        const localeSubjectPromise = createLocaleSubject({
+          data: localeSubjectData,
+          genericSubjectId: genericId,
+        });
+
         promises.push(localeSubjectPromise);
       });
   });
