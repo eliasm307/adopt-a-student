@@ -43,7 +43,17 @@ export class SubjectCategoryController extends Controller {
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateSubjectCategoryResponseBody> {
     const auth = verifyRequest(body, context);
-    return createSubjectCategoryHandler(body);
+
+    const { locale, data, name } = body;
+
+    // verify received data
+    if (!locale)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not create subject because provided data is  incomplete"
+      );
+
+    return createSubjectCategoryHandler({ data, locale, name });
   }
 
   @Post(getSubjectCategoriesForLocale)
@@ -53,14 +63,16 @@ export class SubjectCategoryController extends Controller {
   ): Promise<GetSubjectCategoriesForLocaleResponseBody> {
     const auth = verifyRequest(body, context);
 
+    const { locale } = body;
+
     // verify received data
-    if (!body?.locale)
+    if (!locale)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not get subjects because provided data is missing subject id"
       );
 
-    return getSubjectCategoriesForLocaleHandler(body);
+    return getSubjectCategoriesForLocaleHandler({ locale });
   }
 
   @Post(getSubjectCategory)
@@ -69,12 +81,6 @@ export class SubjectCategoryController extends Controller {
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectCategoryResponseBody> {
     const auth = verifyRequest(body, context);
-
-    if (!body)
-      throw new functionsHttps.HttpsError(
-        "failed-precondition",
-        "No data provided"
-      );
 
     const { id, locale } = body;
 
@@ -93,19 +99,22 @@ export class SubjectCategoryController extends Controller {
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateSubjectCategoryResponseBody> {
     const auth = verifyRequest(body, context);
+
+    const { id, locale, updates } = body;
+
     // verify received data
-    if (
-      !body ||
-      !body.updates ||
-      typeof body.updates !== "object" ||
-      !Object.keys(body.updates).length ||
-      !body.id ||
-      !body.locale
-    )
+    if (!updates || typeof updates !== "object" || !id || !locale)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not update document because provided data is not valid"
       );
-    return updateSubjectCategoryHandler(body, context);
+
+    if (!Object.keys(updates).length)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update document because no updates were provided"
+      );
+
+    return updateSubjectCategoryHandler({ id, locale, updates });
   }
 }
