@@ -18,7 +18,7 @@ const getSubjectCategory: InternalHandler<
   const genericCategory = await getDocumentData({
     firestoreAdmin,
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
-    id,
+    documentId: id,
     dataPredicate: isGenericSubjectCategoryData,
   });
 

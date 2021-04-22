@@ -6,7 +6,10 @@ import { hasLinkMutator } from './interfaces';
 export interface DocumentLinkMutationProps<D, L> {
   collectionPath: string;
   dataPredicate: (data: any) => data is D;
-  id: string;
+  /** The id of the document in firestore that holds the entity data */
+  documentId: string;
+  /** The id inside the entity e.g. student.id */
+  entityId: string;
   linkReducer: (link: L) => string;
   // linkToAdd: L;
   linksPropName: keyof D;
@@ -80,8 +83,8 @@ export default async function mutateDocumentLink<D1, L1, D2, L2>(
   );
 
   // avoid any uneccessary writes if documents already linked
-  const existingLink1 = document2LinkIdMap[document1Props.id];
-  const existingLink2 = document1LinkIdMap[document2Props.id];
+  const existingLink1 = document2LinkIdMap[document1Props.documentId];
+  const existingLink2 = document1LinkIdMap[document2Props.documentId];
 
   if (!documentLinksShouldBeMutated(existingLink1, existingLink2))
     return [document1Data, document2Data];
@@ -92,7 +95,8 @@ export default async function mutateDocumentLink<D1, L1, D2, L2>(
     Promise.resolve(document2Data),
   ];
 
-  const document1IsLinkedToDocument2 = document1LinkIdMap[document2Props.id];
+  const document1IsLinkedToDocument2 =
+    document1LinkIdMap[document2Props.documentId];
 
   // only add links if they didnt exist already
   if (!document1IsLinkedToDocument2)
@@ -103,7 +107,8 @@ export default async function mutateDocumentLink<D1, L1, D2, L2>(
       firestoreAdmin,
     });
 
-  const document2IsLinkedToDocument1 = document2LinkIdMap[document1Props.id];
+  const document2IsLinkedToDocument1 =
+    document2LinkIdMap[document1Props.documentId];
 
   // only add links if they didnt exist already
   if (!document2IsLinkedToDocument1)

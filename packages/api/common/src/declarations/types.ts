@@ -20,13 +20,13 @@ export type EmailString = string;
 export type UrlString = string;
 
 /** A subject id that specifies locale and country */
-export type LocaleSubjectId = string;
+// export type LocaleSubjectId = string;
 
 /** A general subject id that doesnt specify locale or country */
-export type GenericSubjectId = string;
+export type SubjectId = string;
 
 /** Any subject id */
-export type SubjectId = GenericSubjectId | LocaleSubjectId;
+// export type SubjectId = GenericSubjectId | LocaleSubjectId;
 
 /** A tutor user id */
 export type TutorId = string;
@@ -41,7 +41,7 @@ export type UserId = TutorId | StudentId;
 export type SubjectCategoryId = string;
 
 /** A subject cateogory id which specifies a locale */
-export type LocaleSubjectCategoryId = string;
+// export type LocaleSubjectCategoryId = string;
 
 /** A general category name which doesnt specify locale */
 export type CategoryId = string;

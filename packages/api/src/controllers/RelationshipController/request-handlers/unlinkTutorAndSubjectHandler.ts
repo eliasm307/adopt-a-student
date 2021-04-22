@@ -34,7 +34,7 @@ const unlinkTutorAndSubject: InternalHandler<
     filterPredicate: ({ id: linkId }) => linkId !== id,
     linkReducer: ({ id }) => id,
     linksPropName: "relatedSubjects",
-    id: uid,
+    documentId: uid,
   };
 
   const document2Props: RemoveDocumentLinkProps<LocaleSubjectData, string> = {
@@ -43,7 +43,7 @@ const unlinkTutorAndSubject: InternalHandler<
     filterPredicate: (linkId) => linkId !== uid,
     linkReducer: (link) => link,
     linksPropName: "relatedStudents",
-    id,
+    documentId: id,
   };
 
   const [updatedDocument1, updatedDocument2] = await unlinkDocuments({

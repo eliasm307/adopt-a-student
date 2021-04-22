@@ -12,7 +12,7 @@ import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import newGuid from '../../../utils/newGuid';
 import verifyRequest from '../../../utils/verifyRequest';
-import { createLocaleSubjectId } from '../utils/localeSubjectDocumentId';
+import { createLocaleSubjectDocumentId } from '../utils/localeSubjectDocumentId';
 
 const createLocaleSubject: InternalHandler<
   CreateLocaleSubjectRequestBody,
@@ -33,7 +33,11 @@ const createLocaleSubject: InternalHandler<
     );
 
   // id is generated from generic id
-  const id = createLocaleSubjectId({ genericId: genericId, locale, country });
+  const id = createLocaleSubjectDocumentId({
+    genericId: genericId,
+    locale,
+    country,
+  });
 
   const localeSubjectData = { ...props.data, id };
 

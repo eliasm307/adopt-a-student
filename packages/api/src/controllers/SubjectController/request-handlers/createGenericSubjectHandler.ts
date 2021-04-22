@@ -11,7 +11,7 @@ import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import newGuid from '../../../utils/newGuid';
 import verifyRequest from '../../../utils/verifyRequest';
-import { createLocaleSubjectId } from '../utils/localeSubjectDocumentId';
+import { createLocaleSubjectDocumentId } from '../utils/localeSubjectDocumentId';
 
 const createGenericSubject: InternalHandler<
   CreateGenericSubjectRequestBody,
@@ -75,7 +75,7 @@ const createGenericSubject: InternalHandler<
   // create initial locale subject
   const localeSubject = await createDocument({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
-    id: createLocaleSubjectId({ country, genericId, locale }),
+    id: createLocaleSubjectDocumentId({ country, genericId, locale }),
     data: localeSubjectData,
     dataPredicate: isLocaleSubjectData,
     firestoreAdmin,

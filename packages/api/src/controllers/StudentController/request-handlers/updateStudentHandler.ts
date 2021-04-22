@@ -3,7 +3,6 @@ import {
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME } from '../../../constants';
-import { hasId } from '../../../declarations/interfaces';
 import { InternalHandler } from '../../../declarations/types';
 import studentDataUpdater from '../../../utils/data-updaters/studentDataUpdater';
 import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
@@ -11,7 +10,7 @@ import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
 
 const updateStudentHandler: InternalHandler<
-  UpdateStudentRequestBody & hasId,
+  UpdateStudentRequestBody & AuthData,
   UpdateStudentResponseBody
 > = async (props) => {
   const { updates: inputUpdates, id } = props;

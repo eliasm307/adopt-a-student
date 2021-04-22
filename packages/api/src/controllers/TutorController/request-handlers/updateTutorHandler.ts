@@ -10,7 +10,7 @@ import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
 
 const updateTutorHandler: InternalHandler<
-  UpdateTutorRequestBody & hasId,
+  UpdateTutorRequestBody & AuthData,
   UpdateTutorResponseBody
 > = async (props) => {
   const { updates: inputUpdates, uid } = props;

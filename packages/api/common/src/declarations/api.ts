@@ -3,8 +3,8 @@ import {
   PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData, UserSubjectData,
 } from './data-models';
 import {
-  CategoryId, Country, GenericSubjectId, LocaleCode, StudentId, SubjectCategoryId,
-  SubjectCategoryName, SubjectId, TutorId,
+  CategoryId, Country, LocaleCode, StudentId, SubjectCategoryId, SubjectCategoryName, SubjectId,
+  TutorId,
 } from './types';
 
 export interface GetStudentsBySubjectsRequestBody {
@@ -75,13 +75,13 @@ export interface GetSubjectsByCategoryRequestBody {
 
 export interface SubjectOverview {
   relatedCategories: CategoryId[];
-  relatedSubjects: GenericSubjectId[];
+  relatedSubjects: SubjectId[];
   subject: LocaleSubjectData;
 }
 
 export interface SubjectCategoryOverview {
   category: LocaleSubjectCategoryData;
-  relatedSubjects: GenericSubjectId[];
+  relatedSubjects: SubjectId[];
 }
 
 export interface GetSubjectsByCategoryResponseBody {

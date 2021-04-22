@@ -6,11 +6,11 @@ interface Props {
   locale: LocaleCode;
 }
 
-export function isLocaleSubjectId(id: string): boolean {
+export function isLocaleSubjectDocumentId(id: string): boolean {
   return id.split(`/`).length === 3;
 }
 
-export function createLocaleSubjectId({
+export function createLocaleSubjectDocumentId({
   genericId,
   locale,
   country,
@@ -18,7 +18,7 @@ export function createLocaleSubjectId({
   return `${genericId}-${locale}-${country}`;
 }
 
-export function getGenericIdFromLocaleSubjectId(
+export function getGenericIdFromLocaleSubjectDocumentId(
   localeSubjectId: string
 ): string {
   return (
@@ -30,7 +30,9 @@ export function getGenericIdFromLocaleSubjectId(
   );
 }
 
-export function getLocaleFromLocaleSubjectId(localeSubjectId: string): string {
+export function getLocaleFromLocaleSubjectDocumentId(
+  localeSubjectId: string
+): string {
   return (
     localeSubjectId.split(`-`)[1] ||
     console.warn(
@@ -44,7 +46,9 @@ export function getLocaleFromLocaleSubjectId(localeSubjectId: string): string {
   );
 }
 
-export function getCountryFromLocaleSubjectId(localeSubjectId: string): string {
+export function getCountryFromLocaleSubjectDocumentId(
+  localeSubjectId: string
+): string {
   return (
     localeSubjectId.split(`-`)[2] ||
     console.warn(

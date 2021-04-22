@@ -29,13 +29,13 @@ const linkGenericSubjects: InternalHandler<
   const document1Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
     linkToAdd: subject2Id,
-    id: subject1Id,
+    documentId: subject1Id,
   };
 
   const document2Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
     linkToAdd: subject1Id,
-    id: subject2Id,
+    documentId: subject2Id,
   };
 
   const [updatedDocument1, updatedDocument2] = await linkDocuments({

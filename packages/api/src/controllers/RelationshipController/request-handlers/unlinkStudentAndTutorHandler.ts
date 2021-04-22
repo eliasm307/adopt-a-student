@@ -37,7 +37,7 @@ const unlinkStudentAndTutor: InternalHandler<
   > = {
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
-    id: studentId,
+    documentId: studentId,
     filterPredicate: ({ id: linkId }) => linkId !== tutorId,
     linkReducer: ({ id }) => id,
     linksPropName: "relatedTutors",
@@ -49,7 +49,7 @@ const unlinkStudentAndTutor: InternalHandler<
   > = {
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,
-    id: tutorId,
+    documentId: tutorId,
     filterPredicate: ({ id: linkId }) => linkId !== studentId,
     linkReducer: (link) => link.id,
     linksPropName: "relatedStudents",

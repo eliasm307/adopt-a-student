@@ -1,7 +1,7 @@
 import { ConfidenceLevelEnum } from './enums';
 import {
-  CategoryId, Country, EmailString, GenericSubjectId, LocaleCode, LocaleSubjectId, StudentId,
-  SubjectCategoryId, SubjectCategoryName, SubjectId, SubjectName, TutorId, UrlString, UserId,
+  CategoryId, Country, EmailString, LocaleCode, StudentId, SubjectCategoryId, SubjectCategoryName,
+  SubjectId, SubjectName, TutorId, UrlString, UserId,
 } from './types';
 
 export interface Entity {}
@@ -49,10 +49,11 @@ export interface PublicTutorData extends PublicUserData {
  */
 export interface UserSubjectData {
   /** Unique id to the related subject */
-  readonly id: LocaleSubjectId;
+  readonly id: SubjectId;
 
   /** A rating of how confident a user feels in the subject, the numbers  */
   confidenceLevel: ConfidenceLevelEnum;
+  country: Country;
   /** Detail of the users experience with the subject */
   detail: string;
   locale: LocaleCode;
@@ -64,7 +65,7 @@ export interface UserSubjectData {
  * where "Physics" and "Physiques" both belong to the "Physics" generic subject
  */
 export interface GenericSubjectData extends Entity {
-  readonly id: GenericSubjectId;
+  readonly id: SubjectId;
 
   /** Existing names for this subject from defined locales
    *
@@ -76,7 +77,7 @@ export interface GenericSubjectData extends Entity {
   /** Links to other relevant subjects a user might be interested in
      `// todo needs to be syncronised ie if A is related to B then B must be related to A`
     */
-  relatedSubjects: GenericSubjectId[];
+  relatedSubjects: SubjectId[];
 }
 /** Name of a subject category in a specific locale */
 export interface LocaleSubjectName {

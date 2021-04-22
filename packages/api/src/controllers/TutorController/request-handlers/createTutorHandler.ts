@@ -9,7 +9,7 @@ import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 
 const createTutorHandler: InternalHandler<
-  CreateTutorRequestBody & hasId,
+  CreateTutorRequestBody & AuthData,
   CreateTutorResponseBody
 > = async (props) => {
   const { tutor: tutorParams, uid } = props;

@@ -32,7 +32,7 @@ const unlinkSubjectAndSubjectCategoryHandler: InternalHandler<
     filterPredicate: (link) => link !== categoryId,
     linkReducer: (link) => link,
     linksPropName: "relatedCategories",
-    id: subjectId,
+    documentId: subjectId,
   };
 
   const document2Props: RemoveDocumentLinkProps<
@@ -44,7 +44,7 @@ const unlinkSubjectAndSubjectCategoryHandler: InternalHandler<
     filterPredicate: (link) => link !== subjectId,
     linkReducer: (link) => link,
     linksPropName: "relatedSubjects",
-    id: categoryId,
+    documentId: categoryId,
   };
 
   const [updatedDocument1, updatedDocument2] = await unlinkDocuments({

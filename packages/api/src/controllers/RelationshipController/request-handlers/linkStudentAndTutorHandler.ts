@@ -24,7 +24,7 @@ const linkStudentAndTutor: InternalHandler<
   > = {
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
-    id: studentId,
+    documentId: studentId,
     linkToAdd: { id: tutorId },
     linkReducer: (link) => link.id,
     linksPropName: "relatedTutors",
@@ -36,7 +36,7 @@ const linkStudentAndTutor: InternalHandler<
   > = {
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,
-    id: tutorId,
+    documentId: tutorId,
     linkToAdd: { id: studentId },
     linkReducer: (link) => link.id,
     linksPropName: "relatedStudents",

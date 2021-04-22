@@ -25,7 +25,7 @@ const linkTutorAndSubject: InternalHandler<
     linkToAdd: data,
     linkReducer: ({ id }) => id,
     linksPropName: "relatedStudents",
-    id: uid,
+    documentId: uid,
   };
 
   const { id } = data;
@@ -36,7 +36,7 @@ const linkTutorAndSubject: InternalHandler<
     linkToAdd: uid,
     linkReducer: (link) => link,
     linksPropName: "relatedTutors",
-    id,
+    documentId: id,
   };
 
   const [updatedTutor, updatedSubject] = await linkDocuments({

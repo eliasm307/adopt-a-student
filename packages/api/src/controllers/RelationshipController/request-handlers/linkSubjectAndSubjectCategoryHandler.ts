@@ -28,7 +28,7 @@ const linkSubjectAndSubjectCategory: InternalHandler<
     linkToAdd: subjectCategoryId,
     linkReducer: (link) => link,
     linksPropName: "relatedSubjects",
-    id: genericSubjectId,
+    documentId: genericSubjectId,
   };
 
   const document2Props: AddDocumentLinkProps<
@@ -40,7 +40,7 @@ const linkSubjectAndSubjectCategory: InternalHandler<
     linkToAdd: genericSubjectId,
     linkReducer: (link) => link,
     linksPropName: "relatedSubjects",
-    id: subjectCategoryId,
+    documentId: subjectCategoryId,
   };
 
   const [updatedGenericSubject, updatedSubjectCategory] = await linkDocuments({

@@ -36,13 +36,13 @@ const unlinkGenericSubjects: InternalHandler<
     ...commonDocumentProps,
     filterPredicate: (link) => link !== subject2Id,
 
-    id: subject1Id,
+    documentId: subject1Id,
   };
 
   const document2Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
     filterPredicate: (link) => link !== subject1Id,
-    id: subject2Id,
+    documentId: subject2Id,
   };
 
   const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
