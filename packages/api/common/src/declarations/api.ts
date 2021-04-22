@@ -137,7 +137,7 @@ export interface UnlinkSubjectsRequestBody {
 }
 
 export interface UnlinkSubjectsResponseBody {
-  // return nothing
+  // return nothing, as getting useful data would require queries out of the scope of what has been requested
 }
 
 export interface LinkSubjectsRequestBody {
@@ -146,7 +146,7 @@ export interface LinkSubjectsRequestBody {
 }
 
 export interface LinkSubjectsResponseBody {
-  // return nothing
+  // return nothing, as getting useful data would require queries out of the scope of what has been requested
 }
 
 export interface UnlinkStudentAndTutorRequestBody {
@@ -175,8 +175,7 @@ export interface UnlinkSubjectAndSubjectCategoryRequestBody {
 }
 
 export interface UnlinkSubjectAndSubjectCategoryResponseBody {
-  subject: LocaleSubjectData;
-  subjectCategory: SubjectCategoryOverview;
+  // return nothing, as getting useful data would require queries out of the scope of what has been requested
 }
 
 export interface LinkSubjectAndSubjectCategoryRequestBody {
@@ -187,7 +186,7 @@ export interface LinkSubjectAndSubjectCategoryRequestBody {
 }
 
 export interface LinkSubjectAndSubjectCategoryResponseBody {
-  // return nothing
+  // return nothing, as getting useful data would require queries out of the scope of what has been requested
 }
 
 export interface UnlinkTutorAndSubjectRequestBody {
