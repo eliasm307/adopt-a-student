@@ -1,7 +1,9 @@
 import {
   CreateTutorRequestBody,
   CreateTutorResponseBody,
+  localeCountries,
   PrivateTutorData,
+  selectAnyArrayItem,
 } from "@adopt-a-student/common";
 import isProductionEnvironment from "../utils/isProductionEnvironment";
 import callFirebaseFunction from "./callFirebaseFunction";
@@ -65,13 +67,15 @@ describe.only("firebase functions createTutor", () => {
           {
             confidenceLevel: 2,
             detail: faker.lorem.paragraph(Math.random() * 3),
-            id: "fake-id",
+            id: `fake-id-${Math.random() * 999}`,
             locale: "en",
+            country: selectAnyArrayItem([...localeCountries.en]),
           },
         ],
         userName: faker.internet.userName(),
         imageUrl: faker.image.imageUrl(),
         introduction: faker.lorem.lines(Math.random() * 3),
+        available: Math.random() > 0.5,
       },
     };
 

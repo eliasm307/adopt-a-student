@@ -11,6 +11,9 @@ export function isPrivateTutorData(data: any): data is PrivateTutorData {
     userName,
     prefferedLocales,
     relatedSubjects,
+    available,
+    imageUrl,
+    introduction,
   } = data as PrivateTutorData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -23,6 +26,9 @@ export function isPrivateTutorData(data: any): data is PrivateTutorData {
     userName,
     prefferedLocales,
     relatedSubjects,
+    available,
+    imageUrl,
+    introduction,
   };
 
   const hasPreferredLocales = Array.isArray(prefferedLocales);
@@ -31,6 +37,11 @@ export function isPrivateTutorData(data: any): data is PrivateTutorData {
   const hasId = typeof id === "string" && id;
   const hasRelatedSubjects = Array.isArray(relatedStudents);
   const hasStudents = Array.isArray(relatedStudents);
+  const hasAvailability = typeof available === "boolean";
+  const canHaveImage =
+    typeof imageUrl === "undefined" || typeof imageUrl === "string";
+  const canHaveIntro =
+    typeof introduction === "undefined" || typeof introduction === "string";
 
   if (
     hasEmail &&
@@ -38,7 +49,10 @@ export function isPrivateTutorData(data: any): data is PrivateTutorData {
     hasId &&
     hasRelatedSubjects &&
     hasStudents &&
-    hasPreferredLocales
+    hasPreferredLocales &&
+    canHaveImage &&
+    hasAvailability &&
+    canHaveIntro
   )
     return true;
 

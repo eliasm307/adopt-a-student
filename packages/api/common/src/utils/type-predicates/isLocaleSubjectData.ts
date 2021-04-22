@@ -8,7 +8,7 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
     country,
     relatedTutors,
     description,
-    genericId,
+    name,
     locale,
     relatedStudents,
   } = data as LocaleSubjectData;
@@ -21,13 +21,13 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
     country,
     relatedTutors,
     description,
-    genericId,
+    name,
     locale,
     relatedStudents,
   };
 
   const hasId = typeof id === "string" && id;
-  const hasGenericSubjectId = typeof genericId === "string"; // && genericId;
+  const hasName = typeof name === "string" && name;
   const hasLocale = typeof locale === "string" && locale;
   const hasDescription = typeof description === "string";
   const hasCountry = typeof country === "string";
@@ -54,7 +54,7 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
     return Boolean(
       console.warn(__filename, "Data is not valid because of locale", { data })
     );
-  if (!hasGenericSubjectId)
+  if (!hasName)
     return Boolean(
       console.warn(
         __filename,

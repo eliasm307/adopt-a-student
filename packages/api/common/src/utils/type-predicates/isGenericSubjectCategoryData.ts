@@ -6,7 +6,12 @@ export function isGenericSubjectCategoryData(
 ): data is GenericSubjectCategoryData {
   if (typeof data !== "object") return false;
 
-  const { id, locales, relatedSubjects } = data as GenericSubjectCategoryData;
+  const {
+    id,
+    locales,
+    relatedSubjects,
+    names,
+  } = data as GenericSubjectCategoryData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
   // ts will throw an error to update the predicate as this object will be invalid
@@ -15,14 +20,15 @@ export function isGenericSubjectCategoryData(
     id,
     locales,
     relatedSubjects,
+    names,
   };
 
   const hasId = typeof id === "string" && id;
-
+  const hasNames = Array.isArray(names);
   const hasGenericSubjectIds = Array.isArray(relatedSubjects);
   const hasLocaleSubjects = typeof locales === "object";
 
-  if (!(hasId && hasLocaleSubjects && hasGenericSubjectIds)) {
+  if (!(hasId && hasLocaleSubjects && hasGenericSubjectIds && hasNames)) {
     console.warn(
       __filename,
       "Data is not valid, either doesnt have id or locale subjects",

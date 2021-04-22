@@ -107,16 +107,16 @@ export class SubjectsController extends Controller {
   ): Promise<GetSubjectsByCategoryResponseBody> {
     const { uid } = verifyRequest(body, context);
 
-    const { categoryId, locale } = body;
+    const { categoryId, locale, country } = body;
 
     // verify received data
-    if (!locale || !categoryId)
+    if (!locale || !categoryId || !country)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
-        "Could not get subjects by category because provided data is missing locale or required subject category id"
+        "Could not get subjects by category because provided data is incomplete"
       );
 
-    return getSubjectsByCategoryHandler({ categoryId, locale });
+    return getSubjectsByCategoryHandler({ categoryId, locale, country });
   }
 
   @Post(updateLocaleSubject)
