@@ -39,7 +39,7 @@ const unlinkStudentAndTutor: InternalHandler<
     dataPredicate: isPrivateStudentData,
     documentId: studentId,
     filterPredicate: ({ id: linkId }) => linkId !== tutorId,
-    linkReducer: ({ id }) => id,
+    linkToMutatePredicate: ({ id }) => id,
     linksPropName: "relatedTutors",
   };
 
@@ -51,7 +51,7 @@ const unlinkStudentAndTutor: InternalHandler<
     dataPredicate: isPrivateTutorData,
     documentId: tutorId,
     filterPredicate: ({ id: linkId }) => linkId !== studentId,
-    linkReducer: (link) => link.id,
+    linkToMutatePredicate: (link) => link.id,
     linksPropName: "relatedStudents",
   };
 

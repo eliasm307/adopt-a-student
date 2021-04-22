@@ -19,7 +19,7 @@ const updateTutorHandler: InternalHandler<
 
   const updatedData = await updateDocumentData({
     collectionPath: TUTOR_COLLECTION_NAME,
-    id: uid,
+    documentId: uid,
     updates: updates,
     dataPredicate: isPrivateTutorData,
     dataUpdater: tutorDataUpdater,

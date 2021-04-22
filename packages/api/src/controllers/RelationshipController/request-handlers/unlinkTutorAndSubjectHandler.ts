@@ -32,7 +32,7 @@ const unlinkTutorAndSubject: InternalHandler<
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,
     filterPredicate: ({ id: linkId }) => linkId !== id,
-    linkReducer: ({ id }) => id,
+    linkToMutatePredicate: ({ id }) => id,
     linksPropName: "relatedSubjects",
     documentId: uid,
   };
@@ -41,7 +41,7 @@ const unlinkTutorAndSubject: InternalHandler<
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
     filterPredicate: (linkId) => linkId !== uid,
-    linkReducer: (link) => link,
+    linkToMutatePredicate: (link) => link,
     linksPropName: "relatedStudents",
     documentId: id,
   };

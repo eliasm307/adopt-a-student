@@ -24,7 +24,7 @@ const updateSubjectCategory: InternalHandler<
   // update just the locale subject category of the generic
   const genericSubjectCategory = await updateDocumentData({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
-    id,
+    documentId: id,
     updates: genericCategoryUpdates,
     dataPredicate: isGenericSubjectCategoryData,
     dataUpdater: genericSubjectCategoryDataUpdater,

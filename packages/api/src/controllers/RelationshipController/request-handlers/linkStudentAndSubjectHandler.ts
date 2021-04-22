@@ -32,7 +32,7 @@ const linkStudentAndLocaleSubject: InternalHandler<
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
     linkToAdd: data,
-    linkReducer: (link) => link.id,
+    linkToMutatePredicate: (link) => link.id,
     linksPropName: "relatedSubjects",
     documentId: uid,
     entityId: uid,
@@ -42,7 +42,7 @@ const linkStudentAndLocaleSubject: InternalHandler<
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
     linkToAdd: uid,
-    linkReducer: (link) => link,
+    linkToMutatePredicate: (link) => link,
     linksPropName: "relatedStudents",
     documentId: createLocaleSubjectDocumentId({
       country,

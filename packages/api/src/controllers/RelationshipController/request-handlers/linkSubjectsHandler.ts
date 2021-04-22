@@ -22,7 +22,7 @@ const linkGenericSubjects: InternalHandler<
   > = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
-    linkReducer: (link) => link,
+    linkToMutatePredicate: (link) => link,
     linksPropName: "relatedSubjects",
   };
 

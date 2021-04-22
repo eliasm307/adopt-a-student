@@ -23,7 +23,7 @@ const linkTutorAndSubject: InternalHandler<
     collectionPath: TUTOR_COLLECTION_NAME,
     dataPredicate: isPrivateTutorData,
     linkToAdd: data,
-    linkReducer: ({ id }) => id,
+    linkToMutatePredicate: ({ id }) => id,
     linksPropName: "relatedStudents",
     documentId: uid,
   };
@@ -34,7 +34,7 @@ const linkTutorAndSubject: InternalHandler<
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
     linkToAdd: uid,
-    linkReducer: (link) => link,
+    linkToMutatePredicate: (link) => link,
     linksPropName: "relatedTutors",
     documentId: id,
   };

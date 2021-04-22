@@ -17,7 +17,7 @@ const updateLocaleSubject: InternalHandler<
 
   const result = await updateDocumentData({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
-    id,
+    documentId: id,
     updates: { ...updates, id },
     dataPredicate: isLocaleSubjectData,
     dataUpdater: localeSubjectDataUpdater,

@@ -31,7 +31,7 @@ const unlinkStudentAndLocaleSubject: InternalHandler<
   > = {
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
-    linkReducer: ({ id }) => id,
+    linkToMutatePredicate: ({ id }) => id,
     filterPredicate: ({ id: link }) => link !== subjectId,
     linksPropName: "relatedSubjects",
     documentId: uid,
@@ -41,7 +41,7 @@ const unlinkStudentAndLocaleSubject: InternalHandler<
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
     filterPredicate: (link) => link !== uid,
-    linkReducer: (link) => link,
+    linkToMutatePredicate: (link) => link,
     linksPropName: "relatedStudents",
     documentId: localeSubjectDocumentId,
   };

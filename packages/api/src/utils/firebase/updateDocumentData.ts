@@ -7,8 +7,8 @@ interface Props<D> {
   collectionPath: string;
   dataPredicate: (data: any) => data is D;
   dataUpdater: DataUpdater<D>;
+  documentId: string;
   firestoreAdmin: FirestoreAdmin;
-  id: string;
   updates: Partial<D>;
 }
 
@@ -17,10 +17,10 @@ export default async function updateDocumentData<D>({
   updates: updates,
   dataPredicate,
   firestoreAdmin,
-  id,
+  documentId,
   dataUpdater,
 }: Props<D>): Promise<D> {
-  const documentPath = createPath(collectionPath, id);
+  const documentPath = createPath(collectionPath, documentId);
 
   // check if tutor already exists for this user
   const docSnapshot = await firestoreAdmin.doc(documentPath).get();
