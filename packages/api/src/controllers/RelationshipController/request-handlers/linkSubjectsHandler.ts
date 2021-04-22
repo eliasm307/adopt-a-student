@@ -18,11 +18,10 @@ const linkGenericSubjects: InternalHandler<
 
   const commonDocumentProps: Omit<
     AddDocumentLinkProps<GenericSubjectData, string>,
-    "id" | "linkToAdd"
+    "documentId" | "linkToAdd" | "linkToMutatePredicate"
   > = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
-    linkToMutatePredicate: (link) => link,
     linksPropName: "relatedSubjects",
   };
 
@@ -30,12 +29,14 @@ const linkGenericSubjects: InternalHandler<
     ...commonDocumentProps,
     linkToAdd: subject2Id,
     documentId: subject1Id,
+    linkToMutatePredicate: (link) => link === subject2Id,
   };
 
   const document2Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
     linkToAdd: subject1Id,
     documentId: subject2Id,
+    linkToMutatePredicate: (link) => link === subject1Id,
   };
 
   const [updatedDocument1, updatedDocument2] = await linkDocuments({

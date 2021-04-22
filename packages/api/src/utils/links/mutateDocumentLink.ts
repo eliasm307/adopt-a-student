@@ -9,7 +9,7 @@ export interface DocumentLinkMutationProps<D, L> {
   dataPredicate: (data: any) => data is D;
   /** The id of the document in firestore that holds the entity data */
   documentId: string;
-  /** Predicate to identify the link affected in this mutation */
+  /** Predicate to identify the link affected in this mutation, used to determine if the requested link already exists */
   linkToMutatePredicate: (link: L) => boolean;
   // linkToAdd: L;
   linksPropName: keyof D;
