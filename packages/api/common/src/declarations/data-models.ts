@@ -30,13 +30,15 @@ export interface PrivateUserData extends PublicUserData {
   relatedSubjects: UserSubjectData[];
 }
 /** Schema of data that represents a student, as it is stored in database */
-export interface PrivateStudentData extends PrivateUserData {
+export interface PrivateStudentData extends PrivateUserData, PublicStudentData {
   /** Data about the tutors a student is involved with */
   relatedTutors: LinkedTutorData[];
 }
+
 export interface PublicStudentData extends PublicUserData {}
+
 /** Schema of data that represents a tutor, only available to the tutor */
-export interface PrivateTutorData extends PrivateUserData {
+export interface PrivateTutorData extends PrivateUserData, PublicTutorData {
   /** Data about the students a teacher is involved with */
   relatedStudents: LinkedStudentData[];
 }

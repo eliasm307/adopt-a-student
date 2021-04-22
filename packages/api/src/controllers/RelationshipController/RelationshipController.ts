@@ -155,6 +155,20 @@ export class RelationshipController extends Controller {
     @Body() body: Partial<UnlinkStudentAndTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkStudentAndTutorResponseBody> {
+    // verify received data
+    if (!body || !body.studentId || !body.tutorId)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update tutor because provided data is not valid"
+      );
+    const userIsStudentOrTutor = studentId === uid || tutorId === uid;
+
+    if (!userIsStudentOrTutor)
+      throw new functionsHttps.HttpsError(
+        "permission-denied",
+        "Logged in user is neither the student or the tutor"
+      );
+
     return unlinkStudentAndTutorHandler(body, context);
   }
 
