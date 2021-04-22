@@ -93,7 +93,9 @@ export interface LocaleSubjectCategoryData {
 /** Subject category with all locale names */
 export interface GenericSubjectCategoryData extends Entity {
   id: CategoryId;
-  /** Representations of the same generic subject catories in different locales */
+  /** Representations of the same generic subject catories in different locales
+    // ? should the key be the country instead?
+  */
   locales: Record<LocaleCode, LocaleSubjectCategoryData>;
   /** Existing names for this subject category from defined locales *
   // todo this should update when locale subjects are changed
