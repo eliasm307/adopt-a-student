@@ -18,9 +18,7 @@ export type FirebaseCallableFunctionHandler<D = any, R = any> = (
 ) => Promise<R>;
 
 /** Internal api handler, doesnt require auth */
-export type InternalHandler<D = any, R = any> = (
-  body: Partial<D> | undefined
-) => Promise<R>;
+export type InternalHandler<D = any, R = any> = (props: D) => Promise<R>;
 
 /** Defines the callable function names available, as defined by various controllers */
 export type CallableFunctionName =
