@@ -1,28 +1,9 @@
-import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
-
 import {
-  isLinkedLocaleSubjectData, LinkStudentAndSubjectRequestBody, LinkStudentAndSubjectResponseBody,
-  LinkStudentAndTutorRequestBody, LinkStudentAndTutorResponseBody,
-  LinkSubjectAndSubjectCategoryRequestBody, LinkSubjectAndSubjectCategoryResponseBody,
-  LinkSubjectsRequestBody, LinkSubjectsResponseBody, LinkTutorAndSubjectRequestBody,
-  LinkTutorAndSubjectResponseBody, UnlinkStudentAndSubjectRequestBody,
-  UnlinkStudentAndSubjectResponseBody, UnlinkStudentAndTutorRequestBody,
-  UnlinkStudentAndTutorResponseBody, UnlinkSubjectAndSubjectCategoryRequestBody,
-  UnlinkSubjectAndSubjectCategoryResponseBody, UnlinkSubjectsRequestBody,
-  UnlinkSubjectsResponseBody, UnlinkTutorAndSubjectRequestBody, UnlinkTutorAndSubjectResponseBody,
+  LinkTutorAndSubjectRequestBody, LinkTutorAndSubjectResponseBody,
 } from '@adopt-a-student/common';
 
-import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
-import arrayToRecord from '../../utils/arrayToRecord';
-import linkStudentAndSubjectHandler from './request-handlers/linkStudentAndSubjectHandler';
-import linkStudentAndTutorHandler from './request-handlers/linkStudentAndTutorHandler';
-import linkSubjectAndSubjectCategoryHandler from './request-handlers/linkSubjectAndSubjectCategoryHandler';
-import linkSubjectsHandler from './request-handlers/linkSubjectsHandler';
-import linkTutorAndSubjectHandler from './request-handlers/linkTutorAndSubjectHandler';
-import unlinkStudentAndSubjectHandler from './request-handlers/unlinkStudentAndSubjectHandler';
-import unlinkStudentAndTutorHandler from './request-handlers/unlinkStudentAndTutorHandler';
-import unlinkSubjectAndSubjectCategoryHandler from './request-handlers/unlinkSubjectAndSubjectCategoryHangler';
-import unlinkSubjectsHandler from './request-handlers/unlinkSubjectsHandler';
+import linkDocuments from '../../../utils/links/linkDocuments';
+import verifyRequest from '../../../utils/verifyRequest';
 import unlinkTutorAndSubjectHandler from './request-handlers/unlinkTutorAndSubjectHandler';
 
 const linkSubjects = "linkSubjects";
@@ -144,6 +125,13 @@ export class RelationshipController extends Controller {
     @Body() body: Partial<LinkTutorAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkTutorAndSubjectResponseBody> {
+    // verify received data
+    if (!body || !body.data || !isLinkedLocaleSubjectData(data))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+
     return linkTutorAndSubjectHandler(body, context);
   }
 

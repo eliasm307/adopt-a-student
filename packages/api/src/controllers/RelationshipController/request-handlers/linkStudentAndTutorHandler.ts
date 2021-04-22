@@ -48,6 +48,12 @@ const linkStudentAndTutor: InternalHandler<
     firestoreAdmin,
   });
 
+  // todo this should use some sort of request mechanism instead of automatically adding
+  /*
+// todo put these in request arrays then a user can decide to reject or accept request,
+rejecting a request should not delete it but keep it there as rejected, this would then disallow subsequent requests to be sent?
+*/
+
   // ? should this return the user data?
   return {
     student: extractPublicStudentData(updatedStudent),

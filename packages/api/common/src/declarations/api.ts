@@ -218,7 +218,8 @@ export interface LinkTutorAndSubjectRequestBody {
 
 export interface LinkTutorAndSubjectResponseBody {
   subject: LocaleSubjectData;
-  tutor: PublicTutorData;
+  // private data because the user owning the profile can make this change
+  tutor: PrivateTutorData;
 }
 
 export interface LinkStudentAndSubjectRequestBody {
