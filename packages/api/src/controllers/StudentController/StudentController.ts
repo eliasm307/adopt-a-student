@@ -3,7 +3,8 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 import {
   CreateStudentRequestBody, CreateStudentResponseBody, GetStudentRequestBody,
   GetStudentResponseBody, GetStudentsBySubjectsRequestBody, GetStudentsBySubjectsResponseBody,
-  isArray, isEmptyObject, isObject, isString, UpdateStudentRequestBody, UpdateStudentResponseBody,
+  isArray, isEmptyObject, isObject, isPrivateStudentData, isString, UpdateStudentRequestBody,
+  UpdateStudentResponseBody,
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
@@ -35,12 +36,6 @@ const exportedNames = [
 export class StudentsController extends Controller {
   static callableNames = exportedNames;
   static callableNamesMap = arrayToRecord([...exportedNames]);
-  /*
-  static callableNames = Object.keys(namedKeys).reduce(
-    (acc, name) => ({ ...acc, [name]: name }),
-    {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
-  );
-  */
   static id = "Students";
 
   @Post(createStudent)
@@ -48,20 +43,21 @@ export class StudentsController extends Controller {
     @Body() body: Partial<CreateStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateStudentResponseBody> {
-    if (!body)
+    const { uid } = verifyRequest(body, context);
+
+    const { student } = body;
+
+    if (!student || !isPrivateStudentData({ student, id: uid }))
       throw new functionsHttps.HttpsError(
         "invalid-argument",
-        "body data not provided"
+        "Provided data is not valid"
       );
 
-    return createStudentHandler({ id, student });
+    return createStudentHandler({ id: uid, student });
   }
 
   /**
    * Retreives data about a student user. If the student user owns the data then they get all the data, otherwise it is restricted to 'public' data.
-   * @param body
-   * @param context
-   * @returns
    */
   @Post(getStudent)
   static getStudent(
