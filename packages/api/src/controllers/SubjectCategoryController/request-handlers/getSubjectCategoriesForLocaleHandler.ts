@@ -5,24 +5,15 @@ import {
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
 import { InternalHandler } from '../../../declarations/types';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import getCollectionData from '../../../utils/firebase/getCollectionData';
 import verifyRequest from '../../../utils/verifyRequest';
 
 const getSubjectCategoriesForLocaleHandler: InternalHandler<
   GetSubjectCategoriesForLocaleRequestBody,
   GetSubjectCategoriesForLocaleResponseBody
-> = async (data, context) => {
-  const auth = verifyRequest(data, context);
-
-  // verify received data
-  if (!data?.locale)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not get subjects because provided data is missing subject id"
-    );
-
-  const locale = data.locale;
+> = async (props) => {
+  const { locale } = props;
 
   const genericSubjectCategories = await getCollectionData({
     firestoreAdmin,

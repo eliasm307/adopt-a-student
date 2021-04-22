@@ -10,7 +10,6 @@ import {
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
 import { functionsHttps } from '../../utils/firebase/firebase-admin';
-import verifyRequest from '../../utils/verifyRequest';
 import createSubjectCategoryHandler from './request-handlers/createSubjectCategoryHandler';
 import getSubjectCategoriesForLocaleHandler from './request-handlers/getSubjectCategoriesForLocaleHandler';
 import getSubjectCategoryHandler from './request-handlers/getSubjectCategoryHandler';
@@ -52,6 +51,12 @@ export class SubjectCategoryController extends Controller {
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectCategoriesForLocaleResponseBody> {
     const auth = verifyRequest(body, context);
+    // verify received data
+    if (!data?.locale)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not get subjects because provided data is missing subject id"
+      );
     return getSubjectCategoriesForLocaleHandler(body, context);
   }
 
