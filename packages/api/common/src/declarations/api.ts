@@ -3,8 +3,8 @@ import {
   PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData, UserSubjectData,
 } from './data-models';
 import {
-  CategoryId, GenericSubjectId, LocaleCode, LocaleSubjectId, StudentId, SubjectCategoryId,
-  SubjectId, TutorId,
+  CategoryId, Country, GenericSubjectId, LocaleCode, StudentId, SubjectCategoryId, SubjectId,
+  TutorId,
 } from './types';
 
 export interface GetStudentsBySubjectsRequestBody {
@@ -83,8 +83,9 @@ export interface GetSubjectsByCategoryResponseBody {
   results: SubjectOverview[];
 }
 export interface UpdateLocaleSubjectRequestBody {
-  /** Locale subject id to modify */
-  id: LocaleSubjectId;
+  country: Country;
+  id: SubjectId;
+  locale: LocaleCode;
   updates: Partial<Omit<LocaleSubjectData, "id">>;
 }
 export interface UpdateLocaleSubjectResponseBody {
@@ -106,7 +107,9 @@ export interface CreateLocaleSubjectResponseBody {
   subject: LocaleSubjectData;
 }
 export interface GetSubjectRequestBody {
-  id: LocaleSubjectId;
+  country: Country;
+  id: SubjectId;
+  locale: LocaleCode;
 }
 export interface GetSubjectResponseBody {
   localeSubject: LocaleSubjectData;
@@ -159,14 +162,19 @@ export interface LinkSubjectAndSubjectCategoryRequestBody {
 
 export interface LinkSubjectAndSubjectCategoryResponseBody
   extends BasicResponseData {}
+
 export interface UnlinkTutorAndSubjectRequestBody {
-  id: LocaleSubjectId;
+  country: Country;
+  id: SubjectId;
+  locale: LocaleCode;
 }
 
 export interface UnlinkTutorAndSubjectResponseBody extends BasicResponseData {}
 
 export interface UnlinkStudentAndSubjectRequestBody {
-  id: LocaleSubjectId;
+  country: Country;
+  id: SubjectId;
+  locale: LocaleCode;
 }
 
 export interface UnlinkStudentAndSubjectResponseBody
@@ -177,6 +185,7 @@ export interface LinkTutorAndSubjectRequestBody {
 }
 
 export interface LinkTutorAndSubjectResponseBody extends BasicResponseData {}
+
 export interface LinkStudentAndSubjectRequestBody {
   data: UserSubjectData;
 }
@@ -199,7 +208,8 @@ export interface UpdateSubjectCategoryResponseBody {
 }
 
 export interface GetSubjectCategoryRequestBody {
-  id: LocaleSubjectCategoryId;
+  id: SubjectCategoryId;
+  locale: LocaleCode;
 }
 export interface GetSubjectCategoryResponseBody {
   subjectCategories: LocaleSubjectCategoryData;
