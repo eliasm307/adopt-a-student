@@ -1,7 +1,7 @@
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
-  LinkStudentAndSubjectRequestBody, LinkStudentAndSubjectResponseBody,
+  isLinkedLocaleSubjectData, LinkStudentAndSubjectRequestBody, LinkStudentAndSubjectResponseBody,
   LinkStudentAndTutorRequestBody, LinkStudentAndTutorResponseBody,
   LinkSubjectAndSubjectCategoryRequestBody, LinkSubjectAndSubjectCategoryResponseBody,
   LinkSubjectsRequestBody, LinkSubjectsResponseBody, LinkTutorAndSubjectRequestBody,
@@ -76,6 +76,13 @@ export class RelationshipController extends Controller {
     @Body() body: Partial<LinkStudentAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkStudentAndSubjectResponseBody> {
+    // verify received data
+    if (!body || !body.data || !isLinkedLocaleSubjectData(data))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+
     return linkStudentAndSubjectHandler(body, context);
   }
 

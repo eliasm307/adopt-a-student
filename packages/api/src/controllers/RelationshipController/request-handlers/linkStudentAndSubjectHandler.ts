@@ -1,11 +1,12 @@
 import {
-  isLinkedLocaleSubjectData, isLocaleSubjectData, isPrivateStudentData,
-  LinkStudentAndSubjectRequestBody, LinkStudentAndSubjectResponseBody, LocaleSubjectData,
-  PrivateStudentData, UserSubjectData,
+  isLocaleSubjectData, isPrivateStudentData, LinkStudentAndSubjectRequestBody,
+  LinkStudentAndSubjectResponseBody, LocaleSubjectData, PrivateStudentData, UserSubjectData,
 } from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../../../constants';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { hasId } from '../../../declarations/interfaces';
+import { InternalHandler } from '../../../declarations/types';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
@@ -14,19 +15,10 @@ import verifyRequest from '../../../utils/verifyRequest';
 // todo should add subject to user and user to subject
 
 const linkStudentAndLocaleSubject: InternalHandler<
-  LinkStudentAndSubjectRequestBody,
+  LinkStudentAndSubjectRequestBody & hasId,
   LinkStudentAndSubjectResponseBody
-> = async (body, context) => {
-  const { uid } = verifyRequest(body, context);
-
-  const data = body?.data;
-
-  // verify received data
-  if (!body || !body.data || !isLinkedLocaleSubjectData(data))
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not link documents because provided data is not valid"
-    );
+> = async (props) => {
+  const { data, id } = props;
 
   const document1Props: AddDocumentLinkProps<
     PrivateStudentData,
@@ -37,13 +29,13 @@ const linkStudentAndLocaleSubject: InternalHandler<
     linkToAdd: data,
     linkReducer: (link) => link.id,
     linksPropName: "relatedSubjects",
-    id: uid,
+    id,
   };
 
   const document2Props: AddDocumentLinkProps<LocaleSubjectData, string> = {
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
-    linkToAdd: uid,
+    linkToAdd: id,
     linkReducer: (link) => link,
     linksPropName: "relatedStudents",
     id: data.id,
