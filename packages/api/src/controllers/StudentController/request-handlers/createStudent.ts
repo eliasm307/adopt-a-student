@@ -3,12 +3,11 @@ import {
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const createStudent: FirebaseCallableFunctionHandler<
+const createStudent: InternalHandler<
   CreateStudentRequestBody,
   CreateStudentResponseBody
 > = async (body, context) => {

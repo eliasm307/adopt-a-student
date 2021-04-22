@@ -4,7 +4,6 @@ import {
 } from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import createPath from '../../../utils/createPath';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
@@ -12,7 +11,7 @@ import newGuid from '../../../utils/newGuid';
 import verifyRequest from '../../../utils/verifyRequest';
 
 /** Initialises a generic subject with an initial locale, if a matching generic subject doesnt already exist */
-const createSubjectCategory: FirebaseCallableFunctionHandler<
+const createSubjectCategory: InternalHandler<
   CreateSubjectCategoryRequestBody,
   CreateSubjectCategoryResponseBody
 > = async (body, context) => {

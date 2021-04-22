@@ -4,7 +4,6 @@ import {
 } from '@adopt-a-student/common';
 
 import createSubjectCategory from '../../controllers/SubjectCategoryController/request-handlers/createSubjectCategoryHandler';
-import createGenericSubject from '../../controllers/SubjectController/request-handlers/createGenericSubjectHandler';
 import createLocaleSubject from '../../controllers/SubjectController/request-handlers/createLocaleSubjectHandler';
 import callableContextSpoof from '../firebase/callableContextSpoof';
 

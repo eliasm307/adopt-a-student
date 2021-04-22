@@ -5,7 +5,6 @@ import {
 import {
   GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME,
 } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getDocumentData from '../../../utils/firebase/getDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
@@ -13,7 +12,7 @@ import {
   createLocaleSubjectId as createLocaleSubjectDocumentId, isLocaleSubjectId,
 } from '../utils/localeSubjectDocumentId';
 
-const getSubjectHandler: FirebaseCallableFunctionHandler<
+const getSubjectHandler: InternalHandler<
   GetSubjectRequestBody,
   GetSubjectResponseBody
 > = async (data, context) => {

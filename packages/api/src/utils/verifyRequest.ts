@@ -8,7 +8,7 @@ interface Auth {
 
 /** Does general verification on request data */
 export default function verifyRequest(
-  data: any,
+  _data: any,
   context: CallableContext
 ): Auth {
   if (!context.auth?.uid) {

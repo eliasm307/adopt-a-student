@@ -2,13 +2,12 @@ import {
   GetSubjectsByCategoryRequestBody, GetSubjectsByCategoryResponseBody, SubjectOverview,
 } from '@adopt-a-student/common';
 
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
 import getLocaleSubjectFromGenericSubject from '../utils/getLocaleSubjectFromGenericSubject';
 
-const getSubjectsByCategory: FirebaseCallableFunctionHandler<
+const getSubjectsByCategory: InternalHandler<
   GetSubjectsByCategoryRequestBody,
   GetSubjectsByCategoryResponseBody
 > = async (data, context) => {

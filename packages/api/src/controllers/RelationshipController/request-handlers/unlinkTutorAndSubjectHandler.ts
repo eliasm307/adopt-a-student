@@ -4,7 +4,6 @@ import {
 } from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
@@ -12,7 +11,7 @@ import verifyRequest from '../../../utils/verifyRequest';
 // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
 // todo needs to verify a user has access to this data
 // todo should remove subject to user and user to subject
-const unlinkTutorAndSubject: FirebaseCallableFunctionHandler<
+const unlinkTutorAndSubject: InternalHandler<
   UnlinkTutorAndSubjectRequestBody,
   UnlinkTutorAndSubjectResponseBody
 > = async (body, context) => {

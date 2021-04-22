@@ -3,14 +3,13 @@ import {
 } from '@adopt-a-student/common';
 
 import { TUTOR_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getUsersBySubjects from '../../../utils/getUsersBySubjects';
 import verifyRequest from '../../../utils/verifyRequest';
 import extractPublicTutorData from './utils/extractPublicTutorData';
 
 /** Get tutors by subjects, save this in subject */
-const getTutorsBySubjects: FirebaseCallableFunctionHandler<
+const getTutorsBySubjects: InternalHandler<
   GetTutorsBySubjectsRequestBody,
   GetTutorsBySubjectsResponseBody
 > = async (data, context) => {

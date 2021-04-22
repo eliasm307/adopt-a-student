@@ -3,14 +3,13 @@ import {
 } from '@adopt-a-student/common';
 
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
 // todo firestoreAdmin should be a dependency through  props
 
-const linkGenericSubjects: FirebaseCallableFunctionHandler<
+const linkGenericSubjects: InternalHandler<
   LinkSubjectsRequestBody,
   LinkSubjectsResponseBody
 > = async (body, context) => {

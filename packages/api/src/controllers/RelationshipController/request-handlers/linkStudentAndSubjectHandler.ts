@@ -5,7 +5,6 @@ import {
 } from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
@@ -14,7 +13,7 @@ import verifyRequest from '../../../utils/verifyRequest';
 // todo needs to verify a user has access to this data
 // todo should add subject to user and user to subject
 
-const linkStudentAndLocaleSubject: FirebaseCallableFunctionHandler<
+const linkStudentAndLocaleSubject: InternalHandler<
   LinkStudentAndSubjectRequestBody,
   LinkStudentAndSubjectResponseBody
 > = async (body, context) => {

@@ -5,12 +5,11 @@ import {
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const linkStudentAndTutor: FirebaseCallableFunctionHandler<
+const linkStudentAndTutor: InternalHandler<
   LinkStudentAndTutorRequestBody,
   LinkStudentAndTutorResponseBody
 > = async (body, context) => {

@@ -6,7 +6,6 @@ import {
 import {
   GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME,
 } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import newGuid from '../../../utils/newGuid';
@@ -14,7 +13,7 @@ import verifyRequest from '../../../utils/verifyRequest';
 import { createLocaleSubjectId } from '../utils/localeSubjectDocumentId';
 
 // ? should the handlers require a CallableContext? should any security logic be done in the controller instead?
-const createGenericSubject: FirebaseCallableFunctionHandler<
+const createGenericSubject: InternalHandler<
   CreateGenericSubjectRequestBody,
   CreateGenericSubjectResponseBody
 > = async (body, context) => {

@@ -11,9 +11,15 @@ import {
 import { SubjectsController } from '../controllers/SubjectController/SubjectController';
 import { TutorsController } from '../controllers/TutorController/TutorController';
 
+/** Api handler with auth */
 export type FirebaseCallableFunctionHandler<D = any, R = any> = (
   body: Partial<D> | undefined,
   context: CallableContext
+) => Promise<R>;
+
+/** Internal api handler, doesnt require auth */
+export type InternalHandler<D = any, R = any> = (
+  body: Partial<D> | undefined
 ) => Promise<R>;
 
 /** Defines the callable function names available, as defined by various controllers */

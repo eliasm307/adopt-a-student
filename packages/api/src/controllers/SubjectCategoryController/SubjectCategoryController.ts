@@ -9,6 +9,7 @@ import {
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
+import verifyRequest from '../../utils/verifyRequest';
 import createSubjectCategoryHandler from './request-handlers/createSubjectCategoryHandler';
 import getSubjectCategoriesForLocaleHandler from './request-handlers/getSubjectCategoriesForLocaleHandler';
 import getSubjectCategoryHandler from './request-handlers/getSubjectCategoryHandler';
@@ -40,6 +41,7 @@ export class SubjectCategoryController extends Controller {
     @Body() body: CreateSubjectCategoryRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateSubjectCategoryResponseBody> {
+    const auth = verifyRequest(body, context);
     return createSubjectCategoryHandler(body, context);
   }
 
@@ -48,6 +50,7 @@ export class SubjectCategoryController extends Controller {
     @Body() body: GetSubjectCategoriesForLocaleRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectCategoriesForLocaleResponseBody> {
+    const auth = verifyRequest(body, context);
     return getSubjectCategoriesForLocaleHandler(body, context);
   }
 
@@ -56,6 +59,7 @@ export class SubjectCategoryController extends Controller {
     @Body() body: GetSubjectCategoryRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectCategoryResponseBody> {
+    const auth = verifyRequest(body, context);
     return getSubjectCategoryHandler(body, context);
   }
 
@@ -64,6 +68,7 @@ export class SubjectCategoryController extends Controller {
     @Body() body: UpdateSubjectCategoryRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateSubjectCategoryResponseBody> {
+    const auth = verifyRequest(body, context);
     return updateSubjectCategoryHandler(body, context);
   }
 }

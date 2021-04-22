@@ -4,12 +4,11 @@ import {
 } from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const unlinkStudentAndLocaleSubject: FirebaseCallableFunctionHandler<
+const unlinkStudentAndLocaleSubject: InternalHandler<
   UnlinkStudentAndSubjectRequestBody,
   UnlinkStudentAndSubjectResponseBody
 > = async (body, context) => {
