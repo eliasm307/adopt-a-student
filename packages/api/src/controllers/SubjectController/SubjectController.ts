@@ -3,21 +3,20 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 import {
   CreateGenericSubjectRequestBody, CreateGenericSubjectResponseBody, CreateLocaleSubjectRequestBody,
   CreateLocaleSubjectResponseBody, GetSubjectRequestBody, GetSubjectResponseBody,
-  GetTutorRequestBody, GetTutorResponseBody, UpdateLocaleSubjectRequestBody,
-  UpdateLocaleSubjectResponseBody,
+  GetSubjectsByCategoryRequestBody, GetSubjectsByCategoryResponseBody,
+  UpdateLocaleSubjectRequestBody, UpdateLocaleSubjectResponseBody,
 } from '@adopt-a-student/common';
 
-import verifyRequest from '../../../utils/verifyRequest';
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
 import { functionsHttps } from '../../utils/firebase/firebase-admin';
+import verifyRequest from '../../utils/verifyRequest';
 import getPrivateTutorData from '../TutorController/request-handlers/getPrivateTutorDataHandler';
 import getPublicTutorData from '../TutorController/request-handlers/getPublicTutorDataHandler';
-import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
-import getLocaleSubjectFromGenericSubject from '../utils/getLocaleSubjectFromGenericSubject';
 import createGenericSubjectHandler from './request-handlers/createGenericSubjectHandler';
 import createLocaleSubjectHandler from './request-handlers/createLocaleSubjectHandler';
 import getSubjectHandler from './request-handlers/getSubjectHandler';
+import getSubjectsByCategoryHandler from './request-handlers/getSubjectsByCategoryHandler';
 import updateLocaleSubjectHandler from './request-handlers/updateLocaleSubjectHandler';
 
 const createGenericSubject = "createGenericSubject";
@@ -48,15 +47,17 @@ export class SubjectsController extends Controller {
     @Body() body: CreateGenericSubjectRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateGenericSubjectResponseBody> {
-    const auth = verifyRequest(body, context);
+    const { uid } = verifyRequest(body, context);
 
-    if (!body?.data)
+    const { data } = body;
+
+    if (!data)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Data not provided"
       );
 
-    return createGenericSubjectHandler(body, context);
+    return createGenericSubjectHandler({ data });
   }
 
   @Post(createLocaleSubject)
@@ -64,13 +65,17 @@ export class SubjectsController extends Controller {
     @Body() body: CreateLocaleSubjectRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateLocaleSubjectResponseBody> {
-    if (!props?.data || !props.genericSubjectId)
+    const { uid } = verifyRequest(body, context);
+
+    const { data, genericSubjectId } = body;
+
+    if (!data || !genericSubjectId)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Data not provided"
       );
 
-    return createLocaleSubjectHandler(body, context);
+    return createLocaleSubjectHandler({ data, genericSubjectId });
   }
 
   @Post(getSubject)
@@ -78,14 +83,18 @@ export class SubjectsController extends Controller {
     @Body() body: GetSubjectRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectResponseBody> {
+    const { uid } = verifyRequest(body, context);
+
+    const { country, id, locale } = body;
+
     // verify received data
-    if (!data?.id || !data.country || !data.locale)
+    if (!id || !country || !locale)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not get subjects because provided data is missing subject id"
       );
 
-    return getSubjectHandler(body, context);
+    return getSubjectHandler({ country, id, locale });
   }
 
   /**
@@ -93,23 +102,21 @@ export class SubjectsController extends Controller {
    */
   @Post(getSubjectsByCategory)
   static getSubjectsByCategory(
-    @Body() body: GetTutorRequestBody,
+    @Body() body: GetSubjectsByCategoryRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
-  ): Promise<GetTutorResponseBody> {
+  ): Promise<GetSubjectsByCategoryResponseBody> {
     const { uid } = verifyRequest(body, context);
 
-    const { id } = body;
+    const { categoryId, locale } = body;
 
     // verify received data
-    if (!data?.locale || !data.categoryId)
+    if (!locale || !categoryId)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not get subjects by category because provided data is missing locale or required subject category id"
       );
 
-    return uid === id
-      ? getPrivateTutorData(body, context)
-      : getPublicTutorData(body, context);
+    return getSubjectsByCategoryHandler({ categoryId, locale });
   }
 
   @Post(updateLocaleSubject)
@@ -117,33 +124,23 @@ export class SubjectsController extends Controller {
     @Body() body: UpdateLocaleSubjectRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateLocaleSubjectResponseBody> {
+    const { uid } = verifyRequest(body, context);
+
+    const { country, id, locale, updates } = body;
+
     // verify received data
-    if (
-      !body ||
-      !body.updates ||
-      typeof body.updates !== "object" ||
-      !Object.keys(body.updates).length ||
-      !body.id
-    )
+    if (!updates || typeof updates !== "object" || !id)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not update tutor because provided data is not valid"
       );
-    return updateLocaleSubjectHandler(body, context);
+
+    if (!Object.keys(updates).length)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update subject because no updates were provided"
+      );
+
+    return updateLocaleSubjectHandler({ country, id, locale, updates });
   }
 }
-
-/*
-enum wer {
-  a,
-  b,
-  c,
-}
-*/
-
-// const a = { ...wer };
-
-// const b = Object.values(a).map((k) => k as const);
-
-// type q = keyof typeof a;
-// const c:  q,  = "";
