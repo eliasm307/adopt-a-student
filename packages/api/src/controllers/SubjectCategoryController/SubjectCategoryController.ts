@@ -9,7 +9,7 @@ import arrayToRecord from '../../utils/arrayToRecord';
 import createSubjectCategoryHandler from './request-handlers/createSubjectCategoryHandler';
 import getSubjectCategoriesHandler, {
   GetSubjectCategoryRequestBody, GetSubjectCategoryResponseBody,
-} from './request-handlers/getSubjectCategoriesHandler';
+} from './request-handlers/getSubjectCategoriesForLocaleHandler';
 import updateSubjectCategoryHandler, {
   UpdateSubjectCategoryRequestBody, UpdateSubjectCategoryResponseBody,
 } from './request-handlers/updateSubjectCategoryHandler';

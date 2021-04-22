@@ -1,5 +1,6 @@
 import {
-  isGenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData,
+  GetSubjectCategoryRequestBody, GetSubjectCategoryResponseBody, isGenericSubjectCategoryData,
+  LocaleSubjectCategoryData,
 } from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
@@ -8,12 +9,6 @@ import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase
 import getCollectionData from '../../../utils/firebase/getCollectionData';
 import verifyRequest from '../../../utils/verifyRequest';
 
-export interface GetSubjectCategoryRequestBody {
-  locale: LocaleCode;
-}
-export interface GetSubjectCategoryResponseBody {
-  subjectCategories: LocaleSubjectCategoryData[];
-}
 const getSubjectCategories: FirebaseCallableFunctionHandler<
   GetSubjectCategoryRequestBody,
   GetSubjectCategoryResponseBody
@@ -35,7 +30,7 @@ const getSubjectCategories: FirebaseCallableFunctionHandler<
     dataPredicate: isGenericSubjectCategoryData,
   });
 
-  const subjectCategories = genericSubjectCategories
+  const subjectCategoriesForLocale = genericSubjectCategories
     // get locale subjects from generic subject, default to en if not defined
     .map((genericCategory) => {
       const localeSubjectCategory =
@@ -54,7 +49,7 @@ const getSubjectCategories: FirebaseCallableFunctionHandler<
       return localeSubjectCategory;
     })
     // filter out any falsy locale subjects
-    .filter((localeSubjectCategory) => localeSubjectCategory)
+    .filter((localeSubjectCategory) => !!localeSubjectCategory)
     // type assertion to make ts happy
     .map(
       (localeSubjectCategory) =>
@@ -62,7 +57,7 @@ const getSubjectCategories: FirebaseCallableFunctionHandler<
     );
 
   return {
-    subjectCategories,
+    subjectCategories: subjectCategoriesForLocale,
   } as GetSubjectCategoryResponseBody;
 };
 

@@ -1,6 +1,6 @@
 import {
-  GenericSubjectCategoryData, isGenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData,
-  SubjectCategoryId,
+  GenericSubjectCategoryData, isGenericSubjectCategoryData, UpdateSubjectCategoryRequestBody,
+  UpdateSubjectCategoryResponseBody,
 } from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
@@ -9,15 +9,6 @@ import genericSubjectCategoryDataUpdater from '../../../utils/data-updaters/gene
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
-
-export interface UpdateSubjectCategoryRequestBody {
-  id: SubjectCategoryId;
-  locale: LocaleCode;
-  updates: Partial<Omit<LocaleSubjectCategoryData, "id" | "locale">>;
-}
-export interface UpdateSubjectCategoryResponseBody {
-  result: LocaleSubjectCategoryData;
-}
 
 const updateSubjectCategory: FirebaseCallableFunctionHandler<
   UpdateSubjectCategoryRequestBody,
