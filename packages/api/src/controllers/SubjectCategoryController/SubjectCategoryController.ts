@@ -10,6 +10,7 @@ import {
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
 import { functionsHttps } from '../../utils/firebase/firebase-admin';
+import verifyRequest from '../../utils/verifyRequest';
 import createSubjectCategoryHandler from './request-handlers/createSubjectCategoryHandler';
 import getSubjectCategoriesForLocaleHandler from './request-handlers/getSubjectCategoriesForLocaleHandler';
 import getSubjectCategoryHandler from './request-handlers/getSubjectCategoryHandler';
@@ -42,7 +43,7 @@ export class SubjectCategoryController extends Controller {
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateSubjectCategoryResponseBody> {
     const auth = verifyRequest(body, context);
-    return createSubjectCategoryHandler(body, context);
+    return createSubjectCategoryHandler(body);
   }
 
   @Post(getSubjectCategoriesForLocale)
@@ -51,28 +52,39 @@ export class SubjectCategoryController extends Controller {
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectCategoriesForLocaleResponseBody> {
     const auth = verifyRequest(body, context);
+
     // verify received data
-    if (!data?.locale)
+    if (!body?.locale)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not get subjects because provided data is missing subject id"
       );
-    return getSubjectCategoriesForLocaleHandler(body, context);
+
+    return getSubjectCategoriesForLocaleHandler(body);
   }
 
   @Post(getSubjectCategory)
   static getSubjectCategory(
-    @Body() body: GetSubjectCategoryRequestBody,
+    @Body() body: Partial<GetSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectCategoryResponseBody> {
     const auth = verifyRequest(body, context);
-    if (!body?.locale || !body?.name || !body.data)
+
+    if (!body)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "No data provided"
+      );
+
+    const { id, locale } = body;
+
+    if (!locale || !id)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Incomplete data provided"
       );
 
-    return getSubjectCategoryHandler(body, context);
+    return getSubjectCategoryHandler({ id, locale });
   }
 
   @Post(updateSubjectCategory)
