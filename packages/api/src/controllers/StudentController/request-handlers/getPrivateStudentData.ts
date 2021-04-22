@@ -3,19 +3,17 @@ import {
 } from '@adopt-a-student/common';
 
 import { TUTOR_COLLECTION_NAME } from '../../../constants';
+import { InternalHandler } from '../../../declarations/types';
 import createPath from '../../../utils/createPath';
 import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import readPublicUserData from '../../../utils/readPublicUserData';
-import verifyRequest from '../../../utils/verifyRequest';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
 
-const handler: InternalHandler<
-  GetStudentRequestBody,
+const getPrivateStudentData: InternalHandler<
+  GetStudentRequestBody & { uid: string },
   GetStudentResponseBody
-> = async (_, context) => {
-  const auth = verifyRequest(_, context);
-
-  const path = createPath(TUTOR_COLLECTION_NAME, auth.uid);
+> = async ({ id, uid }) => {
+  const path = createPath(TUTOR_COLLECTION_NAME, uid);
 
   const student = await readPublicUserData({
     dataPredicate: isPrivateStudentData,
@@ -29,4 +27,4 @@ const handler: InternalHandler<
   };
 };
 
-export default handler;
+export default getPrivateStudentData;
