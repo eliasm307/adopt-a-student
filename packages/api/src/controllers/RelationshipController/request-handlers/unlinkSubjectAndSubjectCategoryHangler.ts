@@ -21,11 +21,9 @@ const unlinkSubjectAndSubjectCategoryHandler: InternalHandler<
   const document1Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
-    linkToRemovePredicate: (link) => link !== categoryId,
-    linkToMutatePredicate: (link) => link,
+    linkToMutatePredicate: (link) => link === categoryId,
     linksPropName: "relatedCategories",
     documentId: subjectId,
-    entityId: subjectId,
   };
 
   const document2Props: RemoveDocumentLinkProps<
@@ -34,11 +32,9 @@ const unlinkSubjectAndSubjectCategoryHandler: InternalHandler<
   > = {
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     dataPredicate: isGenericSubjectCategoryData,
-    linkToRemovePredicate: (link) => link !== subjectId,
-    linkToMutatePredicate: (link) => link,
+    linkToMutatePredicate: (link) => link === subjectId,
     linksPropName: "relatedSubjects",
     documentId: categoryId,
-    entityId: categoryId,
   };
 
   const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
