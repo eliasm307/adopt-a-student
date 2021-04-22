@@ -44,16 +44,16 @@ export class SubjectCategoryController extends Controller {
   ): Promise<CreateSubjectCategoryResponseBody> {
     const auth = verifyRequest(body, context);
 
-    const { locale, data, name } = body;
+    const { locale, name } = body;
 
     // verify received data
-    if (!locale || !data || !name)
+    if (!locale || !name)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not create subject because provided data is  incomplete"
       );
 
-    return createSubjectCategoryHandler({ data, locale, name });
+    return createSubjectCategoryHandler({ locale, name });
   }
 
   @Post(getSubjectCategoriesForLocale)
