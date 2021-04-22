@@ -19,7 +19,11 @@ Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
 
-type CallableName = typeof StudentsController.callableNames[number] | any;
+type CallableName =
+  | typeof StudentsController.callableNames[number]
+  | typeof TutorsController.callableNames[number]
+  | typeof SubjectsController.callableNames[number]
+  | typeof SubjectCategoryController.callableNames[number];
 
 // getStudentsBySubjects;
 const callableFunctionHandlers = {
@@ -47,12 +51,13 @@ const callableFunctionHandlers = {
   getSubjectsByCategory: SubjectsController.getSubjectsByCategory,
 
   // subject categories
-  getSubjectCategories: SubjectCategoryController.getSubjectCategories,
+  getSubjectCategory: SubjectCategoryController.getSubjectCategory,
+  getSubjectCategoriesForLocale:
+    SubjectCategoryController.getSubjectCategoriesForLocale,
   createSubjectCategory: SubjectCategoryController.createSubjectCategory,
   updateSubjectCategory: SubjectCategoryController.updateSubjectCategory,
 
   // relationships
-  /* */
   linkSubjects: RelationshipController.linkSubjects,
   unlinkSubjects: RelationshipController.unlinkSubjects,
 

@@ -2,47 +2,30 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
   CreateSubjectCategoryRequestBody, CreateSubjectCategoryResponseBody,
+  GetSubjectCategoriesForLocaleRequestBody, GetSubjectCategoriesForLocaleResponseBody,
+  GetSubjectCategoryRequestBody, GetSubjectCategoryResponseBody, UpdateSubjectCategoryRequestBody,
+  UpdateSubjectCategoryResponseBody,
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
 import createSubjectCategoryHandler from './request-handlers/createSubjectCategoryHandler';
-import getSubjectCategoriesHandler, {
-  GetSubjectCategoryRequestBody, GetSubjectCategoryResponseBody,
-} from './request-handlers/getSubjectCategoriesForLocaleHandler';
-import updateSubjectCategoryHandler, {
-  UpdateSubjectCategoryRequestBody, UpdateSubjectCategoryResponseBody,
-} from './request-handlers/updateSubjectCategoryHandler';
+import getSubjectCategoriesForLocaleHandler from './request-handlers/getSubjectCategoriesForLocaleHandler';
+import getSubjectCategoryHandler from './request-handlers/getSubjectCategoryHandler';
+import updateSubjectCategoryHandler from './request-handlers/updateSubjectCategoryHandler';
 
-const getSubjectCategories = "getSubjectCategories";
+const getSubjectCategoriesForLocale = "getSubjectCategoriesForLocale";
+const getSubjectCategory = "getSubjectCategory";
 const createSubjectCategory = "createSubjectCategory";
 const updateSubjectCategory = "updateSubjectCategory";
 
 const exportedNames = [
-  getSubjectCategories,
+  getSubjectCategoriesForLocale,
   createSubjectCategory,
   updateSubjectCategory,
+  getSubjectCategory,
 ] as const;
-/*
-const namedKeys = { a: "", v: "", c: "", d: "" };
 
-// ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
-// ! so the routes are named
-const { a, c, d, v } = namedKeys;
-const custom = {
-  val1: "aVal",
-};
-
-const { createGenericSubjectX: createGenericSubjecta } = CallableName;
-
-const name1 = "name1x/";
-const name23 = CallableName.createGenericSubjectX + "dedec";
-console.log(
-  `enum: ${CallableName.createSubjectCategory.toString()} enumCustom: ${custom.val1.toString()}`
-);
-
-const enumv = CallableName.createSubjectCategory.toString() + "/";
-*/
 // hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
 @Route("/")
@@ -50,12 +33,6 @@ export class SubjectCategoryController extends Controller {
   static callableNames = exportedNames;
   static callableNamesMap = arrayToRecord([...exportedNames]);
 
-  /*
-  static callableNames = Object.keys(namedKeys).reduce(
-    (acc, name) => ({ ...acc, [name]: name }),
-    {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
-  );
-  */
   typeName = "Subject Categories";
 
   @Post(createSubjectCategory)
@@ -66,12 +43,20 @@ export class SubjectCategoryController extends Controller {
     return createSubjectCategoryHandler(body, context);
   }
 
-  @Post(getSubjectCategories)
-  static getSubjectCategories(
+  @Post(getSubjectCategoriesForLocale)
+  static getSubjectCategoriesForLocale(
+    @Body() body: GetSubjectCategoriesForLocaleRequestBody,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<GetSubjectCategoriesForLocaleResponseBody> {
+    return getSubjectCategoriesForLocaleHandler(body, context);
+  }
+
+  @Post(getSubjectCategory)
+  static getSubjectCategory(
     @Body() body: GetSubjectCategoryRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectCategoryResponseBody> {
-    return getSubjectCategoriesHandler(body, context);
+    return getSubjectCategoryHandler(body, context);
   }
 
   @Post(updateSubjectCategory)
@@ -82,18 +67,3 @@ export class SubjectCategoryController extends Controller {
     return updateSubjectCategoryHandler(body, context);
   }
 }
-
-/*
-enum wer {
-  a,
-  b,
-  c,
-}
-*/
-
-// const a = { ...wer };
-
-// const b = Object.values(a).map((k) => k as const);
-
-// type q = keyof typeof a;
-// const c:  q,  = "";

@@ -212,7 +212,7 @@ export interface GetSubjectCategoryRequestBody {
   locale: LocaleCode;
 }
 export interface GetSubjectCategoryResponseBody {
-  subjectCategories: LocaleSubjectCategoryData;
+  subjectCategory: LocaleSubjectCategoryData;
 }
 
 export interface GetSubjectCategoriesForLocaleRequestBody {
