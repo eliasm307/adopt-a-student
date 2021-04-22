@@ -3,14 +3,13 @@ import {
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME } from '../../../constants';
-import { AuthData } from '../../../declarations/interfaces';
 import { InternalHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 
 const createStudent: InternalHandler<
-  CreateStudentRequestBody & AuthData,
+  CreateStudentRequestBody & hasId,
   CreateStudentResponseBody
 > = async (props) => {
   const { student: studentInput, uid } = props;

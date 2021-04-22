@@ -1,19 +1,9 @@
-import { CreateStudentRequestBody, CreateStudentResponseBody } from '@adopt-a-student/common';
+import { UpdateStudentRequestBody, UpdateStudentResponseBody } from '@adopt-a-student/common';
 
-import createDocument from '../../../utils/firebase/createDocument';
+import studentDataUpdater from '../../../utils/data-updaters/studentDataUpdater';
+import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
-import updateStudentHandler from './request-handlers/updateStudentHandler';
 
-const createStudent = "createStudent";
-const getStudentsBySubjects = "getStudentsBySubjects";
-const updateStudent = "updateStudent";
-const getStudent = "getStudent";
-
-const exportedNames = [
-  createStudent,
-  getStudent,
-  getStudentsBySubjects,
-  getStudentsBySubjects,
   updateStudent,
 ] as const;
 /*
@@ -97,6 +87,18 @@ export class StudentsController extends Controller {
     @Body() body: Partial<UpdateStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateStudentResponseBody> {
+    // verify received data
+  if (
+    !body ||
+    !body.updates ||
+    typeof body.updates !== "object" ||
+    !Object.keys(body.updates).length
+  )
+    throw new functionsHttps.HttpsError(
+      "failed-precondition",
+      "Could not update tutor because provided data is not valid"
+    );
+
     return updateStudentHandler(body, context);
   }
 }

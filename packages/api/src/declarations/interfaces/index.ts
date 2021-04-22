@@ -62,3 +62,7 @@ export type FirebaseCallableFunctionContext = {
 export interface AuthData {
   uid: string;
 }
+
+export interface hasId {
+  id: string;
+}

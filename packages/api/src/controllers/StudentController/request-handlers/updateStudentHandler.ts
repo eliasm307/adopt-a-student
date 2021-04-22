@@ -3,34 +3,24 @@ import {
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME } from '../../../constants';
+import { hasId } from '../../../declarations/interfaces';
+import { InternalHandler } from '../../../declarations/types';
 import studentDataUpdater from '../../../utils/data-updaters/studentDataUpdater';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import updateDocumentData from '../../../utils/firebase/updateDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const updateStudent: InternalHandler<
-  UpdateStudentRequestBody,
+const updateStudentHandler: InternalHandler<
+  UpdateStudentRequestBody & hasId,
   UpdateStudentResponseBody
-> = async (body, context) => {
-  const { uid } = verifyRequest(body, context);
+> = async (props) => {
+  const { updates: inputUpdates, id } = props;
 
-  // verify received data
-  if (
-    !body ||
-    !body.updates ||
-    typeof body.updates !== "object" ||
-    !Object.keys(body.updates).length
-  )
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not update tutor because provided data is not valid"
-    );
-
-  const updates = { ...body.updates, uid };
+  const updates = { ...inputUpdates, id };
 
   const updatedData = await updateDocumentData({
     collectionPath: STUDENT_COLLECTION_NAME,
-    id: uid,
+    id,
     updates: updates,
     dataPredicate: isPrivateStudentData,
     dataUpdater: studentDataUpdater,
@@ -40,4 +30,4 @@ const updateStudent: InternalHandler<
   return { result: updatedData };
 };
 
-export default updateStudent;
+export default updateStudentHandler;
