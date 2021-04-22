@@ -1,31 +1,34 @@
-import { UpdateStudentRequestBody, UpdateStudentResponseBody } from '@adopt-a-student/common';
+import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
-import studentDataUpdater from '../../../utils/data-updaters/studentDataUpdater';
-import updateDocumentData from '../../../utils/firebase/updateDocumentData';
-import verifyRequest from '../../../utils/verifyRequest';
+import {
+  CreateStudentRequestBody, CreateStudentResponseBody, GetStudentRequestBody,
+  GetStudentResponseBody, GetStudentsBySubjectsRequestBody, GetStudentsBySubjectsResponseBody,
+  isArray, isEmptyObject, isObject, isString, UpdateStudentRequestBody, UpdateStudentResponseBody,
+} from '@adopt-a-student/common';
 
+import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
+import arrayToRecord from '../../utils/arrayToRecord';
+import { functionsHttps } from '../../utils/firebase/firebase-admin';
+import verifyRequest from '../../utils/verifyRequest';
+import createStudentHandler from './request-handlers/createStudent';
+import getPrivateStudentData from './request-handlers/getPrivateStudentData';
+import getPublicStudentData from './request-handlers/getPublicStudentDataHandler';
+import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
+import updateStudentHandler from './request-handlers/updateStudentHandler';
+
+const createStudent = "createStudent";
+const getStudentsBySubjects = "getStudentsBySubjects";
+const updateStudent = "updateStudent";
+const getStudent = "getStudent";
+
+const exportedNames = [
+  createStudent,
+  getStudent,
+  getStudentsBySubjects,
+  getStudentsBySubjects,
   updateStudent,
 ] as const;
-/*
-const namedKeys = { a: "", v: "", c: "", d: "" };
 
-// ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
-// ! so the routes are named
-const { a, c, d, v } = namedKeys;
-const custom = {
-  val1: "aVal",
-};
-
-const { createGenericSubjectX: createGenericSubjecta } = CallableName;
-
-const name1 = "name1x/";
-const name23 = CallableName.createGenericSubjectX + "dedec";
-console.log(
-  `enum: ${CallableName.getStudentsBySubjects.toString()} enumCustom: ${custom.val1.toString()}`
-);
-
-const enumv = CallableName.getStudentsBySubjects.toString() + "/";
-*/
 // hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
 @Route("/")
@@ -51,7 +54,7 @@ export class StudentsController extends Controller {
         "body data not provided"
       );
 
-    return createStudentHandler(body, context);
+    return createStudentHandler({ id, student });
   }
 
   /**
@@ -69,9 +72,15 @@ export class StudentsController extends Controller {
 
     const { id } = body;
 
+    if (!isString(id))
+      throw new functionsHttps.HttpsError(
+        "invalid-argument",
+        "Provided data is not valid"
+      );
+
     return uid === id
-      ? getPrivateStudentData({ id, uid })
-      : getPublicStudentData({ id, uid });
+      ? getPrivateStudentData({ id })
+      : getPublicStudentData({ id });
   }
 
   @Post(getStudentsBySubjects)
@@ -79,7 +88,18 @@ export class StudentsController extends Controller {
     @Body() body: Partial<GetStudentsBySubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetStudentsBySubjectsResponseBody> {
-    return getStudentsBySubjectsHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { subjectIds } = body;
+
+    // verify received data
+    if (!isArray(subjectIds))
+      throw new functionsHttps.HttpsError(
+        "invalid-argument",
+        "Could not get students by subjects because provided locale subject ids are not valid format"
+      );
+
+    return getStudentsBySubjectsHandler({ subjectIds });
   }
 
   @Post(updateStudent)
@@ -87,33 +107,23 @@ export class StudentsController extends Controller {
     @Body() body: Partial<UpdateStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateStudentResponseBody> {
-    // verify received data
-  if (
-    !body ||
-    !body.updates ||
-    typeof body.updates !== "object" ||
-    !Object.keys(body.updates).length
-  )
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not update tutor because provided data is not valid"
-    );
+    const { uid } = verifyRequest(body, context);
 
-    return updateStudentHandler(body, context);
+    const { updates } = body;
+
+    // verify received data
+    if (!updates || !isObject(updates))
+      throw new functionsHttps.HttpsError(
+        "invalid-argument",
+        "Could not update tutor because provided data is not valid"
+      );
+
+    if (isEmptyObject(updates))
+      throw new functionsHttps.HttpsError(
+        "invalid-argument",
+        "Could not update tutor because no updates were provided"
+      );
+
+    return updateStudentHandler({ id: uid, updates });
   }
 }
-
-/*
-enum wer {
-  a,
-  b,
-  c,
-}
-*/
-
-// const a = { ...wer };
-
-// const b = Object.values(a).map((k) => k as const);
-
-// type q = keyof typeof a;
-// const c:  q,  = "";

@@ -10,10 +10,10 @@ import readPrivateUserData from '../../../utils/readPrivateUserData';
 import verifyRequest from '../../../utils/verifyRequest';
 
 const getPublicStudentData: InternalHandler<
-  GetStudentRequestBody & hasId,
+  GetStudentRequestBody,
   GetStudentResponseBody
-> = async ({ id, uid }) => {
-  const path = createPath(TUTOR_COLLECTION_NAME, uid);
+> = async ({ id }) => {
+  const path = createPath(TUTOR_COLLECTION_NAME, id);
 
   const student = await readPrivateUserData({
     dataPredicate: isPrivateStudentData,

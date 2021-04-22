@@ -10,10 +10,10 @@ import readPublicUserData from '../../../utils/readPublicUserData';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
 
 const getPrivateStudentData: InternalHandler<
-  GetStudentRequestBody & hasId,
+  GetStudentRequestBody,
   GetStudentResponseBody
-> = async ({ uid }) => {
-  const path = createPath(TUTOR_COLLECTION_NAME, uid);
+> = async ({ id }) => {
+  const path = createPath(TUTOR_COLLECTION_NAME, id);
 
   const student = await readPublicUserData({
     dataPredicate: isPrivateStudentData,
