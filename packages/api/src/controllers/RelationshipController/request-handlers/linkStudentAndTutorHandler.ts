@@ -9,6 +9,8 @@ import { InternalHandler } from '../../../declarations/types';
 import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
+import extractPublicStudentData from '../../StudentController/utils/extractPublicStudentData';
+import extractPublicTutorData from '../../TutorController/request-handlers/utils/extractPublicTutorData';
 
 const linkStudentAndTutor: InternalHandler<
   LinkStudentAndTutorRequestBody,
@@ -40,14 +42,17 @@ const linkStudentAndTutor: InternalHandler<
     linksPropName: "relatedStudents",
   };
 
-  const [_updatedStudent, _updatedTutor] = await linkDocuments({
+  const [updatedStudent, updatedTutor] = await linkDocuments({
     document1Props,
     document2Props,
     firestoreAdmin,
   });
 
   // ? should this return the user data?
-  return { message: "Success linking users" };
+  return {
+    student: extractPublicStudentData(updatedStudent),
+    tutor: extractPublicTutorData(updatedTutor),
+  } as LinkStudentAndTutorResponseBody;
 };
 
 export default linkStudentAndTutor;
