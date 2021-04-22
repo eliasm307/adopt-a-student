@@ -1,19 +1,8 @@
-import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
+import { UpdateTutorRequestBody, UpdateTutorResponseBody } from '@adopt-a-student/common';
 
-/* eslint-disable @typescript-eslint/require-await */
-import {
-  CreateTutorRequestBody, CreateTutorResponseBody, GetTutorRequestBody, GetTutorResponseBody,
-  GetTutorsBySubjectsRequestBody, GetTutorsBySubjectsResponseBody, UpdateTutorRequestBody,
-  UpdateTutorResponseBody,
-} from '@adopt-a-student/common';
-
-import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
-import arrayToRecord from '../../utils/arrayToRecord';
-import verifyRequest from '../../utils/verifyRequest';
-import createTutorHandler from './request-handlers/createTutorHandler';
-import getPrivateTutorData from './request-handlers/getPrivateTutorDataHandler';
-import getPublicTutorData from './request-handlers/getPublicTutorDataHandler';
-import getTutorsBySubjectsHandler from './request-handlers/getTutorsBySubjectsHandler';
+import tutorDataUpdater from '../../../utils/data-updaters/tutorDataUpdater';
+import updateDocumentData from '../../../utils/firebase/updateDocumentData';
+import verifyRequest from '../../../utils/verifyRequest';
 import updateTutorHandler from './request-handlers/updateTutorHandler';
 
 const createTutor = "createTutor";
@@ -77,6 +66,18 @@ export class TutorsController extends Controller {
     @Body() body: UpdateTutorRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateTutorResponseBody> {
+    // verify received data
+    if (
+      !body ||
+      !body.updates ||
+      typeof body.updates !== "object" ||
+      !Object.keys(body.updates).length
+    )
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update tutor because provided data is not valid"
+      );
+
     return updateTutorHandler(body, context);
   }
 }
