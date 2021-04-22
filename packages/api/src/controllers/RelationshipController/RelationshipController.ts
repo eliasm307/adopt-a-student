@@ -207,6 +207,14 @@ export class RelationshipController extends Controller {
     @Body() body: Partial<UnlinkTutorAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkTutorAndSubjectResponseBody> {
+    const { uid } = verifyRequest(body, context);
+
+    // verify received data
+    if (!body || !body.id)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
     return unlinkTutorAndSubjectHandler(body, context);
   }
 }
