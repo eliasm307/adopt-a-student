@@ -44,7 +44,7 @@ export class SubjectsController extends Controller {
 
   @Post(createGenericSubject)
   static createGenericSubject(
-    @Body() body: CreateGenericSubjectRequestBody,
+    @Body() body: Partial<CreateGenericSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateGenericSubjectResponseBody> {
     const { uid } = verifyRequest(body, context);
@@ -62,7 +62,7 @@ export class SubjectsController extends Controller {
 
   @Post(createLocaleSubject)
   static createLocaleSubject(
-    @Body() body: CreateLocaleSubjectRequestBody,
+    @Body() body: Partial<CreateLocaleSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateLocaleSubjectResponseBody> {
     const { uid } = verifyRequest(body, context);
@@ -80,7 +80,7 @@ export class SubjectsController extends Controller {
 
   @Post(getSubject)
   static getSubject(
-    @Body() body: GetSubjectRequestBody,
+    @Body() body: Partial<GetSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectResponseBody> {
     const { uid } = verifyRequest(body, context);
@@ -102,7 +102,7 @@ export class SubjectsController extends Controller {
    */
   @Post(getSubjectsByCategory)
   static getSubjectsByCategory(
-    @Body() body: GetSubjectsByCategoryRequestBody,
+    @Body() body: Partial<GetSubjectsByCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectsByCategoryResponseBody> {
     const { uid } = verifyRequest(body, context);
@@ -121,7 +121,7 @@ export class SubjectsController extends Controller {
 
   @Post(updateLocaleSubject)
   static updateLocaleSubject(
-    @Body() body: UpdateLocaleSubjectRequestBody,
+    @Body() body: Partial<UpdateLocaleSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateLocaleSubjectResponseBody> {
     const { uid } = verifyRequest(body, context);

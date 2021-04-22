@@ -1,17 +1,19 @@
-import { UpdateTutorRequestBody, UpdateTutorResponseBody } from '@adopt-a-student/common';
+import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
-import tutorDataUpdater from '../../../utils/data-updaters/tutorDataUpdater';
-import updateDocumentData from '../../../utils/firebase/updateDocumentData';
-import verifyRequest from '../../../utils/verifyRequest';
-import updateTutorHandler from './request-handlers/updateTutorHandler';
 
-const createTutor = "createTutor";
-const getTutorsBySubjects = "getTutorsBySubjects";
-const updateTutor = "updateTutor";
-const getTutor = "getTutor";
 
-const exportedNames = [
-  createTutor,
+import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
+import arrayToRecord from '../../utils/arrayToRecord';
+import { functionsHttps } from '../../utils/firebase/firebase-admin';
+import verifyRequest from '../../utils/verifyRequest';
+import getPrivateTutorData from '../TutorController/request-handlers/getPrivateTutorDataHandler';
+import getPublicTutorData from '../TutorController/request-handlers/getPublicTutorDataHandler';
+import createGenericSubjectHandler from './request-handlers/createGenericSubjectHandler';
+import createLocaleSubjectHandler from './request-handlers/createLocaleSubjectHandler';
+import getSubjectHandler from './request-handlers/getSubjectHandler';
+import getSubjectsByCategoryHandler from './request-handlers/getSubjectsByCategoryHandler';
+import updateLocaleSubjectHandler from './request-handlers/updateLocaleSubjectHandler';
+
   getTutor,
   getTutorsBySubjects,
   getTutorsBySubjects,
@@ -28,7 +30,7 @@ export class TutorsController extends Controller {
 
   @Post(createTutor)
   static createTutor(
-    @Body() body: CreateTutorRequestBody,
+    @Body() body: Partial<CreateTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateTutorResponseBody> {
     return createTutorHandler(body, context);
@@ -42,20 +44,21 @@ export class TutorsController extends Controller {
    */
   @Post(getTutor)
   static getTutor(
-    @Body() body: GetTutorRequestBody,
+    @Body() body: Partial<GetTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetTutorResponseBody> {
-    const { id } = body;
     const { uid } = verifyRequest(body, context);
 
+    const { id } = body;
+
     return uid === id
-      ? getPrivateTutorData(body, context)
-      : getPublicTutorData(body, context);
+      ? getPrivateTutorData({ id })
+      : getPublicTutorData({ id });
   }
 
   @Post(getTutorsBySubjects)
   static getTutorsBySubjects(
-    @Body() body: GetTutorsBySubjectsRequestBody,
+    @Body() body: Partial<GetTutorsBySubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetTutorsBySubjectsResponseBody> {
     return getTutorsBySubjectsHandler(body, context);
@@ -63,7 +66,7 @@ export class TutorsController extends Controller {
 
   @Post(updateTutor)
   static updateTutor(
-    @Body() body: UpdateTutorRequestBody,
+    @Body() body: Partial<UpdateTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateTutorResponseBody> {
     // verify received data

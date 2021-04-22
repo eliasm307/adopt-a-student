@@ -73,7 +73,7 @@ export class RelationshipController extends Controller {
    */
   @Post(linkStudentAndSubject)
   static linkStudentAndSubject(
-    @Body() body: LinkStudentAndSubjectRequestBody,
+    @Body() body: Partial<LinkStudentAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkStudentAndSubjectResponseBody> {
     return linkStudentAndSubjectHandler(body, context);
@@ -81,7 +81,7 @@ export class RelationshipController extends Controller {
 
   @Post(linkStudentAndTutor)
   static linkStudentAndTutor(
-    @Body() body: LinkStudentAndTutorRequestBody,
+    @Body() body: Partial<LinkStudentAndTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkStudentAndTutorResponseBody> {
     return linkStudentAndTutorHandler(body, context);
@@ -89,7 +89,7 @@ export class RelationshipController extends Controller {
 
   @Post(linkSubjectAndSubjectCategory)
   static linkSubjectAndSubjectCategory(
-    @Body() body: LinkSubjectAndSubjectCategoryRequestBody,
+    @Body() body: Partial<LinkSubjectAndSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkSubjectAndSubjectCategoryResponseBody> {
     return linkSubjectAndSubjectCategoryHandler(body, context);
@@ -97,7 +97,7 @@ export class RelationshipController extends Controller {
 
   @Post(linkSubjects)
   static linkSubjects(
-    @Body() body: LinkSubjectsRequestBody,
+    @Body() body: Partial<LinkSubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkSubjectsResponseBody> {
     return linkSubjectsHandler(body, context);
@@ -105,7 +105,7 @@ export class RelationshipController extends Controller {
 
   @Post(linkTutorAndSubject)
   static linkTutorAndSubject(
-    @Body() body: LinkTutorAndSubjectRequestBody,
+    @Body() body: Partial<LinkTutorAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkTutorAndSubjectResponseBody> {
     return linkTutorAndSubjectHandler(body, context);
@@ -113,7 +113,7 @@ export class RelationshipController extends Controller {
 
   @Post(unlinkStudentAndSubject)
   static unlinkStudentAndSubject(
-    @Body() body: UnlinkStudentAndSubjectRequestBody,
+    @Body() body: Partial<UnlinkStudentAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkStudentAndSubjectResponseBody> {
     return unlinkStudentAndSubjectHandler(body, context);
@@ -121,7 +121,7 @@ export class RelationshipController extends Controller {
 
   @Post(unlinkStudentAndTutor)
   static unlinkStudentAndTutor(
-    @Body() body: UnlinkStudentAndTutorRequestBody,
+    @Body() body: Partial<UnlinkStudentAndTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkStudentAndTutorResponseBody> {
     return unlinkStudentAndTutorHandler(body, context);
@@ -129,7 +129,7 @@ export class RelationshipController extends Controller {
 
   @Post(unlinkSubjectAndSubjectCategory)
   static unlinkSubjectAndSubjectCategory(
-    @Body() body: UnlinkSubjectAndSubjectCategoryRequestBody,
+    @Body() body: Partial<UnlinkSubjectAndSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkSubjectAndSubjectCategoryResponseBody> {
     return unlinkSubjectAndSubjectCategoryHandler(body, context);
@@ -137,7 +137,7 @@ export class RelationshipController extends Controller {
 
   @Post(unlinkSubjects)
   static unlinkSubjects(
-    @Body() body: UnlinkSubjectsRequestBody,
+    @Body() body: Partial<UnlinkSubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkSubjectsResponseBody> {
     return unlinkSubjectsHandler(body, context);
@@ -145,7 +145,7 @@ export class RelationshipController extends Controller {
 
   @Post(unlinkTutorAndSubject)
   static unlinkTutorAndSubject(
-    @Body() body: UnlinkTutorAndSubjectRequestBody,
+    @Body() body: Partial<UnlinkTutorAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkTutorAndSubjectResponseBody> {
     return unlinkTutorAndSubjectHandler(body, context);

@@ -64,7 +64,7 @@ export class StudentsController extends Controller {
 
   @Post(createStudent)
   static createStudent(
-    @Body() body: CreateStudentRequestBody,
+    @Body() body: Partial<CreateStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateStudentResponseBody> {
     return createStudentHandler(body, context);
@@ -78,7 +78,7 @@ export class StudentsController extends Controller {
    */
   @Post(getStudent)
   static getStudent(
-    @Body() body: GetStudentRequestBody,
+    @Body() body: Partial<GetStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetStudentResponseBody> {
     const { id } = body;
@@ -91,7 +91,7 @@ export class StudentsController extends Controller {
 
   @Post(getStudentsBySubjects)
   static getStudentsBySubjects(
-    @Body() body: GetStudentsBySubjectsRequestBody,
+    @Body() body: Partial<GetStudentsBySubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetStudentsBySubjectsResponseBody> {
     return getStudentsBySubjectsHandler(body, context);
@@ -99,7 +99,7 @@ export class StudentsController extends Controller {
 
   @Post(updateStudent)
   static updateStudent(
-    @Body() body: UpdateStudentRequestBody,
+    @Body() body: Partial<UpdateStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateStudentResponseBody> {
     return updateStudentHandler(body, context);

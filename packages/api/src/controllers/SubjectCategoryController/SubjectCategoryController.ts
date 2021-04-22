@@ -39,7 +39,7 @@ export class SubjectCategoryController extends Controller {
 
   @Post(createSubjectCategory)
   static createSubjectCategory(
-    @Body() body: CreateSubjectCategoryRequestBody,
+    @Body() body: Partial<CreateSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateSubjectCategoryResponseBody> {
     const auth = verifyRequest(body, context);
@@ -58,7 +58,7 @@ export class SubjectCategoryController extends Controller {
 
   @Post(getSubjectCategoriesForLocale)
   static getSubjectCategoriesForLocale(
-    @Body() body: GetSubjectCategoriesForLocaleRequestBody,
+    @Body() body: Partial<GetSubjectCategoriesForLocaleRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectCategoriesForLocaleResponseBody> {
     const auth = verifyRequest(body, context);
@@ -96,7 +96,7 @@ export class SubjectCategoryController extends Controller {
 
   @Post(updateSubjectCategory)
   static updateSubjectCategory(
-    @Body() body: UpdateSubjectCategoryRequestBody,
+    @Body() body: Partial<UpdateSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateSubjectCategoryResponseBody> {
     const auth = verifyRequest(body, context);
