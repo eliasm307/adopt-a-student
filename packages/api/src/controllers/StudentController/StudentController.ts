@@ -1,19 +1,7 @@
-/* eslint-disable @typescript-eslint/require-await */
-import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
+import { CreateStudentRequestBody, CreateStudentResponseBody } from '@adopt-a-student/common';
 
-import {
-  CreateStudentRequestBody, CreateStudentResponseBody, GetStudentRequestBody,
-  GetStudentResponseBody, GetStudentsBySubjectsRequestBody, GetStudentsBySubjectsResponseBody,
-  UpdateStudentRequestBody, UpdateStudentResponseBody,
-} from '@adopt-a-student/common';
-
-import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
-import arrayToRecord from '../../utils/arrayToRecord';
-import verifyRequest from '../../utils/verifyRequest';
-import createStudentHandler from './request-handlers/createStudent';
-import getPrivateStudentData from './request-handlers/getPrivateStudentData';
-import getPublicStudentData from './request-handlers/getPublicStudentDataHandler';
-import getStudentsBySubjectsHandler from './request-handlers/getStudentsBySubjectsHandler';
+import createDocument from '../../../utils/firebase/createDocument';
+import verifyRequest from '../../../utils/verifyRequest';
 import updateStudentHandler from './request-handlers/updateStudentHandler';
 
 const createStudent = "createStudent";
@@ -67,6 +55,12 @@ export class StudentsController extends Controller {
     @Body() body: Partial<CreateStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateStudentResponseBody> {
+    if (!body)
+      throw new functionsHttps.HttpsError(
+        "invalid-argument",
+        "body data not provided"
+      );
+
     return createStudentHandler(body, context);
   }
 

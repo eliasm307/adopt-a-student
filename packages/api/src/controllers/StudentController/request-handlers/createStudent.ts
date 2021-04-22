@@ -3,30 +3,24 @@ import {
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME } from '../../../constants';
+import { AuthData } from '../../../declarations/interfaces';
+import { InternalHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 
 const createStudent: InternalHandler<
-  CreateStudentRequestBody,
+  CreateStudentRequestBody & AuthData,
   CreateStudentResponseBody
-> = async (body, context) => {
-  const auth = verifyRequest(body, context);
-
-  if (!body)
-    throw new functionsHttps.HttpsError(
-      "invalid-argument",
-      "body data not provided"
-    );
-
-  const { student: studentInput } = body;
+> = async (props) => {
+  const { student: studentInput, uid } = props;
 
   // make sure data uses user id
-  const data = { ...studentInput, id: auth.uid };
+  const data = { ...studentInput, id: uid };
 
   const student: PrivateStudentData = await createDocument({
     collectionPath: STUDENT_COLLECTION_NAME,
-    id: auth.uid,
+    id: uid,
     data,
     dataPredicate: isPrivateStudentData,
     firestoreAdmin,
