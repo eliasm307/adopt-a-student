@@ -2,10 +2,10 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
   CreateTutorRequestBody, CreateTutorResponseBody, GetTutorRequestBody, GetTutorResponseBody,
-  GetTutorsBySubjectsRequestBody, GetTutorsBySubjectsResponseBody, isPrivateTutorData,
+  GetTutorsBySubjectsRequestBody, GetTutorsBySubjectsResponseBody, isArray, isEmptyObject, isObject,
+  isPrivateTutorData, isString, UpdateTutorRequestBody, UpdateTutorResponseBody,
 } from '@adopt-a-student/common';
 
-import isId from '../../../common/src/utils/type-predicates/isId';
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
 import { functionsHttps } from '../../utils/firebase/firebase-admin';
@@ -14,6 +14,7 @@ import getPrivateTutorData from '../TutorController/request-handlers/getPrivateT
 import getPublicTutorData from '../TutorController/request-handlers/getPublicTutorDataHandler';
 import createTutorHandler from './request-handlers/createTutorHandler';
 import getTutorsBySubjectsHandler from './request-handlers/getTutorsBySubjectsHandler';
+import updateTutorHandler from './request-handlers/updateTutorHandler';
 
 const createTutor = "createTutor";
 const getTutorsBySubjects = "getTutorsBySubjects";
@@ -45,7 +46,7 @@ export class TutorsController extends Controller {
 
     const { tutor } = body;
 
-    if (!tutor || !isPrivateTutorData({ tutor, id: uid }))
+    if (!tutor || !isObject(tutor) || !isPrivateTutorData({ tutor, id: uid }))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Provided data is invalid"
@@ -69,7 +70,7 @@ export class TutorsController extends Controller {
 
     const { id } = body;
 
-    if (!isId(id))
+    if (!isString(id))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Provided data is invalid"
@@ -89,7 +90,7 @@ export class TutorsController extends Controller {
 
     const { subjectIds } = body;
 
-    if (!)
+    if (!isArray(subjectIds))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Provided data is invalid"
@@ -105,33 +106,21 @@ export class TutorsController extends Controller {
   ): Promise<UpdateTutorResponseBody> {
     const { uid } = verifyRequest(body, context);
 
+    const { updates } = body;
+
     // verify received data
-    if (
-      !body ||
-      !body.updates ||
-      typeof body.updates !== "object" ||
-      !Object.keys(body.updates).length
-    )
+    if (!isObject(updates))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not update tutor because provided data is not valid"
       );
 
-    return updateTutorHandler(body, context);
+    if (isEmptyObject(updates))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update tutor because no updates were provided"
+      );
+
+    return updateTutorHandler({ uid, updates });
   }
 }
-
-/*
-enum wer {
-  a,
-  b,
-  c,
-}
-*/
-
-// const a = { ...wer };
-
-// const b = Object.values(a).map((k) => k as const);
-
-// type q = keyof typeof a;
-// const c:  q,  = "";

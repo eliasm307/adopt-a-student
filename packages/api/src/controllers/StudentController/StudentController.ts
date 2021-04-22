@@ -81,12 +81,13 @@ export class StudentsController extends Controller {
     @Body() body: Partial<GetStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetStudentResponseBody> {
-    const { id } = body;
     const { uid } = verifyRequest(body, context);
 
+    const { id } = body;
+
     return uid === id
-      ? getPrivateStudentData(body, context)
-      : getPublicStudentData(body, context);
+      ? getPrivateStudentData({ id, uid })
+      : getPublicStudentData({ id, uid });
   }
 
   @Post(getStudentsBySubjects)
