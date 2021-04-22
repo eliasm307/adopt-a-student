@@ -12,7 +12,7 @@ const documentLinkRemover = async <D, L>({
   firestoreAdmin,
   currentData,
   currentLinks,
-  filterPredicate,
+  linkToRemovePredicate,
 }: Props<D, L>): Promise<D> => {
   const { linksPropName } = documentProps;
 
@@ -22,7 +22,9 @@ const documentLinkRemover = async <D, L>({
     firestoreAdmin,
     updates: {
       ...currentData,
-      [linksPropName]: currentLinks.filter(filterPredicate), // remove link
+      [linksPropName]: currentLinks.filter(
+        (link) => !linkToRemovePredicate(link)
+      ), // filter out specified link
     },
     dataUpdater: createDocumentPropDataUpdater(linksPropName),
   });

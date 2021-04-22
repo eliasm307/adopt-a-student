@@ -21,7 +21,7 @@ const unlinkSubjectAndSubjectCategoryHandler: InternalHandler<
   const document1Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
-    filterPredicate: (link) => link !== categoryId,
+    linkToRemovePredicate: (link) => link !== categoryId,
     linkToMutatePredicate: (link) => link,
     linksPropName: "relatedCategories",
     documentId: subjectId,
@@ -34,7 +34,7 @@ const unlinkSubjectAndSubjectCategoryHandler: InternalHandler<
   > = {
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     dataPredicate: isGenericSubjectCategoryData,
-    filterPredicate: (link) => link !== subjectId,
+    linkToRemovePredicate: (link) => link !== subjectId,
     linkToMutatePredicate: (link) => link,
     linksPropName: "relatedSubjects",
     documentId: categoryId,

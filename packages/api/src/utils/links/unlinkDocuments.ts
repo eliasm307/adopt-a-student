@@ -1,12 +1,10 @@
 import { FirestoreAdmin } from '../../declarations/interfaces';
 import createLinkRemover from './createLinkRemover';
-import { hasFilterPredicate } from './interfaces';
 import { documentLinksShouldBeRemoved as linksShouldBeRemoved } from './linksShouldBeMutated';
 import mutateDocumentLink, { DocumentLinkMutationProps } from './mutateDocumentLink';
 
 export interface RemoveDocumentLinkProps<D, L>
-  extends DocumentLinkMutationProps<D, L>,
-    hasFilterPredicate<L> {}
+  extends DocumentLinkMutationProps<D, L> {}
 
 interface Props<D1, L1, D2, L2> {
   document1Props: RemoveDocumentLinkProps<D1, L1>;
@@ -22,13 +20,13 @@ export default async function unlinkDocuments<D1, L1, D2, L2>(
     document1Props: {
       ...document1Props,
       linkMutator: createLinkRemover({
-        filterPredicate: document1Props.filterPredicate,
+        linkToRemovePredicate: document1Props.linkToMutatePredicate,
       }),
     },
     document2Props: {
       ...document2Props,
       linkMutator: createLinkRemover({
-        filterPredicate: document2Props.filterPredicate,
+        linkToRemovePredicate: document2Props.linkToMutatePredicate,
       }),
     },
     documentLinksShouldBeMutated: linksShouldBeRemoved,

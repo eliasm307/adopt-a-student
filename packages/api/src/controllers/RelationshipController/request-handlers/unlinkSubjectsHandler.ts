@@ -34,14 +34,14 @@ const unlinkGenericSubjects: InternalHandler<
 
   const document1Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
-    filterPredicate: (link) => link !== subject2Id,
+    linkToRemovePredicate: (link) => link !== subject2Id,
 
     documentId: subject1Id,
   };
 
   const document2Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
-    filterPredicate: (link) => link !== subject1Id,
+    linkToRemovePredicate: (link) => link !== subject1Id,
     documentId: subject2Id,
   };
 

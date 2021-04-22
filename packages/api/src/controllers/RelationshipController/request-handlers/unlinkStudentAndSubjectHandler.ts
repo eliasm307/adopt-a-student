@@ -31,8 +31,12 @@ const unlinkStudentAndLocaleSubject: InternalHandler<
   > = {
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
-    linkToMutatePredicate: ({ id }) => id,
-    filterPredicate: ({ id: link }) => link !== subjectId,
+    linkToMutatePredicate: ({
+      id: linkId,
+      country: linkCountry,
+      locale: linkLocale,
+    }) =>
+      linkId === subjectId && linkCountry === country && linkLocale === locale,
     linksPropName: "relatedSubjects",
     documentId: uid,
   };
@@ -40,19 +44,18 @@ const unlinkStudentAndLocaleSubject: InternalHandler<
   const document2Props: RemoveDocumentLinkProps<LocaleSubjectData, string> = {
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
-    filterPredicate: (link) => link !== uid,
-    linkToMutatePredicate: (link) => link,
+    linkToMutatePredicate: (link) => link === uid,
     linksPropName: "relatedStudents",
     documentId: localeSubjectDocumentId,
   };
 
-  const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
+  const [student, subject] = await unlinkDocuments({
     document1Props,
     document2Props,
     firestoreAdmin,
   });
 
-  return { message: "Success" };
+  return { student, subject } as UnlinkStudentAndSubjectResponseBody;
 };
 
 export default unlinkStudentAndLocaleSubject;
