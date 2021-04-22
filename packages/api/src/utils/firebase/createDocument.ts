@@ -4,7 +4,7 @@ import { functionsHttps } from "./firebase-admin";
 
 export interface CreateDocumentProps<D> {
   collectionPath: string;
-  data: Partial<D>;
+  data: D;
   dataPredicate: (data: any) => data is D;
   firestoreAdmin: FirestoreAdmin;
   id: string;

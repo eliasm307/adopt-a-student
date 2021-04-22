@@ -18,19 +18,19 @@ const createSubjectCategory: FirebaseCallableFunctionHandler<
 > = async (body, context) => {
   const auth = verifyRequest(body, context);
 
-  if (!body?.locale || !body?.name)
+  if (!body?.locale || !body?.name || !body.data)
     throw new functionsHttps.HttpsError(
       "failed-precondition",
-      "Data not provided"
+      "Incomplete data provided"
     );
 
   const { locale, name, data: inputData } = body;
 
-  const id = newGuid();
+  const genericId = newGuid();
 
   const localeCategoryData: LocaleSubjectCategoryData = {
-    ...(inputData as LocaleSubjectCategoryData),
-    parentId: id,
+    ...inputData,
+    id: genericId,
   };
 
   if (!isLocaleSubjectCategoryData(localeCategoryData))
@@ -41,8 +41,8 @@ const createSubjectCategory: FirebaseCallableFunctionHandler<
 
   const subjectCategoryNamesField: keyof GenericSubjectCategoryData = "names";
 
-  // check if a subject with the given name already exists,
-  // if a generic subject already exists with a given name,
+  // check if a subject category with the given name already exists,
+  // if a generic subject category already exists with a given name,
   // this means this new subject belongs as a locale subject of that existing subject category
   const existingSubjectCategoriesSnapshot = await firestoreAdmin
     .collection(SUBJECT_CATEGORY_COLLECTION_NAME)
@@ -50,11 +50,11 @@ const createSubjectCategory: FirebaseCallableFunctionHandler<
     .get();
 
   if (existingSubjectCategoriesSnapshot.docs.length) {
-    const error = `Tried to create a subject with name ${String(
+    const error = `Tried to create a subject category with name ${String(
       name
-    )} however there is ${
+    )} however there are ${
       existingSubjectCategoriesSnapshot.docs.length
-    } existing subjects with this name, try to edit existing subjects instead`;
+    } existing subject categories with this name, try to edit existing subjects instead`;
 
     console.warn(__filename, error, { body });
 
@@ -68,13 +68,13 @@ const createSubjectCategory: FirebaseCallableFunctionHandler<
     >,
     names: [name], // assign inital name
     relatedSubjects: [],
-    id,
+    id: genericId,
   };
 
   // create
   const result = await createDocument({
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
-    id,
+    id: genericId,
     data,
     dataPredicate: isGenericSubjectCategoryData,
     firestoreAdmin,

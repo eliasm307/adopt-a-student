@@ -85,10 +85,10 @@ export interface LocaleSubjectName {
 }
 /** Subject category data in a specific locale */
 export interface LocaleSubjectCategoryData {
+  /** id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject */
+  id: SubjectId;
   locale: LocaleCode;
   name: SubjectCategoryName;
-  /** id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject */
-  parentId: SubjectId;
 }
 /** Subject category with all locale names */
 export interface GenericSubjectCategoryData extends Entity {
@@ -98,7 +98,7 @@ export interface GenericSubjectCategoryData extends Entity {
   */
   locales: Record<LocaleCode, LocaleSubjectCategoryData>;
   /** Existing names for this subject category from defined locales *
-  // todo this should update when locale subjects are changed
+  // todo test this should update when locale subjects are changed
   */
   names: SubjectName[];
   /** generic subjects which belong to this generic category
@@ -111,15 +111,13 @@ export interface GenericSubjectCategoryData extends Entity {
  // ! this is represented as separate documents as there might be a lot of data associated with locale subjects, so this prevents every locale subject being loaded when querying generic subjects
 */
 export interface LocaleSubjectData extends Entity {
-  /** Unique id created by combining [GenericSubjectId]-[LocaleCode] */
-  readonly id: LocaleSubjectId;
+  /** Id of generic subject this locale subject relates to, there should only be 1 */
+  readonly id: SubjectId;
 
   /** Specific country for this subject, for any subjects that might be country dependent, blank means it applies to any */
   country: Country;
   /** Description of the subject */
   description: string;
-  /** Id of generic subject this locale subject relates to, there should only be 1 */
-  genericId: GenericSubjectId;
   /** Represents a language that a subject is in */
   locale: LocaleCode;
   name: SubjectName;

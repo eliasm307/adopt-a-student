@@ -9,7 +9,9 @@ import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getDocumentData from '../../../utils/firebase/getDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
-import { isLocaleSubjectId } from '../utils/localeSubjectId';
+import {
+  createLocaleSubjectId as createLocaleSubjectDocumentId, isLocaleSubjectId,
+} from '../utils/localeSubjectDocumentId';
 
 const getSubjectHandler: FirebaseCallableFunctionHandler<
   GetSubjectRequestBody,
@@ -18,13 +20,13 @@ const getSubjectHandler: FirebaseCallableFunctionHandler<
   const auth = verifyRequest(data, context);
 
   // verify received data
-  if (!data?.id)
+  if (!data?.id || !data.country || !data.locale)
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Could not get subjects because provided data is missing subject id"
     );
 
-  const { id } = data;
+  const { id, country, locale } = data;
 
   if (!isLocaleSubjectId(id))
     throw new functionsHttps.HttpsError(
@@ -35,14 +37,14 @@ const getSubjectHandler: FirebaseCallableFunctionHandler<
   const localeSubject = await getDocumentData({
     firestoreAdmin,
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
-    id,
+    id: createLocaleSubjectDocumentId({ country, genericId: id, locale }), // todo see if any other locale subject queries need to use this function instead of trying to use the raw id
     dataPredicate: isLocaleSubjectData,
   });
 
   const { relatedCategories, relatedSubjects } = await getDocumentData({
     firestoreAdmin,
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
-    id: localeSubject.genericId,
+    id,
     dataPredicate: isGenericSubjectData,
   });
 
