@@ -26,7 +26,7 @@ const createLocaleSubject: FirebaseCallableFunctionHandler<
       "Data not provided"
     );
 
-  const { genericId, locale } = body.data;
+  const { genericId, locale, country } = body.data;
 
   const genericSubjectRef = await firestoreAdmin
     .doc(createPath(GENERIC_SUBJECT_COLLECTION_NAME, genericId))
@@ -39,7 +39,7 @@ const createLocaleSubject: FirebaseCallableFunctionHandler<
     );
 
   // id is generated from generic id
-  const id = createLocaleSubjectId({ genericId: genericId, locale });
+  const id = createLocaleSubjectId({ genericId: genericId, locale, country });
 
   const data = { ...body.data, id };
 
