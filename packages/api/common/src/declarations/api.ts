@@ -79,6 +79,11 @@ export interface SubjectOverview {
   subject: LocaleSubjectData;
 }
 
+export interface SubjectCategoryOverview {
+  category: LocaleSubjectCategoryData;
+  relatedSubjects: GenericSubjectId[];
+}
+
 export interface GetSubjectsByCategoryResponseBody {
   results: SubjectOverview[];
 }
@@ -131,41 +136,60 @@ export interface UnlinkSubjectsRequestBody {
   subject2Id: SubjectId;
 }
 
-export interface UnlinkSubjectsResponseBody extends BasicResponseData {}
+export interface UnlinkSubjectsResponseBody {
+  subject1: SubjectOverview;
+  subject2: SubjectOverview;
+}
 
 export interface LinkSubjectsRequestBody {
   subject1Id: SubjectId;
   subject2Id: SubjectId;
 }
 
-export interface LinkSubjectsResponseBody extends BasicResponseData {}
+export interface LinkSubjectsResponseBody {
+  subject1: SubjectOverview;
+  subject2: SubjectOverview;
+}
+
 export interface UnlinkStudentAndTutorRequestBody {
   studentId: StudentId;
   tutorId: TutorId;
 }
 
-export interface UnlinkStudentAndTutorResponseBody extends BasicResponseData {}
+export interface UnlinkStudentAndTutorResponseBody {
+  student: PublicStudentData;
+  tutor: PublicTutorData;
+}
+
 export interface LinkStudentAndTutorRequestBody {
   studentId: StudentId;
   tutorId: TutorId;
 }
 
-export interface LinkStudentAndTutorResponseBody extends BasicResponseData {}
+export interface LinkStudentAndTutorResponseBody {
+  student: PublicStudentData;
+  tutor: PublicTutorData;
+}
 
 export interface UnlinkSubjectAndSubjectCategoryRequestBody {
   categoryId: CategoryId;
   subjectId: SubjectId;
 }
 
-export interface UnlinkSubjectAndSubjectCategoryResponseBody
-  extends BasicResponseData {}
+export interface UnlinkSubjectAndSubjectCategoryResponseBody {
+  subject: SubjectOverview;
+  subjectCategory: SubjectCategoryOverview;
+}
+
 export interface LinkSubjectAndSubjectCategoryRequestBody {
   categoryId: CategoryId;
   subjectId: SubjectId;
 }
 
-export interface LinkSubjectAndSubjectCategoryResponseBody
-  extends BasicResponseData {}
+export interface LinkSubjectAndSubjectCategoryResponseBody {
+  subject: SubjectOverview;
+  subjectCategory: SubjectCategoryOverview;
+}
 
 export interface UnlinkTutorAndSubjectRequestBody {
   country: Country;
@@ -173,7 +197,10 @@ export interface UnlinkTutorAndSubjectRequestBody {
   locale: LocaleCode;
 }
 
-export interface UnlinkTutorAndSubjectResponseBody extends BasicResponseData {}
+export interface UnlinkTutorAndSubjectResponseBody {
+  subject: SubjectOverview;
+  tutor: PublicTutorData;
+}
 
 export interface UnlinkStudentAndSubjectRequestBody {
   country: Country;
@@ -181,26 +208,36 @@ export interface UnlinkStudentAndSubjectRequestBody {
   locale: LocaleCode;
 }
 
-export interface UnlinkStudentAndSubjectResponseBody
-  extends BasicResponseData {}
+export interface UnlinkStudentAndSubjectResponseBody {
+  student: PublicStudentData;
+  subject: SubjectOverview;
+}
 
 export interface LinkTutorAndSubjectRequestBody {
   data: UserSubjectData;
 }
 
-export interface LinkTutorAndSubjectResponseBody extends BasicResponseData {}
+export interface LinkTutorAndSubjectResponseBody {
+  subject: SubjectOverview;
+  tutor: PublicTutorData;
+}
 
 export interface LinkStudentAndSubjectRequestBody {
   data: UserSubjectData;
 }
 
-export interface LinkStudentAndSubjectResponseBody extends BasicResponseData {}
+export interface LinkStudentAndSubjectResponseBody {
+  student: PublicStudentData;
+  subject: SubjectOverview;
+}
 
+/*
 export interface BasicResponseData {
   message?: string;
 
 // success: boolean;
 }
+*/
 
 export interface UpdateSubjectCategoryRequestBody {
   id: SubjectCategoryId;

@@ -14,6 +14,7 @@ import verifyRequest from '../../../utils/verifyRequest';
 // todo needs to verify a user has access to this data
 // todo should add subject to user and user to subject
 
+/** Links given student id to a locale subject */
 const linkStudentAndLocaleSubject: InternalHandler<
   LinkStudentAndSubjectRequestBody & hasId,
   LinkStudentAndSubjectResponseBody
