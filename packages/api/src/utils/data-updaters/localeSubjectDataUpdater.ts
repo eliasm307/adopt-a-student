@@ -23,8 +23,8 @@ const localeSubjectDataUpdater: DataUpdater<LocaleSubjectData> = ({
       typeof value === "string" ? (newData.country = value as Country) : null,
     description: (value) =>
       typeof value === "string" ? (newData.description = value) : null,
-    parentId: (value) =>
-      typeof value === "string" ? (newData.parentId = value) : null,
+    genericId: (value) =>
+      typeof value === "string" ? (newData.genericId = value) : null, // ? should this be modifiable?
     locale: (value) =>
       typeof value === "string" ? (newData.locale = value as LocaleCode) : null,
   };

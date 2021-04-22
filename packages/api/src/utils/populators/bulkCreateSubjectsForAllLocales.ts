@@ -1,17 +1,13 @@
 // todo implement
 
-import {
-  GenericSubjectData, isGenericSubjectData, LocaleSubjectData,
-} from '@adopt-a-student/common';
+import { GenericSubjectData, LocaleSubjectData } from '@adopt-a-student/common';
 
 import { localeCodes } from '../../../common/src/utils/locales';
 import promiseAllSettledAndLog from '../../../common/src/utils/promiseAllSettledAndLog';
-import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../constants';
 import createGenericSubject from '../../controllers/SubjectController/request-handlers/createGenericSubjectHandler';
-import { createLocaleSubjectId } from '../../controllers/SubjectController/utils/localeSubjectId';
+import createLocaleSubject from '../../controllers/SubjectController/request-handlers/createLocaleSubjectHandler';
 import callableContextSpoof from '../firebase/callableContextSpoof';
 import createDocument from '../firebase/createDocument';
-import { firestoreAdmin } from '../firebase/firebase-admin';
 import newGuid from '../newGuid';
 import getRandomLocaleCountry from './getRandomLocaleCountry';
 
@@ -43,7 +39,7 @@ export default async function bulkCreateSubjectsForAllLocales(props: Props) {
       relatedStudents: [],
       relatedTutors: [],
     };
-
+    /*
     const localeSubjectPromise = createDocument({
       collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
       id: createLocaleSubjectId({ genericId, locale }),
@@ -51,9 +47,19 @@ export default async function bulkCreateSubjectsForAllLocales(props: Props) {
       dataPredicate: isGenericSubjectData,
       firestoreAdmin,
     });
+    */
 
-    promises.push(localeSubjectPromise);
+    const localeSubjectPromise2 = createLocaleSubject(
+      {
+        data: localeSubjectData,
+        genericSubjectId: genericId,
+      },
+      callableContextSpoof()
+    );
+    promises.push(localeSubjectPromise2);
   });
 
-  return promiseAllSettledAndLog(promises);
+  const result = await promiseAllSettledAndLog(promises);
+
+  return result;
 }

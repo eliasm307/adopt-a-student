@@ -1,12 +1,12 @@
 import {
-  GenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData, ObjectMap,
+  GenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData,
 } from '@adopt-a-student/common';
 
 import { DataMutatorMap as DataMutatorMap, DataUpdater } from '../../declarations/types';
 
 interface Props {
-  updates: any;
   existingData: GenericSubjectCategoryData;
+  updates: any;
 }
 
 const genericSubjectCategoryDataUpdater: DataUpdater<GenericSubjectCategoryData> = ({
@@ -23,7 +23,7 @@ const genericSubjectCategoryDataUpdater: DataUpdater<GenericSubjectCategoryData>
     // replace the object with the updates, this should be merged by the firestore update
     locales: (value) =>
       typeof value === "object"
-        ? (newData.locales = value as ObjectMap<
+        ? (newData.locales = value as Record<
             LocaleCode,
             LocaleSubjectCategoryData
           >)

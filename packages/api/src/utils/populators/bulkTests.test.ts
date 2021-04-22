@@ -1,4 +1,5 @@
 import { isPrivateStudentData, isPrivateTutorData } from '../../../common/src';
+import promiseAllSettledAndLog from '../../../common/src/utils/promiseAllSettledAndLog';
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../constants';
 import { firestoreAdmin } from '../firebase/firebase-admin';
 import bulkCreateSubjectsForAllLocales from './bulkCreateSubjectsForAllLocales';
@@ -33,13 +34,15 @@ describe("bulkUserPopulator", () => {
 });
 
 describe("bulkCreateSubjectsForAllLocales", () => {
-  it("can generate multiple subjects and locale subjects", () => {
-    const result = bulkCreateSubjectsForAllLocales({
-      genericSubjectData: {
-        internalName: "Maths",
-        relatedCategories: [],
-        relatedSubjects: [],
-      },
-    });
+  it("can generate multiple subjects and locale subjects", async () => {
+    await expect(
+      bulkCreateSubjectsForAllLocales({
+        genericSubjectData: {
+          internalName: "Maths",
+          relatedCategories: [],
+          relatedSubjects: [],
+        },
+      })
+    ).resolves.toBeTruthy();
   });
 });

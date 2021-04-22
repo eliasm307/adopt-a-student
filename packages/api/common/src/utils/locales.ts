@@ -22,7 +22,7 @@ const localesUsed = locales.all.filter((locale) =>
 
 // populate countries set for each locale
 localesUsed.forEach((locale) => {
-  console.warn({ locale, localeCountries });
+  // console.warn({ locale, localeCountries });
 
   if (locale.location) {
     if (!localeCountries[locale["iso639-1"] as LocaleCode])

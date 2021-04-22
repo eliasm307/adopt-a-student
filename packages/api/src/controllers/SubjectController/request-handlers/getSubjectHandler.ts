@@ -35,7 +35,7 @@ const getSubjectHandler: FirebaseCallableFunctionHandler<
   const { relatedCategories, relatedSubjects } = await getDocumentData({
     firestoreAdmin,
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
-    id: localeSubject.parentId,
+    id: localeSubject.genericId,
     dataPredicate: isGenericSubjectData,
   });
 

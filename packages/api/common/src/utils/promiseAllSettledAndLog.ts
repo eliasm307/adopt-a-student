@@ -11,7 +11,7 @@ export default async function promiseAllSettledAndLog<T>(
 
   const rejectedCount = results.length - resolvedCount;
 
-  console.log(
+  console.warn(
     __filename,
     `${resolvedCount}/${results.length} resolved, ${rejectedCount} rejected, results:`,
     results

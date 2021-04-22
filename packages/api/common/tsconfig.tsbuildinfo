@@ -226,14 +226,24 @@
         "signature": "801067ca47204145766efd1cca3fc0278324dbe44a71e353ad62f785e3951670",
         "affectsGlobalScope": false
       },
+      "../../../node_modules/locale-codes/index.d.ts": {
+        "version": "953ce34ff67f5dd458ea15181112101cf140e1378473b081fc38ca608c42543b",
+        "signature": "953ce34ff67f5dd458ea15181112101cf140e1378473b081fc38ca608c42543b",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/locales.ts": {
+        "version": "8298035c420b5a60222ddc496e7d3a913f20f903dbc7185e46c3f4b039d22838",
+        "signature": "46d991a2d4b9d662fd4e1a1fe0f5305d2d8473040512718d1957d0bcf1534d2c",
+        "affectsGlobalScope": false
+      },
       "./src/declarations/types.ts": {
-        "version": "ff537bb2d0e257fd9b12de198e6ecb2a3ab086290406dea0e06e90c302792ec0",
-        "signature": "1c0cf7a4e6acfdfcf38819c9493aa380097973e63f55f693eccaa834036fde20",
+        "version": "fbb5ca7f45c6e5c04ef7b363fce6f4605b0ee34b4214f6e8154a63a271892364",
+        "signature": "b7e9360a10a6eff2d2cd0ae800ff90f4d03932c8e6892d3f7518e7676acc1b48",
         "affectsGlobalScope": false
       },
       "./src/declarations/data-models.ts": {
-        "version": "4c4e0753d92d2e7b88cc2463b77bf26feaf613c3c2a7b673cdd1574990964e43",
-        "signature": "16399d5fca5c205784130ee8c5ca6bfdab84de47795c180bf75543b9c1e85907",
+        "version": "5c9420f0a7ec83542526e2509cd1a09dbd00aaad23370e64e6222b49847e9b0a",
+        "signature": "ed8241d074db2c037c26808c03e4037367fb9ef9ffdccd691d5b49400c7380f7",
         "affectsGlobalScope": false
       },
       "./src/declarations/object-shcema.ts": {
@@ -252,7 +262,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isgenericsubjectdata.ts": {
-        "version": "ecb5bd0d2281b6c0eb908ecefacc1c9ddd12e1d31ccf719a447f25404d8b0769",
+        "version": "2a5c4a494f1538745050e2b73c37a1ca1beea164e314c4ad0867eeac016c55ce",
         "signature": "8c52e0aa05f551447fce69c04a30e60c9136fcc6628c71fc1937163d47d8eff4",
         "affectsGlobalScope": false
       },
@@ -262,7 +272,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/islocalesubjectdata.ts": {
-        "version": "190569420541592aebef2e4ba4cb8fe809e2328cdeb818b729abbc29b2204af2",
+        "version": "70db936678658e86728cb50f963b839e22eb2f682e754a6c2cd4f9ee491b05d7",
         "signature": "163b7f2e92e84f90677aeb2c558d612d6017fbc1c02ad7acc101bf90241c5611",
         "affectsGlobalScope": false
       },
@@ -292,13 +302,23 @@
         "affectsGlobalScope": false
       },
       "./src/declarations/api.ts": {
-        "version": "7de9f603402e9adebf0adc97084e57050ae7b3ff746ed7fdf79a2c6131439f3c",
-        "signature": "18c88710282d3bcaf313853c52d6c2364f3e34bc5911cb2eefef13b8dfb43701",
+        "version": "b3364e9be8ee87b18fb039c523b80c8c3466647286657772171d02f0ea7dff31",
+        "signature": "a8d71033956007dff36dd13e51ecc91aabed5b84675e0793abef43625c4782d7",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
         "version": "6ead5aea271de1b436c767c91a3d32061cd87aff634940ab66cf36c3961b60f6",
         "signature": "6f83b5a5a1ded389b4d5bb989b8d024045c97f723e31d629515eeecc8be94589",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/promiseallsettledandlog.ts": {
+        "version": "c98d752b31c6c86cd06614c49d3559b81dada4edd3b3e41e26f2901e92533d92",
+        "signature": "d579cdba7884bef8395051ffb057f370b7f00134a685f76c57ba1d596f64814d",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/selectanyarrayitem.ts": {
+        "version": "f10a53da3eab3f72ff20ba2397539182f4437fec514548a4607596b6bb57e31e",
+        "signature": "58037bf47230503fed01df53b82c6091221e1159f67075a299bc91f2f0f98e75",
         "affectsGlobalScope": false
       },
       "./node_modules/jest-diff/build/cleanupsemantic.d.ts": {
@@ -578,7 +598,7 @@
       ],
       "module": 1,
       "moduleResolution": 2,
-      "target": 4,
+      "target": 7,
       "sourceMap": true,
       "noEmitOnError": true,
       "resolveJsonModule": true,
@@ -871,6 +891,9 @@
       "./src/declarations/object-shcema.ts": [
         "./src/declarations/data-models.ts"
       ],
+      "./src/declarations/types.ts": [
+        "./src/utils/locales.ts"
+      ],
       "./src/index.ts": [
         "./src/declarations/api.ts",
         "./src/declarations/data-models.ts",
@@ -878,6 +901,10 @@
         "./src/declarations/object-shcema.ts",
         "./src/declarations/types.ts",
         "./src/utils/type-predicates/index.ts"
+      ],
+      "./src/utils/locales.ts": [
+        "../../../node_modules/locale-codes/index.d.ts",
+        "./src/declarations/types.ts"
       ],
       "./src/utils/type-predicates/index.ts": [
         "./src/utils/type-predicates/isgenericsubjectcategorydata.ts",
@@ -1180,6 +1207,9 @@
       "./src/declarations/object-shcema.ts": [
         "./src/declarations/data-models.ts"
       ],
+      "./src/declarations/types.ts": [
+        "./src/utils/locales.ts"
+      ],
       "./src/index.ts": [
         "./src/declarations/api.ts",
         "./src/declarations/data-models.ts",
@@ -1187,6 +1217,10 @@
         "./src/declarations/object-shcema.ts",
         "./src/declarations/types.ts",
         "./src/utils/type-predicates/index.ts"
+      ],
+      "./src/utils/locales.ts": [
+        "../../../node_modules/locale-codes/index.d.ts",
+        "./src/declarations/types.ts"
       ],
       "./src/utils/type-predicates/index.ts": [
         "./src/utils/type-predicates/isgenericsubjectcategorydata.ts",
@@ -1228,6 +1262,7 @@
       ]
     },
     "semanticDiagnosticsPerFile": [
+      "../../../node_modules/locale-codes/index.d.ts",
       "./node_modules/@types/jest/index.d.ts",
       "./node_modules/@types/node/assert.d.ts",
       "./node_modules/@types/node/async_hooks.d.ts",
@@ -1332,6 +1367,9 @@
       "./src/declarations/object-shcema.ts",
       "./src/declarations/types.ts",
       "./src/index.ts",
+      "./src/utils/locales.ts",
+      "./src/utils/promiseallsettledandlog.ts",
+      "./src/utils/selectanyarrayitem.ts",
       "./src/utils/type-predicates/index.ts",
       "./src/utils/type-predicates/isgenericsubjectcategorydata.ts",
       "./src/utils/type-predicates/isgenericsubjectdata.ts",
@@ -1344,6 +1382,10 @@
       "./src/utils/type-predicates/ispublictutordata.ts"
     ],
     "affectedFilesPendingEmit": [
+      [
+        "../../../node_modules/locale-codes/index.d.ts",
+        1
+      ],
       [
         "./lib/declarations/api.d.ts",
         1
@@ -1625,7 +1667,55 @@
         1
       ],
       [
+        "./node_modules/typescript/lib/lib.dom.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.dom.iterable.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2015.collection.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2015.core.d.ts",
+        1
+      ],
+      [
         "./node_modules/typescript/lib/lib.es2015.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2015.generator.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2015.iterable.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2015.promise.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2015.proxy.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2015.reflect.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2015.symbol.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2016.array.include.d.ts",
         1
       ],
       [
@@ -1637,7 +1727,51 @@
         1
       ],
       [
+        "./node_modules/typescript/lib/lib.es2017.intl.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2017.object.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2017.string.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
+        1
+      ],
+      [
         "./node_modules/typescript/lib/lib.es2018.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2018.intl.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2018.promise.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2018.regexp.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2019.array.d.ts",
         1
       ],
       [
@@ -1645,11 +1779,67 @@
         1
       ],
       [
+        "./node_modules/typescript/lib/lib.es2019.object.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2019.string.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2019.symbol.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2020.bigint.d.ts",
+        1
+      ],
+      [
         "./node_modules/typescript/lib/lib.es2020.d.ts",
         1
       ],
       [
+        "./node_modules/typescript/lib/lib.es2020.intl.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2020.promise.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2020.sharedmemory.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2020.string.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2020.symbol.wellknown.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es5.d.ts",
+        1
+      ],
+      [
         "./node_modules/typescript/lib/lib.esnext.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.esnext.intl.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.esnext.promise.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.esnext.string.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.esnext.weakref.d.ts",
         1
       ],
       [
@@ -1674,6 +1864,18 @@
       ],
       [
         "./src/index.ts",
+        1
+      ],
+      [
+        "./src/utils/locales.ts",
+        1
+      ],
+      [
+        "./src/utils/promiseallsettledandlog.ts",
+        1
+      ],
+      [
+        "./src/utils/selectanyarrayitem.ts",
         1
       ],
       [

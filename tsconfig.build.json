@@ -3,14 +3,15 @@
     "typeRoots": ["./node_modules/@types"],
     "module": "CommonJS",
     "moduleResolution": "Node",
-    "target": "es2017",
+    "target": "es2020",
     "sourceMap": true,
     "noEmitOnError": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "declaration": true,
-    "allowSyntheticDefaultImports": true,
-    "incremental": true
+    "incremental": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "**/node_modules/**",

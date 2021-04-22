@@ -7,6 +7,7 @@ export function isGenericSubjectData(data: any): data is GenericSubjectData {
     id,
     relatedCategories: categoryIds,
     relatedSubjects: relatedGenericSubjectIds,
+    internalName,
   } = data as GenericSubjectData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -16,10 +17,11 @@ export function isGenericSubjectData(data: any): data is GenericSubjectData {
     id,
     relatedCategories: categoryIds,
     relatedSubjects: relatedGenericSubjectIds,
+    internalName,
   };
 
   const hasId = typeof id === "string" && id;
-
+  const hasInternalName = typeof internalName === "string";
   const hasCategoryIds = Array.isArray(categoryIds);
   const hasRelatedGenericSubjectIds = Array.isArray(relatedGenericSubjectIds);
 
