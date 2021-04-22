@@ -47,7 +47,7 @@ export class SubjectCategoryController extends Controller {
     const { locale, data, name } = body;
 
     // verify received data
-    if (!locale)
+    if (!locale || !data || !name)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not create subject because provided data is  incomplete"

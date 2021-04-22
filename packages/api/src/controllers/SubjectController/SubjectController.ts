@@ -129,7 +129,7 @@ export class SubjectsController extends Controller {
     const { country, id, locale, updates } = body;
 
     // verify received data
-    if (!updates || typeof updates !== "object" || !id)
+    if (!updates || typeof updates !== "object" || !id || !country || !locale)
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not update tutor because provided data is not valid"

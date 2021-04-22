@@ -1,6 +1,9 @@
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
-
+import {
+  CreateTutorRequestBody, CreateTutorResponseBody, GetTutorRequestBody, GetTutorResponseBody,
+  isPrivateTutorData,
+} from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
@@ -8,12 +11,15 @@ import { functionsHttps } from '../../utils/firebase/firebase-admin';
 import verifyRequest from '../../utils/verifyRequest';
 import getPrivateTutorData from '../TutorController/request-handlers/getPrivateTutorDataHandler';
 import getPublicTutorData from '../TutorController/request-handlers/getPublicTutorDataHandler';
-import createGenericSubjectHandler from './request-handlers/createGenericSubjectHandler';
-import createLocaleSubjectHandler from './request-handlers/createLocaleSubjectHandler';
-import getSubjectHandler from './request-handlers/getSubjectHandler';
-import getSubjectsByCategoryHandler from './request-handlers/getSubjectsByCategoryHandler';
-import updateLocaleSubjectHandler from './request-handlers/updateLocaleSubjectHandler';
+import createTutorHandler from './request-handlers/createTutorHandler';
 
+const createTutor = "createTutor";
+const getTutorsBySubjects = "getTutorsBySubjects";
+const updateTutor = "updateTutor";
+const getTutor = "getTutor";
+
+const exportedNames = [
+  createTutor,
   getTutor,
   getTutorsBySubjects,
   getTutorsBySubjects,
@@ -33,7 +39,17 @@ export class TutorsController extends Controller {
     @Body() body: Partial<CreateTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateTutorResponseBody> {
-    return createTutorHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { tutor } = body;
+
+    if (!tutor || !isPrivateTutorData({ tutor, id: uid }))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Provided data is invalid"
+      );
+
+    return createTutorHandler({ tutor, uid });
   }
 
   /**
@@ -51,6 +67,12 @@ export class TutorsController extends Controller {
 
     const { id } = body;
 
+    if (!tutor || !isPrivateTutorData({ tutor, id: uid }))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Provided data is invalid"
+      );
+
     return uid === id
       ? getPrivateTutorData({ id })
       : getPublicTutorData({ id });
@@ -61,6 +83,8 @@ export class TutorsController extends Controller {
     @Body() body: Partial<GetTutorsBySubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetTutorsBySubjectsResponseBody> {
+    const { uid } = verifyRequest(body, context);
+
     return getTutorsBySubjectsHandler(body, context);
   }
 
@@ -69,6 +93,8 @@ export class TutorsController extends Controller {
     @Body() body: Partial<UpdateTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateTutorResponseBody> {
+    const { uid } = verifyRequest(body, context);
+
     // verify received data
     if (
       !body ||
