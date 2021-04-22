@@ -28,36 +28,11 @@ const exportedNames = [
   getTutorsBySubjects,
   updateTutor,
 ] as const;
-/*
-const namedKeys = { a: "", v: "", c: "", d: "" };
 
-// ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
-// ! so the routes are named
-const { a, c, d, v } = namedKeys;
-const custom = {
-  val1: "aVal",
-};
-
-const { createGenericSubjectX: createGenericSubjecta } = CallableName;
-
-const name1 = "name1x/";
-const name23 = CallableName.createGenericSubjectX + "dedec";
-console.log(
-  `enum: ${CallableName.getTutorsBySubjects.toString()} enumCustom: ${custom.val1.toString()}`
-);
-
-const enumv = CallableName.getTutorsBySubjects.toString() + "/";
-*/
 // hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
 @Route("/")
 export class TutorsController extends Controller {
-  /*
-  static callableNames = Object.keys(namedKeys).reduce(
-    (acc, name) => ({ ...acc, [name]: name }),
-    {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
-  );
-  */
   static callableNames = exportedNames;
   static callableNamesMap = arrayToRecord([...exportedNames]);
   static typeName = "Tutors";
