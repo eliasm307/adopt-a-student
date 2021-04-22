@@ -9,6 +9,7 @@ import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getDocumentData from '../../../utils/firebase/getDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
+import { isLocaleSubjectId } from '../utils/localeSubjectId';
 
 const getSubjectHandler: FirebaseCallableFunctionHandler<
   GetSubjectRequestBody,
@@ -24,6 +25,12 @@ const getSubjectHandler: FirebaseCallableFunctionHandler<
     );
 
   const { id } = data;
+
+  if (!isLocaleSubjectId(id))
+    throw new functionsHttps.HttpsError(
+      "failed-precondition",
+      "Id should be a locale subject id in the format [genericId]-[locale]-[country]"
+    );
 
   const localeSubject = await getDocumentData({
     firestoreAdmin,

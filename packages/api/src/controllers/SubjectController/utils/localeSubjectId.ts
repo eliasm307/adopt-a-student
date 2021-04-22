@@ -6,6 +6,10 @@ interface Props {
   locale: LocaleCode;
 }
 
+export function isLocaleSubjectId(id: string): boolean {
+  return id.split(`/`).length === 3;
+}
+
 export function createLocaleSubjectId({
   genericId,
   locale,
