@@ -64,6 +64,13 @@ export class SubjectsController extends Controller {
     @Body() body: GetSubjectRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectResponseBody> {
+    // verify received data
+    if (!data?.id || !data.country || !data.locale)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not get subjects because provided data is missing subject id"
+      );
+
     return getSubjectHandler(body, context);
   }
 

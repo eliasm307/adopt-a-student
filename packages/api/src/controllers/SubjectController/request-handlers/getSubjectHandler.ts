@@ -5,6 +5,7 @@ import {
 import {
   GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME,
 } from '../../../constants';
+import { InternalHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getDocumentData from '../../../utils/firebase/getDocumentData';
 import verifyRequest from '../../../utils/verifyRequest';
@@ -15,17 +16,8 @@ import {
 const getSubjectHandler: InternalHandler<
   GetSubjectRequestBody,
   GetSubjectResponseBody
-> = async (data, context) => {
-  const auth = verifyRequest(data, context);
-
-  // verify received data
-  if (!data?.id || !data.country || !data.locale)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not get subjects because provided data is missing subject id"
-    );
-
-  const { id, country, locale } = data;
+> = async (props) => {
+  const { id, country, locale } = props;
 
   if (!isLocaleSubjectId(id))
     throw new functionsHttps.HttpsError(
