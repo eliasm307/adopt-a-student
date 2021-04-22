@@ -4,6 +4,7 @@ import {
 } from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
+import { InternalHandler } from '../../../declarations/types';
 import genericSubjectCategoryDataUpdater from '../../../utils/data-updaters/genericSubjectCategoryDataUpdater';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import updateDocumentData from '../../../utils/firebase/updateDocumentData';
@@ -13,24 +14,8 @@ import verifyRequest from '../../../utils/verifyRequest';
 const updateSubjectCategory: InternalHandler<
   UpdateSubjectCategoryRequestBody,
   UpdateSubjectCategoryResponseBody
-> = async (body, context) => {
-  const { uid } = verifyRequest(body, context);
-
-  // verify received data
-  if (
-    !body ||
-    !body.updates ||
-    typeof body.updates !== "object" ||
-    !Object.keys(body.updates).length ||
-    !body.id ||
-    !body.locale
-  )
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not update document because provided data is not valid"
-    );
-
-  const { id, locale, updates: localeCategoryUpdates } = body;
+> = async (props) => {
+  const { id, locale, updates: localeCategoryUpdates } = props;
 
   const genericCategoryUpdates: Partial<GenericSubjectCategoryData> = {
     locales: { [locale]: localeCategoryUpdates },

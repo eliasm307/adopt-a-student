@@ -3,6 +3,7 @@ import {
 } from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
+import { InternalHandler } from '../../../declarations/types';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import getCollectionData from '../../../utils/firebase/getCollectionData';
 import getDocumentData from '../../../utils/firebase/getDocumentData';
@@ -11,17 +12,8 @@ import verifyRequest from '../../../utils/verifyRequest';
 const getSubjectCategory: InternalHandler<
   GetSubjectCategoryRequestBody,
   GetSubjectCategoryResponseBody
-> = async (data, context) => {
-  const auth = verifyRequest(data, context);
-
-  // verify received data
-  if (!data?.locale || !data.id)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not get subject because provided data is incomplete"
-    );
-
-  const { id, locale } = data;
+> = async (props) => {
+  const { id, locale } = props;
 
   const genericCategory = await getDocumentData({
     firestoreAdmin,
@@ -50,6 +42,7 @@ const getSubjectCategory: InternalHandler<
     );
   }
 
+  // todo delete
   /*
   const subjectCategoriesForLocale = genericSubjectCategories
     // get locale subjects from generic subject, default to en if not defined

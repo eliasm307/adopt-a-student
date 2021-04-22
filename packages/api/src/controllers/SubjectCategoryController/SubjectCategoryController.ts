@@ -9,6 +9,7 @@ import {
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
+import { functionsHttps } from '../../utils/firebase/firebase-admin';
 import verifyRequest from '../../utils/verifyRequest';
 import createSubjectCategoryHandler from './request-handlers/createSubjectCategoryHandler';
 import getSubjectCategoriesForLocaleHandler from './request-handlers/getSubjectCategoriesForLocaleHandler';
@@ -60,6 +61,12 @@ export class SubjectCategoryController extends Controller {
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectCategoryResponseBody> {
     const auth = verifyRequest(body, context);
+    if (!body?.locale || !body?.name || !body.data)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Incomplete data provided"
+      );
+
     return getSubjectCategoryHandler(body, context);
   }
 
@@ -69,6 +76,19 @@ export class SubjectCategoryController extends Controller {
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateSubjectCategoryResponseBody> {
     const auth = verifyRequest(body, context);
+    // verify received data
+    if (
+      !body ||
+      !body.updates ||
+      typeof body.updates !== "object" ||
+      !Object.keys(body.updates).length ||
+      !body.id ||
+      !body.locale
+    )
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update document because provided data is not valid"
+      );
     return updateSubjectCategoryHandler(body, context);
   }
 }

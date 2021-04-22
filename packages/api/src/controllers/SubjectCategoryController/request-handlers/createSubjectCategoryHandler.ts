@@ -4,6 +4,7 @@ import {
 } from '@adopt-a-student/common';
 
 import { SUBJECT_CATEGORY_COLLECTION_NAME } from '../../../constants';
+import { InternalHandler } from '../../../declarations/types';
 import createPath from '../../../utils/createPath';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
@@ -14,17 +15,8 @@ import verifyRequest from '../../../utils/verifyRequest';
 const createSubjectCategory: InternalHandler<
   CreateSubjectCategoryRequestBody,
   CreateSubjectCategoryResponseBody
-> = async (body, context) => {
-  const auth = verifyRequest(body, context);
-
-  if (!body?.locale || !body?.name || !body.data)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Incomplete data provided"
-    );
-
-  const { locale, name, data: inputData } = body;
-
+> = async (props) => {
+  const { locale, name, data: inputData } = props;
   const genericId = newGuid();
 
   const localeCategoryData: LocaleSubjectCategoryData = {
@@ -55,7 +47,7 @@ const createSubjectCategory: InternalHandler<
       existingSubjectCategoriesSnapshot.docs.length
     } existing subject categories with this name, try to edit existing subjects instead`;
 
-    console.warn(__filename, error, { body });
+    console.warn(__filename, error, { props });
 
     throw new functionsHttps.HttpsError("already-exists", error);
   }
