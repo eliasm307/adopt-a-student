@@ -56,6 +56,12 @@ export class SubjectsController extends Controller {
     @Body() body: CreateLocaleSubjectRequestBody,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateLocaleSubjectResponseBody> {
+    if (!props?.data || !props.genericSubjectId)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Data not provided"
+      );
+
     return createLocaleSubjectHandler(body, context);
   }
 

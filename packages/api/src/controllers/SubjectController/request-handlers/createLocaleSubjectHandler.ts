@@ -6,6 +6,7 @@ import {
 import {
   GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME,
 } from '../../../constants';
+import { InternalHandler } from '../../../declarations/types';
 import createPath from '../../../utils/createPath';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
@@ -16,16 +17,10 @@ import { createLocaleSubjectId } from '../utils/localeSubjectDocumentId';
 const createLocaleSubject: InternalHandler<
   CreateLocaleSubjectRequestBody,
   CreateLocaleSubjectResponseBody
-> = async (body, context) => {
-  const auth = verifyRequest(body, context);
+> = async (props) => {
+  const { genericSubjectId: genericId, data: inputData } = props;
 
-  if (!body?.data || !body.genericSubjectId)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Data not provided"
-    );
-
-  const { genericId, locale, country } = body.data;
+  const { country, locale } = inputData;
 
   const genericSubjectRef = await firestoreAdmin
     .doc(createPath(GENERIC_SUBJECT_COLLECTION_NAME, genericId))
@@ -40,12 +35,12 @@ const createLocaleSubject: InternalHandler<
   // id is generated from generic id
   const id = createLocaleSubjectId({ genericId: genericId, locale, country });
 
-  const data = { ...body.data, id };
+  const localeSubjectData = { ...props.data, id };
 
   const subject = await createDocument({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     id,
-    data,
+    data: localeSubjectData,
     dataPredicate: isLocaleSubjectData,
     firestoreAdmin,
   });
