@@ -1,6 +1,7 @@
 import faker from 'faker';
 
-import { PrivateStudentData } from '../../../common/src';
+import { PrivateStudentData } from '@adopt-a-student/common';
+
 import newGuid from '../newGuid';
 import getRandomLocales from './getRandomLocales';
 

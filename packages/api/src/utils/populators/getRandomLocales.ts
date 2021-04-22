@@ -1,5 +1,4 @@
-import { LocaleCode } from '../../../common/src';
-import { localeCodes } from '../../../common/src/utils/locales';
+import { LocaleCode, localeCodes } from '@adopt-a-student/common';
 
 export default function getRandomLocales(): LocaleCode[] {
   const count = Math.floor(Math.random() * (localeCodes.length - 1)) + 1;

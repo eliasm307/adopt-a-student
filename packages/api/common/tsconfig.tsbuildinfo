@@ -232,8 +232,8 @@
         "affectsGlobalScope": false
       },
       "./src/utils/locales.ts": {
-        "version": "8298035c420b5a60222ddc496e7d3a913f20f903dbc7185e46c3f4b039d22838",
-        "signature": "46d991a2d4b9d662fd4e1a1fe0f5305d2d8473040512718d1957d0bcf1534d2c",
+        "version": "a6cfb1be341a0fcace502d603eb0225e9a3bba7e4e8bd402b54e1e31944073ed",
+        "signature": "dd373854b6aadd8ab2994ee1a31669aec6ae1f37bc90cf10efed7a0d6679b4c4",
         "affectsGlobalScope": false
       },
       "./src/declarations/types.ts": {
@@ -306,11 +306,6 @@
         "signature": "a8d71033956007dff36dd13e51ecc91aabed5b84675e0793abef43625c4782d7",
         "affectsGlobalScope": false
       },
-      "./src/index.ts": {
-        "version": "6ead5aea271de1b436c767c91a3d32061cd87aff634940ab66cf36c3961b60f6",
-        "signature": "6f83b5a5a1ded389b4d5bb989b8d024045c97f723e31d629515eeecc8be94589",
-        "affectsGlobalScope": false
-      },
       "./src/utils/promiseallsettledandlog.ts": {
         "version": "c98d752b31c6c86cd06614c49d3559b81dada4edd3b3e41e26f2901e92533d92",
         "signature": "d579cdba7884bef8395051ffb057f370b7f00134a685f76c57ba1d596f64814d",
@@ -319,6 +314,16 @@
       "./src/utils/selectanyarrayitem.ts": {
         "version": "f10a53da3eab3f72ff20ba2397539182f4437fec514548a4607596b6bb57e31e",
         "signature": "58037bf47230503fed01df53b82c6091221e1159f67075a299bc91f2f0f98e75",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/index.ts": {
+        "version": "fd25c727c8d7da576f5c4d0b627766f51a5ca15160d6082c5dcd5570015f0c9e",
+        "signature": "09360665ed1c30ce33b3447c348710ad9df9641dbc17a58fe86dc3b0eb0b3ecc",
+        "affectsGlobalScope": false
+      },
+      "./src/index.ts": {
+        "version": "cf66e2fe716adb8429d3058cc874cf3699c1d5ed1c1a5e99e85f8ff51a64adb1",
+        "signature": "30297b4ea96ffd0e5964e5ff76906ebd6b488bbe4ae2a071dd7ba405548fc644",
         "affectsGlobalScope": false
       },
       "./node_modules/jest-diff/build/cleanupsemantic.d.ts": {
@@ -604,8 +609,9 @@
       "resolveJsonModule": true,
       "esModuleInterop": true,
       "declaration": true,
-      "allowSyntheticDefaultImports": true,
       "incremental": true,
+      "skipLibCheck": true,
+      "allowSyntheticDefaultImports": true,
       "lib": [
         "lib.dom.d.ts",
         "lib.dom.iterable.d.ts",
@@ -613,7 +619,6 @@
       ],
       "downlevelIteration": true,
       "allowJs": true,
-      "skipLibCheck": true,
       "strict": true,
       "noUnusedLocals": false,
       "alwaysStrict": true,
@@ -900,7 +905,13 @@
         "./src/declarations/enums.ts",
         "./src/declarations/object-shcema.ts",
         "./src/declarations/types.ts",
+        "./src/utils/index.ts",
         "./src/utils/type-predicates/index.ts"
+      ],
+      "./src/utils/index.ts": [
+        "./src/utils/locales.ts",
+        "./src/utils/promiseallsettledandlog.ts",
+        "./src/utils/selectanyarrayitem.ts"
       ],
       "./src/utils/locales.ts": [
         "../../../node_modules/locale-codes/index.d.ts",
@@ -1216,10 +1227,15 @@
         "./src/declarations/enums.ts",
         "./src/declarations/object-shcema.ts",
         "./src/declarations/types.ts",
+        "./src/utils/index.ts",
         "./src/utils/type-predicates/index.ts"
       ],
+      "./src/utils/index.ts": [
+        "./src/utils/locales.ts",
+        "./src/utils/promiseallsettledandlog.ts",
+        "./src/utils/selectanyarrayitem.ts"
+      ],
       "./src/utils/locales.ts": [
-        "../../../node_modules/locale-codes/index.d.ts",
         "./src/declarations/types.ts"
       ],
       "./src/utils/type-predicates/index.ts": [
@@ -1367,6 +1383,7 @@
       "./src/declarations/object-shcema.ts",
       "./src/declarations/types.ts",
       "./src/index.ts",
+      "./src/utils/index.ts",
       "./src/utils/locales.ts",
       "./src/utils/promiseallsettledandlog.ts",
       "./src/utils/selectanyarrayitem.ts",
@@ -1864,6 +1881,10 @@
       ],
       [
         "./src/index.ts",
+        1
+      ],
+      [
+        "./src/utils/index.ts",
         1
       ],
       [

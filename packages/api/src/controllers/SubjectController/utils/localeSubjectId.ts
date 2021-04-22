@@ -1,4 +1,4 @@
-import { LocaleCode } from '../../../../common/src';
+import { LocaleCode } from '@adopt-a-student/common';
 
 interface Props {
   genericId: string;

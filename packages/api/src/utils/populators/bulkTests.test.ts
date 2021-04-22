@@ -1,5 +1,5 @@
-import { isPrivateStudentData, isPrivateTutorData } from '../../../common/src';
-import promiseAllSettledAndLog from '../../../common/src/utils/promiseAllSettledAndLog';
+import { isPrivateStudentData, isPrivateTutorData } from '@adopt-a-student/common';
+
 import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../constants';
 import { firestoreAdmin } from '../firebase/firebase-admin';
 import bulkCreateSubjectsForAllLocales from './bulkCreateSubjectsForAllLocales';
@@ -44,5 +44,5 @@ describe("bulkCreateSubjectsForAllLocales", () => {
         },
       })
     ).resolves.toBeTruthy();
-  });
+  }, 9999);
 });

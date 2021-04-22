@@ -1,6 +1,7 @@
 import faker from 'faker';
 
-import promiseAllSettledAndLog from '../../../common/src/utils/promiseAllSettledAndLog';
+import { promiseAllSettledAndLog } from '@adopt-a-student/common';
+
 import createDocument, { CreateDocumentProps } from '../firebase/createDocument';
 import newGuid from '../newGuid';
 
@@ -38,7 +39,9 @@ const bulkUserPopulator = async <D>(props: Props<D>) => {
     });
   }
 
-  return promiseAllSettledAndLog(promises);
+  const result = await promiseAllSettledAndLog(promises);
+
+  return result;
 };
 
 export default bulkUserPopulator;

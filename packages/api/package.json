@@ -18,6 +18,7 @@
     "pretest": "yarn",
     "test:production": "set NODE_ENV=production-test&& yarn test",
     "check-types": "npx tsc",
+    "cleanbuild": "rm -rf node_modules && yarn build",
     "prebuild": "yarn build:common && rm -rf lib && yarn",
     "build": "tsc --build tsconfig.build.json",
     "build:common": "yarn --cwd ./common build",

@@ -2,7 +2,8 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
   CreateSubjectCategoryRequestBody, CreateSubjectCategoryResponseBody,
-} from '../../../common/src';
+} from '@adopt-a-student/common';
+
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
 import createSubjectCategoryHandler from './request-handlers/createSubjectCategoryHandler';

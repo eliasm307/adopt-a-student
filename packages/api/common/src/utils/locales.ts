@@ -1,15 +1,13 @@
-export {};
-
 import locales from 'locale-codes';
 
 import { LocaleCode } from '../declarations/types';
 
 // define the available locale codes, keep this limited for the hackathon app
-export const localeCodes = ["ms", "en", "fr", "pt"] as const;
+const localeCodes = ["ms", "en", "fr", "pt"] as const;
 
-export const getLocaleData = (locale: LocaleCode) => locales.getByTag(locale);
+// export const getLocaleData = (locale: LocaleCode) => locales.getByTag(locale);
 
-export const localeCountries: Record<LocaleCode, Set<string>> = {} as Record<
+const localeCountries: Record<LocaleCode, Set<string>> = {} as Record<
   LocaleCode,
   Set<string>
 >;
@@ -32,6 +30,7 @@ localesUsed.forEach((locale) => {
   }
 });
 
+export { localeCountries, localeCodes };
 /*
 console.log(__filename, "Resulting locale data", {
   localeCountries,
