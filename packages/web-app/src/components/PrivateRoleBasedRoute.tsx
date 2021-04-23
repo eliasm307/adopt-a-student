@@ -5,9 +5,10 @@ import useAuthData from 'src/hooks/useAuthData';
 
 import { RouteComponentProps } from '@reach/router';
 
+import { BaseRouteProps } from '../declarations/interfaces';
 import NavBar from './NavBar';
 
-interface Props extends RouteComponentProps {
+interface Props extends RouteComponentProps, BaseRouteProps {
   StudentComponent: React.ComponentType<any>;
   TutorComponent: React.ComponentType<any>;
 }
@@ -16,6 +17,8 @@ const PrivateRoleBasedRoute = ({
   StudentComponent,
   TutorComponent,
   location,
+  links,
+  title,
   ...rest
 }: Props) => {
   const user = useAuthData();
@@ -44,7 +47,7 @@ const PrivateRoleBasedRoute = ({
 
   return (
     <>
-      <NavBar /> <Component {...rest} />
+      <NavBar links={links} title={title} /> <Component {...rest} />
     </>
   );
 };

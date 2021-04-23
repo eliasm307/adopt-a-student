@@ -5,13 +5,20 @@ import useAuthData from 'src/hooks/useAuthData';
 
 import { RouteComponentProps } from '@reach/router';
 
+import { BaseRouteProps } from '../declarations/interfaces';
 import NavBar from './NavBar';
+
+interface Props extends BaseRouteProps, RouteComponentProps {
+  component: any;
+}
 
 const PrivateRoute = ({
   component: Component,
   location,
+  links,
+  title,
   ...restProps
-}: RouteComponentProps<any>) => {
+}: Props) => {
   const user = useAuthData();
 
   if (!user && location?.pathname !== RoutePath.login) {
@@ -24,7 +31,7 @@ const PrivateRoute = ({
   }
   return (
     <>
-      <NavBar /> <Component {...restProps} />
+      <NavBar links={links} title={title} /> <Component {...restProps} />
     </>
   );
 };

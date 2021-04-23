@@ -49,32 +49,45 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <Layout>
           <Router>
-            <PublicRoute default component={NotFound} />
-            <PublicRoute path={RoutePath.login} component={SignIn} />
-            <PrivateRoute path={RoutePath.roleSelect} component={RoleSelect} />
+            <PublicRoute default component={NotFound} title='Not found' />
+            <PublicRoute
+              path={RoutePath.login}
+              component={SignIn}
+              title='Sign-In'
+            />
+            <PrivateRoute
+              path={RoutePath.roleSelect}
+              component={RoleSelect}
+              title='Select a Role'
+            />
             <Redirect from='/app' to={RoutePath.login} noThrow />
             <PrivateRoleBasedRoute
               path={RoutePath.home}
               StudentComponent={StudentHome}
               TutorComponent={TutorHome}
+              title='Home'
             />
             <PrivateRoleBasedRoute
               path={RoutePath.profile}
               StudentComponent={StudentProfile}
               TutorComponent={TutorProfile}
+              title='My Profile'
             />
             <PrivateRoute
               path={`${RoutePath.studentOverview}/:studentId`}
               component={StudentOverview}
+              title='Student Overview'
             />
             <PrivateRoute
               path={`${RoutePath.tutorOverview}/:tutorId`}
               component={TutorOverview}
+              title='Tutor Overview'
             />
             <PrivateRoleBasedRoute
               path={RoutePath.signUp}
               StudentComponent={StudentSignUp}
               TutorComponent={TutorSignUp}
+              title='Sign-Up'
             />
           </Router>
         </Layout>

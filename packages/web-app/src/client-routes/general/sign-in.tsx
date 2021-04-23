@@ -134,6 +134,7 @@ const SignIn = () => {
             style={{
               display: "grid",
               placeItems: "center",
+              width: "60%",
             }}
           >
             <Form.Group controlId='formBasicEmail' className='w-100'>
