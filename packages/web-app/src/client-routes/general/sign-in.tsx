@@ -102,19 +102,17 @@ const SignIn = () => {
 
   return (
     <UserProvider>
-      <Row className='justify-content-md-center'>
+      <Row className='justify-content-md-center mt-4'>
         <Col
-          lg={6}
-          className='justify-contents-center debug'
+          lg={10}
+          className='justify-contents-center'
           style={{
             display: "grid",
             placeItems: "center",
           }}
         >
-          <h1>Log in</h1>
-          <div>Role: {user?.role}</div>
           <div
-            className='   debug'
+            className='  '
             style={{
               width: "100%",
               padding: "auto auto",
@@ -132,6 +130,7 @@ const SignIn = () => {
               handleSubmit(event);
               navigate(RoutePath.roleSelect);
             }}
+            className='mt-3'
             style={{
               display: "grid",
               placeItems: "center",
@@ -160,7 +159,7 @@ const SignIn = () => {
               />
             </Form.Group>
 
-            <Row>
+            <Row className='w-100'>
               <Button variant='primary' type='submit' className='col'>
                 Sign in
               </Button>

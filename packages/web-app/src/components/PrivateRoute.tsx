@@ -5,6 +5,8 @@ import useAuthData from 'src/hooks/useAuthData';
 
 import { RouteComponentProps } from '@reach/router';
 
+import NavBar from './NavBar';
+
 const PrivateRoute = ({
   component: Component,
   location,
@@ -20,8 +22,11 @@ const PrivateRoute = ({
     navigate(RoutePath.login);
     return null;
   }
-
-  return <Component {...restProps} />;
+  return (
+    <>
+      <NavBar /> <Component {...restProps} />
+    </>
+  );
 };
 
 export default PrivateRoute;

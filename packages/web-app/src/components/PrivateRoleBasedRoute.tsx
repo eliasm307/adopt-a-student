@@ -5,6 +5,8 @@ import useAuthData from 'src/hooks/useAuthData';
 
 import { RouteComponentProps } from '@reach/router';
 
+import NavBar from './NavBar';
+
 interface Props extends RouteComponentProps {
   StudentComponent: React.ComponentType<any>;
   TutorComponent: React.ComponentType<any>;
@@ -18,7 +20,8 @@ const PrivateRoleBasedRoute = ({
 }: Props) => {
   const user = useAuthData();
 
-  if (!user && location?.pathname !== RoutePath.login) {
+  // && location?.pathname !== RoutePath.login
+  if (!user) {
     console.warn(__filename, "not signed in, redirect to sign in");
     navigate(RoutePath.login);
     return null;
@@ -39,7 +42,11 @@ const PrivateRoleBasedRoute = ({
     (role === "Tutor" && TutorComponent) ||
     (() => <div>Route not defined for {role} user role</div>);
 
-  return <Component {...rest} />;
+  return (
+    <>
+      <NavBar /> <Component {...rest} />
+    </>
+  );
 };
 
 export default PrivateRoleBasedRoute;

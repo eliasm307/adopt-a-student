@@ -8,7 +8,7 @@ interface Props {
 const SVG = ({ path }: Props) => (
   <ReactSVG
     src={path}
-    className='debug'
+    className=' '
     style={{ margin: "auto", padding: "auto" }}
   />
 );
