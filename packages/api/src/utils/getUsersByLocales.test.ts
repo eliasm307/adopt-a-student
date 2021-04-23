@@ -8,7 +8,7 @@ describe("getUsersByLocales", () => {
     expect.assertions(2);
 
     const result = await getUsersByLocales({
-      countries: ["World"],
+      countries: ["Angola"],
       firestoreAdmin,
       locales: ["en", "fr"],
       publicDataExtractor: extractPublicTutorData,

@@ -2,8 +2,9 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
   CreateTutorRequestBody, CreateTutorResponseBody, GetTutorRequestBody, GetTutorResponseBody,
-  GetTutorsBySubjectsRequestBody, GetTutorsBySubjectsResponseBody, isArray, isEmptyObject, isObject,
-  isPrivateTutorData, isString, UpdateTutorRequestBody, UpdateTutorResponseBody,
+  GetTutorsByLocalesRequestBody, GetTutorsByLocalesResponseBody, GetTutorsBySubjectsRequestBody,
+  GetTutorsBySubjectsResponseBody, isArray, isEmptyObject, isObject, isPrivateTutorData, isString,
+  UpdateTutorRequestBody, UpdateTutorResponseBody,
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
@@ -13,6 +14,7 @@ import verifyRequest from '../../utils/verifyRequest';
 import getPrivateTutorData from '../TutorController/request-handlers/getPrivateTutorDataHandler';
 import getPublicTutorData from '../TutorController/request-handlers/getPublicTutorDataHandler';
 import createTutorHandler from './request-handlers/createTutorHandler';
+import getTutorsByLocalesHandler from './request-handlers/getTutorsByLocaleHandler';
 import getTutorsBySubjectsHandler from './request-handlers/getTutorsBySubjectsHandler';
 import updateTutorHandler from './request-handlers/updateTutorHandler';
 
@@ -20,8 +22,10 @@ const createTutor = "createTutor";
 const getTutorsBySubjects = "getTutorsBySubjects";
 const updateTutor = "updateTutor";
 const getTutor = "getTutor";
+const getTutorsByLocales = "getTutorsByLocales";
 
 const exportedNames = [
+  getTutorsByLocales,
   createTutor,
   getTutor,
   getTutorsBySubjects,
@@ -79,6 +83,25 @@ export class TutorsController extends Controller {
     return uid === id
       ? getPrivateTutorData({ id })
       : getPublicTutorData({ id });
+  }
+
+  @Post(getTutorsByLocales)
+  static getTutorsByLocales(
+    @Body() body: Partial<GetTutorsByLocalesRequestBody>,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<GetTutorsByLocalesResponseBody> {
+    const { uid } = verifyRequest(body, context);
+
+    const { countries, locales } = body;
+
+    // verify received data
+    if (!isArray(countries) || !isArray(locales))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not get students by subjects because provided locale subject ids are not valid format"
+      );
+
+    return getTutorsByLocalesHandler({ countries, locales });
   }
 
   @Post(getTutorsBySubjects)

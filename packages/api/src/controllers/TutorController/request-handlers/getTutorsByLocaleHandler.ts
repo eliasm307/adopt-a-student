@@ -6,12 +6,10 @@ import { TUTOR_COLLECTION_NAME } from '../../../constants';
 import { InternalHandler } from '../../../declarations/types';
 import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import getUsersByLocales from '../../../utils/getUsersByLocales';
-import getUsersBySubjects from '../../../utils/getUsersBySubjects';
-import verifyRequest from '../../../utils/verifyRequest';
 import extractPublicTutorData from './utils/extractPublicTutorData';
 
 /** Get tutors by subjects, save this in subject */
-const getTutorsByLocales: InternalHandler<
+const getTutorsByLocalesHandler: InternalHandler<
   GetTutorsByLocalesRequestBody,
   GetTutorsByLocalesResponseBody
 > = async (props) => {
@@ -28,4 +26,4 @@ const getTutorsByLocales: InternalHandler<
   return { tutors };
 };
 
-export default getTutorsByLocales;
+export default getTutorsByLocalesHandler;

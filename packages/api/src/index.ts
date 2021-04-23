@@ -34,6 +34,7 @@ const callableFunctionHandlers = {
   updateTutor: TutorsController.updateTutor,
   getTutor: TutorsController.getTutor,
   getTutorsBySubjects: TutorsController.getTutorsBySubjects,
+  getTutorsByLocales: TutorsController.getTutorsByLocales,
 
   // students
   createStudent: StudentsController.createStudent,
