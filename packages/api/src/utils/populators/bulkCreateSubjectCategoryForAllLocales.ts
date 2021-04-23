@@ -28,7 +28,7 @@ export default async function bulkCreateSubjectCategoryForAllLocales(
 
   // create all locale subjects promises
   [...localeCodes].forEach((locale) => {
-    const countries: string[] = [...localeCountries[locale]];
+    const countries: string[] = [...Object.keys(localeCountries[locale])];
 
     if (countries)
       countries.forEach((country) => {

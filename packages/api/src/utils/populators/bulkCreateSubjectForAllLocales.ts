@@ -1,6 +1,6 @@
 import {
-  GenericSubjectData, isGenericSubjectData, localeCodes, localeCountries, LocaleSubjectData,
-  promiseAllSettledAndLog,
+  Country, GenericSubjectData, isGenericSubjectData, localeCodes, localeCountries,
+  LocaleSubjectData, promiseAllSettledAndLog,
 } from '@adopt-a-student/common';
 
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../constants';
@@ -35,10 +35,11 @@ export default async function bulkCreateSubjectsForAllLocales(props: Props) {
 
   // create all locale subjects promises
   [...localeCodes].forEach((locale) => {
-    const countries: string[] = [...localeCountries[locale]];
+    const countries: string[] = [...Object.keys(localeCountries[locale])];
 
     if (countries)
-      countries.forEach((country) => {
+      countries.forEach((_country) => {
+        const country = _country as Country;
         const localeSubjectData: Omit<LocaleSubjectData, "id"> = {
           country,
           description: `test subject in ${String(

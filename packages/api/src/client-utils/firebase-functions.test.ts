@@ -1,4 +1,5 @@
 import {
+  Country,
   CreateTutorRequestBody,
   CreateTutorResponseBody,
   localeCountries,
@@ -61,7 +62,7 @@ describe.only("firebase functions createTutor", () => {
       // id: "232",
       tutor: {
         email: faker.internet.email(),
-        prefferedLocales: [{ country: "UK", locale: "en" }],
+        prefferedLocales: [{ country: "United States", locale: "en" }],
         relatedStudents: [],
         relatedSubjects: [
           {
@@ -69,7 +70,9 @@ describe.only("firebase functions createTutor", () => {
             detail: faker.lorem.paragraph(Math.random() * 3),
             id: `fake-id-${Math.random() * 999}`,
             locale: "en",
-            country: selectAnyArrayItem([...localeCountries.en]),
+            country: selectAnyArrayItem([
+              ...(Object.keys(localeCountries.en) as Country[]),
+            ]),
           },
         ],
         userName: faker.internet.userName(),
