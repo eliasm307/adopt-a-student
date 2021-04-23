@@ -26,7 +26,7 @@ const PrivateRoleBasedRoute = ({
   // && location?.pathname !== RoutePath.login
   if (!user) {
     console.warn(__filename, "not signed in, redirect to sign in");
-    navigate(RoutePath.login);
+    navigate(RoutePath.Login);
     return null;
   }
   const { role } = user;
@@ -35,7 +35,7 @@ const PrivateRoleBasedRoute = ({
   if (!user?.role) {
     alert(`Only ${role}s can access this route`);
     console.log("PrivateRoleBasedRoute", "ro");
-    navigate(RoutePath.roleSelect);
+    navigate(RoutePath.RoleSelect);
     return null;
   }
   /**/

@@ -4,7 +4,7 @@ import { RoutePath } from 'src/constants';
 import useAuthData from 'src/hooks/useAuthData';
 import { signOut } from 'src/utils/auth';
 
-import { NavBarLinkData } from '../declarations/interfaces';
+import { NavBarLinkData } from '../../declarations/interfaces';
 
 interface Props {
   links?: NavBarLinkData[];
@@ -50,7 +50,7 @@ export default function NavBar({ links, title }: Props) {
       <nav>
         <Link to='/'>Home</Link>
         {` `}
-        <Link to={RoutePath.profile}>Profile</Link>
+        <Link to={RoutePath.Profile}>Profile</Link>
         {linksJsx}
         {` `}
         {user ? (

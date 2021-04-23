@@ -128,7 +128,7 @@ const SignIn = () => {
             method='post'
             onSubmit={(event) => {
               handleSubmit(event);
-              navigate(RoutePath.roleSelect);
+              navigate(RoutePath.RoleSelect);
             }}
             className='mt-3'
             style={{

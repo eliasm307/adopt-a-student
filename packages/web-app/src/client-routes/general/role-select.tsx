@@ -35,7 +35,7 @@ const RoleSelect = (props: any) => {
           style={pathStyle}
           onClick={(e) => {
             setUserRole("Student");
-            navigate(RoutePath.home);
+            navigate(RoutePath.Home);
           }}
         >
           Student
@@ -45,7 +45,7 @@ const RoleSelect = (props: any) => {
           style={pathStyle}
           onClick={() => {
             setUserRole("Tutor");
-            navigate(RoutePath.home);
+            navigate(RoutePath.Home);
           }}
         >
           Tutor

@@ -51,40 +51,40 @@ const App = () => {
           <Router>
             <PublicRoute default component={NotFound} title='Not found' />
             <PublicRoute
-              path={RoutePath.login}
+              path={RoutePath.Login}
               component={SignIn}
               title='Sign-In'
             />
             <PrivateRoute
-              path={RoutePath.roleSelect}
+              path={RoutePath.RoleSelect}
               component={RoleSelect}
               title='Select a Role'
             />
-            <Redirect from='/app' to={RoutePath.login} noThrow />
+            <Redirect from='/app' to={RoutePath.Login} noThrow />
             <PrivateRoleBasedRoute
-              path={RoutePath.home}
+              path={RoutePath.Home}
               StudentComponent={StudentHome}
               TutorComponent={TutorHome}
               title='Home'
             />
             <PrivateRoleBasedRoute
-              path={RoutePath.profile}
+              path={RoutePath.Profile}
               StudentComponent={StudentProfile}
               TutorComponent={TutorProfile}
               title='My Profile'
             />
             <PrivateRoute
-              path={`${RoutePath.studentOverview}/:studentId`}
+              path={`${RoutePath.StudentOverview}/:studentId`}
               component={StudentOverview}
               title='Student Overview'
             />
             <PrivateRoute
-              path={`${RoutePath.tutorOverview}/:tutorId`}
+              path={`${RoutePath.TutorOverview}/:tutorId`}
               component={TutorOverview}
               title='Tutor Overview'
             />
             <PrivateRoleBasedRoute
-              path={RoutePath.signUp}
+              path={RoutePath.SignUp}
               StudentComponent={StudentSignUp}
               TutorComponent={TutorSignUp}
               title='Sign-Up'

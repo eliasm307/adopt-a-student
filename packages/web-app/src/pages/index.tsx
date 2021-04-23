@@ -19,7 +19,7 @@ export default function Home() {
           </>
         ) : (
           <>
-            You should <Link to={RoutePath.login}>log in</Link> to see
+            You should <Link to={RoutePath.Login}>log in</Link> to see
             restricted content
           </>
         )}

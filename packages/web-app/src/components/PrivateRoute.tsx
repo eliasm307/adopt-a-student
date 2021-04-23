@@ -21,12 +21,12 @@ const PrivateRoute = ({
 }: Props) => {
   const user = useAuthData();
 
-  if (!user && location?.pathname !== RoutePath.login) {
+  if (!user && location?.pathname !== RoutePath.Login) {
     console.log(
       "PrivateRoute",
-      `Not signed in, redirecting to "${RoutePath.login}"`
+      `Not signed in, redirecting to "${RoutePath.Login}"`
     );
-    navigate(RoutePath.login);
+    navigate(RoutePath.Login);
     return null;
   }
   return (

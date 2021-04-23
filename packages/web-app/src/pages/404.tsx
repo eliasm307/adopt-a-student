@@ -8,7 +8,7 @@ export default function Home() {
     <Layout>
       <p>Are you lost?</p>
       <p>
-        Lets go back <a href={RoutePath.home}>home</a>
+        Lets go back <a href={RoutePath.Home}>home</a>
       </p>
     </Layout>
   );
