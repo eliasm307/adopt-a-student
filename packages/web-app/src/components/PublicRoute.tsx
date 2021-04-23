@@ -12,7 +12,7 @@ interface Props extends RouteComponentProps, BaseRouteProps {
 const PublicRoute = ({
   component: Component,
   location,
-  links,
+  navbarLinks: links,
   title,
   ...rest
 }: Props) => (

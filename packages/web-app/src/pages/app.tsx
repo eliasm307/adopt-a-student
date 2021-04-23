@@ -13,6 +13,13 @@ import TutorHome from '../client-routes/tutor/home';
 import TutorOverview from '../client-routes/tutor/overview';
 import TutorSignUp from '../client-routes/tutor/sign-up';
 import TutorProfile from '../client-routes/tutor/tutor-profile';
+import HomeNavBarLinks from '../components/NavBar/routeItems/home';
+import ProfileNavbarLinks from '../components/NavBar/routeItems/profile';
+import RoleSelectNavBarLinks from '../components/NavBar/routeItems/role-select';
+import SignInNavBarLinks from '../components/NavBar/routeItems/sign-in';
+import SignUpNavBarLinks from '../components/NavBar/routeItems/sign-up';
+import StudentOverviewNavBarLinks from '../components/NavBar/routeItems/student-overview';
+import TutorOverviewNavBarLinks from '../components/NavBar/routeItems/tutor-overview';
 import PrivateRoleBasedRoute from '../components/PrivateRoleBasedRoute';
 import PrivateRoute from '../components/PrivateRoute';
 import PublicRoute from '../components/PublicRoute';
@@ -54,11 +61,13 @@ const App = () => {
               path={RoutePath.Login}
               component={SignIn}
               title='Sign-In'
+              navbarLinks={SignInNavBarLinks}
             />
             <PrivateRoute
               path={RoutePath.RoleSelect}
               component={RoleSelect}
               title='Select a Role'
+              navbarLinks={RoleSelectNavBarLinks}
             />
             <Redirect from='/app' to={RoutePath.Login} noThrow />
             <PrivateRoleBasedRoute
@@ -66,28 +75,33 @@ const App = () => {
               StudentComponent={StudentHome}
               TutorComponent={TutorHome}
               title='Home'
+              navbarLinks={HomeNavBarLinks}
             />
             <PrivateRoleBasedRoute
               path={RoutePath.Profile}
               StudentComponent={StudentProfile}
               TutorComponent={TutorProfile}
               title='My Profile'
+              navbarLinks={ProfileNavbarLinks}
             />
             <PrivateRoute
               path={`${RoutePath.StudentOverview}/:studentId`}
               component={StudentOverview}
               title='Student Overview'
+              navbarLinks={StudentOverviewNavBarLinks}
             />
             <PrivateRoute
               path={`${RoutePath.TutorOverview}/:tutorId`}
               component={TutorOverview}
               title='Tutor Overview'
+              navbarLinks={TutorOverviewNavBarLinks}
             />
             <PrivateRoleBasedRoute
               path={RoutePath.SignUp}
               StudentComponent={StudentSignUp}
               TutorComponent={TutorSignUp}
               title='Sign-Up'
+              navbarLinks={SignUpNavBarLinks}
             />
           </Router>
         </Layout>

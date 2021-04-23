@@ -17,7 +17,7 @@ const PrivateRoleBasedRoute = ({
   StudentComponent,
   TutorComponent,
   location,
-  links,
+  navbarLinks: links,
   title,
   ...rest
 }: Props) => {

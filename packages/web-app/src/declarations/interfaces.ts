@@ -12,6 +12,6 @@ export interface NavBarLinkData {
   url?: string;
 }
 export interface BaseRouteProps {
-  links?: NavBarLinkData[];
+  navbarLinks?: NavBarLinkData[];
   title: string;
 }

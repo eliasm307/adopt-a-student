@@ -15,7 +15,7 @@ interface Props extends BaseRouteProps, RouteComponentProps {
 const PrivateRoute = ({
   component: Component,
   location,
-  links,
+  navbarLinks: links,
   title,
   ...restProps
 }: Props) => {

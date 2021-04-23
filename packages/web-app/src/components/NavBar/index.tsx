@@ -47,7 +47,14 @@ export default function NavBar({ links, title }: Props) {
       }}
     >
       <span>{title}</span>
-      <nav>
+      <nav>{linksJsx}</nav>
+    </div>
+  );
+}
+
+// todo delete
+/*
+  {}
         <Link to='/'>Home</Link>
         {` `}
         <Link to={RoutePath.Profile}>Profile</Link>
@@ -64,7 +71,5 @@ export default function NavBar({ links, title }: Props) {
             Logout
           </a>
         ) : null}
-      </nav>
-    </div>
-  );
-}
+
+*/
