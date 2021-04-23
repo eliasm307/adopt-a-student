@@ -1,4 +1,5 @@
 import { navigate } from 'gatsby';
+import path from 'path';
 import React, { useContext, useState } from 'react';
 import { RoutePath } from 'src/constants';
 import useAuthData from 'src/hooks/useAuthData';
@@ -6,8 +7,24 @@ import UserProvider, { UserContext } from 'src/providers/UserProvider';
 import { signInWithEmailPassword, signOut } from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
 import isProductionEnvironment from 'src/utils/isProductionEnvironment';
+import tw from 'twin.macro';
+
+import SVG from '../../components/SVG';
 
 // import testUser from '../../private_config/testUserAuth';
+
+// const svgLogo = require("../../assets/logo.svg");
+
+// const svgPath = path.resolve("../../assets/logo.svg");
+
+const SignInForm = tw.form`
+bg-gray-500 border-2 flex flex-col items-center max-w-md m-auto`;
+
+const TextInput = tw.input`
+
+`;
+
+const Button = tw.button``;
 
 const SignIn = () => {
   const [userName, setUserName] = useState("");
@@ -21,9 +38,12 @@ const SignIn = () => {
   console.log(`typeof user ${typeof user}`);
 
   if (user) {
-    console.log("sign-in", "user signed in, navigating to app role select...");
-    navigate(RoutePath.roleSelect);
-    return null;
+    console.log(
+      "sign-in",
+      "user signed in, navigating to app role select...DISABLED"
+    );
+    // navigate(RoutePath.roleSelect);
+    // return null;
   }
   console.log("sign-in", "NOT navigating to app role select...", {
     user,
@@ -39,7 +59,7 @@ const SignIn = () => {
   if (!isProductionEnvironment()) {
     console.log("Dev environment, signing in anonymously");
     // signInWithEmailPassword(testUser.email, testUser.password);
-    auth.signInAnonymously();
+    // auth.signInAnonymously();
   }
 
   /*
@@ -80,18 +100,28 @@ const SignIn = () => {
   return (
     <UserProvider>
       <h1>Log in</h1>
-      <div>Role: {user}</div>
-      <form
+      <div>Role: {user?.role}</div>
+      <div>
+        <SVG path='/assets/logo-only.svg' />
+        <SVG path='/assets/connecting_students_and_teachers.svg' />
+      </div>
+      <SignInForm
         method='post'
         onSubmit={(event) => {
           handleSubmit(event);
           navigate(RoutePath.roleSelect);
         }}
       >
-        <label>
+        <label htmlFor='username'>
           Username
-          <input type='text' name='username' onChange={onChangeHandler} />
+          <input
+            id='username'
+            type='text'
+            name='username'
+            onChange={onChangeHandler}
+          />
         </label>
+
         <label>
           Password
           <input type='password' name='password' onChange={onChangeHandler} />
@@ -100,7 +130,7 @@ const SignIn = () => {
         <button type='button' onClick={() => signOut()}>
           Sign out
         </button>
-      </form>
+      </SignInForm>
     </UserProvider>
   );
 };

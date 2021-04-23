@@ -2980,6 +2980,15 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
+"@tanem/svg-injector@^10.0.1":
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/@tanem/svg-injector/-/svg-injector-10.0.2.tgz#102dcc190c009a0b7de7150ff8a62693040715ce"
+  integrity sha512-5gHa3DxbMKQCt+qrP+jJoxhOIR9eLFtqLpT5ELpdzdp+hPHnty/lW/2fR9KOMzzFWsWC5cwV4zjDV/mV3hw4+A==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    content-type "^1.0.4"
+    tslib "^2.2.0"
+
 "@tokenizer/token@^0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@tokenizer/token/-/token-0.1.1.tgz#f0d92c12f87079ddfd1b29f614758b9696bc29e3"
@@ -3367,7 +3376,7 @@
   resolved "https://registry.yarnpkg.com/@types/prettier/-/prettier-2.2.3.tgz#ef65165aea2924c9359205bf748865b8881753c0"
   integrity sha512-PijRCG/K3s3w1We6ynUKdxEc5AcuuH3NBmMDP8uvKVp6X43UY7NQlTzczakXP3DJR0F4dfNQIGjU2cUeRYs2AA==
 
-"@types/prop-types@*":
+"@types/prop-types@*", "@types/prop-types@^15.7.3":
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
@@ -3401,6 +3410,13 @@
   dependencies:
     "@types/react" "*"
     ts-toolbelt "*"
+
+"@types/react-svg@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-svg/-/react-svg-5.0.0.tgz#32c9b5e987cadff2797468bbee0abd265f44b75c"
+  integrity sha512-SKvgyw45ZaZX91uulrA1dgENZ0tC6D3owupmZKOuJFffkHJvp8lvfjbb+5juC3z4qCYoqESgxkkiS6owa+gemg==
+  dependencies:
+    react-svg "*"
 
 "@types/react@*", "@types/react@^17.0.3":
   version "17.0.3"
@@ -13923,6 +13939,16 @@ react-refresh@^0.9.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.9.0.tgz#71863337adc3e5c2f8a6bfddd12ae3bfe32aafbf"
   integrity sha512-Gvzk7OZpiqKSkxsQvO/mbTN1poglhmAV7gR/DdIrRrSMXraRQQlfikRJOr3Nb9GTMPC5kof948Zy6jJZIFtDvQ==
 
+react-svg@*, react-svg@^13.0.3:
+  version "13.0.3"
+  resolved "https://registry.yarnpkg.com/react-svg/-/react-svg-13.0.3.tgz#8ecf8de7da57eb8c089c59484424cf42178c8507"
+  integrity sha512-rjZQIEg8Ffv2QQtd1Tufm9RBQuXsNOMH8IfDYzf8kSEKysna3bocFndAJi2wzwHM4GYSOLi/DvCs01BHGUJ3vg==
+  dependencies:
+    "@babel/runtime" "^7.13.10"
+    "@tanem/svg-injector" "^10.0.1"
+    "@types/prop-types" "^15.7.3"
+    prop-types "^15.7.2"
+
 react-tabs@^3.1.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/react-tabs/-/react-tabs-3.2.2.tgz#07bdc3cdb17bdffedd02627f32a93cd4b3d6e4d0"
@@ -16207,7 +16233,7 @@ tslib@^1.10.0, tslib@^1.11.1, tslib@^1.8.1, tslib@^1.9.0:
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
   integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
 
-tslib@^2, tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@~2.2.0:
+tslib@^2, tslib@^2.0.0, tslib@^2.0.3, tslib@^2.1.0, tslib@^2.2.0, tslib@~2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.2.0.tgz#fb2c475977e35e241311ede2693cee1ec6698f5c"
   integrity sha512-gS9GVHRU+RGn5KQM2rllAlR3dU6m7AcpJKdtH8gFvQiC4Otgk98XnmMU+nZenHt/+VhnBPWwgrJsyrdcw6i23w==
