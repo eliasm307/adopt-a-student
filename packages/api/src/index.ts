@@ -87,3 +87,5 @@ module.exports = Object.entries(callableFunctionHandlers).reduce(
 );
 
 module.exports.docs = functionsHttps.onRequest(app);
+
+export type { CallableFunctionName } from "./declarations/types";

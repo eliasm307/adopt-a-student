@@ -1,3 +1,4 @@
+import CallableFunctionNames from '../data/api/callableFunctionNames.json';
 import {
   GenericSubjectCategoryData, GenericSubjectData, LocaleSubjectCategoryData, LocaleSubjectData,
   PrivateStudentData, PrivateTutorData, PublicStudentData, PublicTutorData, UserSubjectData,
@@ -6,6 +7,8 @@ import {
   CategoryId, Country, LocaleCode, StudentId, SubjectCategoryId, SubjectCategoryName, SubjectId,
   TutorId,
 } from './types';
+
+export { CallableFunctionNames };
 
 export interface GetStudentsBySubjectsRequestBody {
   subjectIds: SubjectId[];

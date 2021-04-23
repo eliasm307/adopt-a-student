@@ -19,9 +19,11 @@
   },
   "dependencies": {
     "@adopt-a-student/common": "file:../api/common",
+    "@types/react-query": "^1.1.2",
     "gatsby": "^3.2.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-query": "^3.13.11"
   },
   "devDependencies": {
     "@types/reach__router": "^1.3.7",

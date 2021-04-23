@@ -1,11 +1,15 @@
 import { localeCodes } from '../constants';
 import countryLocales from '../data/locales/country-locales.json';
+import { CallableFunctionNames } from './api';
 
 /** A locale code to specify language e.g. en for English */
 export type LocaleCode = typeof localeCodes[number]; // todo add more
 
 /** A country name e.g. "Malaysia" */
 export type Country = keyof typeof countryLocales;
+
+/** Defines the callable function names available */
+export type CallableFunctionName = keyof typeof CallableFunctionNames;
 /*
 export type Country = "United Kingdom" | "Brazil" | "Cote d'Ivoire" | string;
 */

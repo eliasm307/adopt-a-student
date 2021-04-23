@@ -1,10 +1,10 @@
-// import { CallableFunctionName } from "@adopt-a-student/common";
+import { CallableFunctionName } from "@adopt-a-student/common";
 import { FirebaseFunctions } from ".";
 
 interface Props<D> {
   data: D;
   functions: FirebaseFunctions;
-  name: string;
+  name: CallableFunctionName;
 
   // todo  fix this import from api CallableFunctionName;
 }
