@@ -4,7 +4,7 @@ import Layout from 'src/layouts/DefaultLayout';
 
 import { Redirect, Router } from '@reach/router';
 
-import RoleSelect from '../general/role';
+import RoleSelect from '../general/role-select';
 import StudentHome from './home';
 import StudentOverview from './overview';
 import StudentProfile from './profile';

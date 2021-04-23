@@ -2,6 +2,7 @@
 
 import { navigate } from 'gatsby';
 import React, { useContext } from 'react';
+import { RoutePath } from 'src/constants';
 import { UserContext } from 'src/providers/UserProvider';
 
 // todo shows public data
@@ -11,11 +12,13 @@ import { UserContext } from 'src/providers/UserProvider';
 const RoleSelect = (props: any) => {
   const { setUserRole, user } = useContext(UserContext);
 
+  /*
   if (user?.role) {
-    navigate("/app/home");
+    navigate(RoutePath.home);
     console.log("role", "user role defined, navigating to home");
     return null;
   }
+  */
   console.warn("role", "user role not defined, staying on role select screen");
 
   const pathStyle: React.CSSProperties = {
@@ -32,6 +35,7 @@ const RoleSelect = (props: any) => {
           style={pathStyle}
           onClick={(e) => {
             setUserRole("Student");
+            navigate(RoutePath.home);
           }}
         >
           Student
@@ -39,7 +43,10 @@ const RoleSelect = (props: any) => {
         <button
           type='button'
           style={pathStyle}
-          onClick={() => setUserRole("Tutor")}
+          onClick={() => {
+            setUserRole("Tutor");
+            navigate(RoutePath.home);
+          }}
         >
           Tutor
         </button>

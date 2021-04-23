@@ -1,4 +1,5 @@
 import React from 'react';
+import { RoutePath } from 'src/constants';
 
 import Layout from '../layouts/DefaultLayout';
 
@@ -7,7 +8,7 @@ export default function Home() {
     <Layout>
       <p>Are you lost?</p>
       <p>
-        Lets go back <a href='/app/home'>home</a>
+        Lets go back <a href={RoutePath.home}>home</a>
       </p>
     </Layout>
   );

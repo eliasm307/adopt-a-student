@@ -30,20 +30,27 @@ export default function UserProvider({ children }: Props) {
     auth.onAuthStateChanged((userAuth) => {
       console.log(__filename, `User state changed to:`, { userAuth });
 
+      if (!userAuth) return console.warn("Signed out", { userAuth });
+
       const lastRole = getUserLocalStorageItem({
         uid: userAuth.uid,
         key: ROLE_LOCAL_STORAGE_KEY,
       }) as UserRole;
 
+      console.log(
+        "UserProvider",
+        `Loaded last role from local storage "${lastRole}"`
+      );
+
       setUser({
         ...userAuth,
-        role: lastRole,
+        role: lastRole || null,
       });
     });
   }, []);
 
   const setUserRole = (role: UserRole) => {
-    const newUser = { ...user, role };
+    const newUser = { ...user, role: role || null };
     setUserLocalStorageItem({
       uid: user.uid,
       key: ROLE_LOCAL_STORAGE_KEY,

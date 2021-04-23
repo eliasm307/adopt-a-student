@@ -1,5 +1,5 @@
 import React from 'react';
-import RoleSelect from 'src/client-routes/general/role';
+import RoleSelect from 'src/client-routes/general/role-select';
 import SignIn from 'src/client-routes/general/sign-in';
 import StudentHome from 'src/client-routes/student/home';
 import StudentOverview from 'src/client-routes/student/overview';
@@ -9,6 +9,7 @@ import TutorOverview from 'src/client-routes/tutor/overview';
 import TutorSignUp from 'src/client-routes/tutor/sign-up';
 import TutorProfile from 'src/client-routes/tutor/tutor-profile';
 import PrivateRoleRoute from 'src/components/PrivateRoleBasedRoute';
+import { RoutePath } from 'src/constants';
 import useAuthData from 'src/hooks/useAuthData';
 import UserProvider from 'src/providers/UserProvider';
 
@@ -18,6 +19,7 @@ import StudentProfile from '../client-routes/student/profile';
 import PrivateRoute from '../components/PrivateRoute';
 import PublicRoute from '../components/PublicRoute';
 import Layout from '../layouts/DefaultLayout';
+// eslint-disable-next-line import/no-useless-path-segments
 import NotFound from '../pages/404';
 
 // todo add router switch to match exact paths
@@ -45,29 +47,29 @@ const App = () => {
         <div>Role {user?.role}</div>
         <Router>
           <PublicRoute default component={NotFound} />
-          <PublicRoute path='/app/sign-in' component={SignIn} />
-          <PrivateRoute path='/app/role' component={RoleSelect} />
-          <Redirect from='/app' to='/app/sign-in' noThrow />
+          <PublicRoute path={RoutePath.login} component={SignIn} />
+          <PrivateRoute path={RoutePath.roleSelect} component={RoleSelect} />
+          <Redirect from='/app' to={RoutePath.login} noThrow />
           <PrivateRoleRoute
-            path='/app/home'
+            path={RoutePath.home}
             StudentComponent={StudentHome}
             TutorComponent={TutorHome}
           />
           <PrivateRoleRoute
-            path='/app/profile'
+            path={RoutePath.profile}
             StudentComponent={StudentProfile}
             TutorComponent={TutorProfile}
           />
           <PrivateRoute
-            path='/app/student/:studentId'
+            path={`${RoutePath.studentOverview}/:studentId`}
             component={StudentOverview}
           />
           <PrivateRoute
-            path='/app/tutor/:studentId'
+            path={`${RoutePath.tutorOverview}/:tutorId`}
             component={TutorOverview}
           />
           <PrivateRoleRoute
-            path='/app/sign-up'
+            path={RoutePath.signUp}
             StudentComponent={StudentSignUp}
             TutorComponent={TutorSignUp}
           />

@@ -1,5 +1,6 @@
 import { navigate } from 'gatsby';
 import React from 'react';
+import { RoutePath } from 'src/constants';
 import useAuthData from 'src/hooks/useAuthData';
 
 import { RouteComponentProps } from '@reach/router';
@@ -11,9 +12,12 @@ const PrivateRoute = ({
 }: RouteComponentProps<any>) => {
   const user = useAuthData();
 
-  if (!user && location?.pathname !== `/app/sign-in`) {
-    console.log("PrivateRoute", "Not signed in, redirecting to /app/sign-in");
-    navigate("/app/sign-in");
+  if (!user && location?.pathname !== RoutePath.login) {
+    console.log(
+      "PrivateRoute",
+      `Not signed in, redirecting to "${RoutePath.login}"`
+    );
+    navigate(RoutePath.login);
     return null;
   }
 

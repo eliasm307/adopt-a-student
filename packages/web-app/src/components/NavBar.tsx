@@ -1,5 +1,6 @@
 import { Link } from 'gatsby';
 import React from 'react';
+import { RoutePath } from 'src/constants';
 import useAuthData from 'src/hooks/useAuthData';
 import { signOut } from 'src/utils/auth';
 
@@ -24,7 +25,7 @@ export default function NavBar() {
       <nav>
         <Link to='/'>Home</Link>
         {` `}
-        <Link to='/app/profile'>Profile</Link>
+        <Link to={RoutePath.profile}>Profile</Link>
         {` `}
         {user ? (
           <a

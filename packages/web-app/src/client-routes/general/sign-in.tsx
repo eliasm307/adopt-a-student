@@ -1,5 +1,6 @@
 import { navigate } from 'gatsby';
 import React, { useContext, useState } from 'react';
+import { RoutePath } from 'src/constants';
 import useAuthData from 'src/hooks/useAuthData';
 import UserProvider, { UserContext } from 'src/providers/UserProvider';
 import { signInWithEmailPassword, signOut } from 'src/utils/auth';
@@ -21,7 +22,7 @@ const SignIn = () => {
 
   if (user) {
     console.log("sign-in", "user signed in, navigating to app role select...");
-    navigate(`/app/role`);
+    navigate(RoutePath.roleSelect);
     return null;
   }
   console.log("sign-in", "NOT navigating to app role select...", {
@@ -84,7 +85,7 @@ const SignIn = () => {
         method='post'
         onSubmit={(event) => {
           handleSubmit(event);
-          navigate(`/app/role`);
+          navigate(RoutePath.roleSelect);
         }}
       >
         <label>

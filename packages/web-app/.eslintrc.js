@@ -74,6 +74,7 @@ module.exports = {
     "prefer-promise-reject-errors": 0,
     "consistent-return": 0,
     "func-names": 0,
+    "no-useless-rename": 1,
     "import/no-webpack-loader-syntax": 1,
     "import/no-cycle": [
       1,

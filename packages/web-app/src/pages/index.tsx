@@ -1,5 +1,6 @@
 import { Link, navigate } from 'gatsby';
 import React from 'react';
+import { RoutePath } from 'src/constants';
 import useAuthData from 'src/hooks/useAuthData';
 
 import Layout from '../layouts/DefaultLayout';
@@ -18,8 +19,8 @@ export default function Home() {
           </>
         ) : (
           <>
-            You should <Link to='/app/sign-in'>log in</Link> to see restricted
-            content
+            You should <Link to={RoutePath.login}>log in</Link> to see
+            restricted content
           </>
         )}
       </p>
