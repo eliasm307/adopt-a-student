@@ -52,7 +52,7 @@ const SignIn = () => {
   };
   */
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     signInWithEmailPassword(userName, password);
   };
@@ -66,9 +66,9 @@ const SignIn = () => {
       const { name, value } = currentTarget;
       switch (name) {
         case "userEmail":
-          return setEmail(value as string);
+          return setEmail(value);
         case "userPassword":
-          return setPassword(value as string);
+          return setPassword(value);
         default:
           return console.error(`Unknown html event target "${name}"`);
       }
@@ -80,7 +80,7 @@ const SignIn = () => {
   return (
     <UserProvider>
       <h1>Log in</h1>
-      <div>Role: {user?.role}</div>
+      <div>Role: {user}</div>
       <form
         method='post'
         onSubmit={(event) => {

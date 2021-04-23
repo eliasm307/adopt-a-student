@@ -7,5 +7,9 @@
 module.exports = {
   flags: { FAST_DEV: true },
   /* Your site config here */
-  plugins: [`gatsby-plugin-tsconfig-paths`, "gatsby-plugin-eslint"],
+  plugins: [
+    `gatsby-plugin-tsconfig-paths`,
+    "gatsby-plugin-eslint",
+    `gatsby-plugin-emotion`,
+  ],
 };

@@ -6,7 +6,8 @@
     "jsx": "react",
     "esModuleInterop": true,
     "noEmit": true,
-    "checkJs": false
+    "checkJs": false,
+    "jsxImportSource": "@emotion/react"
   },
   "include": ["**/*"],
   "exclude": ["**/node_modules/**", "**/public/**"]

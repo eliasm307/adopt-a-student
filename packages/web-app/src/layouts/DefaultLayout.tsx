@@ -1,7 +1,11 @@
 import React from 'react';
+import { GlobalStyles } from 'twin.macro';
 
-import NavBar from '../components/NavBar';
-
-const Layout = ({ children }) => <>{children}</>;
+const Layout = ({ children }: React.PropsWithChildren<any>) => (
+  <>
+    <GlobalStyles />
+    {children}
+  </>
+);
 
 export default Layout;
