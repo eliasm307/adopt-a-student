@@ -10,7 +10,6 @@ import {
 } from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
 import isProductionEnvironment from 'src/utils/isProductionEnvironment';
-import tw from 'twin.macro';
 
 import SVG from '../../components/SVG';
 
@@ -20,12 +19,14 @@ import SVG from '../../components/SVG';
 
 // const svgPath = path.resolve("../../assets/logo.svg");
 
+/*
 const SignInForm = tw.form`
 bg-gray-500 border-2 flex flex-col items-center max-w-md m-auto`;
 
 const TextInput = tw.input`
 
 `;
+*/
 
 /*
 const Button = tw.button``;

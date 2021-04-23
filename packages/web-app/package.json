@@ -18,6 +18,11 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start-emulators": "yarn --cwd ../../ start-emulators"
   },
+  "resolutions": {
+    "graphql": "^15.4.0",
+    "graphql-compose": "^7.25.0",
+    "webpack": "^5.24.2"
+  },
   "dependencies": {
     "@adopt-a-student/common": "file:../api/common",
     "@emotion/react": "^11.1.5",
@@ -26,15 +31,17 @@
     "bootstrap": "^4.6.0",
     "gatsby": "^3.2.1",
     "gatsby-plugin-emotion": "^6.3.0",
+    "gatsby-plugin-image": "^1.3.1",
     "gatsby-plugin-sass": "^4.3.0",
+    "gatsby-plugin-sharp": "^3.3.1",
+    "gatsby-source-filesystem": "^3.3.0",
+    "gatsby-transformer-sharp": "^3.3.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.1",
     "react-query": "^3.13.11",
     "react-svg": "^13.0.3",
-    "sass": "^1.32.11",
-    "tailwindcss": "^2.1.1",
-    "twin.macro": "^2.3.3"
+    "sass": "^1.32.11"
   },
   "devDependencies": {
     "@types/reach__router": "^1.3.7",

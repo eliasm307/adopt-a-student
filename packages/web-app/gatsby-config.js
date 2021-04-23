@@ -12,5 +12,8 @@ module.exports = {
     "gatsby-plugin-eslint",
     `gatsby-plugin-emotion`,
     "gatsby-plugin-sass",
+    `gatsby-plugin-image`,
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
   ],
 };
