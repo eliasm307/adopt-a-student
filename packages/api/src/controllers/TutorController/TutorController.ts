@@ -90,10 +90,11 @@ export class TutorsController extends Controller {
 
     const { subjectIds } = body;
 
+    // verify received data
     if (!isArray(subjectIds))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
-        "Provided data is invalid"
+        "Could not get students by subjects because provided locale subject ids are not valid format"
       );
 
     return getTutorsBySubjectsHandler({ subjectIds });

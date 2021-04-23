@@ -9,6 +9,7 @@ export function isPublicStudentData(data: any): data is PublicStudentData {
     imageUrl,
     introduction,
     prefferedLocales,
+    prefferedCountries,
   } = data as PublicStudentData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -20,8 +21,10 @@ export function isPublicStudentData(data: any): data is PublicStudentData {
     imageUrl,
     prefferedLocales,
     introduction,
+    prefferedCountries,
   };
 
+  const hasPreferredCountries = Array.isArray(prefferedCountries);
   const hasPreferredLocales = Array.isArray(prefferedLocales);
   const hasUserName = typeof userName === "string" && userName;
   const canHaveImage =
@@ -36,7 +39,8 @@ export function isPublicStudentData(data: any): data is PublicStudentData {
     hasUserName &&
     canHaveImage &&
     canHaveIntroduction &&
-    hasPreferredLocales
+    hasPreferredLocales &&
+    hasPreferredCountries
   )
     return true;
 

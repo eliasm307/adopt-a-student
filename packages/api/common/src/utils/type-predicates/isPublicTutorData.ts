@@ -10,6 +10,7 @@ export function isPublicTutorData(data: any): data is PublicTutorData {
     introduction,
     available,
     prefferedLocales,
+    prefferedCountries,
   } = data as PublicTutorData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -22,6 +23,7 @@ export function isPublicTutorData(data: any): data is PublicTutorData {
     prefferedLocales,
     introduction,
     available,
+    prefferedCountries,
   };
 
   /* // todo split type predictes into 2 types "Only" and "Atleast"
@@ -32,6 +34,7 @@ export function isPublicTutorData(data: any): data is PublicTutorData {
   so if a high level item changes, the children type predicates dont all need to change,
   just the type predicate for the parent
   */
+  const hasPreferredCountries = Array.isArray(prefferedCountries);
   const hasPreferredLocales = Array.isArray(prefferedLocales);
   const hasUserName = typeof userName === "string" && userName;
   const canHaveImage =
@@ -49,7 +52,8 @@ export function isPublicTutorData(data: any): data is PublicTutorData {
     hasAvailable &&
     canHaveImage &&
     canHaveIntroduction &&
-    hasPreferredLocales
+    hasPreferredLocales &&
+    hasPreferredCountries
   )
     return true;
 

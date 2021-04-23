@@ -3,8 +3,8 @@ import { PrivateStudentData } from '@adopt-a-student/common';
 import { DataMutatorMap, DataUpdater } from '../../declarations/types';
 
 interface Props {
-  updates: any;
   existingData: PrivateStudentData;
+  updates: any;
 }
 
 const studentDataUpdater: DataUpdater<PrivateStudentData> = ({
@@ -19,6 +19,9 @@ const studentDataUpdater: DataUpdater<PrivateStudentData> = ({
     id: null,
     relatedSubjects: null,
     prefferedLocales: () => {
+      throw Error("Mutator not implemented");
+    },
+    prefferedCountries: () => {
       throw Error("Mutator not implemented");
     },
     relatedTutors: null,

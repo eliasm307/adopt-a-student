@@ -17,7 +17,10 @@ const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
 
   const mutators: DataMutatorMap<PrivateTutorData> = {
     id: null,
-    prefferedLocales: () => {
+    prefferedLocales: (value) => {
+      throw Error("Mutator not implemented for tutorDataUpdater");
+    },
+    prefferredCountries: (value) => {
       throw Error("Mutator not implemented for tutorDataUpdater");
     },
     relatedSubjects: null,

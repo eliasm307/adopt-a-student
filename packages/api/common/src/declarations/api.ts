@@ -24,6 +24,14 @@ export interface GetTutorsBySubjectsResponseBody {
   tutors: PublicTutorData[];
 }
 
+export interface GetTutorsByLocaleRequestBody {
+  country: Country;
+  locale: LocaleCode;
+}
+export interface GetTutorsByLocaleResponseBody {
+  tutors: PublicTutorData[];
+}
+
 export interface CreateTutorRequestBody {
   tutor: Omit<PrivateTutorData, "id">;
 }
