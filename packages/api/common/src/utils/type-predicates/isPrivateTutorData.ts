@@ -10,6 +10,7 @@ export function isPrivateTutorData(data: any): data is PrivateTutorData {
     relatedStudents,
     userName,
     prefferedLocales,
+    prefferedCountries,
     relatedSubjects,
     available,
     imageUrl,
@@ -29,8 +30,10 @@ export function isPrivateTutorData(data: any): data is PrivateTutorData {
     available,
     imageUrl,
     introduction,
+    prefferedCountries,
   };
 
+  const hasPreferredCountries = Array.isArray(prefferedCountries);
   const hasPreferredLocales = Array.isArray(prefferedLocales);
   const hasEmail = typeof email === "string" && email;
   const hasUserName = typeof userName === "string" && userName;
@@ -52,7 +55,8 @@ export function isPrivateTutorData(data: any): data is PrivateTutorData {
     hasPreferredLocales &&
     canHaveImage &&
     hasAvailability &&
-    canHaveIntro
+    canHaveIntro &&
+    hasPreferredCountries
   )
     return true;
 

@@ -13,6 +13,7 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
     imageUrl,
     introduction,
     prefferedLocales,
+    prefferedCountries,
   } = data as PrivateStudentData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -27,8 +28,10 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
     imageUrl,
     introduction,
     prefferedLocales,
+    prefferedCountries,
   };
 
+  const hasPreferredCountries = Array.isArray(prefferedCountries);
   const hasEmail = typeof email === "string" && email;
   const hasUserName = typeof userName === "string" && userName;
   const hasId = typeof id === "string" && id;
@@ -48,7 +51,8 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
     hasTutors &&
     canHaveImage &&
     canHaveIntroduction &&
-    hasPreferredLocales
+    hasPreferredLocales &&
+    hasPreferredCountries
   )
     return true;
 

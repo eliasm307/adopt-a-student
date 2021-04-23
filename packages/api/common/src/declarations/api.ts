@@ -24,11 +24,11 @@ export interface GetTutorsBySubjectsResponseBody {
   tutors: PublicTutorData[];
 }
 
-export interface GetTutorsByLocaleRequestBody {
-  country: Country;
-  locale: LocaleCode;
+export interface GetTutorsByLocalesRequestBody {
+  countries: Country[];
+  locales: LocaleCode[];
 }
-export interface GetTutorsByLocaleResponseBody {
+export interface GetTutorsByLocalesResponseBody {
   tutors: PublicTutorData[];
 }
 

@@ -4,8 +4,8 @@ import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../constants'
 import { firestoreAdmin } from '../firebase/firebase-admin';
 import bulkCreateSubjectsForAllLocales from './bulkCreateSubjectForAllLocales';
 import bulkUserPopulator from './bulkUserPopulator';
-import createFakeTutorData from './createFakeStudentData';
-import createFakeStudentData from './createFakeTutorData';
+import createFakeStudentData from './createFakeStudentData';
+import createFakeTutorData from './createFakeTutorData';
 
 describe("bulkUserPopulator", () => {
   it("Can bulk generate students", async () => {
@@ -17,7 +17,10 @@ describe("bulkUserPopulator", () => {
       userDataFactory: createFakeStudentData,
     });
 
-    console.log(__filename, "test result", { results });
+    console.log(__filename, "test result", {
+      resultsCount: results.length,
+      results,
+    });
   }, 9999);
 
   it("Can bulk generate tutors", async () => {
@@ -25,11 +28,14 @@ describe("bulkUserPopulator", () => {
       collectionPath: TUTOR_COLLECTION_NAME,
       dataPredicate: isPrivateTutorData,
       firestoreAdmin,
-      numberToGenerate: 10,
+      numberToGenerate: 100,
       userDataFactory: createFakeTutorData,
     });
 
-    console.log(__filename, "test result", { results });
+    console.log(__filename, "test result", {
+      resultsCount: results.length,
+      results,
+    });
   }, 9999);
 });
 

@@ -1,12 +1,13 @@
 import faker from 'faker';
 
-import { PrivateTutorData } from '@adopt-a-student/common';
+import { PrivateStudentData } from '@adopt-a-student/common';
 
 import newGuid from '../newGuid';
+import getRandomCountries from './getRandomCountries';
 import getRandomLocales from './getRandomLocales';
 import getRandomUserLocales from './getRandomUserLocales';
 
-export default function createFakeTutorData(): PrivateTutorData {
+export default function createFakeStudentData(): PrivateStudentData {
   return {
     email: faker.internet.email(),
     id: newGuid(),
@@ -14,9 +15,8 @@ export default function createFakeTutorData(): PrivateTutorData {
     imageUrl: faker.image.avatar(),
     introduction: faker.lorem.lines(Math.random() * 3),
     prefferedLocales: getRandomLocales(),
-    prefferredCountries: ["World"],
+    prefferedCountries: getRandomCountries(),
     relatedSubjects: [],
-    relatedStudents: [],
-    available: true,
+    relatedTutors: [],
   };
 }

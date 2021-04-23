@@ -59,6 +59,6 @@ export function isPublicTutorData(data: any): data is PublicTutorData {
 
   // ? check key count?
 
-  console.warn(__filename, "Data is not public Tutor data");
+  console.warn(__filename, "Data is not public Tutor data", { data });
   return false;
 }

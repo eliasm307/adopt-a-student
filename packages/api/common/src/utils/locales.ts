@@ -10,6 +10,7 @@ const countryLocales = countryLocalesJson as Record<
   Country,
   Record<LocaleCode, LocaleCode>
 >;
+const countryNames = [...new Set(Object.keys(countryLocales))] as Country[];
 const localeCountriesAsMapObjects = localeCountriesJson as Record<
   LocaleCode,
   Record<Country, Country>
@@ -28,6 +29,7 @@ const localeNativeNames = localeNativeNamesJson as Record<
 
 export {
   countryLocales,
+  countryNames,
   localeCountriesAsMapObjects as localeCountries,
   localeEnglishNames,
 };
