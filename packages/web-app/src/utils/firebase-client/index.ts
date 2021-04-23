@@ -112,11 +112,11 @@ export type FirestoreQuerySnapshot = firebase.firestore.QuerySnapshot<firebase.f
 ////////////////////////////////////////////////////////
 // Functions
 
-export const functionsLive = firebase.functions();
+// export const functionsLive = firebase.app().functions();
 
 // Using functions emulator
 // https://firebase.google.com/docs/emulator-suite/connect_functions
-export const functionsClient = firebase.functions();
+export const functionsClient = firebase.app().functions();
 if (!isProductionEnvironment()) {
   functionsClient.useEmulator("localhost", 5001);
 } else {

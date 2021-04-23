@@ -10,8 +10,9 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf lib && yarn && npx tsc -p tsconfig.build.json",
-    "prebuild": "yarn && npx tsc"
+    "prebuild": "yarn && npx tsc",
+    "build": "rm -rf lib && yarn && npx tsc -p tsconfig.build.json"
+
   },
   "author": "",
   "license": "MIT",

@@ -13,6 +13,6 @@ export default async function callFirebaseFunction<D = any, R = any>({
   data,
   functions,
   name,
-}: Props<D>) {
+}: Props<D>): Promise<R> {
   return (await functions.httpsCallable(name as string)(data)).data as R;
 }

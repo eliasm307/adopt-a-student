@@ -237,13 +237,13 @@
         "affectsGlobalScope": true
       },
       "./src/data/api/callablefunctionnames.json": {
-        "version": "7c79bc0ee91649ce22b10dc5f97a96dc4d6698aada9dbe62b43b4288dc75f04a",
-        "signature": "fcca140d77fdeef36aba8ce3827c55a28a50823121a2458eea9436c2561d05c6",
+        "version": "271843ecb607c7cc226474b5fcb43a93ba13957cc9ffc20ae02db6929da61223",
+        "signature": "01c67362d3d576ae346f99314c3fc1cb4d4e473a7055cce772c608c97467a8e4",
         "affectsGlobalScope": true
       },
       "./src/declarations/api.ts": {
-        "version": "dae3cf19c153750bb2fb95b0969ac24f16239011315f819c7a0a6ab6dd2e8a8e",
-        "signature": "80b95231bc4af32d1d311707d9d6877d9686d0383c4f78396012a4ee9639fc83",
+        "version": "e54bd5855743b136dec686e702b8df29221800b5ccce61a376e0f596aadd6b5a",
+        "signature": "7d2df41edb0b592264900d517a6b0feb1906ed4edc15d46c69f46ae378736a10",
         "affectsGlobalScope": false
       },
       "./src/declarations/types.ts": {
@@ -252,8 +252,8 @@
         "affectsGlobalScope": false
       },
       "./src/declarations/data-models.ts": {
-        "version": "f8e620698dc68a5f6703f6be5c32979f44b9d732688adb269fff6da4c11f56a1",
-        "signature": "5bf36753f220b8d2d6bc7b2cac32dc80fe7a31e5851e094301e4680377ca097e",
+        "version": "e3dff68e4c8792a8af956e689a8a6f6a29ea30773fd2d7eaea61898586720718",
+        "signature": "75e6b1185ec747c65dd0a4f032ee3d2f105f7f707b66a476b40ac8122819c598",
         "affectsGlobalScope": false
       },
       "./src/declarations/object-shcema.ts": {
@@ -287,22 +287,22 @@
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isprivatestudentdata.ts": {
-        "version": "c51988b052bd07b0ed8889a132447e389a7184b64efb1abbbb62dcb641ed062f",
+        "version": "74d1266f7b9d1d83a699a960abec0185bea1577e39ae3c45e1ed4a8aa0e94070",
         "signature": "2139056c54401170e17fe51a221fe8e0b0f05608b8095c22888aa0be667013f3",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isprivatetutordata.ts": {
-        "version": "1cbd73cdd9b778f0add8eea35a6e420efc5be69bfc0c8184e4f29baf404fad86",
+        "version": "196c2ff19349d14166625239bcfcfc35d6d1b6f19b6462bcedba1369b4a6d715",
         "signature": "9d8870a6b6883ce746cdcb3c82875373591e3bbef1204008fd42144e75891e80",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/ispublicstudentdata.ts": {
-        "version": "baf683a5d9ddaf88004702cccfd7bdd9228a36e40b60f1c1dcfddb233661e75b",
+        "version": "db8f64da9aeb6693f7069e4fe2a15913e70a5c25ad0634ecad01a1158fd5502f",
         "signature": "6f0769782f418baaacbb5c822cecdf8459cf32eeae4040341b131604c289e9e3",
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/ispublictutordata.ts": {
-        "version": "86fb1a7dab0dc876de6c1347f63bca21a4c77becfc2651787dc89cc6c9d86c4e",
+        "version": "4ed770bc3e42e9cc2a713e86d755579463671d5840cd873daee4248169ddd4bd",
         "signature": "c8a1af46a03792756a4d9c4d6663d1b27da071aaf71d224024a90b2cd135a8cd",
         "affectsGlobalScope": false
       },
@@ -332,8 +332,8 @@
         "affectsGlobalScope": true
       },
       "./src/utils/locales.ts": {
-        "version": "38a86838c08686050397572744aac603bd5be0df3f1b62b26cf8524af80dc2e5",
-        "signature": "8bbcf1981a1af0b1923c0072c5fca663e05c6f7dbb2d1d9f1d832851e31ed877",
+        "version": "2c38eb9ef5c0446707383da6a6c26038af665d926c32104e600cd4f06e504a79",
+        "signature": "5b3dce351a04885c3e503be0df6c7fa33ccf7f191a3c9c93150d4f1ced545c29",
         "affectsGlobalScope": false
       },
       "./src/utils/promiseallsettledandlog.ts": {

@@ -36,6 +36,8 @@ describe("bulkUserPopulator", () => {
       resultsCount: results.length,
       results,
     });
+    expect(results).toBeTruthy();
+    expect(results.length).toEqual(100);
   }, 9999);
 });
 

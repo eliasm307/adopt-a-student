@@ -3,6 +3,7 @@
   "getStudent": "getStudent",
   "getStudentsBySubjects": "getStudentsBySubjects",
   "updateStudent": "updateStudent",
+  "getTutorsByLocales": "getTutorsByLocales",
   "createTutor": "createTutor",
   "getTutor": "getTutor",
   "getTutorsBySubjects": "getTutorsBySubjects",

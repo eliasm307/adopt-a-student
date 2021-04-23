@@ -63,6 +63,7 @@ module.exports = {
     "@typescript-eslint/unbound-method": 0,
     "@typescript-eslint/no-unsafe-assignment": 0,
     "@typescript-eslint/no-unnecessary-type-assertion": 1,
+    "@typescript-eslint/indent": 0,
     semi: 0,
     "@typescript-eslint/semi": 0,
     "arrow-body-style": 0,
