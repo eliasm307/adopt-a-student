@@ -72,7 +72,7 @@ const App = () => {
               path={`${RoutePath.tutorOverview}/:tutorId`}
               component={TutorOverview}
             />
-            <PrivateRoleRoute
+            <PrivateRoleBasedRoute
               path={RoutePath.signUp}
               StudentComponent={StudentSignUp}
               TutorComponent={TutorSignUp}

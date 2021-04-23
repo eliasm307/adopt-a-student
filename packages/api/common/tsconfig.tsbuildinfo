@@ -236,9 +236,19 @@
         "signature": "be59d851dbb18999548b010d4c7d25c839b756a368842a8da51d4f3bdeb50f08",
         "affectsGlobalScope": true
       },
+      "./src/data/api/callablefunctionnames.json": {
+        "version": "7c79bc0ee91649ce22b10dc5f97a96dc4d6698aada9dbe62b43b4288dc75f04a",
+        "signature": "fcca140d77fdeef36aba8ce3827c55a28a50823121a2458eea9436c2561d05c6",
+        "affectsGlobalScope": true
+      },
+      "./src/declarations/api.ts": {
+        "version": "dae3cf19c153750bb2fb95b0969ac24f16239011315f819c7a0a6ab6dd2e8a8e",
+        "signature": "80b95231bc4af32d1d311707d9d6877d9686d0383c4f78396012a4ee9639fc83",
+        "affectsGlobalScope": false
+      },
       "./src/declarations/types.ts": {
-        "version": "185b4e8abf2f619c258da101f256a226dcdf0c43ed1eb96d518a5fab4c254977",
-        "signature": "9724352ef3eff1b1ad5639ab4615c00d3038fb4ef21a9d4b769e4020e135c4d3",
+        "version": "d268e2b4d630dfbdd2c394c64b8fda115e9a13be346f4cd8eebb42a054867012",
+        "signature": "bd7b055a1d4f8abcd604dfd942456b1fd72545d4e67696e0c797a1846bb45b49",
         "affectsGlobalScope": false
       },
       "./src/declarations/data-models.ts": {
@@ -304,11 +314,6 @@
       "./src/utils/type-predicates/index.ts": {
         "version": "63d68a8fd6da18eb6ff69ad9ae9e964ef12a16de837d7e846d72c73d7e5264a3",
         "signature": "63d68a8fd6da18eb6ff69ad9ae9e964ef12a16de837d7e846d72c73d7e5264a3",
-        "affectsGlobalScope": false
-      },
-      "./src/declarations/api.ts": {
-        "version": "1c863b8331fc961f542a08d11108ffcdadcdda55aea761e79aa14cbd3ccaebef",
-        "signature": "d87f38884ae109f1c391c705d3577b97bd6bed1cb0d375163e9419d7f9fc2e37",
         "affectsGlobalScope": false
       },
       "./src/data/locales/locale-countries.json": {
@@ -953,6 +958,7 @@
         "./node_modules/pretty-format/build/types.d.ts"
       ],
       "./src/declarations/api.ts": [
+        "./src/data/api/callablefunctionnames.json",
         "./src/declarations/data-models.ts",
         "./src/declarations/types.ts"
       ],
@@ -965,7 +971,8 @@
       ],
       "./src/declarations/types.ts": [
         "./src/constants.ts",
-        "./src/data/locales/country-locales.json"
+        "./src/data/locales/country-locales.json",
+        "./src/declarations/api.ts"
       ],
       "./src/index.ts": [
         "./src/constants.ts",
@@ -1307,6 +1314,7 @@
         "./node_modules/pretty-format/build/types.d.ts"
       ],
       "./src/declarations/api.ts": [
+        "./src/data/api/callablefunctionnames.json",
         "./src/declarations/data-models.ts",
         "./src/declarations/types.ts"
       ],
@@ -1319,7 +1327,8 @@
       ],
       "./src/declarations/types.ts": [
         "./src/constants.ts",
-        "./src/data/locales/country-locales.json"
+        "./src/data/locales/country-locales.json",
+        "./src/declarations/api.ts"
       ],
       "./src/index.ts": [
         "./src/constants.ts",
@@ -1485,6 +1494,7 @@
       "./node_modules/typescript/lib/lib.esnext.string.d.ts",
       "./node_modules/typescript/lib/lib.esnext.weakref.d.ts",
       "./src/constants.ts",
+      "./src/data/api/callablefunctionnames.json",
       "./src/data/locales/country-locales.json",
       "./src/data/locales/locale-countries.json",
       "./src/data/locales/locale-english-names.json",
@@ -2166,6 +2176,10 @@
       ],
       [
         "./src/constants.ts",
+        1
+      ],
+      [
+        "./src/data/api/callablefunctionnames.json",
         1
       ],
       [
