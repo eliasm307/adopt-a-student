@@ -1,6 +1,7 @@
 import { navigate } from 'gatsby';
 import path from 'path';
 import React, { useContext, useState } from 'react';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { RoutePath } from 'src/constants';
 import useAuthData from 'src/hooks/useAuthData';
 import UserProvider, { UserContext } from 'src/providers/UserProvider';
@@ -24,7 +25,9 @@ const TextInput = tw.input`
 
 `;
 
+/*
 const Button = tw.button``;
+*/
 
 const SignIn = () => {
   const [userName, setUserName] = useState("");
@@ -99,38 +102,75 @@ const SignIn = () => {
 
   return (
     <UserProvider>
-      <h1>Log in</h1>
-      <div>Role: {user?.role}</div>
-      <div>
-        <SVG path='/assets/logo-only.svg' />
-        <SVG path='/assets/connecting_students_and_teachers.svg' />
-      </div>
-      <SignInForm
-        method='post'
-        onSubmit={(event) => {
-          handleSubmit(event);
-          navigate(RoutePath.roleSelect);
-        }}
-      >
-        <label htmlFor='username'>
-          Username
-          <input
-            id='username'
-            type='text'
-            name='username'
-            onChange={onChangeHandler}
-          />
-        </label>
+      <Row className='justify-content-md-center'>
+        <Col
+          lg={6}
+          className='justify-contents-center debug'
+          style={{
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <h1>Log in</h1>
+          <div>Role: {user?.role}</div>
+          <div
+            className='   debug'
+            style={{
+              width: "100%",
+              padding: "auto auto",
+              margin: "auto",
+              display: "grid",
+              placeItems: "center",
+            }}
+          >
+            <SVG path='/assets/logo-only.svg' />
+            <SVG path='/assets/connecting_students_and_teachers.svg' />
+          </div>
+          <Form
+            method='post'
+            onSubmit={(event) => {
+              handleSubmit(event);
+              navigate(RoutePath.roleSelect);
+            }}
+            style={{
+              display: "grid",
+              placeItems: "center",
+            }}
+          >
+            <Form.Group controlId='formBasicEmail' className='w-100'>
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                type='email'
+                placeholder='Enter email'
+                onChange={onChangeHandler}
+              />
+              <Form.Text className='text-muted'>
+                We&apos;ll never share your email with anyone else.
+              </Form.Text>
+            </Form.Group>
 
-        <label>
-          Password
-          <input type='password' name='password' onChange={onChangeHandler} />
-        </label>
-        <input type='submit' value='Log In' />
-        <button type='button' onClick={() => signOut()}>
-          Sign out
-        </button>
-      </SignInForm>
+            <Form.Group controlId='formBasicPassword' className='w-100'>
+              <Form.Label htmlFor='password'>Password</Form.Label>
+              <Form.Control
+                id='password'
+                name='password'
+                type='password'
+                placeholder='Password'
+                onChange={onChangeHandler}
+              />
+            </Form.Group>
+
+            <Row>
+              <Button variant='primary' type='submit' className='col'>
+                Sign in
+              </Button>
+              <Button variant='primary' type='button' className='col'>
+                Sign Up
+              </Button>
+            </Row>
+          </Form>
+        </Col>
+      </Row>
     </UserProvider>
   );
 };

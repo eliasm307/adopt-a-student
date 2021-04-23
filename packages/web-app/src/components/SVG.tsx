@@ -5,6 +5,12 @@ interface Props {
   path: string;
 }
 
-const SVG = ({ path }: Props) => <ReactSVG src={path} />;
+const SVG = ({ path }: Props) => (
+  <ReactSVG
+    src={path}
+    className='debug'
+    style={{ margin: "auto", padding: "auto" }}
+  />
+);
 
 export default SVG;

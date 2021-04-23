@@ -11,5 +11,6 @@ module.exports = {
     `gatsby-plugin-tsconfig-paths`,
     "gatsby-plugin-eslint",
     `gatsby-plugin-emotion`,
+    "gatsby-plugin-sass",
   ],
 };

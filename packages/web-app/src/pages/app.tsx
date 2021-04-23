@@ -48,7 +48,6 @@ const App = () => {
     <UserProvider>
       <QueryClientProvider client={queryClient}>
         <Layout>
-          <div>Role {user?.role}</div>
           <Router>
             <PublicRoute default component={NotFound} />
             <PublicRoute path={RoutePath.login} component={SignIn} />
