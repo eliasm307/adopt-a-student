@@ -5,7 +5,9 @@ import { Button, Col, Form, Row } from 'react-bootstrap';
 import { RoutePath } from 'src/constants';
 import useAuthData from 'src/hooks/useAuthData';
 import UserProvider, { UserContext } from 'src/providers/UserProvider';
-import { signInWithEmailPassword, signOut } from 'src/utils/auth';
+import {
+  signInAnonymously, signInWithEmailPassword, signInWithGoogle, signOut,
+} from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
 import isProductionEnvironment from 'src/utils/isProductionEnvironment';
 import tw from 'twin.macro';
@@ -45,8 +47,8 @@ const SignIn = () => {
       "sign-in",
       "user signed in, navigating to app role select...DISABLED"
     );
-    // navigate(RoutePath.roleSelect);
-    // return null;
+    navigate(RoutePath.RoleSelect);
+    return null;
   }
   console.log("sign-in", "NOT navigating to app role select...", {
     user,
@@ -109,6 +111,7 @@ const SignIn = () => {
           style={{
             display: "grid",
             placeItems: "center",
+            overflow: "auto",
           }}
         >
           <div
@@ -134,7 +137,7 @@ const SignIn = () => {
             style={{
               display: "grid",
               placeItems: "center",
-              width: "60%",
+              width: "clamp(100px, 100%, 500px)",
             }}
           >
             <Form.Group controlId='formBasicEmail' className='w-100'>
@@ -150,9 +153,8 @@ const SignIn = () => {
             </Form.Group>
 
             <Form.Group controlId='formBasicPassword' className='w-100'>
-              <Form.Label htmlFor='password'>Password</Form.Label>
+              <Form.Label>Password</Form.Label>
               <Form.Control
-                id='password'
                 name='password'
                 type='password'
                 placeholder='Password'
@@ -164,8 +166,32 @@ const SignIn = () => {
               <Button variant='primary' type='submit' className='col'>
                 Sign in
               </Button>
+
               <Button variant='primary' type='button' className='col'>
                 Sign Up
+              </Button>
+            </Row>
+            <Row>
+              <Button
+                variant='primary'
+                type='button'
+                className='col'
+                onClick={() => {
+                  alert("clicked");
+                  signInAnonymously();
+                }}
+              >
+                Sign in Anonymously
+              </Button>
+            </Row>
+            <Row>
+              <Button
+                variant='primary'
+                type='button'
+                className='col'
+                onClick={() => signInWithGoogle()}
+              >
+                Sign in with Google
               </Button>
             </Row>
           </Form>
