@@ -10,9 +10,11 @@ import {
   GetTutorsByLocalesRequestBody, GetTutorsByLocalesResponseBody,
 } from '@adopt-a-student/common';
 
+import { QueryName } from '../../constants';
 import { functionsClient } from '../../utils/firebase-client';
 import callFirebaseFunction from '../../utils/firebase-client/callFirebaseFunction';
 
+// todo this should come from user preferrences
 const requestData: GetTutorsByLocalesRequestBody = {
   countries: ["Australia"],
   locales: ["en"],
@@ -22,7 +24,7 @@ const StudentHome = () => {
   const { isLoading, error, data: responseData } = useQuery<
     GetTutorsByLocalesResponseBody,
     Error
-  >("repoData", async () =>
+  >(QueryName.TutorsByLocales, async () =>
     callFirebaseFunction<
       GetTutorsByLocalesRequestBody,
       GetTutorsByLocalesResponseBody

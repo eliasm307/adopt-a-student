@@ -5,7 +5,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 import React, { useContext } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { RoutePath } from 'src/constants';
-import { UserContext } from 'src/providers/UserProvider';
+import { UserContext } from 'src/providers/UserAuthProvider';
 
 export interface RoleSelectProps {
   /** Route to redirect to after role select */
@@ -13,7 +13,7 @@ export interface RoleSelectProps {
 }
 
 const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
-  const { setUserRole } = useContext(UserContext);
+  const { updateUserRole: setUserRole } = useContext(UserContext);
 
   /*
   if (user?.role) {

@@ -24,66 +24,71 @@ import { RoutePath } from '../constants';
 import Layout from '../layouts/DefaultLayout';
 // eslint-disable-next-line import/no-useless-path-segments
 import NotFound from '../pages/404';
-import UserProvider from '../providers/UserProvider';
+import UserProvider from '../providers/UserAuthProvider';
+import UserStudentDataProvider from '../providers/UserStudentDataProvider';
 
 const queryClient = new QueryClient();
 
+// ? split routing and provider specification?
+/** Responsilbe for defining the routes for the app and providers */
 const App = () => {
   return (
     <UserProvider>
-      <QueryClientProvider client={queryClient}>
-        <Layout>
-          <Router>
-            <Route isPublic default component={NotFound} title='Not found' />
-            <Redirect from='/app' to={RoutePath.Home} noThrow />
-            <Route
-              isPublic
-              path={RoutePath.SignIn}
-              component={SignIn}
-              title='Sign-In'
-              navbarLinks={SignInNavBarLinks}
-            />
-            <RoleBasedRoute
-              isPublic={false}
-              path={RoutePath.Home}
-              StudentComponent={StudentHome}
-              TutorComponent={TutorHome}
-              title='Home'
-              navbarLinks={HomeNavBarLinks}
-            />
-            <RoleBasedRoute
-              isPublic={false}
-              path={RoutePath.Profile}
-              StudentComponent={StudentProfile}
-              TutorComponent={TutorProfile}
-              title='My Profile'
-              navbarLinks={ProfileNavbarLinks}
-            />
-            <Route
-              isPublic={false}
-              path={`${RoutePath.StudentOverview}/:studentId`}
-              component={StudentOverview}
-              title='Student Overview'
-              navbarLinks={StudentOverviewNavBarLinks}
-            />
-            <Route
-              isPublic={false}
-              path={`${RoutePath.TutorOverview}/:tutorId`}
-              component={TutorOverview}
-              title='Tutor Overview'
-              navbarLinks={TutorOverviewNavBarLinks}
-            />
-            <RoleBasedRoute
-              isPublic
-              path={RoutePath.SignUp}
-              StudentComponent={StudentSignUp}
-              TutorComponent={TutorSignUp}
-              title='Sign-Up'
-              navbarLinks={SignUpNavBarLinks}
-            />
-          </Router>
-        </Layout>
-      </QueryClientProvider>
+      <UserStudentDataProvider>
+        <QueryClientProvider client={queryClient}>
+          <Layout>
+            <Router>
+              <Route isPublic default component={NotFound} title='Not found' />
+              <Redirect from='/app' to={RoutePath.Home} noThrow />
+              <Route
+                isPublic
+                path={RoutePath.SignIn}
+                component={SignIn}
+                title='Sign-In'
+                navbarLinks={SignInNavBarLinks}
+              />
+              <RoleBasedRoute
+                isPublic={false}
+                path={RoutePath.Home}
+                StudentComponent={StudentHome}
+                TutorComponent={TutorHome}
+                title='Home'
+                navbarLinks={HomeNavBarLinks}
+              />
+              <RoleBasedRoute
+                isPublic={false}
+                path={RoutePath.Profile}
+                StudentComponent={StudentProfile}
+                TutorComponent={TutorProfile}
+                title='My Profile'
+                navbarLinks={ProfileNavbarLinks}
+              />
+              <Route
+                isPublic={false}
+                path={`${RoutePath.StudentOverview}/:studentId`}
+                component={StudentOverview}
+                title='Student Overview'
+                navbarLinks={StudentOverviewNavBarLinks}
+              />
+              <Route
+                isPublic={false}
+                path={`${RoutePath.TutorOverview}/:tutorId`}
+                component={TutorOverview}
+                title='Tutor Overview'
+                navbarLinks={TutorOverviewNavBarLinks}
+              />
+              <RoleBasedRoute
+                isPublic
+                path={RoutePath.SignUp}
+                StudentComponent={StudentSignUp}
+                TutorComponent={TutorSignUp}
+                title='Sign-Up'
+                navbarLinks={SignUpNavBarLinks}
+              />
+            </Router>
+          </Layout>
+        </QueryClientProvider>
+      </UserStudentDataProvider>
     </UserProvider>
   );
 };

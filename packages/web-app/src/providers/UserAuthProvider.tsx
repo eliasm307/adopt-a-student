@@ -6,8 +6,9 @@ import { getUserLocalStorageItem, setUserLocalStorageItem } from 'src/utils/user
 import { auth } from '../utils/firebase-client';
 import { UserAuth } from './declarations/interfaces';
 
-interface UserContextShape {
-  setUserRole: (role: UserRole) => void;
+// todo move role logic to separate provider
+interface UserAuthContextShape {
+  updateUserRole: (role: UserRole) => void;
   user: UserAuth | null;
   userRole: UserRole | null;
 }
@@ -18,16 +19,16 @@ interface Props {
 
 // initial context
 export const UserContext = createContext({
-  setUserRole: () => {
+  updateUserRole: () => {
     throw Error("setUserRole is undefined");
   },
   user: null,
   userRole: null,
-} as UserContextShape);
+} as UserAuthContextShape);
 
 export default function UserProvider({ children }: Props) {
-  const [userState, setUserState] = useState(null as UserAuth | null);
-  const [userRoleState, setRoleState] = useState(null as UserRole | null);
+  const [user, setUser] = useState(null as UserAuth | null);
+  const [userRole, setUserRole] = useState(null as UserRole | null);
 
   // on mount, add auth state listener
   useEffect(() => {
@@ -46,55 +47,40 @@ export default function UserProvider({ children }: Props) {
         `Loaded last role from local storage "${lastRole}"`
       );
 
-      setUserState({
+      setUser({
         ...userAuth,
       });
     });
   }, []);
 
-  const setUserRole = (role: UserRole) => {
-    /*
-    if (!user)
-      return console.warn(
-        "UserProvide",
-        "Could not set role on user not signed in"
-      );
-      */
-
-    // const newUser = { ...user, role };
-
+  const updateUserRole = (role: UserRole) => {
     // save role change to local storage
     setUserLocalStorageItem({
-      uid: userState?.uid || "UNDEFINED-",
+      uid: user?.uid || "UNDEFINED-",
       key: ROLE_LOCAL_STORAGE_KEY,
       value: role,
     });
 
     console.log(__filename, `Setting user role to ${role}`, {
-      oldRole: userRoleState,
+      oldRole: role,
       newRole: role,
     });
 
-    setRoleState(role);
-    /*
-    setUser(newUser);
-    */
+    setUserRole(role);
   };
 
   // restore a previous role if there is one
-  if (!userRoleState) {
+  if (!userRole) {
     const storedRole = getUserLocalStorageItem({
       key: ROLE_LOCAL_STORAGE_KEY,
-      uid: userState?.uid || "UNDEFINED-",
+      uid: user?.uid || "UNDEFINED-",
     }) as UserRole | null;
 
-    if (storedRole) setRoleState(storedRole);
+    if (storedRole) setUserRole(storedRole);
   }
 
   return (
-    <UserContext.Provider
-      value={{ user: userState, setUserRole, userRole: userRoleState }}
-    >
+    <UserContext.Provider value={{ user, updateUserRole, userRole }}>
       {children}
     </UserContext.Provider>
   );

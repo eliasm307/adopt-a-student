@@ -2,7 +2,7 @@ import { navigate } from 'gatsby';
 import React, { useContext, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { RoutePath } from 'src/constants';
-import { UserContext } from 'src/providers/UserProvider';
+import { UserContext } from 'src/providers/UserAuthProvider';
 import {
   signInAnonymously, signInWithEmailPassword, signInWithGoogle, signOut,
 } from 'src/utils/auth';
@@ -36,7 +36,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [showValidation, setShowValidation] = useState(false);
 
-  const { setUserRole, user } = useContext(UserContext);
+  const { updateUserRole: setUserRole, user } = useContext(UserContext);
 
   console.log(`typeof user ${typeof user}`);
 
