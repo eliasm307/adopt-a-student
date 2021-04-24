@@ -8,8 +8,7 @@ import {
 } from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
 
-import SVG from '../../components/SVG';
-import { useAuthData } from '../../hooks';
+import Image from './Image';
 
 // import testUser from '../../private_config/testUserAuth';
 
@@ -30,7 +29,7 @@ const TextInput = tw.input`
 const Button = tw.button``;
 */
 
-const SignIn = () => {
+const UserSignUpForm = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -107,8 +106,11 @@ const SignIn = () => {
             placeItems: "center",
           }}
         >
-          <SVG path='/assets/logo-with-text.svg' />
-          <SVG path='/assets/connecting_students_and_teachers.svg' />
+          <Image src='logo-with-text.png' alt='Logo' />
+          <Image
+            src='connecting_students_and_teachers.png'
+            alt='Connecting students and teachers text'
+          />
         </div>
         <Form
           method='post'
@@ -124,7 +126,7 @@ const SignIn = () => {
           }}
         >
           <Form.Group controlId='formBasicEmail' className='w-100'>
-            <Form.Label>Username</Form.Label>
+            <Form.Label>Email</Form.Label>
             <Form.Control
               type='email'
               placeholder='Enter email'
@@ -185,4 +187,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default UserSignUpForm;
