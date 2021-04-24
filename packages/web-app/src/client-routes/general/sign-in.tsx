@@ -4,7 +4,7 @@ import React, { useContext, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { RoutePath } from 'src/constants';
 import useAuthData from 'src/hooks/useAuthData';
-import UserProvider, { UserContext } from 'src/providers/UserProvider';
+import { UserContext } from 'src/providers/UserProvider';
 import {
   signInAnonymously, signInWithEmailPassword, signInWithGoogle, signOut,
 } from 'src/utils/auth';
@@ -104,101 +104,101 @@ const SignIn = () => {
   };
 
   return (
-    <UserProvider>
-      <Row className='justify-content-md-center mt-4'>
-        <Col
-          lg={10}
-          className='justify-contents-center'
+    <Row className='justify-content-md-center mt-4'>
+      <Col
+        lg={10}
+        className='justify-contents-center'
+        style={{
+          display: "grid",
+          placeItems: "center",
+          overflow: "auto",
+        }}
+      >
+        <div
+          className='  '
+          style={{
+            width: "100%",
+            padding: "auto auto",
+            margin: "auto",
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <SVG path='/assets/logo-only.svg' />
+          <SVG path='/assets/connecting_students_and_teachers.svg' />
+        </div>
+        <Form
+          method='post'
+          onSubmit={(event) => {
+            handleSubmit(event);
+            navigate(RoutePath.RoleSelect);
+          }}
+          className='mt-3'
           style={{
             display: "grid",
             placeItems: "center",
-            overflow: "auto",
+            width: "clamp(100px, 100%, 500px)",
           }}
         >
-          <div
-            className='  '
-            style={{
-              width: "100%",
-              padding: "auto auto",
-              margin: "auto",
-              display: "grid",
-              placeItems: "center",
-            }}
-          >
-            <SVG path='/assets/logo-only.svg' />
-            <SVG path='/assets/connecting_students_and_teachers.svg' />
-          </div>
-          <Form
-            method='post'
-            onSubmit={(event) => {
-              handleSubmit(event);
-              navigate(RoutePath.RoleSelect);
-            }}
-            className='mt-3'
-            style={{
-              display: "grid",
-              placeItems: "center",
-              width: "clamp(100px, 100%, 500px)",
-            }}
-          >
-            <Form.Group controlId='formBasicEmail' className='w-100'>
-              <Form.Label>Username</Form.Label>
-              <Form.Control
-                type='email'
-                placeholder='Enter email'
-                onChange={onChangeHandler}
-              />
-              <Form.Text className='text-muted'>
-                We&apos;ll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
+          <Form.Group controlId='formBasicEmail' className='w-100'>
+            <Form.Label>Username</Form.Label>
+            <Form.Control
+              type='email'
+              placeholder='Enter email'
+              onChange={onChangeHandler}
+            />
+            <Form.Text className='text-muted'>
+              We&apos;ll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
 
-            <Form.Group controlId='formBasicPassword' className='w-100'>
-              <Form.Label>Password</Form.Label>
-              <Form.Control
-                name='password'
-                type='password'
-                placeholder='Password'
-                onChange={onChangeHandler}
-              />
-            </Form.Group>
+          <Form.Group controlId='formBasicPassword' className='w-100'>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              name='password'
+              type='password'
+              placeholder='Password'
+              onChange={onChangeHandler}
+            />
+          </Form.Group>
 
-            <Row className='w-100'>
-              <Button variant='primary' type='submit' className='col'>
-                Sign in
-              </Button>
+          <Row className='w-100'>
+            <Button variant='primary' type='submit' className='col'>
+              Sign in
+            </Button>
 
-              <Button variant='primary' type='button' className='col'>
-                Sign Up
-              </Button>
-            </Row>
-            <Row>
-              <Button
-                variant='primary'
-                type='button'
-                className='col'
-                onClick={() => {
-                  alert("clicked");
-                  signInAnonymously();
-                }}
-              >
-                Sign in Anonymously
-              </Button>
-            </Row>
-            <Row>
-              <Button
-                variant='primary'
-                type='button'
-                className='col'
-                onClick={() => signInWithGoogle()}
-              >
-                Sign in with Google
-              </Button>
-            </Row>
-          </Form>
-        </Col>
-      </Row>
-    </UserProvider>
+            <Button
+              variant='primary'
+              type='button'
+              className='col'
+              onClick={() => navigate(RoutePath.SignUp)}
+            >
+              Sign Up
+            </Button>
+          </Row>
+          <Row>
+            <Button
+              variant='primary'
+              type='button'
+              className='col'
+              onClick={() => signInAnonymously()}
+            >
+              Sign in Anonymously
+            </Button>
+          </Row>
+          <Row>
+            <Button
+              variant='primary'
+              type='button'
+              className='col'
+              onClick={() => signInWithGoogle()}
+            >
+              Sign in with Google
+            </Button>
+          </Row>
+        </Form>
+      </Col>
+    </Row>
   );
 };
 
