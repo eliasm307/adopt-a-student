@@ -96,7 +96,7 @@ const App = () => {
               title='Tutor Overview'
               navbarLinks={TutorOverviewNavBarLinks}
             />
-            <PrivateRoleBasedRoute
+            <PublicRoleBasedRoute
               path={RoutePath.SignUp}
               StudentComponent={StudentSignUp}
               TutorComponent={TutorSignUp}
