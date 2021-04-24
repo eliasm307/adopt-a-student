@@ -8,6 +8,7 @@ import React from 'react';
 import { Row } from 'react-bootstrap';
 
 import Carousel from '../../components/Carousel';
+import Image from '../../components/Image';
 
 const slidesJSX: React.ReactElement[] = [
   <div>item1</div>,
@@ -23,11 +24,11 @@ const slidesJSX: React.ReactElement[] = [
 
 const slidesData: ImageSlideData[] = [
   {
-    src: "../../../static/assets/student-signup-slide1.png",
+    src: "student-signup-slide1.png",
     text: "Slide 1",
   },
   {
-    src: "../../../static/assets/student-signup-slide2.png",
+    src: "student-signup-slide2.png",
     text: "Slide 2",
   },
 ];
@@ -40,7 +41,7 @@ interface ImageSlideData {
 
 const slidesContentJsx = slidesData.map(({ src, text, title }) => (
   <div style={{ width: "20%", height: "100%", objectFit: "cover" }}>
-    <StaticImage src={src} alt='' />
+    <Image src={src} alt='' />
   </div>
 ));
 
