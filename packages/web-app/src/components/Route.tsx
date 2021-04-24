@@ -1,7 +1,7 @@
 import { navigate } from 'gatsby';
 import React from 'react';
 import { RoutePath } from 'src/constants';
-import useAuthData from 'src/hooks/useAuthData';
+import { useAuthData } from 'src/hooks';
 
 import { RouteComponentProps } from '@reach/router';
 
@@ -12,16 +12,17 @@ interface Props extends BaseRouteProps, RouteComponentProps {
   component: any;
 }
 
-const PrivateRoute = ({
+const Route = ({
   component: Component,
   location,
   navbarLinks: links,
   title,
+  isPublic,
   ...restProps
 }: Props) => {
   const user = useAuthData();
 
-  if (!user && location?.pathname !== RoutePath.Login) {
+  if (!isPublic && !user) {
     console.log(
       "PrivateRoute",
       `Not signed in, redirecting to "${RoutePath.Login}"`
@@ -36,4 +37,4 @@ const PrivateRoute = ({
   );
 };
 
-export default PrivateRoute;
+export default Route;

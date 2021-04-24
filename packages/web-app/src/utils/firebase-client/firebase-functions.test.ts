@@ -55,7 +55,9 @@ describe.only("firebase functions createTutor", () => {
       // id: "232",
       tutor: {
         email: faker.internet.email(),
-        prefferedLocales: [{ locale: "en", c }],
+        prefferedLocales: ["en"],
+        prefferedCountries: ["World"],
+        available: true,
         relatedStudents: [],
         relatedSubjects: [
           {

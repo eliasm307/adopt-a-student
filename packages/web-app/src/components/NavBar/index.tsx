@@ -1,10 +1,8 @@
 import { Link } from 'gatsby';
-import React, { MouseEventHandler } from 'react';
-import { RoutePath } from 'src/constants';
-import useAuthData from 'src/hooks/useAuthData';
-import { signOut } from 'src/utils/auth';
+import React from 'react';
 
 import { NavBarLinkData } from '../../declarations/interfaces';
+import { useAuthData } from '../../hooks';
 
 interface Props {
   links?: NavBarLinkData[];
@@ -26,7 +24,7 @@ export default function NavBar({ links, title }: Props) {
     links.map(({ text, action, url }) => {
       if (action)
         return (
-          <button type='button' onClick={action}>
+          <button type='button' onClick={action} key={`${text}-${url || ""}`}>
             {text}
           </button>
         );

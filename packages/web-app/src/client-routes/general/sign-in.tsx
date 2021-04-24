@@ -1,17 +1,15 @@
 import { navigate } from 'gatsby';
-import path from 'path';
 import React, { useContext, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { RoutePath } from 'src/constants';
-import useAuthData from 'src/hooks/useAuthData';
 import { UserContext } from 'src/providers/UserProvider';
 import {
   signInAnonymously, signInWithEmailPassword, signInWithGoogle, signOut,
 } from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
-import isProductionEnvironment from 'src/utils/isProductionEnvironment';
 
 import SVG from '../../components/SVG';
+import { useAuthData } from '../../hooks';
 
 // import testUser from '../../private_config/testUserAuth';
 
@@ -38,17 +36,13 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
 
-  const user = useAuthData();
-  const { setUserRole } = useContext(UserContext);
+  const { setUserRole, user } = useContext(UserContext);
 
   console.log(`typeof user ${typeof user}`);
 
   if (user) {
-    console.log(
-      "sign-in",
-      "user signed in, navigating to app role select...DISABLED"
-    );
-    navigate(RoutePath.RoleSelect);
+    console.log("sign-in", "user signed in, navigating to app role select...");
+    navigate(RoutePath.App);
     return null;
   }
   console.log("sign-in", "NOT navigating to app role select...", {
@@ -56,18 +50,7 @@ const SignIn = () => {
     authUser: auth.currentUser,
   });
 
-  /*
-  if (user && !user?.role) {
-    setUserRole("Student");
-  }
-  */
-
-  if (!isProductionEnvironment()) {
-    console.log("Dev environment, signing in anonymously");
-    // signInWithEmailPassword(testUser.email, testUser.password);
-    // auth.signInAnonymously();
-  }
-
+  // todo enable
   /*
   const signInWithEmailAndPasswordHandler = (
     event: React.ChangeEvent<HTMLButtonElement>,
@@ -131,7 +114,7 @@ const SignIn = () => {
           method='post'
           onSubmit={(event) => {
             handleSubmit(event);
-            navigate(RoutePath.RoleSelect);
+            navigate(RoutePath.App);
           }}
           className='mt-3'
           style={{

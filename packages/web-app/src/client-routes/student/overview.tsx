@@ -1,5 +1,8 @@
+import { navigate } from 'gatsby';
 import React from 'react';
-import useAuthData from 'src/hooks/useAuthData';
+
+import { RoutePath } from '../../constants';
+import { useAuthData } from '../../hooks';
 
 // todo shows public data
 
@@ -7,6 +10,11 @@ import useAuthData from 'src/hooks/useAuthData';
 
 const StudentOverview = () => {
   const user = useAuthData();
+
+  if (!user) {
+    navigate(RoutePath.Login);
+    return null;
+  }
 
   return (
     <>

@@ -1,49 +1,51 @@
 import { navigate } from 'gatsby';
 import React from 'react';
 import { RoutePath } from 'src/constants';
-import useAuthData from 'src/hooks/useAuthData';
+import { useAuthData, useUserRole } from 'src/hooks';
 
 import { RouteComponentProps } from '@reach/router';
 
 import { BaseRouteProps } from '../declarations/interfaces';
 import NavBar from './NavBar';
+import RoleSelector from './RoleSelector';
 
 interface Props extends RouteComponentProps, BaseRouteProps {
   StudentComponent: React.ComponentType<any>;
   TutorComponent: React.ComponentType<any>;
+
+  // roleSelectRoute: RoutePath;
 }
 
-const PrivateRoleBasedRoute = ({
+const RoleBasedRoute = ({
   StudentComponent,
   TutorComponent,
   location,
   navbarLinks: links,
   title,
+  // roleSelectRoute = RoutePath.AppRoleSelect,
+  isPublic,
   ...rest
 }: Props) => {
   const user = useAuthData();
+  const userRole = useUserRole();
 
-  // && location?.pathname !== RoutePath.login
-  if (!user) {
+  // check user is signed in, if route is not public
+  if (!isPublic && !user) {
     console.warn(__filename, "not signed in, redirect to sign in");
     navigate(RoutePath.Login);
     return null;
   }
-  const { role } = user;
-
-  // this shouldnt be required if the right app is provided, but including it just incase
-  if (!user?.role) {
-    alert(`Only ${role}s can access this route`);
-    console.log("PrivateRoleBasedRoute", "ro");
-    navigate(RoutePath.RoleSelect);
-    return null;
+  // check if user has defined a role, otherwise make them select a role
+  if (!userRole) {
+    return <RoleSelector />;
   }
+
   /**/
 
   const Component =
-    (role === "Student" && StudentComponent) ||
-    (role === "Tutor" && TutorComponent) ||
-    (() => <div>Route not defined for {role} user role</div>);
+    (userRole === "Student" && StudentComponent) ||
+    (userRole === "Tutor" && TutorComponent) ||
+    (() => <div>Route not defined for {userRole} user role</div>);
 
   return (
     <>
@@ -52,4 +54,4 @@ const PrivateRoleBasedRoute = ({
   );
 };
 
-export default PrivateRoleBasedRoute;
+export default RoleBasedRoute;

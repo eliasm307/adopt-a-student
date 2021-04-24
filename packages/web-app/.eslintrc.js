@@ -65,6 +65,7 @@ module.exports = {
     "@typescript-eslint/no-unnecessary-type-assertion": 1,
     "@typescript-eslint/indent": 0,
     semi: 0,
+    "react/jsx-curly-brace-presence": 1,
     "@typescript-eslint/semi": 0,
     "arrow-body-style": 0,
     "no-use-before-define": 0,

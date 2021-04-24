@@ -1,8 +1,8 @@
 import { Link, navigate } from 'gatsby';
 import React from 'react';
-import { RoutePath } from 'src/constants';
-import useAuthData from 'src/hooks/useAuthData';
 
+import { RoutePath } from '../constants';
+import { useAuthData } from '../hooks';
 import Layout from '../layouts/DefaultLayout';
 
 export default function Home() {

@@ -22,9 +22,9 @@ const MyCarousel = ({
   ...restProps
 }: Props) => {
   return (
-    <Row noGutters>
+    <Row noGutters className='debug'>
       <Carousel
-        className={clsx("carousel-container", className)}
+        className={clsx("carousel-container col", className)}
         renderThumbs={renderThumbs}
         {...CarouselConfigProps}
         {...restProps}

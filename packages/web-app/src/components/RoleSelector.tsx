@@ -7,14 +7,13 @@ import { Col, Row } from 'react-bootstrap';
 import { RoutePath } from 'src/constants';
 import { UserContext } from 'src/providers/UserProvider';
 
-import SVG from '../../components/SVG';
+export interface RoleSelectProps {
+  /** Route to redirect to after role select */
+  redirectAfterSelect?: RoutePath;
+}
 
-// todo shows public data
-
-// ! shows private data
-
-const RoleSelect = (props: any) => {
-  const { setUserRole, user } = useContext(UserContext);
+const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
+  const { setUserRole } = useContext(UserContext);
 
   /*
   if (user?.role) {
@@ -43,10 +42,14 @@ const RoleSelect = (props: any) => {
           style={pathStyle}
           onClick={() => {
             setUserRole("Tutor");
-            navigate(RoutePath.Home);
+            console.log(
+              "RoleSelector",
+              `Tutor Role selected, redirecting to ${redirect}`
+            );
+            if (redirect) navigate(redirect);
           }}
         >
-          <StaticImage src='../../../static/assets/tutor-role.svg' alt='' />
+          <StaticImage src='../../static/assets/tutor-role.png' alt='' />
         </button>
       </Col>
       <Col
@@ -66,7 +69,7 @@ const RoleSelect = (props: any) => {
             padding: `30px`,
           }}
         >
-          <StaticImage src='../../../static/assets/logo-only.png' alt='' />
+          <StaticImage src='../../static/assets/logo-only.png' alt='' />
         </div>
       </Col>
       <Col
@@ -80,14 +83,18 @@ const RoleSelect = (props: any) => {
           style={{ ...pathStyle }}
           onClick={() => {
             setUserRole("Student");
-            navigate(RoutePath.Home);
+            console.log(
+              "RoleSelector",
+              `Student Role selected, redirecting to ${redirect}`
+            );
+            if (redirect) navigate(redirect);
           }}
         >
-          <StaticImage src='../../../static/assets/student-role.svg' alt='' />
+          <StaticImage src='../../static/assets/student-role.png' alt='' />
         </button>
       </Col>
     </Row>
   );
 };
 
-export default RoleSelect;
+export default RoleSelector;
