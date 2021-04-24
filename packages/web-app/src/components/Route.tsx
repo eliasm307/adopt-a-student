@@ -25,9 +25,9 @@ const Route = ({
   if (!isPublic && !user) {
     console.log(
       "PrivateRoute",
-      `Not signed in, redirecting to "${RoutePath.Login}"`
+      `Not signed in, redirecting to "${RoutePath.SignIn}"`
     );
-    navigate(RoutePath.Login);
+    navigate(RoutePath.SignIn);
     return null;
   }
   return (

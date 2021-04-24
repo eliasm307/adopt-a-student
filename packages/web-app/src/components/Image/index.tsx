@@ -8,6 +8,7 @@ interface Props {
   alt: string;
   className?: string;
   imgStyle?: React.CSSProperties;
+  style?: React.CSSProperties;
   src: string;
 }
 
@@ -50,6 +51,8 @@ const Image = ({ src, alt, ...restProps }: Props) => {
     console.error(__filename, "Could not get image data", { imageEdge });
     return null;
   }
+
+  console.log("Image", `Found image for path ${src}`);
 
   return <GatsbyImage alt={alt} image={imageData} {...restProps} />;
 };

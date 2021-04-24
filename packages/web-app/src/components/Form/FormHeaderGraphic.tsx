@@ -1,11 +1,16 @@
 import React from 'react';
 
 import Image from '../Image';
+import SVG from '../SVG';
 
-const FormHeaderGraphic = () => {
+interface Props {
+  hideTextImage?: boolean;
+}
+
+const FormHeaderGraphic = ({ hideTextImage }: Props) => {
   return (
     <div
-      className='rowx debug'
+      className='  '
       style={{
         width: "100%",
         padding: "auto auto",
@@ -14,12 +19,10 @@ const FormHeaderGraphic = () => {
         placeItems: "center",
       }}
     >
-      <Image src='logo-with-text.png' alt='Logo' />
-      <Image
-        src='connecting_students_and_teachers.png'
-        alt='Connecting students and teachers text'
-      />
-      T
+      <SVG path='/assets/logo-with-text.svg' />
+      {!hideTextImage && (
+        <SVG path='/assets/connecting_students_and_teachers.svg' />
+      )}
     </div>
   );
 };

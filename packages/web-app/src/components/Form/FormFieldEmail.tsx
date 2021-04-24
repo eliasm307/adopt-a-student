@@ -11,7 +11,9 @@ const FormFieldEmail = ({ onChange, controlId }: Props) => {
     <Form.Group controlId={controlId} className='w-100'>
       <Form.Label>Email</Form.Label>
       <Form.Control
+        required
         type='email'
+        name={controlId}
         placeholder='Enter email'
         onChange={onChange}
       />

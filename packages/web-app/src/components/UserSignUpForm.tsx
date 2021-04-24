@@ -1,13 +1,15 @@
 import { navigate } from 'gatsby';
+import { formatFromFilename } from 'gatsby-plugin-image/dist/src/image-utils';
 import React, { useContext, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { RoutePath } from 'src/constants';
 import { UserContext } from 'src/providers/UserProvider';
 import {
-  signInAnonymously, signInWithEmailPassword, signInWithGoogle, signOut,
+  signInAnonymously, signInWithEmailPassword, signInWithGoogle, signOut, signUpWithEmailPassword,
 } from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
 
+import { useAuthData } from '../hooks';
 import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from './Form';
 import Image from './Image';
 
@@ -31,14 +33,26 @@ const Button = tw.button``;
 */
 
 const UserSignUpForm = () => {
-  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(null);
-
-  const { setUserRole, user } = useContext(UserContext);
+  const [showValidation, setShowValidation] = useState(false);
+  const user = useAuthData();
 
   console.log(`typeof user ${typeof user}`);
+
+  const handleSubmit = React.useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const form = event.currentTarget;
+
+      if (form.checkValidity()) signUpWithEmailPassword(email, password);
+
+      if (!showValidation) setShowValidation(true);
+    },
+    [email, password, showValidation]
+  );
 
   if (user) {
     console.log("sign-in", "user signed in, navigating to app role select...");
@@ -50,22 +64,6 @@ const UserSignUpForm = () => {
     authUser: auth.currentUser,
   });
 
-  // todo enable
-  /*
-  const signInWithEmailAndPasswordHandler = (
-    event: React.ChangeEvent<HTMLButtonElement>,
-    _email: string,
-    _password: string
-  ): void => {
-    event.preventDefault();
-  };
-  */
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    signInWithEmailPassword(userName, password);
-  };
-
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ): void => {
@@ -75,8 +73,10 @@ const UserSignUpForm = () => {
       const { name, value } = currentTarget;
       switch (name) {
         case "userEmail":
+          console.log("email changed");
           return setEmail(value);
         case "userPassword":
+          console.log("password changed");
           return setPassword(value);
         default:
           return console.error(`Unknown html event target "${name}"`);
@@ -97,13 +97,13 @@ const UserSignUpForm = () => {
           overflow: "auto",
         }}
       >
-        <FormHeaderGraphic />
+        <FormHeaderGraphic hideTextImage />
 
+        <h2>Sign Up to Discover More</h2>
         <Form
           method='post'
           onSubmit={(event) => {
             handleSubmit(event);
-            navigate(RoutePath.App);
           }}
           className='mt-3'
           style={{
@@ -112,13 +112,10 @@ const UserSignUpForm = () => {
             width: "clamp(100px, 100%, 500px)",
           }}
         >
-          <FormFieldEmail
-            onChange={onChangeHandler}
-            controlId='formBasicEmail'
-          />
+          <FormFieldEmail onChange={onChangeHandler} controlId='userEmail' />
 
           <FormFieldPassword
-            controlId='formBasicPassword'
+            controlId='userPassword'
             onChange={onChangeHandler}
           />
 

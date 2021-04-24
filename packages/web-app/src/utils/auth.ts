@@ -35,6 +35,23 @@ export const signInWithEmailPassword = async (
   }
 };
 
+export const signUpWithEmailPassword = async (
+  email: string,
+  password: string
+) => {
+  // const provider = new EmailAuthProvider();
+  // auth.signInWithPopup(provider);
+  if (!email || !password)
+    return console.error("Invalid arguments for sign in with email"); // todo this should be in form validation
+  try {
+    await auth.createUserWithEmailAndPassword(email, password);
+    console.log("created new user using email and password");
+  } catch (error) {
+    console.error(__filename, "Could not create new user", { error });
+    alert("Could not sign in");
+  }
+};
+
 export const signInAnonymously = async () => {
   console.log("auth", "trying to sign in anonymously");
   try {

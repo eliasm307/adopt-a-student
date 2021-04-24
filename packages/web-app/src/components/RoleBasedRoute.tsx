@@ -32,7 +32,7 @@ const RoleBasedRoute = ({
   // check user is signed in, if route is not public
   if (!isPublic && !user) {
     console.warn(__filename, "not signed in, redirect to sign in");
-    navigate(RoutePath.Login);
+    navigate(RoutePath.SignIn);
     return null;
   }
   // check if user has defined a role, otherwise make them select a role

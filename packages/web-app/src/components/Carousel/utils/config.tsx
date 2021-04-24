@@ -34,7 +34,7 @@ const CarouselConfigProps: CarouselCustomProps = {
   showArrows: false,
   showStatus: true,
   showIndicators: true,
-  infiniteLoop: true,
+  infiniteLoop: false,
   showThumbs: false,
   useKeyboardArrows: true,
   autoPlay: false,

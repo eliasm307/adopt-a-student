@@ -12,7 +12,7 @@ const StudentOverview = () => {
   const user = useAuthData();
 
   if (!user) {
-    navigate(RoutePath.Login);
+    navigate(RoutePath.SignIn);
     return null;
   }
 

@@ -53,7 +53,6 @@ const slidesContentJsx = slidesData.map(({ src, text, title }) => (
       <Image
         src={src}
         alt=''
-        className='debugx'
         imgStyle={{
           objectFit: "contain",
           maxHeight: imageHeight,
@@ -73,13 +72,9 @@ slidesContentJsx.push(<UserSignUpForm key='form' />);
 
 const StudentSignUp = () => {
   return (
-    <>
-      <h1>Student Sign up</h1>
-
-      <div>
-        <Carousel>{slidesContentJsx}</Carousel>
-      </div>
-    </>
+    <div>
+      <Carousel>{slidesContentJsx}</Carousel>
+    </div>
   );
 };
 

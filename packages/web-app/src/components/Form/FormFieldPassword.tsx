@@ -11,7 +11,8 @@ const FormFieldPassword = ({ onChange, controlId }: Props) => {
     <Form.Group controlId={controlId} className='w-100'>
       <Form.Label>Password</Form.Label>
       <Form.Control
-        name='password'
+        required
+        name={controlId}
         type='password'
         placeholder='Password'
         onChange={onChange}

@@ -59,12 +59,12 @@ const App = () => {
             <Route isPublic default component={NotFound} title='Not found' />
             <Route
               isPublic
-              path={RoutePath.Login}
+              path={RoutePath.SignIn}
               component={SignIn}
               title='Sign-In'
               navbarLinks={SignInNavBarLinks}
             />
-            <Redirect from='/app' to={RoutePath.Login} noThrow />
+            <Redirect from='/app' to={RoutePath.Home} noThrow />
             <RoleBasedRoute
               isPublic={false}
               path={RoutePath.Home}

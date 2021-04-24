@@ -8,6 +8,7 @@ import {
 } from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
 
+import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from '../../components/Form';
 import SVG from '../../components/SVG';
 import { useAuthData } from '../../hooks';
 
@@ -31,10 +32,9 @@ const Button = tw.button``;
 */
 
 const SignIn = () => {
-  const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [error, setError] = useState(null);
+  const [showValidation, setShowValidation] = useState(false);
 
   const { setUserRole, user } = useContext(UserContext);
 
@@ -63,7 +63,13 @@ const SignIn = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    signInWithEmailPassword(userName, password);
+    event.stopPropagation();
+
+    const form = event.currentTarget;
+
+    if (form.checkValidity()) signInWithEmailPassword(email, password);
+
+    if (!showValidation) setShowValidation(true);
   };
 
   const onChangeHandler = (
@@ -97,24 +103,11 @@ const SignIn = () => {
           overflow: "auto",
         }}
       >
-        <div
-          className='  '
-          style={{
-            width: "100%",
-            padding: "auto auto",
-            margin: "auto",
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
-          <SVG path='/assets/logo-with-text.svg' />
-          <SVG path='/assets/connecting_students_and_teachers.svg' />
-        </div>
+        <FormHeaderGraphic />
         <Form
           method='post'
           onSubmit={(event) => {
             handleSubmit(event);
-            navigate(RoutePath.App);
           }}
           className='mt-3'
           style={{
@@ -123,27 +116,12 @@ const SignIn = () => {
             width: "clamp(100px, 100%, 500px)",
           }}
         >
-          <Form.Group controlId='formBasicEmail' className='w-100'>
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              type='email'
-              placeholder='Enter email'
-              onChange={onChangeHandler}
-            />
-            <Form.Text className='text-muted'>
-              We&apos;ll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+          <FormFieldEmail onChange={onChangeHandler} controlId='userEmail' />
 
-          <Form.Group controlId='formBasicPassword' className='w-100'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              name='password'
-              type='password'
-              placeholder='Password'
-              onChange={onChangeHandler}
-            />
-          </Form.Group>
+          <FormFieldPassword
+            controlId='userPassword'
+            onChange={onChangeHandler}
+          />
 
           <Row className='w-100'>
             <Button variant='primary' type='submit' className='col'>
