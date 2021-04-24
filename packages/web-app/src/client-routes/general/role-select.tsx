@@ -27,11 +27,11 @@ const RoleSelect = (props: any) => {
 
   const pathStyle: React.CSSProperties = {
     padding: "50px",
-    border: "1px solid red",
+    border: "none",
   };
 
   return (
-    <Row noGutters className='debug'>
+    <Row noGutters>
       <Col
         style={{
           display: "grid",
@@ -46,18 +46,15 @@ const RoleSelect = (props: any) => {
             navigate(RoutePath.Home);
           }}
         >
-          <SVG path='../../../static/assets/tutor-role.svg' />
-          Tutor
+          <StaticImage src='../../../static/assets/tutor-role.svg' alt='' />
         </button>
       </Col>
       <Col
         md={12}
         lg={1}
-        className='debug'
         style={{
           display: "grid",
           placeItems: "center",
-          minWidth: "150px",
         }}
       >
         <div
@@ -66,10 +63,10 @@ const RoleSelect = (props: any) => {
             placeItems: "center",
             background: `rgba(0,0,0,0.1)`,
             borderRadius: `100%`,
-            padding: `50px`,
+            padding: `30px`,
           }}
         >
-          <StaticImage src='/assets/logo-only.png' alt='' />
+          <StaticImage src='../../../static/assets/logo-only.png' alt='' />
         </div>
       </Col>
       <Col
@@ -80,14 +77,13 @@ const RoleSelect = (props: any) => {
       >
         <button
           type='button'
-          style={pathStyle}
+          style={{ ...pathStyle }}
           onClick={() => {
             setUserRole("Student");
             navigate(RoutePath.Home);
           }}
         >
-          <SVG path='/assets/student-role.svg' />
-          Student
+          <StaticImage src='../../../static/assets/student-role.svg' alt='' />
         </button>
       </Col>
     </Row>
