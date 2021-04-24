@@ -27,6 +27,16 @@ export function useGetPrivateStudentDataQuery({
   const userAuth = useAuthData();
   const userRole = useUserRole();
 
+  if (userRole === "Student") {
+    console.log(
+      "Running useGetPrivateStudentDataQuery because user is a student..."
+    );
+  } else {
+    console.log(
+      "NOT Running useGetPrivateStudentDataQuery because user is not a student"
+    );
+  }
+
   const { isLoading, error, data: responseData } = useQuery<
     GetStudentResponseBody,
     Error

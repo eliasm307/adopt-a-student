@@ -1,6 +1,8 @@
 import { navigate } from 'gatsby';
 import { auth, GoogleAuthProvider } from 'src/utils/firebase-client';
 
+import { UserRole } from '../declarations/types';
+
 export const signOut = async () => {
   await auth.signOut();
   navigate(`/`);
@@ -37,7 +39,8 @@ export const signInWithEmailPassword = async (
 
 export const signUpWithEmailPassword = async (
   email: string,
-  password: string
+  password: string,
+  role: UserRole
 ) => {
   // const provider = new EmailAuthProvider();
   // auth.signInWithPopup(provider);
@@ -52,11 +55,11 @@ export const signUpWithEmailPassword = async (
   }
 };
 
-export const signInAnonymously = async () => {
+export const signInAnonymously = async (role: UserRole) => {
   console.log("auth", "trying to sign in anonymously");
   try {
     await auth.signInAnonymously();
-    return console.log("Signed in anonymously");
+    console.log("Signed in anonymously, creating anonymous user");
   } catch (error) {
     console.error("auth", { error });
     alert("Could not sign in");

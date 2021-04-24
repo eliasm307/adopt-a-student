@@ -17,13 +17,15 @@ const UserSignUpForm = () => {
   console.log(`typeof user ${typeof user}`);
 
   const handleSubmit = React.useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       event.stopPropagation();
 
       const form = event.currentTarget;
 
-      if (form.checkValidity()) signUpWithEmailPassword(email, password);
+      if (form.checkValidity()) {
+        await signUpWithEmailPassword(email, password);
+      }
 
       if (!showValidation) setShowValidation(true);
     },
