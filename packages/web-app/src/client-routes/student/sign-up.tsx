@@ -41,9 +41,8 @@ interface ImageSlideData {
 const imageHeight = "50vh";
 
 const slidesContentJsx = slidesData.map(({ src, text, title }) => (
-  <>
+  <div key={src}>
     <div
-      key={src}
       style={{
         height: imageHeight,
         width: "auto",
@@ -67,10 +66,10 @@ const slidesContentJsx = slidesData.map(({ src, text, title }) => (
 
     <h2>{title}</h2>
     <p style={{ paddingBottom: 50 }}>{text}</p>
-  </>
+  </div>
 ));
 
-slidesContentJsx.push(<UserSignUpForm />);
+slidesContentJsx.push(<UserSignUpForm key='form' />);
 
 const StudentSignUp = () => {
   return (

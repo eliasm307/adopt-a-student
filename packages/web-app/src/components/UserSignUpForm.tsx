@@ -8,7 +8,7 @@ import {
 } from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
 
-import FormFieldEmail from './FormFieldEmail';
+import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from './Form';
 import Image from './Image';
 
 // import testUser from '../../private_config/testUserAuth';
@@ -97,22 +97,8 @@ const UserSignUpForm = () => {
           overflow: "auto",
         }}
       >
-        <div
-          className='  '
-          style={{
-            width: "100%",
-            padding: "auto auto",
-            margin: "auto",
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
-          <Image src='logo-with-text.png' alt='Logo' />
-          <Image
-            src='connecting_students_and_teachers.png'
-            alt='Connecting students and teachers text'
-          />
-        </div>
+        <FormHeaderGraphic />
+
         <Form
           method='post'
           onSubmit={(event) => {
@@ -131,62 +117,23 @@ const UserSignUpForm = () => {
             controlId='formBasicEmail'
           />
 
-          <Form.Group controlId='formBasicEmail' className='w-100'>
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              type='email'
-              placeholder='Enter email'
-              onChange={onChangeHandler}
-            />
-            <Form.Text className='text-muted'>
-              We&apos;ll never share your email with anyone else.
-            </Form.Text>
-          </Form.Group>
+          <FormFieldPassword
+            controlId='formBasicPassword'
+            onChange={onChangeHandler}
+          />
 
-          <Form.Group controlId='formBasicPassword' className='w-100'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              name='password'
-              type='password'
-              placeholder='Password'
-              onChange={onChangeHandler}
-            />
-          </Form.Group>
+          <Button variant='primary' type='submit' className='col m-1'>
+            Sign up
+          </Button>
 
-          <Row className='w-100'>
-            <Button variant='primary' type='submit' className='col'>
-              Sign in
-            </Button>
-
-            <Button
-              variant='primary'
-              type='button'
-              className='col'
-              onClick={() => navigate(RoutePath.SignUp)}
-            >
-              Sign Up
-            </Button>
-          </Row>
-          <Row>
-            <Button
-              variant='primary'
-              type='button'
-              className='col'
-              onClick={() => signInAnonymously()}
-            >
-              Sign in Anonymously
-            </Button>
-          </Row>
-          <Row>
-            <Button
-              variant='primary'
-              type='button'
-              className='col'
-              onClick={() => signInWithGoogle()}
-            >
-              Sign in with Google
-            </Button>
-          </Row>
+          <Button
+            variant='primary'
+            type='button'
+            className='col'
+            onClick={() => signInWithGoogle()}
+          >
+            Sign up with Google
+          </Button>
         </Form>
       </Col>
     </Row>

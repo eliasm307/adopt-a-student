@@ -2,7 +2,7 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react';
 
-import { ImageEdge, ImageQueryData } from './declarations/interfaces';
+import { ImageQueryData } from './declarations/interfaces';
 
 interface Props {
   alt: string;
