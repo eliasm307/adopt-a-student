@@ -48,7 +48,9 @@ export const signUpWithEmailPassword = async (
     return console.error("Invalid arguments for sign in with email"); // todo this should be in form validation
   try {
     await auth.createUserWithEmailAndPassword(email, password);
-    console.log("created new user using email and password");
+    console.log(
+      `created new user auth using email and password, now creating ${role} profile`
+    );
   } catch (error) {
     console.error(__filename, "Could not create new user", { error });
     alert("Could not sign in");

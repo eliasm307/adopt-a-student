@@ -9,7 +9,7 @@ import { BaseRouteProps } from '../declarations/interfaces';
 import { useUserPrivateStudentData } from '../providers/PrivateStudentDataProvider';
 import NavBar from './NavBar';
 import RoleSelector from './RoleSelector';
-import StudentPreferencesForm from './StudentPreferencesForm';
+import StudentPreferencesForm from './SetupStudentProfileForm';
 
 interface Props extends RouteComponentProps, BaseRouteProps {
   StudentComponent: React.ComponentType<any>;

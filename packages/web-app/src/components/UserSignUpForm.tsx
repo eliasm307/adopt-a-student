@@ -1,14 +1,19 @@
 import { navigate } from 'gatsby';
 import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { RoutePath } from 'src/constants';
-import { signInWithGoogle, signUpWithEmailPassword } from 'src/utils/auth';
-import { auth } from 'src/utils/firebase-client';
+import { auth, GoogleAuthProvider } from 'src/utils/firebase-client';
 
+import { RoutePath } from '../constants';
+import { UserRole } from '../declarations/types';
 import { useAuthData } from '../hooks';
+import { signInWithGoogle, signUpWithEmailPassword } from '../utils/auth';
 import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from './Form';
 
-const UserSignUpForm = () => {
+interface Props {
+  role: UserRole;
+}
+
+const UserSignUpForm = ({ role }: Props) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [showValidation, setShowValidation] = useState(false);
@@ -24,12 +29,12 @@ const UserSignUpForm = () => {
       const form = event.currentTarget;
 
       if (form.checkValidity()) {
-        await signUpWithEmailPassword(email, password);
+        await signUpWithEmailPassword(email, password, role);
       }
 
       if (!showValidation) setShowValidation(true);
     },
-    [email, password, showValidation]
+    [email, password, showValidation, role]
   );
 
   if (user) {
