@@ -1,5 +1,8 @@
 import { Link } from 'gatsby';
 import React from 'react';
+import { Button } from 'react-bootstrap';
+
+import { navigate } from '@reach/router';
 
 import { NavBarLinkData } from '../../declarations/interfaces';
 import { useAuthData } from '../../hooks';
@@ -21,14 +24,19 @@ export default function NavBar({ links, title }: Props) {
   */
   const linksJsx =
     links &&
-    links.map(({ text, action, url }) => {
+    links.map(({ text, action, route: url }) => {
       if (action)
         return (
-          <button type='button' onClick={action} key={`${text}-${url || ""}`}>
+          <Button type='Button' onClick={action} key={`${text}-${url || ""}`}>
             {text}
-          </button>
+          </Button>
         );
-      if (url) return <Link to={url}>{text}</Link>;
+      if (url)
+        return (
+          <Button key={`${url}-${text || ""}`} onClick={() => navigate(url)}>
+            {text}
+          </Button>
+        );
       return null;
     });
   return (

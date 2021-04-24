@@ -4,12 +4,12 @@ import { signOut } from '../../../utils/auth';
 
 export const HomeNavbarLink: NavBarLinkData = {
   text: "Home",
-  url: RoutePath.Home,
+  route: RoutePath.Home,
 };
 
 export const ProfileNavbarLink: NavBarLinkData = {
   text: "My Profile",
-  url: RoutePath.Profile,
+  route: RoutePath.Profile,
 };
 
 export const SignOutNavbarLink: NavBarLinkData = {
