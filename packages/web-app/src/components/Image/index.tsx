@@ -7,6 +7,7 @@ import { ImageEdge, ImageQueryData } from './declarations/interfaces';
 interface Props {
   alt: string;
   className?: string;
+  imgStyle?: React.CSSProperties;
   src: string;
 }
 

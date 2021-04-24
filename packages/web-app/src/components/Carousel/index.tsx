@@ -25,7 +25,6 @@ const MyCarousel = ({
     <Row noGutters className='debug'>
       <Carousel
         className={clsx("carousel-container col", className)}
-        renderThumbs={renderThumbs}
         {...CarouselConfigProps}
         {...restProps}
       >

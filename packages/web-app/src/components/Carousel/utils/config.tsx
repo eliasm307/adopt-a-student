@@ -31,13 +31,13 @@ const RenderCarouselArrowPrev: RenderArrowPrev = (
 );
 
 const CarouselConfigProps: CarouselCustomProps = {
-  showArrows: true,
+  showArrows: false,
   showStatus: true,
-  showIndicators: false,
+  showIndicators: true,
   infiniteLoop: true,
   showThumbs: true,
   useKeyboardArrows: true,
-  autoPlay: true,
+  autoPlay: false,
   stopOnHover: true,
   swipeable: true,
   dynamicHeight: false,

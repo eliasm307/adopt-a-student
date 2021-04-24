@@ -10,18 +10,6 @@ import { Row } from 'react-bootstrap';
 import Carousel from '../../components/Carousel';
 import Image from '../../components/Image';
 
-const slidesJSX: React.ReactElement[] = [
-  <div>item1</div>,
-  <div>item2</div>,
-  <div>item3</div>,
-  <div style={{ width: "20%", height: "100%", objectFit: "cover" }}>
-    <StaticImage
-      src='../../../static/assets/student-signup-slide2.png'
-      alt=''
-    />
-  </div>,
-];
-
 const slidesData: ImageSlideData[] = [
   {
     src: "student-signup-slide1.png",
@@ -31,6 +19,10 @@ const slidesData: ImageSlideData[] = [
     src: "student-signup-slide2.png",
     text: "Slide 2",
   },
+  {
+    src: "student-signup-slide3.png",
+    text: "Slide 3",
+  },
 ];
 
 interface ImageSlideData {
@@ -39,22 +31,38 @@ interface ImageSlideData {
   title?: string;
 }
 
+const imageHeight = "50vh";
+
 const slidesContentJsx = slidesData.map(({ src, text, title }) => (
-  <div style={{ width: "20%", height: "100%", objectFit: "cover" }}>
-    <Image src={src} alt='' />
+  <div
+    key={src}
+    style={{
+      height: imageHeight,
+      width: "auto",
+      margin: "auto",
+      position: "relative",
+    }}
+  >
+    <Image
+      src={src}
+      alt=''
+      className='debugx'
+      imgStyle={{
+        objectFit: "contain",
+        maxHeight: imageHeight,
+        objectPosition: "center center",
+        left: "50%",
+        transform: "translateX(-50%)",
+      }}
+    />
   </div>
 ));
-
-const img = `../../../../../static/assets/student-signup-slide2.png`;
 
 const StudentSignUp = () => {
   return (
     <>
       <h1>Student Sign up</h1>
 
-      <div>
-        <Carousel>{slidesJSX}</Carousel>
-      </div>
       <div>
         <Carousel>{slidesContentJsx}</Carousel>
       </div>
