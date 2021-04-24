@@ -10,3 +10,10 @@ export interface BaseRouteProps {
   navbarLinks?: NavBarLinkData[];
   title: string;
 }
+
+export interface MultiSelectOption {
+  disabled?: boolean;
+  key?: string;
+  label: string;
+  value: any;
+}

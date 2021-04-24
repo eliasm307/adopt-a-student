@@ -6,7 +6,7 @@ interface Props {
   fieldDescription?: string;
   label: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  required: boolean;
+  required?: boolean;
 }
 
 const FormFieldText = ({

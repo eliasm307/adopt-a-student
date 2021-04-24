@@ -6,7 +6,9 @@ import Container from 'react-bootstrap/Container';
 import NavBar from '../components/NavBar';
 
 const Layout = ({ children }: React.PropsWithChildren<any>) => (
-  <Container fluid>{children}</Container>
+  <Container fluid style={{ height: "100vh" }}>
+    {children}
+  </Container>
 );
 
 export default Layout;

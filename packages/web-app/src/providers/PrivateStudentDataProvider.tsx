@@ -8,6 +8,7 @@ import { queryClient } from '../utils/reactQuery';
 
 interface PrivateStudentDataContextShape {
   refreshPrivateStudentData: (data: PrivateStudentData) => void;
+  updateUserPrivateStudentData: (data: PrivateStudentData | null) => void;
   userPrivateStudentData: PrivateStudentData | null;
 }
 
@@ -18,7 +19,10 @@ interface ProviderProps {
 // initial context
 export const UserPrivateDataContext = createContext({
   refreshPrivateStudentData: () => {
-    throw Error("setUserRole is undefined");
+    throw Error("function is undefined");
+  },
+  updateUserPrivateStudentData: () => {
+    throw Error("function is undefined");
   },
   userPrivateStudentData: null,
 } as PrivateStudentDataContextShape);
@@ -56,22 +60,23 @@ export default function UserPrivateStudentDataProvider({
     setUserPrivateStudentData(null);
   }, [queryName]);
 
-  /*
-  const updatePrivateStudentData = (newPrivateData: PrivateStudentData) => {
-    console.log(__filename, `Updating user Private data...`, {
+  const updateUserPrivateStudentData = (
+    newPrivateData: PrivateStudentData | null
+  ) => {
+    console.log(__filename, `Updating user Private Student data...`, {
       currentPrivateData: userPrivateStudentData,
       newPrivateData,
     });
 
     setUserPrivateStudentData(newPrivateData);
   };
-  */
 
   return (
     <UserPrivateDataContext.Provider
       value={{
         userPrivateStudentData: userPrivateStudentDataState,
         refreshPrivateStudentData,
+        updateUserPrivateStudentData,
       }}
     >
       {children}

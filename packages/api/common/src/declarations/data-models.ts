@@ -19,14 +19,14 @@ export interface PublicUserData extends Entity {
   readonly id: UserId;
 
   /** Link to profile image, if defined */
-  imageUrl?: UrlString;
+  imageUrl?: UrlString | null;
   /** Optional text for users to introduce themselves,
    * describe their experience, what subjects they are interested in etc */
   introduction?: string;
-  /** The locales a user prefers for content */
-  prefferedLocales: LocaleCode[];
   /** The countries the user prefers for content */
   prefferedCountries: Country[];
+  /** The locales a user prefers for content */
+  prefferedLocales: LocaleCode[];
   /** Username which will be displayed for a user */
   userName: string;
 }

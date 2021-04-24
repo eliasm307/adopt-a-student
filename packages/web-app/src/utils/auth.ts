@@ -1,8 +1,6 @@
 import { navigate } from 'gatsby';
 import { auth, GoogleAuthProvider } from 'src/utils/firebase-client';
 
-import { UserRole } from '../declarations/types';
-
 export const signOut = async () => {
   await auth.signOut();
   navigate(`/`);
@@ -39,8 +37,7 @@ export const signInWithEmailPassword = async (
 
 export const signUpWithEmailPassword = async (
   email: string,
-  password: string,
-  role: UserRole
+  password: string
 ) => {
   // const provider = new EmailAuthProvider();
   // auth.signInWithPopup(provider);
@@ -48,16 +45,14 @@ export const signUpWithEmailPassword = async (
     return console.error("Invalid arguments for sign in with email"); // todo this should be in form validation
   try {
     await auth.createUserWithEmailAndPassword(email, password);
-    console.log(
-      `created new user auth using email and password, now creating ${role} profile`
-    );
+    console.log(`created new user auth using email and password`);
   } catch (error) {
     console.error(__filename, "Could not create new user", { error });
     alert("Could not sign in");
   }
 };
 
-export const signInAnonymously = async (role: UserRole) => {
+export const signInAnonymously = async () => {
   console.log("auth", "trying to sign in anonymously");
   try {
     await auth.signInAnonymously();

@@ -37,7 +37,7 @@ const App = () => {
       <UserAuthProvider>
         <UserStudentDataProvider>
           <Layout>
-            <Router>
+            <Router id='router'>
               <Route isPublic default component={NotFound} title='Not found' />
               <Redirect from={RoutePath.App} to={RoutePath.Home} noThrow />
               <Route

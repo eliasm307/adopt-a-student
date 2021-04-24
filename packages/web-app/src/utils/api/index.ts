@@ -1,3 +1,7 @@
+/**
+ * Aliases for api method calls
+ */
+
 import {
   CreateStudentRequestBody, CreateStudentResponseBody, CreateTutorRequestBody,
   CreateTutorResponseBody, PrivateStudentData, PrivateTutorData, PrivateUserData,
@@ -7,15 +11,11 @@ import { functionsClient } from '../firebase-client';
 import callFirebaseFunction from '../firebase-client/callFirebaseFunction';
 
 interface CreateNewUserProps
-  extends Pick<PrivateUserData, "id" | "email" | "userName" | "imageUrl"> {}
+  extends Pick<PrivateUserData, "email" | "userName" | "imageUrl"> {}
 
-interface CreateNewStudentUserProps extends CreateNewUserProps {
-  afterUserCreate?: (user: PrivateStudentData) => void;
-}
+interface CreateNewStudentUserProps extends CreateNewUserProps {}
 
-interface CreateNewTutorUserProps extends CreateNewUserProps {
-  afterUserCreate?: (user: PrivateTutorData) => void;
-}
+interface CreateNewTutorUserProps extends CreateNewUserProps {}
 
 const basicInitialUserData: Omit<
   PrivateUserData,
@@ -27,9 +27,7 @@ const basicInitialUserData: Omit<
 };
 
 export async function createNewStudentUser(props: CreateNewStudentUserProps) {
-  const { afterUserCreate } = props;
-
-  const result = await callFirebaseFunction<
+  return callFirebaseFunction<
     CreateStudentRequestBody,
     CreateStudentResponseBody
   >({
@@ -37,18 +35,10 @@ export async function createNewStudentUser(props: CreateNewStudentUserProps) {
     data: { student: { ...basicInitialUserData, ...props, relatedTutors: [] } },
     functions: functionsClient,
   });
-
-  if (result && result.student && afterUserCreate)
-    afterUserCreate(result.student);
 }
 
 export async function createNewTutorUser(props: CreateNewTutorUserProps) {
-  const { afterUserCreate } = props;
-
-  const result = await callFirebaseFunction<
-    CreateTutorRequestBody,
-    CreateTutorResponseBody
-  >({
+  return callFirebaseFunction<CreateTutorRequestBody, CreateTutorResponseBody>({
     name: "createTutor",
     data: {
       tutor: {
@@ -60,6 +50,4 @@ export async function createNewTutorUser(props: CreateNewTutorUserProps) {
     },
     functions: functionsClient,
   });
-
-  if (result && result.tutor && afterUserCreate) afterUserCreate(result.tutor);
 }
