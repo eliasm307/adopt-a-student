@@ -19,4 +19,5 @@ export enum RoutePath {
 export enum QueryName {
   TutorsByLocales = "tutors-by-locales",
   UserStudentData = "user-student-data",
+  UserPrivateStudentData = "user-private-student-data",
 }

@@ -1,6 +1,7 @@
-import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
+import React, { createContext, useContext, useState } from 'react';
+import { QueryClientProvider } from 'react-query';
 
+import { PrivateStudentData, PrivateUserData } from '@adopt-a-student/common';
 import { Redirect, Router } from '@reach/router';
 
 import SignIn from '../client-routes/general/sign-in';
@@ -24,22 +25,21 @@ import { RoutePath } from '../constants';
 import Layout from '../layouts/DefaultLayout';
 // eslint-disable-next-line import/no-useless-path-segments
 import NotFound from '../pages/404';
-import UserProvider from '../providers/UserAuthProvider';
-import UserStudentDataProvider from '../providers/UserStudentDataProvider';
-
-const queryClient = new QueryClient();
+import UserStudentDataProvider from '../providers/PrivateStudentDataProvider';
+import UserAuthProvider from '../providers/UserAuthProvider';
+import { queryClient } from '../utils/reactQuery';
 
 // ? split routing and provider specification?
 /** Responsilbe for defining the routes for the app and providers */
 const App = () => {
   return (
-    <UserProvider>
-      <UserStudentDataProvider>
-        <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <UserAuthProvider>
+        <UserStudentDataProvider>
           <Layout>
             <Router>
               <Route isPublic default component={NotFound} title='Not found' />
-              <Redirect from='/app' to={RoutePath.Home} noThrow />
+              <Redirect from={RoutePath.App} to={RoutePath.Home} noThrow />
               <Route
                 isPublic
                 path={RoutePath.SignIn}
@@ -48,6 +48,7 @@ const App = () => {
                 navbarLinks={SignInNavBarLinks}
               />
               <RoleBasedRoute
+                requiresUserPreferencesSet
                 isPublic={false}
                 path={RoutePath.Home}
                 StudentComponent={StudentHome}
@@ -56,6 +57,7 @@ const App = () => {
                 navbarLinks={HomeNavBarLinks}
               />
               <RoleBasedRoute
+                requiresUserPreferencesSet={false}
                 isPublic={false}
                 path={RoutePath.Profile}
                 StudentComponent={StudentProfile}
@@ -78,6 +80,7 @@ const App = () => {
                 navbarLinks={TutorOverviewNavBarLinks}
               />
               <RoleBasedRoute
+                requiresUserPreferencesSet={false}
                 isPublic
                 path={RoutePath.SignUp}
                 StudentComponent={StudentSignUp}
@@ -87,9 +90,9 @@ const App = () => {
               />
             </Router>
           </Layout>
-        </QueryClientProvider>
-      </UserStudentDataProvider>
-    </UserProvider>
+        </UserStudentDataProvider>
+      </UserAuthProvider>
+    </QueryClientProvider>
   );
 };
 

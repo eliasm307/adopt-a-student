@@ -6,14 +6,15 @@ import { useAuthData, useUserRole } from 'src/hooks';
 import { RouteComponentProps } from '@reach/router';
 
 import { BaseRouteProps } from '../declarations/interfaces';
+import { useUserPrivateStudentData } from '../providers/PrivateStudentDataProvider';
 import NavBar from './NavBar';
 import RoleSelector from './RoleSelector';
+import StudentPreferencesForm from './StudentPreferencesForm';
 
 interface Props extends RouteComponentProps, BaseRouteProps {
   StudentComponent: React.ComponentType<any>;
   TutorComponent: React.ComponentType<any>;
-
-  // roleSelectRoute: RoutePath;
+  requiresUserPreferencesSet: boolean;
 }
 
 const RoleBasedRoute = ({
@@ -22,12 +23,13 @@ const RoleBasedRoute = ({
   location,
   navbarLinks: links,
   title,
-  // roleSelectRoute = RoutePath.AppRoleSelect,
+  requiresUserPreferencesSet,
   isPublic,
   ...rest
 }: Props) => {
   const user = useAuthData();
   const userRole = useUserRole();
+  const userPrivateStudentData = useUserPrivateStudentData();
 
   // check user is signed in, if route is not public
   if (!isPublic && !user) {
@@ -37,10 +39,31 @@ const RoleBasedRoute = ({
   }
   // check if user has defined a role, otherwise make them select a role
   if (!userRole) {
+    // ? should this be a modal window instead
     return <RoleSelector />;
   }
 
-  /**/
+  const studentPreferencesDefined =
+    userPrivateStudentData &&
+    userPrivateStudentData?.prefferedCountries?.length &&
+    userPrivateStudentData.prefferedLocales?.length;
+
+  if (
+    userRole === "Student" &&
+    requiresUserPreferencesSet &&
+    !studentPreferencesDefined
+  ) {
+    // ? should this be a modal window instead
+    return <StudentPreferencesForm />;
+  }
+
+  // todo implement for tutor
+  /*
+  if (userRole === "Tutor" && requiresUserPreferencesSet) {
+    // ? should this be a modal window instead
+    return <StudentPreferencesForm />;
+  }
+  */
 
   const Component =
     (userRole === "Student" && StudentComponent) ||

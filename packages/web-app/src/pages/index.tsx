@@ -1,13 +1,12 @@
-import { Link, navigate } from 'gatsby';
+import { navigate } from 'gatsby';
 import React from 'react';
 
 import { RoutePath } from '../constants';
-import { useAuthData } from '../hooks';
-import Layout from '../layouts/DefaultLayout';
 
 export default function Home() {
-  const user = useAuthData();
-
+  navigate(RoutePath.SignIn);
+  return null;
+  /*
   if (user && typeof window !== "undefined") navigate("/app");
   return (
     <Layout>
@@ -26,4 +25,5 @@ export default function Home() {
       </p>
     </Layout>
   );
+  */
 }

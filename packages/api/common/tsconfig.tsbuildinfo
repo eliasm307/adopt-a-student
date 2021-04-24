@@ -332,8 +332,8 @@
         "affectsGlobalScope": true
       },
       "./src/utils/locales.ts": {
-        "version": "2c38eb9ef5c0446707383da6a6c26038af665d926c32104e600cd4f06e504a79",
-        "signature": "5b3dce351a04885c3e503be0df6c7fa33ccf7f191a3c9c93150d4f1ced545c29",
+        "version": "ed7526541f2c4fd102846580fcf5792d42c3235c4f0b5e281bcfdbcb83ffdbab",
+        "signature": "7ff65c208085131fe07916a7f3780d8aceb6658710de3f6bc0d8fad7ffbc1aa8",
         "affectsGlobalScope": false
       },
       "./src/utils/promiseallsettledandlog.ts": {

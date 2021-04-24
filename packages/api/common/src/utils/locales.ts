@@ -20,16 +20,15 @@ const localeEnglishNames = localeEnglishNamesJson as Record<
   Record<string, string>
 >;
 // todo fix this, some names are not coming up e.g. french native name francais
-/*
 const localeNativeNames = localeNativeNamesJson as Record<
-  LocaleCode,
+  LocaleCode | string,
   Record<string, string> | undefined
 >;
-*/
 
 export {
   countryLocales,
   countryNames,
   localeCountriesAsMapObjects as localeCountries,
   localeEnglishNames,
+  localeNativeNames,
 };
