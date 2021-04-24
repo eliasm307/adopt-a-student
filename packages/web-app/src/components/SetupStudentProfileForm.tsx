@@ -5,6 +5,8 @@ import { useAuthData } from 'src/hooks';
 
 import { countryNames, localeEnglishNames } from '@adopt-a-student/common';
 
+import FormHeaderGraphic from './Form/FormHeaderGraphic';
+
 interface Props {}
 
 export interface Option {

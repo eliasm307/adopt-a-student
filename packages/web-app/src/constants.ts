@@ -21,3 +21,10 @@ export enum QueryName {
   UserStudentData = "user-student-data",
   UserPrivateStudentData = "user-private-student-data",
 }
+
+/** General form field names, to be used if there is only one form on a page */
+export enum FormFieldId {
+  Password = "userPassword",
+  Email = "userEmail",
+  UserName = "userUserName",
+}

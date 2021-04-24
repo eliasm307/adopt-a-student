@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { auth, GoogleAuthProvider } from 'src/utils/firebase-client';
 
-import { RoutePath } from '../constants';
+import { FormFieldId, RoutePath } from '../constants';
 import { UserRole } from '../declarations/types';
 import { useAuthData } from '../hooks';
 import { signInWithGoogle, signUpWithEmailPassword } from '../utils/auth';
@@ -55,9 +55,9 @@ const UserSignUpForm = ({ role }: Props) => {
     if (currentTarget instanceof EventTarget) {
       const { name, value } = currentTarget;
       switch (name) {
-        case "userEmail":
+        case FormFieldId.Email.toString():
           return setEmail(value);
-        case "userPassword":
+        case FormFieldId.Password.toString():
           return setPassword(value);
         default:
           return console.error(`Unknown html event target "${name}"`);
@@ -93,10 +93,13 @@ const UserSignUpForm = ({ role }: Props) => {
             width: "clamp(100px, 100%, 500px)",
           }}
         >
-          <FormFieldEmail onChange={onChangeHandler} controlId='userEmail' />
+          <FormFieldEmail
+            onChange={onChangeHandler}
+            controlId={FormFieldId.Email}
+          />
 
           <FormFieldPassword
-            controlId='userPassword'
+            controlId={FormFieldId.Password}
             onChange={onChangeHandler}
           />
 
