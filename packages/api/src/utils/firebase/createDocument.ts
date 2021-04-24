@@ -17,6 +17,12 @@ export default async function createDocument<D>({
   firestoreAdmin,
   data,
 }: CreateDocumentProps<D>): Promise<D> {
+  console.log(__filename, "Creating document", {
+    data,
+    documentId,
+    collectionPath,
+  });
+
   // verify received data
   if (!dataPredicate(data))
     throw new functionsHttps.HttpsError(

@@ -21,7 +21,7 @@ const FormFieldText = ({
       <Form.Label>{label}</Form.Label>
       <Form.Control
         required={required}
-        type='email'
+        type='text'
         name={controlId}
         placeholder='Enter email'
         onChange={onChange}

@@ -38,10 +38,8 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
   const hasRelatedSubjects = Array.isArray(linkedLocaleSubjects);
   const hasTutors = Array.isArray(tutors);
   const hasPreferredLocales = Array.isArray(prefferedLocales);
-  const canHaveImage =
-    typeof imageUrl === "undefined" || typeof imageUrl === "string";
-  const canHaveIntroduction =
-    typeof introduction === "undefined" || typeof introduction === "string";
+  const canHaveImage = !imageUrl || typeof imageUrl === "string";
+  const canHaveIntroduction = !introduction || typeof introduction === "string";
 
   if (
     hasEmail &&
@@ -57,5 +55,17 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
     return true;
 
   console.warn("data is not complete private Student data", { data });
+  if (!hasEmail) console.error("See hasEmail", { hasEmail });
+  if (!hasUserName) console.error("See hasUserName", { hasUserName });
+  if (!hasId) console.error("See hasId", { hasEmail });
+  if (!hasRelatedSubjects)
+    console.error("See hasRelatedSubjects", { hasRelatedSubjects });
+  if (!hasTutors) console.error("See hasTutors", { hasTutors });
+  if (!canHaveImage) console.error("See canHaveImage", { canHaveImage });
+  if (!canHaveIntroduction)
+    console.error("See canHaveIntroduction", { canHaveIntroduction });
+  if (!hasPreferredLocales)
+    console.error("See hasPreferredLocales", { hasPreferredLocales });
+
   return false;
 }

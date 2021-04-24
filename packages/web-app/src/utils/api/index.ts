@@ -4,27 +4,18 @@
 
 import {
   CreateStudentRequestBody, CreateStudentResponseBody, CreateTutorRequestBody,
-  CreateTutorResponseBody, PrivateStudentData, PrivateTutorData, PrivateUserData,
+  CreateTutorResponseBody, PrivateUserData,
 } from '@adopt-a-student/common';
 
 import { functionsClient } from '../firebase-client';
 import callFirebaseFunction from '../firebase-client/callFirebaseFunction';
 
 interface CreateNewUserProps
-  extends Pick<PrivateUserData, "email" | "userName" | "imageUrl"> {}
+  extends Omit<PrivateUserData, "id" | "relatedSubjects"> {}
 
 interface CreateNewStudentUserProps extends CreateNewUserProps {}
 
 interface CreateNewTutorUserProps extends CreateNewUserProps {}
-
-const basicInitialUserData: Omit<
-  PrivateUserData,
-  "id" | "email" | "userName"
-> = {
-  prefferedCountries: [],
-  prefferedLocales: [],
-  relatedSubjects: [],
-};
 
 export async function createNewStudentUser(props: CreateNewStudentUserProps) {
   return callFirebaseFunction<
@@ -32,7 +23,7 @@ export async function createNewStudentUser(props: CreateNewStudentUserProps) {
     CreateStudentResponseBody
   >({
     name: "createStudent",
-    data: { student: { ...basicInitialUserData, ...props, relatedTutors: [] } },
+    data: { student: { ...props, relatedTutors: [], relatedSubjects: [] } },
     functions: functionsClient,
   });
 }
@@ -42,9 +33,9 @@ export async function createNewTutorUser(props: CreateNewTutorUserProps) {
     name: "createTutor",
     data: {
       tutor: {
-        ...basicInitialUserData,
         ...props,
         relatedStudents: [],
+        relatedSubjects: [],
         available: true,
       },
     },

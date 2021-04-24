@@ -3,7 +3,7 @@ import { Button, Col, Form, Image, Row } from 'react-bootstrap';
 import MultiSelect from 'react-multi-select-component';
 import { useAuthData } from 'src/hooks';
 
-import { countryNames, localeEnglishNames } from '@adopt-a-student/common';
+import { Country, countryNames, LocaleCode, localeEnglishNames } from '@adopt-a-student/common';
 
 import { FormFieldId } from '../constants';
 import { MultiSelectOption } from '../declarations/interfaces';
@@ -31,8 +31,12 @@ const countryOptions: MultiSelectOption[] = countryNames.map(
 /** User  */
 const StudentPreferencesForm = () => {
   const user = useAuthData();
-  const [selectedLocales, setSelectedLocales] = useState([]);
-  const [selectedCountries, setSelectedCountries] = useState([]);
+  const [selectedLocales, setSelectedLocales] = useState<MultiSelectOption[]>(
+    []
+  );
+  const [selectedCountries, setSelectedCountries] = useState<
+    MultiSelectOption[]
+  >([]);
   const [userName, setUserName] = useState("");
   const { updateUserPrivateStudentData } = useContext(
     UserPrivateStudentDataContext
@@ -91,9 +95,15 @@ const StudentPreferencesForm = () => {
       console.log("StudentPreferencesForm", "creating student user...");
 
       const result = await createNewStudentUser({
-        email: email || "",
+        email: email || "anonymous",
         userName,
         imageUrl: photoURL,
+        prefferedCountries: selectedCountries.map(
+          (country) => country.value as Country
+        ),
+        prefferedLocales: selectedLocales.map(
+          (locale) => locale.value as LocaleCode
+        ),
       });
 
       console.log("StudentPreferencesForm", "student user created");
@@ -104,8 +114,8 @@ const StudentPreferencesForm = () => {
       updateUserPrivateStudentData,
       user,
       userName,
-      selectedLocales.length,
-      selectedCountries.length,
+      selectedLocales,
+      selectedCountries,
     ]
   );
 
@@ -154,23 +164,13 @@ const StudentPreferencesForm = () => {
               value={selectedLocales}
             />
 
-            <h3 id='selectLocalesLabel'>Preferred Locales</h3>
-            <div style={{ width: "100%" }}>
-              <MultiSelect
-                options={localeOptions}
-                value={selectedLocales}
-                onChange={setSelectedLocales}
-                labelledBy='selectLocalesLabel'
-                className='w-100'
-              />
-            </div>
-            <h3 id='selectCountriesLabel'>Preferred Countries</h3>
-            <MultiSelect
+            <FormFieldMultiSelect
+              label='Preferred Countries'
               options={countryOptions}
               value={selectedCountries}
               onChange={setSelectedCountries}
-              labelledBy='selectCountriesLabel'
             />
+
             <Button variant='primary' type='submit' className='col m-1'>
               Save
             </Button>

@@ -252,8 +252,8 @@
         "affectsGlobalScope": false
       },
       "./src/declarations/data-models.ts": {
-        "version": "e3dff68e4c8792a8af956e689a8a6f6a29ea30773fd2d7eaea61898586720718",
-        "signature": "75e6b1185ec747c65dd0a4f032ee3d2f105f7f707b66a476b40ac8122819c598",
+        "version": "3af8e817cb21b5d9ffade6c82fc6a2b87d0229d3b572bb9d807a584063fc7018",
+        "signature": "a403d409d60aab1cb0f1db3ce2f150b09e7ab32e236a00620cac251e8785bf88",
         "affectsGlobalScope": false
       },
       "./src/declarations/object-shcema.ts": {
@@ -287,7 +287,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/type-predicates/isprivatestudentdata.ts": {
-        "version": "74d1266f7b9d1d83a699a960abec0185bea1577e39ae3c45e1ed4a8aa0e94070",
+        "version": "2cbc306f6524f8f052019024ed5657ab5593c25fe69b31b45606eaaf0bc96c0f",
         "signature": "2139056c54401170e17fe51a221fe8e0b0f05608b8095c22888aa0be667013f3",
         "affectsGlobalScope": false
       },
