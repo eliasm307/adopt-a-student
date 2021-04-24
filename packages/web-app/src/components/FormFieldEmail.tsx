@@ -3,17 +3,17 @@ import Form from 'react-bootstrap/Form';
 
 interface Props {
   controlId: string;
-  onChangeHandler?: () => React.ChangeEventHandler<HTMLFormElement>;
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
 }
 
-const FormFieldEmail = ({ onChangeHandler, controlId }: Props) => {
+const FormFieldEmail = ({ onChange, controlId }: Props) => {
   return (
     <Form.Group controlId={controlId} className='w-100'>
       <Form.Label>Email</Form.Label>
       <Form.Control
         type='email'
         placeholder='Enter email'
-        onChange={onChangeHandler}
+        onChange={onChange}
       />
       <Form.Text className='text-muted'>
         We&apos;ll never share your email with anyone else.

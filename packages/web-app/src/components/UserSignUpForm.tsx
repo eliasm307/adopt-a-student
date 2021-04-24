@@ -8,6 +8,7 @@ import {
 } from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
 
+import FormFieldEmail from './FormFieldEmail';
 import Image from './Image';
 
 // import testUser from '../../private_config/testUserAuth';
@@ -65,8 +66,8 @@ const UserSignUpForm = () => {
     signInWithEmailPassword(userName, password);
   };
 
-  const onChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
+  const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = (
+    event
   ): void => {
     const { currentTarget } = event;
 
@@ -125,6 +126,11 @@ const UserSignUpForm = () => {
             width: "clamp(100px, 100%, 500px)",
           }}
         >
+          <FormFieldEmail
+            onChange={onChangeHandler}
+            controlId='formBasicEmail'
+          />
+
           <Form.Group controlId='formBasicEmail' className='w-100'>
             <Form.Label>Email</Form.Label>
             <Form.Control
