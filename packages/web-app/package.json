@@ -69,6 +69,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "gatsby-plugin-eslint": "^3.0.0",
     "gatsby-plugin-tsconfig-paths": "^1.0.3",
+    "netlify-cli": "^3.21.9",
     "prettier": "2.2.1"
   },
   "repository": {
