@@ -130,7 +130,10 @@ const StudentPreferencesForm = () => {
             placeItems: "center",
           }}
         >
-          <div>Student preferences for: {user?.displayName || "undefined"}</div>
+          <div>
+            Student preferences for:{" "}
+            {user?.displayName || user?.uid || "unknown"}
+          </div>
           <pre>{JSON.stringify(selectedLocales)}</pre>
           <Form
             method='post'

@@ -6,6 +6,7 @@
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
 import config from "../../../private_config/config";
+import isProductionEnvironment from "../isProductionEnvironment";
 
 // import functionsTest from 'firebase-functions-test';
 // import path from 'path';
@@ -16,7 +17,7 @@ let app;
 
 console.log(__filename, { NODE_ENV: process.env.NODE_ENV });
 
-if (process.env.NODE_ENV === "production") {
+if (isProductionEnvironment()) {
   console.warn(__filename, "using live admin");
   app = admin.initializeApp({
     credential: admin.credential.cert({
@@ -48,6 +49,13 @@ const projectConfig = {
 // todo choose one
 // const firestoreAdmin = admin.firestore();
 const firestoreApp = app.firestore();
+
+if (!isProductionEnvironment()) {
+  firestoreApp.settings({
+    host: "localhost:8080",
+    ssl: false,
+  });
+}
 
 const firestoreAdmin = firestoreApp;
 

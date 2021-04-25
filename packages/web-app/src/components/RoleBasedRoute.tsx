@@ -48,6 +48,11 @@ const RoleBasedRoute = ({
     userPrivateStudentData?.prefferedCountries?.length &&
     userPrivateStudentData.prefferedLocales?.length;
 
+  console.log("RoleBasedRoute", {
+    studentPreferencesDefined,
+    userPrivateStudentData,
+  });
+
   if (
     userRole === "Student" &&
     requiresUserPreferencesSet &&

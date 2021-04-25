@@ -3,7 +3,7 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 import {
   CreateStudentRequestBody, CreateStudentResponseBody, GetStudentRequestBody,
   GetStudentResponseBody, GetStudentsBySubjectsRequestBody, GetStudentsBySubjectsResponseBody,
-  isArray, isEmptyObject, isObject, isPrivateStudentData, isString, UpdateStudentRequestBody,
+  isArray, isEmptyObject, isObject, isPrivateStudentData, isTruthyString, UpdateStudentRequestBody,
   UpdateStudentResponseBody,
 } from '@adopt-a-student/common';
 
@@ -47,6 +47,8 @@ export class StudentsController extends Controller {
 
     const { student } = body;
 
+    console.log(__filename, "Start", { uid, student });
+
     if (!student || !isPrivateStudentData({ ...student, id: uid }))
       throw new functionsHttps.HttpsError(
         "invalid-argument",
@@ -68,11 +70,15 @@ export class StudentsController extends Controller {
 
     const { id } = body;
 
-    if (!isString(id))
+    console.log(__filename, "Start", { uid, id });
+
+    if (!id || !isTruthyString(id))
       throw new functionsHttps.HttpsError(
         "invalid-argument",
         "Provided data is not valid"
       );
+
+    console.log(__filename, `${getStudent}`, { body });
 
     return uid === id
       ? getPrivateStudentData({ id })

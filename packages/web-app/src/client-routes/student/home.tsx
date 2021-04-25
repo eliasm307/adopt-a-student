@@ -11,6 +11,7 @@ import {
 } from '@adopt-a-student/common';
 
 import { QueryName } from '../../constants';
+import { useUserPrivateStudentData } from '../../providers/PrivateStudentDataProvider';
 import { functionsClient } from '../../utils/firebase-client';
 import callFirebaseFunction from '../../utils/firebase-client/callFirebaseFunction';
 
@@ -21,18 +22,25 @@ const requestData: GetTutorsByLocalesRequestBody = {
 };
 
 const StudentHome = () => {
+  const privateData = useUserPrivateStudentData();
   const { isLoading, error, data: responseData } = useQuery<
     GetTutorsByLocalesResponseBody,
     Error
-  >(QueryName.TutorsByLocales, async () =>
-    callFirebaseFunction<
-      GetTutorsByLocalesRequestBody,
-      GetTutorsByLocalesResponseBody
-    >({
-      name: "getTutorsByLocales",
-      data: requestData,
-      functions: functionsClient,
-    })
+  >(
+    QueryName.TutorsByLocales,
+    async () =>
+      callFirebaseFunction<
+        GetTutorsByLocalesRequestBody,
+        GetTutorsByLocalesResponseBody
+      >({
+        name: "getTutorsByLocales",
+        data: {
+          countries: privateData?.prefferedCountries || ["World"],
+          locales: privateData?.prefferedLocales || [],
+        },
+        functions: functionsClient,
+      }),
+    { enabled: !!privateData, retry: !!privateData }
   );
 
   if (isLoading) return <div>Loading...</div>;
@@ -44,7 +52,12 @@ const StudentHome = () => {
       </div>
     );
 
-  return <div>student home Data: {JSON.stringify(responseData, null, 2)}</div>;
+  return (
+    <>
+      <div>student home Data: {responseData?.tutors.length} items</div>
+      <div>{JSON.stringify(responseData, null, 2)}</div>
+    </>
+  );
 };
 
 export default StudentHome;

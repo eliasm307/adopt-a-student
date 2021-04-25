@@ -27,12 +27,9 @@ export function isPublicStudentData(data: any): data is PublicStudentData {
   const hasPreferredCountries = Array.isArray(prefferedCountries);
   const hasPreferredLocales = Array.isArray(prefferedLocales);
   const hasUserName = typeof userName === "string" && userName;
-  const canHaveImage =
-    typeof imageUrl === "undefined" ||
-    (typeof imageUrl === "string" && imageUrl);
+  const canHaveImage = !imageUrl || typeof imageUrl === "string";
   const hasId = typeof id === "string" && id;
-  const canHaveIntroduction =
-    typeof introduction === "undefined" || typeof introduction === "string";
+  const canHaveIntroduction = !introduction || typeof introduction === "string";
 
   if (
     hasId &&
@@ -46,6 +43,6 @@ export function isPublicStudentData(data: any): data is PublicStudentData {
 
   // ? check key count?
 
-  console.warn(__filename, "Data is not public student data");
+  console.warn(__filename, "Data is not public student data", { data });
   return false;
 }

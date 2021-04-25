@@ -8,9 +8,7 @@
   "types": "lib/src/index.d.ts",
   "nohoist": [
     "**/*jest*",
-    "**/*jest*/**",
-    "**/@adopt-a-student/**",
-    "**/@adopt-a-student*"
+    "**/*jest*/**"
   ],
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
@@ -18,11 +16,12 @@
     "pretest": "yarn",
     "test:production": "set NODE_ENV=production-test&& yarn test",
     "check-types": "npx tsc",
-    "cleanbuild": "rm -rf node_modules && yarn build",
+    "cleanbuild": "yarn cleaninstall && yarn build",
     "saveCallableNames": "npx ts-node src/scripts/saveCallableNames.ts",
     "prebuild": "yarn saveCallableNames && yarn build:common && npx tsc && rm -rf lib && yarn",
     "build": "yarn ts:build",
     "ts:build": "tsc --build tsconfig.build.json",
+    "ts:hot-build": "tsc --build tsconfig.build.json --watch",
     "build:common": "yarn --cwd ./common build",
     "build:hot-reload": "tsc --build tsconfig.build.json --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
@@ -31,6 +30,7 @@
     "predeploy": "yarn build && yarn tsoa:build",
     "deploy": "firebase deploy --only functions",
     "preinstall": "yarn install:common",
+    "cleaninstall": "rm -rf node_modules && yarn",
     "install:common": "yarn --cwd ./common",
     "logs": "firebase functions:log",
     "start-emulators": "yarn --cwd ../../ start-emulators",

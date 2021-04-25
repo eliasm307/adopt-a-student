@@ -2,10 +2,11 @@ import {
   GetStudentRequestBody, GetStudentResponseBody, isPrivateStudentData,
 } from '@adopt-a-student/common';
 
-import { TUTOR_COLLECTION_NAME } from '../../../constants';
+import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
 import { InternalHandler } from '../../../declarations/types';
 import createPath from '../../../utils/createPath';
 import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
+import readPrivateUserData from '../../../utils/readPrivateUserData';
 import readPublicUserData from '../../../utils/readPublicUserData';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
 
@@ -13,14 +14,17 @@ const getPrivateStudentData: InternalHandler<
   GetStudentRequestBody,
   GetStudentResponseBody
 > = async ({ id }) => {
-  const path = createPath(TUTOR_COLLECTION_NAME, id);
+  const path = createPath(STUDENT_COLLECTION_NAME, id);
 
-  const student = await readPublicUserData({
+  console.log(__filename, { id, path });
+
+  const student = await readPrivateUserData({
     dataPredicate: isPrivateStudentData,
     firestoreAdmin,
     path,
-    publicDataExtractor: extractPublicStudentData,
   });
+
+  console.log(__filename, "result", { student });
 
   return {
     student,

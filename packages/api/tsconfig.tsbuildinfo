@@ -302,18 +302,18 @@
         "affectsGlobalScope": false
       },
       "./common/src/utils/type-predicates/ispublicstudentdata.ts": {
-        "version": "db8f64da9aeb6693f7069e4fe2a15913e70a5c25ad0634ecad01a1158fd5502f",
+        "version": "3956ce8a66c6a555f1e3df8e7b0cd91edc92e8ae45bc722043ed218219ed6f83",
         "signature": "6f0769782f418baaacbb5c822cecdf8459cf32eeae4040341b131604c289e9e3",
         "affectsGlobalScope": false
       },
       "./common/src/utils/type-predicates/ispublictutordata.ts": {
-        "version": "4ed770bc3e42e9cc2a713e86d755579463671d5840cd873daee4248169ddd4bd",
+        "version": "cacc990644beed77031c266025182ab3cf1deaa1cec288545d437233ec12502d",
         "signature": "c8a1af46a03792756a4d9c4d6663d1b27da071aaf71d224024a90b2cd135a8cd",
         "affectsGlobalScope": false
       },
       "./common/src/utils/type-predicates/basic.ts": {
-        "version": "9101c637756fdea1f425eac3118b5c863ab54a6e323c502df5b5fb9d01f353d7",
-        "signature": "9409eb5b59eab7d3fd9702ecb53294809b90f15d4dfa12a010f333d643de8fa4",
+        "version": "63864242fa69eeef02e5cdfe374d4e4d7a1abcad077a8a47eb7bbe0b268aa59a",
+        "signature": "bc51d02c517d6f438277507814f8a5fa1dc0f2a388a7f38d0511b26c0bd2bd7b",
         "affectsGlobalScope": false
       },
       "./common/src/utils/type-predicates/index.ts": {
@@ -338,7 +338,7 @@
       },
       "./common/src/utils/locales.ts": {
         "version": "ed7526541f2c4fd102846580fcf5792d42c3235c4f0b5e281bcfdbcb83ffdbab",
-        "signature": "7ff65c208085131fe07916a7f3780d8aceb6658710de3f6bc0d8fad7ffbc1aa8",
+        "signature": "4f89e18cdec868df77cb79ef5fd7e51f793a2f49e20f8b92750fd3670cbe125f",
         "affectsGlobalScope": false
       },
       "./common/src/utils/promiseallsettledandlog.ts": {
@@ -1596,8 +1596,13 @@
         "signature": "07e237618a901f1246dfcd85c3269ce2a84a010f54f977ec56068536f965f084",
         "affectsGlobalScope": false
       },
+      "./src/utils/isproductionenvironment.ts": {
+        "version": "bbac64d282a954cbe6eea99c43226f63783e1e364c083a5559137ade1bf459d8",
+        "signature": "65df1eb126550e6439ccbb7255c48a9e4482ca17d3b82b12ca1bfff25dd6f143",
+        "affectsGlobalScope": false
+      },
       "./src/utils/firebase/firebase-admin.ts": {
-        "version": "8a17a9d1ab520fb27c0e899eb1dca5ec49cb99c71a0533240506d7741e0973f0",
+        "version": "526f22236a17119959b392f66a681bc5342e7b399cdd269c199c4056124b31d4",
         "signature": "6092ff1478c0e0e3e434284b07572412f9050252397bbaaebfb5a86e44959c47",
         "affectsGlobalScope": false
       },
@@ -1667,7 +1672,7 @@
         "affectsGlobalScope": false
       },
       "./src/controllers/studentcontroller/utils/extractpublicstudentdata.ts": {
-        "version": "3e01d969f583a13a9bb8f000595a1bc5d2df762545d6f3b93c22470bb2316904",
+        "version": "61a95ccf90a80bbdf652e96519c643aadb63159c69a9fe8c30ba85ee90a10f1c",
         "signature": "6459857b67abb9826e056450695e9a0beb339717e6de39431379ff611d25a46d",
         "affectsGlobalScope": false
       },
@@ -1732,7 +1737,7 @@
         "affectsGlobalScope": false
       },
       "./src/controllers/relationshipcontroller/relationshipcontroller.ts": {
-        "version": "e3cab941e3212909c96bde163a4dc8d422abe66c0deb403af1acadade23fa4c6",
+        "version": "8e15fffd921cc92c5f6e9d72af59464715c8d7e792f21cabadbc82b439a9d8fb",
         "signature": "be13d046572c3eca70dbdf9adb1ab760ca16247f2a61f6eca91ba82cdd2b87c2",
         "affectsGlobalScope": false
       },
@@ -1747,22 +1752,22 @@
         "affectsGlobalScope": false
       },
       "./src/utils/readprivateuserdata.ts": {
-        "version": "c8945cbd06eee8ddbe9b87563b8705f0edae35e0461bae3082f744e790b5c676",
+        "version": "aae214627aeece9c0f5f14976072f8b2ba21debd70d6ac98e245e42359390ebf",
         "signature": "fe773eed5908c2f399311d4224a1ddabf3b2608cafa067ee20704efd8055f772",
         "affectsGlobalScope": false
       },
       "./src/utils/readpublicuserdata.ts": {
-        "version": "866113b46d349d87774172c8a286f74942dbd6aa6010159eb92e074152b2afa6",
+        "version": "b4cabb3f722e30cf5495c24c0fbe9f0c88d3eed491604f92c40c11f1cd1d82ba",
         "signature": "e018ac6158a304afcd83478eaa1154e75343a27b47f817df7e75e2ed745213c5",
         "affectsGlobalScope": false
       },
       "./src/controllers/studentcontroller/request-handlers/getprivatestudentdata.ts": {
-        "version": "2632ae83562e4977a7900c3efcf9c2748e404747750e803ac2d2ae3604d1d6ca",
+        "version": "aea2020680bed87b1625c45ceabcaeb0c5c3ac9e7dc797f202cd543802d1cf7a",
         "signature": "06857c9c6a9c880fa554bef8889f37ce352ca455ce94496238b82d02bc74eb16",
         "affectsGlobalScope": false
       },
       "./src/controllers/studentcontroller/request-handlers/getpublicstudentdatahandler.ts": {
-        "version": "048308b83628738b96c9dbb8b92fa70f45605353fab91d04cae3c1d175ab159f",
+        "version": "2b6edfac63e9cea610b75138180a0023a50ef7266663a84ded7720fb35f03cb2",
         "signature": "0e399f7e1ab7ef89bc27bdb0d73daa7c6ff6c15ad5211749ca890c22ac571243",
         "affectsGlobalScope": false
       },
@@ -1792,7 +1797,7 @@
         "affectsGlobalScope": false
       },
       "./src/controllers/studentcontroller/studentcontroller.ts": {
-        "version": "ebcdd7e1d8def8cc885daa955abd9e58f0cb6f482ed190265fba3005c27854a1",
+        "version": "331532c4da3413b03e837ec65ef4ed29e79ec4204afacd83c766ea94afa098cb",
         "signature": "addf68cbb062bf9d41bf8d68a5bae0d545eb8563244ae441ad03560cf0740878",
         "affectsGlobalScope": false
       },
@@ -1927,7 +1932,7 @@
         "affectsGlobalScope": false
       },
       "./src/controllers/tutorcontroller/tutorcontroller.ts": {
-        "version": "5674ba5f2692a246cd680913057da5bed38709720ca18d79cde33b47e14d025e",
+        "version": "8194b45713eb4bd9d816ff5ceb26070def0950638c30830af5fa669229c4b973",
         "signature": "b2b9ed4346cbbd66ff0693d67ed05b7090a10550f267465817256adfb9b1d166",
         "affectsGlobalScope": false
       },
@@ -1996,11 +2001,6 @@
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
-      "./src/utils/isproductionenvironment.ts": {
-        "version": "bbac64d282a954cbe6eea99c43226f63783e1e364c083a5559137ade1bf459d8",
-        "signature": "65df1eb126550e6439ccbb7255c48a9e4482ca17d3b82b12ca1bfff25dd6f143",
-        "affectsGlobalScope": false
-      },
       "./src/utils/firebase/callablecontextspoof.ts": {
         "version": "1af698dac61fd9005334f663be3130b7cf5a6cee38dacc4d62394c4778faac5f",
         "signature": "02922c68125215675069391549e0f216f5ea3b0394a70df053b1862a64c34d55",
@@ -2038,7 +2038,7 @@
       },
       "./src/utils/populators/getrandomuserlocales.ts": {
         "version": "52e1dacf2a3f1981cdcf09f822ce5df3245eb512a37fe23e8687b7a8955d2a4f",
-        "signature": "0833023c0d0b8b5d34455aa9b053234a154fc28d6982820635cd8e0c9108429c",
+        "signature": "429d352d3e0b0c57eba08b4991e26b51e9de8de83f9183e91f3f6915b99b9951",
         "affectsGlobalScope": false
       },
       "./src/utils/populators/createfakestudentdata.ts": {
@@ -36050,6 +36050,7 @@
         "./src/declarations/types.ts",
         "./src/utils/createpath.ts",
         "./src/utils/firebase/firebase-admin.ts",
+        "./src/utils/readprivateuserdata.ts",
         "./src/utils/readpublicuserdata.ts"
       ],
       "./src/controllers/studentcontroller/request-handlers/getpublicstudentdatahandler.ts": [
@@ -36137,10 +36138,12 @@
         "./node_modules/@types/node/worker_threads.d.ts",
         "./node_modules/@types/node/zlib.d.ts",
         "./src/constants.ts",
+        "./src/controllers/studentcontroller/utils/extractpublicstudentdata.ts",
         "./src/declarations/types.ts",
         "./src/utils/createpath.ts",
         "./src/utils/firebase/firebase-admin.ts",
         "./src/utils/readprivateuserdata.ts",
+        "./src/utils/readpublicuserdata.ts",
         "./src/utils/verifyrequest.ts"
       ],
       "./src/controllers/studentcontroller/request-handlers/getstudentsbysubjectshandler.ts": [
@@ -39975,7 +39978,8 @@
         "./node_modules/@types/node/wasi.d.ts",
         "./node_modules/@types/node/worker_threads.d.ts",
         "./node_modules/@types/node/zlib.d.ts",
-        "./private_config/config.ts"
+        "./private_config/config.ts",
+        "./src/utils/isproductionenvironment.ts"
       ],
       "./src/utils/firebase/getcollectiondata.ts": [
         "../../node_modules/@types/node/assert.d.ts",

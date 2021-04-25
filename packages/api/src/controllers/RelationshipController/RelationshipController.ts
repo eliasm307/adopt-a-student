@@ -1,7 +1,7 @@
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
-  isLinkedLocaleSubjectData, isString, LinkStudentAndSubjectRequestBody,
+  isLinkedLocaleSubjectData, isTruthyString, LinkStudentAndSubjectRequestBody,
   LinkStudentAndSubjectResponseBody, LinkStudentAndTutorRequestBody,
   LinkStudentAndTutorResponseBody, LinkSubjectAndSubjectCategoryRequestBody,
   LinkSubjectAndSubjectCategoryResponseBody, LinkSubjectsRequestBody, LinkSubjectsResponseBody,
@@ -103,7 +103,12 @@ export class RelationshipController extends Controller {
     const { studentId, tutorId } = body;
 
     // verify received data
-    if (!isString(studentId) || !isString(tutorId))
+    if (
+      !studentId ||
+      !isTruthyString(studentId) ||
+      !tutorId ||
+      !isTruthyString(tutorId)
+    )
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not update tutor because provided data is not valid"
@@ -130,7 +135,11 @@ export class RelationshipController extends Controller {
     const { categoryId, locale, subjectId } = body;
 
     // verify received data
-    if (!isString(categoryId) || !isString(locale) || !isString(subjectId))
+    if (
+      !isTruthyString(categoryId) ||
+      !isTruthyString(locale) ||
+      !isTruthyString(subjectId)
+    )
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not link documents because provided data is not valid"
@@ -153,7 +162,7 @@ export class RelationshipController extends Controller {
     const { subject1Id, subject2Id } = body;
 
     // verify received data
-    if (!isString(subject1Id) || !isString(subject2Id))
+    if (!isTruthyString(subject1Id) || !isTruthyString(subject2Id))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not link documents because provided data is not valid"
@@ -191,7 +200,11 @@ export class RelationshipController extends Controller {
     const { country, id, locale } = body;
 
     // verify received data
-    if (!isString(country) || !isString(id) || !isString(locale))
+    if (
+      !isTruthyString(country) ||
+      !isTruthyString(id) ||
+      !isTruthyString(locale)
+    )
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not link documents because provided data is not valid"
@@ -211,7 +224,7 @@ export class RelationshipController extends Controller {
     const { studentId, tutorId } = body;
 
     // verify received data
-    if (!isString(studentId) || !isString(tutorId))
+    if (!isTruthyString(studentId) || !isTruthyString(tutorId))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not update tutor because provided data is not valid"
@@ -238,7 +251,7 @@ export class RelationshipController extends Controller {
     const { categoryId, subjectId } = body;
 
     // verify received data
-    if (!isString(categoryId) || !isString(subjectId))
+    if (!isTruthyString(categoryId) || !isTruthyString(subjectId))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not unlink documents because provided data is not valid"
@@ -257,7 +270,7 @@ export class RelationshipController extends Controller {
     const { subject1Id, subject2Id } = body;
 
     // verify received data
-    if (!body || !isString(subject1Id) || !isString(subject2Id))
+    if (!body || !isTruthyString(subject1Id) || !isTruthyString(subject2Id))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not link documents because provided data is not valid"
@@ -276,7 +289,11 @@ export class RelationshipController extends Controller {
     const { country, id, locale } = body;
 
     // verify received data
-    if (!isString(country) || !isString(id) || !isString(locale))
+    if (
+      !isTruthyString(country) ||
+      !isTruthyString(id) ||
+      !isTruthyString(locale)
+    )
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Could not link documents because provided data is not valid"

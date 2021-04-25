@@ -28,7 +28,7 @@ export function useGetPrivateStudentDataQuery({
   const userRole = useUserRole();
 
   if (userRole === "Student") {
-    console.log(
+    console.warn(
       "Running useGetPrivateStudentDataQuery because user is a student..."
     );
   } else {
@@ -48,7 +48,7 @@ export function useGetPrivateStudentDataQuery({
         data: { id: userAuth?.uid || "" },
         functions: functionsClient,
       }),
-    { enabled: userRole === "Student" }
+    { enabled: userRole === "Student" && !!userAuth, retry: !!userAuth }
   );
 
   if (!responseData) {

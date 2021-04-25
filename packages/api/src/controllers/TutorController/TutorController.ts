@@ -3,8 +3,8 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 import {
   CreateTutorRequestBody, CreateTutorResponseBody, GetTutorRequestBody, GetTutorResponseBody,
   GetTutorsByLocalesRequestBody, GetTutorsByLocalesResponseBody, GetTutorsBySubjectsRequestBody,
-  GetTutorsBySubjectsResponseBody, isArray, isEmptyObject, isObject, isPrivateTutorData, isString,
-  UpdateTutorRequestBody, UpdateTutorResponseBody,
+  GetTutorsBySubjectsResponseBody, isArray, isEmptyObject, isObject, isPrivateTutorData,
+  isTruthyString, UpdateTutorRequestBody, UpdateTutorResponseBody,
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
@@ -74,7 +74,7 @@ export class TutorsController extends Controller {
 
     const { id } = body;
 
-    if (!isString(id))
+    if (!isTruthyString(id))
       throw new functionsHttps.HttpsError(
         "failed-precondition",
         "Provided data is invalid"

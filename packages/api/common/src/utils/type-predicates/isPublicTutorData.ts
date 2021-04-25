@@ -37,12 +37,9 @@ export function isPublicTutorData(data: any): data is PublicTutorData {
   const hasPreferredCountries = Array.isArray(prefferedCountries);
   const hasPreferredLocales = Array.isArray(prefferedLocales);
   const hasUserName = typeof userName === "string" && userName;
-  const canHaveImage =
-    typeof imageUrl === "undefined" ||
-    (typeof imageUrl === "string" && imageUrl);
+  const canHaveImage = !imageUrl || (typeof imageUrl === "string" && imageUrl);
   const hasId = typeof id === "string" && id;
-  const canHaveIntroduction =
-    typeof introduction === "undefined" || typeof introduction === "string";
+  const canHaveIntroduction = !introduction || typeof introduction === "string";
 
   const hasAvailable = typeof available === "boolean";
 
