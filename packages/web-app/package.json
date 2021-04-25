@@ -12,7 +12,7 @@
     "predevelop": "npx tsc && yarn clean",
     "dev": "yarn develop",
     "start": "yarn develop",
-    "serve": "yarn build && gatsby serve",
+    "buildserve": "yarn build && gatsby serve",
     "clean": "rm -rf public && gatsby clean",
     "cleaninstall": "rm -rf node_modules && yarn clean && yarn",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",

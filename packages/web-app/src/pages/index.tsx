@@ -2,9 +2,10 @@ import { navigate } from 'gatsby';
 import React from 'react';
 
 import { RoutePath } from '../constants';
+import isBrowser from '../utils/isBrowser';
 
 export default function Home() {
-  navigate(RoutePath.SignIn);
+  if (isBrowser()) navigate(RoutePath.SignIn);
   return null;
   /*
   if (user && typeof window !== "undefined") navigate("/app");

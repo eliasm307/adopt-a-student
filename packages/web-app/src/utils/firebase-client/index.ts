@@ -87,7 +87,7 @@ export interface FireBaseUser extends firebase.User {}
 ////////////////////////////////////////////////////////
 // Firestore exports
 
-export const firestoreLive = firebase.firestore();
+// export const firestoreLive = firebase.firestore();
 
 const firestoreClient = firebase.firestore();
 if (!isProductionEnvironment()) {
@@ -116,7 +116,8 @@ export type FirestoreQuerySnapshot = firebase.firestore.QuerySnapshot<firebase.f
 
 // Using functions emulator
 // https://firebase.google.com/docs/emulator-suite/connect_functions
-export const functionsClient = firebase.app().functions();
+// setting the region https://firebase.google.com/docs/functions/locations#client-side_location_selection_for_callable_functions
+export const functionsClient = firebase.app().functions("europe-west1");
 if (!isProductionEnvironment()) {
   functionsClient.useEmulator("localhost", 5001);
 } else {

@@ -1617,7 +1617,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/firebase/firebase-admin.ts": {
-        "version": "526f22236a17119959b392f66a681bc5342e7b399cdd269c199c4056124b31d4",
+        "version": "2fca8c5d3a0c5069425017766b03270dd3d7af1b6062fc304e8b6775f90d527b",
         "signature": "6092ff1478c0e0e3e434284b07572412f9050252397bbaaebfb5a86e44959c47",
         "affectsGlobalScope": false
       },
@@ -1977,7 +1977,7 @@
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "3fd2cc2e1f2d0361f80b06637c08ddb98dfb55b9d4e5269d57087c1b7bafe0a7",
+        "version": "a70b2f6c4c83feb4ffcbe388f14dcebffbd07aa0e16ef5a5540a61e6418edb74",
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
@@ -1994,6 +1994,61 @@
       "./src/request-handlers/firestorewrite.ts": {
         "version": "85da0e625d3813a3baec4f77e78361d04096071c4002853819fbe28ddf078162",
         "signature": "5edbcc0ad15fb8830468bf250579c882ea51a4897941eb4be936323612b26433",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/firebase/callablecontextspoof.ts": {
+        "version": "1af698dac61fd9005334f663be3130b7cf5a6cee38dacc4d62394c4778faac5f",
+        "signature": "02922c68125215675069391549e0f216f5ea3b0394a70df053b1862a64c34d55",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/populators/bulkcreatesubjectforalllocales.ts": {
+        "version": "ce8d465450541a14d8d3607b5c8c697bf0cdc4c6fe441656496f520053d16fbc",
+        "signature": "2a88d4ffe18aef5dd809e931d4311388333391647e81b13b64ad3df8565e06db",
+        "affectsGlobalScope": false
+      },
+      "../../node_modules/@types/faker/index.d.ts": {
+        "version": "cb972bc3957475ba82f35fd6a25d3f1d856c82b297ce587c7ce0750efd689727",
+        "signature": "cb972bc3957475ba82f35fd6a25d3f1d856c82b297ce587c7ce0750efd689727",
+        "affectsGlobalScope": true
+      },
+      "./src/utils/populators/bulkuserpopulator.ts": {
+        "version": "f02875ca23edf8a5bdf369df0acc6a8e8101af974759c4ad6277b187beb8bbf8",
+        "signature": "3904c0a605c96c57a289efde260548853c08bcf5cd5cc0e0daa0c723e96417a2",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/populators/getrandomcountries.ts": {
+        "version": "a4d50d083404045e7445005a239c17fd10f11feed1959a31c09621cf2f8ed51e",
+        "signature": "e898800beb9d3a63a74c537a2e62fe96cd8235544a8b4a7e88a2c583e3121eae",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/populators/getrandomlocales.ts": {
+        "version": "27b7653da5751159ee5d65946a27cae632a207e22328a468cc8f540b49594be4",
+        "signature": "83abda4df742d171db03415845b705322cc81946ba7c59968e63302fbafa408d",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/populators/getrandomuserlocales.ts": {
+        "version": "52e1dacf2a3f1981cdcf09f822ce5df3245eb512a37fe23e8687b7a8955d2a4f",
+        "signature": "429d352d3e0b0c57eba08b4991e26b51e9de8de83f9183e91f3f6915b99b9951",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/populators/createfakestudentdata.ts": {
+        "version": "989d56b4418fdfa3a08771822bb217455b6ad5a6a8ef5820cc15c8a1fe658b77",
+        "signature": "670e55b34f4c357a578c42d76552dd34c67c0620acdb5b26048bb5b3e689e4df",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/populators/getrandomcountry.ts": {
+        "version": "49499bf54065bdc8673ec2b6a5075d74943bfc90e903758dc88b3662b3793d15",
+        "signature": "3f7439a7681845538861198acf6a2c0057f2960964af4656eead5b53be1ea9b5",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/populators/createfaketutordata.ts": {
+        "version": "7476a8fd72eab0b61ddef00f9da303d49847ca8a7d5c2fc1bf865147cd6f7492",
+        "signature": "269e24ed8356016974089bed5d6f0c5df235593eda81d5be69d82505990a37b0",
+        "affectsGlobalScope": false
+      },
+      "./src/scripts/populatefirestore.ts": {
+        "version": "c9d61d1cb93a091a0519bc3953cef2cd26524e1f3bd3dbe83904663a1895d66c",
+        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
       "../../node_modules/@types/fs-extra/index.d.ts": {
@@ -2016,59 +2071,9 @@
         "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
         "affectsGlobalScope": false
       },
-      "./src/utils/firebase/callablecontextspoof.ts": {
-        "version": "1af698dac61fd9005334f663be3130b7cf5a6cee38dacc4d62394c4778faac5f",
-        "signature": "02922c68125215675069391549e0f216f5ea3b0394a70df053b1862a64c34d55",
-        "affectsGlobalScope": false
-      },
       "./src/utils/populators/bulkcreatesubjectcategoryforalllocales.ts": {
         "version": "969b27ed65418fa41ecac8aece9aa07df0740226d9dd0e9f01a10fc19baff36c",
         "signature": "3153d97045e2876a01a3105e05338e81e2087b35b44519a12797fbc32d3a8eda",
-        "affectsGlobalScope": false
-      },
-      "./src/utils/populators/bulkcreatesubjectforalllocales.ts": {
-        "version": "acdc3f10e5910401f21dfad8596766b3c267785fbda62343e3bdf69c9e154cf4",
-        "signature": "2a88d4ffe18aef5dd809e931d4311388333391647e81b13b64ad3df8565e06db",
-        "affectsGlobalScope": false
-      },
-      "../../node_modules/@types/faker/index.d.ts": {
-        "version": "cb972bc3957475ba82f35fd6a25d3f1d856c82b297ce587c7ce0750efd689727",
-        "signature": "cb972bc3957475ba82f35fd6a25d3f1d856c82b297ce587c7ce0750efd689727",
-        "affectsGlobalScope": true
-      },
-      "./src/utils/populators/bulkuserpopulator.ts": {
-        "version": "f02875ca23edf8a5bdf369df0acc6a8e8101af974759c4ad6277b187beb8bbf8",
-        "signature": "3904c0a605c96c57a289efde260548853c08bcf5cd5cc0e0daa0c723e96417a2",
-        "affectsGlobalScope": false
-      },
-      "./src/utils/populators/getrandomcountries.ts": {
-        "version": "2ec5b0234469d685482c94bab42bbe7fb99f56c469cdb466aaed846753c000f3",
-        "signature": "e898800beb9d3a63a74c537a2e62fe96cd8235544a8b4a7e88a2c583e3121eae",
-        "affectsGlobalScope": false
-      },
-      "./src/utils/populators/getrandomlocales.ts": {
-        "version": "27b7653da5751159ee5d65946a27cae632a207e22328a468cc8f540b49594be4",
-        "signature": "83abda4df742d171db03415845b705322cc81946ba7c59968e63302fbafa408d",
-        "affectsGlobalScope": false
-      },
-      "./src/utils/populators/getrandomuserlocales.ts": {
-        "version": "52e1dacf2a3f1981cdcf09f822ce5df3245eb512a37fe23e8687b7a8955d2a4f",
-        "signature": "429d352d3e0b0c57eba08b4991e26b51e9de8de83f9183e91f3f6915b99b9951",
-        "affectsGlobalScope": false
-      },
-      "./src/utils/populators/createfakestudentdata.ts": {
-        "version": "87b52d70645d7ff029f3d05c91954255140f7cf5529cbe2cc64720c48fc8ea7f",
-        "signature": "670e55b34f4c357a578c42d76552dd34c67c0620acdb5b26048bb5b3e689e4df",
-        "affectsGlobalScope": false
-      },
-      "./src/utils/populators/getrandomcountry.ts": {
-        "version": "49499bf54065bdc8673ec2b6a5075d74943bfc90e903758dc88b3662b3793d15",
-        "signature": "3f7439a7681845538861198acf6a2c0057f2960964af4656eead5b53be1ea9b5",
-        "affectsGlobalScope": false
-      },
-      "./src/utils/populators/createfaketutordata.ts": {
-        "version": "eb7bc8fcd3e98a6ef9902b3e3ee30bb4cc992c610d27e5496b7ba8aec5df755a",
-        "signature": "269e24ed8356016974089bed5d6f0c5df235593eda81d5be69d82505990a37b0",
         "affectsGlobalScope": false
       },
       "./src/utils/populators/bulktests.test.ts": {
@@ -39130,6 +39135,97 @@
         "./src/declarations/types.ts",
         "./src/utils/firebase/firebase-admin.ts"
       ],
+      "./src/scripts/populatefirestore.ts": [
+        "../../node_modules/@types/node/assert.d.ts",
+        "../../node_modules/@types/node/async_hooks.d.ts",
+        "../../node_modules/@types/node/buffer.d.ts",
+        "../../node_modules/@types/node/child_process.d.ts",
+        "../../node_modules/@types/node/cluster.d.ts",
+        "../../node_modules/@types/node/console.d.ts",
+        "../../node_modules/@types/node/constants.d.ts",
+        "../../node_modules/@types/node/crypto.d.ts",
+        "../../node_modules/@types/node/dgram.d.ts",
+        "../../node_modules/@types/node/dns.d.ts",
+        "../../node_modules/@types/node/domain.d.ts",
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/fs/promises.d.ts",
+        "../../node_modules/@types/node/http.d.ts",
+        "../../node_modules/@types/node/http2.d.ts",
+        "../../node_modules/@types/node/https.d.ts",
+        "../../node_modules/@types/node/inspector.d.ts",
+        "../../node_modules/@types/node/module.d.ts",
+        "../../node_modules/@types/node/net.d.ts",
+        "../../node_modules/@types/node/os.d.ts",
+        "../../node_modules/@types/node/path.d.ts",
+        "../../node_modules/@types/node/perf_hooks.d.ts",
+        "../../node_modules/@types/node/process.d.ts",
+        "../../node_modules/@types/node/punycode.d.ts",
+        "../../node_modules/@types/node/querystring.d.ts",
+        "../../node_modules/@types/node/readline.d.ts",
+        "../../node_modules/@types/node/repl.d.ts",
+        "../../node_modules/@types/node/stream.d.ts",
+        "../../node_modules/@types/node/string_decoder.d.ts",
+        "../../node_modules/@types/node/timers.d.ts",
+        "../../node_modules/@types/node/tls.d.ts",
+        "../../node_modules/@types/node/trace_events.d.ts",
+        "../../node_modules/@types/node/tty.d.ts",
+        "../../node_modules/@types/node/url.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/v8.d.ts",
+        "../../node_modules/@types/node/vm.d.ts",
+        "../../node_modules/@types/node/wasi.d.ts",
+        "../../node_modules/@types/node/worker_threads.d.ts",
+        "../../node_modules/@types/node/zlib.d.ts",
+        "./common/src/index.ts",
+        "./node_modules/@types/node/assert.d.ts",
+        "./node_modules/@types/node/async_hooks.d.ts",
+        "./node_modules/@types/node/buffer.d.ts",
+        "./node_modules/@types/node/child_process.d.ts",
+        "./node_modules/@types/node/cluster.d.ts",
+        "./node_modules/@types/node/console.d.ts",
+        "./node_modules/@types/node/constants.d.ts",
+        "./node_modules/@types/node/crypto.d.ts",
+        "./node_modules/@types/node/dgram.d.ts",
+        "./node_modules/@types/node/dns.d.ts",
+        "./node_modules/@types/node/domain.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/fs/promises.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/http2.d.ts",
+        "./node_modules/@types/node/https.d.ts",
+        "./node_modules/@types/node/inspector.d.ts",
+        "./node_modules/@types/node/module.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/os.d.ts",
+        "./node_modules/@types/node/path.d.ts",
+        "./node_modules/@types/node/perf_hooks.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/punycode.d.ts",
+        "./node_modules/@types/node/querystring.d.ts",
+        "./node_modules/@types/node/readline.d.ts",
+        "./node_modules/@types/node/repl.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/string_decoder.d.ts",
+        "./node_modules/@types/node/timers.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/trace_events.d.ts",
+        "./node_modules/@types/node/tty.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/v8.d.ts",
+        "./node_modules/@types/node/vm.d.ts",
+        "./node_modules/@types/node/wasi.d.ts",
+        "./node_modules/@types/node/worker_threads.d.ts",
+        "./node_modules/@types/node/zlib.d.ts",
+        "./src/constants.ts",
+        "./src/utils/firebase/firebase-admin.ts",
+        "./src/utils/populators/bulkcreatesubjectforalllocales.ts",
+        "./src/utils/populators/bulkuserpopulator.ts",
+        "./src/utils/populators/createfakestudentdata.ts",
+        "./src/utils/populators/createfaketutordata.ts"
+      ],
       "./src/scripts/savecallablenames.ts": [
         "../../node_modules/@types/node/assert.d.ts",
         "../../node_modules/@types/node/async_hooks.d.ts",
@@ -72873,6 +72969,7 @@
       "./src/declarations/types.ts",
       "./src/index.ts",
       "./src/request-handlers/firestorewrite.ts",
+      "./src/scripts/populatefirestore.ts",
       "./src/scripts/savecallablenames.ts",
       "./src/tsoa-docs/app.ts",
       "./src/tsoa-docs/server.ts",
@@ -75305,6 +75402,10 @@
       ],
       [
         "./src/request-handlers/firestorewrite.ts",
+        1
+      ],
+      [
+        "./src/scripts/populatefirestore.ts",
         1
       ],
       [

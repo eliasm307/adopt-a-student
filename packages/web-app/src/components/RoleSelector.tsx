@@ -43,6 +43,7 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
           type='button'
           style={pathStyle}
           onClick={() => {
+            return alert("Tutor route tbc");
             setUserRole("Tutor");
             log(
               "RoleSelector",

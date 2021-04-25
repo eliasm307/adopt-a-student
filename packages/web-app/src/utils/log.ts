@@ -4,5 +4,5 @@ import isProductionEnvironment from './isProductionEnvironment';
 export default function log(...args: any[]) {
   if (isProductionEnvironment()) return;
 
-  log(...args);
+  console.log(...args);
 }

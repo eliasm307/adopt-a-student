@@ -127,6 +127,7 @@ module.exports = {
     "react/no-danger": 1,
     "import/no-useless-path-segments": 1,
     "react/prefer-stateless-function": 1,
+    "react/no-unused-prop-types": 1,
     "jsx-a11y/aria-role": 1,
     "react/self-closing-comp": 1,
     "jsx-a11y/label-has-associated-control": 1,

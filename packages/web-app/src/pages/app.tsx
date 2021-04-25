@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useState } from 'react';
+import React from 'react';
 import { QueryClientProvider } from 'react-query';
 
-import { PrivateStudentData, PrivateUserData } from '@adopt-a-student/common';
 import { Redirect, Router } from '@reach/router';
 
 import SignIn from '../client-routes/general/sign-in';

@@ -9,7 +9,7 @@ export default function getRandomCountries(): Country[] {
   */
 
   // random count of countries, atleast 1
-  const count = Math.floor(Math.random() * 5) + 1;
+  const count = Math.floor(Math.random() * 10) + 1;
 
   const selected = new Set<Country>();
 

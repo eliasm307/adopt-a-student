@@ -81,7 +81,10 @@ const callableFunctionHandlers = {
 module.exports = Object.entries(callableFunctionHandlers).reduce(
   (exports, [callableName, callableHandler]) => {
     if (callableHandler)
-      exports[callableName] = functionsHttps.onCall(callableHandler);
+      exports[callableName] = functionsHttps._onCallWithOptions(
+        callableHandler,
+        { regions: ["europe-west1", "us-central1"] }
+      );
     return exports;
   },
   {} as Record<string, HttpsFunction & Runnable<any>>

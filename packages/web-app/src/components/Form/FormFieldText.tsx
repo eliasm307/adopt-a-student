@@ -23,7 +23,7 @@ const FormFieldText = ({
         required={required}
         type='text'
         name={controlId}
-        placeholder='Enter email'
+        placeholder=''
         onChange={onChange}
       />
       {description && (

@@ -19,7 +19,7 @@ console.log(__filename, { NODE_ENV: process.env.NODE_ENV });
 
 if (isProductionEnvironment()) {
   console.warn(__filename, "using live admin");
-  /*
+
   app = admin.initializeApp({
     credential: admin.credential.cert({
       // todo create custom type declarations for functions module
@@ -30,7 +30,7 @@ if (isProductionEnvironment()) {
     // databaseURL: "https://adopt-a-student.firebaseio.com",
     databaseURL,
   });
-  */
+  /*
   const config = require("../../../private_config/firebase_service_account_cert.json");
 
   app = admin.initializeApp({
@@ -43,6 +43,7 @@ if (isProductionEnvironment()) {
     // databaseURL: "https://adopt-a-student.firebaseio.com",
     databaseURL,
   });
+  */
 } else {
   console.warn(__filename, "using local admin");
   // make admin app use this for firestore requests
