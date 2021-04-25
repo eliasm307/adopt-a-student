@@ -10,6 +10,7 @@ import {
   GetTutorsByLocalesRequestBody, GetTutorsByLocalesResponseBody,
 } from '@adopt-a-student/common';
 
+import TutorList from '../../components/TutorList';
 import { QueryName } from '../../constants';
 import { useUserPrivateStudentData } from '../../providers/PrivateStudentDataProvider';
 import { functionsClient } from '../../utils/firebase-client';
@@ -48,14 +49,17 @@ const StudentHome = () => {
   if (error)
     return (
       <div>
-        An error has occurred: {error.name} {error.message} Stakc: {error.stack}
+        An error has occurred: {error.name} {error.message} Stack: {error.stack}
       </div>
     );
+
+  if (!responseData || !responseData.tutors.length)
+    return <div>No Data found: result = {JSON.stringify(responseData)}</div>;
 
   return (
     <>
       <div>student home Data: {responseData?.tutors.length} items</div>
-      <div>{JSON.stringify(responseData, null, 2)}</div>
+      <TutorList tutors={responseData.tutors} />
     </>
   );
 };
