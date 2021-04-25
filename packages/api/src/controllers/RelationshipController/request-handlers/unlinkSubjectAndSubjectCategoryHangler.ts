@@ -7,33 +7,23 @@ import {
 import {
   GENERIC_SUBJECT_COLLECTION_NAME, SUBJECT_CATEGORY_COLLECTION_NAME,
 } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { InternalHandler } from '../../../declarations/types';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const unlinkSubjectAndSubjectCategoryHandler: FirebaseCallableFunctionHandler<
+const unlinkSubjectAndSubjectCategoryHandler: InternalHandler<
   UnlinkSubjectAndSubjectCategoryRequestBody,
   UnlinkSubjectAndSubjectCategoryResponseBody
-> = async (body, context) => {
-  const { uid } = verifyRequest(body, context);
-
-  // verify received data
-  if (!body || !body.categoryId || !body.subjectId)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not unlink documents because provided data is not valid"
-    );
-
+> = async (body) => {
   const { subjectId, categoryId } = body;
 
   const document1Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
-    filterPredicate: (link) => link !== categoryId,
-    linkReducer: (link) => link,
+    linkToMutatePredicate: (link) => link === categoryId,
     linksPropName: "relatedCategories",
-    id: subjectId,
+    documentId: subjectId,
   };
 
   const document2Props: RemoveDocumentLinkProps<
@@ -42,10 +32,9 @@ const unlinkSubjectAndSubjectCategoryHandler: FirebaseCallableFunctionHandler<
   > = {
     collectionPath: SUBJECT_CATEGORY_COLLECTION_NAME,
     dataPredicate: isGenericSubjectCategoryData,
-    filterPredicate: (link) => link !== subjectId,
-    linkReducer: (link) => link,
+    linkToMutatePredicate: (link) => link === subjectId,
     linksPropName: "relatedSubjects",
-    id: categoryId,
+    documentId: categoryId,
   };
 
   const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
@@ -54,7 +43,7 @@ const unlinkSubjectAndSubjectCategoryHandler: FirebaseCallableFunctionHandler<
     firestoreAdmin,
   });
 
-  return { message: "Success linking documents" };
+  return {};
 };
 
 export default unlinkSubjectAndSubjectCategoryHandler;

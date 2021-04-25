@@ -1,12 +1,12 @@
 import {
-  GenericSubjectCategoryData, LocaleCode, LocaleSubjectCategoryData, ObjectMap,
+  GenericSubjectCategoryData, isArray, LocaleCode, LocaleSubjectCategoryData,
 } from '@adopt-a-student/common';
 
 import { DataMutatorMap as DataMutatorMap, DataUpdater } from '../../declarations/types';
 
 interface Props {
-  updates: any;
   existingData: GenericSubjectCategoryData;
+  updates: any;
 }
 
 const genericSubjectCategoryDataUpdater: DataUpdater<GenericSubjectCategoryData> = ({
@@ -23,11 +23,29 @@ const genericSubjectCategoryDataUpdater: DataUpdater<GenericSubjectCategoryData>
     // replace the object with the updates, this should be merged by the firestore update
     locales: (value) =>
       typeof value === "object"
-        ? (newData.locales = value as ObjectMap<
+        ? (newData.locales = value as Record<
             LocaleCode,
             LocaleSubjectCategoryData
           >)
         : null,
+    names: (value) => {
+      if (!isArray(value)) return null;
+
+      for (const val of value) {
+        if (typeof val !== "string") {
+          console.warn(
+            __filename,
+            "Tried to update generic subject category name with an array that wasnt all strings, did nothing",
+            { value }
+          );
+          return null;
+        }
+      }
+
+      // make sure names are Unique
+      newData.names = [...new Set([...(value as string[]), ...newData.names])];
+      return;
+    },
     relatedSubjects: null, // change handled by a different request
   };
 

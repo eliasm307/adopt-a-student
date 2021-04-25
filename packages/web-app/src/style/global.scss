@@ -1,0 +1,22 @@
+// override bootstrap settings
+$primary: red;
+$primary: #15BDD8;
+$primary2: #33C4B3;
+
+$enable-gradients: true;
+
+// bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+@mixin debug {
+  border: 1px solid red !important;
+}
+
+.debug {
+  border: 1px solid red !important;
+}

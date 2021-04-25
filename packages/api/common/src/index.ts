@@ -9,3 +9,7 @@ export * from "./declarations/types";
 export * from "./utils/type-predicates";
 
 export * from "./declarations/api";
+
+export * from "./utils";
+
+export * from "./constants";

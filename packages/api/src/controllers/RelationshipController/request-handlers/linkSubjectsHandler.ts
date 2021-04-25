@@ -3,48 +3,40 @@ import {
 } from '@adopt-a-student/common';
 
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { InternalHandler } from '../../../declarations/types';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
 // todo firestoreAdmin should be a dependency through  props
 
-const linkGenericSubjects: FirebaseCallableFunctionHandler<
+const linkGenericSubjects: InternalHandler<
   LinkSubjectsRequestBody,
   LinkSubjectsResponseBody
-> = async (body, context) => {
-  const { uid } = verifyRequest(body, context);
-
-  // verify received data
-  if (!body || !body.subject1Id || !body.subject2Id)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not link documents because provided data is not valid"
-    );
-
-  const { subject1Id, subject2Id } = body;
+> = async (props) => {
+  const { subject1Id, subject2Id } = props;
 
   const commonDocumentProps: Omit<
     AddDocumentLinkProps<GenericSubjectData, string>,
-    "id" | "linkToAdd"
+    "documentId" | "linkToAdd" | "linkToMutatePredicate"
   > = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
-    linkReducer: (link) => link,
     linksPropName: "relatedSubjects",
   };
 
   const document1Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
     linkToAdd: subject2Id,
-    id: subject1Id,
+    documentId: subject1Id,
+    linkToMutatePredicate: (link) => link === subject2Id,
   };
 
   const document2Props: AddDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
     linkToAdd: subject1Id,
-    id: subject2Id,
+    documentId: subject2Id,
+    linkToMutatePredicate: (link) => link === subject1Id,
   };
 
   const [updatedDocument1, updatedDocument2] = await linkDocuments({
@@ -53,6 +45,6 @@ const linkGenericSubjects: FirebaseCallableFunctionHandler<
     firestoreAdmin,
   });
 
-  return { message: "Success linking documents" };
+  return {};
 };
 export default linkGenericSubjects;

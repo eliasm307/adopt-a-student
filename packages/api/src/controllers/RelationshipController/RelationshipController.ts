@@ -1,20 +1,22 @@
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
-/* eslint-disable @typescript-eslint/require-await */
 import {
-  LinkStudentAndSubjectRequestBody, LinkStudentAndSubjectResponseBody,
-  LinkStudentAndTutorRequestBody, LinkStudentAndTutorResponseBody,
-  LinkSubjectAndSubjectCategoryRequestBody, LinkSubjectAndSubjectCategoryResponseBody,
-  LinkSubjectsRequestBody, LinkSubjectsResponseBody, LinkTutorAndSubjectRequestBody,
-  LinkTutorAndSubjectResponseBody, UnlinkStudentAndSubjectRequestBody,
-  UnlinkStudentAndSubjectResponseBody, UnlinkStudentAndTutorRequestBody,
-  UnlinkStudentAndTutorResponseBody, UnlinkSubjectAndSubjectCategoryRequestBody,
-  UnlinkSubjectAndSubjectCategoryResponseBody, UnlinkSubjectsRequestBody,
-  UnlinkSubjectsResponseBody, UnlinkTutorAndSubjectRequestBody, UnlinkTutorAndSubjectResponseBody,
+  isLinkedLocaleSubjectData, isTruthyString, LinkStudentAndSubjectRequestBody,
+  LinkStudentAndSubjectResponseBody, LinkStudentAndTutorRequestBody,
+  LinkStudentAndTutorResponseBody, LinkSubjectAndSubjectCategoryRequestBody,
+  LinkSubjectAndSubjectCategoryResponseBody, LinkSubjectsRequestBody, LinkSubjectsResponseBody,
+  LinkTutorAndSubjectRequestBody, LinkTutorAndSubjectResponseBody,
+  UnlinkStudentAndSubjectRequestBody, UnlinkStudentAndSubjectResponseBody,
+  UnlinkStudentAndTutorRequestBody, UnlinkStudentAndTutorResponseBody,
+  UnlinkSubjectAndSubjectCategoryRequestBody, UnlinkSubjectAndSubjectCategoryResponseBody,
+  UnlinkSubjectsRequestBody, UnlinkSubjectsResponseBody, UnlinkTutorAndSubjectRequestBody,
+  UnlinkTutorAndSubjectResponseBody,
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
+import { functionsHttps } from '../../utils/firebase/firebase-admin';
+import verifyRequest from '../../utils/verifyRequest';
 import linkStudentAndSubjectHandler from './request-handlers/linkStudentAndSubjectHandler';
 import linkStudentAndTutorHandler from './request-handlers/linkStudentAndTutorHandler';
 import linkSubjectAndSubjectCategoryHandler from './request-handlers/linkSubjectAndSubjectCategoryHandler';
@@ -52,13 +54,19 @@ const exportedNames = [
   unlinkStudentAndTutor,
 ] as const;
 
-// hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
+// tsoa hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
 @Route("/")
 export class RelationshipController extends Controller {
   static callableNames = exportedNames;
   static callableNamesMap = arrayToRecord([...exportedNames]);
   static typeName = "Relationships";
+
+  // todo add this to other controllers? or should controllers be instantiable with firebaseAdmin dependency injected?
+  // should not be instantiable as the methods are stateless
+  private constructor() {
+    super();
+  }
 
   /**
    * Retreives data about a tutor user. If the tutor user owns the data then they get all the data, otherwise it is restricted to 'public' data.
@@ -68,81 +76,228 @@ export class RelationshipController extends Controller {
    */
   @Post(linkStudentAndSubject)
   static linkStudentAndSubject(
-    @Body() body: LinkStudentAndSubjectRequestBody,
+    @Body() body: Partial<LinkStudentAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkStudentAndSubjectResponseBody> {
-    return linkStudentAndSubjectHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { data } = body;
+
+    // verify received data
+    if (!isLinkedLocaleSubjectData(data))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+
+    return linkStudentAndSubjectHandler({ data, uid });
   }
 
   @Post(linkStudentAndTutor)
   static linkStudentAndTutor(
-    @Body() body: LinkStudentAndTutorRequestBody,
+    @Body() body: Partial<LinkStudentAndTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkStudentAndTutorResponseBody> {
-    return linkStudentAndTutorHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { studentId, tutorId } = body;
+
+    // verify received data
+    if (
+      !studentId ||
+      !isTruthyString(studentId) ||
+      !tutorId ||
+      !isTruthyString(tutorId)
+    )
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update tutor because provided data is not valid"
+      );
+
+    const userIsStudentOrTutor = studentId === uid || tutorId === uid;
+
+    if (!userIsStudentOrTutor)
+      throw new functionsHttps.HttpsError(
+        "permission-denied",
+        "Logged in user is neither the student or the tutor"
+      );
+
+    return linkStudentAndTutorHandler({ studentId, tutorId });
   }
 
   @Post(linkSubjectAndSubjectCategory)
   static linkSubjectAndSubjectCategory(
-    @Body() body: LinkSubjectAndSubjectCategoryRequestBody,
+    @Body() body: Partial<LinkSubjectAndSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkSubjectAndSubjectCategoryResponseBody> {
-    return linkSubjectAndSubjectCategoryHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { categoryId, locale, subjectId } = body;
+
+    // verify received data
+    if (
+      !isTruthyString(categoryId) ||
+      !isTruthyString(locale) ||
+      !isTruthyString(subjectId)
+    )
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+
+    return linkSubjectAndSubjectCategoryHandler({
+      categoryId,
+      locale,
+      subjectId,
+    });
   }
 
   @Post(linkSubjects)
   static linkSubjects(
-    @Body() body: LinkSubjectsRequestBody,
+    @Body() body: Partial<LinkSubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkSubjectsResponseBody> {
-    return linkSubjectsHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { subject1Id, subject2Id } = body;
+
+    // verify received data
+    if (!isTruthyString(subject1Id) || !isTruthyString(subject2Id))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+
+    return linkSubjectsHandler({ subject1Id, subject2Id });
   }
 
   @Post(linkTutorAndSubject)
   static linkTutorAndSubject(
-    @Body() body: LinkTutorAndSubjectRequestBody,
+    @Body() body: Partial<LinkTutorAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkTutorAndSubjectResponseBody> {
-    return linkTutorAndSubjectHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { data } = body;
+
+    // verify received data
+    if (!isLinkedLocaleSubjectData(data))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+
+    return linkTutorAndSubjectHandler({ data, uid });
   }
 
   @Post(unlinkStudentAndSubject)
   static unlinkStudentAndSubject(
-    @Body() body: UnlinkStudentAndSubjectRequestBody,
+    @Body() body: Partial<UnlinkStudentAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkStudentAndSubjectResponseBody> {
-    return unlinkStudentAndSubjectHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { country, id, locale } = body;
+
+    // verify received data
+    if (
+      !isTruthyString(country) ||
+      !isTruthyString(id) ||
+      !isTruthyString(locale)
+    )
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+
+    return unlinkStudentAndSubjectHandler({ country, id, locale, uid });
   }
 
   @Post(unlinkStudentAndTutor)
   static unlinkStudentAndTutor(
-    @Body() body: UnlinkStudentAndTutorRequestBody,
+    @Body() body: Partial<UnlinkStudentAndTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkStudentAndTutorResponseBody> {
-    return unlinkStudentAndTutorHandler(body, context);
+    // ? implement request system, so this would be unlinking a student in what way?
+    const { uid } = verifyRequest(body, context);
+
+    const { studentId, tutorId } = body;
+
+    // verify received data
+    if (!isTruthyString(studentId) || !isTruthyString(tutorId))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update tutor because provided data is not valid"
+      );
+
+    const userIsStudentOrTutor = studentId === uid || tutorId === uid;
+
+    if (!userIsStudentOrTutor)
+      throw new functionsHttps.HttpsError(
+        "permission-denied",
+        "Logged in user is neither the student or the tutor"
+      );
+
+    return unlinkStudentAndTutorHandler({ studentId, tutorId, uid });
   }
 
   @Post(unlinkSubjectAndSubjectCategory)
   static unlinkSubjectAndSubjectCategory(
-    @Body() body: UnlinkSubjectAndSubjectCategoryRequestBody,
+    @Body() body: Partial<UnlinkSubjectAndSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkSubjectAndSubjectCategoryResponseBody> {
-    return unlinkSubjectAndSubjectCategoryHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { categoryId, subjectId } = body;
+
+    // verify received data
+    if (!isTruthyString(categoryId) || !isTruthyString(subjectId))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not unlink documents because provided data is not valid"
+      );
+
+    return unlinkSubjectAndSubjectCategoryHandler({ categoryId, subjectId });
   }
 
   @Post(unlinkSubjects)
   static unlinkSubjects(
-    @Body() body: UnlinkSubjectsRequestBody,
+    @Body() body: Partial<UnlinkSubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkSubjectsResponseBody> {
-    return unlinkSubjectsHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { subject1Id, subject2Id } = body;
+
+    // verify received data
+    if (!body || !isTruthyString(subject1Id) || !isTruthyString(subject2Id))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+
+    return unlinkSubjectsHandler({ subject1Id, subject2Id });
   }
 
   @Post(unlinkTutorAndSubject)
   static unlinkTutorAndSubject(
-    @Body() body: UnlinkTutorAndSubjectRequestBody,
+    @Body() body: Partial<UnlinkTutorAndSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UnlinkTutorAndSubjectResponseBody> {
-    return unlinkTutorAndSubjectHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { country, id, locale } = body;
+
+    // verify received data
+    if (
+      !isTruthyString(country) ||
+      !isTruthyString(id) ||
+      !isTruthyString(locale)
+    )
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not link documents because provided data is not valid"
+      );
+    return unlinkTutorAndSubjectHandler({ country, id, locale, uid });
   }
 }

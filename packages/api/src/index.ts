@@ -19,7 +19,11 @@ Example from https://firebase.google.com/docs/functions/callable#web
 // Saves a message to the Firebase Realtime Database but sanitizes the text by removing swearwords.
 */
 
-type CallableName = typeof StudentsController.callableNames[number] | any;
+type CallableName =
+  | typeof StudentsController.callableNames[number]
+  | typeof TutorsController.callableNames[number]
+  | typeof SubjectsController.callableNames[number]
+  | typeof SubjectCategoryController.callableNames[number];
 
 // getStudentsBySubjects;
 const callableFunctionHandlers = {
@@ -30,6 +34,7 @@ const callableFunctionHandlers = {
   updateTutor: TutorsController.updateTutor,
   getTutor: TutorsController.getTutor,
   getTutorsBySubjects: TutorsController.getTutorsBySubjects,
+  getTutorsByLocales: TutorsController.getTutorsByLocales,
 
   // students
   createStudent: StudentsController.createStudent,
@@ -47,12 +52,13 @@ const callableFunctionHandlers = {
   getSubjectsByCategory: SubjectsController.getSubjectsByCategory,
 
   // subject categories
-  getSubjectCategories: SubjectCategoryController.getSubjectCategories,
+  getSubjectCategory: SubjectCategoryController.getSubjectCategory,
+  getSubjectCategoriesForLocale:
+    SubjectCategoryController.getSubjectCategoriesForLocale,
   createSubjectCategory: SubjectCategoryController.createSubjectCategory,
   updateSubjectCategory: SubjectCategoryController.updateSubjectCategory,
 
   // relationships
-  /* */
   linkSubjects: RelationshipController.linkSubjects,
   unlinkSubjects: RelationshipController.unlinkSubjects,
 
@@ -75,7 +81,10 @@ const callableFunctionHandlers = {
 module.exports = Object.entries(callableFunctionHandlers).reduce(
   (exports, [callableName, callableHandler]) => {
     if (callableHandler)
-      exports[callableName] = functionsHttps.onCall(callableHandler);
+      exports[callableName] = functionsHttps._onCallWithOptions(
+        callableHandler,
+        { regions: ["europe-west1", "us-central1"] }
+      );
     return exports;
   },
   {} as Record<string, HttpsFunction & Runnable<any>>

@@ -1,20 +1,30 @@
 import { ConfidenceLevelEnum } from './enums';
 import {
-  CategoryId, Country, EmailString, GenericSubjectId, LocaleCode, LocaleSubjectId, StudentId,
-  SubjectCategoryId, SubjectId, TutorId, UrlString, UserId,
+  CategoryId, Country, EmailString, LocaleCode, StudentId, SubjectCategoryId, SubjectCategoryName,
+  SubjectId, SubjectName, TutorId, UrlString, UserId,
 } from './types';
 
 export interface Entity {}
+
+/*
+export interface UserLocale {
+  country: Country;
+  locale: LocaleCode;
+}
+*/
+
 /** User data that is publicly available */
 export interface PublicUserData extends Entity {
   /** Unique id for a user */
   readonly id: UserId;
 
   /** Link to profile image, if defined */
-  imageUrl?: UrlString;
+  imageUrl?: UrlString | null;
   /** Optional text for users to introduce themselves,
    * describe their experience, what subjects they are interested in etc */
   introduction?: string;
+  /** The countries the user prefers for content */
+  prefferedCountries: Country[];
   /** The locales a user prefers for content */
   prefferedLocales: LocaleCode[];
   /** Username which will be displayed for a user */
@@ -30,13 +40,15 @@ export interface PrivateUserData extends PublicUserData {
   relatedSubjects: UserSubjectData[];
 }
 /** Schema of data that represents a student, as it is stored in database */
-export interface PrivateStudentData extends PrivateUserData {
+export interface PrivateStudentData extends PrivateUserData, PublicStudentData {
   /** Data about the tutors a student is involved with */
   relatedTutors: LinkedTutorData[];
 }
+
 export interface PublicStudentData extends PublicUserData {}
+
 /** Schema of data that represents a tutor, only available to the tutor */
-export interface PrivateTutorData extends PrivateUserData {
+export interface PrivateTutorData extends PrivateUserData, PublicTutorData {
   /** Data about the students a teacher is involved with */
   relatedStudents: LinkedStudentData[];
 }
@@ -49,10 +61,11 @@ export interface PublicTutorData extends PublicUserData {
  */
 export interface UserSubjectData {
   /** Unique id to the related subject */
-  readonly id: LocaleSubjectId;
+  readonly id: SubjectId;
 
   /** A rating of how confident a user feels in the subject, the numbers  */
   confidenceLevel: ConfidenceLevelEnum;
+  country: Country;
   /** Detail of the users experience with the subject */
   detail: string;
   locale: LocaleCode;
@@ -64,32 +77,43 @@ export interface UserSubjectData {
  * where "Physics" and "Physiques" both belong to the "Physics" generic subject
  */
 export interface GenericSubjectData extends Entity {
-  readonly id: GenericSubjectId;
+  readonly id: SubjectId;
 
+  /** Existing names for this subject from defined locales
+   *
+  // todo this should update when locale subjects are changed
+   */
+  names: SubjectName[];
   /** The categories this generic subject belongs to */
   relatedCategories: SubjectCategoryId[];
   /** Links to other relevant subjects a user might be interested in
      `// todo needs to be syncronised ie if A is related to B then B must be related to A`
     */
-  relatedSubjects: GenericSubjectId[];
+  relatedSubjects: SubjectId[];
 }
 /** Name of a subject category in a specific locale */
-export interface SubjectLocaleName {
+export interface LocaleSubjectName {
   locale: LocaleCode;
-  name: string;
+  name: SubjectName;
 }
 /** Subject category data in a specific locale */
 export interface LocaleSubjectCategoryData {
-  locale: LocaleCode;
-  name: string;
   /** id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject */
-  parentId: SubjectId;
+  id: SubjectId;
+  locale: LocaleCode;
+  name: SubjectCategoryName;
 }
 /** Subject category with all locale names */
 export interface GenericSubjectCategoryData extends Entity {
   id: CategoryId;
-  /** Representations of the same generic subject catories in different locales */
+  /** Representations of the same generic subject catories in different locales
+    // ? should the key be the country instead?
+  */
   locales: Record<LocaleCode, LocaleSubjectCategoryData>;
+  /** Existing names for this subject category from defined locales *
+  // todo test this should update when locale subjects are changed
+  */
+  names: SubjectName[];
   /** generic subjects which belong to this generic category
        // todo this should link category to subject and subject to category
     */
@@ -100,8 +124,8 @@ export interface GenericSubjectCategoryData extends Entity {
  // ! this is represented as separate documents as there might be a lot of data associated with locale subjects, so this prevents every locale subject being loaded when querying generic subjects
 */
 export interface LocaleSubjectData extends Entity {
-  /** Unique id created by combining [GenericSubjectId]-[LocaleCode] */
-  readonly id: LocaleSubjectId;
+  /** Id of generic subject this locale subject relates to, there should only be 1 */
+  readonly id: SubjectId;
 
   /** Specific country for this subject, for any subjects that might be country dependent, blank means it applies to any */
   country: Country;
@@ -109,8 +133,7 @@ export interface LocaleSubjectData extends Entity {
   description: string;
   /** Represents a language that a subject is in */
   locale: LocaleCode;
-  /** Id of generic subject this locale subject relates to, there should only be 1 */
-  parentId: GenericSubjectId;
+  name: SubjectName;
   /** Ids of students needing help with this subject `// todo needs to be syncronised` */
   relatedStudents: StudentId[];
   /** Ids of tutors available to help with this subject `// todo needs to be syncronised` */

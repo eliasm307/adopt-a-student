@@ -11,7 +11,11 @@ interface Props<D, P> {
 export default async function readPublicUserData<D, P>(props: Props<D, P>) {
   const { publicDataExtractor } = props;
 
-  const data = await readPrivateUserData(props);
+  const privateData = await readPrivateUserData(props);
 
-  return publicDataExtractor(data);
+  const extractedPublicData = publicDataExtractor(privateData);
+
+  console.log(__filename, { privateData, extractedPublicData });
+
+  return extractedPublicData;
 }

@@ -1,0 +1,1523 @@
+[
+  {
+    "name": "English",
+    "local": "English",
+    "location": null,
+    "tag": "en",
+    "lcid": 9,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "American Samoa",
+    "tag": "en-AS",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Anguilla",
+    "tag": "en-AI",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Antigua and Barbuda",
+    "tag": "en-AG",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Australia",
+    "tag": "en-AU",
+    "lcid": 3081,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Austria",
+    "tag": "en-AT",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Bahamas",
+    "tag": "en-BS",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Barbados",
+    "tag": "en-BB",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Belgium",
+    "tag": "en-BE",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Belize",
+    "tag": "en-BZ",
+    "lcid": 10249,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Bermuda",
+    "tag": "en-BM",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Botswana",
+    "tag": "en-BW",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "British Indian Ocean Territory",
+    "tag": "en-IO",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "British Virgin Islands",
+    "tag": "en-VG",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Burundi",
+    "tag": "en-BI",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Cameroon",
+    "tag": "en-CM",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Canada",
+    "tag": "en-CA",
+    "lcid": 4105,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Caribbean",
+    "tag": "en-029",
+    "lcid": 9225,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Cayman Islands",
+    "tag": "en-KY",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Christmas Island",
+    "tag": "en-CX",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Cocos [Keeling] Islands",
+    "tag": "en-CC",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Cook Islands",
+    "tag": "en-CK",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Cyprus",
+    "tag": "en-CY",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Denmark",
+    "tag": "en-DK",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Dominica",
+    "tag": "en-DM",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Eritrea",
+    "tag": "en-ER",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Europe",
+    "tag": "en-150",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Falkland Islands",
+    "tag": "en-FK",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Finland",
+    "tag": "en-FI",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Fiji",
+    "tag": "en-FJ",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Gambia",
+    "tag": "en-GM",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Germany",
+    "tag": "en-DE",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Ghana",
+    "tag": "en-GH",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Gibraltar",
+    "tag": "en-GI",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Grenada",
+    "tag": "en-GD",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Guam",
+    "tag": "en-GU",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Guernsey",
+    "tag": "en-GG",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Guyana",
+    "tag": "en-GY",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Hong Kong",
+    "tag": "en-HK",
+    "lcid": 15369,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "India",
+    "tag": "en-IN",
+    "lcid": 16393,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Ireland",
+    "tag": "en-IE",
+    "lcid": 6153,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Isle of Man",
+    "tag": "en-IM",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Israel",
+    "tag": "en-IL",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Jamaica",
+    "tag": "en-JM",
+    "lcid": 8201,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Jersey",
+    "tag": "en-JE",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Kenya",
+    "tag": "en-KE",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Kiribati",
+    "tag": "en-KI",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Lesotho",
+    "tag": "en-LS",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Liberia",
+    "tag": "en-LR",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Macao SAR",
+    "tag": "en-MO",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Madagascar",
+    "tag": "en-MG",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Malawi",
+    "tag": "en-MW",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Malaysia",
+    "tag": "en-MY",
+    "lcid": 17417,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Malta",
+    "tag": "en-MT",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Marshall Islands",
+    "tag": "en-MH",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Mauritius",
+    "tag": "en-MU",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Micronesia",
+    "tag": "en-FM",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Montserrat",
+    "tag": "en-MS",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Namibia",
+    "tag": "en-NA",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Nauru",
+    "tag": "en-NR",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Netherlands",
+    "tag": "en-NL",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "New Zealand",
+    "tag": "en-NZ",
+    "lcid": 5129,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Nigeria",
+    "tag": "en-NG",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Niue",
+    "tag": "en-NU",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Norfolk Island",
+    "tag": "en-NF",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Northern Mariana Islands",
+    "tag": "en-MP",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Pakistan",
+    "tag": "en-PK",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Palau",
+    "tag": "en-PW",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Papua New Guinea",
+    "tag": "en-PG",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Pitcairn Islands",
+    "tag": "en-PN",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Puerto Rico",
+    "tag": "en-PR",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Republic of the Philippines",
+    "tag": "en-PH",
+    "lcid": 13321,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Rwanda",
+    "tag": "en-RW",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Saint Kitts and Nevis",
+    "tag": "en-KN",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Saint Lucia",
+    "tag": "en-LC",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Saint Vincent and the Grenadines",
+    "tag": "en-VC",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Samoa",
+    "tag": "en-WS",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Seychelles",
+    "tag": "en-SC",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Sierra Leone",
+    "tag": "en-SL",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Singapore",
+    "tag": "en-SG",
+    "lcid": 18441,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Sint Maarten",
+    "tag": "en-SX",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Slovenia",
+    "tag": "en-SI",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Solomon Islands",
+    "tag": "en-SB",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "South Africa",
+    "tag": "en-ZA",
+    "lcid": 7177,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "South Sudan",
+    "tag": "en-SS",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "St Helena, Ascension,  Tristan da Cunha",
+    "tag": "en-SH",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Sudan",
+    "tag": "en-SD",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Swaziland",
+    "tag": "en-SZ",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Sweden",
+    "tag": "en-SE",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Switzerland",
+    "tag": "en-CH",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Tanzania",
+    "tag": "en-TZ",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Tokelau",
+    "tag": "en-TK",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Tonga",
+    "tag": "en-TO",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Trinidad and Tobago",
+    "tag": "en-TT",
+    "lcid": 11273,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Turks and Caicos Islands",
+    "tag": "en-TC",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Tuvalu",
+    "tag": "en-TV",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Uganda",
+    "tag": "en-UG",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "United Arab Emirates",
+    "tag": "en-AE",
+    "lcid": 19465,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "United Kingdom",
+    "tag": "en-GB",
+    "lcid": 2057,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "United States",
+    "tag": "en-US",
+    "lcid": 1033,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "US Minor Outlying Islands",
+    "tag": "en-UM",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "US Virgin Islands",
+    "tag": "en-VI",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Vanuatu",
+    "tag": "en-VU",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "World",
+    "tag": "en-001",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Zambia",
+    "tag": "en-ZM",
+    "lcid": 4096,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "English",
+    "local": "English",
+    "location": "Zimbabwe",
+    "tag": "en-ZW",
+    "lcid": 12297,
+    "iso639-2": "eng",
+    "iso639-1": "en"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": null,
+    "tag": "fr",
+    "lcid": 12,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Algeria",
+    "tag": "fr-DZ",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Belgium",
+    "tag": "fr-BE",
+    "lcid": 2060,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Benin",
+    "tag": "fr-BJ",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Burkina Faso",
+    "tag": "fr-BF",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Burundi",
+    "tag": "fr-BI",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Cameroon",
+    "tag": "fr-CM",
+    "lcid": 11276,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Canada",
+    "tag": "fr-CA",
+    "lcid": 3084,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Central African Republic",
+    "tag": "fr-CF",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Chad",
+    "tag": "fr-TD",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Comoros",
+    "tag": "fr-KM",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Congo",
+    "tag": "fr-CG",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Congo, DRC",
+    "tag": "fr-CD",
+    "lcid": 9228,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Côte d'Ivoire",
+    "tag": "fr-CI",
+    "lcid": 12300,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Djibouti",
+    "tag": "fr-DJ",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Equatorial Guinea",
+    "tag": "fr-GQ",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "France",
+    "tag": "fr-FR",
+    "lcid": 1036,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "French Guiana",
+    "tag": "fr-GF",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "French Polynesia",
+    "tag": "fr-PF",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Gabon",
+    "tag": "fr-GA",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Guadeloupe",
+    "tag": "fr-GP",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Guinea",
+    "tag": "fr-GN",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Haiti",
+    "tag": "fr-HT",
+    "lcid": 15372,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Luxembourg",
+    "tag": "fr-LU",
+    "lcid": 5132,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Madagascar",
+    "tag": "fr-MG",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Mali",
+    "tag": "fr-ML",
+    "lcid": 13324,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Martinique",
+    "tag": "fr-MQ",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Mauritania",
+    "tag": "fr-MR",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Mauritius",
+    "tag": "fr-MU",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Mayotte",
+    "tag": "fr-YT",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Morocco",
+    "tag": "fr-MA",
+    "lcid": 14348,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "New Caledonia",
+    "tag": "fr-NC",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Niger",
+    "tag": "fr-NE",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Principality of Monaco",
+    "tag": "fr-MC",
+    "lcid": 6156,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Reunion",
+    "tag": "fr-RE",
+    "lcid": 8204,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Rwanda",
+    "tag": "fr-RW",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Saint Barthélemy",
+    "tag": "fr-BL",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Saint Martin",
+    "tag": "fr-MF",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Saint Pierre and Miquelon",
+    "tag": "fr-PM",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Senegal",
+    "tag": "fr-SN",
+    "lcid": 10252,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Seychelles",
+    "tag": "fr-SC",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Switzerland",
+    "tag": "fr-CH",
+    "lcid": 4108,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Syria",
+    "tag": "fr-SY",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Togo",
+    "tag": "fr-TG",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Tunisia",
+    "tag": "fr-TN",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Vanuatu",
+    "tag": "fr-VU",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "French",
+    "local": null,
+    "location": "Wallis and Futuna",
+    "tag": "fr-WF",
+    "lcid": 4096,
+    "iso639-2": "fre/fra",
+    "iso639-1": "fr"
+  },
+  {
+    "name": "Malay",
+    "local": null,
+    "location": null,
+    "tag": "ms",
+    "lcid": 62,
+    "iso639-2": "may/msa",
+    "iso639-1": "ms"
+  },
+  {
+    "name": "Malay",
+    "local": null,
+    "location": "Brunei Darussalam",
+    "tag": "ms-BN",
+    "lcid": 2110,
+    "iso639-2": "may/msa",
+    "iso639-1": "ms"
+  },
+  {
+    "name": "Malay",
+    "local": null,
+    "location": "Malaysia",
+    "tag": "ms-MY",
+    "lcid": 1086,
+    "iso639-2": "may/msa",
+    "iso639-1": "ms"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": null,
+    "tag": "pt",
+    "lcid": 22,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Angola",
+    "tag": "pt-AO",
+    "lcid": 4096,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Brazil",
+    "tag": "pt-BR",
+    "lcid": 1046,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Cabo Verde",
+    "tag": "pt-CV",
+    "lcid": 4096,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Equatorial Guinea",
+    "tag": "pt-GQ",
+    "lcid": 4096,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Guinea-Bissau",
+    "tag": "pt-GW",
+    "lcid": 4096,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Luxembourg",
+    "tag": "pt-LU",
+    "lcid": 4096,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Macao SAR",
+    "tag": "pt-MO",
+    "lcid": 4096,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Mozambique",
+    "tag": "pt-MZ",
+    "lcid": 4096,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Portugal",
+    "tag": "pt-PT",
+    "lcid": 2070,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "São Tomé and Príncipe",
+    "tag": "pt-ST",
+    "lcid": 4096,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Switzerland",
+    "tag": "pt-CH",
+    "lcid": 4096,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  },
+  {
+    "name": "Portuguese",
+    "local": "Português",
+    "location": "Timor-Leste",
+    "tag": "pt-TL",
+    "lcid": 4096,
+    "iso639-2": "por",
+    "iso639-1": "pt"
+  }
+]

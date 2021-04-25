@@ -1,15 +1,16 @@
 import { HttpsFunction, Runnable } from 'firebase-functions';
 import { CallableContext } from 'firebase-functions/lib/providers/https';
 
-import { CALLABLE_FUNCTION_NAMES } from '../constants';
-
+/** Api handler with auth */
 export type FirebaseCallableFunctionHandler<D = any, R = any> = (
   body: Partial<D> | undefined,
   context: CallableContext
 ) => Promise<R>;
 
-/** Defines the callable function names available */
-export type CallableFunctionName = typeof CALLABLE_FUNCTION_NAMES[number];
+/** Internal api handler, doesnt require auth */
+export type InternalHandler<D = any, R = any> = (props: D) => Promise<R>;
+
+// typeof CALLABLE_FUNCTION_NAMES[number];
 
 /** Type of a callable function */
 export type CallableMethod = HttpsFunction & Runnable<any>;

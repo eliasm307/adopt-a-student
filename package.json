@@ -1,14 +1,15 @@
 {
-  "name": "adopt-a-student",
   "private": true,
+  "name": "adopt-a-student",
   "version": "1.0.0",
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bootstrap": "lerna bootstrap"
+    "bootstrap": "lerna bootstrap",
+    "start-emulators": "kill-port 8080 && set FIRESTORE_EMULATOR_HOST=localhost:8080&& set NODE_ENV=development&& firebase emulators:start"
   },
-  "author": "",
   "license": "MIT",
+  "author": "",
   "devDependencies": {
     "lerna": "^4.0.0"
   },

@@ -2,21 +2,27 @@ import { FirestoreAdmin } from "../../declarations/interfaces";
 import createPath from "../createPath";
 import { functionsHttps } from "./firebase-admin";
 
-interface Props<D> {
+export interface CreateDocumentProps<D> {
   collectionPath: string;
-  data: any;
+  data: D;
   dataPredicate: (data: any) => data is D;
+  documentId: string;
   firestoreAdmin: FirestoreAdmin;
-  id: string;
 }
 
 export default async function createDocument<D>({
   dataPredicate,
-  id,
+  documentId,
   collectionPath,
   firestoreAdmin,
   data,
-}: Props<D>): Promise<D> {
+}: CreateDocumentProps<D>): Promise<D> {
+  console.log(__filename, "Creating document", {
+    data,
+    documentId,
+    collectionPath,
+  });
+
   // verify received data
   if (!dataPredicate(data))
     throw new functionsHttps.HttpsError(
@@ -24,7 +30,7 @@ export default async function createDocument<D>({
       "Could not create document because provided data is not valid/complete"
     );
 
-  const path = createPath(collectionPath, id);
+  const path = createPath(collectionPath, documentId);
 
   // check if tutor already exists for this user
   const docRef = await firestoreAdmin.doc(path).get();
@@ -35,14 +41,12 @@ export default async function createDocument<D>({
       "Could not create document because one already exists at path",
       { path }
     );
-    // dont throw error if there is an existing tutor, its not that deep
-    /*
-    return {
-      success: false,
-      data,
-      message: "Could not create document because one already exists",
-    };
-    */
+
+    throw new functionsHttps.HttpsError(
+      "already-exists",
+      "Could not create document because one already exists at path",
+      JSON.stringify({ __filename })
+    );
   }
 
   // create document

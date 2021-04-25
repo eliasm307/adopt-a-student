@@ -5,17 +5,17 @@ import { functionsHttps } from "./firebase-admin";
 interface Props<D> {
   collectionPath: string;
   dataPredicate: (data: any) => data is D;
+  documentId: string;
   firestoreAdmin: FirestoreAdmin;
-  id: string;
 }
 
 export default async function getDocumentData<D>({
   dataPredicate,
-  id,
+  documentId,
   collectionPath,
   firestoreAdmin,
 }: Props<D>) {
-  const path = createPath(collectionPath, id);
+  const path = createPath(collectionPath, documentId);
 
   // check if tutor already exists for this user
   const docSnapshot = await firestoreAdmin.doc(path).get();

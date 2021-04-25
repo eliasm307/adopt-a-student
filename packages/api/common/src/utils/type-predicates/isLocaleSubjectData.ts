@@ -8,7 +8,7 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
     country,
     relatedTutors,
     description,
-    parentId: genericSubjectId,
+    name,
     locale,
     relatedStudents,
   } = data as LocaleSubjectData;
@@ -21,30 +21,59 @@ export function isLocaleSubjectData(data: any): data is LocaleSubjectData {
     country,
     relatedTutors,
     description,
-    parentId: genericSubjectId,
+    name,
     locale,
     relatedStudents,
   };
 
   const hasId = typeof id === "string" && id;
-  const hasGenericSubjectId =
-    typeof genericSubjectId === "string" && genericSubjectId;
+  const hasName = typeof name === "string" && name;
   const hasLocale = typeof locale === "string" && locale;
   const hasDescription = typeof description === "string";
   const hasCountry = typeof country === "string";
   const hasStudentIds = Array.isArray(relatedStudents);
   const hasTutorIds = Array.isArray(relatedTutors);
 
-  if (
-    hasId &&
-    hasStudentIds &&
-    hasTutorIds &&
-    hasLocale &&
-    hasGenericSubjectId &&
-    hasDescription &&
-    hasCountry
-  )
-    return true;
+  if (!hasId)
+    return Boolean(
+      console.warn(__filename, "Data is not valid because of id", { data })
+    );
+  if (!hasStudentIds)
+    return Boolean(
+      console.warn(__filename, "Data is not valid because of student ids", {
+        data,
+      })
+    );
+  if (!hasTutorIds)
+    return Boolean(
+      console.warn(__filename, "Data is not valid because of tutor ids", {
+        data,
+      })
+    );
+  if (!hasLocale)
+    return Boolean(
+      console.warn(__filename, "Data is not valid because of locale", { data })
+    );
+  if (!hasName)
+    return Boolean(
+      console.warn(
+        __filename,
+        "Data is not valid because of generic subject id",
+        { data }
+      )
+    );
+  if (!hasDescription)
+    return Boolean(
+      console.warn(__filename, "Data is not valid because of description", {
+        data,
+      })
+    );
+  if (!hasCountry)
+    return Boolean(
+      console.warn(__filename, "Data is not valid because of country", { data })
+    );
+
+  return true;
 
   // ? check key count?
 

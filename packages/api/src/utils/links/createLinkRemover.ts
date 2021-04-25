@@ -1,9 +1,8 @@
 import createDocumentPropDataUpdater from '../createDocumentPropDataUpdater';
 import updateDocumentData from '../firebase/updateDocumentData';
-import { hasFilterPredicate } from './interfaces';
 import { LinkMutatorProps } from './mutateDocumentLink';
 
-interface FactoryProps<D, L> extends hasFilterPredicate<L> {}
+interface FactoryProps<D, L> {}
 
 interface Props<D, L> extends LinkMutatorProps<D, L>, FactoryProps<D, L> {}
 
@@ -12,9 +11,8 @@ const documentLinkRemover = async <D, L>({
   firestoreAdmin,
   currentData,
   currentLinks,
-  filterPredicate,
 }: Props<D, L>): Promise<D> => {
-  const { linksPropName } = documentProps;
+  const { linksPropName, linkToMutatePredicate } = documentProps;
 
   // create and return document update promise
   return updateDocumentData({
@@ -22,7 +20,9 @@ const documentLinkRemover = async <D, L>({
     firestoreAdmin,
     updates: {
       ...currentData,
-      [linksPropName]: currentLinks.filter(filterPredicate), // remove link
+      [linksPropName]: currentLinks.filter(
+        (link) => !linkToMutatePredicate(link)
+      ), // filter out specified link
     },
     dataUpdater: createDocumentPropDataUpdater(linksPropName),
   });

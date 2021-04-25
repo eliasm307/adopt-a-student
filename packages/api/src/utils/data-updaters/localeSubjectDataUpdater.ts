@@ -16,15 +16,15 @@ const localeSubjectDataUpdater: DataUpdater<LocaleSubjectData> = ({
   const newData: LocaleSubjectData = { ...existingData };
 
   const mutators: DataMutatorMap<LocaleSubjectData> = {
-    id: null,
+    id: null, // fixed parent id, if this needs to change then you must create a new locale subject
     relatedStudents: null, // change handled by a different request
     relatedTutors: null, // change handled by a different request
     country: (value) =>
       typeof value === "string" ? (newData.country = value as Country) : null,
     description: (value) =>
       typeof value === "string" ? (newData.description = value) : null,
-    parentId: (value) =>
-      typeof value === "string" ? (newData.parentId = value) : null,
+    name: (value) =>
+      typeof value === "string" ? (newData.name = value) : null,
     locale: (value) =>
       typeof value === "string" ? (newData.locale = value as LocaleCode) : null,
   };

@@ -7,12 +7,13 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
   const {
     email,
     id,
-    relatedSubjects: linkedLocaleSubjects,
+    relatedSubjects,
     userName,
-    relatedTutors: tutors,
+    relatedTutors,
     imageUrl,
     introduction,
     prefferedLocales,
+    prefferedCountries,
   } = data as PrivateStudentData;
 
   // this is to ensure that if the schema changes, ie props are added/removed,
@@ -21,24 +22,24 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
   const forTsError: PrivateStudentData = {
     email,
     id,
-    relatedSubjects: linkedLocaleSubjects,
+    relatedSubjects,
     userName,
-    relatedTutors: tutors,
+    relatedTutors,
     imageUrl,
     introduction,
     prefferedLocales,
+    prefferedCountries,
   };
 
+  const hasPreferredCountries = Array.isArray(prefferedCountries);
   const hasEmail = typeof email === "string" && email;
   const hasUserName = typeof userName === "string" && userName;
   const hasId = typeof id === "string" && id;
-  const hasRelatedSubjects = Array.isArray(linkedLocaleSubjects);
-  const hasTutors = Array.isArray(tutors);
+  const hasRelatedSubjects = Array.isArray(relatedSubjects);
+  const hasTutors = Array.isArray(relatedTutors);
   const hasPreferredLocales = Array.isArray(prefferedLocales);
-  const canHaveImage =
-    typeof imageUrl === "undefined" || typeof imageUrl === "string";
-  const canHaveIntroduction =
-    typeof introduction === "undefined" || typeof introduction === "string";
+  const canHaveImage = !imageUrl || typeof imageUrl === "string";
+  const canHaveIntroduction = !introduction || typeof introduction === "string";
 
   if (
     hasEmail &&
@@ -48,10 +49,46 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
     hasTutors &&
     canHaveImage &&
     canHaveIntroduction &&
-    hasPreferredLocales
+    hasPreferredLocales &&
+    hasPreferredCountries
   )
     return true;
 
   console.warn("data is not complete private Student data", { data });
+  if (!hasEmail)
+    console.error("See hasEmail", {
+      hasEmail,
+      email,
+      typeofEmail: typeof email,
+    });
+  if (!hasUserName)
+    console.error("See hasUserName", {
+      hasUserName,
+      userName,
+      typeof: typeof userName,
+    });
+  if (!hasId) console.error("See hasId", { hasEmail });
+  if (!hasRelatedSubjects)
+    console.error("See hasRelatedSubjects", {
+      hasRelatedSubjects,
+      relatedSubjects,
+      typeof: typeof relatedSubjects,
+    });
+  if (!hasTutors)
+    console.error("See hasTutors", {
+      hasTutors,
+      relatedTutors,
+      typeoftutors: typeof relatedTutors,
+    });
+  if (!canHaveImage) console.error("See canHaveImage", { canHaveImage });
+  if (!canHaveIntroduction)
+    console.error("See canHaveIntroduction", { canHaveIntroduction });
+  if (!hasPreferredLocales)
+    console.error("See hasPreferredLocales", {
+      hasPreferredLocales,
+      prefferedLocales,
+      typeofEmail: typeof prefferedLocales,
+    });
+
   return false;
 }

@@ -33,15 +33,24 @@
     }
   },
   "hosting": {
-    "public": "custom",
+    "public": "packages/web-app/public",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
     "rewrites": [ {
+      "source": "/app/*",
+      "destination": "/app",
+      "type": 301
+    }, {
+      "source": "/",
+      "destination": "/app",
+      "type": 301
+    }, {
       "source": "**",
-      "function": "docs"
+      "destination": "/app",
+      "type": 301
     } ]
   }
 }

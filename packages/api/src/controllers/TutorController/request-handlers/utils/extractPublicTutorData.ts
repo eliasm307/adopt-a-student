@@ -2,7 +2,9 @@ import { isPublicTutorData, PublicTutorData } from '@adopt-a-student/common';
 
 import { functionsHttps } from '../../../../utils/firebase/firebase-admin';
 
-export default function extractPublicTutorData(data: any): PublicTutorData {
+export default function extractPublicTutorData(
+  data: Record<string, any>
+): PublicTutorData {
   if (typeof data !== "object")
     throw new functionsHttps.HttpsError(
       "internal",
@@ -12,14 +14,20 @@ export default function extractPublicTutorData(data: any): PublicTutorData {
   // get only the public properties
   const {
     id,
-    userName: username,
+    userName,
     imageUrl,
     introduction,
+    available,
+    prefferedCountries,
+    prefferedLocales,
   } = data as PublicTutorData;
 
-  const publicData = {
+  const publicData: PublicTutorData = {
     id,
-    username,
+    available,
+    prefferedCountries,
+    prefferedLocales,
+    userName,
     imageUrl,
     introduction,
   };

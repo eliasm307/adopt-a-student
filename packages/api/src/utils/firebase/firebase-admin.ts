@@ -5,6 +5,8 @@
 
 import * as admin from "firebase-admin";
 import * as functions from "firebase-functions";
+import config from "../../../private_config/config";
+import isProductionEnvironment from "../isProductionEnvironment";
 
 // import functionsTest from 'firebase-functions-test';
 // import path from 'path';
@@ -15,8 +17,9 @@ let app;
 
 console.log(__filename, { NODE_ENV: process.env.NODE_ENV });
 
-if (process.env.NODE_ENV === "production") {
+if (isProductionEnvironment()) {
   console.warn(__filename, "using live admin");
+
   app = admin.initializeApp({
     credential: admin.credential.cert({
       // todo create custom type declarations for functions module
@@ -27,13 +30,27 @@ if (process.env.NODE_ENV === "production") {
     // databaseURL: "https://adopt-a-student.firebaseio.com",
     databaseURL,
   });
+  /*
+  const config = require("../../../private_config/firebase_service_account_cert.json");
+
+  app = admin.initializeApp({
+    credential: admin.credential.cert({
+      // todo create custom type declarations for functions module
+      privateKey: config.private_key,
+      projectId: config.project_id,
+      clientEmail: config.client_email,
+    }),
+    // databaseURL: "https://adopt-a-student.firebaseio.com",
+    databaseURL,
+  });
+  */
 } else {
   console.warn(__filename, "using local admin");
   // make admin app use this for firestore requests
   process.env.FIRESTORE_EMULATOR_HOST = "localhost:8080";
 
   console.log(__filename, "trying to use using emulator admin");
-  app = admin.initializeApp();
+  app = admin.initializeApp({ projectId: config.FIREBASE_PROJECT_ID });
 }
 
 // you can check all these information in firebase console/settings
@@ -47,6 +64,13 @@ const projectConfig = {
 // todo choose one
 // const firestoreAdmin = admin.firestore();
 const firestoreApp = app.firestore();
+
+if (!isProductionEnvironment()) {
+  firestoreApp.settings({
+    host: "localhost:8080",
+    ssl: false,
+  });
+}
 
 const firestoreAdmin = firestoreApp;
 

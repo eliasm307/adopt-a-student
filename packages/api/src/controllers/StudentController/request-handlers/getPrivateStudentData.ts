@@ -2,32 +2,33 @@ import {
   GetStudentRequestBody, GetStudentResponseBody, isPrivateStudentData,
 } from '@adopt-a-student/common';
 
-import { TUTOR_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
+import { STUDENT_COLLECTION_NAME, TUTOR_COLLECTION_NAME } from '../../../constants';
+import { InternalHandler } from '../../../declarations/types';
 import createPath from '../../../utils/createPath';
 import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
+import readPrivateUserData from '../../../utils/readPrivateUserData';
 import readPublicUserData from '../../../utils/readPublicUserData';
-import verifyRequest from '../../../utils/verifyRequest';
 import extractPublicStudentData from '../utils/extractPublicStudentData';
 
-const handler: FirebaseCallableFunctionHandler<
+const getPrivateStudentData: InternalHandler<
   GetStudentRequestBody,
   GetStudentResponseBody
-> = async (_, context) => {
-  const auth = verifyRequest(_, context);
+> = async ({ id }) => {
+  const path = createPath(STUDENT_COLLECTION_NAME, id);
 
-  const path = createPath(TUTOR_COLLECTION_NAME, auth.uid);
+  console.log(__filename, { id, path });
 
-  const student = await readPublicUserData({
+  const student = await readPrivateUserData({
     dataPredicate: isPrivateStudentData,
     firestoreAdmin,
     path,
-    publicDataExtractor: extractPublicStudentData,
   });
+
+  console.log(__filename, "result", { student });
 
   return {
     student,
   };
 };
 
-export default handler;
+export default getPrivateStudentData;

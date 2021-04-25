@@ -1,3 +1,4 @@
+/*
 export const CALLABLE_FUNCTION_NAMES = [
   // "test",
   // "writeTest",
@@ -96,6 +97,7 @@ export enum CallableName {
   linkGenericSubjects = "linkGenericSubjects",
   unlinkGenericSubjects = "unlinkGenericSubjects",
 }
+*/
 export const GENERIC_SUBJECT_COLLECTION_NAME = "generic-subjects";
 export const LOCALE_SUBJECT_COLLECTION_NAME = "locale-subjects";
 export const SUBJECT_CATEGORY_COLLECTION_NAME = "subject-categories";

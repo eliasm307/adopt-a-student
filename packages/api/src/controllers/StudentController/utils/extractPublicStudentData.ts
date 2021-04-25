@@ -1,4 +1,4 @@
-import { isPublicTutorData, PublicStudentData } from '@adopt-a-student/common';
+import { isPublicStudentData, isPublicTutorData, PublicStudentData } from '@adopt-a-student/common';
 
 import { functionsHttps } from '../../../utils/firebase/firebase-admin';
 
@@ -24,7 +24,7 @@ export default function extractPublicStudentData(data: any): PublicStudentData {
     introduction,
   };
 
-  if (!isPublicTutorData(publicData))
+  if (!isPublicStudentData(publicData))
     throw new functionsHttps.HttpsError(
       "failed-precondition",
       "Student data could not be extracted as it is not the correct format"

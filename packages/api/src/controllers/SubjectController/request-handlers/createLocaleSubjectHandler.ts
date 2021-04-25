@@ -1,34 +1,50 @@
 import {
-  CreateLocaleSubjectRequestBody, CreateLocaleSubjectResponseBody, isLocaleSubjectData,
+  CreateLocaleSubjectRequestBody as CreateLocaleSubjectRequestBody,
+  CreateLocaleSubjectResponseBody as CreateLocaleSubjectResponseBody, isLocaleSubjectData,
 } from '@adopt-a-student/common';
 
-import { LOCALE_SUBJECT_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
+import {
+  GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME,
+} from '../../../constants';
+import { InternalHandler } from '../../../declarations/types';
+import createPath from '../../../utils/createPath';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import newGuid from '../../../utils/newGuid';
 import verifyRequest from '../../../utils/verifyRequest';
+import { createLocaleSubjectDocumentId } from '../utils/localeSubjectDocumentId';
 
-const createLocaleSubject: FirebaseCallableFunctionHandler<
+const createLocaleSubject: InternalHandler<
   CreateLocaleSubjectRequestBody,
   CreateLocaleSubjectResponseBody
-> = async (body, context) => {
-  const auth = verifyRequest(body, context);
+> = async (props) => {
+  const { genericSubjectId: genericId, data: inputData } = props;
 
-  const id = newGuid();
+  const { country, locale } = inputData;
 
-  if (!body?.data)
+  const genericSubjectRef = await firestoreAdmin
+    .doc(createPath(GENERIC_SUBJECT_COLLECTION_NAME, genericId))
+    .get();
+
+  if (!genericSubjectRef.exists)
     throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Data not provided"
+      "not-found",
+      "Could not create a locale subject for a generic subject that doesnt exist"
     );
 
-  const data = { ...body.data, id };
+  // id is generated from generic id
+  const id = createLocaleSubjectDocumentId({
+    genericId: genericId,
+    locale,
+    country,
+  });
+
+  const localeSubjectData = { ...props.data, id };
 
   const subject = await createDocument({
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
-    id,
-    data,
+    documentId: id,
+    data: localeSubjectData,
     dataPredicate: isLocaleSubjectData,
     firestoreAdmin,
   });

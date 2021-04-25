@@ -1,14 +1,15 @@
-/* eslint-disable @typescript-eslint/require-await */
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
   CreateStudentRequestBody, CreateStudentResponseBody, GetStudentRequestBody,
   GetStudentResponseBody, GetStudentsBySubjectsRequestBody, GetStudentsBySubjectsResponseBody,
-  UpdateStudentRequestBody, UpdateStudentResponseBody,
+  isArray, isEmptyObject, isObject, isPrivateStudentData, isTruthyString, UpdateStudentRequestBody,
+  UpdateStudentResponseBody,
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
+import { functionsHttps } from '../../utils/firebase/firebase-admin';
 import verifyRequest from '../../utils/verifyRequest';
 import createStudentHandler from './request-handlers/createStudent';
 import getPrivateStudentData from './request-handlers/getPrivateStudentData';
@@ -28,95 +29,103 @@ const exportedNames = [
   getStudentsBySubjects,
   updateStudent,
 ] as const;
-/*
-const namedKeys = { a: "", v: "", c: "", d: "" };
 
-// ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
-// ! so the routes are named
-const { a, c, d, v } = namedKeys;
-const custom = {
-  val1: "aVal",
-};
-
-const { createGenericSubjectX: createGenericSubjecta } = CallableName;
-
-const name1 = "name1x/";
-const name23 = CallableName.createGenericSubjectX + "dedec";
-console.log(
-  `enum: ${CallableName.getStudentsBySubjects.toString()} enumCustom: ${custom.val1.toString()}`
-);
-
-const enumv = CallableName.getStudentsBySubjects.toString() + "/";
-*/
 // hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
 @Route("/")
 export class StudentsController extends Controller {
   static callableNames = exportedNames;
   static callableNamesMap = arrayToRecord([...exportedNames]);
-  /*
-  static callableNames = Object.keys(namedKeys).reduce(
-    (acc, name) => ({ ...acc, [name]: name }),
-    {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
-  );
-  */
   static id = "Students";
 
   @Post(createStudent)
   static createStudent(
-    @Body() body: CreateStudentRequestBody,
+    @Body() body: Partial<CreateStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateStudentResponseBody> {
-    return createStudentHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { student } = body;
+
+    console.log(__filename, "Start", { uid, student });
+
+    if (!student || !isPrivateStudentData({ ...student, id: uid }))
+      throw new functionsHttps.HttpsError(
+        "invalid-argument",
+        "Provided data is not valid"
+      );
+
+    return createStudentHandler({ uid, student });
   }
 
   /**
    * Retreives data about a student user. If the student user owns the data then they get all the data, otherwise it is restricted to 'public' data.
-   * @param body
-   * @param context
-   * @returns
    */
   @Post(getStudent)
   static getStudent(
-    @Body() body: GetStudentRequestBody,
+    @Body() body: Partial<GetStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetStudentResponseBody> {
-    const { id } = body;
     const { uid } = verifyRequest(body, context);
 
+    const { id } = body;
+
+    console.log(__filename, "Start", { uid, id });
+
+    if (!id || !isTruthyString(id))
+      throw new functionsHttps.HttpsError(
+        "invalid-argument",
+        "Provided data is not valid"
+      );
+
+    console.log(__filename, `${getStudent}`, { body });
+
     return uid === id
-      ? getPrivateStudentData(body, context)
-      : getPublicStudentData(body, context);
+      ? getPrivateStudentData({ id })
+      : getPublicStudentData({ id });
   }
 
   @Post(getStudentsBySubjects)
   static getStudentsBySubjects(
-    @Body() body: GetStudentsBySubjectsRequestBody,
+    @Body() body: Partial<GetStudentsBySubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetStudentsBySubjectsResponseBody> {
-    return getStudentsBySubjectsHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { subjectIds } = body;
+
+    // verify received data
+    if (!isArray(subjectIds))
+      throw new functionsHttps.HttpsError(
+        "invalid-argument",
+        "Could not get students by subjects because provided locale subject ids are not valid format"
+      );
+
+    return getStudentsBySubjectsHandler({ subjectIds });
   }
 
   @Post(updateStudent)
   static updateStudent(
-    @Body() body: UpdateStudentRequestBody,
+    @Body() body: Partial<UpdateStudentRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateStudentResponseBody> {
-    return updateStudentHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { updates } = body;
+
+    // verify received data
+    if (!updates || !isObject(updates))
+      throw new functionsHttps.HttpsError(
+        "invalid-argument",
+        "Could not update tutor because provided data is not valid"
+      );
+
+    if (isEmptyObject(updates))
+      throw new functionsHttps.HttpsError(
+        "invalid-argument",
+        "Could not update tutor because no updates were provided"
+      );
+
+    return updateStudentHandler({ uid, updates });
   }
 }
-
-/*
-enum wer {
-  a,
-  b,
-  c,
-}
-*/
-
-// const a = { ...wer };
-
-// const b = Object.values(a).map((k) => k as const);
-
-// type q = keyof typeof a;
-// const c:  q,  = "";

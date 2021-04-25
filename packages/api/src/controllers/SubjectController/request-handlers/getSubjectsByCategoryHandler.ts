@@ -2,26 +2,17 @@ import {
   GetSubjectsByCategoryRequestBody, GetSubjectsByCategoryResponseBody, SubjectOverview,
 } from '@adopt-a-student/common';
 
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { InternalHandler } from '../../../declarations/types';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 import getGenericSubjectsByCategory from '../utils/getGenericSubjectsByCategory';
 import getLocaleSubjectFromGenericSubject from '../utils/getLocaleSubjectFromGenericSubject';
 
-const getSubjectsByCategory: FirebaseCallableFunctionHandler<
+const getSubjectsByCategory: InternalHandler<
   GetSubjectsByCategoryRequestBody,
   GetSubjectsByCategoryResponseBody
-> = async (data, context) => {
-  const { uid } = verifyRequest(data, context);
-
-  // verify received data
-  if (!data?.locale || !data.categoryId)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not get subjects by category because provided data is missing locale or required subject category id"
-    );
-
-  const { categoryId: subjectCategoryId, locale } = data;
+> = async (props) => {
+  const { categoryId: subjectCategoryId, locale, country } = props;
 
   const genericSubjectsByCategory = await getGenericSubjectsByCategory({
     firestoreAdmin,
@@ -34,6 +25,7 @@ const getSubjectsByCategory: FirebaseCallableFunctionHandler<
         firestoreAdmin,
         genericSubject,
         locale,
+        country,
       })
   );
 

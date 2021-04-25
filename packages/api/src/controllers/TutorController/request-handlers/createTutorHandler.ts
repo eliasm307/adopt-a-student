@@ -3,31 +3,24 @@ import {
 } from '@adopt-a-student/common';
 
 import { TUTOR_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
+import { AuthData } from '../../../declarations/interfaces';
+import { InternalHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const createTutor: FirebaseCallableFunctionHandler<
-  CreateTutorRequestBody,
+const createTutorHandler: InternalHandler<
+  CreateTutorRequestBody & AuthData,
   CreateTutorResponseBody
-> = async (body, context) => {
-  if (!body)
-    throw new functionsHttps.HttpsError(
-      "invalid-argument",
-      "Body not provided"
-    );
-
-  const auth = verifyRequest(body, context);
-
-  const { tutor: tutorParams } = body;
+> = async (props) => {
+  const { tutor: tutorParams, uid } = props;
 
   // make sure data uses user id
-  const data = { ...tutorParams, id: auth.uid };
+  const data = { ...tutorParams, id: uid };
 
   const tutor = await createDocument({
     collectionPath: TUTOR_COLLECTION_NAME,
-    id: auth.uid,
+    documentId: uid,
     data,
     dataPredicate: isPrivateTutorData,
     firestoreAdmin,
@@ -73,4 +66,4 @@ const createTutor: FirebaseCallableFunctionHandler<
   */
 };
 
-export default createTutor;
+export default createTutorHandler;

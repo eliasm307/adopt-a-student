@@ -3,47 +3,36 @@ import {
 } from '@adopt-a-student/common';
 
 import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { InternalHandler } from '../../../declarations/types';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import unlinkDocuments, { RemoveDocumentLinkProps } from '../../../utils/links/unlinkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const unlinkGenericSubjects: FirebaseCallableFunctionHandler<
+const unlinkGenericSubjects: InternalHandler<
   UnlinkSubjectsRequestBody,
   UnlinkSubjectsResponseBody
-> = async (body, context) => {
-  const { uid } = verifyRequest(body, context);
-
-  // verify received data
-  if (!body || !body.subject1Id || !body.subject2Id)
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not link documents because provided data is not valid"
-    );
-
+> = async (body) => {
   const { subject1Id, subject2Id } = body;
 
   const commonDocumentProps: Omit<
     RemoveDocumentLinkProps<GenericSubjectData, string>,
-    "id" | "filterPredicate"
+    "documentId" | "linkToMutatePredicate"
   > = {
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
     dataPredicate: isGenericSubjectData,
-    linkReducer: (link) => link,
     linksPropName: "relatedSubjects",
   };
 
   const document1Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
-    filterPredicate: (link) => link !== subject2Id,
-
-    id: subject1Id,
+    documentId: subject1Id,
+    linkToMutatePredicate: (link) => link === subject2Id,
   };
 
   const document2Props: RemoveDocumentLinkProps<GenericSubjectData, string> = {
     ...commonDocumentProps,
-    filterPredicate: (link) => link !== subject1Id,
-    id: subject2Id,
+    documentId: subject2Id,
+    linkToMutatePredicate: (link) => link === subject1Id,
   };
 
   const [updatedDocument1, updatedDocument2] = await unlinkDocuments({
@@ -51,7 +40,7 @@ const unlinkGenericSubjects: FirebaseCallableFunctionHandler<
     document2Props,
     firestoreAdmin,
   });
-
+  // ? why is this not a ts error?
   return { message: "Success" };
 };
 

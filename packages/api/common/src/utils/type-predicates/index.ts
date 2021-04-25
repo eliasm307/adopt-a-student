@@ -7,3 +7,4 @@ export * from "./isPrivateStudentData";
 export * from "./isPrivateTutorData";
 export * from "./isPublicStudentData";
 export * from "./isPublicTutorData";
+export * from "./basic";

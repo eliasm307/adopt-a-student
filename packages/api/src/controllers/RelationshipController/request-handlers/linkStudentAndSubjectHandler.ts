@@ -1,33 +1,29 @@
 import {
-  isLinkedLocaleSubjectData, isLocaleSubjectData, isPrivateStudentData,
-  LinkStudentAndSubjectRequestBody, LinkStudentAndSubjectResponseBody, LocaleSubjectData,
-  PrivateStudentData, UserSubjectData,
+  isLocaleSubjectData, isPrivateStudentData, LinkStudentAndSubjectRequestBody,
+  LinkStudentAndSubjectResponseBody, LocaleSubjectData, PrivateStudentData, UserSubjectData,
 } from '@adopt-a-student/common';
 
 import { LOCALE_SUBJECT_COLLECTION_NAME, STUDENT_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
-import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
+import { AuthData } from '../../../declarations/interfaces';
+import { InternalHandler } from '../../../declarations/types';
+import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import linkDocuments, { AddDocumentLinkProps } from '../../../utils/links/linkDocuments';
 import verifyRequest from '../../../utils/verifyRequest';
+import {
+  createLocaleSubjectDocumentId,
+} from '../../SubjectController/utils/localeSubjectDocumentId';
 
 // todo this needs to verify if the user data is complete, since the set method allows for incomplete items to be created
 // todo needs to verify a user has access to this data
 // todo should add subject to user and user to subject
 
-const linkStudentAndLocaleSubject: FirebaseCallableFunctionHandler<
-  LinkStudentAndSubjectRequestBody,
+/** Links given student id to a locale subject */
+const linkStudentAndLocaleSubject: InternalHandler<
+  LinkStudentAndSubjectRequestBody & AuthData,
   LinkStudentAndSubjectResponseBody
-> = async (body, context) => {
-  const { uid } = verifyRequest(body, context);
-
-  const data = body?.data;
-
-  // verify received data
-  if (!body || !body.data || !isLinkedLocaleSubjectData(data))
-    throw new functionsHttps.HttpsError(
-      "failed-precondition",
-      "Could not link documents because provided data is not valid"
-    );
+> = async (props) => {
+  const { data, uid } = props;
+  const { id: subjectId, locale, country } = data;
 
   const document1Props: AddDocumentLinkProps<
     PrivateStudentData,
@@ -36,29 +32,39 @@ const linkStudentAndLocaleSubject: FirebaseCallableFunctionHandler<
     collectionPath: STUDENT_COLLECTION_NAME,
     dataPredicate: isPrivateStudentData,
     linkToAdd: data,
-    linkReducer: (link) => link.id,
+    linkToMutatePredicate: ({
+      country: linkCountry,
+      locale: linkLocale,
+      id: linkId,
+    }) =>
+      linkId === subjectId && linkLocale === locale && linkCountry === country,
     linksPropName: "relatedSubjects",
-    id: uid,
+    documentId: uid,
   };
 
   const document2Props: AddDocumentLinkProps<LocaleSubjectData, string> = {
     collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
     dataPredicate: isLocaleSubjectData,
     linkToAdd: uid,
-    linkReducer: (link) => link,
+    linkToMutatePredicate: (link) => link === uid,
     linksPropName: "relatedStudents",
-    id: data.id,
+    documentId: createLocaleSubjectDocumentId({
+      country,
+      genericId: subjectId,
+      locale,
+    }),
   };
 
-  const [updatedDocument1, updatedDocument2] = await linkDocuments({
+  const [updatedStudent, updatedSubject] = await linkDocuments({
     document1Props,
     document2Props,
     firestoreAdmin,
   });
 
   return {
-    message: "Success linking documents",
-  };
+    student: updatedStudent,
+    subject: updatedSubject,
+  } as LinkStudentAndSubjectResponseBody;
 };
 
 export default linkStudentAndLocaleSubject;

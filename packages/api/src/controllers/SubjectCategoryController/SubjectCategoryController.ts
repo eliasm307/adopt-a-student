@@ -2,46 +2,32 @@ import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
 import {
   CreateSubjectCategoryRequestBody, CreateSubjectCategoryResponseBody,
-} from '../../../common/src';
+  GetSubjectCategoriesForLocaleRequestBody, GetSubjectCategoriesForLocaleResponseBody,
+  GetSubjectCategoryRequestBody, GetSubjectCategoryResponseBody, UpdateSubjectCategoryRequestBody,
+  UpdateSubjectCategoryResponseBody,
+} from '@adopt-a-student/common';
+
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
+import { functionsHttps } from '../../utils/firebase/firebase-admin';
+import verifyRequest from '../../utils/verifyRequest';
 import createSubjectCategoryHandler from './request-handlers/createSubjectCategoryHandler';
-import getSubjectCategoriesHandler, {
-  GetSubjectCategoryRequestBody, GetSubjectCategoryResponseBody,
-} from './request-handlers/getSubjectCategoriesHandler';
-import updateSubjectCategoryHandler, {
-  UpdateSubjectCategoryRequestBody, UpdateSubjectCategoryResponseBody,
-} from './request-handlers/updateSubjectCategoryHandler';
+import getSubjectCategoriesForLocaleHandler from './request-handlers/getSubjectCategoriesForLocaleHandler';
+import getSubjectCategoryHandler from './request-handlers/getSubjectCategoryHandler';
+import updateSubjectCategoryHandler from './request-handlers/updateSubjectCategoryHandler';
 
-const getSubjectCategories = "getSubjectCategories";
+const getSubjectCategoriesForLocale = "getSubjectCategoriesForLocale";
+const getSubjectCategory = "getSubjectCategory";
 const createSubjectCategory = "createSubjectCategory";
 const updateSubjectCategory = "updateSubjectCategory";
 
 const exportedNames = [
-  getSubjectCategories,
+  getSubjectCategoriesForLocale,
   createSubjectCategory,
   updateSubjectCategory,
+  getSubjectCategory,
 ] as const;
-/*
-const namedKeys = { a: "", v: "", c: "", d: "" };
 
-// ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
-// ! so the routes are named
-const { a, c, d, v } = namedKeys;
-const custom = {
-  val1: "aVal",
-};
-
-const { createGenericSubjectX: createGenericSubjecta } = CallableName;
-
-const name1 = "name1x/";
-const name23 = CallableName.createGenericSubjectX + "dedec";
-console.log(
-  `enum: ${CallableName.createSubjectCategory.toString()} enumCustom: ${custom.val1.toString()}`
-);
-
-const enumv = CallableName.createSubjectCategory.toString() + "/";
-*/
 // hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
 @Route("/")
@@ -49,50 +35,87 @@ export class SubjectCategoryController extends Controller {
   static callableNames = exportedNames;
   static callableNamesMap = arrayToRecord([...exportedNames]);
 
-  /*
-  static callableNames = Object.keys(namedKeys).reduce(
-    (acc, name) => ({ ...acc, [name]: name }),
-    {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
-  );
-  */
   typeName = "Subject Categories";
 
   @Post(createSubjectCategory)
   static createSubjectCategory(
-    @Body() body: CreateSubjectCategoryRequestBody,
+    @Body() body: Partial<CreateSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateSubjectCategoryResponseBody> {
-    return createSubjectCategoryHandler(body, context);
+    const auth = verifyRequest(body, context);
+
+    const { locale, name } = body;
+
+    // verify received data
+    if (!locale || !name)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not create subject because provided data is  incomplete"
+      );
+
+    return createSubjectCategoryHandler({ locale, name });
   }
 
-  @Post(getSubjectCategories)
-  static getSubjectCategories(
-    @Body() body: GetSubjectCategoryRequestBody,
+  @Post(getSubjectCategoriesForLocale)
+  static getSubjectCategoriesForLocale(
+    @Body() body: Partial<GetSubjectCategoriesForLocaleRequestBody>,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<GetSubjectCategoriesForLocaleResponseBody> {
+    const auth = verifyRequest(body, context);
+
+    const { locale } = body;
+
+    // verify received data
+    if (!locale)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not get subjects because provided data is missing subject id"
+      );
+
+    return getSubjectCategoriesForLocaleHandler({ locale });
+  }
+
+  @Post(getSubjectCategory)
+  static getSubjectCategory(
+    @Body() body: Partial<GetSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectCategoryResponseBody> {
-    return getSubjectCategoriesHandler(body, context);
+    const auth = verifyRequest(body, context);
+
+    const { id, locale } = body;
+
+    // verify received data
+    if (!locale || !id)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Incomplete data provided"
+      );
+
+    return getSubjectCategoryHandler({ id, locale });
   }
 
   @Post(updateSubjectCategory)
   static updateSubjectCategory(
-    @Body() body: UpdateSubjectCategoryRequestBody,
+    @Body() body: Partial<UpdateSubjectCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateSubjectCategoryResponseBody> {
-    return updateSubjectCategoryHandler(body, context);
+    const auth = verifyRequest(body, context);
+
+    const { id, locale, updates } = body;
+
+    // verify received data
+    if (!updates || typeof updates !== "object" || !id || !locale)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update document because provided data is not valid"
+      );
+
+    if (!Object.keys(updates).length)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update document because no updates were provided"
+      );
+
+    return updateSubjectCategoryHandler({ id, locale, updates });
   }
 }
-
-/*
-enum wer {
-  a,
-  b,
-  c,
-}
-*/
-
-// const a = { ...wer };
-
-// const b = Object.values(a).map((k) => k as const);
-
-// type q = keyof typeof a;
-// const c:  q,  = "";

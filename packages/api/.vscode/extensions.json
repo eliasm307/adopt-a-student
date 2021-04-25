@@ -1,6 +1,7 @@
 {
   "recommendations": [
     "mike-co.import-sorter",
-    "coenraads.bracket-pair-colorizer-2"
+    "coenraads.bracket-pair-colorizer-2",
+    "kavod-io.vscode-jest-test-adapter"
   ]
 }

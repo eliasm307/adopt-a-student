@@ -1,21 +1,22 @@
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
-/* eslint-disable @typescript-eslint/require-await */
 import {
   CreateGenericSubjectRequestBody, CreateGenericSubjectResponseBody, CreateLocaleSubjectRequestBody,
   CreateLocaleSubjectResponseBody, GetSubjectRequestBody, GetSubjectResponseBody,
-  GetTutorRequestBody, GetTutorResponseBody, UpdateLocaleSubjectRequestBody,
-  UpdateLocaleSubjectResponseBody,
+  GetSubjectsByCategoryRequestBody, GetSubjectsByCategoryResponseBody,
+  UpdateLocaleSubjectRequestBody, UpdateLocaleSubjectResponseBody,
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
+import { functionsHttps } from '../../utils/firebase/firebase-admin';
 import verifyRequest from '../../utils/verifyRequest';
 import getPrivateTutorData from '../TutorController/request-handlers/getPrivateTutorDataHandler';
 import getPublicTutorData from '../TutorController/request-handlers/getPublicTutorDataHandler';
 import createGenericSubjectHandler from './request-handlers/createGenericSubjectHandler';
 import createLocaleSubjectHandler from './request-handlers/createLocaleSubjectHandler';
 import getSubjectHandler from './request-handlers/getSubjectHandler';
+import getSubjectsByCategoryHandler from './request-handlers/getSubjectsByCategoryHandler';
 import updateLocaleSubjectHandler from './request-handlers/updateLocaleSubjectHandler';
 
 const createGenericSubject = "createGenericSubject";
@@ -43,67 +44,103 @@ export class SubjectsController extends Controller {
 
   @Post(createGenericSubject)
   static createGenericSubject(
-    @Body() body: CreateGenericSubjectRequestBody,
+    @Body() body: Partial<CreateGenericSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateGenericSubjectResponseBody> {
-    return createGenericSubjectHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { data } = body;
+
+    if (!data)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Data not provided"
+      );
+
+    return createGenericSubjectHandler({ data });
   }
 
   @Post(createLocaleSubject)
   static createLocaleSubject(
-    @Body() body: CreateLocaleSubjectRequestBody,
+    @Body() body: Partial<CreateLocaleSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateLocaleSubjectResponseBody> {
-    return createLocaleSubjectHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { data, genericSubjectId } = body;
+
+    if (!data || !genericSubjectId)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Data not provided"
+      );
+
+    return createLocaleSubjectHandler({ data, genericSubjectId });
   }
 
   @Post(getSubject)
   static getSubject(
-    @Body() body: GetSubjectRequestBody,
+    @Body() body: Partial<GetSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetSubjectResponseBody> {
-    return getSubjectHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { country, id, locale } = body;
+
+    // verify received data
+    if (!id || !country || !locale)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not get subjects because provided data is missing subject id"
+      );
+
+    return getSubjectHandler({ country, id, locale });
   }
 
   /**
    * Retreives data about a tutor user. If the tutor user owns the data then they get all the data, otherwise it is restricted to 'public' data.
-   * @param body
-   * @param context
-   * @returns
    */
   @Post(getSubjectsByCategory)
   static getSubjectsByCategory(
-    @Body() body: GetTutorRequestBody,
+    @Body() body: Partial<GetSubjectsByCategoryRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
-  ): Promise<GetTutorResponseBody> {
-    const { id } = body;
+  ): Promise<GetSubjectsByCategoryResponseBody> {
     const { uid } = verifyRequest(body, context);
 
-    return uid === id
-      ? getPrivateTutorData(body, context)
-      : getPublicTutorData(body, context);
+    const { categoryId, locale, country } = body;
+
+    // verify received data
+    if (!locale || !categoryId || !country)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not get subjects by category because provided data is incomplete"
+      );
+
+    return getSubjectsByCategoryHandler({ categoryId, locale, country });
   }
 
   @Post(updateLocaleSubject)
   static updateLocaleSubject(
-    @Body() body: UpdateLocaleSubjectRequestBody,
+    @Body() body: Partial<UpdateLocaleSubjectRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateLocaleSubjectResponseBody> {
-    return updateLocaleSubjectHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { country, id, locale, updates } = body;
+
+    // verify received data
+    if (!updates || typeof updates !== "object" || !id || !country || !locale)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update tutor because provided data is not valid"
+      );
+
+    if (!Object.keys(updates).length)
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update subject because no updates were provided"
+      );
+
+    return updateLocaleSubjectHandler({ country, id, locale, updates });
   }
 }
-
-/*
-enum wer {
-  a,
-  b,
-  c,
-}
-*/
-
-// const a = { ...wer };
-
-// const b = Object.values(a).map((k) => k as const);
-
-// type q = keyof typeof a;
-// const c:  q,  = "";

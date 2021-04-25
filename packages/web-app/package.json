@@ -1,11 +1,80 @@
 {
   "name": "@adopt-a-student/web-app",
-  "version": "0.0.0",
-  "description": "API for adopt-a-student",
-  "main": "index.js",
+  "private": true,
+  "description": "Web app for adopt a student",
+  "version": "0.1.0",
+  "license": "0BSD",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:common": "yarn --cwd ../api/common build",
+    "build": "gatsby build",
+    "prebuild": "rm -rf public && gatsby clean && yarn",
+    "develop": "gatsby develop --open",
+    "predevelop": "npx tsc && yarn clean",
+    "dev": "yarn develop",
+    "start": "yarn develop",
+    "buildserve": "yarn build && gatsby serve",
+    "clean": "rm -rf public && gatsby clean",
+    "cleaninstall": "rm -rf node_modules && yarn clean && yarn",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start-emulators": "yarn --cwd ../../ start-emulators",
+    "deploy": "yarn build && firebase deploy --only hosting"
   },
-  "author": "",
-  "license": "MIT"
+  "resolutions": {
+    "graphql": "^15.4.0",
+    "graphql-compose": "^7.25.0",
+    "webpack": "^5.24.2"
+  },
+  "dependencies": {
+    "@adopt-a-student/common": "file:../api/common",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.3.0",
+    "@types/react-query": "^1.1.2",
+    "bootstrap": "^4.6.0",
+    "gatsby": "^3.2.1",
+    "gatsby-plugin-emotion": "^6.3.0",
+    "gatsby-plugin-image": "^1.3.1",
+    "gatsby-plugin-sass": "^4.3.0",
+    "gatsby-plugin-sharp": "^3.3.1",
+    "gatsby-source-filesystem": "^3.3.0",
+    "gatsby-transformer-sharp": "^3.3.0",
+    "react": "^17.0.1",
+    "react-bootstrap": "^1.5.2",
+    "react-dom": "^17.0.1",
+    "react-multi-select-component": "^4.0.1",
+    "react-query": "^3.13.11",
+    "react-responsive-carousel": "^3.2.18",
+    "react-svg": "^13.0.3",
+    "sass": "^1.32.11"
+  },
+  "devDependencies": {
+    "@types/reach__router": "^1.3.7",
+    "@types/react": "^17.0.3",
+    "@types/react-svg": "^5.0.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "babel-plugin-import": "^1.13.3",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "babel-plugin-transform-imports": "^2.0.0",
+    "babel-preset-gatsby": "^1.3.0",
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-import-resolver-babel-module": "^5.3.0",
+    "eslint-import-resolver-typescript": "^2.4.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.2",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "gatsby-plugin-eslint": "^3.0.0",
+    "gatsby-plugin-tsconfig-paths": "^1.0.3",
+    "prettier": "2.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
+  },
+  "bugs": {
+    "url": "https://github.com/gatsbyjs/gatsby/issues"
+  }
 }

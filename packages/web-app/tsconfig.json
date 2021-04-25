@@ -1,0 +1,15 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": { "@adopt-a-student/common": ["../api/common/src"] },
+    "jsx": "react",
+    "esModuleInterop": true,
+    "noEmit": true,
+    "checkJs": false,
+    "target": "es5",
+    "module": "commonjs"
+  },
+  "include": ["**/*"],
+  "exclude": ["**/node_modules/**", "**/public/**"]
+}

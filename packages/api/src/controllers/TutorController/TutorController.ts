@@ -1,18 +1,20 @@
 import { Body, Controller, Hidden, Post, Query, Route } from 'tsoa';
 
-/* eslint-disable @typescript-eslint/require-await */
 import {
   CreateTutorRequestBody, CreateTutorResponseBody, GetTutorRequestBody, GetTutorResponseBody,
-  GetTutorsBySubjectsRequestBody, GetTutorsBySubjectsResponseBody, UpdateTutorRequestBody,
-  UpdateTutorResponseBody,
+  GetTutorsByLocalesRequestBody, GetTutorsByLocalesResponseBody, GetTutorsBySubjectsRequestBody,
+  GetTutorsBySubjectsResponseBody, isArray, isEmptyObject, isObject, isPrivateTutorData,
+  isTruthyString, UpdateTutorRequestBody, UpdateTutorResponseBody,
 } from '@adopt-a-student/common';
 
 import { FirebaseCallableFunctionContext } from '../../declarations/interfaces';
 import arrayToRecord from '../../utils/arrayToRecord';
+import { functionsHttps } from '../../utils/firebase/firebase-admin';
 import verifyRequest from '../../utils/verifyRequest';
+import getPrivateTutorData from '../TutorController/request-handlers/getPrivateTutorDataHandler';
+import getPublicTutorData from '../TutorController/request-handlers/getPublicTutorDataHandler';
 import createTutorHandler from './request-handlers/createTutorHandler';
-import getPrivateTutorData from './request-handlers/getPrivateTutorDataHandler';
-import getPublicTutorData from './request-handlers/getPublicTutorDataHandler';
+import getTutorsByLocalesHandler from './request-handlers/getTutorsByLocaleHandler';
 import getTutorsBySubjectsHandler from './request-handlers/getTutorsBySubjectsHandler';
 import updateTutorHandler from './request-handlers/updateTutorHandler';
 
@@ -20,54 +22,41 @@ const createTutor = "createTutor";
 const getTutorsBySubjects = "getTutorsBySubjects";
 const updateTutor = "updateTutor";
 const getTutor = "getTutor";
+const getTutorsByLocales = "getTutorsByLocales";
 
 const exportedNames = [
+  getTutorsByLocales,
   createTutor,
   getTutor,
   getTutorsBySubjects,
   getTutorsBySubjects,
   updateTutor,
 ] as const;
-/*
-const namedKeys = { a: "", v: "", c: "", d: "" };
 
-// ! tsoa doesnt seem to accept variables as names for routes, however it takes in variable values
-// ! so the routes are named
-const { a, c, d, v } = namedKeys;
-const custom = {
-  val1: "aVal",
-};
-
-const { createGenericSubjectX: createGenericSubjecta } = CallableName;
-
-const name1 = "name1x/";
-const name23 = CallableName.createGenericSubjectX + "dedec";
-console.log(
-  `enum: ${CallableName.getTutorsBySubjects.toString()} enumCustom: ${custom.val1.toString()}`
-);
-
-const enumv = CallableName.getTutorsBySubjects.toString() + "/";
-*/
 // hide props decorator https://tsoa-community.github.io/docs/decorators.html#hidden
 
 @Route("/")
 export class TutorsController extends Controller {
-  /*
-  static callableNames = Object.keys(namedKeys).reduce(
-    (acc, name) => ({ ...acc, [name]: name }),
-    {} as Record<keyof typeof namedKeys, keyof typeof namedKeys>
-  );
-  */
   static callableNames = exportedNames;
   static callableNamesMap = arrayToRecord([...exportedNames]);
   static typeName = "Tutors";
 
   @Post(createTutor)
   static createTutor(
-    @Body() body: CreateTutorRequestBody,
+    @Body() body: Partial<CreateTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<CreateTutorResponseBody> {
-    return createTutorHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { tutor } = body;
+
+    if (!tutor || !isObject(tutor) || !isPrivateTutorData({ tutor, id: uid }))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Provided data is invalid"
+      );
+
+    return createTutorHandler({ tutor, uid });
   }
 
   /**
@@ -78,45 +67,84 @@ export class TutorsController extends Controller {
    */
   @Post(getTutor)
   static getTutor(
-    @Body() body: GetTutorRequestBody,
+    @Body() body: Partial<GetTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetTutorResponseBody> {
-    const { id } = body;
     const { uid } = verifyRequest(body, context);
 
+    const { id } = body;
+
+    if (!isTruthyString(id))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Provided data is invalid"
+      );
+
     return uid === id
-      ? getPrivateTutorData(body, context)
-      : getPublicTutorData(body, context);
+      ? getPrivateTutorData({ id })
+      : getPublicTutorData({ id });
+  }
+
+  @Post(getTutorsByLocales)
+  static getTutorsByLocales(
+    @Body() body: Partial<GetTutorsByLocalesRequestBody>,
+    @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
+  ): Promise<GetTutorsByLocalesResponseBody> {
+    const { uid } = verifyRequest(body, context);
+
+    const { countries, locales } = body;
+
+    // verify received data
+    if (!isArray(countries) || !isArray(locales))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not get students by subjects because provided locale subject ids are not valid format"
+      );
+
+    return getTutorsByLocalesHandler({ countries, locales });
   }
 
   @Post(getTutorsBySubjects)
   static getTutorsBySubjects(
-    @Body() body: GetTutorsBySubjectsRequestBody,
+    @Body() body: Partial<GetTutorsBySubjectsRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<GetTutorsBySubjectsResponseBody> {
-    return getTutorsBySubjectsHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { subjectIds } = body;
+
+    // verify received data
+    if (!isArray(subjectIds))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not get students by subjects because provided locale subject ids are not valid format"
+      );
+
+    return getTutorsBySubjectsHandler({ subjectIds });
   }
 
   @Post(updateTutor)
   static updateTutor(
-    @Body() body: UpdateTutorRequestBody,
+    @Body() body: Partial<UpdateTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<UpdateTutorResponseBody> {
-    return updateTutorHandler(body, context);
+    const { uid } = verifyRequest(body, context);
+
+    const { updates } = body;
+
+    // verify received data
+    if (!isObject(updates))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update tutor because provided data is not valid"
+      );
+
+    if (isEmptyObject(updates))
+      throw new functionsHttps.HttpsError(
+        "failed-precondition",
+        "Could not update tutor because no updates were provided"
+      );
+
+    return updateTutorHandler({ uid, updates });
   }
 }
-
-/*
-enum wer {
-  a,
-  b,
-  c,
-}
-*/
-
-// const a = { ...wer };
-
-// const b = Object.values(a).map((k) => k as const);
-
-// type q = keyof typeof a;
-// const c:  q,  = "";

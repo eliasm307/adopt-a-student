@@ -1,25 +1,26 @@
 import {
-  CreateStudentRequestBody, CreateStudentResponseBody, isPrivateStudentData,
+  CreateStudentRequestBody, CreateStudentResponseBody, isPrivateStudentData, PrivateStudentData,
 } from '@adopt-a-student/common';
 
 import { STUDENT_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
+import { AuthData } from '../../../declarations/interfaces';
+import { InternalHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin } from '../../../utils/firebase/firebase-admin';
 import verifyRequest from '../../../utils/verifyRequest';
 
-const createStudent: FirebaseCallableFunctionHandler<
-  CreateStudentRequestBody,
+const createStudentHandler: InternalHandler<
+  CreateStudentRequestBody & AuthData,
   CreateStudentResponseBody
-> = async (body, context) => {
-  const auth = verifyRequest(body, context);
+> = async (props) => {
+  const { student: studentInput, uid } = props;
 
   // make sure data uses user id
-  const data = { ...body?.student, id: auth.uid };
+  const data = { ...studentInput, id: uid };
 
-  const student = await createDocument({
+  const student: PrivateStudentData = await createDocument({
     collectionPath: STUDENT_COLLECTION_NAME,
-    id: auth.uid,
+    documentId: uid,
     data,
     dataPredicate: isPrivateStudentData,
     firestoreAdmin,
@@ -30,4 +31,4 @@ const createStudent: FirebaseCallableFunctionHandler<
   };
 };
 
-export default createStudent;
+export default createStudentHandler;

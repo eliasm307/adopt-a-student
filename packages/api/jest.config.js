@@ -9,6 +9,9 @@ module.exports = {
   transform: {
     "^.+\\.tsx?$": "ts-jest",
   },
+  moduleNameMapper: {
+    "@adopt-a-student/common": "<rootDir>/common/src/",
+  },
 
   // testRegex: "src(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
   // testPathIgnorePatterns: ["lib/", "node_modules/"],

@@ -6,17 +6,314 @@
 		"requestBodies": {},
 		"responses": {},
 		"schemas": {
-			"LinkStudentAndSubjectResponseBody": {
+			"TutorId": {
+				"type": "string",
+				"description": "A tutor user id"
+			},
+			"StudentId": {
+				"type": "string",
+				"description": "A student user id"
+			},
+			"UserId": {
+				"anyOf": [
+					{
+						"$ref": "#/components/schemas/TutorId"
+					},
+					{
+						"$ref": "#/components/schemas/StudentId"
+					}
+				],
+				"description": "A general user id, ie a student or tutor id"
+			},
+			"UrlString": {
+				"type": "string",
+				"description": "An internet link"
+			},
+			"Country": {
+				"type": "string",
+				"enum": [
+					"American Samoa",
+					"Anguilla",
+					"Antigua and Barbuda",
+					"Australia",
+					"Austria",
+					"Bahamas",
+					"Barbados",
+					"Belgium",
+					"Belize",
+					"Bermuda",
+					"Botswana",
+					"British Indian Ocean Territory",
+					"British Virgin Islands",
+					"Burundi",
+					"Cameroon",
+					"Canada",
+					"Caribbean",
+					"Cayman Islands",
+					"Christmas Island",
+					"Cocos [Keeling] Islands",
+					"Cook Islands",
+					"Cyprus",
+					"Denmark",
+					"Dominica",
+					"Eritrea",
+					"Europe",
+					"Falkland Islands",
+					"Finland",
+					"Fiji",
+					"Gambia",
+					"Germany",
+					"Ghana",
+					"Gibraltar",
+					"Grenada",
+					"Guam",
+					"Guernsey",
+					"Guyana",
+					"Hong Kong",
+					"India",
+					"Ireland",
+					"Isle of Man",
+					"Israel",
+					"Jamaica",
+					"Jersey",
+					"Kenya",
+					"Kiribati",
+					"Lesotho",
+					"Liberia",
+					"Macao SAR",
+					"Madagascar",
+					"Malawi",
+					"Malaysia",
+					"Malta",
+					"Marshall Islands",
+					"Mauritius",
+					"Micronesia",
+					"Montserrat",
+					"Namibia",
+					"Nauru",
+					"Netherlands",
+					"New Zealand",
+					"Nigeria",
+					"Niue",
+					"Norfolk Island",
+					"Northern Mariana Islands",
+					"Pakistan",
+					"Palau",
+					"Papua New Guinea",
+					"Pitcairn Islands",
+					"Puerto Rico",
+					"Republic of the Philippines",
+					"Rwanda",
+					"Saint Kitts and Nevis",
+					"Saint Lucia",
+					"Saint Vincent and the Grenadines",
+					"Samoa",
+					"Seychelles",
+					"Sierra Leone",
+					"Singapore",
+					"Sint Maarten",
+					"Slovenia",
+					"Solomon Islands",
+					"South Africa",
+					"South Sudan",
+					"St Helena, Ascension,  Tristan da Cunha",
+					"Sudan",
+					"Swaziland",
+					"Sweden",
+					"Switzerland",
+					"Tanzania",
+					"Tokelau",
+					"Tonga",
+					"Trinidad and Tobago",
+					"Turks and Caicos Islands",
+					"Tuvalu",
+					"Uganda",
+					"United Arab Emirates",
+					"United Kingdom",
+					"United States",
+					"US Minor Outlying Islands",
+					"US Virgin Islands",
+					"Vanuatu",
+					"World",
+					"Zambia",
+					"Zimbabwe",
+					"Algeria",
+					"Benin",
+					"Burkina Faso",
+					"Central African Republic",
+					"Chad",
+					"Comoros",
+					"Congo",
+					"Congo, DRC",
+					"Côte d'Ivoire",
+					"Djibouti",
+					"Equatorial Guinea",
+					"France",
+					"French Guiana",
+					"French Polynesia",
+					"Gabon",
+					"Guadeloupe",
+					"Guinea",
+					"Haiti",
+					"Luxembourg",
+					"Mali",
+					"Martinique",
+					"Mauritania",
+					"Mayotte",
+					"Morocco",
+					"New Caledonia",
+					"Niger",
+					"Principality of Monaco",
+					"Reunion",
+					"Saint Barthélemy",
+					"Saint Martin",
+					"Saint Pierre and Miquelon",
+					"Senegal",
+					"Syria",
+					"Togo",
+					"Tunisia",
+					"Wallis and Futuna",
+					"Brunei Darussalam",
+					"Angola",
+					"Brazil",
+					"Cabo Verde",
+					"Guinea-Bissau",
+					"Mozambique",
+					"Portugal",
+					"São Tomé and Príncipe",
+					"Timor-Leste"
+				],
+				"description": "A country name e.g. \"Malaysia\""
+			},
+			"LocaleCode": {
+				"type": "string",
+				"enum": [
+					"en",
+					"fr",
+					"pt",
+					"ms"
+				],
+				"description": "A locale code to specify language e.g. en for English"
+			},
+			"PublicStudentData": {
 				"properties": {
-					"message": {
-						"type": "string"
+					"id": {
+						"$ref": "#/components/schemas/UserId",
+						"description": "Unique id for a user"
+					},
+					"imageUrl": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/UrlString"
+							}
+						],
+						"nullable": true,
+						"description": "Link to profile image, if defined"
+					},
+					"introduction": {
+						"type": "string",
+						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedCountries": {
+						"items": {
+							"$ref": "#/components/schemas/Country"
+						},
+						"type": "array",
+						"description": "The countries the user prefers for content"
+					},
+					"prefferedLocales": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleCode"
+						},
+						"type": "array",
+						"description": "The locales a user prefers for content"
+					},
+					"userName": {
+						"type": "string",
+						"description": "Username which will be displayed for a user"
 					}
 				},
+				"required": [
+					"id",
+					"prefferedCountries",
+					"prefferedLocales",
+					"userName"
+				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"LocaleSubjectId": {
-				"type": "string"
+			"SubjectId": {
+				"type": "string",
+				"description": "A general subject id that doesnt specify locale or country"
+			},
+			"SubjectName": {
+				"type": "string",
+				"description": "Name of a subject in a specific locale"
+			},
+			"LocaleSubjectData": {
+				"description": "Schema of the general public data (not relating to a user) that represents a specific locale dependent subject,\r\nas it is stored in database. e.g. \"Physics\" and \"Physiques\" are two different LocaleSubjects\r\n// ! this is represented as separate documents as there might be a lot of data associated with locale subjects, so this prevents every locale subject being loaded when querying generic subjects",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/SubjectId",
+						"description": "Id of generic subject this locale subject relates to, there should only be 1"
+					},
+					"country": {
+						"$ref": "#/components/schemas/Country",
+						"description": "Specific country for this subject, for any subjects that might be country dependent, blank means it applies to any"
+					},
+					"description": {
+						"type": "string",
+						"description": "Description of the subject"
+					},
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode",
+						"description": "Represents a language that a subject is in"
+					},
+					"name": {
+						"$ref": "#/components/schemas/SubjectName"
+					},
+					"relatedStudents": {
+						"items": {
+							"$ref": "#/components/schemas/StudentId"
+						},
+						"type": "array",
+						"description": "Ids of students needing help with this subject `// todo needs to be syncronised`"
+					},
+					"relatedTutors": {
+						"items": {
+							"$ref": "#/components/schemas/TutorId"
+						},
+						"type": "array",
+						"description": "Ids of tutors available to help with this subject `// todo needs to be syncronised`"
+					}
+				},
+				"required": [
+					"id",
+					"country",
+					"description",
+					"locale",
+					"name",
+					"relatedStudents",
+					"relatedTutors"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"LinkStudentAndSubjectResponseBody": {
+				"properties": {
+					"student": {
+						"$ref": "#/components/schemas/PublicStudentData"
+					},
+					"subject": {
+						"$ref": "#/components/schemas/LocaleSubjectData"
+					}
+				},
+				"required": [
+					"student",
+					"subject"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
 			"ConfidenceLevelEnum": {
 				"description": "Confidence level options mapped to integers",
@@ -28,23 +325,19 @@
 				],
 				"type": "number"
 			},
-			"LocaleCode": {
-				"type": "string",
-				"enum": [
-					"en",
-					"fr"
-				]
-			},
 			"UserSubjectData": {
 				"description": "Data about a subject specific to a user, as it is stored in database\r\n// ? should this be public?",
 				"properties": {
 					"id": {
-						"$ref": "#/components/schemas/LocaleSubjectId",
+						"$ref": "#/components/schemas/SubjectId",
 						"description": "Unique id to the related subject"
 					},
 					"confidenceLevel": {
 						"$ref": "#/components/schemas/ConfidenceLevelEnum",
 						"description": "A rating of how confident a user feels in the subject, the numbers"
+					},
+					"country": {
+						"$ref": "#/components/schemas/Country"
 					},
 					"detail": {
 						"type": "string",
@@ -57,23 +350,21 @@
 				"required": [
 					"id",
 					"confidenceLevel",
+					"country",
 					"detail",
 					"locale"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"LinkStudentAndSubjectRequestBody": {
+			"Partial_LinkStudentAndSubjectRequestBody_": {
 				"properties": {
 					"data": {
 						"$ref": "#/components/schemas/UserSubjectData"
 					}
 				},
-				"required": [
-					"data"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"FirebaseCallableFunctionContext": {
 				"properties": {
@@ -105,22 +396,75 @@
 				"type": "object",
 				"description": "The interface for metadata for the API as passed to the handler.\r\nProvided automatically by Firebase.\r\nDuplicated from firebase for TSOA compatibility."
 			},
-			"LinkStudentAndTutorResponseBody": {
+			"PublicTutorData": {
 				"properties": {
-					"message": {
-						"type": "string"
+					"id": {
+						"$ref": "#/components/schemas/UserId",
+						"description": "Unique id for a user"
+					},
+					"imageUrl": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/UrlString"
+							}
+						],
+						"nullable": true,
+						"description": "Link to profile image, if defined"
+					},
+					"introduction": {
+						"type": "string",
+						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedCountries": {
+						"items": {
+							"$ref": "#/components/schemas/Country"
+						},
+						"type": "array",
+						"description": "The countries the user prefers for content"
+					},
+					"prefferedLocales": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleCode"
+						},
+						"type": "array",
+						"description": "The locales a user prefers for content"
+					},
+					"userName": {
+						"type": "string",
+						"description": "Username which will be displayed for a user"
+					},
+					"available": {
+						"type": "boolean",
+						"description": "Represents whether a tutor is available to take on a student"
 					}
 				},
+				"required": [
+					"id",
+					"prefferedCountries",
+					"prefferedLocales",
+					"userName",
+					"available"
+				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"StudentId": {
-				"type": "string"
+			"LinkStudentAndTutorResponseBody": {
+				"properties": {
+					"student": {
+						"$ref": "#/components/schemas/PublicStudentData"
+					},
+					"tutor": {
+						"$ref": "#/components/schemas/PublicTutorData"
+					}
+				},
+				"required": [
+					"student",
+					"tutor"
+				],
+				"type": "object",
+				"additionalProperties": false
 			},
-			"TutorId": {
-				"type": "string"
-			},
-			"LinkStudentAndTutorRequestBody": {
+			"Partial_LinkStudentAndTutorRequestBody_": {
 				"properties": {
 					"studentId": {
 						"$ref": "#/components/schemas/StudentId"
@@ -129,131 +473,216 @@
 						"$ref": "#/components/schemas/TutorId"
 					}
 				},
-				"required": [
-					"studentId",
-					"tutorId"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"LinkSubjectAndSubjectCategoryResponseBody": {
-				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
+				"properties": {},
 				"type": "object",
 				"additionalProperties": false
 			},
 			"CategoryId": {
-				"type": "string"
+				"type": "string",
+				"description": "A general category name which doesnt specify locale"
 			},
-			"GenericSubjectId": {
-				"type": "string"
-			},
-			"SubjectId": {
-				"anyOf": [
-					{
-						"$ref": "#/components/schemas/GenericSubjectId"
-					},
-					{
-						"$ref": "#/components/schemas/LocaleSubjectId"
-					}
-				]
-			},
-			"LinkSubjectAndSubjectCategoryRequestBody": {
+			"Partial_LinkSubjectAndSubjectCategoryRequestBody_": {
 				"properties": {
 					"categoryId": {
 						"$ref": "#/components/schemas/CategoryId"
+					},
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode",
+						"description": "Locale to be returned after linking"
 					},
 					"subjectId": {
 						"$ref": "#/components/schemas/SubjectId"
 					}
 				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"LinkSubjectsResponseBody": {
+				"properties": {},
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_LinkSubjectsRequestBody_": {
+				"properties": {
+					"subject1Id": {
+						"$ref": "#/components/schemas/SubjectId"
+					},
+					"subject2Id": {
+						"$ref": "#/components/schemas/SubjectId"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"LinkedStudentData": {
+				"description": "Data about a student from the perspective of a tutor, as it is stored in database",
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/StudentId",
+						"description": "Id of the student related to the tutor"
+					}
+				},
 				"required": [
-					"categoryId",
-					"subjectId"
+					"id"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"LinkSubjectsResponseBody": {
-				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
-				"type": "object",
-				"additionalProperties": false
+			"EmailString": {
+				"type": "string",
+				"description": "A valid email address"
 			},
-			"LinkSubjectsRequestBody": {
+			"PrivateTutorData": {
+				"description": "Schema of data that represents a tutor, only available to the tutor",
 				"properties": {
-					"subject1Id": {
-						"type": "string"
+					"id": {
+						"$ref": "#/components/schemas/UserId",
+						"description": "Unique id for a user"
 					},
-					"subject2Id": {
-						"type": "string"
+					"imageUrl": {
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/UrlString"
+							}
+						],
+						"nullable": true,
+						"description": "Link to profile image, if defined"
+					},
+					"introduction": {
+						"type": "string",
+						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedCountries": {
+						"items": {
+							"$ref": "#/components/schemas/Country"
+						},
+						"type": "array",
+						"description": "The countries the user prefers for content"
+					},
+					"prefferedLocales": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleCode"
+						},
+						"type": "array",
+						"description": "The locales a user prefers for content"
+					},
+					"userName": {
+						"type": "string",
+						"description": "Username which will be displayed for a user"
+					},
+					"email": {
+						"$ref": "#/components/schemas/EmailString",
+						"description": "Email to allow users to start communicating"
+					},
+					"relatedSubjects": {
+						"items": {
+							"$ref": "#/components/schemas/UserSubjectData"
+						},
+						"type": "array",
+						"description": "Links to subjects a user is interested in learning/teaching (depends on type of user)\r\nand user specific information about the user relating to a specific subject"
+					},
+					"available": {
+						"type": "boolean",
+						"description": "Represents whether a tutor is available to take on a student"
+					},
+					"relatedStudents": {
+						"items": {
+							"$ref": "#/components/schemas/LinkedStudentData"
+						},
+						"type": "array",
+						"description": "Data about the students a teacher is involved with"
 					}
 				},
 				"required": [
-					"subject1Id",
-					"subject2Id"
+					"id",
+					"prefferedCountries",
+					"prefferedLocales",
+					"userName",
+					"email",
+					"relatedSubjects",
+					"available",
+					"relatedStudents"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
 			"LinkTutorAndSubjectResponseBody": {
 				"properties": {
-					"message": {
-						"type": "string"
+					"subject": {
+						"$ref": "#/components/schemas/LocaleSubjectData"
+					},
+					"tutor": {
+						"$ref": "#/components/schemas/PrivateTutorData"
 					}
 				},
+				"required": [
+					"subject",
+					"tutor"
+				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"LinkTutorAndSubjectRequestBody": {
+			"Partial_LinkTutorAndSubjectRequestBody_": {
 				"properties": {
 					"data": {
 						"$ref": "#/components/schemas/UserSubjectData"
 					}
 				},
-				"required": [
-					"data"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"UnlinkStudentAndSubjectResponseBody": {
 				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
-				"type": "object",
-				"additionalProperties": false
-			},
-			"UnlinkStudentAndSubjectRequestBody": {
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/LocaleSubjectId"
+					"student": {
+						"$ref": "#/components/schemas/PublicStudentData"
+					},
+					"subject": {
+						"$ref": "#/components/schemas/LocaleSubjectData"
 					}
 				},
 				"required": [
-					"id"
+					"student",
+					"subject"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"UnlinkStudentAndTutorResponseBody": {
+			"Partial_UnlinkStudentAndSubjectRequestBody_": {
 				"properties": {
-					"message": {
-						"type": "string"
+					"country": {
+						"$ref": "#/components/schemas/Country"
+					},
+					"id": {
+						"$ref": "#/components/schemas/SubjectId"
+					},
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode"
 					}
 				},
 				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"UnlinkStudentAndTutorResponseBody": {
+				"properties": {
+					"student": {
+						"$ref": "#/components/schemas/PublicStudentData"
+					},
+					"tutor": {
+						"$ref": "#/components/schemas/PublicTutorData"
+					}
+				},
+				"required": [
+					"student",
+					"tutor"
+				],
+				"type": "object",
 				"additionalProperties": false
 			},
-			"UnlinkStudentAndTutorRequestBody": {
+			"Partial_UnlinkStudentAndTutorRequestBody_": {
 				"properties": {
 					"studentId": {
 						"$ref": "#/components/schemas/StudentId"
@@ -262,23 +691,15 @@
 						"$ref": "#/components/schemas/TutorId"
 					}
 				},
-				"required": [
-					"studentId",
-					"tutorId"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"UnlinkSubjectAndSubjectCategoryResponseBody": {
-				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
+				"properties": {},
 				"type": "object",
 				"additionalProperties": false
 			},
-			"UnlinkSubjectAndSubjectCategoryRequestBody": {
+			"Partial_UnlinkSubjectAndSubjectCategoryRequestBody_": {
 				"properties": {
 					"categoryId": {
 						"$ref": "#/components/schemas/CategoryId"
@@ -287,58 +708,56 @@
 						"$ref": "#/components/schemas/SubjectId"
 					}
 				},
-				"required": [
-					"categoryId",
-					"subjectId"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"UnlinkSubjectsResponseBody": {
-				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
+				"properties": {},
 				"type": "object",
 				"additionalProperties": false
 			},
-			"UnlinkSubjectsRequestBody": {
+			"Partial_UnlinkSubjectsRequestBody_": {
 				"properties": {
 					"subject1Id": {
-						"type": "string"
+						"$ref": "#/components/schemas/SubjectId"
 					},
 					"subject2Id": {
-						"type": "string"
+						"$ref": "#/components/schemas/SubjectId"
 					}
 				},
-				"required": [
-					"subject1Id",
-					"subject2Id"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"UnlinkTutorAndSubjectResponseBody": {
 				"properties": {
-					"message": {
-						"type": "string"
-					}
-				},
-				"type": "object",
-				"additionalProperties": false
-			},
-			"UnlinkTutorAndSubjectRequestBody": {
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/LocaleSubjectId"
+					"subject": {
+						"$ref": "#/components/schemas/LocaleSubjectData"
+					},
+					"tutor": {
+						"$ref": "#/components/schemas/PublicTutorData"
 					}
 				},
 				"required": [
-					"id"
+					"subject",
+					"tutor"
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"Partial_UnlinkTutorAndSubjectRequestBody_": {
+				"properties": {
+					"country": {
+						"$ref": "#/components/schemas/Country"
+					},
+					"id": {
+						"$ref": "#/components/schemas/SubjectId"
+					},
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
 			},
 			"LinkedTutorData": {
 				"description": "Data about a tutor from the perspective of a student, as it is stored in database",
@@ -354,24 +773,6 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"EmailString": {
-				"type": "string",
-				"description": "A valid email address"
-			},
-			"UserId": {
-				"anyOf": [
-					{
-						"$ref": "#/components/schemas/TutorId"
-					},
-					{
-						"$ref": "#/components/schemas/StudentId"
-					}
-				]
-			},
-			"UrlString": {
-				"type": "string",
-				"description": "An internet link"
-			},
 			"PrivateStudentData": {
 				"description": "Schema of data that represents a student, as it is stored in database",
 				"properties": {
@@ -380,12 +781,24 @@
 						"description": "Unique id for a user"
 					},
 					"imageUrl": {
-						"$ref": "#/components/schemas/UrlString",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/UrlString"
+							}
+						],
+						"nullable": true,
 						"description": "Link to profile image, if defined"
 					},
 					"introduction": {
 						"type": "string",
 						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedCountries": {
+						"items": {
+							"$ref": "#/components/schemas/Country"
+						},
+						"type": "array",
+						"description": "The countries the user prefers for content"
 					},
 					"prefferedLocales": {
 						"items": {
@@ -419,6 +832,7 @@
 				},
 				"required": [
 					"id",
+					"prefferedCountries",
 					"prefferedLocales",
 					"userName",
 					"email",
@@ -461,12 +875,24 @@
 						"description": "Links to subjects a user is interested in learning/teaching (depends on type of user)\r\nand user specific information about the user relating to a specific subject"
 					},
 					"imageUrl": {
-						"$ref": "#/components/schemas/UrlString",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/UrlString"
+							}
+						],
+						"nullable": true,
 						"description": "Link to profile image, if defined"
 					},
 					"introduction": {
 						"type": "string",
 						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedCountries": {
+						"items": {
+							"$ref": "#/components/schemas/Country"
+						},
+						"type": "array",
+						"description": "The countries the user prefers for content"
 					},
 					"prefferedLocales": {
 						"items": {
@@ -484,6 +910,7 @@
 					"relatedTutors",
 					"email",
 					"relatedSubjects",
+					"prefferedCountries",
 					"prefferedLocales",
 					"userName"
 				],
@@ -494,51 +921,14 @@
 				"$ref": "#/components/schemas/Pick_PrivateStudentData.Exclude_keyofPrivateStudentData.id__",
 				"description": "Construct a type with the properties of T except for those in type K."
 			},
-			"CreateStudentRequestBody": {
+			"Partial_CreateStudentRequestBody_": {
 				"properties": {
 					"student": {
 						"$ref": "#/components/schemas/Omit_PrivateStudentData.id_"
 					}
 				},
-				"required": [
-					"student"
-				],
 				"type": "object",
-				"additionalProperties": false
-			},
-			"PublicStudentData": {
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/UserId",
-						"description": "Unique id for a user"
-					},
-					"imageUrl": {
-						"$ref": "#/components/schemas/UrlString",
-						"description": "Link to profile image, if defined"
-					},
-					"introduction": {
-						"type": "string",
-						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
-					},
-					"prefferedLocales": {
-						"items": {
-							"$ref": "#/components/schemas/LocaleCode"
-						},
-						"type": "array",
-						"description": "The locales a user prefers for content"
-					},
-					"userName": {
-						"type": "string",
-						"description": "Username which will be displayed for a user"
-					}
-				},
-				"required": [
-					"id",
-					"prefferedLocales",
-					"userName"
-				],
-				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"GetStudentResponseBody": {
 				"properties": {
@@ -559,17 +949,14 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GetStudentRequestBody": {
+			"Partial_GetStudentRequestBody_": {
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/StudentId"
 					}
 				},
-				"required": [
-					"id"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"GetStudentsBySubjectsResponseBody": {
 				"properties": {
@@ -586,7 +973,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GetStudentsBySubjectsRequestBody": {
+			"Partial_GetStudentsBySubjectsRequestBody_": {
 				"properties": {
 					"subjectIds": {
 						"items": {
@@ -595,11 +982,8 @@
 						"type": "array"
 					}
 				},
-				"required": [
-					"subjectIds"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"UpdateStudentResponseBody": {
 				"properties": {
@@ -634,12 +1018,24 @@
 						"description": "Links to subjects a user is interested in learning/teaching (depends on type of user)\r\nand user specific information about the user relating to a specific subject"
 					},
 					"imageUrl": {
-						"$ref": "#/components/schemas/UrlString",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/UrlString"
+							}
+						],
+						"nullable": true,
 						"description": "Link to profile image, if defined"
 					},
 					"introduction": {
 						"type": "string",
 						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedCountries": {
+						"items": {
+							"$ref": "#/components/schemas/Country"
+						},
+						"type": "array",
+						"description": "The countries the user prefers for content"
 					},
 					"prefferedLocales": {
 						"items": {
@@ -656,36 +1052,37 @@
 				"type": "object",
 				"description": "Make all properties in T optional"
 			},
-			"UpdateStudentRequestBody": {
+			"Partial_UpdateStudentRequestBody_": {
 				"properties": {
 					"updates": {
 						"$ref": "#/components/schemas/Partial_Omit_PrivateStudentData.id__"
 					}
 				},
-				"required": [
-					"updates"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
+			},
+			"SubjectCategoryName": {
+				"type": "string",
+				"description": "Name of a subject cateogry in a specific locale"
 			},
 			"LocaleSubjectCategoryData": {
 				"description": "Subject category data in a specific locale",
 				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/SubjectId",
+						"description": "id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject"
+					},
 					"locale": {
 						"$ref": "#/components/schemas/LocaleCode"
 					},
 					"name": {
-						"type": "string"
-					},
-					"parentId": {
-						"$ref": "#/components/schemas/SubjectId",
-						"description": "id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject"
+						"$ref": "#/components/schemas/SubjectCategoryName"
 					}
 				},
 				"required": [
+					"id",
 					"locale",
-					"name",
-					"parentId"
+					"name"
 				],
 				"type": "object",
 				"additionalProperties": false
@@ -696,6 +1093,12 @@
 						"$ref": "#/components/schemas/LocaleSubjectCategoryData"
 					},
 					"fr": {
+						"$ref": "#/components/schemas/LocaleSubjectCategoryData"
+					},
+					"pt": {
+						"$ref": "#/components/schemas/LocaleSubjectCategoryData"
+					},
+					"ms": {
 						"$ref": "#/components/schemas/LocaleSubjectCategoryData"
 					}
 				},
@@ -710,7 +1113,14 @@
 					},
 					"locales": {
 						"$ref": "#/components/schemas/Record_LocaleCode.LocaleSubjectCategoryData_",
-						"description": "Representations of the same generic subject catories in different locales"
+						"description": "Representations of the same generic subject catories in different locales\r\n// ? should the key be the country instead?"
+					},
+					"names": {
+						"items": {
+							"$ref": "#/components/schemas/SubjectName"
+						},
+						"type": "array",
+						"description": "Existing names for this subject category from defined locales *\r\n// todo test this should update when locale subjects are changed"
 					},
 					"relatedSubjects": {
 						"items": {
@@ -723,6 +1133,7 @@
 				"required": [
 					"id",
 					"locales",
+					"names",
 					"relatedSubjects"
 				],
 				"type": "object",
@@ -740,36 +1151,19 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Partial_Omit_GenericSubjectCategoryData.id__": {
+			"Partial_CreateSubjectCategoryRequestBody_": {
 				"properties": {
-					"relatedSubjects": {
-						"items": {
-							"$ref": "#/components/schemas/SubjectId"
-						},
-						"type": "array",
-						"description": "generic subjects which belong to this generic category\r\n // todo this should link category to subject and subject to category"
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode"
 					},
-					"locales": {
-						"$ref": "#/components/schemas/Record_LocaleCode.LocaleSubjectCategoryData_",
-						"description": "Representations of the same generic subject catories in different locales"
+					"name": {
+						"$ref": "#/components/schemas/SubjectCategoryName"
 					}
 				},
 				"type": "object",
 				"description": "Make all properties in T optional"
 			},
-			"CreateSubjectCategoryRequestBody": {
-				"properties": {
-					"updates": {
-						"$ref": "#/components/schemas/Partial_Omit_GenericSubjectCategoryData.id__"
-					}
-				},
-				"required": [
-					"updates"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"GetSubjectCategoryResponseBody": {
+			"GetSubjectCategoriesForLocaleResponseBody": {
 				"properties": {
 					"subjectCategories": {
 						"items": {
@@ -784,17 +1178,42 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GetSubjectCategoryRequestBody": {
+			"Partial_GetSubjectCategoriesForLocaleRequestBody_": {
 				"properties": {
 					"locale": {
 						"$ref": "#/components/schemas/LocaleCode"
 					}
 				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"GetSubjectCategoryResponseBody": {
+				"properties": {
+					"subjectCategory": {
+						"$ref": "#/components/schemas/LocaleSubjectCategoryData"
+					}
+				},
 				"required": [
-					"locale"
+					"subjectCategory"
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"SubjectCategoryId": {
+				"type": "string",
+				"description": "A generic subject category id"
+			},
+			"Partial_GetSubjectCategoryRequestBody_": {
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/SubjectCategoryId"
+					},
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
 			},
 			"UpdateSubjectCategoryResponseBody": {
 				"properties": {
@@ -808,23 +1227,16 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"SubjectCategoryId": {
-				"type": "string"
-			},
 			"Partial_Omit_LocaleSubjectCategoryData.id-or-locale__": {
 				"properties": {
 					"name": {
-						"type": "string"
-					},
-					"parentId": {
-						"$ref": "#/components/schemas/SubjectId",
-						"description": "id of the generic subject, NOT the locale subject, the locale differentiates different locale subjects, that belong to one generic subject"
+						"$ref": "#/components/schemas/SubjectCategoryName"
 					}
 				},
 				"type": "object",
 				"description": "Make all properties in T optional"
 			},
-			"UpdateSubjectCategoryRequestBody": {
+			"Partial_UpdateSubjectCategoryRequestBody_": {
 				"properties": {
 					"id": {
 						"$ref": "#/components/schemas/SubjectCategoryId"
@@ -836,19 +1248,21 @@
 						"$ref": "#/components/schemas/Partial_Omit_LocaleSubjectCategoryData.id-or-locale__"
 					}
 				},
-				"required": [
-					"id",
-					"locale",
-					"updates"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"GenericSubjectData": {
 				"description": "Represents a subject in every language, ie not dependent on locale.\r\nThis is used to map high level relationships between subjects e.g.\r\nthe \"Maths\" generic subject could be related to the \"Physics\" generic subject\r\nwhere \"Physics\" and \"Physiques\" both belong to the \"Physics\" generic subject",
 				"properties": {
 					"id": {
-						"$ref": "#/components/schemas/GenericSubjectId"
+						"$ref": "#/components/schemas/SubjectId"
+					},
+					"names": {
+						"items": {
+							"$ref": "#/components/schemas/SubjectName"
+						},
+						"type": "array",
+						"description": "Existing names for this subject from defined locales\r\n\r\n// todo this should update when locale subjects are changed"
 					},
 					"relatedCategories": {
 						"items": {
@@ -859,7 +1273,7 @@
 					},
 					"relatedSubjects": {
 						"items": {
-							"$ref": "#/components/schemas/GenericSubjectId"
+							"$ref": "#/components/schemas/SubjectId"
 						},
 						"type": "array",
 						"description": "Links to other relevant subjects a user might be interested in\r\n`// todo needs to be syncronised ie if A is related to B then B must be related to A`"
@@ -867,6 +1281,7 @@
 				},
 				"required": [
 					"id",
+					"names",
 					"relatedCategories",
 					"relatedSubjects"
 				],
@@ -875,90 +1290,29 @@
 			},
 			"CreateGenericSubjectResponseBody": {
 				"properties": {
-					"subject": {
+					"genericSubject": {
 						"$ref": "#/components/schemas/GenericSubjectData"
+					},
+					"localeSubject": {
+						"$ref": "#/components/schemas/LocaleSubjectData"
 					}
 				},
 				"required": [
-					"subject"
+					"genericSubject",
+					"localeSubject"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Pick_GenericSubjectData.Exclude_keyofGenericSubjectData.id__": {
+			"Pick_LocaleSubjectData.Exclude_keyofLocaleSubjectData.id__": {
 				"properties": {
-					"relatedSubjects": {
-						"items": {
-							"$ref": "#/components/schemas/GenericSubjectId"
-						},
-						"type": "array",
-						"description": "Links to other relevant subjects a user might be interested in\r\n`// todo needs to be syncronised ie if A is related to B then B must be related to A`"
-					},
-					"relatedCategories": {
-						"items": {
-							"$ref": "#/components/schemas/SubjectCategoryId"
-						},
-						"type": "array",
-						"description": "The categories this generic subject belongs to"
-					}
-				},
-				"required": [
-					"relatedSubjects",
-					"relatedCategories"
-				],
-				"type": "object",
-				"description": "From T, pick a set of properties whose keys are in the union K"
-			},
-			"Omit_GenericSubjectData.id_": {
-				"$ref": "#/components/schemas/Pick_GenericSubjectData.Exclude_keyofGenericSubjectData.id__",
-				"description": "Construct a type with the properties of T except for those in type K."
-			},
-			"CreateGenericSubjectRequestBody": {
-				"properties": {
-					"data": {
-						"$ref": "#/components/schemas/Omit_GenericSubjectData.id_"
-					}
-				},
-				"type": "object",
-				"additionalProperties": false
-			},
-			"Country": {
-				"type": "string",
-				"enum": [
-					"United Kingdom",
-					"Brazil",
-					"Cote d'Ivoire"
-				]
-			},
-			"LocaleSubjectData": {
-				"description": "Schema of the general public data (not relating to a user) that represents a specific locale dependent subject,\r\nas it is stored in database. e.g. \"Physics\" and \"Physiques\" are two different LocaleSubjects\r\n// ! this is represented as separate documents as there might be a lot of data associated with locale subjects, so this prevents every locale subject being loaded when querying generic subjects",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/LocaleSubjectId",
-						"description": "Unique id created by combining [GenericSubjectId]-[LocaleCode]"
-					},
-					"country": {
-						"$ref": "#/components/schemas/Country",
-						"description": "Specific country for this subject, for any subjects that might be country dependent, blank means it applies to any"
-					},
-					"description": {
-						"type": "string",
-						"description": "Description of the subject"
-					},
 					"locale": {
 						"$ref": "#/components/schemas/LocaleCode",
 						"description": "Represents a language that a subject is in"
 					},
-					"parentId": {
-						"$ref": "#/components/schemas/GenericSubjectId",
-						"description": "Id of generic subject this locale subject relates to, there should only be 1"
-					},
-					"relatedStudents": {
-						"items": {
-							"$ref": "#/components/schemas/StudentId"
-						},
-						"type": "array",
-						"description": "Ids of students needing help with this subject `// todo needs to be syncronised`"
+					"country": {
+						"$ref": "#/components/schemas/Country",
+						"description": "Specific country for this subject, for any subjects that might be country dependent, blank means it applies to any"
 					},
 					"relatedTutors": {
 						"items": {
@@ -966,19 +1320,46 @@
 						},
 						"type": "array",
 						"description": "Ids of tutors available to help with this subject `// todo needs to be syncronised`"
+					},
+					"name": {
+						"$ref": "#/components/schemas/SubjectName"
+					},
+					"description": {
+						"type": "string",
+						"description": "Description of the subject"
+					},
+					"relatedStudents": {
+						"items": {
+							"$ref": "#/components/schemas/StudentId"
+						},
+						"type": "array",
+						"description": "Ids of students needing help with this subject `// todo needs to be syncronised`"
 					}
 				},
 				"required": [
-					"id",
-					"country",
-					"description",
 					"locale",
-					"parentId",
-					"relatedStudents",
-					"relatedTutors"
+					"country",
+					"relatedTutors",
+					"name",
+					"description",
+					"relatedStudents"
 				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "From T, pick a set of properties whose keys are in the union K"
+			},
+			"Omit_LocaleSubjectData.id_": {
+				"$ref": "#/components/schemas/Pick_LocaleSubjectData.Exclude_keyofLocaleSubjectData.id__",
+				"description": "Construct a type with the properties of T except for those in type K."
+			},
+			"Partial_CreateGenericSubjectRequestBody_": {
+				"properties": {
+					"data": {
+						"$ref": "#/components/schemas/Omit_LocaleSubjectData.id_",
+						"description": "initial localeSubjectData"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
 			},
 			"CreateLocaleSubjectResponseBody": {
 				"properties": {
@@ -992,65 +1373,17 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"Pick_LocaleSubjectData.Exclude_keyofLocaleSubjectData.id__": {
-				"properties": {
-					"relatedTutors": {
-						"items": {
-							"$ref": "#/components/schemas/TutorId"
-						},
-						"type": "array",
-						"description": "Ids of tutors available to help with this subject `// todo needs to be syncronised`"
-					},
-					"locale": {
-						"$ref": "#/components/schemas/LocaleCode",
-						"description": "Represents a language that a subject is in"
-					},
-					"parentId": {
-						"$ref": "#/components/schemas/GenericSubjectId",
-						"description": "Id of generic subject this locale subject relates to, there should only be 1"
-					},
-					"country": {
-						"$ref": "#/components/schemas/Country",
-						"description": "Specific country for this subject, for any subjects that might be country dependent, blank means it applies to any"
-					},
-					"description": {
-						"type": "string",
-						"description": "Description of the subject"
-					},
-					"relatedStudents": {
-						"items": {
-							"$ref": "#/components/schemas/StudentId"
-						},
-						"type": "array",
-						"description": "Ids of students needing help with this subject `// todo needs to be syncronised`"
-					}
-				},
-				"required": [
-					"relatedTutors",
-					"locale",
-					"parentId",
-					"country",
-					"description",
-					"relatedStudents"
-				],
-				"type": "object",
-				"description": "From T, pick a set of properties whose keys are in the union K"
-			},
-			"Omit_LocaleSubjectData.id_": {
-				"$ref": "#/components/schemas/Pick_LocaleSubjectData.Exclude_keyofLocaleSubjectData.id__",
-				"description": "Construct a type with the properties of T except for those in type K."
-			},
-			"CreateLocaleSubjectRequestBody": {
+			"Partial_CreateLocaleSubjectRequestBody_": {
 				"properties": {
 					"data": {
 						"$ref": "#/components/schemas/Omit_LocaleSubjectData.id_"
+					},
+					"genericSubjectId": {
+						"$ref": "#/components/schemas/SubjectId"
 					}
 				},
-				"required": [
-					"data"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"GetSubjectResponseBody": {
 				"properties": {
@@ -1078,157 +1411,76 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GetSubjectRequestBody": {
+			"Partial_GetSubjectRequestBody_": {
 				"properties": {
+					"country": {
+						"$ref": "#/components/schemas/Country"
+					},
 					"id": {
-						"$ref": "#/components/schemas/LocaleSubjectId"
+						"$ref": "#/components/schemas/SubjectId"
+					},
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode"
 					}
 				},
-				"required": [
-					"id"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
-			"LinkedStudentData": {
-				"description": "Data about a student from the perspective of a tutor, as it is stored in database",
+			"SubjectOverview": {
 				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/StudentId",
-						"description": "Id of the student related to the tutor"
-					}
-				},
-				"required": [
-					"id"
-				],
-				"type": "object",
-				"additionalProperties": false
-			},
-			"PrivateTutorData": {
-				"description": "Schema of data that represents a tutor, only available to the tutor",
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/UserId",
-						"description": "Unique id for a user"
-					},
-					"imageUrl": {
-						"$ref": "#/components/schemas/UrlString",
-						"description": "Link to profile image, if defined"
-					},
-					"introduction": {
-						"type": "string",
-						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
-					},
-					"prefferedLocales": {
+					"relatedCategories": {
 						"items": {
-							"$ref": "#/components/schemas/LocaleCode"
+							"$ref": "#/components/schemas/CategoryId"
 						},
-						"type": "array",
-						"description": "The locales a user prefers for content"
-					},
-					"userName": {
-						"type": "string",
-						"description": "Username which will be displayed for a user"
-					},
-					"email": {
-						"$ref": "#/components/schemas/EmailString",
-						"description": "Email to allow users to start communicating"
+						"type": "array"
 					},
 					"relatedSubjects": {
 						"items": {
-							"$ref": "#/components/schemas/UserSubjectData"
+							"$ref": "#/components/schemas/SubjectId"
 						},
-						"type": "array",
-						"description": "Links to subjects a user is interested in learning/teaching (depends on type of user)\r\nand user specific information about the user relating to a specific subject"
+						"type": "array"
 					},
-					"relatedStudents": {
-						"items": {
-							"$ref": "#/components/schemas/LinkedStudentData"
-						},
-						"type": "array",
-						"description": "Data about the students a teacher is involved with"
+					"subject": {
+						"$ref": "#/components/schemas/LocaleSubjectData"
 					}
 				},
 				"required": [
-					"id",
-					"prefferedLocales",
-					"userName",
-					"email",
+					"relatedCategories",
 					"relatedSubjects",
-					"relatedStudents"
+					"subject"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"PublicTutorData": {
+			"GetSubjectsByCategoryResponseBody": {
 				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/UserId",
-						"description": "Unique id for a user"
-					},
-					"imageUrl": {
-						"$ref": "#/components/schemas/UrlString",
-						"description": "Link to profile image, if defined"
-					},
-					"introduction": {
-						"type": "string",
-						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
-					},
-					"prefferedLocales": {
+					"results": {
 						"items": {
-							"$ref": "#/components/schemas/LocaleCode"
+							"$ref": "#/components/schemas/SubjectOverview"
 						},
-						"type": "array",
-						"description": "The locales a user prefers for content"
-					},
-					"userName": {
-						"type": "string",
-						"description": "Username which will be displayed for a user"
-					},
-					"available": {
-						"type": "boolean",
-						"description": "Represents whether a tutor is available to take on a student"
+						"type": "array"
 					}
 				},
 				"required": [
-					"id",
-					"prefferedLocales",
-					"userName",
-					"available"
+					"results"
 				],
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GetTutorResponseBody": {
+			"Partial_GetSubjectsByCategoryRequestBody_": {
 				"properties": {
-					"tutor": {
-						"anyOf": [
-							{
-								"$ref": "#/components/schemas/PrivateTutorData"
-							},
-							{
-								"$ref": "#/components/schemas/PublicTutorData"
-							}
-						]
+					"categoryId": {
+						"$ref": "#/components/schemas/SubjectCategoryId"
+					},
+					"country": {
+						"$ref": "#/components/schemas/Country"
+					},
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode"
 					}
 				},
-				"required": [
-					"tutor"
-				],
 				"type": "object",
-				"additionalProperties": false
-			},
-			"GetTutorRequestBody": {
-				"properties": {
-					"id": {
-						"$ref": "#/components/schemas/TutorId"
-					}
-				},
-				"required": [
-					"id"
-				],
-				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"UpdateLocaleSubjectResponseBody": {
 				"properties": {
@@ -1244,6 +1496,14 @@
 			},
 			"Partial_Omit_LocaleSubjectData.id__": {
 				"properties": {
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode",
+						"description": "Represents a language that a subject is in"
+					},
+					"country": {
+						"$ref": "#/components/schemas/Country",
+						"description": "Specific country for this subject, for any subjects that might be country dependent, blank means it applies to any"
+					},
 					"relatedTutors": {
 						"items": {
 							"$ref": "#/components/schemas/TutorId"
@@ -1251,17 +1511,8 @@
 						"type": "array",
 						"description": "Ids of tutors available to help with this subject `// todo needs to be syncronised`"
 					},
-					"locale": {
-						"$ref": "#/components/schemas/LocaleCode",
-						"description": "Represents a language that a subject is in"
-					},
-					"parentId": {
-						"$ref": "#/components/schemas/GenericSubjectId",
-						"description": "Id of generic subject this locale subject relates to, there should only be 1"
-					},
-					"country": {
-						"$ref": "#/components/schemas/Country",
-						"description": "Specific country for this subject, for any subjects that might be country dependent, blank means it applies to any"
+					"name": {
+						"$ref": "#/components/schemas/SubjectName"
 					},
 					"description": {
 						"type": "string",
@@ -1278,22 +1529,23 @@
 				"type": "object",
 				"description": "Make all properties in T optional"
 			},
-			"UpdateLocaleSubjectRequestBody": {
+			"Partial_UpdateLocaleSubjectRequestBody_": {
 				"properties": {
+					"country": {
+						"$ref": "#/components/schemas/Country"
+					},
 					"id": {
-						"$ref": "#/components/schemas/LocaleSubjectId",
-						"description": "Locale subject id to modify"
+						"$ref": "#/components/schemas/SubjectId"
+					},
+					"locale": {
+						"$ref": "#/components/schemas/LocaleCode"
 					},
 					"updates": {
 						"$ref": "#/components/schemas/Partial_Omit_LocaleSubjectData.id__"
 					}
 				},
-				"required": [
-					"id",
-					"updates"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"CreateTutorResponseBody": {
 				"properties": {
@@ -1321,12 +1573,24 @@
 						"description": "Links to subjects a user is interested in learning/teaching (depends on type of user)\r\nand user specific information about the user relating to a specific subject"
 					},
 					"imageUrl": {
-						"$ref": "#/components/schemas/UrlString",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/UrlString"
+							}
+						],
+						"nullable": true,
 						"description": "Link to profile image, if defined"
 					},
 					"introduction": {
 						"type": "string",
 						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedCountries": {
+						"items": {
+							"$ref": "#/components/schemas/Country"
+						},
+						"type": "array",
+						"description": "The countries the user prefers for content"
 					},
 					"prefferedLocales": {
 						"items": {
@@ -1345,14 +1609,20 @@
 						},
 						"type": "array",
 						"description": "Data about the students a teacher is involved with"
+					},
+					"available": {
+						"type": "boolean",
+						"description": "Represents whether a tutor is available to take on a student"
 					}
 				},
 				"required": [
 					"email",
 					"relatedSubjects",
+					"prefferedCountries",
 					"prefferedLocales",
 					"userName",
-					"relatedStudents"
+					"relatedStudents",
+					"available"
 				],
 				"type": "object",
 				"description": "From T, pick a set of properties whose keys are in the union K"
@@ -1361,10 +1631,26 @@
 				"$ref": "#/components/schemas/Pick_PrivateTutorData.Exclude_keyofPrivateTutorData.id__",
 				"description": "Construct a type with the properties of T except for those in type K."
 			},
-			"CreateTutorRequestBody": {
+			"Partial_CreateTutorRequestBody_": {
 				"properties": {
 					"tutor": {
 						"$ref": "#/components/schemas/Omit_PrivateTutorData.id_"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"GetTutorResponseBody": {
+				"properties": {
+					"tutor": {
+						"anyOf": [
+							{
+								"$ref": "#/components/schemas/PrivateTutorData"
+							},
+							{
+								"$ref": "#/components/schemas/PublicTutorData"
+							}
+						]
 					}
 				},
 				"required": [
@@ -1372,6 +1658,48 @@
 				],
 				"type": "object",
 				"additionalProperties": false
+			},
+			"Partial_GetTutorRequestBody_": {
+				"properties": {
+					"id": {
+						"$ref": "#/components/schemas/TutorId"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
+			},
+			"GetTutorsByLocalesResponseBody": {
+				"properties": {
+					"tutors": {
+						"items": {
+							"$ref": "#/components/schemas/PublicTutorData"
+						},
+						"type": "array"
+					}
+				},
+				"required": [
+					"tutors"
+				],
+				"type": "object",
+				"additionalProperties": false
+			},
+			"Partial_GetTutorsByLocalesRequestBody_": {
+				"properties": {
+					"countries": {
+						"items": {
+							"$ref": "#/components/schemas/Country"
+						},
+						"type": "array"
+					},
+					"locales": {
+						"items": {
+							"$ref": "#/components/schemas/LocaleCode"
+						},
+						"type": "array"
+					}
+				},
+				"type": "object",
+				"description": "Make all properties in T optional"
 			},
 			"GetTutorsBySubjectsResponseBody": {
 				"properties": {
@@ -1388,7 +1716,7 @@
 				"type": "object",
 				"additionalProperties": false
 			},
-			"GetTutorsBySubjectsRequestBody": {
+			"Partial_GetTutorsBySubjectsRequestBody_": {
 				"properties": {
 					"subjectIds": {
 						"items": {
@@ -1397,11 +1725,8 @@
 						"type": "array"
 					}
 				},
-				"required": [
-					"subjectIds"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			},
 			"UpdateTutorResponseBody": {
 				"properties": {
@@ -1429,12 +1754,24 @@
 						"description": "Links to subjects a user is interested in learning/teaching (depends on type of user)\r\nand user specific information about the user relating to a specific subject"
 					},
 					"imageUrl": {
-						"$ref": "#/components/schemas/UrlString",
+						"allOf": [
+							{
+								"$ref": "#/components/schemas/UrlString"
+							}
+						],
+						"nullable": true,
 						"description": "Link to profile image, if defined"
 					},
 					"introduction": {
 						"type": "string",
 						"description": "Optional text for users to introduce themselves,\r\ndescribe their experience, what subjects they are interested in etc"
+					},
+					"prefferedCountries": {
+						"items": {
+							"$ref": "#/components/schemas/Country"
+						},
+						"type": "array",
+						"description": "The countries the user prefers for content"
 					},
 					"prefferedLocales": {
 						"items": {
@@ -1453,22 +1790,23 @@
 						},
 						"type": "array",
 						"description": "Data about the students a teacher is involved with"
+					},
+					"available": {
+						"type": "boolean",
+						"description": "Represents whether a tutor is available to take on a student"
 					}
 				},
 				"type": "object",
 				"description": "Make all properties in T optional"
 			},
-			"UpdateTutorRequestBody": {
+			"Partial_UpdateTutorRequestBody_": {
 				"properties": {
 					"updates": {
 						"$ref": "#/components/schemas/Partial_Omit_PrivateTutorData.id__"
 					}
 				},
-				"required": [
-					"updates"
-				],
 				"type": "object",
-				"additionalProperties": false
+				"description": "Make all properties in T optional"
 			}
 		},
 		"securitySchemes": {}
@@ -1509,7 +1847,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/LinkStudentAndSubjectRequestBody"
+								"$ref": "#/components/schemas/Partial_LinkStudentAndSubjectRequestBody_"
 							}
 						}
 					}
@@ -1538,7 +1876,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/LinkStudentAndTutorRequestBody"
+								"$ref": "#/components/schemas/Partial_LinkStudentAndTutorRequestBody_"
 							}
 						}
 					}
@@ -1567,7 +1905,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/LinkSubjectAndSubjectCategoryRequestBody"
+								"$ref": "#/components/schemas/Partial_LinkSubjectAndSubjectCategoryRequestBody_"
 							}
 						}
 					}
@@ -1596,7 +1934,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/LinkSubjectsRequestBody"
+								"$ref": "#/components/schemas/Partial_LinkSubjectsRequestBody_"
 							}
 						}
 					}
@@ -1625,7 +1963,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/LinkTutorAndSubjectRequestBody"
+								"$ref": "#/components/schemas/Partial_LinkTutorAndSubjectRequestBody_"
 							}
 						}
 					}
@@ -1654,7 +1992,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UnlinkStudentAndSubjectRequestBody"
+								"$ref": "#/components/schemas/Partial_UnlinkStudentAndSubjectRequestBody_"
 							}
 						}
 					}
@@ -1683,7 +2021,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UnlinkStudentAndTutorRequestBody"
+								"$ref": "#/components/schemas/Partial_UnlinkStudentAndTutorRequestBody_"
 							}
 						}
 					}
@@ -1712,7 +2050,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UnlinkSubjectAndSubjectCategoryRequestBody"
+								"$ref": "#/components/schemas/Partial_UnlinkSubjectAndSubjectCategoryRequestBody_"
 							}
 						}
 					}
@@ -1741,7 +2079,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UnlinkSubjectsRequestBody"
+								"$ref": "#/components/schemas/Partial_UnlinkSubjectsRequestBody_"
 							}
 						}
 					}
@@ -1770,7 +2108,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UnlinkTutorAndSubjectRequestBody"
+								"$ref": "#/components/schemas/Partial_UnlinkTutorAndSubjectRequestBody_"
 							}
 						}
 					}
@@ -1799,7 +2137,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateStudentRequestBody"
+								"$ref": "#/components/schemas/Partial_CreateStudentRequestBody_"
 							}
 						}
 					}
@@ -1829,7 +2167,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GetStudentRequestBody"
+								"$ref": "#/components/schemas/Partial_GetStudentRequestBody_"
 							}
 						}
 					}
@@ -1858,7 +2196,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GetStudentsBySubjectsRequestBody"
+								"$ref": "#/components/schemas/Partial_GetStudentsBySubjectsRequestBody_"
 							}
 						}
 					}
@@ -1887,7 +2225,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UpdateStudentRequestBody"
+								"$ref": "#/components/schemas/Partial_UpdateStudentRequestBody_"
 							}
 						}
 					}
@@ -1916,16 +2254,45 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateSubjectCategoryRequestBody"
+								"$ref": "#/components/schemas/Partial_CreateSubjectCategoryRequestBody_"
 							}
 						}
 					}
 				}
 			}
 		},
-		"/getSubjectCategories": {
+		"/getSubjectCategoriesForLocale": {
 			"post": {
-				"operationId": "GetSubjectCategories",
+				"operationId": "GetSubjectCategoriesForLocale",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetSubjectCategoriesForLocaleResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_GetSubjectCategoriesForLocaleRequestBody_"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/getSubjectCategory": {
+			"post": {
+				"operationId": "GetSubjectCategory",
 				"responses": {
 					"200": {
 						"description": "Ok",
@@ -1945,7 +2312,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GetSubjectCategoryRequestBody"
+								"$ref": "#/components/schemas/Partial_GetSubjectCategoryRequestBody_"
 							}
 						}
 					}
@@ -1974,7 +2341,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UpdateSubjectCategoryRequestBody"
+								"$ref": "#/components/schemas/Partial_UpdateSubjectCategoryRequestBody_"
 							}
 						}
 					}
@@ -2003,7 +2370,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateGenericSubjectRequestBody"
+								"$ref": "#/components/schemas/Partial_CreateGenericSubjectRequestBody_"
 							}
 						}
 					}
@@ -2032,7 +2399,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateLocaleSubjectRequestBody"
+								"$ref": "#/components/schemas/Partial_CreateLocaleSubjectRequestBody_"
 							}
 						}
 					}
@@ -2061,7 +2428,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GetSubjectRequestBody"
+								"$ref": "#/components/schemas/Partial_GetSubjectRequestBody_"
 							}
 						}
 					}
@@ -2077,7 +2444,7 @@
 						"content": {
 							"application/json": {
 								"schema": {
-									"$ref": "#/components/schemas/GetTutorResponseBody"
+									"$ref": "#/components/schemas/GetSubjectsByCategoryResponseBody"
 								}
 							}
 						}
@@ -2091,7 +2458,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GetTutorRequestBody"
+								"$ref": "#/components/schemas/Partial_GetSubjectsByCategoryRequestBody_"
 							}
 						}
 					}
@@ -2120,7 +2487,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UpdateLocaleSubjectRequestBody"
+								"$ref": "#/components/schemas/Partial_UpdateLocaleSubjectRequestBody_"
 							}
 						}
 					}
@@ -2149,7 +2516,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/CreateTutorRequestBody"
+								"$ref": "#/components/schemas/Partial_CreateTutorRequestBody_"
 							}
 						}
 					}
@@ -2179,7 +2546,36 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GetTutorRequestBody"
+								"$ref": "#/components/schemas/Partial_GetTutorRequestBody_"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/getTutorsByLocales": {
+			"post": {
+				"operationId": "GetTutorsByLocales",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/GetTutorsByLocalesResponseBody"
+								}
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Partial_GetTutorsByLocalesRequestBody_"
 							}
 						}
 					}
@@ -2208,7 +2604,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/GetTutorsBySubjectsRequestBody"
+								"$ref": "#/components/schemas/Partial_GetTutorsBySubjectsRequestBody_"
 							}
 						}
 					}
@@ -2237,7 +2633,7 @@
 					"content": {
 						"application/json": {
 							"schema": {
-								"$ref": "#/components/schemas/UpdateTutorRequestBody"
+								"$ref": "#/components/schemas/Partial_UpdateTutorRequestBody_"
 							}
 						}
 					}

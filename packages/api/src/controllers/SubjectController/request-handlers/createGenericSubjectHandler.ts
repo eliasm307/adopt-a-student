@@ -1,39 +1,89 @@
 import {
-  CreateGenericSubjectRequestBody, CreateGenericSubjectResponseBody, isGenericSubjectData,
+  CreateGenericSubjectRequestBody, CreateGenericSubjectResponseBody, GenericSubjectData,
+  isGenericSubjectData, isLocaleSubjectData, LocaleSubjectData,
 } from '@adopt-a-student/common';
 
-import { GENERIC_SUBJECT_COLLECTION_NAME } from '../../../constants';
-import { FirebaseCallableFunctionHandler } from '../../../declarations/types';
+import {
+  GENERIC_SUBJECT_COLLECTION_NAME, LOCALE_SUBJECT_COLLECTION_NAME,
+} from '../../../constants';
+import { InternalHandler } from '../../../declarations/types';
 import createDocument from '../../../utils/firebase/createDocument';
 import { firestoreAdmin, functionsHttps } from '../../../utils/firebase/firebase-admin';
 import newGuid from '../../../utils/newGuid';
 import verifyRequest from '../../../utils/verifyRequest';
+import { createLocaleSubjectDocumentId } from '../utils/localeSubjectDocumentId';
 
-const createGenericSubject: FirebaseCallableFunctionHandler<
+const createGenericSubject: InternalHandler<
   CreateGenericSubjectRequestBody,
   CreateGenericSubjectResponseBody
-> = async (body, context) => {
-  const auth = verifyRequest(body, context);
+> = async (props) => {
+  const { data: inputData } = props;
 
-  const id = newGuid();
+  const { country, locale, name } = inputData;
 
-  if (!body?.data)
+  const genericId = newGuid();
+
+  const localeSubjectData: LocaleSubjectData = {
+    ...inputData,
+    id: genericId,
+  };
+
+  if (!isLocaleSubjectData(localeSubjectData))
     throw new functionsHttps.HttpsError(
       "failed-precondition",
-      "Data not provided"
+      `Provided initial data is not valid`
     );
 
-  const data = { ...body.data, id };
+  const genericNamesField: keyof GenericSubjectData = "names";
 
-  const subject = await createDocument({
+  // check if a subject with the given name already exists,
+  // if a generic subject already exists with a given name,
+  // this means this new subject belongs as a locale subject of that existing subject category
+  const existingSubjectsSnapshot = await firestoreAdmin
+    .collection(GENERIC_SUBJECT_COLLECTION_NAME)
+    .where(genericNamesField, "array-contains", name)
+    .get();
+
+  if (existingSubjectsSnapshot.docs.length) {
+    const error = `Tried to create a subject with name ${String(
+      name
+    )} however there are ${
+      existingSubjectsSnapshot.docs.length
+    } existing subjects with this name, try to edit existing subjects instead`;
+
+    console.warn(__filename, error, { body: props });
+
+    throw new functionsHttps.HttpsError("already-exists", error);
+  }
+
+  const genericSubjectData: GenericSubjectData = {
+    names: [name], // assign inital name
+    relatedSubjects: [],
+    relatedCategories: [],
+    id: genericId,
+  };
+
+  // create generic subject
+  const genericSubject = await createDocument({
     collectionPath: GENERIC_SUBJECT_COLLECTION_NAME,
-    id,
-    data,
+    documentId: genericId,
+    data: genericSubjectData,
     dataPredicate: isGenericSubjectData,
     firestoreAdmin,
   });
+
+  // create initial locale subject
+  const localeSubject = await createDocument({
+    collectionPath: LOCALE_SUBJECT_COLLECTION_NAME,
+    documentId: createLocaleSubjectDocumentId({ country, genericId, locale }),
+    data: localeSubjectData,
+    dataPredicate: isLocaleSubjectData,
+    firestoreAdmin,
+  });
+
   return {
-    subject,
+    genericSubject,
+    localeSubject,
   } as CreateGenericSubjectResponseBody;
 };
 
