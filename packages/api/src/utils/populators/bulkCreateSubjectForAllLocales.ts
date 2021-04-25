@@ -42,10 +42,10 @@ export default async function bulkCreateSubjectsForAllLocales(props: Props) {
         const country = _country as Country;
         const localeSubjectData: Omit<LocaleSubjectData, "id"> = {
           country,
-          description: `test subject in ${String(
+          description: `${names[0]} subject in ${String(
             locale
           )} locale for country ${country}`,
-          name: names[0],
+          name: `${names[0]} (${country})`,
           locale,
           relatedStudents: [],
           relatedTutors: [],

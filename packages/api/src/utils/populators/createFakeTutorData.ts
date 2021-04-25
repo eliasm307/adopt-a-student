@@ -12,7 +12,7 @@ export default function createFakeTutorData(): PrivateTutorData {
   return {
     email: faker.internet.email(),
     id: newGuid(),
-    userName: faker.internet.userName(),
+    userName: `${faker.name.firstName()} ${faker.name.lastName()}`,
     imageUrl: faker.image.avatar(),
     introduction: faker.lorem.lines(Math.random() * 3),
     prefferedLocales: getRandomLocales(),

@@ -19,12 +19,26 @@ console.log(__filename, { NODE_ENV: process.env.NODE_ENV });
 
 if (isProductionEnvironment()) {
   console.warn(__filename, "using live admin");
+  /*
   app = admin.initializeApp({
     credential: admin.credential.cert({
       // todo create custom type declarations for functions module
       privateKey: functions.config().private.key.replace(/\\n/g, "\n"),
       projectId: functions.config().project.id,
       clientEmail: functions.config().client.email,
+    }),
+    // databaseURL: "https://adopt-a-student.firebaseio.com",
+    databaseURL,
+  });
+  */
+  const config = require("../../../private_config/firebase_service_account_cert.json");
+
+  app = admin.initializeApp({
+    credential: admin.credential.cert({
+      // todo create custom type declarations for functions module
+      privateKey: config.private_key,
+      projectId: config.project_id,
+      clientEmail: config.client_email,
     }),
     // databaseURL: "https://adopt-a-student.firebaseio.com",
     databaseURL,

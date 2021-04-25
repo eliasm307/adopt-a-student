@@ -15,6 +15,7 @@
     "test": "jest --colors --logHeapUsage",
     "pretest": "yarn",
     "test:production": "set NODE_ENV=production-test&& yarn test",
+    "firestore:populate-production": "setx NODE_ENV=production-test&& npx ts-node src/scripts/populateFirestore.ts",
     "check-types": "npx tsc",
     "cleanbuild": "yarn cleaninstall && yarn build",
     "saveCallableNames": "npx ts-node src/scripts/saveCallableNames.ts",

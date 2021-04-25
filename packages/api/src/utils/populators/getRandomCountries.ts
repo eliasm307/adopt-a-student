@@ -1,10 +1,15 @@
 import { Country, countryNames } from '@adopt-a-student/common';
 
 export default function getRandomCountries(): Country[] {
-  const count = Math.max(
+  /*
+  const count = Math.min(
     Math.floor(Math.random() * (countryNames.length - 1)) + 1,
-    10
+    5
   );
+  */
+
+  // random count of countries, atleast 1
+  const count = Math.floor(Math.random() * 5) + 1;
 
   const selected = new Set<Country>();
 
