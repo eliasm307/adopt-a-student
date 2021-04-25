@@ -1,3 +1,7 @@
+/**
+ * This is a work around for Tsoa to work for documenting api
+ */
+
 import fs from 'fs-extra';
 import path from 'path';
 

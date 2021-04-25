@@ -338,7 +338,7 @@
       },
       "./src/utils/locales.ts": {
         "version": "ed7526541f2c4fd102846580fcf5792d42c3235c4f0b5e281bcfdbcb83ffdbab",
-        "signature": "7ff65c208085131fe07916a7f3780d8aceb6658710de3f6bc0d8fad7ffbc1aa8",
+        "signature": "4f89e18cdec868df77cb79ef5fd7e51f793a2f49e20f8b92750fd3670cbe125f",
         "affectsGlobalScope": false
       },
       "./src/utils/promiseallsettledandlog.ts": {
@@ -359,6 +359,11 @@
       "./src/index.ts": {
         "version": "482f3f643910aae5ffa9d58bbb6e71e002346e116e4d65ff239d635d4aa0932a",
         "signature": "8e5ce0512d4d39e96342ba3564245f995e719b6e6957146fa76c4e1711c0efe7",
+        "affectsGlobalScope": false
+      },
+      "./src/data/locales/country-locales_test.ts": {
+        "version": "37048aacdde235b4b3da2839541b0c0173f754cfe00e22dd1b6c5acaee8326a5",
+        "signature": "11a9974cf637d9bce89798c5dd241b7fbc598e50c12c212818e6e5dbe0efc28b",
         "affectsGlobalScope": false
       },
       "../../../node_modules/@types/node/globals.d.ts": {
@@ -597,8 +602,8 @@
         "affectsGlobalScope": false
       },
       "./src/scripts/localesjsontots.ts": {
-        "version": "ba954b7647269a5a336964dc9b610bf0a4045431e99e2ab73a9fcb2b07cfe898",
-        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
+        "version": "64a380b45297affc794d741a8d08e118282c5135a0eacd9e03b4eda2d0bc1ed1",
+        "signature": "6912a831e182f47bf2e695b350298eefac18ea8350d9f84a6eb887230988cd16",
         "affectsGlobalScope": false
       },
       "../../../node_modules/locale-codes/index.d.ts": {
@@ -678,20 +683,24 @@
       ],
       "module": 1,
       "moduleResolution": 2,
-      "target": 7,
+      "target": 2,
+      "lib": [
+        "lib.dom.d.ts",
+        "lib.dom.iterable.d.ts",
+        "lib.esnext.d.ts"
+      ],
       "sourceMap": true,
       "noEmitOnError": true,
+      "types": [
+        "@types/jest",
+        "@types/node"
+      ],
       "resolveJsonModule": true,
       "esModuleInterop": true,
       "declaration": true,
       "incremental": true,
       "skipLibCheck": true,
       "allowSyntheticDefaultImports": true,
-      "lib": [
-        "lib.dom.d.ts",
-        "lib.dom.iterable.d.ts",
-        "lib.esnext.d.ts"
-      ],
       "downlevelIteration": true,
       "allowJs": true,
       "strict": true,
@@ -704,10 +713,6 @@
       "checkJs": false,
       "noImplicitReturns": true,
       "noEmit": true,
-      "types": [
-        "@types/jest",
-        "@types/node"
-      ],
       "configFilePath": "./tsconfig.json"
     },
     "referencedMap": {
@@ -1511,6 +1516,7 @@
       "./src/data/api/callablefunctionnames.json",
       "./src/data/locales/country-locales.json",
       "./src/data/locales/country-locales.ts",
+      "./src/data/locales/country-locales_test.ts",
       "./src/data/locales/locale-countries.json",
       "./src/data/locales/locale-english-names.json",
       "./src/data/locales/locale-native-names.json",
@@ -2207,6 +2213,10 @@
         1
       ],
       [
+        "./src/data/locales/country-locales_test.ts",
+        1
+      ],
+      [
         "./src/data/locales/locale-countries.json",
         1
       ],
@@ -2384,6 +2394,258 @@
       ],
       [
         "../node_modules/@adopt-a-student/common/lib/utils/type-predicates/ispublictutordata.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/fs-extra/index.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/jest/index.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/assert.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/async_hooks.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/base.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/buffer.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/child_process.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/cluster.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/console.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/constants.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/crypto.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/dgram.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/dns.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/domain.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/events.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/fs.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/fs/promises.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/globals.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/globals.global.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/http.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/http2.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/https.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/index.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/inspector.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/module.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/net.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/os.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/path.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/perf_hooks.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/process.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/punycode.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/querystring.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/readline.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/repl.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/stream.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/string_decoder.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/timers.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/tls.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/trace_events.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/ts3.6/base.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/tty.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/url.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/util.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/v8.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/vm.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/wasi.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/worker_threads.d.ts",
+        1
+      ],
+      [
+        "../node_modules/@types/node/zlib.d.ts",
+        1
+      ],
+      [
+        "../node_modules/jest-diff/build/cleanupsemantic.d.ts",
+        1
+      ],
+      [
+        "../node_modules/jest-diff/build/difflines.d.ts",
+        1
+      ],
+      [
+        "../node_modules/jest-diff/build/index.d.ts",
+        1
+      ],
+      [
+        "../node_modules/jest-diff/build/printdiffs.d.ts",
+        1
+      ],
+      [
+        "../node_modules/jest-diff/build/types.d.ts",
+        1
+      ],
+      [
+        "../node_modules/locale-codes/index.d.ts",
+        1
+      ],
+      [
+        "../node_modules/pretty-format/build/index.d.ts",
+        1
+      ],
+      [
+        "../node_modules/pretty-format/build/types.d.ts",
+        1
+      ],
+      [
+        "../node_modules/typescript/lib/lib.es2015.d.ts",
+        1
+      ],
+      [
+        "../node_modules/typescript/lib/lib.es2016.d.ts",
+        1
+      ],
+      [
+        "../node_modules/typescript/lib/lib.es2017.d.ts",
+        1
+      ],
+      [
+        "../node_modules/typescript/lib/lib.es2018.d.ts",
+        1
+      ],
+      [
+        "../node_modules/typescript/lib/lib.es2019.d.ts",
+        1
+      ],
+      [
+        "../node_modules/typescript/lib/lib.es2020.d.ts",
+        1
+      ],
+      [
+        "../node_modules/typescript/lib/lib.esnext.d.ts",
         1
       ]
     ]

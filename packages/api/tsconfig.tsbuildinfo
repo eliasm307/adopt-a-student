@@ -343,7 +343,7 @@
       },
       "./common/src/utils/locales.ts": {
         "version": "ed7526541f2c4fd102846580fcf5792d42c3235c4f0b5e281bcfdbcb83ffdbab",
-        "signature": "7ff65c208085131fe07916a7f3780d8aceb6658710de3f6bc0d8fad7ffbc1aa8",
+        "signature": "4f89e18cdec868df77cb79ef5fd7e51f793a2f49e20f8b92750fd3670cbe125f",
         "affectsGlobalScope": false
       },
       "./common/src/utils/promiseallsettledandlog.ts": {
@@ -364,6 +364,11 @@
       "./common/src/index.ts": {
         "version": "482f3f643910aae5ffa9d58bbb6e71e002346e116e4d65ff239d635d4aa0932a",
         "signature": "8e5ce0512d4d39e96342ba3564245f995e719b6e6957146fa76c4e1711c0efe7",
+        "affectsGlobalScope": false
+      },
+      "./common/src/data/locales/country-locales_test.ts": {
+        "version": "37048aacdde235b4b3da2839541b0c0173f754cfe00e22dd1b6c5acaee8326a5",
+        "signature": "11a9974cf637d9bce89798c5dd241b7fbc598e50c12c212818e6e5dbe0efc28b",
         "affectsGlobalScope": false
       },
       "../../node_modules/@types/node/globals.d.ts": {
@@ -602,8 +607,8 @@
         "affectsGlobalScope": false
       },
       "./common/src/scripts/localesjsontots.ts": {
-        "version": "ba954b7647269a5a336964dc9b610bf0a4045431e99e2ab73a9fcb2b07cfe898",
-        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
+        "version": "64a380b45297affc794d741a8d08e118282c5135a0eacd9e03b4eda2d0bc1ed1",
+        "signature": "6912a831e182f47bf2e695b350298eefac18ea8350d9f84a6eb887230988cd16",
         "affectsGlobalScope": false
       },
       "../../node_modules/locale-codes/index.d.ts": {
@@ -1967,7 +1972,7 @@
         "affectsGlobalScope": true
       },
       "./src/tsoa-docs/app.ts": {
-        "version": "9c49b6a609ccf0c66d53178c709d681d183493c3f9c122ba10d52d697283e2a7",
+        "version": "36222ab757c77b4e699c09940d65fc8e6cba843649a52075ceeb0f336e7a73dd",
         "signature": "629a4ade941bd431c195407a5afd3602c6461fdcc0f65735b7e4a68f8d5d3d51",
         "affectsGlobalScope": false
       },
@@ -2048,7 +2053,7 @@
       },
       "./src/utils/populators/getrandomuserlocales.ts": {
         "version": "52e1dacf2a3f1981cdcf09f822ce5df3245eb512a37fe23e8687b7a8955d2a4f",
-        "signature": "0833023c0d0b8b5d34455aa9b053234a154fc28d6982820635cd8e0c9108429c",
+        "signature": "429d352d3e0b0c57eba08b4991e26b51e9de8de83f9183e91f3f6915b99b9951",
         "affectsGlobalScope": false
       },
       "./src/utils/populators/createfakestudentdata.ts": {
@@ -2353,20 +2358,24 @@
       ],
       "module": 1,
       "moduleResolution": 2,
-      "target": 7,
+      "target": 2,
+      "lib": [
+        "lib.dom.d.ts",
+        "lib.dom.iterable.d.ts",
+        "lib.esnext.d.ts"
+      ],
       "sourceMap": true,
       "noEmitOnError": true,
+      "types": [
+        "@types/jest",
+        "@types/node"
+      ],
       "resolveJsonModule": true,
       "esModuleInterop": true,
       "declaration": true,
       "incremental": true,
       "skipLibCheck": true,
       "allowSyntheticDefaultImports": true,
-      "lib": [
-        "lib.dom.d.ts",
-        "lib.dom.iterable.d.ts",
-        "lib.esnext.d.ts"
-      ],
       "downlevelIteration": true,
       "allowJs": true,
       "strict": true,
@@ -2379,10 +2388,6 @@
       "checkJs": false,
       "noImplicitReturns": true,
       "noEmit": true,
-      "types": [
-        "@types/jest",
-        "@types/node"
-      ],
       "paths": {
         "@adopt-a-student/common": [
           "./common/src/"
@@ -27962,6 +27967,90 @@
         "./node_modules/@types/node/zlib.d.ts"
       ],
       "./common/src/data/locales/country-locales.ts": [
+        "../../node_modules/@types/node/assert.d.ts",
+        "../../node_modules/@types/node/async_hooks.d.ts",
+        "../../node_modules/@types/node/buffer.d.ts",
+        "../../node_modules/@types/node/child_process.d.ts",
+        "../../node_modules/@types/node/cluster.d.ts",
+        "../../node_modules/@types/node/console.d.ts",
+        "../../node_modules/@types/node/constants.d.ts",
+        "../../node_modules/@types/node/crypto.d.ts",
+        "../../node_modules/@types/node/dgram.d.ts",
+        "../../node_modules/@types/node/dns.d.ts",
+        "../../node_modules/@types/node/domain.d.ts",
+        "../../node_modules/@types/node/events.d.ts",
+        "../../node_modules/@types/node/fs.d.ts",
+        "../../node_modules/@types/node/fs/promises.d.ts",
+        "../../node_modules/@types/node/http.d.ts",
+        "../../node_modules/@types/node/http2.d.ts",
+        "../../node_modules/@types/node/https.d.ts",
+        "../../node_modules/@types/node/inspector.d.ts",
+        "../../node_modules/@types/node/module.d.ts",
+        "../../node_modules/@types/node/net.d.ts",
+        "../../node_modules/@types/node/os.d.ts",
+        "../../node_modules/@types/node/path.d.ts",
+        "../../node_modules/@types/node/perf_hooks.d.ts",
+        "../../node_modules/@types/node/process.d.ts",
+        "../../node_modules/@types/node/punycode.d.ts",
+        "../../node_modules/@types/node/querystring.d.ts",
+        "../../node_modules/@types/node/readline.d.ts",
+        "../../node_modules/@types/node/repl.d.ts",
+        "../../node_modules/@types/node/stream.d.ts",
+        "../../node_modules/@types/node/string_decoder.d.ts",
+        "../../node_modules/@types/node/timers.d.ts",
+        "../../node_modules/@types/node/tls.d.ts",
+        "../../node_modules/@types/node/trace_events.d.ts",
+        "../../node_modules/@types/node/tty.d.ts",
+        "../../node_modules/@types/node/url.d.ts",
+        "../../node_modules/@types/node/util.d.ts",
+        "../../node_modules/@types/node/v8.d.ts",
+        "../../node_modules/@types/node/vm.d.ts",
+        "../../node_modules/@types/node/wasi.d.ts",
+        "../../node_modules/@types/node/worker_threads.d.ts",
+        "../../node_modules/@types/node/zlib.d.ts",
+        "./node_modules/@types/node/assert.d.ts",
+        "./node_modules/@types/node/async_hooks.d.ts",
+        "./node_modules/@types/node/buffer.d.ts",
+        "./node_modules/@types/node/child_process.d.ts",
+        "./node_modules/@types/node/cluster.d.ts",
+        "./node_modules/@types/node/console.d.ts",
+        "./node_modules/@types/node/constants.d.ts",
+        "./node_modules/@types/node/crypto.d.ts",
+        "./node_modules/@types/node/dgram.d.ts",
+        "./node_modules/@types/node/dns.d.ts",
+        "./node_modules/@types/node/domain.d.ts",
+        "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/fs/promises.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/http2.d.ts",
+        "./node_modules/@types/node/https.d.ts",
+        "./node_modules/@types/node/inspector.d.ts",
+        "./node_modules/@types/node/module.d.ts",
+        "./node_modules/@types/node/net.d.ts",
+        "./node_modules/@types/node/os.d.ts",
+        "./node_modules/@types/node/path.d.ts",
+        "./node_modules/@types/node/perf_hooks.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/punycode.d.ts",
+        "./node_modules/@types/node/querystring.d.ts",
+        "./node_modules/@types/node/readline.d.ts",
+        "./node_modules/@types/node/repl.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/string_decoder.d.ts",
+        "./node_modules/@types/node/timers.d.ts",
+        "./node_modules/@types/node/tls.d.ts",
+        "./node_modules/@types/node/trace_events.d.ts",
+        "./node_modules/@types/node/tty.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/v8.d.ts",
+        "./node_modules/@types/node/vm.d.ts",
+        "./node_modules/@types/node/wasi.d.ts",
+        "./node_modules/@types/node/worker_threads.d.ts",
+        "./node_modules/@types/node/zlib.d.ts"
+      ],
+      "./common/src/data/locales/country-locales_test.ts": [
         "../../node_modules/@types/node/assert.d.ts",
         "../../node_modules/@types/node/async_hooks.d.ts",
         "../../node_modules/@types/node/buffer.d.ts",
@@ -68205,7 +68294,7 @@
         "./common/src/utils/selectanyarrayitem.ts"
       ],
       "./common/src/utils/locales-internal.ts": [
-        "../../node_modules/locale-codes/index.d.ts"
+        "./node_modules/locale-codes/index.d.ts"
       ],
       "./common/src/utils/type-predicates/index.ts": [
         "./common/src/utils/type-predicates/basic.ts",
@@ -72077,8 +72166,8 @@
         "./node_modules/@types/node/worker_threads.d.ts"
       ],
       "./src/controllers/relationshipcontroller/relationshipcontroller.ts": [
-        "../../node_modules/tsoa/dist/index.d.ts",
         "./common/src/index.ts",
+        "./node_modules/tsoa/dist/index.d.ts",
         "./src/declarations/interfaces/index.ts"
       ],
       "./src/controllers/relationshipcontroller/request-handlers/linkstudentandsubjecthandler.ts": [
@@ -72149,8 +72238,8 @@
         "./src/declarations/types.ts"
       ],
       "./src/controllers/studentcontroller/studentcontroller.ts": [
-        "../../node_modules/tsoa/dist/index.d.ts",
         "./common/src/index.ts",
+        "./node_modules/tsoa/dist/index.d.ts",
         "./src/declarations/interfaces/index.ts"
       ],
       "./src/controllers/studentcontroller/utils/extractpublicstudentdata.ts": [
@@ -72173,8 +72262,8 @@
         "./src/declarations/types.ts"
       ],
       "./src/controllers/subjectcategorycontroller/subjectcategorycontroller.ts": [
-        "../../node_modules/tsoa/dist/index.d.ts",
         "./common/src/index.ts",
+        "./node_modules/tsoa/dist/index.d.ts",
         "./src/declarations/interfaces/index.ts"
       ],
       "./src/controllers/subjectcontroller/request-handlers/creategenericsubjecthandler.ts": [
@@ -72198,8 +72287,8 @@
         "./src/declarations/types.ts"
       ],
       "./src/controllers/subjectcontroller/subjectcontroller.ts": [
-        "../../node_modules/tsoa/dist/index.d.ts",
         "./common/src/index.ts",
+        "./node_modules/tsoa/dist/index.d.ts",
         "./src/declarations/interfaces/index.ts"
       ],
       "./src/controllers/subjectcontroller/utils/getgenericsubjectsbycategory.ts": [
@@ -72243,13 +72332,13 @@
         "./common/src/index.ts"
       ],
       "./src/controllers/tutorcontroller/tutorcontroller.ts": [
-        "../../node_modules/tsoa/dist/index.d.ts",
         "./common/src/index.ts",
+        "./node_modules/tsoa/dist/index.d.ts",
         "./src/declarations/interfaces/index.ts"
       ],
       "./src/declarations/types.ts": [
-        "../../node_modules/firebase-functions/lib/index.d.ts",
-        "../../node_modules/firebase-functions/lib/providers/https.d.ts"
+        "./node_modules/firebase-functions/lib/index.d.ts",
+        "./node_modules/firebase-functions/lib/providers/https.d.ts"
       ],
       "./src/request-handlers/firestorewrite.ts": [
         "./src/declarations/types.ts"
@@ -72277,13 +72366,13 @@
         "./src/declarations/types.ts"
       ],
       "./src/utils/firebase/callablecontextspoof.ts": [
-        "../../node_modules/firebase-functions/lib/providers/https.d.ts"
+        "./node_modules/firebase-functions/lib/providers/https.d.ts"
       ],
       "./src/utils/firebase/createdocument.ts": [
         "./src/declarations/interfaces/index.ts"
       ],
       "./src/utils/firebase/firebase-admin.ts": [
-        "../../node_modules/firebase-functions/lib/index.d.ts"
+        "./node_modules/firebase-functions/lib/index.d.ts"
       ],
       "./src/utils/firebase/getcollectiondata.ts": [
         "./src/declarations/interfaces/index.ts"
@@ -72353,7 +72442,7 @@
         "./src/declarations/interfaces/index.ts"
       ],
       "./src/utils/verifyrequest.ts": [
-        "../../node_modules/firebase-functions/lib/providers/https.d.ts",
+        "./node_modules/firebase-functions/lib/providers/https.d.ts",
         "./src/declarations/interfaces/index.ts"
       ]
     },
@@ -72656,6 +72745,7 @@
       "./common/src/data/api/callablefunctionnames.json",
       "./common/src/data/locales/country-locales.json",
       "./common/src/data/locales/country-locales.ts",
+      "./common/src/data/locales/country-locales_test.ts",
       "./common/src/data/locales/locale-countries.json",
       "./common/src/data/locales/locale-english-names.json",
       "./common/src/data/locales/locale-native-names.json",
@@ -73874,6 +73964,10 @@
         1
       ],
       [
+        "./common/src/data/locales/country-locales_test.ts",
+        1
+      ],
+      [
         "./common/src/data/locales/locale-countries.json",
         1
       ],
@@ -73999,6 +74093,374 @@
       ],
       [
         "./jest.config.js",
+        1
+      ],
+      [
+        "./node_modules/@firebase/logger/dist/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@firebase/logger/dist/src/logger.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/common/build/src/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/common/build/src/operation.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/common/build/src/service-object.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/common/build/src/service.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/common/build/src/util.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/common/node_modules/google-auth-library/build/src/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/firestore/types/firestore.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/firestore/types/protos/firestore_admin_v1_proto_api.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/firestore/types/protos/firestore_v1_proto_api.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/firestore/types/protos/firestore_v1beta1_proto_api.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/firestore/types/v1/firestore_admin_client.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/firestore/types/v1/firestore_client.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/firestore/types/v1beta1/firestore_client.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/storage/build/src/acl.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/storage/build/src/bucket.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/storage/build/src/channel.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/storage/build/src/file.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/storage/build/src/hmackey.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/storage/build/src/iam.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/storage/build/src/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/storage/build/src/notification.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/storage/build/src/signer.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@google-cloud/storage/build/src/storage.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/backoff-timeout.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/call-credentials.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/call-stream.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/call.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/channel-credentials.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/channel-options.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/channel.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/client-interceptors.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/client.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/constants.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/events.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/experimental.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/filter-stack.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/filter.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/load-balancer-child-handler.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/load-balancer.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/logging.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/make-client.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/metadata.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/object-stream.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/picker.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/resolver.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/server-call.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/server-credentials.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/server.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/service-config.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/status-builder.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/subchannel.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/grpc-js/build/src/uri-parser.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@grpc/proto-loader/build/src/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/cli/dist/cli.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/cli/dist/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/cli/dist/module/generate-routes.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/cli/dist/module/generate-spec.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/config.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/decorators/deprecated.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/decorators/example.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/decorators/extension.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/decorators/methods.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/decorators/operationid.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/decorators/parameter.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/decorators/response.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/decorators/route.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/decorators/security.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/decorators/tags.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/interfaces/controller.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/interfaces/file.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/interfaces/iocmodule.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/interfaces/response.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/metadatageneration/tsoa.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/routegeneration/additionalprops.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/routegeneration/templatehelpers.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/routegeneration/tsoa-route.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/swagger/swagger.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/utils/assertnever.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@tsoa/runtime/dist/utils/isheadertype.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/body-parser/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/connect/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/cors/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/express-serve-static-core/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/express/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/faker/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/fs-extra/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/jest/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/long/index.d.ts",
         1
       ],
       [
@@ -74183,6 +74645,470 @@
       ],
       [
         "./node_modules/@types/node/zlib.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/qs/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/serve-static/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/swagger-ui-express/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/@types/uuid/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/abort-controller/dist/abort-controller.d.ts",
+        1
+      ],
+      [
+        "./node_modules/event-target-shim/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/auth/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/credential/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/database/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/firebase-namespace-api.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/firebase-namespace.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/firestore/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/instance-id/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/machine-learning/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/messaging/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/project-management/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/remote-config/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/security-rules/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/lib/storage/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/node_modules/@firebase/app-types/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-admin/node_modules/@firebase/database-types/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/apps.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/cloud-functions.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/config.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/function-builder.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/function-configuration.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/handler-builder.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/logger.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/providers/analytics.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/providers/auth.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/providers/crashlytics.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/providers/database.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/providers/firestore.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/providers/https.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/providers/pubsub.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/providers/remoteconfig.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/providers/storage.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/lib/providers/testlab.d.ts",
+        1
+      ],
+      [
+        "./node_modules/firebase-functions/node_modules/@types/express/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/gaxios/build/src/common.d.ts",
+        1
+      ],
+      [
+        "./node_modules/gaxios/build/src/gaxios.d.ts",
+        1
+      ],
+      [
+        "./node_modules/gaxios/build/src/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/protos/iam_service.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/protos/operations.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/apicaller.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/apitypes.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/bundlingcalls/bundleapicaller.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/bundlingcalls/bundledescriptor.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/bundlingcalls/bundleexecutor.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/bundlingcalls/task.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/call.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/clientinterface.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/createapicall.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/descriptor.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/fallback.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/fallbackerror.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/gax.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/googleerror.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/grpc.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/iamservice.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/longrunningcalls/longrunning.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/longrunningcalls/longrunningapicaller.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/longrunningcalls/longrunningdescriptor.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/normalcalls/normalapicaller.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/operationsclient.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/paginationcalls/pagedescriptor.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/pathtemplate.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/routingheader.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/status.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/streamingcalls/streamdescriptor.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/build/src/streamingcalls/streaming.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/authclient.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/awsclient.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/baseexternalclient.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/computeclient.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/credentials.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/envdetect.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/externalclient.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/googleauth.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/iam.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/identitypoolclient.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/idtokenclient.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/jwtaccess.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/jwtclient.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/loginticket.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/oauth2client.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/auth/refreshclient.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/crypto/crypto.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/google-gax/node_modules/google-auth-library/build/src/transporters.d.ts",
+        1
+      ],
+      [
+        "./node_modules/gtoken/build/src/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/jest-diff/build/cleanupsemantic.d.ts",
+        1
+      ],
+      [
+        "./node_modules/jest-diff/build/difflines.d.ts",
+        1
+      ],
+      [
+        "./node_modules/jest-diff/build/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/jest-diff/build/printdiffs.d.ts",
+        1
+      ],
+      [
+        "./node_modules/jest-diff/build/types.d.ts",
+        1
+      ],
+      [
+        "./node_modules/locale-codes/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/pretty-format/build/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/pretty-format/build/types.d.ts",
+        1
+      ],
+      [
+        "./node_modules/protobufjs/ext/descriptor/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/protobufjs/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/protobufjs/minimal.d.ts",
+        1
+      ],
+      [
+        "./node_modules/teeny-request/build/src/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/teeny-request/build/src/teenystatistics.d.ts",
+        1
+      ],
+      [
+        "./node_modules/tsoa/dist/index.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2015.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2016.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2017.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2018.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2019.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.es2020.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/lib.esnext.d.ts",
+        1
+      ],
+      [
+        "./node_modules/typescript/lib/typescript.d.ts",
         1
       ],
       [
