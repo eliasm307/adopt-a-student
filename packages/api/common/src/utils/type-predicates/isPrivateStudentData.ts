@@ -7,9 +7,9 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
   const {
     email,
     id,
-    relatedSubjects: linkedLocaleSubjects,
+    relatedSubjects,
     userName,
-    relatedTutors: tutors,
+    relatedTutors,
     imageUrl,
     introduction,
     prefferedLocales,
@@ -22,9 +22,9 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
   const forTsError: PrivateStudentData = {
     email,
     id,
-    relatedSubjects: linkedLocaleSubjects,
+    relatedSubjects,
     userName,
-    relatedTutors: tutors,
+    relatedTutors,
     imageUrl,
     introduction,
     prefferedLocales,
@@ -35,8 +35,8 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
   const hasEmail = typeof email === "string" && email;
   const hasUserName = typeof userName === "string" && userName;
   const hasId = typeof id === "string" && id;
-  const hasRelatedSubjects = Array.isArray(linkedLocaleSubjects);
-  const hasTutors = Array.isArray(tutors);
+  const hasRelatedSubjects = Array.isArray(relatedSubjects);
+  const hasTutors = Array.isArray(relatedTutors);
   const hasPreferredLocales = Array.isArray(prefferedLocales);
   const canHaveImage = !imageUrl || typeof imageUrl === "string";
   const canHaveIntroduction = !introduction || typeof introduction === "string";
@@ -55,17 +55,40 @@ export function isPrivateStudentData(data: any): data is PrivateStudentData {
     return true;
 
   console.warn("data is not complete private Student data", { data });
-  if (!hasEmail) console.error("See hasEmail", { hasEmail });
-  if (!hasUserName) console.error("See hasUserName", { hasUserName });
+  if (!hasEmail)
+    console.error("See hasEmail", {
+      hasEmail,
+      email,
+      typeofEmail: typeof email,
+    });
+  if (!hasUserName)
+    console.error("See hasUserName", {
+      hasUserName,
+      userName,
+      typeof: typeof userName,
+    });
   if (!hasId) console.error("See hasId", { hasEmail });
   if (!hasRelatedSubjects)
-    console.error("See hasRelatedSubjects", { hasRelatedSubjects });
-  if (!hasTutors) console.error("See hasTutors", { hasTutors });
+    console.error("See hasRelatedSubjects", {
+      hasRelatedSubjects,
+      relatedSubjects,
+      typeof: typeof relatedSubjects,
+    });
+  if (!hasTutors)
+    console.error("See hasTutors", {
+      hasTutors,
+      relatedTutors,
+      typeoftutors: typeof relatedTutors,
+    });
   if (!canHaveImage) console.error("See canHaveImage", { canHaveImage });
   if (!canHaveIntroduction)
     console.error("See canHaveIntroduction", { canHaveIntroduction });
   if (!hasPreferredLocales)
-    console.error("See hasPreferredLocales", { hasPreferredLocales });
+    console.error("See hasPreferredLocales", {
+      hasPreferredLocales,
+      prefferedLocales,
+      typeofEmail: typeof prefferedLocales,
+    });
 
   return false;
 }

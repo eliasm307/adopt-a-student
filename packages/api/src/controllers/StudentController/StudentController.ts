@@ -47,7 +47,7 @@ export class StudentsController extends Controller {
 
     const { student } = body;
 
-    if (!student || !isPrivateStudentData({ student, id: uid }))
+    if (!student || !isPrivateStudentData({ ...student, id: uid }))
       throw new functionsHttps.HttpsError(
         "invalid-argument",
         "Provided data is not valid"

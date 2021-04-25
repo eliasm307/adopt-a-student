@@ -4,6 +4,8 @@
  * See: https://www.gatsbyjs.com/docs/gatsby-config/
  */
 
+// todo add site config
+
 module.exports = {
   flags: { FAST_DEV: true },
   /* Your site config here */
