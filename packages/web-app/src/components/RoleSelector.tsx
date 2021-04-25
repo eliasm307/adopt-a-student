@@ -7,6 +7,8 @@ import { Col, Row } from 'react-bootstrap';
 import { RoutePath } from 'src/constants';
 import { UserContext } from 'src/providers/UserAuthProvider';
 
+import log from '../utils/log';
+
 export interface RoleSelectProps {
   /** Route to redirect to after role select */
   redirectAfterSelect?: RoutePath;
@@ -18,7 +20,7 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
   /*
   if (user?.role) {
     navigate(RoutePath.home);
-    console.log("role", "user role defined, navigating to home");
+    log("role", "user role defined, navigating to home");
     return null;
   }
   */
@@ -42,9 +44,9 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
           style={pathStyle}
           onClick={() => {
             setUserRole("Tutor");
-            console.log(
+            log(
               "RoleSelector",
-              `Tutor Role selected, redirecting to ${redirect}`
+              `Tutor Role selected, redirecting to ${String(redirect)}`
             );
             if (redirect) navigate(redirect);
           }}
@@ -83,9 +85,9 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
           style={{ ...pathStyle }}
           onClick={() => {
             setUserRole("Student");
-            console.log(
+            log(
               "RoleSelector",
-              `Student Role selected, redirecting to ${redirect}`
+              `Student Role selected, redirecting to ${String(redirect)}`
             );
             if (redirect) navigate(redirect);
           }}

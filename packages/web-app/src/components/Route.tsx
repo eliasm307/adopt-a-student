@@ -6,6 +6,7 @@ import { useAuthData } from 'src/hooks';
 import { RouteComponentProps } from '@reach/router';
 
 import { BaseRouteProps } from '../declarations/interfaces';
+import log from '../utils/log';
 import NavBar from './NavBar';
 
 interface Props extends BaseRouteProps, RouteComponentProps {
@@ -23,10 +24,7 @@ const Route = ({
   const user = useAuthData();
 
   if (!isPublic && !user) {
-    console.log(
-      "PrivateRoute",
-      `Not signed in, redirecting to "${RoutePath.SignIn}"`
-    );
+    log("PrivateRoute", `Not signed in, redirecting to "${RoutePath.SignIn}"`);
     navigate(RoutePath.SignIn);
     return null;
   }

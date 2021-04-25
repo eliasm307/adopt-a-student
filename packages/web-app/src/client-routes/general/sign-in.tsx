@@ -1,16 +1,13 @@
 import { navigate } from 'gatsby';
 import React, { useContext, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { RoutePath } from 'src/constants';
+import { FormFieldId, RoutePath } from 'src/constants';
 import { UserContext } from 'src/providers/UserAuthProvider';
-import {
-  signInAnonymously, signInWithEmailPassword, signInWithGoogle, signOut,
-} from 'src/utils/auth';
+import { signInAnonymously, signInWithEmailPassword, signInWithGoogle } from 'src/utils/auth';
 import { auth } from 'src/utils/firebase-client';
 
 import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from '../../components/Form';
-import SVG from '../../components/SVG';
-import { useAuthData } from '../../hooks';
+import log from '../../utils/log';
 
 // import testUser from '../../private_config/testUserAuth';
 
@@ -36,30 +33,19 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [showValidation, setShowValidation] = useState(false);
 
-  const { updateUserRole: setUserRole, user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
-  console.log(`typeof user ${typeof user}`);
+  log(`typeof user ${typeof user}`);
 
   if (user) {
-    console.log("sign-in", "user signed in, navigating to app role select...");
+    log("sign-in", "user signed in, navigating to app role select...");
     navigate(RoutePath.App);
     return null;
   }
-  console.log("sign-in", "NOT navigating to app role select...", {
+  log("sign-in", "NOT navigating to app role select...", {
     user,
     authUser: auth.currentUser,
   });
-
-  // todo enable
-  /*
-  const signInWithEmailAndPasswordHandler = (
-    event: React.ChangeEvent<HTMLButtonElement>,
-    _email: string,
-    _password: string
-  ): void => {
-    event.preventDefault();
-  };
-  */
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -80,9 +66,9 @@ const SignIn = () => {
     if (currentTarget instanceof EventTarget) {
       const { name, value } = currentTarget;
       switch (name) {
-        case "userEmail":
+        case FormFieldId.Email:
           return setEmail(value);
-        case "userPassword":
+        case FormFieldId.Password:
           return setPassword(value);
         default:
           return console.error(`Unknown html event target "${name}"`);
@@ -116,10 +102,13 @@ const SignIn = () => {
             width: "clamp(100px, 100%, 500px)",
           }}
         >
-          <FormFieldEmail onChange={onChangeHandler} controlId='userEmail' />
+          <FormFieldEmail
+            onChange={onChangeHandler}
+            controlId={FormFieldId.Email}
+          />
 
           <FormFieldPassword
-            controlId='userPassword'
+            controlId={FormFieldId.Password}
             onChange={onChangeHandler}
           />
 

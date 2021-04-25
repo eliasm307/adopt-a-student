@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useRef, useState } from 'react';
 import { Button, Col, Form, Image, Row } from 'react-bootstrap';
-import MultiSelect from 'react-multi-select-component';
 import { useAuthData } from 'src/hooks';
 
 import { Country, countryNames, LocaleCode, localeEnglishNames } from '@adopt-a-student/common';
@@ -11,6 +10,7 @@ import {
   UserPrivateDataContext as UserPrivateStudentDataContext,
 } from '../providers/PrivateStudentDataProvider';
 import { createNewStudentUser } from '../utils/api';
+import log from '../utils/log';
 import FormFieldMultiSelect from './Form/FormFieldMultiSelect';
 import FormFieldText from './Form/FormFieldText';
 import FormHeaderGraphic from './Form/FormHeaderGraphic';
@@ -77,16 +77,14 @@ const StudentPreferencesForm = () => {
 
       // validate inputs
       if (!form.checkValidity())
-        return console.log(
-          "StudentPreferencesForm",
-          "cant submit, inputs invalid"
-        );
+        return log("StudentPreferencesForm", "cant submit, inputs invalid");
 
       const { email, photoURL } = user;
 
       if (!email)
         console.warn("StudentPreferencesForm", "user does not have an email");
 
+      // eslint-disable-next-line no-alert
       if (!selectedLocales.length) return alert("Select some languages");
 
       if (!selectedCountries.length)
@@ -96,7 +94,7 @@ const StudentPreferencesForm = () => {
       if (submitButtonRef.current) submitButtonRef.current.disabled = true;
 
       // create user
-      console.log("StudentPreferencesForm", "creating student user...");
+      log("StudentPreferencesForm", "creating student user...");
 
       const result = await createNewStudentUser({
         email: email || "anonymous",
@@ -113,7 +111,7 @@ const StudentPreferencesForm = () => {
         if (submitButtonRef.current) submitButtonRef.current.disabled = false;
       });
 
-      console.log("StudentPreferencesForm", "student user created");
+      log("StudentPreferencesForm", "student user created");
 
       updateUserPrivateStudentData(result.student);
     },

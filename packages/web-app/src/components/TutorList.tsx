@@ -1,6 +1,5 @@
 import React from 'react';
-import { Card, Col, Image, Row } from 'react-bootstrap';
-import { ReactSVG } from 'react-svg';
+import { Card, Col, Row } from 'react-bootstrap';
 
 import { PublicTutorData } from '@adopt-a-student/common';
 
@@ -13,7 +12,7 @@ interface Props {
 
 // className='col-sm-12 col-md-6 col-lg-4 col-xl-3'
 // < className='m-2 p-2 debug col' style={{ minHeight: "200px" }}></Card>
-const TutorList = ({ tutors, className }: Props) => {
+const TutorList = ({ tutors }: Props) => {
   const itemsJsx = tutors.map((tutor) => (
     <Col sm={12} md={6} lg={6} xl={4} style={{ padding: "10px" }}>
       <Card

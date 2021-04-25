@@ -1,13 +1,14 @@
 import {
   CreateTutorRequestBody,
   CreateTutorResponseBody,
-  PrivateTutorData,
 } from "@adopt-a-student/common";
+import faker from "faker";
+
 import isProductionEnvironment from "../isProductionEnvironment";
 import callFirebaseFunction from "./callFirebaseFunction";
 import { functionsClient, isFirestoreEmulatorRunning, auth } from ".";
 import testUser from "../../../private_config/testUserAuth";
-import faker from "faker";
+import log from "../log";
 /*
 if (typeof process.env.FIRESTORE_EMULATOR_HOST !== "string")
   throw Error("Firestore emulator host environment variable not set");
@@ -27,7 +28,7 @@ describe("firebase function emulator", () => {
       functions: functionsEmulator,
     });
 
-    console.log(__filename, "firestore writeTest call result", { result });
+    log(__filename, "firestore writeTest call result", { result });
   });
 });
 */
@@ -83,7 +84,7 @@ describe.only("firebase functions createTutor", () => {
       functions: functionsClient,
     });
 
-    console.log(__filename, "call result", {
+    log(__filename, "call result", {
       result,
     });
 
@@ -96,7 +97,7 @@ describe.only("firebase functions createTutor", () => {
       id: "232",
     };
 
-    const response = await expect(
+    await expect(
       callFirebaseFunction({
         name: "createTutor",
         data,

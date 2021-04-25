@@ -4,6 +4,7 @@ import { PrivateStudentData } from '@adopt-a-student/common';
 
 import { QueryName } from '../constants';
 import { useGetPrivateStudentDataQuery } from '../hooks/reactQuery';
+import log from '../utils/log';
 import { queryClient } from '../utils/reactQuery';
 
 interface PrivateStudentDataContextShape {
@@ -46,11 +47,9 @@ export default function UserPrivateStudentDataProvider({
   });
 
   useEffect(() => {
-    console.log(
-      "UserPrivateStudentDataProvider",
-      "updating private user data",
-      { userPrivateStudentData }
-    );
+    log("UserPrivateStudentDataProvider", "updating private user data", {
+      userPrivateStudentData,
+    });
     setUserPrivateStudentData(userPrivateStudentData);
   }, [userPrivateStudentData]);
 
@@ -63,7 +62,7 @@ export default function UserPrivateStudentDataProvider({
   const updateUserPrivateStudentData = (
     newPrivateData: PrivateStudentData | null
   ) => {
-    console.log(__filename, `Updating user Private Student data...`, {
+    log(__filename, `Updating user Private Student data...`, {
       currentPrivateData: userPrivateStudentData,
       newPrivateData,
     });

@@ -1,7 +1,9 @@
 // ? should layout be inside each route to display relevant links
 
+import log from '../../utils/log';
+
 const StudentApp = () => {
-  console.log(__filename, "render");
+  log(__filename, "render");
   /*
   return (
     <Layout>

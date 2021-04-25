@@ -4,6 +4,7 @@ import { UserRole } from 'src/declarations/types';
 import { getUserLocalStorageItem, setUserLocalStorageItem } from 'src/utils/userLocalStorage';
 
 import { auth } from '../utils/firebase-client';
+import log from '../utils/log';
 import { UserAuth } from './declarations/interfaces';
 
 // todo move role logic to separate provider
@@ -33,7 +34,7 @@ export default function UserProvider({ children }: Props) {
   // on mount, add auth state listener
   useEffect(() => {
     auth.onAuthStateChanged((userAuth) => {
-      console.log(__filename, `User state changed to:`, { userAuth });
+      log(__filename, `User state changed to:`, { userAuth });
 
       if (!userAuth) return console.warn("Signed out", { userAuth });
 
@@ -42,10 +43,7 @@ export default function UserProvider({ children }: Props) {
         key: ROLE_LOCAL_STORAGE_KEY,
       }) as UserRole;
 
-      console.log(
-        "UserProvider",
-        `Loaded last role from local storage "${lastRole}"`
-      );
+      log("UserProvider", `Loaded last role from local storage "${lastRole}"`);
 
       setUser({
         ...userAuth,
@@ -61,7 +59,7 @@ export default function UserProvider({ children }: Props) {
       value: role,
     });
 
-    console.log(__filename, `Setting user role to ${role}`, {
+    log(__filename, `Setting user role to ${role}`, {
       oldRole: role,
       newRole: role,
     });

@@ -7,6 +7,7 @@ import { RouteComponentProps } from '@reach/router';
 
 import { BaseRouteProps } from '../declarations/interfaces';
 import { useUserPrivateStudentData } from '../providers/PrivateStudentDataProvider';
+import log from '../utils/log';
 import NavBar from './NavBar';
 import RoleSelector from './RoleSelector';
 import StudentPreferencesForm from './StudentProfileSetupForm';
@@ -48,7 +49,7 @@ const RoleBasedRoute = ({
     userPrivateStudentData?.prefferedCountries?.length &&
     userPrivateStudentData.prefferedLocales?.length;
 
-  console.log("RoleBasedRoute", {
+  log("RoleBasedRoute", {
     studentPreferencesDefined,
     userPrivateStudentData,
   });

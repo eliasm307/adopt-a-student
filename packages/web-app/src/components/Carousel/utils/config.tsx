@@ -50,7 +50,7 @@ const CarouselConfigProps: CarouselCustomProps = {
   renderArrowPrev: RenderCarouselArrowPrev,
   renderArrowNext: RenderCarouselArrowNext,
   statusFormatter: (current, total) => `${current} / ${total}`,
-  // onChange: (index, item) => console.log(__filename, "onChange", { index, item }),
+  // onChange: (index, item) => log(__filename, "onChange", { index, item }),
 };
 
 export default CarouselConfigProps;

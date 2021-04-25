@@ -2,14 +2,15 @@ import { graphql, useStaticQuery } from 'gatsby';
 import { GatsbyImage } from 'gatsby-plugin-image';
 import React from 'react';
 
+import log from '../../utils/log';
 import { ImageQueryData } from './declarations/interfaces';
 
 interface Props {
   alt: string;
   className?: string;
   imgStyle?: React.CSSProperties;
-  style?: React.CSSProperties;
   src: string;
+  style?: React.CSSProperties;
 }
 
 const Image = ({ src, alt, ...restProps }: Props) => {
@@ -52,7 +53,7 @@ const Image = ({ src, alt, ...restProps }: Props) => {
     return null;
   }
 
-  console.log("Image", `Found image for path ${src}`);
+  log("Image", `Found image for path ${src}`);
 
   return <GatsbyImage alt={alt} image={imageData} {...restProps} />;
 };

@@ -16,12 +16,6 @@ import { useUserPrivateStudentData } from '../../providers/PrivateStudentDataPro
 import { functionsClient } from '../../utils/firebase-client';
 import callFirebaseFunction from '../../utils/firebase-client/callFirebaseFunction';
 
-// todo this should come from user preferrences
-const requestData: GetTutorsByLocalesRequestBody = {
-  countries: ["Australia"],
-  locales: ["en"],
-};
-
 const StudentHome = () => {
   const privateData = useUserPrivateStudentData();
   const { isLoading, error, data: responseData } = useQuery<

@@ -18,15 +18,7 @@ const StudentProfile = () => {
     return <div>There was an error </div>;
   }
 
-  const {
-    userName,
-    imageUrl,
-    prefferedLocales,
-    introduction,
-    relatedSubjects,
-    prefferedCountries,
-    relatedTutors,
-  } = privateData;
+  const { userName, imageUrl, prefferedLocales, introduction } = privateData;
 
   const languageItems = prefferedLocales.map((tutorLocale) => {
     const name = Object.keys(localeEnglishNames[tutorLocale])[0];

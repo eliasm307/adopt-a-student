@@ -1,12 +1,12 @@
 import { navigate } from 'gatsby';
 import React, { useCallback, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { auth, GoogleAuthProvider } from 'src/utils/firebase-client';
+import { auth } from 'src/utils/firebase-client';
 
 import { FormFieldId, RoutePath } from '../constants';
-import { UserRole } from '../declarations/types';
 import { useAuthData } from '../hooks';
 import { signInWithGoogle, signUpWithEmailPassword } from '../utils/auth';
+import log from '../utils/log';
 import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from './Form';
 
 const UserSignUpForm = () => {
@@ -15,7 +15,7 @@ const UserSignUpForm = () => {
   // const [showValidation, setShowValidation] = useState(false);
   const user = useAuthData();
 
-  console.log(`typeof user ${typeof user}`);
+  log(`typeof user ${typeof user}`);
 
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (event): void => {
@@ -55,11 +55,11 @@ const UserSignUpForm = () => {
   );
 
   if (user) {
-    // console.log("sign-in", "user signed in, navigating to app role select...");
+    // log("sign-in", "user signed in, navigating to app role select...");
     navigate(RoutePath.App);
     return null;
   }
-  console.log("sign-in", "NOT navigating to app role select...", {
+  log("sign-in", "NOT navigating to app role select...", {
     user,
     authUser: auth.currentUser,
   });

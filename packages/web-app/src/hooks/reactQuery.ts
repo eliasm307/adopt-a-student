@@ -11,6 +11,7 @@ import { useAuthData, useUserRole } from ".";
 import { QueryName } from "../constants";
 import { functionsClient } from "../utils/firebase-client";
 import callFirebaseFunction from "../utils/firebase-client/callFirebaseFunction";
+import log from "../utils/log";
 
 interface UseGetPrivateTutorDataQueryProps {
   queryName: QueryName;
@@ -32,7 +33,7 @@ export function useGetPrivateStudentDataQuery({
       "Running useGetPrivateStudentDataQuery because user is a student..."
     );
   } else {
-    console.log(
+    log(
       "NOT Running useGetPrivateStudentDataQuery because user is not a student"
     );
   }
