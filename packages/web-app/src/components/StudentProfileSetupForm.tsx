@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useRef, useState } from 'react';
 import { Button, Col, Form, Image, Row } from 'react-bootstrap';
 import MultiSelect from 'react-multi-select-component';
 import { useAuthData } from 'src/hooks';
@@ -41,6 +41,7 @@ const StudentPreferencesForm = () => {
   const { updateUserPrivateStudentData } = useContext(
     UserPrivateStudentDataContext
   );
+  const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (event): void => {
@@ -91,6 +92,9 @@ const StudentPreferencesForm = () => {
       if (!selectedCountries.length)
         return alert("Select your country or countries");
 
+      // prevent other submits
+      if (submitButtonRef.current) submitButtonRef.current.disabled = true;
+
       // create user
       console.log("StudentPreferencesForm", "creating student user...");
 
@@ -104,6 +108,9 @@ const StudentPreferencesForm = () => {
         prefferedLocales: selectedLocales.map(
           (locale) => locale.value as LocaleCode
         ),
+      }).finally(() => {
+        // re-enable button in any case
+        if (submitButtonRef.current) submitButtonRef.current.disabled = false;
       });
 
       console.log("StudentPreferencesForm", "student user created");
@@ -130,11 +137,6 @@ const StudentPreferencesForm = () => {
             placeItems: "center",
           }}
         >
-          <div>
-            Student preferences for:{" "}
-            {user?.displayName || user?.uid || "unknown"}
-          </div>
-          <pre>{JSON.stringify(selectedLocales)}</pre>
           <Form
             method='post'
             onSubmit={(event) => {
@@ -148,7 +150,7 @@ const StudentPreferencesForm = () => {
             }}
           >
             <FormHeaderGraphic hideTextImage />
-
+            <h2 style={{ padding: "20px 0" }}>Setup your student profile</h2>
             {user?.photoURL && (
               <Image fluid src={user?.photoURL} alt='User profile image' />
             )}
@@ -174,7 +176,12 @@ const StudentPreferencesForm = () => {
               onChange={setSelectedCountries}
             />
 
-            <Button variant='primary' type='submit' className='col m-1'>
+            <Button
+              ref={submitButtonRef}
+              variant='primary'
+              type='submit'
+              className='col m-1'
+            >
               Save
             </Button>
           </Form>

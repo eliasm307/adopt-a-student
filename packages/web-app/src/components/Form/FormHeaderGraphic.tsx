@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Image from '../Image';
 import SVG from '../SVG';
 
 interface Props {
@@ -10,10 +9,10 @@ interface Props {
 const FormHeaderGraphic = ({ hideTextImage }: Props) => {
   return (
     <div
-      className='  '
+      className=''
       style={{
         width: "100%",
-        padding: "auto auto",
+        padding: "40px auto",
         margin: "auto",
         display: "grid",
         placeItems: "center",
