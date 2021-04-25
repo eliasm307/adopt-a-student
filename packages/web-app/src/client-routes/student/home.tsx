@@ -56,12 +56,7 @@ const StudentHome = () => {
   if (!responseData || !responseData.tutors.length)
     return <div>No Data found: result = {JSON.stringify(responseData)}</div>;
 
-  return (
-    <>
-      <div>student home Data: {responseData?.tutors.length} items</div>
-      <TutorList tutors={responseData.tutors} />
-    </>
-  );
+  return <TutorList tutors={responseData.tutors} />;
 };
 
 export default StudentHome;

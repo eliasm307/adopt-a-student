@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card, Col, Image, Row } from 'react-bootstrap';
+import { Badge, Button, Card, Col, Image, Row } from 'react-bootstrap';
 import { ReactSVG } from 'react-svg';
 
-import { PublicTutorData } from '@adopt-a-student/common';
+import { localeEnglishNames, PublicTutorData } from '@adopt-a-student/common';
 
 interface Props {
   className?: string;
@@ -10,19 +10,69 @@ interface Props {
 }
 
 const TutorListItem = ({ tutor, className }: Props) => {
-  const { available, imageUrl, introduction, userName } = tutor;
+  const {
+    available,
+    imageUrl,
+    introduction,
+    userName,
+    prefferedCountries,
+    prefferedLocales,
+  } = tutor;
+
+  const languageItems = prefferedLocales.map((tutorLocale) => {
+    const name = Object.keys(localeEnglishNames[tutorLocale])[0];
+
+    return (
+      <Badge
+        variant='light'
+        style={{
+          marginLeft: "8px",
+          padding: "8px",
+          border: "1px solid --primary",
+        }}
+      >
+        {name}
+      </Badge>
+    );
+  });
 
   return (
     <>
-      <Card body className='col'>
-        <Row>
-          <Col md={2}>
-            <Image src={imageUrl || undefined} roundedCircle />
+      <Row>
+        <Col sm={3}>
+          <Image
+            fluid
+            src={imageUrl || undefined}
+            roundedCircle
+            style={{
+              width: "clamp(100px, 100%, 300px) !important",
+              border: "3px solid #33C4B3",
+            }}
+          />
+        </Col>
+        <Col>
+          <h3>{userName}</h3>
+          <div>
+            {available && <strong>Available</strong>}
+            {languageItems}
+          </div>
+          <div>{introduction}</div>
+        </Col>
+      </Row>
+      {false && (
+        <div
+          style={{
+            position: "relative",
+            bottom: 0,
+            paddingTop: "auto",
+            height: "100%",
+          }}
+        >
+          <Col className='debug'>
+            <Button style={{ bottom: 0 }}>Action</Button>
           </Col>
-          <Col>{userName}</Col>
-        </Row>
-        <Row>{introduction}</Row>
-      </Card>
+        </div>
+      )}
     </>
   );
 };
