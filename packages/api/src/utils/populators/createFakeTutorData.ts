@@ -1,4 +1,4 @@
-import faker from 'faker';
+import faker, { random } from 'faker';
 
 import { PrivateTutorData } from '@adopt-a-student/common';
 
@@ -17,8 +17,8 @@ export default function createFakeTutorData(): PrivateTutorData {
     introduction: faker.lorem.lines(Math.random() * 3),
     prefferedLocales: getRandomLocales(),
     prefferedCountries: getRandomCountries(),
-    relatedSubjects: [],
+    relatedSubjects: [], // todo randmoise this based on existing users
     relatedStudents: [],
-    available: true,
+    available: Math.random() > 0.5,
   };
 }

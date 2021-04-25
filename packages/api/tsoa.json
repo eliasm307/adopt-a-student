@@ -20,7 +20,7 @@
     "_module": "commonjs",
     "outDir": "tsoa-build",
     "baseUrl": "../../",
-    "typeRoots": [ "./node_modules/@types" ],
+    "typeRoots": [ "./node_modules/@types", "./node_modules/@adopt-a-student/common/lib/index.d.ts" ],
     "types": [ "@types/jest", "@types/node" ],
 
     "_2": "/* Strict Type-Checking Options */",

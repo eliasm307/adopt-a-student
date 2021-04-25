@@ -1,5 +1,5 @@
 import { localeCodes } from '../constants';
-import countryLocales from '../data/locales/country-locales.json';
+import countryLocales from '../data/locales/country-locales';
 import { CallableFunctionNames } from './api';
 
 /** A locale code to specify language e.g. en for English */

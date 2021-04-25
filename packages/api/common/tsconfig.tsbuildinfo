@@ -231,10 +231,10 @@
         "signature": "801067ca47204145766efd1cca3fc0278324dbe44a71e353ad62f785e3951670",
         "affectsGlobalScope": false
       },
-      "./src/data/locales/country-locales.json": {
-        "version": "36b0e5800bbf0e297acd9167dad37518d40e828fa254b0229b8fa79b6e8ad50f",
-        "signature": "be59d851dbb18999548b010d4c7d25c839b756a368842a8da51d4f3bdeb50f08",
-        "affectsGlobalScope": true
+      "./src/data/locales/country-locales.ts": {
+        "version": "b09b010560902454d4aa3f0ee31d8145a296da7a045d730d60203bbd2b3b715a",
+        "signature": "11a9974cf637d9bce89798c5dd241b7fbc598e50c12c212818e6e5dbe0efc28b",
+        "affectsGlobalScope": false
       },
       "./src/data/api/callablefunctionnames.json": {
         "version": "271843ecb607c7cc226474b5fcb43a93ba13957cc9ffc20ae02db6929da61223",
@@ -247,8 +247,8 @@
         "affectsGlobalScope": false
       },
       "./src/declarations/types.ts": {
-        "version": "d268e2b4d630dfbdd2c394c64b8fda115e9a13be346f4cd8eebb42a054867012",
-        "signature": "bd7b055a1d4f8abcd604dfd942456b1fd72545d4e67696e0c797a1846bb45b49",
+        "version": "ad843b2691eb294f8218a8d3e54700aec68589f09e8696852dac590c2c733099",
+        "signature": "7fe817972e379c6aa6526e5bf019df9081e6ad5c95c89279ab4fdf07d07f9249",
         "affectsGlobalScope": false
       },
       "./src/declarations/data-models.ts": {
@@ -316,6 +316,11 @@
         "signature": "63d68a8fd6da18eb6ff69ad9ae9e964ef12a16de837d7e846d72c73d7e5264a3",
         "affectsGlobalScope": false
       },
+      "./src/data/locales/country-locales.json": {
+        "version": "36b0e5800bbf0e297acd9167dad37518d40e828fa254b0229b8fa79b6e8ad50f",
+        "signature": "be59d851dbb18999548b010d4c7d25c839b756a368842a8da51d4f3bdeb50f08",
+        "affectsGlobalScope": true
+      },
       "./src/data/locales/locale-countries.json": {
         "version": "bf827e897468dee7fa68ee59f78c9c3e8cf0f1550c3e172064670f3415413cec",
         "signature": "6ccc0f1c89237a4f5203d301a9d886cb9df9e1cb8190a8006680af83106d26aa",
@@ -354,16 +359,6 @@
       "./src/index.ts": {
         "version": "482f3f643910aae5ffa9d58bbb6e71e002346e116e4d65ff239d635d4aa0932a",
         "signature": "8e5ce0512d4d39e96342ba3564245f995e719b6e6957146fa76c4e1711c0efe7",
-        "affectsGlobalScope": false
-      },
-      "../../../node_modules/locale-codes/index.d.ts": {
-        "version": "953ce34ff67f5dd458ea15181112101cf140e1378473b081fc38ca608c42543b",
-        "signature": "953ce34ff67f5dd458ea15181112101cf140e1378473b081fc38ca608c42543b",
-        "affectsGlobalScope": false
-      },
-      "./src/utils/locales-internal.ts": {
-        "version": "734b559d185f0c0b5c5e0bf258c22ca9ac72864be2e53f3dfa8654aae68b864b",
-        "signature": "f8ac3b436e509d94f7cec959ca58adfe5b3b9581caabe54d1129f61b77d585cc",
         "affectsGlobalScope": false
       },
       "../../../node_modules/@types/node/globals.d.ts": {
@@ -599,6 +594,21 @@
       "./node_modules/@types/fs-extra/index.d.ts": {
         "version": "8d01c38ccb9af3a4035a68818799e5ef32ccc8cf70bdb83e181e1921d7ad32f6",
         "signature": "8d01c38ccb9af3a4035a68818799e5ef32ccc8cf70bdb83e181e1921d7ad32f6",
+        "affectsGlobalScope": false
+      },
+      "./src/scripts/localesjsontots.ts": {
+        "version": "ba954b7647269a5a336964dc9b610bf0a4045431e99e2ab73a9fcb2b07cfe898",
+        "signature": "f761c91419d0a89422a0004ef1a92929dd4d2d5e5c16758654d8b0467d1998c6",
+        "affectsGlobalScope": false
+      },
+      "../../../node_modules/locale-codes/index.d.ts": {
+        "version": "953ce34ff67f5dd458ea15181112101cf140e1378473b081fc38ca608c42543b",
+        "signature": "953ce34ff67f5dd458ea15181112101cf140e1378473b081fc38ca608c42543b",
+        "affectsGlobalScope": false
+      },
+      "./src/utils/locales-internal.ts": {
+        "version": "734b559d185f0c0b5c5e0bf258c22ca9ac72864be2e53f3dfa8654aae68b864b",
+        "signature": "f8ac3b436e509d94f7cec959ca58adfe5b3b9581caabe54d1129f61b77d585cc",
         "affectsGlobalScope": false
       },
       "./src/utils/savejsontofile.ts": {
@@ -971,7 +981,7 @@
       ],
       "./src/declarations/types.ts": [
         "./src/constants.ts",
-        "./src/data/locales/country-locales.json",
+        "./src/data/locales/country-locales.ts",
         "./src/declarations/api.ts"
       ],
       "./src/index.ts": [
@@ -983,6 +993,10 @@
         "./src/declarations/types.ts",
         "./src/utils/index.ts",
         "./src/utils/type-predicates/index.ts"
+      ],
+      "./src/scripts/localesjsontots.ts": [
+        "../../../node_modules/@types/node/path.d.ts",
+        "./node_modules/@types/fs-extra/index.d.ts"
       ],
       "./src/utils/index.ts": [
         "./src/utils/locales.ts",
@@ -1327,7 +1341,7 @@
       ],
       "./src/declarations/types.ts": [
         "./src/constants.ts",
-        "./src/data/locales/country-locales.json",
+        "./src/data/locales/country-locales.ts",
         "./src/declarations/api.ts"
       ],
       "./src/index.ts": [
@@ -1496,6 +1510,7 @@
       "./src/constants.ts",
       "./src/data/api/callablefunctionnames.json",
       "./src/data/locales/country-locales.json",
+      "./src/data/locales/country-locales.ts",
       "./src/data/locales/locale-countries.json",
       "./src/data/locales/locale-english-names.json",
       "./src/data/locales/locale-native-names.json",
@@ -1505,6 +1520,7 @@
       "./src/declarations/object-shcema.ts",
       "./src/declarations/types.ts",
       "./src/index.ts",
+      "./src/scripts/localesjsontots.ts",
       "./src/utils/index.ts",
       "./src/utils/locales-internal.ts",
       "./src/utils/locales.test.ts",
@@ -2187,6 +2203,10 @@
         1
       ],
       [
+        "./src/data/locales/country-locales.ts",
+        1
+      ],
+      [
         "./src/data/locales/locale-countries.json",
         1
       ],
@@ -2224,6 +2244,10 @@
       ],
       [
         "./src/index.ts",
+        1
+      ],
+      [
+        "./src/scripts/localesjsontots.ts",
         1
       ],
       [
