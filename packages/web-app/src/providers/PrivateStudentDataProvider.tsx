@@ -6,7 +6,6 @@ import {
 
 import { QueryName } from '../constants';
 import { useAuthData } from '../hooks';
-import { useGetPrivateStudentDataQuery } from '../hooks/reactQuery';
 import { functionsClient } from '../utils/firebase-client';
 import callFirebaseFunction from '../utils/firebase-client/callFirebaseFunction';
 import log, { Logger } from '../utils/log';

@@ -4,7 +4,6 @@
 // should only include tutors by subjects defined in profile
 
 import React, { useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
 
 import {
   GetTutorsByLocalesRequestBody, GetTutorsByLocalesResponseBody, PublicTutorData,

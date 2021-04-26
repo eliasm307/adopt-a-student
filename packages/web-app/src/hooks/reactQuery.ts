@@ -22,6 +22,9 @@ interface UseGetPrivateStudentDataQueryProps {
   queryName: QueryName;
 }
 
+// ! react query usage needs to be investigated, bad usage can lead to performance losses
+// ! as a significant number of unnessesary queries are made
+/*
 export function useGetPrivateStudentDataQuery({
   queryName,
 }: UseGetPrivateStudentDataQueryProps): PrivateStudentData | null {
@@ -92,3 +95,4 @@ export function useGetTutorsByLocalesQuery({
     })
   );
 }
+*/
