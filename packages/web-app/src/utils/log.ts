@@ -9,16 +9,18 @@ export default function log(...args: any[]) {
 
 /** Util that keeps a context name for when there are a lot of logs */
 export class Logger {
-  contextName?: string;
+  contextName: string;
 
-  constructor(contextName?: string) {
+  constructor(contextName: string) {
     this.contextName = contextName;
   }
 
-  log(...args: any[]) {
-    const items = [...args];
+  error(...args: any[]) {
+    // ? should this show on production?
+    console.error(...args);
+  }
 
-    if (this.contextName) items.unshift(this.contextName);
-    log(...items);
+  log(...args: any[]) {
+    log(this.contextName, ...args);
   }
 }

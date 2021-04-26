@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 import {
-  GetStudentRequestBody, GetStudentResponseBody, PrivateStudentData,
+  GetStudentRequestBody, GetStudentResponseBody, isPrivateStudentData, PrivateStudentData,
 } from '@adopt-a-student/common';
 
 import { QueryName } from '../constants';
@@ -9,7 +9,7 @@ import { useAuthData } from '../hooks';
 import { useGetPrivateStudentDataQuery } from '../hooks/reactQuery';
 import { functionsClient } from '../utils/firebase-client';
 import callFirebaseFunction from '../utils/firebase-client/callFirebaseFunction';
-import log from '../utils/log';
+import log, { Logger } from '../utils/log';
 import { queryClient } from '../utils/reactQuery';
 
 interface PrivateStudentDataContextShape {
@@ -21,6 +21,8 @@ interface PrivateStudentDataContextShape {
 interface ProviderProps {
   children: React.ReactNode;
 }
+
+const logger = new Logger("UserPrivateDataProvider");
 
 // initial context
 export const UserPrivateDataContext = createContext({
@@ -50,6 +52,11 @@ export default function UserPrivateStudentDataProvider({
     null as PrivateStudentData | null
   );
 
+  // state variable used to force a data refetch
+  const [lastDataRequest, setLastDataRequest] = useState<number>(
+    new Date().getTime()
+  );
+
   // ? might be better to have a use effect that calls the query conditionally depending on if it is defined, then include a refresh button or something
 
   /*
@@ -60,7 +67,7 @@ export default function UserPrivateStudentDataProvider({
 
   useEffect(() => {
     const task = async () => {
-      log("studentHome", "starting query for tutors");
+      logger.log("starting query for student data");
       try {
         const data = await callFirebaseFunction<
           GetStudentRequestBody,
@@ -70,25 +77,27 @@ export default function UserPrivateStudentDataProvider({
           data: { id: userAuth?.uid || "" },
           functions: functionsClient,
         });
-        log(
-          "studentHome",
-          `tutor query successful, ${data?.tutors.length || 0} results`
-        );
-        setResponseData(data?.tutors);
-        setIsLoading(false);
+        logger.log(`query successful`, { data });
+
+        if (!data) {
+          logger.error("No data returned");
+          return setUserPrivateStudentData(null);
+        }
+
+        if (!isPrivateStudentData(data?.student)) {
+          logger.error("Student data was not private student data");
+          return setUserPrivateStudentData(null);
+        }
+
+        setUserPrivateStudentData(data.student);
       } catch (error) {
-        console.error("StudentHome", { error });
-      } finally {
-        setIsLoading(false);
+        logger.error({ error });
       }
     };
     task();
-  }, [privateData?.prefferedCountries, privateData?.prefferedLocales]);
+  }, [userAuth?.uid, lastDataRequest]); // if lastDataRequest is changed this should force a data refresh
 
-  const [responseData, setResponseData] = useState<
-    PublicTutorData[] | undefined
-  >(undefined);
-
+  /*
   useEffect(() => {
     log("UserPrivateStudentDataProvider", "updating private user data", {
       userPrivateStudentData,
@@ -100,18 +109,20 @@ export default function UserPrivateStudentDataProvider({
     });
     setUserPrivateStudentData(userPrivateStudentData);
   }, [userPrivateStudentData, userAuth?.uid]);
+  */
 
   const refreshPrivateStudentData = useCallback(() => {
-    queryClient.invalidateQueries(queryName);
+    // queryClient.invalidateQueries(queryName);
     // ? is this required? will this cause flashing?
-    setUserPrivateStudentData(null);
-  }, [queryName]);
+    // setUserPrivateStudentData(null);
+    setLastDataRequest(new Date().getTime());
+  }, []);
 
   const updateUserPrivateStudentData = (
     newPrivateData: PrivateStudentData | null
   ) => {
-    log(__filename, `Updating user Private Student data...`, {
-      currentPrivateData: userPrivateStudentData,
+    logger.log(`Updating user Private Student data...`, {
+      currentPrivateData: userPrivateStudentDataState,
       newPrivateData,
     });
 
