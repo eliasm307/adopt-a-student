@@ -57,22 +57,23 @@ export default function NavBar({ links, title }: Props) {
         boxShadow: "0px 5px 5px 0px rgb(0 0 0 / 10%)",
       }}
     >
-      <span>
-        {" "}
-        <StaticImage
-          src='../../../static/assets/logo-only.png'
-          alt='logo'
-          style={{
-            width: "40px",
-            position: "absolute",
-            top: "50%",
-            left: "10px",
-            transform: "translateY(-50%)",
-          }}
-          imgStyle={{}}
-        />
+      <StaticImage
+        src='../../../static/assets/logo-only.png'
+        alt='logo'
+        style={{
+          width: "40px",
+          position: "absolute",
+          top: "50%",
+          left: "10px",
+          transform: "translateY(-50%)",
+        }}
+        imgStyle={{}}
+      />
+      <span
+        style={{ marginLeft: "50px", fontSize: "1.9em", lineHeight: "60px" }}
+      >
+        {title}
       </span>
-      <span>{title}</span>
       <nav>{linksJsx}</nav>
     </div>
   );
