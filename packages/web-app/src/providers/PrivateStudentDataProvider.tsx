@@ -11,7 +11,7 @@ import callFirebaseFunction from '../utils/firebase-client/callFirebaseFunction'
 import log, { Logger } from '../utils/log';
 import { queryClient } from '../utils/reactQuery';
 
-interface PrivateStudentDataContextShape {
+interface PrivateStudentHookReturn {
   refreshPrivateStudentData: (data: PrivateStudentData) => void;
   setUserPrivateStudentData: (data: PrivateStudentData | null) => void;
   userPrivateStudentData: PrivateStudentData | null;
@@ -25,14 +25,8 @@ const logger = new Logger("UserPrivateDataProvider");
 
 // initial context
 const UserPrivateDataContext = createContext({
-  refreshPrivateStudentData: () => {
-    throw Error("function is undefined");
-  },
-  setUserPrivateStudentData: () => {
-    throw Error("function is undefined");
-  },
   userPrivateStudentData: null,
-} as PrivateStudentDataContextShape);
+} as { userPrivateStudentData: PrivateStudentData | null; setUserPrivateStudentData: (data: PrivateStudentData | null) => void });
 
 // quick hook to get data
 /*
@@ -42,16 +36,23 @@ export function useUserPrivateStudentData(): PrivateStudentData | null {
 */
 // todo save some auth details to localstorage to maintain state between refreshes
 
-export function usePrivateStudentData(): PrivateStudentDataContextShape {
+export function usePrivateStudentData(): PrivateStudentHookReturn {
   const { user } = useAuthData();
 
+  /*
   const [userPrivateStudentData, setUserPrivateStudentData] = useState(
     null as PrivateStudentData | null
   );
+  */
 
   // state variable used to force a data refetch
   const [lastDataRequest, setLastDataRequest] = useState<number>(
     new Date().getTime()
+  );
+
+  // store state on a high level
+  const { setUserPrivateStudentData, userPrivateStudentData } = useContext(
+    UserPrivateDataContext
   );
 
   useEffect(() => {
@@ -88,7 +89,7 @@ export function usePrivateStudentData(): PrivateStudentDataContextShape {
       }
     };
     task();
-  }, [user, lastDataRequest]); // if lastDataRequest is changed this should force a data refresh
+  }, [user, lastDataRequest, setUserPrivateStudentData]); // if lastDataRequest is changed this should force a data refresh
 
   const refreshPrivateStudentData = useCallback(() => {
     // queryClient.invalidateQueries(queryName);
@@ -102,6 +103,25 @@ export function usePrivateStudentData(): PrivateStudentDataContextShape {
     userPrivateStudentData,
     setUserPrivateStudentData,
   };
+}
+
+export default function UserPrivateStudentDataProvider({
+  children,
+}: ProviderProps) {
+  const [userPrivateStudentDataState, setUserPrivateStudentData] = useState(
+    null as PrivateStudentData | null
+  );
+
+  return (
+    <UserPrivateDataContext.Provider
+      value={{
+        userPrivateStudentData: userPrivateStudentDataState,
+        setUserPrivateStudentData,
+      }}
+    >
+      {children}
+    </UserPrivateDataContext.Provider>
+  );
 }
 
 /*
