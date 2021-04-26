@@ -1,15 +1,16 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useCallback, useEffect, useState } from 'react';
 import { ROLE_LOCAL_STORAGE_KEY } from 'src/constants';
 import { UserRole } from 'src/declarations/types';
 import { getUserLocalStorageItem, setUserLocalStorageItem } from 'src/utils/userLocalStorage';
 
 import { auth } from '../utils/firebase-client';
-import log from '../utils/log';
+import log, { Logger } from '../utils/log';
 import { UserAuth } from './declarations/interfaces';
 
 interface UserAuthContextShape {
   updateUserRole: (role: UserRole) => void;
-  user: UserAuth | null;
+  user: UserAuth | UserAuthState;
+  userIsSignedOut: boolean;
   userRole: UserRole | null;
 }
 // todo save some auth details to localstorage to maintain state between refreshes
@@ -18,18 +19,30 @@ interface Props {
   children: React.ReactNode;
 }
 
+enum UserAuthState {
+  Pending,
+  NotSignedIn,
+}
+
+const logger = new Logger("UserAuthProvider");
+
 // initial context
 export const UserContext = createContext({
   updateUserRole: () => {
     throw Error("setUserRole is undefined");
   },
-  user: null,
+  user: UserAuthState.Pending,
   userRole: null,
+  userIsSignedOut: true,
 } as UserAuthContextShape);
 
-export default function UserProvider({ children }: Props) {
-  const [user, setUser] = useState(null as UserAuth | null);
+export default function UserAuthProvider({ children }: Props) {
+  const [user, setUser] = useState(
+    UserAuthState.Pending as UserAuth | UserAuthState
+  );
   const [userRole, setUserRole] = useState(null as UserRole | null);
+
+  const userIsSignedOut = !user;
 
   // on mount, add auth state listener
   useEffect(() => {
@@ -37,40 +50,53 @@ export default function UserProvider({ children }: Props) {
     return auth.onAuthStateChanged((userAuth) => {
       log(__filename, `User state changed to:`, { userAuth });
 
-      if (!userAuth) return console.warn("Signed out", { userAuth });
+      // if user auth is null this means signed out
+      if (!userAuth) {
+        console.warn("Signed out", { userAuth });
+        return setUser(UserAuthState.NotSignedIn);
+      }
+      setUser({
+        ...userAuth,
+      });
 
+      // todo move role logic to separate provider
       const lastRole = getUserLocalStorageItem({
         uid: userAuth.uid,
         key: ROLE_LOCAL_STORAGE_KEY,
       }) as UserRole;
 
       log("UserProvider", `Loaded last role from local storage "${lastRole}"`);
-
-      setUser({
-        ...userAuth,
-      });
     });
   }, []);
 
   // todo move role logic to separate provider
-  const updateUserRole = (role: UserRole) => {
-    // save role change to local storage
-    setUserLocalStorageItem({
-      uid: user?.uid || "UNDEFINED-",
-      key: ROLE_LOCAL_STORAGE_KEY,
-      value: role,
-    });
+  const updateUserRole = useCallback(
+    (role: UserRole) => {
+      // if user is not signed in
+      if (typeof user !== "object")
+        return logger.warn(
+          "Could not update user role because user is not signed in"
+        );
 
-    log(__filename, `Setting user role to ${role}`, {
-      oldRole: role,
-      newRole: role,
-    });
+      // save role change to local storage
+      setUserLocalStorageItem({
+        uid: user?.uid || "UNDEFINED-",
+        key: ROLE_LOCAL_STORAGE_KEY,
+        value: role,
+      });
 
-    setUserRole(role);
-  };
+      log(__filename, `Setting user role to ${role}`, {
+        oldRole: role,
+        newRole: role,
+      });
+
+      setUserRole(role);
+    },
+    [user]
+  );
 
   // restore a previous role if there is one
-  if (!userRole) {
+  if (!userRole && typeof user === "object") {
     const storedRole = getUserLocalStorageItem({
       key: ROLE_LOCAL_STORAGE_KEY,
       uid: user?.uid || "UNDEFINED-",
@@ -80,7 +106,9 @@ export default function UserProvider({ children }: Props) {
   }
 
   return (
-    <UserContext.Provider value={{ user, updateUserRole, userRole }}>
+    <UserContext.Provider
+      value={{ user, updateUserRole, userRole, userIsSignedOut }}
+    >
       {children}
     </UserContext.Provider>
   );

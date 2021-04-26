@@ -23,4 +23,8 @@ export class Logger {
   log(...args: any[]) {
     log(this.contextName, ...args);
   }
+
+  warn(...args: any[]) {
+    console.warn(...args);
+  }
 }
