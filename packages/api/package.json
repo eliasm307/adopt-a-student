@@ -31,7 +31,7 @@
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "predeploy": "yarn cleanbuild && yarn tsoa:build",
-    "deploy": "firebase deploy --only functions",
+    "deploy": "firebase deploy --only functions -- debug",
     "preinstall": "yarn install:common",
     "cleaninstall": "rm -rf node_modules && rm -rf package-lock.json && yarn",
     "install:common": "yarn --cwd ./common",
