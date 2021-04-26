@@ -29,7 +29,7 @@ module.exports = {
         background_color: `#333`,
         theme_color: "#15BDD8",
         display: "minimal-ui",
-        icon: `${__dirname}/static/assets/logo-only.png`,
+        icon: `${__dirname}/static/assets/logo-only-icon.png`,
       },
     },
     `gatsby-plugin-tsconfig-paths`,

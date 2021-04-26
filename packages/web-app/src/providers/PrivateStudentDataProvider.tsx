@@ -52,11 +52,9 @@ export default function UserPrivateStudentDataProvider({
 
   // ? might be better to have a use effect that calls the query conditionally depending on if it is defined, then include a refresh button or something
 
-  /*
   const userPrivateStudentData = useGetPrivateStudentDataQuery({
     queryName,
   });
-  */
 
   useEffect(() => {
     log("UserPrivateStudentDataProvider", "updating private user data", {
@@ -68,7 +66,7 @@ export default function UserPrivateStudentDataProvider({
       functions: functionsClient,
     });
     setUserPrivateStudentData(userPrivateStudentData);
-  }, [userPrivateStudentData]);
+  }, [userPrivateStudentData, userAuth?.uid]);
 
   const refreshPrivateStudentData = useCallback(() => {
     queryClient.invalidateQueries(queryName);
