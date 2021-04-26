@@ -30,12 +30,12 @@ const RoleBasedRoute = ({
   isPublic,
   ...rest
 }: Props) => {
-  const user = useAuthData();
+  const { user, userIsSignedOut } = useAuthData();
   const userRole = useUserRole();
   const userPrivateStudentData = useUserPrivateStudentData();
 
   // check user is signed in, if route is not public
-  if (!isPublic && !user) {
+  if (!isPublic && userIsSignedOut) {
     // todo sometimes user data can be undefined as it loads, so users get redirected unecessarily? try making a hook that explicitly checks on auth state changed on mount and redirects if the auth state is null, see for example https://stackoverflow.com/a/61026772
 
     console.warn(__filename, "not signed in, redirect to sign in");

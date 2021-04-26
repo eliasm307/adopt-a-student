@@ -45,7 +45,7 @@ export default function UserPrivateStudentDataProvider({
   children,
 }: ProviderProps) {
   const queryName = QueryName.UserPrivateStudentData;
-  const userAuth = useAuthData();
+  const { user } = useAuthData();
 
   const [userPrivateStudentDataState, setUserPrivateStudentData] = useState(
     null as PrivateStudentData | null
@@ -66,6 +66,10 @@ export default function UserPrivateStudentDataProvider({
 
   useEffect(() => {
     const task = async () => {
+      if (typeof user !== "object")
+        return logger.warn(
+          "Could not query student data because there is no user data"
+        );
       logger.log("starting query for student data");
       try {
         const data = await callFirebaseFunction<
@@ -73,7 +77,7 @@ export default function UserPrivateStudentDataProvider({
           GetStudentResponseBody
         >({
           name: "getStudent",
-          data: { id: userAuth?.uid || "" },
+          data: { id: user?.uid || "" },
           functions: functionsClient,
         });
         logger.log(`query successful`, { data });
@@ -94,7 +98,7 @@ export default function UserPrivateStudentDataProvider({
       }
     };
     task();
-  }, [userAuth?.uid, lastDataRequest]); // if lastDataRequest is changed this should force a data refresh
+  }, [user, lastDataRequest]); // if lastDataRequest is changed this should force a data refresh
 
   /*
   useEffect(() => {

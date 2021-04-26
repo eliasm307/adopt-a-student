@@ -9,7 +9,7 @@ import { UserAuth } from './declarations/interfaces';
 
 interface UserAuthContextShape {
   updateUserRole: (role: UserRole) => void;
-  user: UserAuth | UserAuthState;
+  user: UserAuth | UserAuthStatus;
   userIsSignedOut: boolean;
   userRole: UserRole | null;
 }
@@ -19,8 +19,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-enum UserAuthState {
-  Pending,
+export enum UserAuthStatus {
+  Pending = 1, // make sure any enum value is truthy, not to be confused with when data is null
   NotSignedIn,
 }
 
@@ -31,14 +31,14 @@ export const UserContext = createContext({
   updateUserRole: () => {
     throw Error("setUserRole is undefined");
   },
-  user: UserAuthState.Pending,
+  user: UserAuthStatus.Pending,
   userRole: null,
   userIsSignedOut: true,
 } as UserAuthContextShape);
 
 export default function UserAuthProvider({ children }: Props) {
   const [user, setUser] = useState(
-    UserAuthState.Pending as UserAuth | UserAuthState
+    UserAuthStatus.Pending as UserAuth | UserAuthStatus
   );
   const [userRole, setUserRole] = useState(null as UserRole | null);
 
@@ -53,7 +53,7 @@ export default function UserAuthProvider({ children }: Props) {
       // if user auth is null this means signed out
       if (!userAuth) {
         console.warn("Signed out", { userAuth });
-        return setUser(UserAuthState.NotSignedIn);
+        return setUser(UserAuthStatus.NotSignedIn);
       }
       setUser({
         ...userAuth,
@@ -75,7 +75,7 @@ export default function UserAuthProvider({ children }: Props) {
       // if user is not signed in
       if (typeof user !== "object")
         return logger.warn(
-          "Could not update user role because user is not signed in"
+          "Could not update user role because user data is not confirmed as signed in"
         );
 
       // save role change to local storage

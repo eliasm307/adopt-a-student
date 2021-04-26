@@ -19,16 +19,6 @@ const NavBarItem = styled(Button)`
 `;
 
 export default function NavBar({ links, title }: Props) {
-  // const user = useAuthData();
-  // let greetingMessage = "";
-  /*
-  if (user) {
-    greetingMessage = `Hello ${user.displayName}`;
-  } else {
-    greetingMessage = "You are not logged in";
-  }
-  */
-
   const linksJsx =
     links &&
     links.map(({ text, action, route: url, variant = "outline-primary" }) => {

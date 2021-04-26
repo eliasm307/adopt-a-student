@@ -5,6 +5,7 @@ import { auth } from 'src/utils/firebase-client';
 
 import { FormFieldId, RoutePath } from '../constants';
 import { useAuthData } from '../hooks';
+import { UserAuthStatus } from '../providers/UserAuthProvider';
 import { signInWithGoogle, signUpWithEmailPassword } from '../utils/auth';
 import log from '../utils/log';
 import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from './Form';
@@ -13,7 +14,7 @@ const UserSignUpForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   // const [showValidation, setShowValidation] = useState(false);
-  const user = useAuthData();
+  const { user, userIsSignedOut } = useAuthData();
 
   log(`typeof user ${typeof user}`);
 
@@ -54,9 +55,9 @@ const UserSignUpForm = () => {
     [email, password]
   );
 
-  if (user) {
+  if (typeof user === "object") {
     // log("sign-in", "user signed in, navigating to app role select...");
-    navigate(RoutePath.App);
+    navigate(RoutePath.App, { replace: true, state: { user } }); // todo utilise this on receipient routes
     return null;
   }
   log("sign-in", "NOT navigating to app role select...", {

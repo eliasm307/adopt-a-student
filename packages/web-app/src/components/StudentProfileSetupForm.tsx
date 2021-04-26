@@ -14,6 +14,7 @@ import log from '../utils/log';
 import FormFieldMultiSelect from './Form/FormFieldMultiSelect';
 import FormFieldText from './Form/FormFieldText';
 import FormHeaderGraphic from './Form/FormHeaderGraphic';
+import Loading from './Loading';
 
 const localeOptions: MultiSelectOption[] = Object.entries(
   localeEnglishNames
@@ -30,7 +31,7 @@ const countryOptions: MultiSelectOption[] = countryNames.map(
 
 /** User  */
 const StudentPreferencesForm = () => {
-  const user = useAuthData();
+  const { user, userIsSignedOut } = useAuthData();
   const [selectedLocales, setSelectedLocales] = useState<MultiSelectOption[]>(
     []
   );
@@ -69,7 +70,7 @@ const StudentPreferencesForm = () => {
 
       const form = event.currentTarget;
 
-      if (!user)
+      if (typeof user !== "object")
         return console.error(
           "StudentPreferencesForm",
           "cant submit, user not signed in"
@@ -135,54 +136,58 @@ const StudentPreferencesForm = () => {
             placeItems: "center",
           }}
         >
-          <Form
-            method='post'
-            onSubmit={(event) => {
-              handleSubmit(event);
-            }}
-            className='mt-3'
-            style={{
-              display: "grid",
-              placeItems: "center",
-              width: "clamp(100px, 100%, 500px)",
-            }}
-          >
-            <FormHeaderGraphic hideTextImage />
-            <h2 style={{ padding: "20px 0" }}>Setup your student profile</h2>
-            {user?.photoURL && (
-              <Image fluid src={user?.photoURL} alt='User profile image' />
-            )}
-
-            <FormFieldText
-              controlId={FormFieldId.UserName}
-              onChange={onChangeHandler}
-              label='User Name'
-              required
-            />
-
-            <FormFieldMultiSelect
-              label='Locales Custom field'
-              onChange={setSelectedLocales}
-              options={localeOptions}
-              value={selectedLocales}
-            />
-
-            <FormFieldMultiSelect
-              label='Preferred Countries'
-              options={countryOptions}
-              value={selectedCountries}
-              onChange={setSelectedCountries}
-            />
-
-            <Button
-              ref={submitButtonRef}
-              variant='primary'
-              type='submit'
-              className='col m-1'
+          {typeof user !== "object" ? (
+            <Loading />
+          ) : (
+            <Form
+              method='post'
+              onSubmit={(event) => {
+                handleSubmit(event);
+              }}
+              className='mt-3'
+              style={{
+                display: "grid",
+                placeItems: "center",
+                width: "clamp(100px, 100%, 500px)",
+              }}
             >
-              Save
-            </Button>
-          </Form>
+              <FormHeaderGraphic hideTextImage />
+              <h2 style={{ padding: "20px 0" }}>Setup your student profile</h2>
+              {user?.photoURL && (
+                <Image fluid src={user?.photoURL} alt='User profile image' />
+              )}
+
+              <FormFieldText
+                controlId={FormFieldId.UserName}
+                onChange={onChangeHandler}
+                label='User Name'
+                required
+              />
+
+              <FormFieldMultiSelect
+                label='Locales Custom field'
+                onChange={setSelectedLocales}
+                options={localeOptions}
+                value={selectedLocales}
+              />
+
+              <FormFieldMultiSelect
+                label='Preferred Countries'
+                options={countryOptions}
+                value={selectedCountries}
+                onChange={setSelectedCountries}
+              />
+
+              <Button
+                ref={submitButtonRef}
+                variant='primary'
+                type='submit'
+                className='col m-1'
+              >
+                Save
+              </Button>
+            </Form>
+          )}
         </Col>
       </Row>
     </>

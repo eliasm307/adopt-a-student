@@ -21,9 +21,9 @@ const Route = ({
   isPublic,
   ...restProps
 }: Props) => {
-  const user = useAuthData();
+  const { userIsSignedOut } = useAuthData();
 
-  if (!isPublic && !user) {
+  if (!isPublic && userIsSignedOut) {
     log("PrivateRoute", `Not signed in, redirecting to "${RoutePath.SignIn}"`);
     navigate(RoutePath.SignIn);
     return null;

@@ -34,16 +34,7 @@ const RoleButton = styled.button`
 const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
   const { updateUserRole: setUserRole } = useContext(UserContext);
 
-  /*
-  if (user?.role) {
-    navigate(RoutePath.home);
-    log("role", "user role defined, navigating to home");
-    return null;
-  }
-  */
   console.warn("role", "user role not defined, staying on role select screen");
-
-  const roleImageStyle: React.CSSProperties = {};
 
   return (
     <>
