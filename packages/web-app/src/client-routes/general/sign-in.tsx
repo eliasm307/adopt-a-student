@@ -10,29 +10,36 @@ import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from '../../comp
 import {
   ConnectingStudentsAndTeachersGraphic, LogoWithTextGraphic,
 } from '../../components/Form/FormHeaderGraphic';
-import log from '../../utils/log';
+import { Logger } from '../../utils/log';
 
 const buttonStyle: CSSProperties = {};
 const buttonCssClasses = "col mb-2";
+
+const logger = new Logger("SignIn");
 
 const SignIn = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [showValidation, setShowValidation] = useState(false);
 
-  const { user } = useContext(UserContext);
+  const { user, userIsSignedOut } = useContext(UserContext);
 
-  log(`typeof user ${typeof user}`);
+  logger.log({
+    typeofUser: typeof user,
+    authUser: auth.currentUser,
+    userIsSignedOut,
+  });
 
-  if (user) {
-    log("sign-in", "user signed in, navigating to app role select...");
+  if (!userIsSignedOut) {
+    logger.log("user signed in, navigating to app role select...");
     // todo should this be enabled
-    // navigate(RoutePath.App);
-    // return null;
+    navigate(RoutePath.App, { replace: true, state: { user } });
+    return null;
   }
-  log("sign-in", "NOT navigating to app role select...", {
+  logger.log("Showing sign in screen...", {
     user,
     authUser: auth.currentUser,
+    userIsSignedOut,
   });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {

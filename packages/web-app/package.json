@@ -9,7 +9,7 @@
     "build": "gatsby build",
     "build:npm": "gatsby clean && gatsby build",
     "prebuild": "rm -rf public && gatsby clean && yarn",
-    "develop": "gatsby develop --open",
+    "develop": "kill-port 8000 && gatsby develop --open",
     "predevelop": "npx tsc && yarn clean",
     "dev": "yarn develop",
     "start": "yarn develop",

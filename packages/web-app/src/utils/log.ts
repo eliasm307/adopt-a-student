@@ -17,7 +17,7 @@ export class Logger {
 
   error(...args: any[]) {
     // ? should this show on production?
-    console.error(...args);
+    console.error(this.contextName, ...args);
   }
 
   log(...args: any[]) {
@@ -25,6 +25,7 @@ export class Logger {
   }
 
   warn(...args: any[]) {
-    console.warn(...args);
+    if (isProductionEnvironment()) return;
+    console.warn(this.contextName, ...args);
   }
 }

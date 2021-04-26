@@ -1,6 +1,6 @@
 import { CallableFunctionName } from "@adopt-a-student/common";
 import { FirebaseFunctions } from ".";
-import log from "../log";
+import log, { Logger } from "../log";
 
 interface Props<D> {
   data: D;
@@ -8,17 +8,20 @@ interface Props<D> {
   name: CallableFunctionName;
 }
 
+const logger = new Logger("callFirebaseFunction");
+
 export default async function callFirebaseFunction<D = any, R = any>({
   data,
   functions,
   name,
 }: Props<D>): Promise<R | null> {
   try {
+    logger.log(`Calling ${name}...`);
     const result = await functions.httpsCallable(name as string)(data);
-    log("callFirebaseFunction", `Call to callable ${name} successful`);
+    logger.log(`Call to callable ${name} successful`);
     return result.data as R;
   } catch (error) {
-    console.error("callFirebaseFunction");
+    logger.error(`Error while calling ${name}`, { error });
     return null;
   }
 }
