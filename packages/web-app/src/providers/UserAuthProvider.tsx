@@ -7,7 +7,6 @@ import { auth } from '../utils/firebase-client';
 import log from '../utils/log';
 import { UserAuth } from './declarations/interfaces';
 
-// todo move role logic to separate provider
 interface UserAuthContextShape {
   updateUserRole: (role: UserRole) => void;
   user: UserAuth | null;
@@ -34,7 +33,8 @@ export default function UserProvider({ children }: Props) {
 
   // on mount, add auth state listener
   useEffect(() => {
-    auth.onAuthStateChanged((userAuth) => {
+    // return unsubscribe function
+    return auth.onAuthStateChanged((userAuth) => {
       log(__filename, `User state changed to:`, { userAuth });
 
       if (!userAuth) return console.warn("Signed out", { userAuth });
@@ -52,6 +52,7 @@ export default function UserProvider({ children }: Props) {
     });
   }, []);
 
+  // todo move role logic to separate provider
   const updateUserRole = (role: UserRole) => {
     // save role change to local storage
     setUserLocalStorageItem({
