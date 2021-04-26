@@ -7,10 +7,13 @@ import { signInAnonymously, signInWithEmailPassword, signInWithGoogle } from 'sr
 import { auth } from 'src/utils/firebase-client';
 
 import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from '../../components/Form';
+import {
+  ConnectingStudentsAndTeachersGraphic, LogoWithTextGraphic,
+} from '../../components/Form/FormHeaderGraphic';
 import log from '../../utils/log';
 
 const buttonStyle: CSSProperties = {};
-const buttonCssClasses = "";
+const buttonCssClasses = "col mb-2";
 
 const SignIn = () => {
   const [password, setPassword] = useState("");
@@ -74,7 +77,8 @@ const SignIn = () => {
           overflow: "auto",
         }}
       >
-        <FormHeaderGraphic />
+        <LogoWithTextGraphic />
+        <ConnectingStudentsAndTeachersGraphic />
         <Form
           method='post'
           onSubmit={(event) => {
@@ -96,41 +100,46 @@ const SignIn = () => {
             controlId={FormFieldId.Password}
             onChange={onChangeHandler}
           />
-
           <Row className='w-100'>
-            <Button variant='primary' type='submit' className='col'>
+            <Button
+              variant='primary'
+              type='submit'
+              className={buttonCssClasses}
+              style={buttonStyle}
+            >
               Sign in
             </Button>
-
+            <div className='mx-1' />
             <Button
               variant='primary'
               type='button'
-              className='col'
+              className={buttonCssClasses}
+              style={buttonStyle}
               onClick={() => navigate(RoutePath.SignUp)}
             >
               Sign Up
             </Button>
           </Row>
-          <Row>
-            <Button
-              variant='primary'
-              type='button'
-              className='col'
-              onClick={() => signInAnonymously()}
-            >
-              Sign in Anonymously
-            </Button>
-          </Row>
-          <Row>
-            <Button
-              variant='primary'
-              type='button'
-              className='col'
-              onClick={() => signInWithGoogle()}
-            >
-              Sign in with Google
-            </Button>
-          </Row>
+
+          <Button
+            variant='outline-primary'
+            type='button'
+            className={buttonCssClasses}
+            style={buttonStyle}
+            onClick={() => signInAnonymously()}
+          >
+            Continue Anonymously
+          </Button>
+
+          <Button
+            variant='outline-danger'
+            type='button'
+            className={buttonCssClasses}
+            style={buttonStyle}
+            onClick={() => signInWithGoogle()}
+          >
+            Continue with Google
+          </Button>
         </Form>
       </Col>
     </Row>

@@ -28,6 +28,10 @@
     "graphql-compose": "^7.25.0",
     "webpack": "^5.24.2"
   },
+  "peerDependencies": {
+    "@emotion/core": ">= 10.x",
+    "@emotion/styled": ">= 10.x"
+  },
   "dependencies": {
     "@adopt-a-student/common": "file:../api/common",
     "@emotion/react": "^11.1.5",
