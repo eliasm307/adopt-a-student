@@ -12,6 +12,7 @@ import { usePrivateStudentData } from '../providers/PrivateStudentDataProvider';
 import { UserAuthStatus } from '../providers/UserAuthProvider';
 import { createNewStudentUser } from '../utils/api';
 import log, { Logger } from '../utils/log';
+import { FormFieldEmail } from './Form';
 import FormFieldMultiSelect from './Form/FormFieldMultiSelect';
 import FormFieldText from './Form/FormFieldText';
 import FormFieldTextArea from './Form/FormFieldTextArea';
@@ -58,6 +59,7 @@ const StudentProfileForm = ({
     MultiSelectOption[]
   >([]);
   const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
   const [summaryStatement, setSummaryStatement] = useState("");
 
   const submitButtonRef = useRef<HTMLButtonElement>(null);
@@ -97,6 +99,9 @@ const StudentProfileForm = ({
         switch (name) {
           case FormFieldId.UserName.toString():
             return setUserName(value);
+
+          case FormFieldId.Email.toString():
+            return setEmail(value);
           case FormFieldId.Introduction.toString():
             return setSummaryStatement(value);
           default:
@@ -133,7 +138,7 @@ const StudentProfileForm = ({
       if (!form.checkValidity())
         return log("StudentPreferencesForm", "cant submit, inputs invalid");
 
-      const { email, photoURL } = user;
+      const { photoURL } = user;
 
       if (!email)
         console.warn("StudentPreferencesForm", "user does not have an email");
@@ -179,6 +184,7 @@ const StudentProfileForm = ({
       setUserPrivateStudentData,
       user,
       userName,
+      email,
       selectedLocales,
       selectedCountries,
       userIsSignedOut,
@@ -222,9 +228,7 @@ const StudentProfileForm = ({
               width: "clamp(100px, 100%, 500px)",
             }}
           >
-            <h2 style={{ padding: "20px 0" }}>
-              {title && "Edit your student profile"}
-            </h2>
+            {title && <h2 style={{ padding: "20px 0" }}>{title}</h2>}
             {user?.photoURL ? (
               <Image fluid src={user?.photoURL} alt='User profile image' />
             ) : (
@@ -237,6 +241,11 @@ const StudentProfileForm = ({
               label='User Name'
               defaultValue={user.displayName || initialData?.userName || ""}
               required
+            />
+            <FormFieldEmail
+              controlId={FormFieldId.Email}
+              onChange={onChangeHandler}
+              defaultValue={user.email || initialData?.email || ""}
             />
 
             <FormFieldTextArea

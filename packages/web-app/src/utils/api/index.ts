@@ -4,7 +4,8 @@
 
 import {
   CreateStudentRequestBody, CreateStudentResponseBody, CreateTutorRequestBody,
-  CreateTutorResponseBody, PrivateUserData,
+  CreateTutorResponseBody, PrivateStudentData, PrivateUserData, UpdateStudentRequestBody,
+  UpdateStudentResponseBody,
 } from '@adopt-a-student/common';
 
 import { functionsClient } from '../firebase-client';
@@ -24,6 +25,19 @@ export async function createNewStudentUser(props: CreateNewStudentUserProps) {
   >({
     name: "createStudent",
     data: { student: { ...props, relatedTutors: [], relatedSubjects: [] } },
+    functions: functionsClient,
+  });
+}
+
+export async function updateStudentUser(
+  props: Partial<Omit<PrivateStudentData, "id">>
+) {
+  return callFirebaseFunction<
+    UpdateStudentRequestBody,
+    UpdateStudentResponseBody
+  >({
+    name: "updateStudent",
+    data: { updates: { ...props } },
     functions: functionsClient,
   });
 }

@@ -8,18 +8,29 @@ import { Badge, Col, Image, Row } from 'react-bootstrap';
 
 import { localeEnglishNames } from '@adopt-a-student/common';
 
+import StudentProfileForm from '../../components/StudentProfileForm';
 import { usePrivateStudentData } from '../../providers/PrivateStudentDataProvider';
+import { updateStudentUser } from '../../utils/api';
 
 const StudentProfile = () => {
-  const { userPrivateStudentData: privateData } = usePrivateStudentData();
+  const {
+    userPrivateStudentData,
+    setUserPrivateStudentData,
+  } = usePrivateStudentData();
 
-  if (!privateData) {
+  if (!userPrivateStudentData) {
     console.error("student-profile", "private student data was null");
     return <div>There was an error </div>;
   }
 
-  const { userName, imageUrl, prefferedLocales, introduction } = privateData;
+  const {
+    userName,
+    imageUrl,
+    prefferedLocales,
+    introduction,
+  } = userPrivateStudentData;
 
+  /*
   const languageItems = prefferedLocales.map((tutorLocale) => {
     const name = Object.keys(localeEnglishNames[tutorLocale])[0];
 
@@ -49,10 +60,19 @@ const StudentProfile = () => {
       </Badge>
     );
   });
+  */
   return (
     <Row className='justify-content-md-center mt-4'>
+      <Col lg={4}>
+        <StudentProfileForm
+          existingData={userPrivateStudentData}
+          title='Edit your profile'
+          onValidSubmit={(data) => updateStudentUser(data)}
+          setUserPrivateStudentData={setUserPrivateStudentData}
+        />
+      </Col>
       <Col
-        lg={10}
+        lg={4}
         className='justify-contents-center'
         style={{
           display: "grid",
@@ -60,34 +80,21 @@ const StudentProfile = () => {
         }}
       >
         <Row>
-          <Col xs={4}>
-            <Image
-              fluid
-              src={imageUrl || "/assets/logo-only.png"}
-              roundedCircle
-              style={{
-                width: "clamp(200px, 100%, 300px) !important",
-                border: "3px solid #33C4B3",
-              }}
-            />
-          </Col>
-          <Col>
-            <h1>{userName}</h1>
-          </Col>
+          <h2>My Subjects</h2>
+          <div>TBC</div>
         </Row>
-
+      </Col>
+      <Col
+        lg={4}
+        className='justify-contents-center'
+        style={{
+          display: "grid",
+          placeItems: "center",
+        }}
+      >
         <Row>
-          <h2>Introduction</h2>
-          {introduction}
-        </Row>
-        <Row>
-          <h2>Languages</h2>
-          {languageItems}
-        </Row>
-
-        <Row>
-          <h2>Countries</h2>
-          {countryItems}
+          <h2>My Teachers</h2>
+          <div>TBC</div>
         </Row>
       </Col>
     </Row>
