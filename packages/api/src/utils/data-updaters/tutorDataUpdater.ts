@@ -17,12 +17,22 @@ const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
 
   const mutators: DataMutatorMap<PrivateTutorData> = {
     id: null,
-    prefferedLocales: (value) => {
-      throw Error("Mutator not implemented for tutorDataUpdater");
-    },
-    prefferedCountries: (value) => {
-      throw Error("Mutator not implemented for tutorDataUpdater");
-    },
+    prefferedLocales: (value) =>
+      Array.isArray(value)
+        ? [...value]
+        : console.error(
+            __filename,
+            "Expected an array for mutator but received",
+            { value }
+          ), // overwrite,
+    prefferedCountries: (value) =>
+      Array.isArray(value)
+        ? [...value]
+        : console.error(
+            __filename,
+            "Expected an array for mutator but received",
+            { value }
+          ), // overwrite,
     relatedSubjects: null,
     relatedStudents: null,
     email: (value) =>
