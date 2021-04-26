@@ -108,6 +108,7 @@ const SignIn = () => {
           <FormFieldEmail
             onChange={onChangeHandler}
             controlId={FormFieldId.Email}
+            defaultValue=''
           />
 
           <FormFieldPassword

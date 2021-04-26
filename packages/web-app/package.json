@@ -2,8 +2,15 @@
   "name": "@adopt-a-student/web-app",
   "private": true,
   "description": "Web app for adopt a student",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "license": "0BSD",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/eliasm307/adopt-a-student"
+  },
+  "bugs": {
+    "url": "https://github.com/eliasm307/adopt-a-student/issues"
+  },
   "scripts": {
     "build:common": "yarn --cwd ../api/common build",
     "build": "gatsby build",
@@ -28,12 +35,10 @@
     "graphql-compose": "^7.25.0",
     "webpack": "^5.24.2"
   },
-  "peerDependencies": {
-    "@emotion/core": ">= 10.x",
-    "@emotion/styled": ">= 10.x"
-  },
   "dependencies": {
     "@adopt-a-student/common": "file:../api/common",
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.3.0",
     "@fontsource/open-sans": "^4.2.2",
     "@types/react-query": "^1.1.2",
     "bootstrap": "^4.6.0",
@@ -77,12 +82,5 @@
     "gatsby-plugin-tsconfig-paths": "^1.0.3",
     "netlify-cli": "^3.21.9",
     "prettier": "2.2.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-hello-world"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }

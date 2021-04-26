@@ -237,7 +237,7 @@
         "affectsGlobalScope": false
       },
       "./common/src/data/locales/country-locales.ts": {
-        "version": "b09b010560902454d4aa3f0ee31d8145a296da7a045d730d60203bbd2b3b715a",
+        "version": "016445e0726a9285188416dabf92fce82037b96b61d1f9556e9688c67fe6a33f",
         "signature": "11a9974cf637d9bce89798c5dd241b7fbc598e50c12c212818e6e5dbe0efc28b",
         "affectsGlobalScope": false
       },
@@ -322,22 +322,22 @@
         "affectsGlobalScope": false
       },
       "./common/src/data/locales/country-locales.json": {
-        "version": "36b0e5800bbf0e297acd9167dad37518d40e828fa254b0229b8fa79b6e8ad50f",
+        "version": "5592b4edb16e1664f61ac14d26e5d78071e28b8ee60cc0ebdf86a63320d6aeae",
         "signature": "be59d851dbb18999548b010d4c7d25c839b756a368842a8da51d4f3bdeb50f08",
         "affectsGlobalScope": true
       },
       "./common/src/data/locales/locale-countries.json": {
-        "version": "bf827e897468dee7fa68ee59f78c9c3e8cf0f1550c3e172064670f3415413cec",
+        "version": "4c37ebb385795f6e3557c74d9ba2b1dee089bde2acdbbb9d6019d9ccacfa1f19",
         "signature": "6ccc0f1c89237a4f5203d301a9d886cb9df9e1cb8190a8006680af83106d26aa",
         "affectsGlobalScope": true
       },
       "./common/src/data/locales/locale-english-names.json": {
-        "version": "f5037ebbbeee97ab99e4366fb257810a76aaad7ad4145fbb7071f85ddfc4c4a1",
+        "version": "98fb41387a7c80d9a322ca21f73a247785e59a118c1814d56dd1239aba97e1d4",
         "signature": "7f2fed46b1d4b7b8248a365c83b1f01b33da122ecf8da53848dd42821fd5e158",
         "affectsGlobalScope": true
       },
       "./common/src/data/locales/locale-native-names.json": {
-        "version": "7754ce3e192bc375c77bead6cb663403e72f0cd7e1c3f1a596cd9265322e7020",
+        "version": "ea62150e708ff858cf8d67520b5b241064542e9af0714fa3de44bd6a78b3158a",
         "signature": "8b96bec7b42b6a61170969f42e59e13de2327b7a44f5f51b497bd5169908110d",
         "affectsGlobalScope": true
       },
@@ -1802,7 +1802,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/data-updaters/studentdataupdater.ts": {
-        "version": "dfbde58bf00deb7c1d0a7142d600854d27023fdfb1ceccf32251bce64f51db12",
+        "version": "ae5b06a8b37d76b7a1084bd73c4865793f09dd00e1d07f68cbd93424671e0137",
         "signature": "1d0004c1b8783f6c12461a16b0395102ab458737a752be0c4ac41d66c223c815",
         "affectsGlobalScope": false
       },
@@ -1937,7 +1937,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/data-updaters/tutordataupdater.ts": {
-        "version": "37e591a4e271dd0ebf1e53e6069e95a07a22dc6c42853a35c55c79f3ad9427b4",
+        "version": "16998248109269c907b8f2100be429d505cbdc022acb6b0dc8f3d6db4abb952c",
         "signature": "6d7cb3e98e3553eb830ed3ae7dc5711ce9871afca24452a7e851bdaf4f813206",
         "affectsGlobalScope": false
       },
@@ -1967,7 +1967,7 @@
         "affectsGlobalScope": false
       },
       "./tsoa-build/swagger-spec.json": {
-        "version": "ea2e190e97ece8249bef46efe167e4f7e62564439fe077da03f7daf5cdf121ee",
+        "version": "4c1400aeb711a835ca71b5aeeac1c1d26ae36d3c4818043a074f01505ae8fbfa",
         "signature": "80266b785a8f0483a497ad731e20b51ec5e1dbc02b31ba9a7db7f10a231253aa",
         "affectsGlobalScope": true
       },
