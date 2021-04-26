@@ -18,6 +18,8 @@ interface Props extends RouteComponentProps, BaseRouteProps {
   requiresUserPreferencesSet: boolean;
 }
 
+// todo this should just be a proxy for a base route
+
 const RoleBasedRoute = ({
   StudentComponent,
   TutorComponent,
@@ -79,9 +81,14 @@ const RoleBasedRoute = ({
     (() => <div>Route not defined for {userRole} user role</div>);
 
   return (
-    <>
-      <NavBar links={links} title={title} /> <Component {...rest} />
-    </>
+    <div style={{ position: "relative" }}>
+      <div style={{ zIndex: 1 }}>
+        <NavBar links={links} title={title} />
+      </div>
+      <div style={{ zIndex: 0 }}>
+        <Component {...rest} />
+      </div>
+    </div>
   );
 };
 

@@ -28,7 +28,7 @@ const TutorList = ({ tutors }: Props) => {
     </Col>
   ));
 
-  return <Row>{itemsJsx}</Row>;
+  return <Row style={{ padding: "0 20px" }}>{itemsJsx}</Row>;
 };
 
 export default TutorList;

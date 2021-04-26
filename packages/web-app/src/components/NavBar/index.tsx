@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Navbar } from 'react-bootstrap';
 
 import styled from '@emotion/styled';
 import { navigate } from '@reach/router';
@@ -56,39 +56,44 @@ export default function NavBar({ links, title }: Props) {
       return null;
     });
   return (
-    <div
-      style={{
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        gap: "20px",
-        flex: "1",
-        justifyContent: "space-between",
-        borderBottom: "1px solid #d1c1e0",
-        height: "60px",
-        margin: 0,
-        padding: "10px",
-        boxShadow: "0px 5px 5px 0px rgb(0 0 0 / 10%)",
-      }}
-    >
-      <StaticImage
-        src='../../../static/assets/logo-only.png'
-        alt='logo'
+    <div style={{ height: "60px", zIndex: 10 }}>
+      <div
         style={{
-          width: "40px",
-          position: "absolute",
-          top: "50%",
-          left: "10px",
-          transform: "translateY(-50%)",
+          left: "0",
+          width: "100%",
+          top: "0",
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          gap: "20px",
+          flex: "1",
+          justifyContent: "space-between",
+          borderBottom: "1px solid #d1c1e0",
+          height: "60px",
+          margin: 0,
+          padding: "10px",
+          boxShadow: "0px 5px 5px 0px rgb(0 0 0 / 10%)",
         }}
-        imgStyle={{}}
-      />
-      <span
-        style={{ marginLeft: "50px", fontSize: "1.9em", lineHeight: "60px" }}
       >
-        {title}
-      </span>
-      <nav>{linksJsx}</nav>
+        <StaticImage
+          src='../../../static/assets/logo-only.png'
+          alt='logo'
+          style={{
+            width: "40px",
+            position: "absolute",
+            top: "50%",
+            left: "10px",
+            transform: "translateY(-50%)",
+          }}
+          imgStyle={{}}
+        />
+        <span
+          style={{ marginLeft: "50px", fontSize: "1.9em", lineHeight: "60px" }}
+        >
+          {title}
+        </span>
+        <nav>{linksJsx}</nav>
+      </div>
     </div>
   );
 }
