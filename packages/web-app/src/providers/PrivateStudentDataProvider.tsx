@@ -52,9 +52,42 @@ export default function UserPrivateStudentDataProvider({
 
   // ? might be better to have a use effect that calls the query conditionally depending on if it is defined, then include a refresh button or something
 
+  /*
   const userPrivateStudentData = useGetPrivateStudentDataQuery({
     queryName,
   });
+  */
+
+  useEffect(() => {
+    const task = async () => {
+      log("studentHome", "starting query for tutors");
+      try {
+        const data = await callFirebaseFunction<
+          GetStudentRequestBody,
+          GetStudentResponseBody
+        >({
+          name: "getStudent",
+          data: { id: userAuth?.uid || "" },
+          functions: functionsClient,
+        });
+        log(
+          "studentHome",
+          `tutor query successful, ${data?.tutors.length || 0} results`
+        );
+        setResponseData(data?.tutors);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("StudentHome", { error });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    task();
+  }, [privateData?.prefferedCountries, privateData?.prefferedLocales]);
+
+  const [responseData, setResponseData] = useState<
+    PublicTutorData[] | undefined
+  >(undefined);
 
   useEffect(() => {
     log("UserPrivateStudentDataProvider", "updating private user data", {
