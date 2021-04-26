@@ -3,6 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
+import styled from '@emotion/styled';
 import { navigate } from '@reach/router';
 
 import { NavBarLinkData } from '../../declarations/interfaces';
@@ -12,6 +13,10 @@ interface Props {
   links?: NavBarLinkData[];
   title: string;
 }
+
+const NavBarItem = styled(Button)`
+  margin-left: 5px;
+`;
 
 export default function NavBar({ links, title }: Props) {
   // const user = useAuthData();
@@ -26,18 +31,27 @@ export default function NavBar({ links, title }: Props) {
 
   const linksJsx =
     links &&
-    links.map(({ text, action, route: url }) => {
+    links.map(({ text, action, route: url, variant = "outline-primary" }) => {
       if (action)
         return (
-          <Button type='Button' onClick={action} key={`${text}-${url || ""}`}>
+          <NavBarItem
+            type='Button'
+            variant={variant}
+            onClick={action}
+            key={`${text}-${url || ""}`}
+          >
             {text}
-          </Button>
+          </NavBarItem>
         );
       if (url)
         return (
-          <Button key={`${url}-${text || ""}`} onClick={() => navigate(url)}>
+          <NavBarItem
+            variant={variant}
+            key={`${url}-${text || ""}`}
+            onClick={() => navigate(url)}
+          >
             {text}
-          </Button>
+          </NavBarItem>
         );
       return null;
     });

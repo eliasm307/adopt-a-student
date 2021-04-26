@@ -15,6 +15,7 @@ import { QueryName } from '../../constants';
 import { useUserPrivateStudentData } from '../../providers/PrivateStudentDataProvider';
 import { functionsClient } from '../../utils/firebase-client';
 import callFirebaseFunction from '../../utils/firebase-client/callFirebaseFunction';
+import log from '../../utils/log';
 
 const StudentHome = () => {
   const privateData = useUserPrivateStudentData();
@@ -47,8 +48,14 @@ const StudentHome = () => {
       </div>
     );
 
-  if (!responseData || !responseData?.tutors?.length)
-    return <div>No Data found: result = {JSON.stringify(responseData)}</div>;
+  if (!responseData || !responseData?.tutors?.length) {
+    log("No Data found: result", { responseData });
+    return (
+      <div style={{ display: "grid", placeItems: "center", height: "50vh" }}>
+        <div style={{ fontSize: "4em" }}>No teachers found 😢</div>
+      </div>
+    );
+  }
 
   return <TutorList tutors={responseData.tutors} />;
 };

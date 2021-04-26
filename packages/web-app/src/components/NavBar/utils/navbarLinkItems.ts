@@ -14,6 +14,7 @@ export const ProfileNavbarLink: NavBarLinkData = {
 
 export const SignOutNavbarLink: NavBarLinkData = {
   text: "Sign Out",
+  variant: "outline-danger",
   action: (event) => {
     event.preventDefault();
     signOut();
