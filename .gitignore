@@ -18,7 +18,7 @@ lib/
 build/
 docs/
 
-*tsconfig.tsbuildinfo
+*.tsbuildinfo
 
 # Runtime data
 pids
