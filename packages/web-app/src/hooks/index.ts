@@ -12,7 +12,3 @@ export function useAuthData(): {
   const data = useContext(UserContext);
   return { user: data.user, userIsSignedOut: data.userIsSignedOut };
 }
-
-export function useUserRole(): UserRole | null {
-  return useContext(UserContext)?.userRole;
-}

@@ -30,7 +30,7 @@ export const UserRoleContext = createContext({
 export default function UserRoleProvider({ children }: Props) {
   const [userRole, setUserRole] = useState(null as UserRole | null);
 
-  const { userIsSignedOut, user: user } = useAuthData();
+  const { user } = useAuthData();
 
   // const userIsSignedOut = !user;
 
@@ -87,4 +87,8 @@ export default function UserRoleProvider({ children }: Props) {
       {children}
     </UserRoleContext.Provider>
   );
+}
+
+export function useUserRole(): UserRole | null {
+  return useContext(UserRoleContext)?.userRole;
 }

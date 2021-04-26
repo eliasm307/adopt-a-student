@@ -1,7 +1,4 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react';
-import { ROLE_LOCAL_STORAGE_KEY } from 'src/constants';
-import { UserRole } from 'src/declarations/types';
-import { getUserLocalStorageItem, setUserLocalStorageItem } from 'src/utils/userLocalStorage';
 
 import { auth } from '../utils/firebase-client';
 import log, { Logger } from '../utils/log';
@@ -10,7 +7,6 @@ import { UserAuth } from './declarations/interfaces';
 interface UserAuthContextShape {
   user: UserAuth | UserAuthStatus;
   userIsSignedOut: boolean;
-  userRole: UserRole | null;
 }
 // todo save some auth details to localstorage to maintain state between refreshes
 
@@ -28,7 +24,6 @@ const logger = new Logger("UserAuthProvider");
 // initial context
 export const UserContext = createContext({
   user: UserAuthStatus.Pending,
-  userRole: null,
   userIsSignedOut: false,
 } as UserAuthContextShape);
 
@@ -107,7 +102,7 @@ export default function UserAuthProvider({ children }: Props) {
   }
 */
   return (
-    <UserContext.Provider value={{ user, userRole, userIsSignedOut }}>
+    <UserContext.Provider value={{ user, userIsSignedOut }}>
       {children}
     </UserContext.Provider>
   );

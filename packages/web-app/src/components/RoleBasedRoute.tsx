@@ -1,14 +1,16 @@
 import { navigate } from 'gatsby';
 import React from 'react';
 import { RoutePath } from 'src/constants';
-import { useAuthData, useUserRole } from 'src/hooks';
+import { useAuthData } from 'src/hooks';
 
 import { RouteComponentProps } from '@reach/router';
 
 import { BaseRouteProps } from '../declarations/interfaces';
 import { useUserPrivateStudentData } from '../providers/PrivateStudentDataProvider';
+import { useUserRole } from '../providers/UserRoleProvider';
 import log, { Logger } from '../utils/log';
 import NavBar from './NavBar';
+import { SignOutNavbarLink } from './NavBar/utils/navbarLinkItems';
 import RoleSelector from './RoleSelector';
 import StudentPreferencesForm from './StudentProfileSetupForm';
 
@@ -56,7 +58,12 @@ const RoleBasedRoute = ({
   if (!userRole) {
     // ? should this be a modal window instead
     logger.warn("userRole not defined, showing role selector", { userRole });
-    return <RoleSelector />;
+    return (
+      <>
+        <NavBar title='Please select a role' links={[SignOutNavbarLink]} />
+        <RoleSelector />
+      </>
+    );
   }
 
   const studentPreferencesDefined =
@@ -75,7 +82,12 @@ const RoleBasedRoute = ({
     !studentPreferencesDefined
   ) {
     // ? should this be a modal window instead
-    return <StudentPreferencesForm />;
+    return (
+      <>
+        <NavBar title='Student Profile Setup' links={[SignOutNavbarLink]} />
+        <StudentPreferencesForm />
+      </>
+    );
   }
 
   // todo implement for tutor

@@ -39,7 +39,6 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
 
   return (
     <>
-      <NavBar title='Please select a role' links={[SignOutNavbarLink]} />
       <Row noGutters>
         <Col
           style={{
