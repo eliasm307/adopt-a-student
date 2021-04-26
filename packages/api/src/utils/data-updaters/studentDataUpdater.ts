@@ -20,7 +20,7 @@ const studentDataUpdater: DataUpdater<PrivateStudentData> = ({
     relatedSubjects: null,
     prefferedLocales: (value) =>
       Array.isArray(value)
-        ? [...value]
+        ? (newData.prefferedLocales = [...value])
         : console.error(
             __filename,
             "Expected an array for mutator but received",
@@ -28,7 +28,7 @@ const studentDataUpdater: DataUpdater<PrivateStudentData> = ({
           ), // overwrite // ! is there a way this can be typed easily without writing the methods manually?
     prefferedCountries: (value) =>
       Array.isArray(value)
-        ? [...value]
+        ? (newData.prefferedCountries = [...value])
         : console.error(
             __filename,
             "Expected an array for mutator but received",

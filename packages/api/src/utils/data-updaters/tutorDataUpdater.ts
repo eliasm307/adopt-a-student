@@ -19,7 +19,7 @@ const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
     id: null,
     prefferedLocales: (value) =>
       Array.isArray(value)
-        ? [...value]
+        ? (newData.prefferedLocales = [...value])
         : console.error(
             __filename,
             "Expected an array for mutator but received",
@@ -27,7 +27,7 @@ const tutorDataUpdater: DataUpdater<PrivateTutorData> = ({
           ), // overwrite,
     prefferedCountries: (value) =>
       Array.isArray(value)
-        ? [...value]
+        ? (newData.prefferedCountries = [...value])
         : console.error(
             __filename,
             "Expected an array for mutator but received",

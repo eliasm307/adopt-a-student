@@ -1937,7 +1937,7 @@
         "affectsGlobalScope": false
       },
       "./src/utils/data-updaters/tutordataupdater.ts": {
-        "version": "16998248109269c907b8f2100be429d505cbdc022acb6b0dc8f3d6db4abb952c",
+        "version": "a658132159ed58ca430ac221477370cfdde97ae25f72ec1633e3fd2ec2b7138d",
         "signature": "6d7cb3e98e3553eb830ed3ae7dc5711ce9871afca24452a7e851bdaf4f813206",
         "affectsGlobalScope": false
       },

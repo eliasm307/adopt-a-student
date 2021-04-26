@@ -17,7 +17,7 @@
     "test:production": "set NODE_ENV=production-test&& yarn test",
 
     "firestore:populate-test": "npx ts-node src/scripts/populateFirestore.ts",
-    "firestore:populate-production": "setx NODE_ENV=production-test&& npx ts-node src/scripts/populateFirestore.ts",
+    "firestore:populate-production": "set_MISSPELLED_TO_MAKE_SURE_YOU_WANT_TO_DO_THISS NODE_ENV=production-test&& npx ts-node src/scripts/populateFirestore.ts",
     "check-types": "npx tsc",
     "cleanbuild": "yarn cleaninstall && yarn build",
     "saveCallableNames": "npx ts-node src/scripts/saveCallableNames.ts",
