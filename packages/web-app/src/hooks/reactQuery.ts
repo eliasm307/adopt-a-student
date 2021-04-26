@@ -1,18 +1,7 @@
-import {
-  PrivateStudentData,
-  GetStudentResponseBody,
-  GetStudentRequestBody,
-  isPrivateStudentData,
-  GetTutorsByLocalesRequestBody,
-  GetTutorsByLocalesResponseBody,
-} from "@adopt-a-student/common";
-import { useQuery } from "react-query";
-import { useAuthData, useUserRole } from ".";
+import { GetTutorsByLocalesRequestBody } from "@adopt-a-student/common";
 import { QueryName } from "../constants";
-import { functionsClient } from "../utils/firebase-client";
-import callFirebaseFunction from "../utils/firebase-client/callFirebaseFunction";
-import log from "../utils/log";
 
+/*
 interface UseGetPrivateTutorDataQueryProps {
   queryName: QueryName;
   requestData: GetTutorsByLocalesRequestBody;
@@ -21,7 +10,11 @@ interface UseGetPrivateTutorDataQueryProps {
 interface UseGetPrivateStudentDataQueryProps {
   queryName: QueryName;
 }
+*/
 
+// ! react query usage needs to be investigated, bad usage can lead to performance losses
+// ! as a significant number of unnessesary queries are made
+/*
 export function useGetPrivateStudentDataQuery({
   queryName,
 }: UseGetPrivateStudentDataQueryProps): PrivateStudentData | null {
@@ -39,7 +32,7 @@ export function useGetPrivateStudentDataQuery({
   }
 
   const { isLoading, error, data: responseData } = useQuery<
-    GetStudentResponseBody,
+    GetStudentResponseBody | null,
     Error
   >(
     queryName,
@@ -79,7 +72,7 @@ export function useGetTutorsByLocalesQuery({
 }: UseGetPrivateTutorDataQueryProps) {
   // todo utilise or remove
   const { isLoading, error, data: responseData } = useQuery<
-    GetTutorsByLocalesResponseBody,
+    GetTutorsByLocalesResponseBody | null,
     Error
   >(queryName, async () =>
     callFirebaseFunction<
@@ -92,3 +85,4 @@ export function useGetTutorsByLocalesQuery({
     })
   );
 }
+*/

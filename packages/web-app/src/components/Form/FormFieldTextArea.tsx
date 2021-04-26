@@ -10,7 +10,7 @@ interface Props {
   required?: boolean;
 }
 
-const FormFieldText = React.forwardRef(
+const FormFieldTextArea = React.forwardRef(
   (
     {
       onChange,
@@ -20,18 +20,20 @@ const FormFieldText = React.forwardRef(
       fieldDescription: description,
       defaultValue = "",
     }: Props,
-    ref: ForwardedRef<HTMLInputElement>
+    ref: ForwardedRef<HTMLTextAreaElement>
   ) => {
     return (
       <Form.Group controlId={controlId} className='w-100'>
         <Form.Label>{label}</Form.Label>
         <Form.Control
           required={required}
-          type='text'
+          as='textarea'
+          rows={3}
           name={controlId}
           placeholder=''
           onChange={onChange}
           defaultValue={defaultValue}
+          style={{ resize: "none" }}
           ref={ref}
         />
         {description && (
@@ -43,4 +45,4 @@ const FormFieldText = React.forwardRef(
 );
 
 // todo add react memo where reasonable
-export default React.memo(FormFieldText);
+export default React.memo(FormFieldTextArea);

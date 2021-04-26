@@ -4,6 +4,7 @@ export interface NavBarLinkData {
   action?: MouseEventHandler<HTMLButtonElement>;
   route?: string;
   text: string;
+  variant?: "outline-primary" | "outline-danger";
 }
 export interface BaseRouteProps {
   isPublic: boolean;

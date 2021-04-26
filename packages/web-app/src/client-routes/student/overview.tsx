@@ -9,20 +9,17 @@ import { useAuthData } from '../../hooks';
 // ! shows private data
 
 const StudentOverview = () => {
-  const user = useAuthData();
+  const { user, userIsSignedOut } = useAuthData();
 
-  if (!user) {
+  // todo pass auth as state to routes https://reach.tech/router/api/navigate
+  if (userIsSignedOut) {
     navigate(RoutePath.SignIn);
     return null;
   }
 
   return (
     <>
-      <h1>Your profile</h1>
-      <ul>
-        <li>Name: {user.displayName}</li>
-        <li>E-mail: {user.email}</li>
-      </ul>
+      <h1>student overview</h1>
     </>
   );
 };

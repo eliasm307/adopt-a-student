@@ -9,6 +9,8 @@ interface Props {
   tutor: PublicTutorData;
 }
 
+// todo add a dummy contact button
+
 const TutorListItem = ({ tutor, className }: Props) => {
   const {
     available,
@@ -59,20 +61,36 @@ const TutorListItem = ({ tutor, className }: Props) => {
           <div>{introduction}</div>
         </Col>
       </Row>
-      {false && (
-        <div
-          style={{
-            position: "relative",
-            bottom: 0,
-            paddingTop: "auto",
-            height: "100%",
-          }}
+
+      <Row className='spacer-for-buttons' style={{ height: "50px" }} />
+      <Row
+        style={{
+          position: "absolute",
+          bottom: 10,
+          left: 0,
+          padding: "0 10px",
+          margin: 0,
+          height: "40px",
+          width: "100%",
+        }}
+        className='row'
+      >
+        <Button
+          className='col'
+          variant='outline-primary'
+          onClick={() => alert("TBC Not implemented")}
         >
-          <Col className='debug'>
-            <Button style={{ bottom: 0 }}>Action</Button>
-          </Col>
-        </div>
-      )}
+          Message
+        </Button>
+        <div className='mx-1' />
+        <Button
+          className='col'
+          variant='outline-primary'
+          onClick={() => alert("TBC Not implemented")}
+        >
+          Follow
+        </Button>
+      </Row>
     </>
   );
 };

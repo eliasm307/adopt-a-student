@@ -9,6 +9,7 @@ exports.onCreatePage = async ({ page, actions }) => {
 
   // todo look into using https://www.gatsbyjs.com/plugins/gatsby-plugin-create-client-paths
 
+  // ! dont use optional chaining here, netlify node version is not compatible
   // page.matchPath is a special key that's used for matching pages
   // only on the client.
   if (page.path.match(/^\/app/)) {

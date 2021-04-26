@@ -18,12 +18,22 @@ const studentDataUpdater: DataUpdater<PrivateStudentData> = ({
   const mutators: DataMutatorMap<PrivateStudentData> = {
     id: null,
     relatedSubjects: null,
-    prefferedLocales: () => {
-      throw Error("Mutator not implemented");
-    },
-    prefferedCountries: () => {
-      throw Error("Mutator not implemented");
-    },
+    prefferedLocales: (value) =>
+      Array.isArray(value)
+        ? (newData.prefferedLocales = [...value])
+        : console.error(
+            __filename,
+            "Expected an array for mutator but received",
+            { value }
+          ), // overwrite // ! is there a way this can be typed easily without writing the methods manually?
+    prefferedCountries: (value) =>
+      Array.isArray(value)
+        ? (newData.prefferedCountries = [...value])
+        : console.error(
+            __filename,
+            "Expected an array for mutator but received",
+            { value }
+          ), // overwrite, there will be no methods to edit these partially
     relatedTutors: null,
     email: (value) =>
       typeof value === "string" ? (newData.email = value) : null,

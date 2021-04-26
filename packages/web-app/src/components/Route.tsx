@@ -6,12 +6,14 @@ import { useAuthData } from 'src/hooks';
 import { RouteComponentProps } from '@reach/router';
 
 import { BaseRouteProps } from '../declarations/interfaces';
-import log from '../utils/log';
+import log, { Logger } from '../utils/log';
 import NavBar from './NavBar';
 
 interface Props extends BaseRouteProps, RouteComponentProps {
   component: any;
 }
+
+const logger = new Logger("Route");
 
 const Route = ({
   component: Component,
@@ -19,11 +21,16 @@ const Route = ({
   navbarLinks: links,
   title,
   isPublic,
+  uri,
+  default: defaultProp,
+  path,
   ...restProps
 }: Props) => {
-  const user = useAuthData();
+  const { userIsSignedOut } = useAuthData();
 
-  if (!isPublic && !user) {
+  logger.log("navigating to:", { title, location, uri, defaultProp, path });
+
+  if (!isPublic && userIsSignedOut) {
     log("PrivateRoute", `Not signed in, redirecting to "${RoutePath.SignIn}"`);
     navigate(RoutePath.SignIn);
     return null;

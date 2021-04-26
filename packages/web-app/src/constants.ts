@@ -27,4 +27,8 @@ export enum FormFieldId {
   Password = "userPassword",
   Email = "userEmail",
   UserName = "userUserName",
+  Introduction = "summaryStatement",
 }
+
+export const DEFAULT_PROFILE_IMAGE_URI =
+  "https://github.com/eliasm307/adopt-a-student/blob/main/packages/web-app/static/assets/logo-only.png?raw=true";
