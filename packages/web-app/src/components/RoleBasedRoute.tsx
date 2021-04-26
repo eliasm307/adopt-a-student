@@ -7,7 +7,7 @@ import { RouteComponentProps } from '@reach/router';
 
 import { BaseRouteProps } from '../declarations/interfaces';
 import { useUserPrivateStudentData } from '../providers/PrivateStudentDataProvider';
-import log from '../utils/log';
+import log, { Logger } from '../utils/log';
 import NavBar from './NavBar';
 import RoleSelector from './RoleSelector';
 import StudentPreferencesForm from './StudentProfileSetupForm';
@@ -17,6 +17,8 @@ interface Props extends RouteComponentProps, BaseRouteProps {
   TutorComponent: React.ComponentType<any>;
   requiresUserPreferencesSet: boolean;
 }
+
+const logger = new Logger("RoleBasedRoute");
 
 // todo this should just be a proxy for a base route
 
@@ -28,23 +30,32 @@ const RoleBasedRoute = ({
   title,
   requiresUserPreferencesSet,
   isPublic,
+  default: defaultProp,
+  path,
+  uri,
   ...rest
 }: Props) => {
   const { user, userIsSignedOut } = useAuthData();
   const userRole = useUserRole();
   const userPrivateStudentData = useUserPrivateStudentData();
 
+  logger.log("navigating to:", { title, location, uri, defaultProp, path });
+
   // check user is signed in, if route is not public
   if (!isPublic && userIsSignedOut) {
     // todo sometimes user data can be undefined as it loads, so users get redirected unecessarily? try making a hook that explicitly checks on auth state changed on mount and redirects if the auth state is null, see for example https://stackoverflow.com/a/61026772
 
-    console.warn(__filename, "not signed in, redirect to sign in");
+    logger.warn("not signed in, redirect to sign in", {
+      user,
+      userIsSignedOut,
+    });
     navigate(RoutePath.SignIn);
     return null;
   }
   // check if user has defined a role, otherwise make them select a role
   if (!userRole) {
     // ? should this be a modal window instead
+    logger.warn("userRole not defined, showing role selector", { userRole });
     return <RoleSelector />;
   }
 

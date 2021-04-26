@@ -57,8 +57,8 @@ export const signUpWithEmailPassword = async (
 export const signInAnonymously = async () => {
   log("auth", "trying to sign in anonymously");
   try {
-    await auth.signInAnonymously();
-    log("Signed in anonymously, creating anonymous user");
+    const result = await auth.signInAnonymously();
+    log("Signed in anonymously, successfully", { uid: result.user?.uid });
   } catch (error) {
     console.error("auth", { error });
     alert("Could not sign in");

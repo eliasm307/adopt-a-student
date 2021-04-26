@@ -1,15 +1,15 @@
 import { navigate } from 'gatsby';
-import React, { CSSProperties, useContext, useState } from 'react';
+import React, { CSSProperties, useCallback, useContext, useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { FormFieldId, RoutePath } from 'src/constants';
-import { UserContext } from 'src/providers/UserAuthProvider';
+import { UserAuthStatus, UserContext } from 'src/providers/UserAuthProvider';
 import { signInAnonymously, signInWithEmailPassword, signInWithGoogle } from 'src/utils/auth';
-import { auth } from 'src/utils/firebase-client';
 
 import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from '../../components/Form';
 import {
   ConnectingStudentsAndTeachersGraphic, LogoWithTextGraphic,
 } from '../../components/Form/FormHeaderGraphic';
+import Loading from '../../components/Loading';
 import { Logger } from '../../utils/log';
 
 const buttonStyle: CSSProperties = {};
@@ -26,52 +26,59 @@ const SignIn = () => {
 
   logger.log({
     typeofUser: typeof user,
-    authUser: auth.currentUser,
+    authUser: user,
     userIsSignedOut,
   });
 
-  if (!userIsSignedOut) {
-    logger.log("user signed in, navigating to app role select...");
-    // todo should this be enabled
-    navigate(RoutePath.App, { replace: true, state: { user } });
-    return null;
-  }
-  logger.log("Showing sign in screen...", {
-    user,
-    authUser: auth.currentUser,
-    userIsSignedOut,
-  });
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-
-    const form = event.currentTarget;
-
-    if (form.checkValidity()) signInWithEmailPassword(email, password);
-
-    if (!showValidation) setShowValidation(true);
-  };
-
-  const onChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void => {
-    const { currentTarget } = event;
-
-    if (currentTarget instanceof EventTarget) {
-      const { name, value } = currentTarget;
-      switch (name) {
-        case FormFieldId.Email:
-          return setEmail(value);
-        case FormFieldId.Password:
-          return setPassword(value);
-        default:
-          return console.error(`Unknown html event target "${name}"`);
-      }
-    } else {
-      console.warn("Unknown event", { event });
+  useEffect(() => {
+    if (typeof user === "object") {
+      logger.log("user signed in, navigating to home...", { user });
+      // todo should this be enabled
+      navigate(RoutePath.Home);
+      return;
     }
-  };
+    logger.log("Showing sign in screen...", {
+      user,
+      userIsSignedOut,
+    });
+  }, [user, userIsSignedOut]);
+
+  const handleSubmit = useCallback(
+    (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const form = event.currentTarget;
+
+      if (form.checkValidity()) signInWithEmailPassword(email, password);
+
+      if (!showValidation) setShowValidation(true);
+    },
+    [email, password, showValidation]
+  );
+
+  const onChangeHandler = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>): void => {
+      const { currentTarget } = event;
+
+      if (currentTarget instanceof EventTarget) {
+        const { name, value } = currentTarget;
+        switch (name) {
+          case FormFieldId.Email:
+            return setEmail(value);
+          case FormFieldId.Password:
+            return setPassword(value);
+          default:
+            return console.error(`Unknown html event target "${name}"`);
+        }
+      } else {
+        console.warn("Unknown event", { event });
+      }
+    },
+    []
+  );
+
+  if (user === UserAuthStatus.Pending) return <Loading />;
 
   return (
     <Row className='justify-content-md-center mt-4'>

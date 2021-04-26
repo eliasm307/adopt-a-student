@@ -9,6 +9,7 @@ import { UserContext } from 'src/providers/UserAuthProvider';
 
 import styled from '@emotion/styled';
 
+import { UserRoleContext } from '../providers/UserRoleProvider';
 import log from '../utils/log';
 import Image from './Image';
 import NavBar from './NavBar';
@@ -32,7 +33,7 @@ const RoleButton = styled.button`
 `;
 
 const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
-  const { updateUserRole: setUserRole } = useContext(UserContext);
+  const { updateUserRole: setUserRole } = useContext(UserRoleContext);
 
   console.warn("role", "user role not defined, staying on role select screen");
 

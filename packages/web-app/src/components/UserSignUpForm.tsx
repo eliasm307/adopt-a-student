@@ -1,5 +1,5 @@
 import { navigate } from 'gatsby';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { auth } from 'src/utils/firebase-client';
 
@@ -7,8 +7,10 @@ import { FormFieldId, RoutePath } from '../constants';
 import { useAuthData } from '../hooks';
 import { UserAuthStatus } from '../providers/UserAuthProvider';
 import { signInWithGoogle, signUpWithEmailPassword } from '../utils/auth';
-import log from '../utils/log';
+import log, { Logger } from '../utils/log';
 import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from './Form';
+
+const logger = new Logger("UserSignUpForm");
 
 const UserSignUpForm = () => {
   const [password, setPassword] = useState("");
@@ -55,14 +57,20 @@ const UserSignUpForm = () => {
     [email, password]
   );
 
-  if (typeof user === "object") {
-    // log("sign-in", "user signed in, navigating to app role select...");
-    navigate(RoutePath.App, { replace: true, state: { user } }); // todo utilise this on receipient routes
-    return null;
-  }
-  log("sign-in", "NOT navigating to app role select...", {
-    user,
-    authUser: auth.currentUser,
+  useEffect(() => {
+    const task = async () => {
+      if (typeof user === "object") {
+        logger.log("user signed in, navigating to app...");
+        await navigate(RoutePath.Home); // todo utilise this on receipient routes
+        logger.log("after wait for navigate to app");
+        return;
+      }
+      log("sign-in", "NOT navigating to app role select...", {
+        user,
+        authUser: auth.currentUser,
+      });
+    };
+    task();
   });
 
   return (

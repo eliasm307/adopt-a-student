@@ -8,7 +8,6 @@ import log, { Logger } from '../utils/log';
 import { UserAuth } from './declarations/interfaces';
 
 interface UserAuthContextShape {
-  updateUserRole: (role: UserRole) => void;
   user: UserAuth | UserAuthStatus;
   userIsSignedOut: boolean;
   userRole: UserRole | null;
@@ -21,28 +20,25 @@ interface Props {
 
 export enum UserAuthStatus {
   Pending = 1, // make sure any enum value is truthy, not to be confused with when data is null
-  NotSignedIn,
+  SignedOut = 0,
 }
 
 const logger = new Logger("UserAuthProvider");
 
 // initial context
 export const UserContext = createContext({
-  updateUserRole: () => {
-    throw Error("setUserRole is undefined");
-  },
   user: UserAuthStatus.Pending,
   userRole: null,
-  userIsSignedOut: true,
+  userIsSignedOut: false,
 } as UserAuthContextShape);
 
 export default function UserAuthProvider({ children }: Props) {
   const [user, setUser] = useState(
     UserAuthStatus.Pending as UserAuth | UserAuthStatus
   );
-  const [userRole, setUserRole] = useState(null as UserRole | null);
+  //   const [userRole, setUserRole] = useState(null as UserRole | null);
 
-  const userIsSignedOut = !user;
+  const userIsSignedOut = user === UserAuthStatus.SignedOut;
 
   // on mount, add auth state listener
   useEffect(() => {
@@ -53,23 +49,27 @@ export default function UserAuthProvider({ children }: Props) {
       // if user auth is null this means signed out
       if (!userAuth) {
         console.warn("Signed out", { userAuth });
-        return setUser(UserAuthStatus.NotSignedIn);
+        return setUser(UserAuthStatus.SignedOut);
       }
-      setUser({
+      logger.log(`Signed in ${userAuth.uid}`);
+      setUser(() => ({
         ...userAuth,
-      });
+      }));
 
       // todo move role logic to separate provider
+      /*
       const lastRole = getUserLocalStorageItem({
         uid: userAuth.uid,
         key: ROLE_LOCAL_STORAGE_KEY,
       }) as UserRole;
 
       log("UserProvider", `Loaded last role from local storage "${lastRole}"`);
+      */
     });
   }, []);
 
   // todo move role logic to separate provider
+  /*
   const updateUserRole = useCallback(
     (role: UserRole) => {
       // if user is not signed in
@@ -94,7 +94,8 @@ export default function UserAuthProvider({ children }: Props) {
     },
     [user]
   );
-
+*/
+  /*
   // restore a previous role if there is one
   if (!userRole && typeof user === "object") {
     const storedRole = getUserLocalStorageItem({
@@ -104,11 +105,9 @@ export default function UserAuthProvider({ children }: Props) {
 
     if (storedRole) setUserRole(storedRole);
   }
-
+*/
   return (
-    <UserContext.Provider
-      value={{ user, updateUserRole, userRole, userIsSignedOut }}
-    >
+    <UserContext.Provider value={{ user, userRole, userIsSignedOut }}>
       {children}
     </UserContext.Provider>
   );

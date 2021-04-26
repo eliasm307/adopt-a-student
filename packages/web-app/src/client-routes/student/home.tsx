@@ -9,6 +9,7 @@ import {
   GetTutorsByLocalesRequestBody, GetTutorsByLocalesResponseBody, PublicTutorData,
 } from '@adopt-a-student/common';
 
+import Loading from '../../components/Loading';
 import TutorList from '../../components/TutorList';
 import { QueryName } from '../../constants';
 import { useUserPrivateStudentData } from '../../providers/PrivateStudentDataProvider';
@@ -76,7 +77,7 @@ const StudentHome = () => {
   );
   */
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Loading />;
 
   /*
   if (error)

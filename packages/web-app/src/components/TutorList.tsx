@@ -14,7 +14,14 @@ interface Props {
 // < className='m-2 p-2 debug col' style={{ minHeight: "200px" }}></Card>
 const TutorList = ({ tutors }: Props) => {
   const itemsJsx = tutors.map((tutor) => (
-    <Col sm={12} md={6} lg={6} xl={4} style={{ padding: "10px" }}>
+    <Col
+      key={tutor.id}
+      sm={12}
+      md={6}
+      lg={6}
+      xl={4}
+      style={{ padding: "10px" }}
+    >
       <Card
         body
         className='m-2'
@@ -29,7 +36,9 @@ const TutorList = ({ tutors }: Props) => {
     </Col>
   ));
 
-  return <Row style={{ padding: "0 20px" }}>{itemsJsx}</Row>;
+  return (
+    <Row style={{ padding: "0 20px", paddingBottom: "50px" }}>{itemsJsx}</Row>
+  );
 };
 
 export default TutorList;

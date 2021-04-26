@@ -9,8 +9,9 @@ import { MultiSelectOption } from '../declarations/interfaces';
 import {
   UserPrivateDataContext as UserPrivateStudentDataContext,
 } from '../providers/PrivateStudentDataProvider';
+import { UserAuthStatus } from '../providers/UserAuthProvider';
 import { createNewStudentUser } from '../utils/api';
-import log from '../utils/log';
+import log, { Logger } from '../utils/log';
 import FormFieldMultiSelect from './Form/FormFieldMultiSelect';
 import FormFieldText from './Form/FormFieldText';
 import FormHeaderGraphic from './Form/FormHeaderGraphic';
@@ -28,6 +29,8 @@ const localeOptions: MultiSelectOption[] = Object.entries(
 const countryOptions: MultiSelectOption[] = countryNames.map(
   (country) => ({ label: country, value: country } as MultiSelectOption)
 );
+
+const logger = new Logger("StudentPreferencesForm");
 
 /** User  */
 const StudentPreferencesForm = () => {
@@ -70,10 +73,17 @@ const StudentPreferencesForm = () => {
 
       const form = event.currentTarget;
 
-      if (typeof user !== "object")
+      if (userIsSignedOut)
         return console.error(
           "StudentPreferencesForm",
           "cant submit, user not signed in"
+        );
+
+      if (typeof user !== "object")
+        return console.error(
+          "StudentPreferencesForm",
+          "cant submit, user signed in but no data",
+          { userIsSignedOut, user }
         );
 
       // validate inputs
@@ -122,8 +132,19 @@ const StudentPreferencesForm = () => {
       userName,
       selectedLocales,
       selectedCountries,
+      userIsSignedOut,
     ]
   );
+
+  if (user === UserAuthStatus.Pending) {
+    logger.log("loading", { user });
+    return <Loading />;
+  }
+
+  if (typeof user !== "object") {
+    logger.error("user is signed in but no data", { userIsSignedOut, user });
+    return <div>Error user data not defined</div>;
+  }
 
   return (
     <>
@@ -136,58 +157,54 @@ const StudentPreferencesForm = () => {
             placeItems: "center",
           }}
         >
-          {typeof user !== "object" ? (
-            <Loading />
-          ) : (
-            <Form
-              method='post'
-              onSubmit={(event) => {
-                handleSubmit(event);
-              }}
-              className='mt-3'
-              style={{
-                display: "grid",
-                placeItems: "center",
-                width: "clamp(100px, 100%, 500px)",
-              }}
+          <Form
+            method='post'
+            onSubmit={(event) => {
+              handleSubmit(event);
+            }}
+            className='mt-3'
+            style={{
+              display: "grid",
+              placeItems: "center",
+              width: "clamp(100px, 100%, 500px)",
+            }}
+          >
+            <FormHeaderGraphic hideTextImage />
+            <h2 style={{ padding: "20px 0" }}>Setup your student profile</h2>
+            {user?.photoURL && (
+              <Image fluid src={user?.photoURL} alt='User profile image' />
+            )}
+
+            <FormFieldText
+              controlId={FormFieldId.UserName}
+              onChange={onChangeHandler}
+              label='User Name'
+              required
+            />
+
+            <FormFieldMultiSelect
+              label='Locales Custom field'
+              onChange={setSelectedLocales}
+              options={localeOptions}
+              value={selectedLocales}
+            />
+
+            <FormFieldMultiSelect
+              label='Preferred Countries'
+              options={countryOptions}
+              value={selectedCountries}
+              onChange={setSelectedCountries}
+            />
+
+            <Button
+              ref={submitButtonRef}
+              variant='primary'
+              type='submit'
+              className='col m-1'
             >
-              <FormHeaderGraphic hideTextImage />
-              <h2 style={{ padding: "20px 0" }}>Setup your student profile</h2>
-              {user?.photoURL && (
-                <Image fluid src={user?.photoURL} alt='User profile image' />
-              )}
-
-              <FormFieldText
-                controlId={FormFieldId.UserName}
-                onChange={onChangeHandler}
-                label='User Name'
-                required
-              />
-
-              <FormFieldMultiSelect
-                label='Locales Custom field'
-                onChange={setSelectedLocales}
-                options={localeOptions}
-                value={selectedLocales}
-              />
-
-              <FormFieldMultiSelect
-                label='Preferred Countries'
-                options={countryOptions}
-                value={selectedCountries}
-                onChange={setSelectedCountries}
-              />
-
-              <Button
-                ref={submitButtonRef}
-                variant='primary'
-                type='submit'
-                className='col m-1'
-              >
-                Save
-              </Button>
-            </Form>
-          )}
+              Save
+            </Button>
+          </Form>
         </Col>
       </Row>
     </>
