@@ -19,15 +19,15 @@ export interface RoleSelectProps {
   redirectAfterSelect?: RoutePath;
 }
 
-const roleButtonStyle: React.CSSProperties = {};
-
 const RoleButton = styled.button`
   padding: 50px;
   border: none;
   background: transparent;
   div {
     border-radius: 500px;
-    &: ;
+    &:hover {
+      transform: scale(1.1);
+    }
   }
 `;
 
