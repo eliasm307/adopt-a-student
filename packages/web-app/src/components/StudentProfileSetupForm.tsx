@@ -113,7 +113,7 @@ const StudentPreferencesForm = () => {
 
       log("StudentPreferencesForm", "student user created");
 
-      updateUserPrivateStudentData(result.student);
+      updateUserPrivateStudentData(result?.student || null);
     },
     [
       updateUserPrivateStudentData,

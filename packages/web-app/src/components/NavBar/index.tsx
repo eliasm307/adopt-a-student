@@ -52,7 +52,8 @@ export default function NavBar({ links, title }: Props) {
         justifyContent: "space-between",
         borderBottom: "1px solid #d1c1e0",
         height: "60px",
-        padding: "auto",
+        margin: 0,
+        padding: "10px",
         boxShadow: "0px 5px 5px 0px rgb(0 0 0 / 10%)",
       }}
     >
@@ -63,9 +64,9 @@ export default function NavBar({ links, title }: Props) {
           alt='logo'
           style={{
             width: "40px",
-            marginLeft: "10px",
             position: "absolute",
             top: "50%",
+            left: "10px",
             transform: "translateY(-50%)",
           }}
           imgStyle={{}}

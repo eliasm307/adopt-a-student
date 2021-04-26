@@ -39,7 +39,7 @@ export function useGetPrivateStudentDataQuery({
   }
 
   const { isLoading, error, data: responseData } = useQuery<
-    GetStudentResponseBody,
+    GetStudentResponseBody | null,
     Error
   >(
     queryName,
@@ -79,7 +79,7 @@ export function useGetTutorsByLocalesQuery({
 }: UseGetPrivateTutorDataQueryProps) {
   // todo utilise or remove
   const { isLoading, error, data: responseData } = useQuery<
-    GetTutorsByLocalesResponseBody,
+    GetTutorsByLocalesResponseBody | null,
     Error
   >(queryName, async () =>
     callFirebaseFunction<

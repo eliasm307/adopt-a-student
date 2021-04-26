@@ -7,12 +7,29 @@ import { Col, Row } from 'react-bootstrap';
 import { RoutePath } from 'src/constants';
 import { UserContext } from 'src/providers/UserAuthProvider';
 
+import styled from '@emotion/styled';
+
 import log from '../utils/log';
+import Image from './Image';
+import NavBar from './NavBar';
+import { SignOutNavbarLink } from './NavBar/utils/navbarLinkItems';
 
 export interface RoleSelectProps {
   /** Route to redirect to after role select */
   redirectAfterSelect?: RoutePath;
 }
+
+const roleButtonStyle: React.CSSProperties = {};
+
+const RoleButton = styled.button`
+  padding: 50px;
+  border: none;
+  background: transparent;
+  div {
+    border-radius: 500px;
+    &: ;
+  }
+`;
 
 const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
   const { updateUserRole: setUserRole } = useContext(UserContext);
@@ -26,27 +43,24 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
   */
   console.warn("role", "user role not defined, staying on role select screen");
 
-  const pathStyle: React.CSSProperties = {
-    padding: "50px",
-    border: "none",
-    background: "transparent",
-  };
+  const roleImageStyle: React.CSSProperties = {};
 
   return (
-    <Row noGutters>
-      <Col
-        style={{
-          display: "grid",
-          placeItems: "center",
-        }}
-      >
-        <button
-          type='button'
-          style={pathStyle}
-          onClick={() => {
-            return alert("Tutor route tbc");
-            // todo implement
-            /*
+    <>
+      <NavBar title='Please select a role' links={[SignOutNavbarLink]} />
+      <Row noGutters>
+        <Col
+          style={{
+            display: "grid",
+            placeItems: "center",
+          }}
+        >
+          <RoleButton
+            type='button'
+            onClick={() => {
+              return alert("Tutor route tbc");
+              // todo implement
+              /*
             setUserRole("Tutor");
             log(
               "RoleSelector",
@@ -54,53 +68,53 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
             );
             if (redirect) navigate(redirect);
             */
-          }}
-        >
-          <StaticImage src='../../static/assets/tutor-role.png' alt='' />
-        </button>
-      </Col>
-      <Col
-        md={12}
-        lg={1}
-        style={{
-          display: "grid",
-          placeItems: "center",
-        }}
-      >
-        <div
+            }}
+          >
+            <StaticImage src='../../static/assets/tutor-role.png' alt='' />
+          </RoleButton>
+        </Col>
+        <Col
+          md={12}
+          lg={1}
           style={{
             display: "grid",
             placeItems: "center",
-            background: `rgba(0,0,0,0.1)`,
-            borderRadius: `100%`,
-            padding: `30px`,
           }}
         >
-          <StaticImage src='../../static/assets/logo-only.png' alt='' />
-        </div>
-      </Col>
-      <Col
-        style={{
-          display: "grid",
-          placeItems: "center",
-        }}
-      >
-        <button
-          type='button'
-          style={{ ...pathStyle }}
-          onClick={() => {
-            setUserRole("Student");
-            log(
-              "RoleSelector",
-              `Student Role selected, redirecting to ${String(redirect)}`
-            );
-            if (redirect) navigate(redirect);
+          <div
+            style={{
+              display: "grid",
+              placeItems: "center",
+              background: `rgba(0,0,0,0.1)`,
+              borderRadius: `100%`,
+              padding: `30px`,
+            }}
+          >
+            <StaticImage src='../../static/assets/logo-only.png' alt='' />
+          </div>
+        </Col>
+        <Col
+          style={{
+            display: "grid",
+            placeItems: "center",
           }}
         >
-          <StaticImage src='../../static/assets/student-role.png' alt='' />
-        </button>
-      </Col>
-    </Row>
+          <RoleButton
+            type='button'
+            onClick={() => {
+              setUserRole("Student");
+              log(
+                "RoleSelector",
+                `Student Role selected, redirecting to ${String(redirect)}`
+              );
+              if (redirect) navigate(redirect);
+            }}
+          >
+            <StaticImage src='../../static/assets/student-role.png' alt='' />
+          </RoleButton>
+        </Col>
+      </Row>
+    </>
   );
 };
 

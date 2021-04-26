@@ -19,7 +19,7 @@ import callFirebaseFunction from '../../utils/firebase-client/callFirebaseFuncti
 const StudentHome = () => {
   const privateData = useUserPrivateStudentData();
   const { isLoading, error, data: responseData } = useQuery<
-    GetTutorsByLocalesResponseBody,
+    GetTutorsByLocalesResponseBody | null,
     Error
   >(
     QueryName.TutorsByLocales,
@@ -35,7 +35,7 @@ const StudentHome = () => {
         },
         functions: functionsClient,
       }),
-    { enabled: !!privateData, retry: !!privateData }
+    { enabled: !!privateData, retry: false }
   );
 
   if (isLoading) return <div>Loading...</div>;
@@ -47,7 +47,7 @@ const StudentHome = () => {
       </div>
     );
 
-  if (!responseData || !responseData.tutors.length)
+  if (!responseData || !responseData?.tutors?.length)
     return <div>No Data found: result = {JSON.stringify(responseData)}</div>;
 
   return <TutorList tutors={responseData.tutors} />;
