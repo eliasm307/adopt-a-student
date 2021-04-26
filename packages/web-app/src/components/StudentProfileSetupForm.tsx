@@ -2,13 +2,13 @@ import React, { useCallback, useContext, useRef, useState } from 'react';
 import { Button, Col, Form, Image, Row } from 'react-bootstrap';
 import { useAuthData } from 'src/hooks';
 
-import { Country, countryNames, LocaleCode, localeEnglishNames } from '@adopt-a-student/common';
+import {
+  Country, countryNames, LocaleCode, localeEnglishNames, PrivateStudentData,
+} from '@adopt-a-student/common';
 
 import { FormFieldId } from '../constants';
 import { MultiSelectOption } from '../declarations/interfaces';
-import {
-  UserPrivateDataContext as UserPrivateStudentDataContext,
-} from '../providers/PrivateStudentDataProvider';
+import { usePrivateStudentData } from '../providers/PrivateStudentDataProvider';
 import { UserAuthStatus } from '../providers/UserAuthProvider';
 import { createNewStudentUser } from '../utils/api';
 import log, { Logger } from '../utils/log';
@@ -32,8 +32,12 @@ const countryOptions: MultiSelectOption[] = countryNames.map(
 
 const logger = new Logger("StudentPreferencesForm");
 
+interface Props {
+  setUserPrivateStudentData: (data: PrivateStudentData | null) => void;
+}
+
 /** User  */
-const StudentPreferencesForm = () => {
+const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
   const { user, userIsSignedOut } = useAuthData();
   const [selectedLocales, setSelectedLocales] = useState<MultiSelectOption[]>(
     []
@@ -42,9 +46,7 @@ const StudentPreferencesForm = () => {
     MultiSelectOption[]
   >([]);
   const [userName, setUserName] = useState("");
-  const { updateUserPrivateStudentData } = useContext(
-    UserPrivateStudentDataContext
-  );
+
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useCallback(
@@ -124,10 +126,10 @@ const StudentPreferencesForm = () => {
 
       log("StudentPreferencesForm", "student user created");
 
-      updateUserPrivateStudentData(result?.student || null);
+      setUserPrivateStudentData(result?.student || null);
     },
     [
-      updateUserPrivateStudentData,
+      setUserPrivateStudentData,
       user,
       userName,
       selectedLocales,

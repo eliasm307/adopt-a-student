@@ -8,10 +8,10 @@ import { Badge, Col, Image, Row } from 'react-bootstrap';
 
 import { localeEnglishNames } from '@adopt-a-student/common';
 
-import { useUserPrivateStudentData } from '../../providers/PrivateStudentDataProvider';
+import { usePrivateStudentData } from '../../providers/PrivateStudentDataProvider';
 
 const StudentProfile = () => {
-  const privateData = useUserPrivateStudentData();
+  const { userPrivateStudentData: privateData } = usePrivateStudentData();
 
   if (!privateData) {
     console.error("student-profile", "private student data was null");

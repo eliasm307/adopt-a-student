@@ -12,13 +12,14 @@ import {
 import Loading from '../../components/Loading';
 import TutorList from '../../components/TutorList';
 import { QueryName } from '../../constants';
-import { useUserPrivateStudentData } from '../../providers/PrivateStudentDataProvider';
+import { usePrivateStudentData } from '../../providers/PrivateStudentDataProvider';
+// import { useUserPrivateStudentData } from '../../providers/PrivateStudentDataProvider';
 import { functionsClient } from '../../utils/firebase-client';
 import callFirebaseFunction from '../../utils/firebase-client/callFirebaseFunction';
 import log from '../../utils/log';
 
 const StudentHome = () => {
-  const privateData = useUserPrivateStudentData();
+  const { userPrivateStudentData } = usePrivateStudentData();
 
   const [isLoading, setIsLoading] = useState(true);
   const [responseData, setResponseData] = useState<
@@ -35,8 +36,8 @@ const StudentHome = () => {
         >({
           name: "getTutorsByLocales",
           data: {
-            countries: privateData?.prefferedCountries || ["World"],
-            locales: privateData?.prefferedLocales || [],
+            countries: userPrivateStudentData?.prefferedCountries || ["World"],
+            locales: userPrivateStudentData?.prefferedLocales || [],
           },
           functions: functionsClient,
         });
@@ -53,7 +54,10 @@ const StudentHome = () => {
       }
     };
     task();
-  }, [privateData?.prefferedCountries, privateData?.prefferedLocales]);
+  }, [
+    userPrivateStudentData?.prefferedCountries,
+    userPrivateStudentData?.prefferedLocales,
+  ]);
 
   /*
   const { isLoading, error, data: responseData } = useQuery<

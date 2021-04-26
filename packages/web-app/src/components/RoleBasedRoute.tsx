@@ -6,7 +6,7 @@ import { useAuthData } from 'src/hooks';
 import { RouteComponentProps } from '@reach/router';
 
 import { BaseRouteProps } from '../declarations/interfaces';
-import { useUserPrivateStudentData } from '../providers/PrivateStudentDataProvider';
+import { usePrivateStudentData } from '../providers/PrivateStudentDataProvider';
 import { useUserRole } from '../providers/UserRoleProvider';
 import log, { Logger } from '../utils/log';
 import NavBar from './NavBar';
@@ -39,7 +39,11 @@ const RoleBasedRoute = ({
 }: Props) => {
   const { user, userIsSignedOut } = useAuthData();
   const userRole = useUserRole();
-  const userPrivateStudentData = useUserPrivateStudentData();
+  // todo this data should be passed to children
+  const {
+    userPrivateStudentData,
+    setUserPrivateStudentData,
+  } = usePrivateStudentData();
 
   logger.log("navigating to:", { title, location, uri, defaultProp, path });
 
@@ -85,7 +89,9 @@ const RoleBasedRoute = ({
     return (
       <>
         <NavBar title='Student Profile Setup' links={[SignOutNavbarLink]} />
-        <StudentPreferencesForm />
+        <StudentPreferencesForm
+          setUserPrivateStudentData={setUserPrivateStudentData}
+        />
       </>
     );
   }

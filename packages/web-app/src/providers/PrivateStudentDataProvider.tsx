@@ -13,7 +13,7 @@ import { queryClient } from '../utils/reactQuery';
 
 interface PrivateStudentDataContextShape {
   refreshPrivateStudentData: (data: PrivateStudentData) => void;
-  updateUserPrivateStudentData: (data: PrivateStudentData | null) => void;
+  setUserPrivateStudentData: (data: PrivateStudentData | null) => void;
   userPrivateStudentData: PrivateStudentData | null;
 }
 
@@ -24,30 +24,28 @@ interface ProviderProps {
 const logger = new Logger("UserPrivateDataProvider");
 
 // initial context
-export const UserPrivateDataContext = createContext({
+const UserPrivateDataContext = createContext({
   refreshPrivateStudentData: () => {
     throw Error("function is undefined");
   },
-  updateUserPrivateStudentData: () => {
+  setUserPrivateStudentData: () => {
     throw Error("function is undefined");
   },
   userPrivateStudentData: null,
 } as PrivateStudentDataContextShape);
 
 // quick hook to get data
+/*
 export function useUserPrivateStudentData(): PrivateStudentData | null {
   return useContext(UserPrivateDataContext).userPrivateStudentData;
 }
-
+*/
 // todo save some auth details to localstorage to maintain state between refreshes
 
-export default function UserPrivateStudentDataProvider({
-  children,
-}: ProviderProps) {
-  const queryName = QueryName.UserPrivateStudentData;
+export function usePrivateStudentData(): PrivateStudentDataContextShape {
   const { user } = useAuthData();
 
-  const [userPrivateStudentDataState, setUserPrivateStudentData] = useState(
+  const [userPrivateStudentData, setUserPrivateStudentData] = useState(
     null as PrivateStudentData | null
   );
 
@@ -55,14 +53,6 @@ export default function UserPrivateStudentDataProvider({
   const [lastDataRequest, setLastDataRequest] = useState<number>(
     new Date().getTime()
   );
-
-  // ? might be better to have a use effect that calls the query conditionally depending on if it is defined, then include a refresh button or something
-
-  /*
-  const userPrivateStudentData = useGetPrivateStudentDataQuery({
-    queryName,
-  });
-  */
 
   useEffect(() => {
     const task = async () => {
@@ -100,19 +90,74 @@ export default function UserPrivateStudentDataProvider({
     task();
   }, [user, lastDataRequest]); // if lastDataRequest is changed this should force a data refresh
 
-  /*
+  const refreshPrivateStudentData = useCallback(() => {
+    // queryClient.invalidateQueries(queryName);
+    // ? is this required? will this cause flashing?
+    // setUserPrivateStudentData(null);
+    setLastDataRequest(new Date().getTime());
+  }, []);
+
+  return {
+    refreshPrivateStudentData,
+    userPrivateStudentData,
+    setUserPrivateStudentData,
+  };
+}
+
+/*
+
+export default function UserPrivateStudentDataProvider({
+  children,
+}: ProviderProps) {
+  const queryName = QueryName.UserPrivateStudentData;
+  const { user } = useAuthData();
+
+  const [userPrivateStudentDataState, setUserPrivateStudentData] = useState(
+    null as PrivateStudentData | null
+  );
+
+  // state variable used to force a data refetch
+  const [lastDataRequest, setLastDataRequest] = useState<number>(
+    new Date().getTime()
+  );
+
+  // ? might be better to have a use effect that calls the query conditionally depending on if it is defined, then include a refresh button or something
+
   useEffect(() => {
-    log("UserPrivateStudentDataProvider", "updating private user data", {
-      userPrivateStudentData,
-    });
-    callFirebaseFunction<GetStudentRequestBody, GetStudentResponseBody>({
-      name: "getStudent",
-      data: { id: userAuth?.uid || "" },
-      functions: functionsClient,
-    });
-    setUserPrivateStudentData(userPrivateStudentData);
-  }, [userPrivateStudentData, userAuth?.uid]);
-  */
+    const task = async () => {
+      if (typeof user !== "object")
+        return logger.warn(
+          "Could not query student data because there is no user data"
+        );
+      logger.log("starting query for student data");
+      try {
+        const data = await callFirebaseFunction<
+          GetStudentRequestBody,
+          GetStudentResponseBody
+        >({
+          name: "getStudent",
+          data: { id: user?.uid || "" },
+          functions: functionsClient,
+        });
+        logger.log(`query successful`, { data });
+
+        if (!data) {
+          logger.error("No data returned");
+          return setUserPrivateStudentData(null);
+        }
+
+        if (!isPrivateStudentData(data?.student)) {
+          logger.error("Student data was not private student data");
+          return setUserPrivateStudentData(null);
+        }
+
+        setUserPrivateStudentData(data.student);
+      } catch (error) {
+        logger.error({ error });
+      }
+    };
+    task();
+  }, [user, lastDataRequest]); // if lastDataRequest is changed this should force a data refresh
 
   const refreshPrivateStudentData = useCallback(() => {
     // queryClient.invalidateQueries(queryName);
@@ -144,3 +189,4 @@ export default function UserPrivateStudentDataProvider({
     </UserPrivateDataContext.Provider>
   );
 }
+*/
