@@ -14,7 +14,7 @@ interface Props {
 }
 
 export default function NavBar({ links, title }: Props) {
-  const user = useAuthData();
+  // const user = useAuthData();
   // let greetingMessage = "";
   /*
   if (user) {
@@ -44,14 +44,16 @@ export default function NavBar({ links, title }: Props) {
   return (
     <div
       style={{
+        position: "relative",
         display: "flex",
+        alignItems: "center",
+        gap: "20px",
         flex: "1",
         justifyContent: "space-between",
         borderBottom: "1px solid #d1c1e0",
         height: "60px",
         padding: "auto",
-        alignItems: "center",
-        gap: "20px",
+        boxShadow: "0px 5px 5px 0px rgb(0 0 0 / 10%)",
       }}
     >
       <span>
@@ -59,7 +61,13 @@ export default function NavBar({ links, title }: Props) {
         <StaticImage
           src='../../../static/assets/logo-only.png'
           alt='logo'
-          style={{ margin: "10px", maxWidth: "50%" }}
+          style={{
+            width: "40px",
+            marginLeft: "10px",
+            position: "absolute",
+            top: "50%",
+            transform: "translateY(-50%)",
+          }}
           imgStyle={{}}
         />
       </span>

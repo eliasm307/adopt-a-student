@@ -1,5 +1,5 @@
 import { navigate } from 'gatsby';
-import React, { useContext, useState } from 'react';
+import React, { CSSProperties, useContext, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { FormFieldId, RoutePath } from 'src/constants';
 import { UserContext } from 'src/providers/UserAuthProvider';
@@ -8,6 +8,9 @@ import { auth } from 'src/utils/firebase-client';
 
 import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from '../../components/Form';
 import log from '../../utils/log';
+
+const buttonStyle: CSSProperties = {};
+const buttonCssClasses = "";
 
 const SignIn = () => {
   const [password, setPassword] = useState("");
@@ -20,8 +23,9 @@ const SignIn = () => {
 
   if (user) {
     log("sign-in", "user signed in, navigating to app role select...");
-    navigate(RoutePath.App);
-    return null;
+    // todo should this be enabled
+    // navigate(RoutePath.App);
+    // return null;
   }
   log("sign-in", "NOT navigating to app role select...", {
     user,
