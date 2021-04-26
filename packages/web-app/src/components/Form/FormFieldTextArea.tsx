@@ -10,7 +10,7 @@ interface Props {
   required?: boolean;
 }
 
-const FormFieldText = ({
+const FormFieldTextArea = ({
   onChange,
   controlId,
   label,
@@ -23,11 +23,13 @@ const FormFieldText = ({
       <Form.Label>{label}</Form.Label>
       <Form.Control
         required={required}
-        type='text'
+        as='textarea'
+        rows={3}
         name={controlId}
         placeholder=''
         onChange={onChange}
         defaultValue={defaultValue}
+        style={{ resize: "none" }}
       />
       {description && (
         <Form.Text className='text-muted'>{description}</Form.Text>
@@ -37,4 +39,4 @@ const FormFieldText = ({
 };
 
 // todo add react memo where reasonable
-export default React.memo(FormFieldText);
+export default React.memo(FormFieldTextArea);

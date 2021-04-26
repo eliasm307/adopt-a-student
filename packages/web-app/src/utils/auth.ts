@@ -1,6 +1,7 @@
 import { navigate } from 'gatsby';
 import { auth, GoogleAuthProvider } from 'src/utils/firebase-client';
 
+import { DEFAULT_PROFILE_IMAGE_URI } from '../constants';
 import log from './log';
 
 export const signOut = async () => {
@@ -29,7 +30,8 @@ export const signInWithEmailPassword = async (
   if (!email || !password)
     return console.error("Invalid arguments for sign in with email"); // todo this should be in form validation
   try {
-    await auth.signInWithEmailAndPassword(email, password);
+    const result = await auth.signInWithEmailAndPassword(email, password);
+
     log("signed in successfully using email and password");
   } catch (error) {
     console.error(__filename, "Could not sign in", { error });
@@ -46,7 +48,15 @@ export const signUpWithEmailPassword = async (
   if (!email || !password)
     return console.error("Invalid arguments for sign in with email"); // todo this should be in form validation
   try {
-    await auth.createUserWithEmailAndPassword(email, password);
+    const result = await auth.createUserWithEmailAndPassword(email, password);
+
+    // set default profile values
+    if (result.user)
+      await result.user.updateProfile({
+        photoURL: DEFAULT_PROFILE_IMAGE_URI,
+        displayName: "Anonymous",
+      });
+
     log(`created new user auth using email and password`);
   } catch (error) {
     console.error(__filename, "Could not create new user", { error });
@@ -58,6 +68,15 @@ export const signInAnonymously = async () => {
   log("auth", "trying to sign in anonymously");
   try {
     const result = await auth.signInAnonymously();
+
+    // todo amend this so it happens before screen navigation
+    // set default profile values
+    if (result.user)
+      await result.user.updateProfile({
+        photoURL: DEFAULT_PROFILE_IMAGE_URI,
+        displayName: "Anonymous",
+      });
+
     log("Signed in anonymously, successfully", { uid: result.user?.uid });
   } catch (error) {
     console.error("auth", { error });

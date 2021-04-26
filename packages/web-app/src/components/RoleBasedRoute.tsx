@@ -12,7 +12,7 @@ import log, { Logger } from '../utils/log';
 import NavBar from './NavBar';
 import { SignOutNavbarLink } from './NavBar/utils/navbarLinkItems';
 import RoleSelector from './RoleSelector';
-import StudentPreferencesForm from './StudentProfileSetupForm';
+import StudentPreferencesForm from './StudentProfileForm';
 
 interface Props extends RouteComponentProps, BaseRouteProps {
   StudentComponent: React.ComponentType<any>;

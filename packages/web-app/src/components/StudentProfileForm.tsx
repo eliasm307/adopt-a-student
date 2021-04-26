@@ -14,7 +14,8 @@ import { createNewStudentUser } from '../utils/api';
 import log, { Logger } from '../utils/log';
 import FormFieldMultiSelect from './Form/FormFieldMultiSelect';
 import FormFieldText from './Form/FormFieldText';
-import FormHeaderGraphic from './Form/FormHeaderGraphic';
+import FormFieldTextArea from './Form/FormFieldTextArea';
+import FormHeaderGraphic, { LogoWithTextGraphic } from './Form/FormHeaderGraphic';
 import Loading from './Loading';
 
 const localeOptions: MultiSelectOption[] = Object.entries(
@@ -46,6 +47,7 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
     MultiSelectOption[]
   >([]);
   const [userName, setUserName] = useState("");
+  const [summaryStatement, setSummaryStatement] = useState("");
 
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -53,11 +55,14 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
     (event): void => {
       const { currentTarget } = event;
 
+      // todo use uncontrolled components, ie with refs instead of doing this
       if (currentTarget instanceof EventTarget) {
         const { name, value } = currentTarget;
         switch (name) {
           case FormFieldId.UserName.toString():
             return setUserName(value);
+          case FormFieldId.SummaryStatement.toString():
+            return setSummaryStatement(value);
           default:
             return console.error(`Unknown html event target "${name}"`);
         }
@@ -112,6 +117,7 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
       const result = await createNewStudentUser({
         email: email || "anonymous",
         userName,
+        introduction: summaryStatement,
         imageUrl: photoURL,
         prefferedCountries: selectedCountries.map(
           (country) => country.value as Country
@@ -135,6 +141,7 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
       selectedLocales,
       selectedCountries,
       userIsSignedOut,
+      summaryStatement,
     ]
   );
 
@@ -171,21 +178,29 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
               width: "clamp(100px, 100%, 500px)",
             }}
           >
-            <FormHeaderGraphic hideTextImage />
             <h2 style={{ padding: "20px 0" }}>Setup your student profile</h2>
-            {user?.photoURL && (
+            {user?.photoURL ? (
               <Image fluid src={user?.photoURL} alt='User profile image' />
+            ) : (
+              <LogoWithTextGraphic />
             )}
 
             <FormFieldText
               controlId={FormFieldId.UserName}
               onChange={onChangeHandler}
               label='User Name'
+              defaultValue={user.displayName || ""}
               required
             />
 
+            <FormFieldTextArea
+              controlId={FormFieldId.SummaryStatement}
+              onChange={onChangeHandler}
+              label='Summary Statement'
+            />
+
             <FormFieldMultiSelect
-              label='Locales Custom field'
+              label='Preferred Languages'
               onChange={setSelectedLocales}
               options={localeOptions}
               value={selectedLocales}

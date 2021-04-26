@@ -30,7 +30,7 @@ import UserAuthProvider from '../providers/UserAuthProvider';
 import UserRoleProvider from '../providers/UserRoleProvider';
 import { queryClient } from '../utils/reactQuery';
 
-// ? split routing and provider specification?
+// ? split routing and provider specification? ie have a high level app with the providers then that wraps the app with the routes
 /** Responsilbe for defining the routes for the app and providers */
 const App = () => {
   return (
