@@ -6,6 +6,7 @@
     "jsx": "react",
     "esModuleInterop": true,
     "noEmit": true,
+    "incremental": false,
     "checkJs": false,
     "target": "es5",
     "module": "commonjs"

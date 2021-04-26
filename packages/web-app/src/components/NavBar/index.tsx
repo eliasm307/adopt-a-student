@@ -1,4 +1,5 @@
 import { Link } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -22,6 +23,7 @@ export default function NavBar({ links, title }: Props) {
     greetingMessage = "You are not logged in";
   }
   */
+
   const linksJsx =
     links &&
     links.map(({ text, action, route: url }) => {
@@ -52,6 +54,15 @@ export default function NavBar({ links, title }: Props) {
         gap: "20px",
       }}
     >
+      <span>
+        {" "}
+        <StaticImage
+          src='../../../static/assets/logo-only.png'
+          alt='logo'
+          style={{ margin: "10px", maxWidth: "50%" }}
+          imgStyle={{}}
+        />
+      </span>
       <span>{title}</span>
       <nav>{linksJsx}</nav>
     </div>

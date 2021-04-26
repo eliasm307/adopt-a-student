@@ -32,6 +32,7 @@
     "@adopt-a-student/common": "file:../api/common",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
+    "@fontsource/open-sans": "^4.2.2",
     "@types/react-query": "^1.1.2",
     "bootstrap": "^4.6.0",
     "gatsby": "^3.2.1",

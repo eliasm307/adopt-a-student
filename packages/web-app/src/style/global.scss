@@ -1,14 +1,27 @@
-// override bootstrap settings
+// override bootstrap settings, must be before bootstrap import
 $primary: red;
 $primary: #15BDD8;
 $primary2: #33C4B3;
-
 $enable-gradients: true;
+
+// transition settings
+$transitionDuration: 0.5s;
 
 // bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+* {
+  // animate changes by default // todo implement this where necessary
+  -webkit-transition: all $transitionDuration ease, color 0s, filter 0s;
+  -o-transition: all $transitionDuration ease, color 0s, filter 0s;
+  -moz-transition: all $transitionDuration ease, color 0s, filter 0s;
+  transition: all $transitionDuration ease, color 0s, filter 0s;
+}
+
 body {
+  font-family: "Open Sans", "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji";
   padding: 0;
   margin: 0;
 }

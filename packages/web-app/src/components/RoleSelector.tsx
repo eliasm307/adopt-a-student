@@ -29,6 +29,7 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
   const pathStyle: React.CSSProperties = {
     padding: "50px",
     border: "none",
+    background: "transparent",
   };
 
   return (
@@ -44,12 +45,15 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
           style={pathStyle}
           onClick={() => {
             return alert("Tutor route tbc");
+            // todo implement
+            /*
             setUserRole("Tutor");
             log(
               "RoleSelector",
               `Tutor Role selected, redirecting to ${String(redirect)}`
             );
             if (redirect) navigate(redirect);
+            */
           }}
         >
           <StaticImage src='../../static/assets/tutor-role.png' alt='' />
