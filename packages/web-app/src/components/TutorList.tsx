@@ -20,6 +20,7 @@ const TutorList = ({ tutors }: Props) => {
         className='m-2'
         style={{
           height: "100%",
+          position: "relative",
           boxShadow: "5px 5px 5px 0px rgba(0,0,0,0.1)",
         }}
       >
