@@ -39,7 +39,7 @@ const SignIn = () => {
 
   if (user) {
     log("sign-in", "user signed in, navigating to app role select...");
-    navigate(RoutePath.App);
+    navigate(RoutePath.App, {});
     return null;
   }
   log("sign-in", "NOT navigating to app role select...", {

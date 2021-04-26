@@ -13,6 +13,7 @@ interface UserAuthContextShape {
   user: UserAuth | null;
   userRole: UserRole | null;
 }
+// todo save some auth details to localstorage to maintain state between refreshes
 
 interface Props {
   children: React.ReactNode;

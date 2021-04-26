@@ -6,6 +6,7 @@
 
 // todo add site config
 
+// todo add site
 module.exports = {
   flags: { FAST_DEV: true },
   /* Your site config here */
