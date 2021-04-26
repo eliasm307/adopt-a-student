@@ -27,7 +27,7 @@ export enum FormFieldId {
   Password = "userPassword",
   Email = "userEmail",
   UserName = "userUserName",
-  SummaryStatement = "summaryStatement",
+  Introduction = "summaryStatement",
 }
 
 export const DEFAULT_PROFILE_IMAGE_URI =

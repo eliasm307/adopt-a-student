@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Button, Col, Form, Image, Row } from 'react-bootstrap';
 import { useAuthData } from 'src/hooks';
 
@@ -24,21 +24,32 @@ const localeOptions: MultiSelectOption[] = Object.entries(
   // todo use native locale name if available
   const name = Object.keys(namesMap)[0];
   const label = `${name} (${locale})`;
-  return { label, value: locale } as MultiSelectOption;
+  return { label, value: locale, key: locale } as MultiSelectOption;
 });
 
 const countryOptions: MultiSelectOption[] = countryNames.map(
-  (country) => ({ label: country, value: country } as MultiSelectOption)
+  (country) =>
+    ({ label: country, value: country, key: country } as MultiSelectOption)
 );
 
 const logger = new Logger("StudentPreferencesForm");
 
+// todo split this into smaller pieces
+
 interface Props {
+  existingData: PrivateStudentData | null;
+  onValidSubmit: (data: Omit<PrivateStudentData, "id">) => Promise<any>;
   setUserPrivateStudentData: (data: PrivateStudentData | null) => void;
+  title: string;
 }
 
-/** User  */
-const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
+/** Form to edit student profile details */
+const StudentProfileForm = ({
+  setUserPrivateStudentData,
+  onValidSubmit,
+  title,
+  existingData: initialData,
+}: Props) => {
   const { user, userIsSignedOut } = useAuthData();
   const [selectedLocales, setSelectedLocales] = useState<MultiSelectOption[]>(
     []
@@ -51,6 +62,31 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
 
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
+  useEffect(() => {
+    if (initialData) {
+      setSelectedCountries(
+        initialData.prefferedCountries.map(
+          (country) =>
+            ({
+              label: country,
+              value: country,
+              key: country,
+            } as MultiSelectOption)
+        )
+      );
+      setSelectedLocales(
+        initialData.prefferedLocales.map(
+          (locale) =>
+            ({
+              label: Object.keys(localeEnglishNames[locale])[0],
+              value: locale,
+              key: locale,
+            } as MultiSelectOption)
+        )
+      );
+    }
+  }, [initialData]);
+
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (event): void => {
       const { currentTarget } = event;
@@ -61,7 +97,7 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
         switch (name) {
           case FormFieldId.UserName.toString():
             return setUserName(value);
-          case FormFieldId.SummaryStatement.toString():
+          case FormFieldId.Introduction.toString():
             return setSummaryStatement(value);
           default:
             return console.error(`Unknown html event target "${name}"`);
@@ -114,7 +150,10 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
       // create user
       log("StudentPreferencesForm", "creating student user...");
 
-      const result = await createNewStudentUser({
+      /*
+
+      */
+      const result = await onValidSubmit({
         email: email || "anonymous",
         userName,
         introduction: summaryStatement,
@@ -125,6 +164,8 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
         prefferedLocales: selectedLocales.map(
           (locale) => locale.value as LocaleCode
         ),
+        relatedSubjects: initialData?.relatedSubjects || [],
+        relatedTutors: initialData?.relatedTutors || [],
       }).finally(() => {
         // re-enable button in any case
         if (submitButtonRef.current) submitButtonRef.current.disabled = false;
@@ -142,6 +183,9 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
       selectedCountries,
       userIsSignedOut,
       summaryStatement,
+      onValidSubmit,
+      initialData?.relatedSubjects,
+      initialData?.relatedTutors,
     ]
   );
 
@@ -178,7 +222,9 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
               width: "clamp(100px, 100%, 500px)",
             }}
           >
-            <h2 style={{ padding: "20px 0" }}>Setup your student profile</h2>
+            <h2 style={{ padding: "20px 0" }}>
+              {title && "Edit your student profile"}
+            </h2>
             {user?.photoURL ? (
               <Image fluid src={user?.photoURL} alt='User profile image' />
             ) : (
@@ -189,13 +235,14 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
               controlId={FormFieldId.UserName}
               onChange={onChangeHandler}
               label='User Name'
-              defaultValue={user.displayName || ""}
+              defaultValue={user.displayName || initialData?.userName || ""}
               required
             />
 
             <FormFieldTextArea
-              controlId={FormFieldId.SummaryStatement}
+              controlId={FormFieldId.Introduction}
               onChange={onChangeHandler}
+              defaultValue={initialData?.introduction}
               label='Summary Statement'
             />
 
@@ -228,4 +275,4 @@ const StudentPreferencesForm = ({ setUserPrivateStudentData }: Props) => {
   );
 };
 
-export default StudentPreferencesForm;
+export default StudentProfileForm;

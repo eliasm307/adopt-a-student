@@ -8,11 +8,12 @@ import { RouteComponentProps } from '@reach/router';
 import { BaseRouteProps } from '../declarations/interfaces';
 import { usePrivateStudentData } from '../providers/PrivateStudentDataProvider';
 import { useUserRole } from '../providers/UserRoleProvider';
+import { createNewStudentUser } from '../utils/api';
 import log, { Logger } from '../utils/log';
 import NavBar from './NavBar';
 import { SignOutNavbarLink } from './NavBar/utils/navbarLinkItems';
 import RoleSelector from './RoleSelector';
-import StudentPreferencesForm from './StudentProfileForm';
+import StudentProfileForm from './StudentProfileForm';
 
 interface Props extends RouteComponentProps, BaseRouteProps {
   StudentComponent: React.ComponentType<any>;
@@ -89,7 +90,10 @@ const RoleBasedRoute = ({
     return (
       <>
         <NavBar title='Student Profile Setup' links={[SignOutNavbarLink]} />
-        <StudentPreferencesForm
+        <StudentProfileForm
+          existingData={userPrivateStudentData}
+          title='Setup your profile to get started'
+          onValidSubmit={(data) => createNewStudentUser(data)}
           setUserPrivateStudentData={setUserPrivateStudentData}
         />
       </>
