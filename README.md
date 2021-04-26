@@ -15,8 +15,8 @@ A project for the [Europe Developer Week 2021 Hackathon](https://www.developerwe
     - [3.2.2. API](#322-api)
       - [3.2.2.1. Security](#3221-security)
       - [3.2.2.2. Documentation](#3222-documentation)
-      - [3.2.2.3. Web App](#3223-web-app)
-    - [3.2.3. Team Productivity](#323-team-productivity)
+    - [3.2.3. Web App](#323-web-app)
+    - [3.2.4. Team Productivity](#324-team-productivity)
 - [4. Challenges we ran into](#4-challenges-we-ran-into)
 - [5. What we learned](#5-what-we-learned)
   - [5.1. Chin Wei](#51-chin-wei)
@@ -85,7 +85,7 @@ I decided to use Firebase for this project as it included all the technology req
 
 For the data model, the structure of this would define what functionality could be implemented on the final product that users would interact with, so it had to accommodate any currently known target functionality but also be easily extensible for any possible updates/changes such as adding fields to the information that can be assigned to different aspects.
 
-I based the core structure around collections of entities, which in this case were Students, Teachers, Subjects, and Subject Categories. All the models and their details were defined as Typescript interfaces. For this MVP, the functionality I focused on accommodating as described following.
+I based the core structure around collections of entities, which in this case were Students, Teachers, Subjects, and Subject Categories. All the models and their details were defined as Typescript interfaces. For this MVP, the functionality I focused on accommodating is described as following.
 
 #### 3.2.1.1. Internationalization (i18n)
 
@@ -115,13 +115,13 @@ The API was made to only allow authenticated users to make requests, and some me
 
 The API would be used by the web app and mobile app, where the mobile app was being developed by another team member, Moh, so for usability, I knew documentation would be required. I used [tsoa](https://www.npmjs.com/package/tsoa) to generate an [OpenAPI specification](https://swagger.io/specification/) from the Typescript definitions of the methods and then used [redoc](https://www.npmjs.com/package/redoc) to represent the specification as web page. See the resulting documentation [here](https://us-central1-adopt-a-student.cloudfunctions.net/docs).
 
-#### 3.2.2.3. Web App
+### 3.2.3. Web App
 
-This was an attempt to implement the UI design work from Chin as closely as possible. It uses the Gatsby framework and interfaces with the API. This section of the project was underdeveloped due to time constraints however it shows some of the basic functionality such as the sign-up process for students, and showing a filtered list of teachers based on a students preferences.
+This was an attempt to implement the UI design work from Chin as closely as possible. It uses Gatsby and interfaces with the API. This section of the project was underdeveloped due to time constraints however it shows some of the basic functionality such as the sign-up process for students, and showing a filtered list of teachers based on a students preferences.
 
-Note: The Firestore database was populated with fake data to show the MVP.
+**Note: The Firestore database was populated with fake data to show the MVP.**
 
-### 3.2.3. Team Productivity
+### 3.2.4. Team Productivity
 
 I also took it upon myself to help the team be more organized and created a project plan comprised of 3 sprints with deadlines during the project, with the various target features to aim for at each stage. This allowed myself and other members of the team to have a clearer understanding of what we were aiming for and the priorities. This project plan was done as a Kanban board in Trello.
 
