@@ -93,7 +93,9 @@ const RoleBasedRoute = ({
         <StudentProfileForm
           existingData={userPrivateStudentData}
           title='Setup your profile to get started'
-          onValidSubmit={(data) => createNewStudentUser(data)}
+          onValidSubmit={async (data) =>
+            (await createNewStudentUser(data))?.student || null
+          }
           setUserPrivateStudentData={setUserPrivateStudentData}
         />
       </>

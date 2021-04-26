@@ -39,7 +39,9 @@ const logger = new Logger("StudentPreferencesForm");
 
 interface Props {
   existingData: PrivateStudentData | null;
-  onValidSubmit: (data: Omit<PrivateStudentData, "id">) => Promise<any>;
+  onValidSubmit: (
+    data: Omit<PrivateStudentData, "id">
+  ) => Promise<PrivateStudentData | null>;
   setUserPrivateStudentData: (data: PrivateStudentData | null) => void;
   title: string;
 }
@@ -58,9 +60,13 @@ const StudentProfileForm = ({
   const [selectedCountries, setSelectedCountries] = useState<
     MultiSelectOption[]
   >([]);
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState("");
-  const [summaryStatement, setSummaryStatement] = useState("");
+  // const [userName, setUserName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [summaryStatement, setSummaryStatement] = useState("");
+
+  const userNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const introductionRef = useRef<HTMLTextAreaElement>(null);
 
   const submitButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -89,6 +95,7 @@ const StudentProfileForm = ({
     }
   }, [initialData]);
 
+  /*
   const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (event): void => {
       const { currentTarget } = event;
@@ -113,6 +120,7 @@ const StudentProfileForm = ({
     },
     []
   );
+  */
 
   const handleSubmit = React.useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
@@ -140,8 +148,13 @@ const StudentProfileForm = ({
 
       const { photoURL } = user;
 
-      if (!email)
-        console.warn("StudentPreferencesForm", "user does not have an email");
+      const email = emailRef.current?.value;
+      const userName = userNameRef.current?.value;
+      const introduction = introductionRef.current?.value;
+
+      if (!email) return alert("Please enter an email");
+
+      if (!userName) return alert("Please enter a userName");
 
       // eslint-disable-next-line no-alert
       if (!selectedLocales.length) return alert("Select some languages");
@@ -159,9 +172,9 @@ const StudentProfileForm = ({
 
       */
       const result = await onValidSubmit({
-        email: email || "anonymous",
+        email,
         userName,
-        introduction: summaryStatement,
+        introduction,
         imageUrl: photoURL,
         prefferedCountries: selectedCountries.map(
           (country) => country.value as Country
@@ -176,19 +189,16 @@ const StudentProfileForm = ({
         if (submitButtonRef.current) submitButtonRef.current.disabled = false;
       });
 
-      log("StudentPreferencesForm", "student user created");
+      logger.log("student user created", { result });
 
-      setUserPrivateStudentData(result?.student || null);
+      setUserPrivateStudentData(result);
     },
     [
       setUserPrivateStudentData,
       user,
-      userName,
-      email,
       selectedLocales,
       selectedCountries,
       userIsSignedOut,
-      summaryStatement,
       onValidSubmit,
       initialData?.relatedSubjects,
       initialData?.relatedTutors,
@@ -237,22 +247,22 @@ const StudentProfileForm = ({
 
             <FormFieldText
               controlId={FormFieldId.UserName}
-              onChange={onChangeHandler}
               label='User Name'
               defaultValue={user.displayName || initialData?.userName || ""}
               required
+              ref={userNameRef}
             />
             <FormFieldEmail
               controlId={FormFieldId.Email}
-              onChange={onChangeHandler}
               defaultValue={user.email || initialData?.email || ""}
+              ref={emailRef}
             />
 
             <FormFieldTextArea
               controlId={FormFieldId.Introduction}
-              onChange={onChangeHandler}
               defaultValue={initialData?.introduction}
               label='Summary Statement'
+              ref={introductionRef}
             />
 
             <FormFieldMultiSelect

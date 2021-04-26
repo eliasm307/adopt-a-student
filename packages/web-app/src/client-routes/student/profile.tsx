@@ -67,7 +67,9 @@ const StudentProfile = () => {
         <StudentProfileForm
           existingData={userPrivateStudentData}
           title='Edit your profile'
-          onValidSubmit={(data) => updateStudentUser(data)}
+          onValidSubmit={async (data) =>
+            (await updateStudentUser(data))?.result || null
+          }
           setUserPrivateStudentData={setUserPrivateStudentData}
         />
       </Col>
