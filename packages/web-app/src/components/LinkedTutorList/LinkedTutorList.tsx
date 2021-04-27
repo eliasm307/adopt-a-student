@@ -12,11 +12,11 @@ interface Props {
 // className='col-sm-12 col-md-6 col-lg-4 col-xl-3'
 // < className='m-2 p-2 debug col' style={{ minHeight: "200px" }}></Card>
 const LinkedTutorList = ({ linkedTutors }: Props) => {
-  const [tutors, setTutors] = useState<PublicTutorData>([]);
+  const [tutors, setTutors] = useState<PublicTutorData[]>([]);
 
   useEffect(() => {
     const task = async () => {
-      const;
+      const d = "";
     };
 
     task();

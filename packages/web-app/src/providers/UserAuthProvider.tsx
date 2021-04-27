@@ -40,9 +40,12 @@ export default function UserAuthProvider({ children }: Props) {
 
   const userIsSignedOut = user === UserAuthStatus.SignedOut;
 
+  // this is now done on specific sign out events, to prevent this showing on login screen
+  /*
   useEffect(() => {
     if (userIsSignedOut) toast.info("Signed out", {});
   }, [userIsSignedOut]);
+  */
 
   useEffect(() => {
     if (typeof user === "object") toast.info("Signed in");
