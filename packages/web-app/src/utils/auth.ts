@@ -16,6 +16,8 @@ const SIGN_IN_ERROR_TOAST_MESSAGE = "There was an error signing in 😢";
 
 const SIGN_UP_ERROR_TOAST_MESSAGE = "There was an error signing up 😢";
 
+// todo add toast ids to prevent duplicates
+
 export const signOut = async () => {
   try {
     await auth.signOut();

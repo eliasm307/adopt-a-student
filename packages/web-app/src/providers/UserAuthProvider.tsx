@@ -1,9 +1,9 @@
-import React, { createContext, useEffect, useState } from "react";
-import { toast } from "react-toastify";
+import React, { createContext, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
-import { auth, FireBaseUser } from "../utils/firebase-client";
-import log, { Logger } from "../utils/log";
-import { UserAuth } from "./declarations/interfaces";
+import { auth, FireBaseUser } from '../utils/firebase-client';
+import log, { Logger } from '../utils/log';
+import { UserAuth } from './declarations/interfaces';
 
 interface UserAuthContextShape {
   setUser: (user: UserAuth | UserAuthStatus) => void;
@@ -41,7 +41,8 @@ export default function UserAuthProvider({ children }: Props) {
   const userIsSignedOut = user === UserAuthStatus.SignedOut;
 
   useEffect(() => {
-    if (typeof user === "object") toast.info("Signed in");
+    if (typeof user === "object")
+      toast.info("Signed in", { toastId: "signed-in" });
   }, [user]);
 
   // on mount, add auth state listener

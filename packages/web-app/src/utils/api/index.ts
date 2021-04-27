@@ -9,6 +9,8 @@ import {
   CreateTutorResponseBody,
   GetTutorRequestBody,
   GetTutorResponseBody,
+  LinkStudentAndTutorRequestBody,
+  LinkStudentAndTutorResponseBody,
   PrivateStudentData,
   PrivateUserData,
   UpdateStudentRequestBody,
@@ -73,6 +75,19 @@ export async function getTutorUser(props: { id: string }) {
     data: {
       id,
     },
+    functions: functionsClient,
+  });
+}
+
+export async function linkStudentAndTutor(
+  props: LinkStudentAndTutorRequestBody
+) {
+  return callFirebaseFunction<
+    LinkStudentAndTutorRequestBody,
+    LinkStudentAndTutorResponseBody
+  >({
+    name: "linkStudentAndTutor",
+    data: props,
     functions: functionsClient,
   });
 }
