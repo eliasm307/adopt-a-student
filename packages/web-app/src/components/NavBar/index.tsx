@@ -1,13 +1,13 @@
-import { Link } from 'gatsby';
-import { StaticImage } from 'gatsby-plugin-image';
-import React from 'react';
-import { Button, Navbar } from 'react-bootstrap';
+import { Link } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
+import React from "react";
+import { Button, Navbar } from "react-bootstrap";
 
-import styled from '@emotion/styled';
-import { navigate } from '@reach/router';
+import styled from "@emotion/styled";
+import { navigate } from "@reach/router";
 
-import { NavBarLinkData } from '../../declarations/interfaces';
-import { useAuthData } from '../../hooks';
+import { NavBarLinkData } from "../../declarations/interfaces";
+import { useAuthData } from "../../hooks";
 
 interface Props {
   links?: NavBarLinkData[];
@@ -87,25 +87,3 @@ export default function NavBar({ links, title }: Props) {
     </div>
   );
 }
-
-// todo delete
-/*
-  {}
-        <Link to='/'>Home</Link>
-        {` `}
-        <Link to={RoutePath.Profile}>Profile</Link>
-        {linksJsx}
-        {` `}
-        {user ? (
-          <a
-            href='/'
-            onClick={(event) => {
-              event.preventDefault();
-              signOut();
-            }}
-          >
-            Logout
-          </a>
-        ) : null}
-
-*/

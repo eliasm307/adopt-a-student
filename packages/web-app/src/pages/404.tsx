@@ -1,15 +1,15 @@
-import React from 'react';
-import { RoutePath } from 'src/constants';
+import React from "react";
+import { RoutePath } from "src/constants";
 
-import Layout from '../layouts/DefaultLayout';
+import AppLayout from "../layouts/AppLayout";
 
 export default function Home() {
   return (
-    <Layout>
+    <AppLayout>
       <p>Are you lost?</p>
       <p>
         Lets go back <a href={RoutePath.Home}>home</a>
       </p>
-    </Layout>
+    </AppLayout>
   );
 }

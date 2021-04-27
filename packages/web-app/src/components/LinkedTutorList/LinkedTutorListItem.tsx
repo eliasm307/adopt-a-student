@@ -11,7 +11,7 @@ interface Props {
 
 // todo add a dummy contact button
 
-const TutorListItem = ({ tutor }: Props) => {
+const LinkedTutorListItem = ({ tutor }: Props) => {
   const {
     available,
     imageUrl,
@@ -95,4 +95,4 @@ const TutorListItem = ({ tutor }: Props) => {
   );
 };
 
-export default TutorListItem;
+export default LinkedTutorListItem;

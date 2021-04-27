@@ -1,24 +1,25 @@
-import { navigate } from 'gatsby';
-import React from 'react';
-import { RoutePath } from 'src/constants';
-import { useAuthData } from 'src/hooks';
+import { navigate } from "gatsby";
+import React from "react";
+import { toast } from "react-toastify";
+import { RoutePath } from "src/constants";
+import { useAuthData } from "src/hooks";
 
-import { RouteComponentProps } from '@reach/router';
+import { RouteComponentProps } from "@reach/router";
 
-import { BaseRouteProps } from '../declarations/interfaces';
-import { usePrivateStudentData } from '../providers/PrivateStudentDataProvider';
-import { useUserRole } from '../providers/UserRoleProvider';
-import { createNewStudentUser } from '../utils/api';
-import log, { Logger } from '../utils/log';
-import NavBar from './NavBar';
-import { SignOutNavbarLink } from './NavBar/utils/navbarLinkItems';
-import RoleSelector from './RoleSelector';
-import StudentProfileForm from './StudentProfileForm';
+import { BaseRouteProps } from "../declarations/interfaces";
+import { usePrivateStudentData } from "../providers/PrivateStudentDataProvider";
+import { useUserRole } from "../providers/UserRoleProvider";
+import { createNewStudentUser } from "../utils/api";
+import log, { Logger } from "../utils/log";
+import NavBar from "./NavBar";
+import { SignOutNavbarLink } from "./NavBar/utils/navbarLinkItems";
+import RoleSelector from "./RoleSelector";
+import StudentProfileForm from "./StudentProfileForm";
 
 interface Props extends RouteComponentProps, BaseRouteProps {
   StudentComponent: React.ComponentType<any>;
   TutorComponent: React.ComponentType<any>;
-  requiresUserPreferencesSet: boolean;
+  requiresUserData: boolean;
 }
 
 const logger = new Logger("RoleBasedRoute");
@@ -31,7 +32,7 @@ const RoleBasedRoute = ({
   location,
   navbarLinks: links,
   title,
-  requiresUserPreferencesSet,
+  requiresUserData: requiresUserPreferencesSet,
   isPublic,
   default: defaultProp,
   path,
@@ -93,9 +94,17 @@ const RoleBasedRoute = ({
         <StudentProfileForm
           existingData={userPrivateStudentData}
           title='Setup your profile to get started'
-          onValidSubmit={async (data) =>
-            (await createNewStudentUser(data))?.student || null
-          }
+          onValidSubmit={async (data) => {
+            const student = (await createNewStudentUser(data))?.student;
+
+            // todo extract toast messages to central location
+            if (student) {
+              toast.info("Changes saved 💾");
+            } else {
+              toast.error("There was an issue saving your changes 😢");
+            }
+            return student || null;
+          }}
           setUserPrivateStudentData={setUserPrivateStudentData}
         />
       </>

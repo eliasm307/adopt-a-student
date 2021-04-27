@@ -1,30 +1,43 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { Button, Col, Form, Image, Row } from 'react-bootstrap';
-import { useAuthData } from 'src/hooks';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { Button, Col, Form, Image, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { useAuthData } from "src/hooks";
 
 import {
-  Country, countryNames, LocaleCode, localeEnglishNames, PrivateStudentData,
-} from '@adopt-a-student/common';
+  Country,
+  countryNames,
+  LocaleCode,
+  localeEnglishNames,
+  PrivateStudentData,
+} from "@adopt-a-student/common";
 
-import { FormFieldId } from '../constants';
-import { MultiSelectOption } from '../declarations/interfaces';
-import { usePrivateStudentData } from '../providers/PrivateStudentDataProvider';
-import { UserAuthStatus } from '../providers/UserAuthProvider';
-import { createNewStudentUser } from '../utils/api';
-import log, { Logger } from '../utils/log';
-import { FormFieldEmail } from './Form';
-import FormFieldMultiSelect from './Form/FormFieldMultiSelect';
-import FormFieldText from './Form/FormFieldText';
-import FormFieldTextArea from './Form/FormFieldTextArea';
-import FormHeaderGraphic, { LogoWithTextGraphic } from './Form/FormHeaderGraphic';
-import Loading from './Loading';
+import { FormFieldId } from "../constants";
+import { MultiSelectOption } from "../declarations/interfaces";
+import { usePrivateStudentData } from "../providers/PrivateStudentDataProvider";
+import { UserAuthStatus } from "../providers/UserAuthProvider";
+import { createNewStudentUser } from "../utils/api";
+import log, { Logger } from "../utils/log";
+import { FormFieldEmail } from "./Form";
+import FormFieldMultiSelect from "./Form/FormFieldMultiSelect";
+import FormFieldText from "./Form/FormFieldText";
+import FormFieldTextArea from "./Form/FormFieldTextArea";
+import FormHeaderGraphic, {
+  LogoWithTextGraphic,
+} from "./Form/FormHeaderGraphic";
+import Loading from "./Loading";
 
 const localeOptions: MultiSelectOption[] = Object.entries(
   localeEnglishNames
 ).map(([locale, namesMap]) => {
   // todo use native locale name if available
   const name = Object.keys(namesMap)[0];
-  const label = `${name} (${locale})`;
+  const label = `${name}`;
   return { label, value: locale, key: locale } as MultiSelectOption;
 });
 
@@ -60,9 +73,6 @@ const StudentProfileForm = ({
   const [selectedCountries, setSelectedCountries] = useState<
     MultiSelectOption[]
   >([]);
-  // const [userName, setUserName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [summaryStatement, setSummaryStatement] = useState("");
 
   const userNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -95,33 +105,6 @@ const StudentProfileForm = ({
     }
   }, [initialData]);
 
-  /*
-  const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useCallback(
-    (event): void => {
-      const { currentTarget } = event;
-
-      // todo use uncontrolled components, ie with refs instead of doing this
-      if (currentTarget instanceof EventTarget) {
-        const { name, value } = currentTarget;
-        switch (name) {
-          case FormFieldId.UserName.toString():
-            return setUserName(value);
-
-          case FormFieldId.Email.toString():
-            return setEmail(value);
-          case FormFieldId.Introduction.toString():
-            return setSummaryStatement(value);
-          default:
-            return console.error(`Unknown html event target "${name}"`);
-        }
-      } else {
-        console.warn("Unknown event", { event });
-      }
-    },
-    []
-  );
-  */
-
   const handleSubmit = React.useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -130,21 +113,17 @@ const StudentProfileForm = ({
       const form = event.currentTarget;
 
       if (userIsSignedOut)
-        return console.error(
-          "StudentPreferencesForm",
-          "cant submit, user not signed in"
-        );
+        return logger.error("cant submit, user not signed in");
 
       if (typeof user !== "object")
-        return console.error(
-          "StudentPreferencesForm",
-          "cant submit, user signed in but no data",
-          { userIsSignedOut, user }
-        );
+        return logger.error("cant submit, user signed in but no data", {
+          userIsSignedOut,
+          user,
+        });
 
       // validate inputs
       if (!form.checkValidity())
-        return log("StudentPreferencesForm", "cant submit, inputs invalid");
+        return logger.log("cant submit, inputs invalid");
 
       const { photoURL } = user;
 
@@ -152,27 +131,33 @@ const StudentProfileForm = ({
       const userName = userNameRef.current?.value;
       const introduction = introductionRef.current?.value;
 
-      if (!email) return alert("Please enter an email");
+      // todo use better form validation feedback, shown on the form instead of a toast
 
-      if (!userName) return alert("Please enter a userName");
+      if (!user.isAnonymous && !email)
+        return toast.warn("Please enter an email");
 
-      // eslint-disable-next-line no-alert
-      if (!selectedLocales.length) return alert("Select some languages");
+      if (!userName) return toast.warn("Please enter a userName");
+
+      if (!selectedLocales.length)
+        return toast.warn(
+          "Please select some languages you would like teachers to speak"
+        );
 
       if (!selectedCountries.length)
-        return alert("Select your country or countries");
+        return toast.warn(
+          "Please select your preferred country or countries to find teachers"
+        );
 
       // prevent other submits
       if (submitButtonRef.current) submitButtonRef.current.disabled = true;
 
-      // create user
-      log("StudentPreferencesForm", "creating student user...");
+      // mutate user
+      logger.log("creating student user...");
 
-      /*
+      // todo check if anything has changed to make sure this isnt called unnecessarily
 
-      */
       const result = await onValidSubmit({
-        email,
+        email: email || "anonymous",
         userName,
         introduction,
         imageUrl: photoURL,
@@ -182,14 +167,14 @@ const StudentProfileForm = ({
         prefferedLocales: selectedLocales.map(
           (locale) => locale.value as LocaleCode
         ),
-        relatedSubjects: initialData?.relatedSubjects || [],
-        relatedTutors: initialData?.relatedTutors || [],
+        relatedSubjects: initialData?.relatedSubjects || [], // todo implememnt editor
+        relatedTutors: initialData?.relatedTutors || [], // todo implement editor
       }).finally(() => {
         // re-enable button in any case
         if (submitButtonRef.current) submitButtonRef.current.disabled = false;
       });
 
-      logger.log("student user created", { result });
+      logger.log("student user mutated", { result });
 
       setUserPrivateStudentData(result);
     },
@@ -217,7 +202,7 @@ const StudentProfileForm = ({
 
   return (
     <>
-      <Row className='justify-content-md-center mt-4'>
+      <Row className='justify-content-md-center mb-5'>
         <Col
           lg={10}
           className='justify-contents-center'
@@ -247,22 +232,25 @@ const StudentProfileForm = ({
 
             <FormFieldText
               controlId={FormFieldId.UserName}
-              label='User Name'
+              label='Display Name'
               defaultValue={user.displayName || initialData?.userName || ""}
               required
               ref={userNameRef}
             />
-            <FormFieldEmail
-              controlId={FormFieldId.Email}
-              defaultValue={user.email || initialData?.email || ""}
-              ref={emailRef}
-            />
+            {!user.isAnonymous && (
+              <FormFieldEmail
+                controlId={FormFieldId.Email}
+                defaultValue={user.email || initialData?.email || `undefined`}
+                ref={emailRef}
+              />
+            )}
 
             <FormFieldTextArea
               controlId={FormFieldId.Introduction}
               defaultValue={initialData?.introduction}
               label='Summary Statement'
               ref={introductionRef}
+              description='Other users will see this on your profile'
             />
 
             <FormFieldMultiSelect
@@ -270,13 +258,15 @@ const StudentProfileForm = ({
               onChange={setSelectedLocales}
               options={localeOptions}
               value={selectedLocales}
+              description='These languages help us find compatible teachers for you'
             />
 
             <FormFieldMultiSelect
-              label='Preferred Countries'
+              label='Preferred Locations'
               options={countryOptions}
               value={selectedCountries}
               onChange={setSelectedCountries}
+              description={`This is for specifying if you want teachers from a specific location, select "World" if you dont mind`}
             />
 
             <Button

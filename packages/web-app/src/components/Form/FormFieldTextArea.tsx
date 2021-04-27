@@ -1,10 +1,10 @@
-import React, { ForwardedRef } from 'react';
-import Form from 'react-bootstrap/Form';
+import React, { ForwardedRef } from "react";
+import Form from "react-bootstrap/Form";
 
 interface Props {
   controlId: string;
   defaultValue?: string;
-  fieldDescription?: string;
+  description?: string;
   label: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   required?: boolean;
@@ -17,7 +17,7 @@ const FormFieldTextArea = React.forwardRef(
       controlId,
       label,
       required,
-      fieldDescription: description,
+      description: description,
       defaultValue = "",
     }: Props,
     ref: ForwardedRef<HTMLTextAreaElement>

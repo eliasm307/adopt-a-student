@@ -1,14 +1,15 @@
-import { navigate } from 'gatsby';
-import React, { useCallback, useEffect, useState } from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
-import { auth } from 'src/utils/firebase-client';
+import { navigate } from "gatsby";
+import React, { useCallback, useEffect, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { auth } from "src/utils/firebase-client";
 
-import { FormFieldId, RoutePath } from '../constants';
-import { useAuthData } from '../hooks';
-import { UserAuthStatus } from '../providers/UserAuthProvider';
-import { signInWithGoogle, signUpWithEmailPassword } from '../utils/auth';
-import log, { Logger } from '../utils/log';
-import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from './Form';
+import { FormFieldId, RoutePath } from "../constants";
+import { useAuthData } from "../hooks";
+import { UserAuthStatus } from "../providers/UserAuthProvider";
+import { signInWithGoogle, signUpWithEmailPassword } from "../utils/auth";
+import log, { Logger } from "../utils/log";
+import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from "./Form";
 
 const logger = new Logger("UserSignUpForm");
 
@@ -16,7 +17,7 @@ const UserSignUpForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   // const [showValidation, setShowValidation] = useState(false);
-  const { user, userIsSignedOut } = useAuthData();
+  const { user, userIsSignedOut, setUser } = useAuthData();
 
   log(`typeof user ${typeof user}`);
 
@@ -24,6 +25,7 @@ const UserSignUpForm = () => {
     (event): void => {
       const { currentTarget } = event;
 
+      // todo use field refs instead
       if (currentTarget instanceof EventTarget) {
         const { name, value } = currentTarget;
         switch (name) {
@@ -48,13 +50,20 @@ const UserSignUpForm = () => {
 
       const form = event.currentTarget;
 
+      if (password.length < 6) {
+        toast.warn("Password should be atleast 6 characters long");
+        return;
+      }
+
       if (form.checkValidity()) {
-        await signUpWithEmailPassword(email, password);
+        const newUser = await signUpWithEmailPassword(email, password);
+
+        if (newUser) setUser(newUser);
       }
 
       // if (!showValidation) setShowValidation(true);
     },
-    [email, password]
+    [email, password, setUser]
   );
 
   useEffect(() => {

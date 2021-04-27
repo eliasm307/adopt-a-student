@@ -1,6 +1,9 @@
-import { RoutePath } from '../../../constants';
-import { NavBarLinkData } from '../../../declarations/interfaces';
-import { signOut } from '../../../utils/auth';
+import { toast } from "react-toastify";
+
+import { RoutePath } from "../../../constants";
+import { NavBarLinkData } from "../../../declarations/interfaces";
+import { signOut } from "../../../utils/auth";
+import { Logger } from "../../../utils/log";
 
 export const HomeNavbarLink: NavBarLinkData = {
   text: "Home",
@@ -12,11 +15,13 @@ export const ProfileNavbarLink: NavBarLinkData = {
   route: RoutePath.Profile,
 };
 
+const logger = new Logger("navbarLinkItems");
+
 export const SignOutNavbarLink: NavBarLinkData = {
   text: "Sign Out",
   variant: "outline-danger",
-  action: (event) => {
+  action: async (event) => {
     event.preventDefault();
-    signOut();
+    await signOut();
   },
 };

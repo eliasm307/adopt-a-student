@@ -3,14 +3,17 @@
 // allows seeing and editting existing relationship data and removing them
 // allows editting edittable data
 
-import React from 'react';
-import { Badge, Col, Image, Row } from 'react-bootstrap';
+import React from "react";
+import { Badge, Col, Image, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
 
-import { localeEnglishNames } from '@adopt-a-student/common';
+import { localeEnglishNames } from "@adopt-a-student/common";
 
-import StudentProfileForm from '../../components/StudentProfileForm';
-import { usePrivateStudentData } from '../../providers/PrivateStudentDataProvider';
-import { updateStudentUser } from '../../utils/api';
+import { LinkedTutorList } from "../../components/LinkedTutorList";
+import StudentProfileForm from "../../components/StudentProfileForm";
+import TutorList from "../../components/TutorList";
+import { usePrivateStudentData } from "../../providers/PrivateStudentDataProvider";
+import { updateStudentUser } from "../../utils/api";
 
 const StudentProfile = () => {
   const {
@@ -63,13 +66,27 @@ const StudentProfile = () => {
   */
   return (
     <Row className='justify-content-md-center mt-4'>
-      <Col lg={4}>
+      <Col
+        lg={4}
+        style={{
+          display: "grid",
+          justifyItems: "center",
+        }}
+      >
+        <h2>{`My profile`}</h2>
         <StudentProfileForm
           existingData={userPrivateStudentData}
-          title='Edit your profile'
-          onValidSubmit={async (data) =>
-            (await updateStudentUser(data))?.result || null
-          }
+          title=''
+          onValidSubmit={async (data) => {
+            const student = (await updateStudentUser(data))?.result;
+
+            if (student) {
+              toast.info("Changes saved 💾");
+            } else {
+              toast.error("There was an issue saving your changes 😢");
+            }
+            return student || null;
+          }}
           setUserPrivateStudentData={setUserPrivateStudentData}
         />
       </Col>
@@ -78,26 +95,23 @@ const StudentProfile = () => {
         className='justify-contents-center'
         style={{
           display: "grid",
-          placeItems: "center",
+          justifyItems: "center",
         }}
       >
-        <Row>
-          <h2>My Subjects</h2>
-          <div>TBC</div>
-        </Row>
+        <h2>My Subjects</h2>
+        <div>TBC</div>
       </Col>
       <Col
         lg={4}
         className='justify-contents-center'
         style={{
           display: "grid",
-          placeItems: "center",
+          justifyItems: "center",
         }}
       >
-        <Row>
-          <h2>My Teachers</h2>
-          <div>TBC</div>
-        </Row>
+        <h2>My Teachers</h2>
+        <div>TBC</div>
+        <LinkedTutorList linkedTutors={userPrivateStudentData.relatedTutors} />
       </Col>
     </Row>
   );

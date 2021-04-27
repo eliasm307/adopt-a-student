@@ -1,16 +1,32 @@
-import { navigate } from 'gatsby';
-import React, { CSSProperties, useCallback, useContext, useEffect, useState } from 'react';
-import { Button, Col, Form, Row } from 'react-bootstrap';
-import { FormFieldId, RoutePath } from 'src/constants';
-import { UserAuthStatus, UserContext } from 'src/providers/UserAuthProvider';
-import { signInAnonymously, signInWithEmailPassword, signInWithGoogle } from 'src/utils/auth';
-
-import { FormFieldEmail, FormFieldPassword, FormHeaderGraphic } from '../../components/Form';
+import { navigate } from "gatsby";
+import React, {
+  CSSProperties,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { FormFieldId, RoutePath } from "src/constants";
+import { UserAuthStatus, UserContext } from "src/providers/UserAuthProvider";
 import {
-  ConnectingStudentsAndTeachersGraphic, LogoWithTextGraphic,
-} from '../../components/Form/FormHeaderGraphic';
-import Loading from '../../components/Loading';
-import { Logger } from '../../utils/log';
+  signInWithEmailPassword,
+  signInWithGoogle,
+  signUpAnonymously,
+} from "src/utils/auth";
+
+import {
+  FormFieldEmail,
+  FormFieldPassword,
+  FormHeaderGraphic,
+} from "../../components/Form";
+import {
+  ConnectingStudentsAndTeachersGraphic,
+  LogoWithTextGraphic,
+} from "../../components/Form/FormHeaderGraphic";
+import Loading from "../../components/Loading";
+import { Logger } from "../../utils/log";
 
 const buttonStyle: CSSProperties = {};
 const buttonCssClasses = "col mb-2";
@@ -22,7 +38,10 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [showValidation, setShowValidation] = useState(false);
 
-  const { user, userIsSignedOut } = useContext(UserContext);
+  const { user, userIsSignedOut, setUser } = useContext(UserContext);
+
+  // this is to say if the initial check for user auth has been done, it prevents automatically navigating to the next page
+  const [userStateChecked, setUserStateChecked] = useState(false);
 
   logger.log({
     typeofUser: typeof user,
@@ -31,26 +50,32 @@ const SignIn = () => {
   });
 
   useEffect(() => {
+    if (userStateChecked)
+      return logger.log("User initial state already checked");
+
     if (typeof user === "object") {
       logger.log("user signed in, navigating to home...", { user });
       // todo should this be enabled
       navigate(RoutePath.Home);
-      return;
     }
-    logger.log("Showing sign in screen...", {
-      user,
-      userIsSignedOut,
-    });
-  }, [user, userIsSignedOut]);
+  }, [user, userIsSignedOut, userStateChecked]);
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       event.stopPropagation();
 
       const form = event.currentTarget;
 
-      if (form.checkValidity()) signInWithEmailPassword(email, password);
+      if (password.length < 6) {
+        toast.warn("Password must be atleast 6 characters");
+        return;
+      }
+
+      if (form.checkValidity()) {
+        await signInWithEmailPassword(email, password);
+        await navigate(RoutePath.Home);
+      }
 
       if (!showValidation) setShowValidation(true);
     },
@@ -109,6 +134,7 @@ const SignIn = () => {
             onChange={onChangeHandler}
             controlId={FormFieldId.Email}
             defaultValue=''
+            required
           />
 
           <FormFieldPassword
@@ -141,7 +167,18 @@ const SignIn = () => {
             type='button'
             className={buttonCssClasses}
             style={buttonStyle}
-            onClick={() => signInAnonymously()}
+            onClick={async () => {
+              const newUser = await signUpAnonymously();
+
+              if (newUser) {
+                setUser(newUser);
+                await navigate(RoutePath.Home);
+              }
+
+              logger.warn(
+                `User was ${typeof newUser} after trying to sign in anonymously`
+              );
+            }}
           >
             Continue Anonymously
           </Button>
