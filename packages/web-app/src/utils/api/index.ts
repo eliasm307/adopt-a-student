@@ -3,13 +3,20 @@
  */
 
 import {
-  CreateStudentRequestBody, CreateStudentResponseBody, CreateTutorRequestBody,
-  CreateTutorResponseBody, PrivateStudentData, PrivateUserData, UpdateStudentRequestBody,
+  CreateStudentRequestBody,
+  CreateStudentResponseBody,
+  CreateTutorRequestBody,
+  CreateTutorResponseBody,
+  GetTutorRequestBody,
+  GetTutorResponseBody,
+  PrivateStudentData,
+  PrivateUserData,
+  UpdateStudentRequestBody,
   UpdateStudentResponseBody,
-} from '@adopt-a-student/common';
+} from "@adopt-a-student/common";
 
-import { functionsClient } from '../firebase-client';
-import callFirebaseFunction from '../firebase-client/callFirebaseFunction';
+import { functionsClient } from "../firebase-client";
+import callFirebaseFunction from "../firebase-client/callFirebaseFunction";
 
 interface CreateNewUserProps
   extends Omit<PrivateUserData, "id" | "relatedSubjects"> {}
@@ -52,6 +59,17 @@ export async function createNewTutorUser(props: CreateNewTutorUserProps) {
         relatedSubjects: [],
         available: true,
       },
+    },
+    functions: functionsClient,
+  });
+}
+
+export async function getTutorUser(props: { id: string }) {
+  const { id } = props;
+  return callFirebaseFunction<GetTutorRequestBody, GetTutorResponseBody>({
+    name: "getTutor",
+    data: {
+      id,
     },
     functions: functionsClient,
   });

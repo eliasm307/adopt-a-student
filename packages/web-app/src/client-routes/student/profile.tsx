@@ -10,6 +10,7 @@ import { toast } from "react-toastify";
 import { localeEnglishNames } from "@adopt-a-student/common";
 
 import StudentProfileForm from "../../components/StudentProfileForm";
+import TutorList from "../../components/TutorList";
 import { usePrivateStudentData } from "../../providers/PrivateStudentDataProvider";
 import { updateStudentUser } from "../../utils/api";
 
@@ -109,6 +110,7 @@ const StudentProfile = () => {
       >
         <h2>My Teachers</h2>
         <div>TBC</div>
+        <LinkedTutorList tutors={userPrivateStudentData.relatedTutors} />
       </Col>
     </Row>
   );

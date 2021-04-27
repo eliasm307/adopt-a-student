@@ -73,9 +73,6 @@ const StudentProfileForm = ({
   const [selectedCountries, setSelectedCountries] = useState<
     MultiSelectOption[]
   >([]);
-  // const [userName, setUserName] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [summaryStatement, setSummaryStatement] = useState("");
 
   const userNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -108,33 +105,6 @@ const StudentProfileForm = ({
     }
   }, [initialData]);
 
-  /*
-  const onChangeHandler: React.ChangeEventHandler<HTMLInputElement> = useCallback(
-    (event): void => {
-      const { currentTarget } = event;
-
-      // todo use uncontrolled components, ie with refs instead of doing this
-      if (currentTarget instanceof EventTarget) {
-        const { name, value } = currentTarget;
-        switch (name) {
-          case FormFieldId.UserName.toString():
-            return setUserName(value);
-
-          case FormFieldId.Email.toString():
-            return setEmail(value);
-          case FormFieldId.Introduction.toString():
-            return setSummaryStatement(value);
-          default:
-            return console.error(`Unknown html event target "${name}"`);
-        }
-      } else {
-        console.warn("Unknown event", { event });
-      }
-    },
-    []
-  );
-  */
-
   const handleSubmit = React.useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -143,21 +113,17 @@ const StudentProfileForm = ({
       const form = event.currentTarget;
 
       if (userIsSignedOut)
-        return console.error(
-          "StudentPreferencesForm",
-          "cant submit, user not signed in"
-        );
+        return logger.error("cant submit, user not signed in");
 
       if (typeof user !== "object")
-        return console.error(
-          "StudentPreferencesForm",
-          "cant submit, user signed in but no data",
-          { userIsSignedOut, user }
-        );
+        return logger.error("cant submit, user signed in but no data", {
+          userIsSignedOut,
+          user,
+        });
 
       // validate inputs
       if (!form.checkValidity())
-        return log("StudentPreferencesForm", "cant submit, inputs invalid");
+        return logger.log("cant submit, inputs invalid");
 
       const { photoURL } = user;
 
@@ -186,7 +152,7 @@ const StudentProfileForm = ({
       if (submitButtonRef.current) submitButtonRef.current.disabled = true;
 
       // mutate user
-      log("StudentPreferencesForm", "creating student user...");
+      logger.log("creating student user...");
 
       // todo check if anything has changed to make sure this isnt called unnecessarily
 
