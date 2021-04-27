@@ -7,6 +7,7 @@ import React, {
   useState,
 } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { FormFieldId, RoutePath } from "src/constants";
 import { UserAuthStatus, UserContext } from "src/providers/UserAuthProvider";
 import {
@@ -65,6 +66,11 @@ const SignIn = () => {
       event.stopPropagation();
 
       const form = event.currentTarget;
+
+      if (password.length < 6) {
+        toast.warn("Password must be atleast 6 characters");
+        return;
+      }
 
       if (form.checkValidity()) {
         await signInWithEmailPassword(email, password);
@@ -128,6 +134,7 @@ const SignIn = () => {
             onChange={onChangeHandler}
             controlId={FormFieldId.Email}
             defaultValue=''
+            required
           />
 
           <FormFieldPassword

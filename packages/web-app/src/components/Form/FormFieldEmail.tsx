@@ -11,7 +11,7 @@ interface Props {
 
 const FormFieldEmail = React.forwardRef(
   (
-    { onChange, controlId, defaultValue, required, hidden }: Props,
+    { onChange, controlId, defaultValue, required = true, hidden }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (

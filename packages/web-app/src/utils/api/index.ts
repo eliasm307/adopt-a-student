@@ -64,6 +64,8 @@ export async function createNewTutorUser(props: CreateNewTutorUserProps) {
   });
 }
 
+// todo add a function to get a batch of tutors from a list of ids
+
 export async function getTutorUser(props: { id: string }) {
   const { id } = props;
   return callFirebaseFunction<GetTutorRequestBody, GetTutorResponseBody>({
