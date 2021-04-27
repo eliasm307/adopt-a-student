@@ -3,14 +3,15 @@
 // allows seeing and editting existing relationship data and removing them
 // allows editting edittable data
 
-import React from 'react';
-import { Badge, Col, Image, Row } from 'react-bootstrap';
+import React from "react";
+import { Badge, Col, Image, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
 
-import { localeEnglishNames } from '@adopt-a-student/common';
+import { localeEnglishNames } from "@adopt-a-student/common";
 
-import StudentProfileForm from '../../components/StudentProfileForm';
-import { usePrivateStudentData } from '../../providers/PrivateStudentDataProvider';
-import { updateStudentUser } from '../../utils/api';
+import StudentProfileForm from "../../components/StudentProfileForm";
+import { usePrivateStudentData } from "../../providers/PrivateStudentDataProvider";
+import { updateStudentUser } from "../../utils/api";
 
 const StudentProfile = () => {
   const {
@@ -67,9 +68,16 @@ const StudentProfile = () => {
         <StudentProfileForm
           existingData={userPrivateStudentData}
           title='Edit your profile'
-          onValidSubmit={async (data) =>
-            (await updateStudentUser(data))?.result || null
-          }
+          onValidSubmit={async (data) => {
+            const student = (await updateStudentUser(data))?.result;
+
+            if (student) {
+              toast.info("Changes saved 💾");
+            } else {
+              toast.error("There was an issue saving your changes 😢");
+            }
+            return student || null;
+          }}
           setUserPrivateStudentData={setUserPrivateStudentData}
         />
       </Col>

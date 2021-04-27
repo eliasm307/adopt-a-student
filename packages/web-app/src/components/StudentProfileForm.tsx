@@ -208,7 +208,7 @@ const StudentProfileForm = ({
         if (submitButtonRef.current) submitButtonRef.current.disabled = false;
       });
 
-      logger.log("student user created", { result });
+      logger.log("student user mutated", { result });
 
       setUserPrivateStudentData(result);
     },
@@ -236,7 +236,7 @@ const StudentProfileForm = ({
 
   return (
     <>
-      <Row className='justify-content-md-center'>
+      <Row className='justify-content-md-center mb-5'>
         <Col
           lg={10}
           className='justify-contents-center'
@@ -296,11 +296,11 @@ const StudentProfileForm = ({
             />
 
             <FormFieldMultiSelect
-              label='Preferred Countries'
+              label='Preferred Locations'
               options={countryOptions}
               value={selectedCountries}
               onChange={setSelectedCountries}
-              description={`This is for specifying if you want teachers in a specific location, select "World" if you dont mind`}
+              description={`This is for specifying if you want teachers from a specific location, select "World" if you dont mind`}
             />
 
             <Button

@@ -27,7 +27,7 @@ const FormFieldMultiSelect = ({
         value={value}
         onChange={onChange}
         labelledBy='selectLocalesLabel'
-        className='w-100x'
+        shouldToggleOnHover
       />
       {description && (
         <Form.Text className='text-muted'>{description}</Form.Text>

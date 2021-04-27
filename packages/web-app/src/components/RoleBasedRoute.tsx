@@ -1,5 +1,6 @@
 import { navigate } from "gatsby";
 import React from "react";
+import { toast } from "react-toastify";
 import { RoutePath } from "src/constants";
 import { useAuthData } from "src/hooks";
 
@@ -93,9 +94,17 @@ const RoleBasedRoute = ({
         <StudentProfileForm
           existingData={userPrivateStudentData}
           title='Setup your profile to get started'
-          onValidSubmit={async (data) =>
-            (await createNewStudentUser(data))?.student || null
-          }
+          onValidSubmit={async (data) => {
+            const student = (await createNewStudentUser(data))?.student;
+
+            // todo extract toast messages to central location
+            if (student) {
+              toast.info("Changes saved 💾");
+            } else {
+              toast.error("There was an issue saving your changes 😢");
+            }
+            return student || null;
+          }}
           setUserPrivateStudentData={setUserPrivateStudentData}
         />
       </>
