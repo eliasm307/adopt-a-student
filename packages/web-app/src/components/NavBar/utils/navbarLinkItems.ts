@@ -22,12 +22,6 @@ export const SignOutNavbarLink: NavBarLinkData = {
   variant: "outline-danger",
   action: async (event) => {
     event.preventDefault();
-    try {
-      await signOut();
-      toast.info("Signed out");
-    } catch (error) {
-      logger.error("Error signing out", { error });
-      toast.error("There was an issue signing out 😢");
-    }
+    await signOut();
   },
 };

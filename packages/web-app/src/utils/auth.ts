@@ -17,8 +17,15 @@ const SIGN_IN_ERROR_TOAST_MESSAGE = "There was an error signing in 😢";
 const SIGN_UP_ERROR_TOAST_MESSAGE = "There was an error signing up 😢";
 
 export const signOut = async () => {
-  await auth.signOut();
-  navigate(`/`);
+  try {
+    await auth.signOut();
+    toast.info("Signed out");
+  } catch (error) {
+    logger.error("Error signing out", { error });
+    toast.error("There was an issue signing out 😢");
+  } finally {
+    navigate(`/`);
+  }
 };
 
 export const signInWithGoogle = async () => {
