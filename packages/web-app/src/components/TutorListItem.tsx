@@ -1,17 +1,17 @@
-import React from 'react';
-import { Badge, Button, Card, Col, Image, Row } from 'react-bootstrap';
-import { ReactSVG } from 'react-svg';
+import React from "react";
+import { Badge, Button, Card, Col, Image, Row } from "react-bootstrap";
+import { ReactSVG } from "react-svg";
+import { toast } from "react-toastify";
 
-import { localeEnglishNames, PublicTutorData } from '@adopt-a-student/common';
+import { localeEnglishNames, PublicTutorData } from "@adopt-a-student/common";
 
 interface Props {
-  className?: string;
   tutor: PublicTutorData;
 }
 
 // todo add a dummy contact button
 
-const TutorListItem = ({ tutor, className }: Props) => {
+const TutorListItem = ({ tutor }: Props) => {
   const {
     available,
     imageUrl,
@@ -78,7 +78,7 @@ const TutorListItem = ({ tutor, className }: Props) => {
         <Button
           className='col'
           variant='outline-primary'
-          onClick={() => alert("TBC Not implemented")}
+          onClick={() => toast.warn("Not yet implemented")}
         >
           Message
         </Button>
@@ -86,7 +86,7 @@ const TutorListItem = ({ tutor, className }: Props) => {
         <Button
           className='col'
           variant='outline-primary'
-          onClick={() => alert("TBC Not implemented")}
+          onClick={() => toast.warn("Not yet implemented")}
         >
           Follow
         </Button>

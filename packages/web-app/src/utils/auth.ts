@@ -1,8 +1,16 @@
-import { navigate } from 'gatsby';
-import { auth, GoogleAuthProvider } from 'src/utils/firebase-client';
+import { navigate } from "gatsby";
+import { toast } from "react-toastify";
+import { auth, GoogleAuthProvider } from "src/utils/firebase-client";
 
-import { DEFAULT_PROFILE_IMAGE_URI } from '../constants';
-import log from './log';
+import { DEFAULT_PROFILE_IMAGE_URI } from "../constants";
+import log, { Logger } from "./log";
+
+const logger = new Logger("auth");
+
+// todo toast messages should be managed in a central location for consistency, maybe have an enum
+const SIGN_IN_ERROR_TOAST_MESSAGE = "There was an error signing in 😢";
+
+const SIGN_UP_ERROR_TOAST_MESSAGE = "There was an error signing up 😢";
 
 export const signOut = async () => {
   await auth.signOut();
@@ -13,14 +21,13 @@ export const signInWithGoogle = async () => {
   const provider = new GoogleAuthProvider();
   try {
     await auth.signInWithPopup(provider);
-    log("Signed in successfully using google");
+    logger.log("signInWithGoogle", "Signed in successfully using google");
   } catch (error) {
-    console.error({ error });
-    alert("Could not sign in");
+    logger.error("signInWithGoogle", { error });
+    toast.error(SIGN_IN_ERROR_TOAST_MESSAGE);
   }
 };
 
-// todo set this up
 export const signInWithEmailPassword = async (
   email: string,
   password: string
@@ -28,14 +35,15 @@ export const signInWithEmailPassword = async (
   // const provider = new EmailAuthProvider();
   // auth.signInWithPopup(provider);
   if (!email || !password)
-    return console.error("Invalid arguments for sign in with email"); // todo this should be in form validation
+    return console.error("Invalid arguments for sign in with email"); // todo this should also be in form validation
   try {
-    const result = await auth.signInWithEmailAndPassword(email, password);
+    await auth.signInWithEmailAndPassword(email, password);
 
     log("signed in successfully using email and password");
   } catch (error) {
-    console.error(__filename, "Could not sign in", { error });
-    alert("Could not sign in");
+    logger.error("signInWithEmailPassword", "Could not sign in", { error });
+
+    toast.error(SIGN_IN_ERROR_TOAST_MESSAGE);
   }
 };
 
@@ -60,7 +68,7 @@ export const signUpWithEmailPassword = async (
     log(`created new user auth using email and password`);
   } catch (error) {
     console.error(__filename, "Could not create new user", { error });
-    alert("Could not sign in");
+    toast.error(SIGN_UP_ERROR_TOAST_MESSAGE);
   }
 };
 
@@ -80,6 +88,6 @@ export const signInAnonymously = async () => {
     log("Signed in anonymously, successfully", { uid: result.user?.uid });
   } catch (error) {
     console.error("auth", { error });
-    alert("Could not sign in");
+    toast.error(SIGN_IN_ERROR_TOAST_MESSAGE);
   }
 };

@@ -1,23 +1,36 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { Button, Col, Form, Image, Row } from 'react-bootstrap';
-import { useAuthData } from 'src/hooks';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { Button, Col, Form, Image, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
+import { useAuthData } from "src/hooks";
 
 import {
-  Country, countryNames, LocaleCode, localeEnglishNames, PrivateStudentData,
-} from '@adopt-a-student/common';
+  Country,
+  countryNames,
+  LocaleCode,
+  localeEnglishNames,
+  PrivateStudentData,
+} from "@adopt-a-student/common";
 
-import { FormFieldId } from '../constants';
-import { MultiSelectOption } from '../declarations/interfaces';
-import { usePrivateStudentData } from '../providers/PrivateStudentDataProvider';
-import { UserAuthStatus } from '../providers/UserAuthProvider';
-import { createNewStudentUser } from '../utils/api';
-import log, { Logger } from '../utils/log';
-import { FormFieldEmail } from './Form';
-import FormFieldMultiSelect from './Form/FormFieldMultiSelect';
-import FormFieldText from './Form/FormFieldText';
-import FormFieldTextArea from './Form/FormFieldTextArea';
-import FormHeaderGraphic, { LogoWithTextGraphic } from './Form/FormHeaderGraphic';
-import Loading from './Loading';
+import { FormFieldId } from "../constants";
+import { MultiSelectOption } from "../declarations/interfaces";
+import { usePrivateStudentData } from "../providers/PrivateStudentDataProvider";
+import { UserAuthStatus } from "../providers/UserAuthProvider";
+import { createNewStudentUser } from "../utils/api";
+import log, { Logger } from "../utils/log";
+import { FormFieldEmail } from "./Form";
+import FormFieldMultiSelect from "./Form/FormFieldMultiSelect";
+import FormFieldText from "./Form/FormFieldText";
+import FormFieldTextArea from "./Form/FormFieldTextArea";
+import FormHeaderGraphic, {
+  LogoWithTextGraphic,
+} from "./Form/FormHeaderGraphic";
+import Loading from "./Loading";
 
 const localeOptions: MultiSelectOption[] = Object.entries(
   localeEnglishNames
@@ -152,25 +165,25 @@ const StudentProfileForm = ({
       const userName = userNameRef.current?.value;
       const introduction = introductionRef.current?.value;
 
-      if (!email) return alert("Please enter an email");
+      // todo use better form validation feedback, shown on the form instead of a toast
 
-      if (!userName) return alert("Please enter a userName");
+      if (!email) return toast.warn("Please enter an email");
 
-      // eslint-disable-next-line no-alert
-      if (!selectedLocales.length) return alert("Select some languages");
+      if (!userName) return toast.warn("Please enter a userName");
+
+      if (!selectedLocales.length) return toast.warn("Select some languages");
 
       if (!selectedCountries.length)
-        return alert("Select your country or countries");
+        return toast.warn("Select your country or countries");
 
       // prevent other submits
       if (submitButtonRef.current) submitButtonRef.current.disabled = true;
 
-      // create user
+      // mutate user
       log("StudentPreferencesForm", "creating student user...");
 
-      /*
+      // todo check if anything has changed to make sure this isnt called unnecessarily
 
-      */
       const result = await onValidSubmit({
         email,
         userName,
@@ -182,8 +195,8 @@ const StudentProfileForm = ({
         prefferedLocales: selectedLocales.map(
           (locale) => locale.value as LocaleCode
         ),
-        relatedSubjects: initialData?.relatedSubjects || [],
-        relatedTutors: initialData?.relatedTutors || [],
+        relatedSubjects: initialData?.relatedSubjects || [], // todo implememnt editor
+        relatedTutors: initialData?.relatedTutors || [], // todo implement editor
       }).finally(() => {
         // re-enable button in any case
         if (submitButtonRef.current) submitButtonRef.current.disabled = false;

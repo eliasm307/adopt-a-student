@@ -4,6 +4,7 @@ import { navigate } from "gatsby";
 import { StaticImage } from "gatsby-plugin-image";
 import React, { useContext } from "react";
 import { Col, Row } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { RoutePath } from "src/constants";
 import { UserContext } from "src/providers/UserAuthProvider";
 
@@ -49,7 +50,7 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
           <RoleButton
             type='button'
             onClick={() => {
-              return alert("Tutor route tbc");
+              return toast.warn("Tutor route tbc");
               // todo implement
               /*
             setUserRole("Tutor");
