@@ -17,6 +17,7 @@ A project for the [Europe Developer Week 2021 Hackathon](https://www.developerwe
       - [3.2.2.2. Documentation](#3222-documentation)
     - [3.2.3. Web App](#323-web-app)
     - [3.2.4. Team Productivity](#324-team-productivity)
+  - [3.3. Moh Smad's Role](#33-moh-smads-role)
 - [4. Challenges we ran into](#4-challenges-we-ran-into)
 - [5. What we learned](#5-what-we-learned)
   - [5.1. Chin Wei](#51-chin-wei)
@@ -24,6 +25,7 @@ A project for the [Europe Developer Week 2021 Hackathon](https://www.developerwe
 - [6. What’s next for Adopt a Student](#6-whats-next-for-adopt-a-student)
   - [6.1. Chin Wei](#61-chin-wei)
   - [6.2. Elias Mangoro](#62-elias-mangoro)
+  - [6.3. Moh Smad](#63-moh-smad)
 
 # 1. Inspiration
 
@@ -125,6 +127,10 @@ This was an attempt to implement the UI design work from Chin as closely as poss
 
 I also took it upon myself to help the team be more organized and created a project plan comprised of 3 sprints with deadlines during the project, with the various target features to aim for at each stage. This allowed myself and other members of the team to have a clearer understanding of what we were aiming for and the priorities. This project plan was done as a Kanban board in Trello.
 
+## 3.3. Moh Smad's Role
+
+Je suis moh Smad mon role dans adopt student était de faire l’application avec flutter, ce fut ma première fois de faire un hackathon en ligne. Jai utilisé la technologie de google pour faire l’application j’ai fais le get started et je devais me servir de L’API que Eli a créé dans mon apps flutter.
+
 # 4. Challenges we ran into
 
 The biggest challenge we ran into was the limited time that we had to create what we had in mind. This was compounded by the fact all team members were from different time zones across four continents.
@@ -165,3 +171,8 @@ I think the idea and goal of the project has the potential to have a positive ef
 
 Elias Mangoro, aspiring Fullstack Developer
 https://github.com/eliasm307
+
+## 6.3. Moh Smad
+
+Ce fut ma première fois de faire un hackathon en ligne et j’ai vraiment aimé.
+Je suis moh Smad dev backend my GitHub https://github.com/smad20
