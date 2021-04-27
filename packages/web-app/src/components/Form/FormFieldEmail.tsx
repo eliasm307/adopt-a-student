@@ -1,16 +1,17 @@
-import React, { ForwardedRef } from 'react';
-import Form from 'react-bootstrap/Form';
+import React, { ForwardedRef } from "react";
+import Form from "react-bootstrap/Form";
 
 interface Props {
   controlId: string;
   defaultValue: string;
+  hidden?: boolean;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   required?: boolean;
 }
 
 const FormFieldEmail = React.forwardRef(
   (
-    { onChange, controlId, defaultValue, required }: Props,
+    { onChange, controlId, defaultValue, required, hidden }: Props,
     ref: ForwardedRef<HTMLInputElement>
   ) => {
     return (
@@ -24,6 +25,7 @@ const FormFieldEmail = React.forwardRef(
           onChange={onChange}
           defaultValue={defaultValue}
           ref={ref}
+          hidden={hidden}
         />
         <Form.Text className='text-muted'>
           We&apos;ll never share your email with anyone else.

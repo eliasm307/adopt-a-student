@@ -167,7 +167,8 @@ const StudentProfileForm = ({
 
       // todo use better form validation feedback, shown on the form instead of a toast
 
-      if (!email) return toast.warn("Please enter an email");
+      if (!user.isAnonymous && !email)
+        return toast.warn("Please enter an email");
 
       if (!userName) return toast.warn("Please enter a userName");
 
@@ -185,7 +186,7 @@ const StudentProfileForm = ({
       // todo check if anything has changed to make sure this isnt called unnecessarily
 
       const result = await onValidSubmit({
-        email,
+        email: email || "anonymous",
         userName,
         introduction,
         imageUrl: photoURL,
@@ -265,11 +266,13 @@ const StudentProfileForm = ({
               required
               ref={userNameRef}
             />
-            <FormFieldEmail
-              controlId={FormFieldId.Email}
-              defaultValue={user.email || initialData?.email || ""}
-              ref={emailRef}
-            />
+            {!user.isAnonymous && (
+              <FormFieldEmail
+                controlId={FormFieldId.Email}
+                defaultValue={user.email || initialData?.email || `undefined`}
+                ref={emailRef}
+              />
+            )}
 
             <FormFieldTextArea
               controlId={FormFieldId.Introduction}
