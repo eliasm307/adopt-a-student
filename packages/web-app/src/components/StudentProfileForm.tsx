@@ -37,7 +37,7 @@ const localeOptions: MultiSelectOption[] = Object.entries(
 ).map(([locale, namesMap]) => {
   // todo use native locale name if available
   const name = Object.keys(namesMap)[0];
-  const label = `${name} (${locale})`;
+  const label = `${name}`;
   return { label, value: locale, key: locale } as MultiSelectOption;
 });
 
@@ -172,10 +172,15 @@ const StudentProfileForm = ({
 
       if (!userName) return toast.warn("Please enter a userName");
 
-      if (!selectedLocales.length) return toast.warn("Select some languages");
+      if (!selectedLocales.length)
+        return toast.warn(
+          "Please select some languages you would like teachers to speak"
+        );
 
       if (!selectedCountries.length)
-        return toast.warn("Select your country or countries");
+        return toast.warn(
+          "Please select your preferred country or countries to find teachers"
+        );
 
       // prevent other submits
       if (submitButtonRef.current) submitButtonRef.current.disabled = true;
@@ -261,7 +266,7 @@ const StudentProfileForm = ({
 
             <FormFieldText
               controlId={FormFieldId.UserName}
-              label='User Name'
+              label='Display Name'
               defaultValue={user.displayName || initialData?.userName || ""}
               required
               ref={userNameRef}
@@ -279,6 +284,7 @@ const StudentProfileForm = ({
               defaultValue={initialData?.introduction}
               label='Summary Statement'
               ref={introductionRef}
+              description='Other users will see this on your profile'
             />
 
             <FormFieldMultiSelect
@@ -286,6 +292,7 @@ const StudentProfileForm = ({
               onChange={setSelectedLocales}
               options={localeOptions}
               value={selectedLocales}
+              description='These languages help us find compatible teachers for you'
             />
 
             <FormFieldMultiSelect
@@ -293,6 +300,7 @@ const StudentProfileForm = ({
               options={countryOptions}
               value={selectedCountries}
               onChange={setSelectedCountries}
+              description={`This is for specifying if you want teachers in a specific location, select "World" if you dont mind`}
             />
 
             <Button
