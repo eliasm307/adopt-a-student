@@ -9,7 +9,7 @@ const AppLayout = ({ children }: React.PropsWithChildren<any>) => (
     <Container fluid style={{ padding: 0, margin: 0 }}>
       {children}
     </Container>
-    <ToastContainer />
+    <ToastContainer autoClose={3000} pauseOnHover limit={2} />
   </>
 );
 
