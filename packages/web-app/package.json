@@ -57,6 +57,7 @@
     "react-query": "^3.13.11",
     "react-responsive-carousel": "^3.2.18",
     "react-svg": "^13.0.3",
+    "react-toastify": "^7.0.4",
     "sass": "^1.32.11"
   },
   "devDependencies": {

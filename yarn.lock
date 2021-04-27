@@ -4826,10 +4826,15 @@ acorn@^7.1.1, acorn@^7.4.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
-acorn@^8.0.0, acorn@^8.0.4, acorn@^8.1.0:
+acorn@^8.0.0, acorn@^8.1.0:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.1.1.tgz#fb0026885b9ac9f48bac1e185e4af472971149ff"
   integrity sha512-xYiIVjNuqtKXMxlRMDc6mZUhXehod4a3gbZ1qRlM7icK4EbxUFNLhWoPblCvFtB2Y9CIqHP3CF/rdxLItaQv8g==
+
+acorn@^8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.2.1.tgz#0d36af126fb6755095879c1dc6fd7edf7d60a5fb"
+  integrity sha512-z716cpm5TX4uzOzILx8PavOE6C6DKshHDw1aQN52M/yNSqE9s5O8SMfyhCCfCJ3HmTL0NkVOi+8a/55T7YB3bg==
 
 add-stream@^1.0.0:
   version "1.0.0"
@@ -6689,7 +6694,7 @@ clone@^1.0.2:
   resolved "https://registry.yarnpkg.com/clone/-/clone-1.0.4.tgz#da309cc263df15994c688ca902179ca3c7cd7c7e"
   integrity sha1-2jCcwmPfFZlMaIypAheco8fNfH4=
 
-clsx@^1.1.0:
+clsx@^1.1.0, clsx@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
   integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
@@ -11039,7 +11044,7 @@ grapheme-splitter@^1.0.4:
   resolved "https://registry.yarnpkg.com/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz#9cf3a665c6247479896834af35cf1dbb4400767e"
   integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
 
-graphql-compose@~7.25.0:
+graphql-compose@^7.25.0, graphql-compose@~7.25.0:
   version "7.25.1"
   resolved "https://registry.yarnpkg.com/graphql-compose/-/graphql-compose-7.25.1.tgz#9d89f72781931590d4dfca6a709f381f2f76b873"
   integrity sha512-TPXTe1BoQkMjp/MH93yA0SQo8PiXxJAv6Eo6K/+kpJELM9l2jZnd5PCduweuXFcKv+nH973wn/VYzYKDMQ9YoQ==
@@ -17573,6 +17578,13 @@ react-tabs@^3.1.1:
     clsx "^1.1.0"
     prop-types "^15.5.0"
 
+react-toastify@^7.0.4:
+  version "7.0.4"
+  resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-7.0.4.tgz#7d0b743f2b96f65754264ca6eae31911a82378db"
+  integrity sha512-Rol7+Cn39hZp5hQ/k6CbMNE2CKYV9E5OQdC/hBLtIQU2xz7DdAm7xil4NITQTHR6zEbE5RVFbpgSwTD7xRGLeQ==
+  dependencies:
+    clsx "^1.1.1"
+
 react-transition-group@^4.4.1:
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
@@ -21171,17 +21183,17 @@ webpack-virtual-modules@^0.3.2:
   dependencies:
     debug "^3.0.0"
 
-webpack@^5.28.0:
-  version "5.35.1"
-  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.35.1.tgz#857670799465c8a5cbb94c4c175d60ac42d18ba3"
-  integrity sha512-uWKYStqJ23+N6/EnMEwUjPSSKUG1tFmcuKhALEh/QXoUxwN8eb3ATNIZB38A+fO6QZ0xfc7Cu7KNV9LXNhDCsw==
+webpack@^5.24.2, webpack@^5.28.0:
+  version "5.36.0"
+  resolved "https://registry.yarnpkg.com/webpack/-/webpack-5.36.0.tgz#d008da31b721f8fecce88ef2adaf1b16dc2161d1"
+  integrity sha512-HdOhLXClUEwTnzQnzpSG9iL00ej23ojvfnGpF49ba0MkuAT2q+WhQilHFFJHOIVRBqbzakQ1vCWQV2K+QLX0Qw==
   dependencies:
     "@types/eslint-scope" "^3.7.0"
     "@types/estree" "^0.0.47"
     "@webassemblyjs/ast" "1.11.0"
     "@webassemblyjs/wasm-edit" "1.11.0"
     "@webassemblyjs/wasm-parser" "1.11.0"
-    acorn "^8.0.4"
+    acorn "^8.2.1"
     browserslist "^4.14.5"
     chrome-trace-event "^1.0.2"
     enhanced-resolve "^5.8.0"

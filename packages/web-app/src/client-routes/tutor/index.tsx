@@ -1,12 +1,12 @@
-import React from 'react';
-import Layout from 'src/layouts/DefaultLayout';
+import React from "react";
+import AppLayout from "src/layouts/AppLayout";
 
 // ? should layout be inside each route to display relevant links
 
 const TutorApp = () => (
-  <Layout>
+  <AppLayout>
     <div>Tutor App</div>
-  </Layout>
+  </AppLayout>
 );
 
 export default TutorApp;

@@ -1,36 +1,41 @@
-import React from 'react';
-import { QueryClientProvider } from 'react-query';
+import "react-toastify/dist/ReactToastify.css";
 
-import { Redirect, Router } from '@reach/router';
+import React from "react";
+import { QueryClientProvider } from "react-query";
 
-import SignIn from '../client-routes/general/sign-in';
-import StudentHome from '../client-routes/student/home';
-import StudentOverview from '../client-routes/student/overview';
-import StudentProfile from '../client-routes/student/profile';
-import StudentSignUp from '../client-routes/student/sign-up';
-import TutorHome from '../client-routes/tutor/home';
-import TutorOverview from '../client-routes/tutor/overview';
-import TutorSignUp from '../client-routes/tutor/sign-up';
-import TutorProfile from '../client-routes/tutor/tutor-profile';
-import HomeNavBarLinks from '../components/NavBar/routeItems/home';
-import ProfileNavbarLinks from '../components/NavBar/routeItems/profile';
-import SignInNavBarLinks from '../components/NavBar/routeItems/sign-in';
-import SignUpNavBarLinks from '../components/NavBar/routeItems/sign-up';
-import StudentOverviewNavBarLinks from '../components/NavBar/routeItems/student-overview';
-import TutorOverviewNavBarLinks from '../components/NavBar/routeItems/tutor-overview';
-import RoleBasedRoute from '../components/RoleBasedRoute';
-import Route from '../components/Route';
-import { RoutePath } from '../constants';
-import Layout from '../layouts/DefaultLayout';
+import { Redirect, Router } from "@reach/router";
+
+import SignIn from "../client-routes/general/sign-in";
+import StudentHome from "../client-routes/student/home";
+import StudentOverview from "../client-routes/student/overview";
+import StudentProfile from "../client-routes/student/profile";
+import StudentSignUp from "../client-routes/student/sign-up";
+import TutorHome from "../client-routes/tutor/home";
+import TutorOverview from "../client-routes/tutor/overview";
+import TutorSignUp from "../client-routes/tutor/sign-up";
+import TutorProfile from "../client-routes/tutor/tutor-profile";
+import HomeNavBarLinks from "../components/NavBar/routeItems/home";
+import ProfileNavbarLinks from "../components/NavBar/routeItems/profile";
+import SignInNavBarLinks from "../components/NavBar/routeItems/sign-in";
+import SignUpNavBarLinks from "../components/NavBar/routeItems/sign-up";
+import StudentOverviewNavBarLinks from "../components/NavBar/routeItems/student-overview";
+import TutorOverviewNavBarLinks from "../components/NavBar/routeItems/tutor-overview";
+import RoleBasedRoute from "../components/RoleBasedRoute";
+import Route from "../components/Route";
+import { RoutePath } from "../constants";
+import AppLayout from "../layouts/AppLayout";
 // eslint-disable-next-line import/no-useless-path-segments
-import NotFound from '../pages/404';
-import UserPrivateStudentDataProvider from '../providers/PrivateStudentDataProvider';
+import NotFound from "../pages/404";
+import UserPrivateStudentDataProvider from "../providers/PrivateStudentDataProvider";
 // import UserStudentDataProvider from '../providers/PrivateStudentDataProvider';
-import UserAuthProvider from '../providers/UserAuthProvider';
-import UserRoleProvider from '../providers/UserRoleProvider';
-import { queryClient } from '../utils/reactQuery';
+import UserAuthProvider from "../providers/UserAuthProvider";
+import UserRoleProvider from "../providers/UserRoleProvider";
+import { queryClient } from "../utils/reactQuery";
 
 // ? split routing and provider specification? ie have a high level app with the providers then that wraps the app with the routes
+
+// todo rewrite routing as a state machine for a more robust system
+
 /** Responsilbe for defining the routes for the app and providers */
 const App = () => {
   return (
@@ -38,7 +43,7 @@ const App = () => {
       <UserAuthProvider>
         <UserRoleProvider>
           <UserPrivateStudentDataProvider>
-            <Layout>
+            <AppLayout>
               <Router id='router'>
                 <Route
                   isPublic
@@ -96,7 +101,7 @@ const App = () => {
                   navbarLinks={SignUpNavBarLinks}
                 />
               </Router>
-            </Layout>
+            </AppLayout>
           </UserPrivateStudentDataProvider>
         </UserRoleProvider>
       </UserAuthProvider>
