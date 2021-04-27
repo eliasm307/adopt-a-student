@@ -1,11 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
-import { auth } from "../utils/firebase-client";
+import { auth, FireBaseUser } from "../utils/firebase-client";
 import log, { Logger } from "../utils/log";
 import { UserAuth } from "./declarations/interfaces";
 
 interface UserAuthContextShape {
+  setUser: (user: UserAuth | UserAuthStatus) => void;
   user: UserAuth | UserAuthStatus;
   userIsSignedOut: boolean;
 }
@@ -26,6 +27,9 @@ const logger = new Logger("UserAuthProvider");
 export const UserContext = createContext({
   user: UserAuthStatus.Pending,
   userIsSignedOut: false,
+  setUser: () => {
+    throw Error("Function not impemented");
+  },
 } as UserAuthContextShape);
 
 export default function UserAuthProvider({ children }: Props) {
@@ -70,7 +74,7 @@ export default function UserAuthProvider({ children }: Props) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, userIsSignedOut }}>
+    <UserContext.Provider value={{ user, userIsSignedOut, setUser }}>
       {children}
     </UserContext.Provider>
   );

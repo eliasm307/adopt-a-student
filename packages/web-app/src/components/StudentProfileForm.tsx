@@ -230,7 +230,7 @@ const StudentProfileForm = ({
 
   return (
     <>
-      <Row className='justify-content-md-center mt-4'>
+      <Row className='justify-content-md-center'>
         <Col
           lg={10}
           className='justify-contents-center'

@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 import { ToastContainer } from "react-toastify";
 
 const AppLayout = ({ children }: React.PropsWithChildren<any>) => (
-  <>
+  <div style={{ paddingBottom: "100px" }}>
     <Container fluid style={{ padding: 0, margin: 0 }}>
       {children}
     </Container>
@@ -16,7 +16,7 @@ const AppLayout = ({ children }: React.PropsWithChildren<any>) => (
       position='bottom-center'
       style={{ marginBottom: 20 }}
     />
-  </>
+  </div>
 );
 
 export default AppLayout;

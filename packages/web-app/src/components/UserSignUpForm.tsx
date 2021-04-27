@@ -17,7 +17,7 @@ const UserSignUpForm = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   // const [showValidation, setShowValidation] = useState(false);
-  const { user, userIsSignedOut } = useAuthData();
+  const { user, userIsSignedOut, setUser } = useAuthData();
 
   log(`typeof user ${typeof user}`);
 
@@ -56,12 +56,14 @@ const UserSignUpForm = () => {
       }
 
       if (form.checkValidity()) {
-        await signUpWithEmailPassword(email, password);
+        const newUser = await signUpWithEmailPassword(email, password);
+
+        if (newUser) setUser(newUser);
       }
 
       // if (!showValidation) setShowValidation(true);
     },
-    [email, password]
+    [email, password, setUser]
   );
 
   useEffect(() => {

@@ -1,6 +1,10 @@
 import { navigate } from "gatsby";
 import { toast } from "react-toastify";
-import { auth, GoogleAuthProvider } from "src/utils/firebase-client";
+import {
+  auth,
+  FireBaseUser,
+  GoogleAuthProvider,
+} from "src/utils/firebase-client";
 
 import { DEFAULT_PROFILE_IMAGE_URI } from "../constants";
 import log, { Logger } from "./log";
@@ -50,29 +54,35 @@ export const signInWithEmailPassword = async (
 export const signUpWithEmailPassword = async (
   email: string,
   password: string
-) => {
+): Promise<FireBaseUser | null> => {
   // const provider = new EmailAuthProvider();
   // auth.signInWithPopup(provider);
-  if (!email || !password)
-    return console.error("Invalid arguments for sign in with email"); // todo this should be in form validation
+  if (!email || !password) {
+    console.error("Invalid arguments for sign in with email"); // todo this should be in form validation
+    return null;
+  }
   try {
     const result = await auth.createUserWithEmailAndPassword(email, password);
 
     // set default profile values
-    if (result.user)
+    if (result.user) {
       await result.user.updateProfile({
         photoURL: DEFAULT_PROFILE_IMAGE_URI,
         displayName: "Anonymous",
       });
+    }
 
     log(`created new user auth using email and password`);
+
+    return result.user;
   } catch (error) {
     console.error(__filename, "Could not create new user", { error });
     toast.error(SIGN_UP_ERROR_TOAST_MESSAGE);
+    return null;
   }
 };
 
-export const signInAnonymously = async () => {
+export const signUpAnonymously = async (): Promise<FireBaseUser | null> => {
   log("auth", "trying to sign in anonymously");
   try {
     const result = await auth.signInAnonymously();
@@ -86,8 +96,10 @@ export const signInAnonymously = async () => {
       });
 
     log("Signed in anonymously, successfully", { uid: result.user?.uid });
+    return result.user;
   } catch (error) {
     console.error("auth", { error });
     toast.error(SIGN_IN_ERROR_TOAST_MESSAGE);
+    return null;
   }
 };
