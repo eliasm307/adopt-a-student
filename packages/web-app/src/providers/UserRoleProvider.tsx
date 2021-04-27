@@ -1,12 +1,21 @@
-import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { ROLE_LOCAL_STORAGE_KEY } from 'src/constants';
-import { UserRole } from 'src/declarations/types';
-import { getUserLocalStorageItem, setUserLocalStorageItem } from 'src/utils/userLocalStorage';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { ROLE_LOCAL_STORAGE_KEY } from "src/constants";
+import { UserRole } from "src/declarations/types";
+import {
+  getUserLocalStorageItem,
+  setUserLocalStorageItem,
+} from "src/utils/userLocalStorage";
 
-import { useAuthData } from '../hooks';
-import { auth } from '../utils/firebase-client';
-import log, { Logger } from '../utils/log';
-import { UserAuth } from './declarations/interfaces';
+import { useAuthData } from "../hooks";
+import { auth } from "../utils/firebase-client";
+import log, { Logger } from "../utils/log";
+import { UserAuth } from "./declarations/interfaces";
 
 interface UserRoleContextShape {
   updateUserRole: (role: UserRole) => void;
@@ -32,9 +41,9 @@ export default function UserRoleProvider({ children }: Props) {
 
   const { user } = useAuthData();
 
-  // const userIsSignedOut = !user;
+  logger.log({ userRole, typeofUser: typeof user });
 
-  // on mount, add auth state listener
+  // restore a previous role for a user if there is one
   useEffect(() => {
     if (typeof user !== "object") return;
 
@@ -44,23 +53,27 @@ export default function UserRoleProvider({ children }: Props) {
     }) as UserRole;
 
     log("UserProvider", `Loaded last role from local storage "${lastRole}"`);
+
+    if (lastRole) return setUserRole(lastRole);
+    logger.warn("no last role found", { lastRole });
   }, [user]);
 
-  // todo move role logic to separate provider
   const updateUserRole = useCallback(
     (role: UserRole) => {
-      // if user is not signed in
-      if (typeof user !== "object")
-        return logger.warn(
-          "Could not update user role because user is not confirmed as signed in"
+      logger.log(`Updating user role to ${role}...`);
+      // if user is signed in (unauthenticated users can select roles when signing up)
+      if (typeof user === "object") {
+        logger.log(
+          "Setting role for signed in user and saving it to local storage"
         );
 
-      // save role change to local storage
-      setUserLocalStorageItem({
-        uid: user?.uid || "UNDEFINED-",
-        key: ROLE_LOCAL_STORAGE_KEY,
-        value: role,
-      });
+        // save role change to local storage
+        setUserLocalStorageItem({
+          uid: user.uid,
+          key: ROLE_LOCAL_STORAGE_KEY,
+          value: role,
+        });
+      }
 
       log(__filename, `Setting user role to ${role}`, {
         oldRole: role,
@@ -72,6 +85,7 @@ export default function UserRoleProvider({ children }: Props) {
     [user]
   );
 
+  /*
   // restore a previous role if there is one
   if (!userRole && typeof user === "object") {
     const storedRole = getUserLocalStorageItem({
@@ -81,6 +95,7 @@ export default function UserRoleProvider({ children }: Props) {
 
     if (storedRole) setUserRole(storedRole);
   }
+  */
 
   return (
     <UserRoleContext.Provider value={{ userRole, updateUserRole }}>

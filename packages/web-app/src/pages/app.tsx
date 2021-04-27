@@ -60,7 +60,7 @@ const App = () => {
                   navbarLinks={SignInNavBarLinks}
                 />
                 <RoleBasedRoute
-                  requiresUserPreferencesSet
+                  requiresUserData
                   isPublic={false}
                   path={RoutePath.Home}
                   StudentComponent={StudentHome}
@@ -69,7 +69,7 @@ const App = () => {
                   navbarLinks={HomeNavBarLinks}
                 />
                 <RoleBasedRoute
-                  requiresUserPreferencesSet={false}
+                  requiresUserData={false}
                   isPublic={false}
                   path={RoutePath.Profile}
                   StudentComponent={StudentProfile}
@@ -92,7 +92,7 @@ const App = () => {
                   navbarLinks={TutorOverviewNavBarLinks}
                 />
                 <RoleBasedRoute
-                  requiresUserPreferencesSet={false}
+                  requiresUserData={false}
                   isPublic
                   path={RoutePath.SignUp}
                   StudentComponent={StudentSignUp}

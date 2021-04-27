@@ -1,19 +1,19 @@
 // users choose what role they want to use the app in for this session
 
-import { navigate } from 'gatsby';
-import { StaticImage } from 'gatsby-plugin-image';
-import React, { useContext } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import { RoutePath } from 'src/constants';
-import { UserContext } from 'src/providers/UserAuthProvider';
+import { navigate } from "gatsby";
+import { StaticImage } from "gatsby-plugin-image";
+import React, { useContext } from "react";
+import { Col, Row } from "react-bootstrap";
+import { RoutePath } from "src/constants";
+import { UserContext } from "src/providers/UserAuthProvider";
 
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
-import { UserRoleContext } from '../providers/UserRoleProvider';
-import log from '../utils/log';
-import Image from './Image';
-import NavBar from './NavBar';
-import { SignOutNavbarLink } from './NavBar/utils/navbarLinkItems';
+import { UserRoleContext } from "../providers/UserRoleProvider";
+import log from "../utils/log";
+import Image from "./Image";
+import NavBar from "./NavBar";
+import { SignOutNavbarLink } from "./NavBar/utils/navbarLinkItems";
 
 export interface RoleSelectProps {
   /** Route to redirect to after role select */
@@ -93,11 +93,12 @@ const RoleSelector = ({ redirectAfterSelect: redirect }: RoleSelectProps) => {
           <RoleButton
             type='button'
             onClick={() => {
-              setUserRole("Student");
               log(
                 "RoleSelector",
                 `Student Role selected, redirecting to ${String(redirect)}`
               );
+              setUserRole("Student");
+
               if (redirect) navigate(redirect);
             }}
           >

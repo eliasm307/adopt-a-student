@@ -16,7 +16,8 @@
     "pretest": "yarn",
     "test:production": "set NODE_ENV=production-test&& yarn test",
 
-    "firestore:populate-test": "npx ts-node src/scripts/populateFirestore.ts",
+    "start-emulators": "yarn --cwd ../../ start-emulators",
+    "firestore:populate-emulator": "npx ts-node src/scripts/populateFirestore.ts",
     "firestore:populate-production": "set_MISSPELLED_TO_MAKE_SURE_YOU_WANT_TO_DO_THISS NODE_ENV=production-test&& npx ts-node src/scripts/populateFirestore.ts",
     "check-types": "npx tsc",
     "cleanbuild": "yarn cleaninstall && yarn build",
@@ -36,7 +37,6 @@
     "cleaninstall": "rm -rf node_modules && rm -rf package-lock.json && yarn",
     "install:common": "yarn --cwd ./common",
     "logs": "firebase functions:log",
-    "start-emulators": "yarn --cwd ../../ start-emulators",
     "typedoc": "yarn docs:generate && yarn docs:zip && yarn docs:start",
     "predocs": "yarn docs:delete",
     "docs:delete": "rm -rf ./docs && rm -rf ./docs.zip",
