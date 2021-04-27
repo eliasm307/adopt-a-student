@@ -1,18 +1,26 @@
-import React from "react";
-import { Badge, Button, Card, Col, Image, Row } from "react-bootstrap";
-import { ReactSVG } from "react-svg";
-import { toast } from "react-toastify";
+import React from 'react';
+import { Badge, Button, Card, Col, Image, Row } from 'react-bootstrap';
+import { ReactSVG } from 'react-svg';
+import { toast } from 'react-toastify';
 
-import { localeEnglishNames, PublicTutorData } from "@adopt-a-student/common";
+import {
+  localeEnglishNames, PrivateStudentData, PublicStudentData, PublicTutorData,
+} from '@adopt-a-student/common';
+
+import { usePrivateStudentData } from '../providers/PrivateStudentDataProvider';
+import { linkStudentAndTutor } from '../utils/api';
 
 interface Props {
+  studentId: string;
   tutor: PublicTutorData;
+  updateStudent: (updates: Partial<PrivateStudentData>) => void;
 }
 
-// todo add a dummy contact button
+// todo card should show count of students the teacher has
 
-const TutorListItem = ({ tutor }: Props) => {
+const TutorListItem = ({ tutor, studentId, updateStudent }: Props) => {
   const {
+    id,
     available,
     imageUrl,
     introduction,
@@ -86,7 +94,27 @@ const TutorListItem = ({ tutor }: Props) => {
         <Button
           className='col'
           variant='outline-primary'
-          onClick={() => toast.warn("Not yet implemented")}
+          onClick={async () => {
+            toast.warn("Not yet implemented");
+            // return;
+
+            // todo implement
+            /*
+            const result = await linkStudentAndTutor({
+              studentId,
+              tutorId: id,
+            });
+
+            if (result) {
+              // todo tutor data should also update for this specific tutor
+              const { student: updatedStudent, tutor: updatedTutor } = result;
+              updateStudent(updatedStudent);
+              toast.info(`You are now following ${userName}`);
+            } else {
+              toast.error("There was an error following this teacher");
+            }
+            */
+          }}
         >
           Follow
         </Button>

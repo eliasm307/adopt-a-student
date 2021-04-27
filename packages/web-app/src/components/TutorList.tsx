@@ -1,18 +1,19 @@
-import React from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import React from "react";
+import { Card, Col, Row } from "react-bootstrap";
 
-import { PublicTutorData } from '@adopt-a-student/common';
+import { PrivateStudentData, PublicTutorData } from "@adopt-a-student/common";
 
-import TutorListItem from './TutorListItem';
+import TutorListItem from "./TutorListItem";
 
 interface Props {
-  className?: string;
+  studentId: string;
   tutors: PublicTutorData[];
+  updateStudent: (updates: Partial<PrivateStudentData>) => void;
 }
 
 // className='col-sm-12 col-md-6 col-lg-4 col-xl-3'
 // < className='m-2 p-2 debug col' style={{ minHeight: "200px" }}></Card>
-const TutorList = ({ tutors }: Props) => {
+const TutorList = ({ tutors, studentId, updateStudent }: Props) => {
   const itemsJsx = tutors.map((tutor) => (
     <Col
       key={tutor.id}
@@ -31,7 +32,11 @@ const TutorList = ({ tutors }: Props) => {
           boxShadow: "5px 5px 5px 0px rgba(0,0,0,0.1)",
         }}
       >
-        <TutorListItem tutor={tutor} />
+        <TutorListItem
+          tutor={tutor}
+          studentId={studentId}
+          updateStudent={updateStudent}
+        />
       </Card>
     </Col>
   ));

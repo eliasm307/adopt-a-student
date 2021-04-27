@@ -1,36 +1,24 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
-import { Button, Col, Form, Image, Row } from "react-bootstrap";
-import { toast } from "react-toastify";
-import { useAuthData } from "src/hooks";
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
+import { Button, Col, Form, Image, Row, Spinner } from 'react-bootstrap';
+import { toast } from 'react-toastify';
+import { useAuthData } from 'src/hooks';
 
 import {
-  Country,
-  countryNames,
-  LocaleCode,
-  localeEnglishNames,
-  PrivateStudentData,
-} from "@adopt-a-student/common";
+  Country, countryNames, LocaleCode, localeEnglishNames, PrivateStudentData,
+} from '@adopt-a-student/common';
 
-import { FormFieldId } from "../constants";
-import { MultiSelectOption } from "../declarations/interfaces";
-import { usePrivateStudentData } from "../providers/PrivateStudentDataProvider";
-import { UserAuthStatus } from "../providers/UserAuthProvider";
-import { createNewStudentUser } from "../utils/api";
-import log, { Logger } from "../utils/log";
-import { FormFieldEmail } from "./Form";
-import FormFieldMultiSelect from "./Form/FormFieldMultiSelect";
-import FormFieldText from "./Form/FormFieldText";
-import FormFieldTextArea from "./Form/FormFieldTextArea";
-import FormHeaderGraphic, {
-  LogoWithTextGraphic,
-} from "./Form/FormHeaderGraphic";
-import Loading from "./Loading";
+import { FormFieldId } from '../constants';
+import { MultiSelectOption } from '../declarations/interfaces';
+import { usePrivateStudentData } from '../providers/PrivateStudentDataProvider';
+import { UserAuthStatus } from '../providers/UserAuthProvider';
+import { createNewStudentUser } from '../utils/api';
+import log, { Logger } from '../utils/log';
+import { FormFieldEmail } from './Form';
+import FormFieldMultiSelect from './Form/FormFieldMultiSelect';
+import FormFieldText from './Form/FormFieldText';
+import FormFieldTextArea from './Form/FormFieldTextArea';
+import FormHeaderGraphic, { LogoWithTextGraphic } from './Form/FormHeaderGraphic';
+import Loading from './Loading';
 
 const localeOptions: MultiSelectOption[] = Object.entries(
   localeEnglishNames
@@ -73,6 +61,7 @@ const StudentProfileForm = ({
   const [selectedCountries, setSelectedCountries] = useState<
     MultiSelectOption[]
   >([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const userNameRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -149,7 +138,8 @@ const StudentProfileForm = ({
         );
 
       // prevent other submits
-      if (submitButtonRef.current) submitButtonRef.current.disabled = true;
+      setIsSubmitting(true);
+      // if (submitButtonRef.current) submitButtonRef.current.disabled = true;
 
       // mutate user
       logger.log("creating student user...");
@@ -171,7 +161,8 @@ const StudentProfileForm = ({
         relatedTutors: initialData?.relatedTutors || [], // todo implement editor
       }).finally(() => {
         // re-enable button in any case
-        if (submitButtonRef.current) submitButtonRef.current.disabled = false;
+        setIsSubmitting(false);
+        // if (submitButtonRef.current) submitButtonRef.current.disabled = false;
       });
 
       logger.log("student user mutated", { result });
@@ -274,8 +265,15 @@ const StudentProfileForm = ({
               variant='primary'
               type='submit'
               className='col m-1'
+              disabled={isSubmitting}
             >
-              Save
+              {isSubmitting ? (
+                <span>
+                  <Spinner animation='border' />
+                </span>
+              ) : (
+                `Save`
+              )}
             </Button>
           </Form>
         </Col>

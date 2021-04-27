@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build:common": "yarn --cwd ../api/common build",
-    "build": "gatsby build",
+    "build": "npx tsc && gatsby build",
     "build:npm": "gatsby clean && gatsby build",
     "prebuild": "rm -rf public && gatsby clean && yarn",
     "develop": "kill-port 8000 && gatsby develop --open",

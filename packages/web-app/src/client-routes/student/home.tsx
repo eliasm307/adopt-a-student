@@ -8,6 +8,7 @@ import React, { useEffect, useState } from "react";
 import {
   GetTutorsByLocalesRequestBody,
   GetTutorsByLocalesResponseBody,
+  PrivateStudentData,
   PublicTutorData,
 } from "@adopt-a-student/common";
 
@@ -21,7 +22,10 @@ import callFirebaseFunction from "../../utils/firebase-client/callFirebaseFuncti
 import log from "../../utils/log";
 
 const StudentHome = () => {
-  const { userPrivateStudentData } = usePrivateStudentData();
+  const {
+    userPrivateStudentData,
+    setUserPrivateStudentData,
+  } = usePrivateStudentData();
 
   const [isLoading, setIsLoading] = useState(true);
   const [responseData, setResponseData] = useState<
@@ -83,7 +87,7 @@ const StudentHome = () => {
   );
   */
 
-  if (isLoading) return <Loading />;
+  if (isLoading || !userPrivateStudentData) return <Loading />;
 
   /*
   if (error)
@@ -105,7 +109,15 @@ const StudentHome = () => {
     );
   }
 
-  return <TutorList tutors={responseData} />;
+  return (
+    <TutorList
+      tutors={responseData}
+      studentId={userPrivateStudentData.id}
+      updateStudent={(updates: Partial<PrivateStudentData>) =>
+        setUserPrivateStudentData({ ...userPrivateStudentData, ...updates })
+      }
+    />
+  );
 };
 
 export default StudentHome;
