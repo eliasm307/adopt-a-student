@@ -64,10 +64,17 @@ const StudentProfile = () => {
   */
   return (
     <Row className='justify-content-md-center mt-4'>
-      <Col lg={4}>
+      <Col
+        lg={4}
+        style={{
+          display: "grid",
+          justifyItems: "center",
+        }}
+      >
+        <h2>{`My profile`}</h2>
         <StudentProfileForm
           existingData={userPrivateStudentData}
-          title='Edit your profile'
+          title=''
           onValidSubmit={async (data) => {
             const student = (await updateStudentUser(data))?.result;
 
@@ -86,26 +93,22 @@ const StudentProfile = () => {
         className='justify-contents-center'
         style={{
           display: "grid",
-          placeItems: "center",
+          justifyItems: "center",
         }}
       >
-        <Row>
-          <h2>My Subjects</h2>
-          <div>TBC</div>
-        </Row>
+        <h2>My Subjects</h2>
+        <div>TBC</div>
       </Col>
       <Col
         lg={4}
         className='justify-contents-center'
         style={{
           display: "grid",
-          placeItems: "center",
+          justifyItems: "center",
         }}
       >
-        <Row>
-          <h2>My Teachers</h2>
-          <div>TBC</div>
-        </Row>
+        <h2>My Teachers</h2>
+        <div>TBC</div>
       </Col>
     </Row>
   );
