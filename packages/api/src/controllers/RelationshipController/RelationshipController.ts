@@ -98,6 +98,8 @@ export class RelationshipController extends Controller {
     @Body() body: Partial<LinkStudentAndTutorRequestBody>,
     @Query() @Hidden() context: FirebaseCallableFunctionContext = {} as any
   ): Promise<LinkStudentAndTutorResponseBody> {
+    // todo this should be 2 separate methods ie linkToStudent and linkToTutor, then it will be clear what private data should be returned
+
     const { uid } = verifyRequest(body, context);
 
     const { studentId, tutorId } = body;
